@@ -1,0 +1,1 @@
+/usr/bin/c++     CMakeFiles/main.dir/main.c.o CMakeFiles/main.dir/interface.cpp.o CMakeFiles/main.dir/WzSerialPort.cpp.o  -o main 

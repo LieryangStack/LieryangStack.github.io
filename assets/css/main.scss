@@ -16,6 +16,12 @@ $brand-colors: (
   "greenblue": #389092,
 );
 
+code, pre {
+  background-color: #000; /* 黑色背景 */
+  color: #fff; /* 白色文字 */
+  /* 这里可以添加其他样式，比如字体、边距等 */
+}
+
 $theme-name: "{{ site.theme_color }}";
 $brand-name: "{{ site.brand_color }}";
 $theme-color: map-get($theme-colors, "snowwhite");

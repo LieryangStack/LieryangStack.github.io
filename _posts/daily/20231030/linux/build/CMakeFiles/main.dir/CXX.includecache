@@ -1,0 +1,46 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/lieryang/Desktop/daily/20231030/linux/WzSerialPort.cpp
+WzSerialPort.h
+/home/lieryang/Desktop/daily/20231030/linux/WzSerialPort.h
+iostream
+-
+stdio.h
+-
+stdlib.h
+-
+string.h
+-
+unistd.h
+-
+sys/types.h
+-
+sys/stat.h
+-
+fcntl.h
+-
+termios.h
+-
+errno.h
+-
+
+/home/lieryang/Desktop/daily/20231030/linux/WzSerialPort.h
+
+/home/lieryang/Desktop/daily/20231030/linux/interface.cpp
+iostream
+-
+string.h
+-
+WzSerialPort.h
+/home/lieryang/Desktop/daily/20231030/linux/WzSerialPort.h
+interface.h
+/home/lieryang/Desktop/daily/20231030/linux/interface.h
+
+/home/lieryang/Desktop/daily/20231030/linux/interface.h
+
