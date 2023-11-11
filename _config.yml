@@ -178,7 +178,7 @@ yat:
 #   follow_site_theme: true
 
 # Build settings
-# highlighter: none
+highlighter: rouge
 markdown: kramdown
 kmarkdown:
   input: GFM
