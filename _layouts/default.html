@@ -1,25 +1,27 @@
----
-#layout: compress # enable only if needed
----
-
 <!DOCTYPE html>
-<html lang="{{ site.lang | slice: 0,2 | default: "en" }}">
+<html lang="{{ page.lang | default: site.lang | default: "en" }}">
 
-{% include head.html %}
+  {%- include head.html -%}
 
-<body>
-  <!-- page container -->
-  <div class="page-container">
-    <!-- page header -->
-    {% include header.html %}
-    <!-- page content -->
-    <main class="page-content" role="main">
-      {{ content }}
+  <body>
+
+    {%- include views/header.html -%}
+
+    {%- include views/banner.html -%}
+
+    {%- include extensions/hashlocate.html -%}
+
+    {%- include extensions/theme-toggle.html -%}
+
+    {%- include extensions/click-to-top.html -%}
+
+    <main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        {{ content }}
+      </div>
     </main>
-    <!-- page footer -->
-    {% include footer.html %}
-  </div>
-  {% include scripts.html %}
-</body>
 
+    {%- include views/footer.html -%}
+
+  </body>
 </html>
