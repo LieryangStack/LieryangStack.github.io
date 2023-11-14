@@ -2,8 +2,8 @@
 layout: post
 title: Table example
 subtitle:
-categories: example
-tags: [table]
+categories: sample
+tags: [sample]
 ---
 
 ## Table example as below
