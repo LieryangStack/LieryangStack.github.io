@@ -58,7 +58,7 @@ namespace NsThree {
 }
 ```
 
-该项目测试文件在 [/assets/post/daily/20230829](/assets/post/daily/20230829/)
+该项目测试文件在 [/assets/日之漫录/20230829](/assets/rizhimanlu/20230829)
 
 ## 参考
 [一、C++在命名空间中声明类和成员函数](https://blog.csdn.net/ningmengccccc/article/details/80791772)

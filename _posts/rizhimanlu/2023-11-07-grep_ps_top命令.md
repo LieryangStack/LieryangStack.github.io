@@ -93,7 +93,7 @@ ps 截取一瞬间进程信息，但不会动态显示和更新进程信息，�
 - x：显示没有控制终端的进程。这通常包括了大多数系统守护进程（daemon）和后台进程。
 
 
-![Alt text](/assets/post/daily/20231107/image/Screenshot%20from%202023-11-07%2009-29-22.png)
+![Alt text](/assets/rizhimanlu/20231107/Screenshot%20from%202023-11-07%2009-29-22.png)
 
 组合使用 `ps aux`` 参数，可以让你查看系统中所有进程的一个全面快照，包括其他用户的进程和没有终端的后台进程。这是一个非常常用的选项组合，因为它提供了关于系统当前进程状态的广泛视图。
 
@@ -144,7 +144,7 @@ lieryang@Galaxy:~$ ps -L -p 8393
 
 top 命令是一个非常强大的<span style="background:pink">实时监控</span>系统进程活动和资源使用的工具，在UNIX和类UNIX操作系统（如Linux）中被广泛使用。
 
-![Alt text](/assets/post/daily/20231107/image/top_image.png)
+![Alt text](/assets/rizhimanlu/20231107/top_image.png)
 
 ### 常用选项
 
