@@ -34,17 +34,11 @@ yat:
 # 如果不需要透明页眉，设置false
 # header_transparent: true
 
-# 如果要更改内容宽度，可以设置为另一个值
-content_width: "920px"
-
 # Google analytics
 # google_analytics: [Tracking ID]
 
 # If you want to generate website sitemap, you can set true
 sitemap: true
-
-# If you want to change site language, you can set lang option
-lang: "en"  # default lang is en
 
 # Translate languges
 # langs refer to https://cloud.google.com/translate/docs/languages
@@ -179,10 +173,14 @@ disqus:
 #   follow_site_theme: true
 
 # Build settings
-highlighter: rouge
 markdown: kramdown
+highlighter: rouge
+
+pygments: true
+
 kmarkdown:
   input: GFM
+  syntax_highlighter: rouge
 
 plugins:
   - jekyll-feed
