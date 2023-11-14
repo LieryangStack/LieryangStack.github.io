@@ -14,7 +14,7 @@ author: LieryangStack
 #   "Copyright (c) 2017-{currentYear} <a href="https://example.com">{author}</a>"
 #   "Copyright © 2017-2021 Foobar"
 #
-copyright: "Unpublished Work (cleft) 2017-{currentYear} {author}"
+copyright: "李尓阳工作室 (cleft) 2017-{currentYear} Lieryang"
 
 description: >- # this means to ignore newlines until "baseurl:"
   李尓阳的个人主页，该主页主要用来记录学习笔记。
@@ -23,28 +23,28 @@ baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. https://example.com
 favicon: "" # the favicon for your site
 
-# Yat date format
+# 日期格式
 # refer to https://shopify.github.io/liquid/filters/date/ if you want to customize this
 yat:
   date_format: "%b %d, %Y"
 
-# If you want more debug log, you can set true
+# 如果你需要更多debug日志，设置true
 # debug: false
 
-# If you don't want transparent header, you can set false
+# 如果不需要透明页眉，设置false
 # header_transparent: true
 
-# If you want to change the content width, you can set to another value
-# content_width: "920px"
+# 如果要更改内容宽度，可以设置为另一个值
+content_width: "920px"
 
 # Google analytics
 # google_analytics: [Tracking ID]
 
 # If you want to generate website sitemap, you can set true
-# sitemap: false
+sitemap: true
 
 # If you want to change site language, you can set lang option
-# lang: "en"  # default lang is en
+lang: "en"  # default lang is en
 
 # Translate languges
 # langs refer to https://cloud.google.com/translate/docs/languages
@@ -73,14 +73,15 @@ yat:
 #     img: https://cdn.countryflags.com/thumbs/russia/flag-400.png
 #     text: Russian
 
-# You can choose a theme color
+# 修改页眉颜色
 # Default theme colors as below:
-# coolblack: #090a0b
-# spacegrey: #353535
-# snowwhite: #ffffff
-#
-# theme_color: snowwhite
-#
+coolblack: #090a0b
+spacegrey: #353535
+snowwhite: #ffffff
+
+# 页眉颜色
+theme_color: snowwhite
+
 # Custom color as below:
 # theme_color: "#882250"
 
@@ -106,15 +107,15 @@ yat:
 # it will be always kept on every visit (i.e. no matter
 # the browser is closed or not)
 #
-# night_mode: "auto"
+night_mode: "auto"
 
 # Code badge setting
 # You can enable or disable the code badge and so on
 # code_badge:
-#   enabled: "true"
-#   color: "#fff"
-#   background_color: "#ff4e00"
-#   text_transform: "uppercase"  # ("uppercase", "lowercase", "capitalize")
+enabled: "true"
+color: "#fff"
+background_color: "#00000"
+text_transform: "uppercase"  # ("uppercase", "lowercase", "capitalize")
 
 # If you want to link only specific pages in your header, uncomment
 # this and add the path to the pages in order as they should show up
@@ -148,15 +149,15 @@ yat:
 #   heading_style: null     # Custom heading style (e.g. "font-weight: bold; text-decoration: underline")
 #   subheading_style: null  # Custom subheading style (e.g. color: gold)
 
-# Excerpt size setting
+# 摘录大小设置
 # excerpt_size: 350
 
-# Pagination setting
+# 分页设置
 # paginate: 5
 
 # Disqus comments
-# disqus:
-#   shortname: "Your Disqus username"
+disqus:
+  shortname: "lieryang"
 
 # Gitment comments
 # gitment:
