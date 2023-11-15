@@ -16,14 +16,8 @@ $brand-colors: (
   "greenblue": #389092,
 );
 
-code, pre {
-  background-color: #000; /* 黑色背景 */
-  color: #fff; /* 白色文字 */
-  /* 这里可以添加其他样式，比如字体、边距等 */
-}
-
 .framework .main {
-  line-height: 1.5; /* 设置行间距为字体大小的1.6倍 */
+  line-height: 1.6; /* 设置行间距为字体大小的1.6倍 */
 }
 
 $theme-name: "{{ site.theme_color }}";

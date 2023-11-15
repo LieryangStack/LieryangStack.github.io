@@ -43,7 +43,7 @@ sidebar:
     </div>
     {%- endif -%}
 
-    {%- assign result = hidden | where_exp: "item", "item == 'related_posts'" -%}
+    <!-- {%- assign result = hidden | where_exp: "item", "item == 'related_posts'" -%}
     {%- if result.size == 0 -%}
     <div class="post-related">
       <div>Related Articles</div>
@@ -54,7 +54,20 @@ sidebar:
         {%- endfor -%}
       </ul>
     </div>
+    {%- endif -%} -->
+    {%- if page.categories.size > 0 -%}
+    <div class="post-related">
+      <div>Related Articles</div>
+      <ul>
+        {%- assign category = page.categories[0] -%}
+        {%- assign posts_in_category = site.categories[category] | where_exp: 'post', 'post.url != page.url' | sort: 'date' | reverse -%}
+        {%- for post in posts_in_category limit:4 -%}
+        <li><a class="post-link" href="{{ post.url | relative_url }}" title="{{ post.title | escape }}">{{ post.title | escape | truncatewords: 12 }}</a></li>
+        {%- endfor -%}
+      </ul>
+    </div>
     {%- endif -%}
+
 
     {%- assign result = hidden | where_exp: "item", "item == 'comments'" -%}
     {%- if result.size == 0 -%}
