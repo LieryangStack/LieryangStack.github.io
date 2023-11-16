@@ -20,7 +20,7 @@ description: >- # this means to ignore newlines until "baseurl:"
   李尓阳的个人主页，该主页主要用来记录学习笔记。
 
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "" # the base hostname & protocol for your site, e.g. https://example.com
+url: "https://lieryangstack.github.io/" # the base hostname & protocol for your site, e.g. https://example.com
 favicon: "" # the favicon for your site
 
 # 日期格式
