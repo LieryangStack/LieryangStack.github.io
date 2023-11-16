@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 九、GObject信号机制--信号Accumulator
-categories: GObject学习笔记
+categories: GObject学习笔记202109
 tags: [GObject学习笔记]
 ---
 
