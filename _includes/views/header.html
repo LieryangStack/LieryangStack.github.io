@@ -32,7 +32,7 @@
             </span>
           </label>
 
-          <div class="trigger">
+          <!-- <div class="trigger">
             {%- for path in page_paths -%}
               {%- assign my_page = site.pages | where: "path", path | first -%}
               {%- if my_page.title -%}
@@ -48,7 +48,18 @@
               {%- include functions.html func='get_value' default='en' -%}
               {%- assign lang = return -%}
             {%- endif -%}
+          </div> -->
+
+          <div class="trigger">
+             <a class="page-link" href="{{ '/about.html' | relative_url }}">关于</a>
+            <a class="page-link" href="{{ '/categories.html' | relative_url }}">分类</a>
+            <a class="page-link" href="{{ '/archives.html' | relative_url }}">归档</a>
+            <a class="page-link" href="{{ '/tags.html' | relative_url }}">标签</a>
+            <a class="page-link" href="{{ '/assets/index.html' | relative_url }}">下载</a>
+            <!-- 在这里添加更多的导航项 -->
           </div>
+          
+
         </nav>
       {%- endif -%}
     </div>

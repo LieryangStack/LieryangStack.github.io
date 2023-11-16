@@ -28,6 +28,10 @@ favicon: "" # the favicon for your site
 yat:
   date_format: "%b %d, %Y"
 
+# assets目录搜索
+# plugins:
+#   - jekyll-auto_generate_assets
+
 # 如果你需要更多debug日志，设置true
 # debug: false
 
