@@ -151,6 +151,7 @@ text_transform: "uppercase"  # ("uppercase", "lowercase", "capitalize")
 
 # Disqus comments
 disqus:
+  comments: true
   shortname: "lieryang"
 
 # Gitment comments
