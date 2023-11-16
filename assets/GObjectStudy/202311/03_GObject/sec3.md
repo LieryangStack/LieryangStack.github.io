@@ -1,25 +1,12 @@
----
-layout: post
-title: 三、类型系统和注册流程
-categories: GObject学习笔记
-tags: [GObject]
----
-
 ## 1 类型系统和注册流程
-
 &emsp;&emsp;GObject是一个基类。我们通常不使用GObject本身。因为GObject非常简单，在大多数情况下不足以单独使用。相反，我们使用GObject的子类对象，例如各种GtkWidget。可以说，这种可继承是GObject最重要的特性。本节介绍如何定义GObject的子对象。
 
 ## 2 命令惯例
-
 &emsp;&emsp;本节的一个例子是一个对象表示一个实数。它不是很有用，因为我们已经在C语言中使用了双类型来表示实数。但是，我认为这个例子对于了解定义子对象的技术来说并不是那么糟糕。
-
 &emsp;&emsp;首先，您需要了解命名约定。对象名称由名称空间和名称组成。例如，“GObject”由名称空间“G”和名称“Object”组成。“GtkWidget”由名称空间“Gtk”和名称“Widget”组成。设新对象的名称空间为“T”，名称为“Double”。在本教程中，我们使用“T”作为我们所创建的所有对象的名称空间。
 TDouble是对象名称。它是GObject的子对象。它表示一个实数，该数的类型为double。它有一些有用的功能。
-
 ## 3 定义TDoubleClass和TDouble
-
 &emsp;&emsp;当我们说“类型”时，它可以是类型系统中的类型或C语言类型。例如，GObject是类型系统中的类型名称。char, int或double是C语言类型。当“类型”这个词在上下文中的意思很清楚时，我们就叫它“类型”。但如果它是模棱两可的，我们称之为“C类型”或“类型系统中的类型”。
-
 &emsp;&emsp;TDouble对象具有类和实例。类的C类型是TDoubleClass。其结构是这样的:
 
 ```c
@@ -49,9 +36,7 @@ struct _TDouble {
  - 结构的第一个成员必须是父实例结构。
 
 TDouble有自己的成员value。它是TDouble实例的值。上面的编码惯例需要一直保持。
-
 ## 4 GObject子对象的创建过程
-
 TDouble类型的创建过程与GObject类似。
 
  1. 用类型系统注册TDouble类型。
@@ -59,11 +44,9 @@ TDouble类型的创建过程与GObject类似。
  3. 初始化TDoubleClass。
  4. 初始化TDouble。
  
-## 5 注册
-
-&emsp;&emsp;通常注册是通过宏完成的，比如G DECLARE FINAL TYPE和G DEFINE TYPE。所以你不需要关心注册。但是，在本教程中，理解GObject类型系统很重要，所以我想首先向您展示不带宏的注册。
-
-&emsp;&emsp;有两种类型，静态和动态。静态类型不会销毁它的类，即使所有实例都已销毁。动态类型在销毁最后一个实例时销毁其类。GObject的类型是静态的，它的子类对象的类型也是静态的。函数g_type_register_static注册一个静态对象的类型。下面的代码是从Glib源文件中的gtype.h中提取的。
+ ## 5 注册
+ &emsp;&emsp;通常注册是通过宏完成的，比如G DECLARE FINAL TYPE和G DEFINE TYPE。所以你不需要关心注册。但是，在本教程中，理解GObject类型系统很重要，所以我想首先向您展示不带宏的注册。
+ &emsp;&emsp;有两种类型，静态和动态。静态类型不会销毁它的类，即使所有实例都已销毁。动态类型在销毁最后一个实例时销毁其类。GObject的类型是静态的，它的子类对象的类型也是静态的。函数g_type_register_static注册一个静态对象的类型。下面的代码是从Glib源文件中的gtype.h中提取的。
  
 ```c
 GType
@@ -73,12 +56,9 @@ g_type_register_static (GType           parent_type,
                         GTypeFlags      flags);
 ```
 上述参数包括:
-- parent type:父类型。
-
-- type name:类型的名称。例如，“TDouble”。
-
-- info:类型信息。GTypeInfo结构将在下面解释。GTypeFlags:flag。如果类型是抽象类型或抽象值类型，则设置它们的标志。否则，将其设置为零。
-
+parent type:父类型。
+type name:类型的名称。例如，“TDouble”。
+info:类型信息。GTypeInfo结构将在下面解释。GTypeFlags:flag。如果类型是抽象类型或抽象值类型，则设置它们的标志。否则，将其设置为零。
 &emsp;&emsp;因为类型系统维持类型的父子类型关系，g_type_refister_static有一个父类型参数。类型系统还保存类型信息。注册后，g_type_refister_static返回新对象的类型。GTypeInfo结构的定义如下：
 
 ```c
@@ -106,7 +86,6 @@ struct _GTypeInfo
   const GTypeValueTable  *value_table;
 };
 ```
-
 这个结构需要在注册之前创建。
 
  - class size：类的大小。例如，TDouble的类大小是sizeof (TDoubleClass)。
@@ -116,7 +95,7 @@ struct _GTypeInfo
  
  &emsp;&emsp;这些信息由类型系统保存，并在对象创建或销毁时使用。Class_size和instance_size用于为类和实例分配内存。Class_init和instance_init函数在类或实例初始化时被调用。
  
- [/assets/GObjectStudy/202311/03_GObject/example3.c](/assets/GObjectStudy/202311/03_GObject/)展示了如何使用g_type_register_static。
+ [Example3.c](./example3.c)展示了如何使用g_type_register_static。
  
 
 ```c
@@ -186,12 +165,13 @@ struct _GTypeInfo
 64 
 ```
 
-- 16-22:类初始化函数和实例初始化函数。它们在这里什么都不做，但它们是注册所必需的。
-- 24-43: t_double_get_type函数。该函数返回TDouble对象的类型。函数的名称总是`<name space>_get_type`。宏`<NAME_SPACE>_TYPE_<NAME>`(所有字符都是大写)将被此函数替换。看第3行。`T_TYPE_DOUBLE`是一个由t_double_get_type()取代的宏。这个函数有一个静态变量类型（static GType）来保存对象的类型。在第一次调用此函数时，type为0。然后调用g_type_register_static将对象注册到类型系统。在第二次或后续调用时，函数只返回type，因为静态变量type已被g_type_register_static赋值为非零值，并且它保留该值。
-- 30-40:设置info结构并调用g_type_register_static。
-- 45-63:主要功能。获取TDouble对象的类型并显示它。G_object_new用于实例化对象。显示实例的地址。
+ - 16-22:类初始化函数和实例初始化函数。它们在这里什么都不做，但它们是注册所必需的。
+ - 24-43: t_double_get_type函数。该函数返回TDouble对象的类型。函数的名称总是`<name space>_get_type`。宏`<NAME_SPACE>_TYPE_<NAME>`(所有字符都是大写)将被此函数替换。看第3行。`T_TYPE_DOUBLE`是一个由t_double_get_type()取代的宏。这个函数有一个静态变量类型（static GType）来保存对象的类型。在第一次调用此函数时，type为0。然后调用g_type_register_static将对象注册到类型系统。在第二次或后续调用时，函数只返回type，因为静态变量type已被g_type_register_static赋值为非零值，并且它保留该值。
+ - 30-40:设置info结构并调用g_type_register_static。
+ - 45-63:主要功能。获取TDouble对象的类型并显示它。G_object_new用于实例化对象。显示实例的地址。
 
-example3.c 执行结果：
+example3.c在src/misc目录中。
+执行结果：
 
 ```sh
 $ cd misc; _build/example3
@@ -200,10 +180,7 @@ Instantiation was a success. The instance address is 0x557292897000.
 ```
 
 ## 6 G_DEFINE_TYPE 宏
-
 上面的注册总是有相同的算法完成的。因此，它可以被定义为一个宏，如G_DEFINE_TYPE。
-
-下面是 `G_DEFINE_TYPE(TDouble, t_double, G_TYPE_OBJECT)` 宏展开
 
 ```c
 static void t_double_init (TDouble *self); 
@@ -266,10 +243,11 @@ t_double_get_type_once (void) {
                                                           (GInstanceInitFunc)(void (*)(void)) t_double_init, 
                                                           (GTypeFlags) 0); 
   
-  { {{;}} } 
+  { {{};} } 
   
   return g_define_type_id; 
 }
+
 ```
 
 **G_DEFINE_TYPE** 的作用如下:
@@ -545,7 +523,7 @@ Instantiation was a success. The instance address is 0x558415d19000.
 d is TDouble instance.
 d is GObject instance.
 
-## 8 分文件编写main.c, tdouble.h和tdouble.c
+##8 分文件编写main.c, tdouble.h和tdouble.c
 现在是时候将内容分离为三个文件:main.c、tdouble.h和tdouble.c。对象由两个文件定义，头文件和C源文件。
 
 ```c
@@ -674,9 +652,7 @@ Now, set d (tDouble object) with -20.000000.
 t_double_get_value succesfully assigned -20.000000 to value.
 
 这个例子非常简单。但是任何对象都有头文件和C源文件，就像上面的例子一样。他们遵循惯例。你可能知道会议的重要性。欲了解更多信息，请参阅GObject API参考—约定。
-
-## 9 函数
-
+##9 函数
 对象的函数对其他对象开放。它们就像面向对象语言中的公共方法。
 
 向TDouble对象添加计算操作符是很自然的，因为它们表示实数。例如，t_double_add将实例的值与另一个实例相加。然后它创建一个新的TDouble实例，该实例的值是这些值的和。
@@ -695,11 +671,7 @@ t_double_add (TDouble *self, TDouble *other) {
 self是函数所属的实例。other是另一个TDouble实例。
 
 self的值可以通过self->值访问，但不能使用other->值获取other的值。使用函数t_double_get_value代替。因为self是来自于other的一个实例。一般来说，对象的结构对其他对象是不开放的。当一个对象A访问另一个对象B时，A必须使用B提供的公共函数。
-
-## 10 练习
-
+##10 练习
 编写TDouble对象的减、乘、除和符号改变(一元减)函数。比较你的程序与src/tdouble2目录下的tdouble.c。
 
-## 参考
-
-[翻译自GObject tutorial](https://github.com/ToshioCP/Gobject-tutorial/blob/main/gfm/sec3.md)
+ [翻译自GObject tutorial](https://github.com/ToshioCP/Gobject-tutorial/blob/main/gfm/sec3.md)
