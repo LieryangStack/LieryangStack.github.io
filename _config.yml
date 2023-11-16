@@ -14,7 +14,7 @@ author: LieryangStack
 #   "Copyright (c) 2017-{currentYear} <a href="https://example.com">{author}</a>"
 #   "Copyright © 2017-2021 Foobar"
 #
-copyright: "Copyright © 2018-{currentYear} 李尔阳工作室"
+copyright: "李尓阳工作室 (cleft) 2018-{currentYear} Lieryang"
 
 description: >- # this means to ignore newlines until "baseurl:"
   李尓阳的个人主页，该主页主要用来记录学习笔记。
