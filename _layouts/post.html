@@ -57,7 +57,7 @@ sidebar:
     {%- endif -%} -->
     {%- if page.categories.size > 0 -%}
     <div class="post-related">
-      <div>Related Articles</div>
+      <div>相关文章</div>
       <ul>
         {%- assign category = page.categories[0] -%}
         {%- assign posts_in_category = site.categories[category] | where_exp: 'post', 'post.url != page.url' | sort: 'date' | reverse -%}
