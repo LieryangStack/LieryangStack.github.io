@@ -181,8 +181,6 @@ disqus:
 markdown: kramdown
 highlighter: rouge
 
-pygments: true
-
 kmarkdown:
   input: GFM
   syntax_highlighter: rouge
