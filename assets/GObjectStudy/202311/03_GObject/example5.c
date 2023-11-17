@@ -3,10 +3,6 @@
 #define T_TYPE_DOUBLE  (t_double_get_type ())
 G_DECLARE_FINAL_TYPE (TDouble, t_double, T, DOUBLE, GObject)
 
-struct _TDoubleClass {
-  GObjectClass parent_class;
-};
-
 struct _TDouble {
   GObject parent;
   double value;

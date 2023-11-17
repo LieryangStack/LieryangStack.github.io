@@ -13,12 +13,14 @@ struct _TDoubleClass {
   GObjectClass parent_class;
 };
 
-typedef struct _TDoublePrivate TDoublePrivate;
-struct _TDoublePrivate {
-  guint private1;
-};
+// typedef struct _TDoublePrivate TDoublePrivate;
+// struct _TDoublePrivate {
+//   guint private1;
+// };
 
-G_DEFINE_TYPE_WITH_PRIVATE (TDouble, t_double, G_TYPE_OBJECT)
+// G_DEFINE_TYPE_WITH_PRIVATE (TDouble, t_double, G_TYPE_OBJECT)
+
+G_DEFINE_TYPE (TDouble, t_double, G_TYPE_OBJECT)
 
 static void
 t_double_class_init (TDoubleClass *class) {
