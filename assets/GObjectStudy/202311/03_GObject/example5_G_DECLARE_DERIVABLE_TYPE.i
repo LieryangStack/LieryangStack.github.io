@@ -17338,11 +17338,9 @@ typedef GTypeClass *GTypeClass_autoptr; typedef GList *GTypeClass_listautoptr; t
 # 43 "/usr/include/glib-2.0/glib-object.h" 2
 # 2 "/home/lieryang/Desktop/gobject-study/section-two/sec3/example5.c" 2
 
-
+/******************************G_DECLARE_DERIVABLE_TYPE (TDouble, t_double, T, DOUBLE, GObject)宏展开********START********************************/
 
 GType t_double_get_type (void);
-
-/******************************G_DECLARE_DERIVABLE_TYPE (TDouble, t_double, T, DOUBLE, GObject)宏展开********START********************************/
 
 
 # 4 "/home/lieryang/Desktop/gobject-study/section-two/sec3/example5.c"
