@@ -29,8 +29,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": false,
-      "cwd": "/home/lieryang/Desktop/LieryangStack.github.io/assets/GObjectStudy/202311/13_GValue",
-      "program": "/home/lieryang/Desktop/LieryangStack.github.io/assets/GObjectStudy/202311/13_GValue/build/Debug/outDebug",
+      "cwd": "/home/lieryang/Desktop/LieryangStack.github.io/assets/GLibStudy/01_GValue",
+      "program": "/home/lieryang/Desktop/LieryangStack.github.io/assets/GLibStudy/01_GValue/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
