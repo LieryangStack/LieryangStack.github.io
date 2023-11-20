@@ -1,4 +1,4 @@
-#include "../tstr/tstr.h"
+#include "tstr.h"
 #include "tcomparable.h"
 
 enum {

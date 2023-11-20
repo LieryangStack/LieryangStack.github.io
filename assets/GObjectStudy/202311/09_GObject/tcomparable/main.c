@@ -1,9 +1,9 @@
 #include <glib-object.h>
 #include "tcomparable.h"
-#include "../tnumber/tnumber.h"
-#include "../tnumber/tint.h"
-#include "../tnumber/tdouble.h"
-#include "../tstr/tstr.h"
+#include "tnumber.h"
+#include "tint.h"
+#include "tdouble.h"
+#include "tstr.h"
 
 static void
 t_print (const char *cmp, TComparable *c1, TComparable *c2) {
@@ -71,6 +71,18 @@ main (int argc, char **argv) {
   str1 = t_str_new_with_string (one);
   str2 = t_str_new_with_string (two);
   str3 = t_str_new_with_string (three);
+
+  TComparableInterface *interface1 = T_COMPARABLE_GET_IFACE (T_COMPARABLE (i));
+  TComparableInterface *interface2 = T_COMPARABLE_GET_IFACE (T_COMPARABLE (str2));
+
+  g_print ("T_TYPE_COMPARABLE = %ld\n", T_TYPE_COMPARABLE);
+  g_print ("T_TYPE_INT = %ld\n", T_TYPE_INT);
+  g_print ("T_TYPE_STR = %ld\n", T_TYPE_STR);
+
+  g_print ("interface1->parent.g_type = %ld interface1->parent.g_instance_type = %ld\n", \
+                          interface1->parent.g_type, interface1->parent.g_instance_type);
+  g_print ("interface2->parent.g_type = %ld interface2->parent.g_instance_type = %ld\n\n", \
+                          interface2->parent.g_type, interface2->parent.g_instance_type);
 
   compare (T_COMPARABLE (i), T_COMPARABLE (d));
   compare (T_COMPARABLE (str1), T_COMPARABLE (str2));

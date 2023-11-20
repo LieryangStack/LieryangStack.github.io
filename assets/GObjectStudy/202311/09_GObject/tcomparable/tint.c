@@ -1,6 +1,6 @@
-#include "../tnumber/tnumber.h"
-#include "../tnumber/tint.h"
-#include "../tnumber/tdouble.h"
+#include "tnumber.h"
+#include "tint.h"
+#include "tdouble.h"
 #include "tcomparable.h"
 
 enum {
@@ -15,7 +15,6 @@ struct _TInt {
   TNumber parent;
   int value;
 };
-
 static void t_comparable_interface_init (TComparableInterface *iface);
 
 G_DEFINE_TYPE_WITH_CODE (TInt, t_int, T_TYPE_NUMBER,

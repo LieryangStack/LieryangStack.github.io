@@ -5,7 +5,13 @@
     "signal-demo.h": "c",
     "glib-object.h": "c",
     "gobject.h": "c",
-    "glib.h": "c"
+    "glib.h": "c",
+    "tdouble.h": "c",
+    "tnumber.h": "c",
+    "tnumstr.h": "c",
+    "tstr.h": "c",
+    "tcomparable.h": "c",
+    "tint.h": "c"
   },
   "C_Cpp_Runner.msvcBatchPath": "",
   "C_Cpp_Runner.cCompilerPath": "gcc",

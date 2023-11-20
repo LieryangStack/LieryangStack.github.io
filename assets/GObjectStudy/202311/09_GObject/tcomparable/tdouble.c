@@ -1,6 +1,6 @@
-#include "../tnumber/tnumber.h"
-#include "../tnumber/tdouble.h"
-#include "../tnumber/tint.h"
+#include "tnumber.h"
+#include "tdouble.h"
+#include "tint.h"
 #include "tcomparable.h"
 
 enum {
