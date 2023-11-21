@@ -5,7 +5,7 @@ categories: GStreamer核心对象
 tags: [GStreamer]
 ---
 
-## GstStructure
+## 1 GstStructure 基本概念
 
 GstStructure 是一组键/值对的集合。键用 GQuarks 表示（GQuarks其实就是字符串，但是字符串和数字一一映射起来，为了字符串使用起来便利），而值可以是任何 GType 类型。
 
@@ -24,6 +24,8 @@ GstStructure 没有引用计数，因为它通常是更高级对象的一部分�
 可以使用 gst_structure_remove_field 或 gst_structure_remove_fields 来删除字段。
 
 结构中的字符串必须是 ASCII 或 UTF-8 编码的。不允许使用其他编码。但字符串可以为 NULL。
+
+## 2 
 
 ## 函数总结
 
