@@ -34,7 +34,8 @@
     "video.h": "c",
     "chrono": "c",
     "random": "c",
-    "glib_trace.h": "c"
+    "glib_trace.h": "c",
+    "gstmemory.h": "c"
   },
   "C_Cpp.errorSquiggles": "disabled",
   "C_Cpp_Runner.msvcBatchPath": "",

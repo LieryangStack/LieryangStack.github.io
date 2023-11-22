@@ -29,8 +29,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": false,
-      "cwd": "/home/lieryang/Desktop/gst-study/gst-dynamic-manipulation",
-      "program": "/home/lieryang/Desktop/gst-study/gst-dynamic-manipulation/build/Debug/outDebug",
+      "cwd": "/home/lieryang/Desktop/LieryangStack.github.io/assets/GStreamerStudy/CoreObject/02_GstMiniObject",
+      "program": "/home/lieryang/Desktop/LieryangStack.github.io/assets/GStreamerStudy/CoreObject/02_GstMiniObject/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [

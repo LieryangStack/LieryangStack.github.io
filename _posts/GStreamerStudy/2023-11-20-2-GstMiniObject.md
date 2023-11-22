@@ -185,7 +185,15 @@ _priv_gst_mini_object_initialize (void)
 
 ```
 
-## gstminiobject.c 定义函数分析
+## GstMiniObject 函数分析
+
+### GstLockFlags
+
+### 父对象
+
+### GstQData
+
+### 虚引用
 
 ### gst_mini_object_init
 
