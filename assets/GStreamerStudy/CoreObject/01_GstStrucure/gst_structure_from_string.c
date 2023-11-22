@@ -29,7 +29,7 @@ main (int argc, char *argv[]) {
     gchar *end;
 
     s = strings[i];
-
+ 
     structure = gst_structure_from_string (s, &end);
     g_print ("end = %p  s = %p\n", end, s + strlen(s));
     g_print ("gst_structure_get_name(structure) = %s\n", gst_structure_get_name(structure));
@@ -38,7 +38,6 @@ main (int argc, char *argv[]) {
     name = gst_structure_nth_field_name (structure, 0);
     if (name)
       g_print ("i = %d name = %s\n", i, name);
-
 
     /* cleanup */
     gst_structure_free (structure);
