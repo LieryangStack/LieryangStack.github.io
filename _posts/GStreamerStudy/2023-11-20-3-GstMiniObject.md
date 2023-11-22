@@ -5,6 +5,8 @@ categories: GStreamer核心对象
 tags: [GStreamer]
 ---
 
+## 1 GstMiniObject基本概念
+
 "GstMiniObject" 是一个简单的结构体，可用于实现引用计数类型。
 
 - GstMiniObject使用的是 `G_DEFINE_BOXED_TYPE` 进行的定义。（也就是结构体对象，并没有普通对象的信号，属性等功能），GstMiniObject内部实现了引用计数功能。
@@ -25,7 +27,7 @@ gst_mini_object_ref 和 gst_mini_object_unref 分别用于增加和减少引用�
 
 可以分别使用 gst_mini_object_weak_ref 和 gst_mini_object_weak_unref 来添加和移除弱引用。
 
-## 继承于GstMiniObject类的轻量级对象
+## 2 继承于GstMiniObject类的轻量级对象
 
 - **GstBuffer**: 表示流水线中单个媒体数据块。用于传输原始数据（如音频样本或视频帧）。
 
@@ -48,16 +50,17 @@ gst_mini_object_ref 和 gst_mini_object_unref 分别用于增加和减少引用�
 - **GstDateTime**: 表示和处理日期和时间数据，用于处理时间相关的元数据或时间戳。
 
 
-## GstMiniObject 结构体成员
+## 3 GstMiniObject 结构体成员
 
 ```c
+/* filename: gstminiobject.h */
 struct _GstMiniObject {
   GType   type; /* 对象注册的GType类型 */
 
   /*< public >*/ /* with COW */
   gint    refcount; /* 引用计数 */
-  gint    lockstate; /* 该对象锁状态 */
-  guint   flags; /* 该对象flag */
+  gint    lockstate; /* 该对象锁状态，GstLockFlags */
+  guint   flags; /* 该对象flag，GstMiniObjectFlags */
 
   GstMiniObjectCopyFunction copy;
   GstMiniObjectDisposeFunction dispose;
@@ -65,12 +68,87 @@ struct _GstMiniObject {
 
   /* < private > */
   /* Used to keep track of parents, weak ref notifies and qdata */
-  guint priv_uint;
-  gpointer priv_pointer;
+  guint priv_uint; /* priv状态 这和私有Data状态有关，具体flag如 PRIV_DATA_STATE_LOCKED*/
+  gpointer priv_pointer;  /* 指向 */
+};
+
+
+/**
+ * GstMiniObjectFlags:
+ * @GST_MINI_OBJECT_FLAG_LOCKABLE: 对象可以通过 gst_mini_object_lock() 和
+ * gst_mini_object_unlock() 进行锁定和解锁。
+ * @GST_MINI_OBJECT_FLAG_LOCK_READONLY: 对象被永久性地锁定在只读模式下。
+ * 只能对该对象执行读取锁定。
+ * @GST_MINI_OBJECT_FLAG_MAY_BE_LEAKED: 预期该对象即使在调用 gst_deinit() 之后
+ * 也会保持存活，因此应该被内存泄漏检测工具忽略。（自版本 1.10 起可用）
+ * @GST_MINI_OBJECT_FLAG_LAST: 子类可以使用的第一个标志。(可以被用来计算那个flag标记了)
+ *
+ */
+typedef enum
+{
+  GST_MINI_OBJECT_FLAG_LOCKABLE      = (1 << 0),
+  GST_MINI_OBJECT_FLAG_LOCK_READONLY = (1 << 1),
+  GST_MINI_OBJECT_FLAG_MAY_BE_LEAKED = (1 << 2),
+  /* padding */
+  GST_MINI_OBJECT_FLAG_LAST          = (1 << 4)
+} GstMiniObjectFlags;
+
+
+/**
+ * GstLockFlags:
+ * @GST_LOCK_FLAG_READ: 用于读取访问的锁定
+ * @GST_LOCK_FLAG_WRITE: 用于写入访问的锁定
+ * @GST_LOCK_FLAG_EXCLUSIVE: 用于独占访问的锁定
+ * @GST_LOCK_FLAG_LAST: 可用于自定义目的的第一个标志
+ *
+ */
+typedef enum {
+  GST_LOCK_FLAG_READ      = (1 << 0),
+  GST_LOCK_FLAG_WRITE     = (1 << 1),
+  GST_LOCK_FLAG_EXCLUSIVE = (1 << 2),
+
+  GST_LOCK_FLAG_LAST      = (1 << 8)
+} GstLockFlags;
+
+
+/* filename: gstminiobject.c */
+
+/**
+ * GST_TYPE_MINI_OBJECT:
+ *
+ * 与 #GstMiniObject 相关联的 #GType。
+ *
+ * 自版本 1.20 起可用。
+ */
+
+/* 出于向后兼容的原因，我们在 GstMiniObject 结构中
+ * 使用 guint 和 gpointer，以一种相当复杂的方式来存储父对象和 qdata。
+ * 最初，它们仅仅是 qdata 的数量和 qdata 本身。
+ *
+ * guint 被用作一个原子状态整数，具有以下状态：
+ * - Locked：0，基本上是一个自旋锁
+ * - No parent，无 qdata：1（指针为 NULL）
+ * - 一个父对象：2（指针包含父对象）
+ * - 多个父对象或 qdata：3（指针包含一个 PrivData 结构体）
+ *
+ * 除非我们处于状态 3，否则我们总是必须原子性地移动到锁定状态，
+ * 并在稍后再将其释放回目标状态，以便在访问指针时使用。
+ * 当我们处于状态 3 时，我们将不再转移到更低的状态
+ *
+ * FIXME 2.0：我们应该直接在结构体内部存储这些信息，
+ * 可能直接为几个父对象保留空间
+ */
+
+/* 私有数据的三种状态 */
+enum {
+  PRIV_DATA_STATE_LOCKED = 0,
+  PRIV_DATA_STATE_NO_PARENT = 1,
+  PRIV_DATA_STATE_ONE_PARENT = 2,
+  PRIV_DATA_STATE_PARENTS_OR_QDATA = 3,
 };
 ```
 
-## GstMiniObject 类型的定义与注册
+## 4 GstMiniObject 类型的定义与注册
 
 ```c
 /* filename:gstminiobject.h */
@@ -86,9 +164,7 @@ extern unsigned long _gst_mini_object_type;
 
 /* 注册该类型调用的函数 */
 extern           gst_mini_object_get_type   (void);
-```
 
-```c
 /* filename: gstminiobject.c */
 
 /* GstMiniObject类型值定义 */
