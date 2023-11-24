@@ -19,9 +19,9 @@ static GQuark weak_ref_quark;
 #define SHARE_TWO (2 << 16) 
 /* 0 */
 #define SHARE_MASK (~(SHARE_ONE - 1)) 
-/* state要大于0x2000才成立 */
+/* state要大于0x20000才成立 */
 #define IS_SHARED(state) (state >= SHARE_TWO) 
-/* 0x1FF */
+/* 0x100 */
 #define LOCK_ONE (GST_LOCK_FLAG_LAST) 
 /* 0xFF 十进制255 */
 #define FLAG_MASK (GST_LOCK_FLAG_LAST - 1) 
@@ -159,6 +159,10 @@ gst_mini_object_copy (const GstMiniObject * mini_object)
 
 /**
  * @brief: 用指定的GstLockFlags锁定GstMiniObject对象的访问状态
+ * @note: lockstate是一个gint变量，该变量具有4个字节
+ *        第一个字节：标记读写状态 0x01是读，0x02是
+ *        第二个字节是：上了几个锁 LOCK_ONE （有几个对象上了锁） 0x100
+ *        第三个字节是：GST_LOCK_FLAG_EXCLUSIVE有几个 0x10000
  * @return: 如果被锁成功，返回TRUE
 */
 gboolean
@@ -185,10 +189,10 @@ gst_mini_object_lock (GstMiniObject * object, GstLockFlags flags)
     GST_CAT_TRACE (GST_CAT_LOCKING, "lock %p: state %08x, access_mode %u",
         object, state, access_mode);
 
-    /* 如果独有锁，则执行 */
+    /* 如果传入参数独有锁，则执行 */
     if (access_mode & GST_LOCK_FLAG_EXCLUSIVE) {
-      /* shared ref */
-      newstate += SHARE_ONE; /* newstate = newstate + 65536 */
+      /* shared ref，读写独有锁占用的是Flag的前八位，共享引用计数占用的是16位以后 */  
+      newstate += SHARE_ONE; /* newstate = newstate + 0x10000*/
       access_mode &= ~GST_LOCK_FLAG_EXCLUSIVE; /* access_mode 已经获取了独有锁flag，去掉独有锁，查看还剩下什么flag */
     }
 
@@ -208,7 +212,7 @@ gst_mini_object_lock (GstMiniObject * object, GstLockFlags flags)
         newstate |= access_mode; /* 把请求上的锁，赋值给 newstate */
       } else {
         /* access_mode must match */
-        if ((state & access_mode) != access_mode) /* 如果目前处于写状态，就不能进行读，反之也是 */
+        if ((state & access_mode) != access_mode) /* 具有写锁的时候不能上读锁，具有读锁的时候不能上写锁*/
           goto lock_failed;
       }
       /* increase refcount */
@@ -245,12 +249,13 @@ gst_mini_object_unlock (GstMiniObject * object, GstLockFlags flags)
 
     GST_CAT_TRACE (GST_CAT_LOCKING, "unlock %p: state %08x, access_mode %u",
         object, state, access_mode);
-
+    
+    /* 先去除独有锁的标记 */
     if (access_mode & GST_LOCK_FLAG_EXCLUSIVE) {
       /* shared counter */
       g_return_if_fail (state >= SHARE_ONE);
       newstate -= SHARE_ONE;
-      access_mode &= ~GST_LOCK_FLAG_EXCLUSIVE;
+      access_mode &= ~GST_LOCK_FLAG_EXCLUSIVE; /* 去除传入参数中的独有锁 */
     }
 
     if (access_mode) {
@@ -258,7 +263,7 @@ gst_mini_object_unlock (GstMiniObject * object, GstLockFlags flags)
       /* decrease the refcount */
       newstate -= LOCK_ONE;
       /* last refcount, unset access_mode */
-      if ((newstate & LOCK_FLAG_MASK) == access_mode)
+      if ((newstate & LOCK_FLAG_MASK) == access_mode) /* 如果是最后一个锁引用，把第一第二个字节置零 */
         newstate &= ~LOCK_FLAG_MASK;
     }
   } while (!g_atomic_int_compare_and_exchange (&object->lockstate, state,
@@ -316,7 +321,7 @@ lock_priv_pointer (GstMiniObject * object) {
 
 /**
  * gst_mini_object_is_writable:
- * @mini_object: 要检查的小型对象
+ * @mini_object: 要检查的GstMiniObject对象
  *
  * 如果 @mini_object 设置了 LOCKABLE 标志，检查当前对 @object 的独占锁定是否是唯一的，
  * 这意味着对对象的更改不会对其他任何对象可见。
@@ -324,7 +329,7 @@ lock_priv_pointer (GstMiniObject * object) {
  * 如果没有设置 LOCKABLE 标志，检查 @mini_object 的引用计数是否正好为 1，
  * 这意味着没有其他对该对象的引用，因此该对象是可写的。
  *
- * 修改小型对象应该只在确认它是可写的之后进行。
+ * 修改GstMiniObject对象应该只在确认它是可写的之后进行。
  *
  * 返回：如果对象是可写的，则为 %TRUE。
  */
@@ -338,14 +343,17 @@ gst_mini_object_is_writable (const GstMiniObject * mini_object)
   g_return_val_if_fail (mini_object != NULL, FALSE);
 
   /* 检查 GstMiniObject 对象创建的时候，是否标记了能够锁的Flag */
-  if (GST_MINI_OBJECT_IS_LOCKABLE (mini_object)) {
+  if (GST_MINI_OBJECT_IS_LOCKABLE (mini_object)) { /* 创建的时候是：GST_MINI_OBJECT_FLAG_LOCKABLE */
     /* 是否处于被共享状态 */
     result = !IS_SHARED (g_atomic_int_get (&mini_object->lockstate));
-  } else {
+  } else { /* 创建的时候是其他Flag */
     result = (GST_MINI_OBJECT_REFCOUNT_VALUE (mini_object) == 1);
   }
 
-  if (!result) /* 如果处于共享状态，那就一定是可写的，直接返回 TRUE */
+  /**
+   * SHARED只跟独有锁有关，如果该对象被两个用户独有，就不能被写。
+  */
+  if (!result) /* 如果处于共享状态，那就一定是可写的，直接返回 FALSE */
     return result;
   
   /* 如果不是 PRIV_DATA_STATE_PARENTS_OR_QDATA，堵塞等待可切换到 PRIV_DATA_STATE_LOCKED状态， 返回的 priv_state 是锁之前的状态*/
@@ -358,12 +366,14 @@ gst_mini_object_is_writable (const GstMiniObject * mini_object)
 
     /* Lock parents（ parent_lock 对应 1 是 锁， 0 不是锁 ） */
     while (!g_atomic_int_compare_and_exchange (&priv_data->parent_lock, 0, 1));
-
-    /* 如果我们有一个父对象，我们只有在那个父对象是可写的情况下才是可写的。
-       否则，如果我们有多个父对象，我们就不是可写的，而如果
-       我们没有父对象，我们就是可写的 */
+    
+    /**
+     * @note: 如果我们有一个父对象，我们只有在那个父对象是可写的情况下才是可写的。
+     *        我们没有父对象，我们就是可写的
+     *        否则，如果我们有多个父对象，我们就不是可写的
+    */
     if (priv_data->n_parents == 1)
-      result = gst_mini_object_is_writable (priv_data->parents[0]);
+      result = gst_mini_object_is_writable (priv_data->parents[0]); /* 对应基本概念中的：只有一个父对象且该父对象本身是可写的时，对象可写*/
     else if (priv_data->n_parents == 0)
       result = TRUE;
     else
@@ -388,14 +398,14 @@ gst_mini_object_is_writable (const GstMiniObject * mini_object)
 
 /**
  * gst_mini_object_make_writable: (跳过)
- * @mini_object: (完全转移): 要使其可写的小型对象
+ * @mini_object: (完全转移): 要使其可写的GstMiniObject对象
  *
- * 检查一个小型对象是否可写。如果不可写，将创建并返回一个可写的副本。
- * 这会放弃对原始小型对象的引用，并返回对新对象的引用。
+ * 检查一个对象是否可写。如果不可写，将创建并返回一个可写的副本。
+ * 这会放弃对原始GstMiniObject对象的引用，并返回对新对象的引用。
  *
  * 多线程安全
  *
- * 返回：(完全转移) (可空)：一个可写的小型对象（可能与 @mini_object 相同，也可能不同）
+ * 返回：(完全转移) (可空)：一个可写的GstMiniObject对象（可能与 @mini_object 相同，也可能不同）
  *     或者如果需要复制但不可能时返回 %NULL。
  */
 
@@ -420,16 +430,16 @@ gst_mini_object_make_writable (GstMiniObject * mini_object)
 
 /**
  * gst_mini_object_ref: (跳过)
- * @mini_object: 小型对象
+ * @mini_object: GstMiniObject对象
  *
- * 增加小型对象的引用计数。
+ * 增加GstMiniObject对象的引用计数。
  *
  * 注意，引用计数会影响 @mini_object 的可写性，
  * 参见 gst_mini_object_is_writable()。需要特别注意的是，
  * 保留对 GstMiniObject 实例的额外引用可能会增加
  * 管道中的 memcpy 操作数量，尤其是当 miniobject 是一个 #GstBuffer 时。
  *
- * 返回：(完全转移)：小型对象。
+ * 返回：(完全转移)：GstMiniObject对象。
  */
 GstMiniObject *
 gst_mini_object_ref (GstMiniObject * mini_object)
@@ -642,8 +652,7 @@ gst_mini_object_unref (GstMiniObject * mini_object)
     else
       do_free = TRUE;
 
-    /* if the subclass recycled the object (and returned FALSE) we don't
-     * want to free the instance anymore */
+    /* 如果子类回收了对象（并返回了 FALSE），我们不再需要释放实例 */
     if (G_LIKELY (do_free)) {
       /* there should be no outstanding locks */
       g_return_if_fail ((g_atomic_int_get (&mini_object->lockstate) & LOCK_MASK)

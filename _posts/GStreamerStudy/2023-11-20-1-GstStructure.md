@@ -25,7 +25,7 @@ GstStructure 没有引用计数，因为它通常是更高级对象的一部分�
 
 结构中的字符串必须是 ASCII 或 UTF-8 编码的。不允许使用其他编码。但字符串可以为 NULL。
 
-## 2 序列化格式
+### 1.1 序列化格式
 
 序列化的字符串主要是在 `gst_structure_from_string` 函数中使用。后面也会在创建结构体章节中讲到该函数的具体使用方法。
 
@@ -81,11 +81,46 @@ GstStructure的序列化格式将GstStructure的名称、键/GType/值序列化�
 
 **注意**:由于向后兼容性的原因，`gst_structure_to_string` 不会使用该语法，为此目的添加了 `gst_structure_serialize`。
 
-## 3 GBoxed 类型
+## 2 GstStructure类型结构
 
 通过查看源文件和头文件，可以发现 `GstStructure` 是GBoxed类型，所以源文件定义了创建 `GstStructure` 内存函数 `gst_structure_new_empty` 或 `gst_structure_new`。但是本质上申请的是 `GstStructureImpl` 的结构体内存。
 
 释放结构体 `GstStructure` 内存函数 `gst_structure_free`。
+
+### 2.1 GstStructure类型注册宏定义
+
+```c
+/* filename: gststructure.h */
+extern GType _gst_structure_type;
+
+#define GST_TYPE_STRUCTURE   (_gst_structure_type)
+/* filename: gststructure.c */
+
+GType _gst_structure_type = 0;
+
+G_DEFINE_BOXED_TYPE (GstStructure, gst_structure,
+    gst_structure_copy_conditional, gst_structure_free);
+
+/**
+ *@brief: 该函数是注册GstStructure类型，调用类型注册函数
+ *@calledby: gst_init函数
+ */
+void
+_priv_gst_structure_initialize (void)
+{
+  _gst_structure_type = gst_structure_get_type ();
+
+  g_value_register_transform_func (_gst_structure_type, G_TYPE_STRING,
+      gst_structure_transform_to_string);
+
+  GST_DEBUG_CATEGORY_INIT (gst_structure_debug, "structure", 0,
+      "GstStructure debug");
+}
+```
+
+### 2.2 GstStructure类型相关结构体定义
+
+要分清楚那个才是主要的结构体
 
 ```c
 /* filename: gststructure.h */
@@ -125,17 +160,15 @@ typedef struct
   GstStructureField arr[1];
 } GstStructureImpl;
 
-G_DEFINE_BOXED_TYPE (GstStructure, gst_structure,
-    gst_structure_copy_conditional, gst_structure_free);
 ```
 
-## 4 函数总结
+## 3 GstStructure对象函数总结
 
 对于常用的一些 `GstStructure` 函数进行总结。
 
-### 4.1 GstStructure 创建函数
+### 3.1 GstStructure 创建函数
 
-#### 4.1.1 gst_structure_new_empty
+#### 3.1.1 gst_structure_new_empty
 
 以下两个函数都是创建零个键值对`GstStructure`，只是一个使用字符串，一个使用GQuark。
 
@@ -148,7 +181,7 @@ GstStructure *gst_structure_new_empty (const gchar * name);
 GstStructure *gst_structure_new_id_empty (GQuark quark);
 ```
 
-#### 4.1.2 gst_structure_new
+#### 3.1.2 gst_structure_new
 
 ```c
 GstStructure *gst_structure_new  (const gchar * name,
@@ -180,7 +213,7 @@ structure = gst_structure_new_id (GST_QUARK (EVENT_LATENCY),
 
 gst_structure_new_valist 测试程序在 [/assets/GStreamerStudy/CoreObject/01_GstStrucure/gst_structure_new_valist.c](/assets/GStreamerStudy/CoreObject/01_GstStrucure/gst_structure_new_valist.c)
 
-#### 4.1.3 gst_structure_from_string
+#### 3.1.3 gst_structure_from_string
 
 `gst_structure_from_string` 是从序列化字符串创建Gst结构体。两个函数的区别就是 `end` 参数，如果 `end`参数不为空，最后返回的`end`为序列化字符串被处理完的地址。只要序列化字符串被正常处理完，end = string + strlen (string)。
 
@@ -196,7 +229,7 @@ gst_structure_new_from_string (const gchar * string)
 }
 ```
 
-### 4.2 获得GstStructure的名字
+### 3.2 获得GstStructure的名字
 
 ```c
 /* 获得GstStructure的名字和名字id（GQuark） */
@@ -204,7 +237,7 @@ const gchar *  gst_structure_get_name  (const GstStructure  * structure);
 GQuark         gst_structure_get_name_id  (const GstStructure  * structure);
 ```
 
-### 4.3 设置GstStructure名字
+### 3.3 设置GstStructure名字
 
 ```c
 /* 3.设置GstStructure名字*/
@@ -212,7 +245,7 @@ void   gst_structure_set_name  (GstStructure        * structure,
                                 const gchar         * name);
 ```
 
-### 4.4 GstStructure添加键值对
+### 3.4 GstStructure添加键值对
 
 ```c
 //(1)添加单个成员
@@ -228,12 +261,12 @@ gst_structure_set(test_structure, "er", G_TYPE_STRING, "Apple",
                                   "yang", G_TYPE_STRING, "1996", NULL);
 ```
 
-### 4.5 GstStructure获取单个成员信息
+### 3.5 GstStructure获取单个成员信息
 ```c
 const GValue * gst_structure_get_value (const GstStructure  * structure,
                                         const gchar         * fieldname);
 ```
-### 4.6 GstStructure遍历结构体成员
+### 3.6 GstStructure遍历结构体成员
 ```c
 gboolean gst_structure_foreach (const GstStructure  * structure,
                                 GstStructureForeachFunc   func,
@@ -248,14 +281,14 @@ print_value(GQuark   field_id,
 }
 ```
 
-### 4.7 序列化GstStructure
+### 3.7 序列化GstStructure
 
 ```c
 gchar *
 gst_structure_to_string (const GstStructure * structure)
 ```
 
-### 4.8 释放GstStructure
+### 3.8 释放GstStructure
 
 因为不是标准的 `GObject` 对象，所以不会自动调用free函数，所以必须手动调用 `gst_structure_free`。
 
