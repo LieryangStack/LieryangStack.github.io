@@ -441,6 +441,19 @@ gst_mini_object_unlock (GstMiniObject * object, GstLockFlags flags)
 
 ### 3.3 GstMiniObject是否可写
 
+- 不可写状态：
+
+  1.这是一个能够上锁的GstMiniObject对象
+      如果被上两次独有锁，也就是处于两次共享状态，直接返回不可写
+
+  2.这是一个只读的GstMiniObject对象，引用计数不等于1，直接返回不可写
+ 
+- 可写状况： 对象可锁，只有一个用户上独有锁或者对象只读，引用计数等于 1 的时候
+
+  1. 只有一个用户上独有锁，只有一个父对象且父对象本身是可写的，返回可写
+  
+  2. 只有一个用户上独有锁，没有父对象，返回可写。
+
 #### 3.3.1 gst_mini_object_is_writable
 
 ```c

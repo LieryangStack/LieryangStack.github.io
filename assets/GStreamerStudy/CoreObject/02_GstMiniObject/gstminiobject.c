@@ -62,7 +62,8 @@ enum {
   PRIV_DATA_STATE_LOCKED = 0, /* 被锁定状态 */
   PRIV_DATA_STATE_NO_PARENT = 1, /* 没有父对象 */
   PRIV_DATA_STATE_ONE_PARENT = 2, /* 一个父对象 */
-  PRIV_DATA_STATE_PARENTS_OR_QDATA = 3, /* 多个父对象或者QData */
+  /* 多个父对象或者QData,注意，也有可能只有一个父对象或者没有父对象，但是已经具备存储多个父对象空间了 */
+  PRIV_DATA_STATE_PARENTS_OR_QDATA = 3, 
 };
 
 
@@ -320,6 +321,17 @@ lock_priv_pointer (GstMiniObject * object) {
 }
 
 /**
+ * 不可写状态：
+ *      1.这是一个能够上锁的GstMiniObject对象
+ *        如果被上两次独有锁，也就是处于两次共享状态，直接返回不可写
+ *      2.这是一个只读的GstMiniObject对象，引用计数不等于1，直接返回不可写
+ * 
+ * 可写状况： 对象可锁，只有一个用户上独有锁或者对象只读，引用计数等于 1 的时候
+ *         1. 只有一个用户上独有锁，只有一个父对象且父对象本身是可写的，返回可写
+ *         2. 只有一个用户上独有锁，没有父对象，返回可写。
+ * 
+*/
+/**
  * gst_mini_object_is_writable:
  * @mini_object: 要检查的GstMiniObject对象
  *
@@ -333,7 +345,6 @@ lock_priv_pointer (GstMiniObject * object) {
  *
  * 返回：如果对象是可写的，则为 %TRUE。
  */
-
 gboolean
 gst_mini_object_is_writable (const GstMiniObject * mini_object)
 {
@@ -344,14 +355,22 @@ gst_mini_object_is_writable (const GstMiniObject * mini_object)
 
   /* 检查 GstMiniObject 对象创建的时候，是否标记了能够锁的Flag */
   if (GST_MINI_OBJECT_IS_LOCKABLE (mini_object)) { /* 创建的时候是：GST_MINI_OBJECT_FLAG_LOCKABLE */
-    /* 是否处于被共享状态 */
+    /* 是否处于被共享状态（两个用户进行独有锁） */
     result = !IS_SHARED (g_atomic_int_get (&mini_object->lockstate));
   } else { /* 创建的时候是其他Flag */
     result = (GST_MINI_OBJECT_REFCOUNT_VALUE (mini_object) == 1);
   }
 
   /**
-   * SHARED只跟独有锁有关，如果该对象被两个用户独有，就不能被写。
+   * 不可写状态：
+   *      1.这是一个能够上锁的GstMiniObject对象
+   *        如果被上两次独有锁，也就是处于两次共享状态，直接返回不可写
+   *      2.这是一个只读的GstMiniObject对象，引用计数不等于1，直接返回不可写
+   * 
+   * 可写状况： 对象可锁，只有一个用户上独有锁或者对象只读，引用计数等于 1 的时候
+   *         1. 只有一个用户上独有锁，只有一个父对象且父对象本身是可写的，返回可写
+   *         2. 只有一个用户上独有锁，没有父对象，返回可写。
+   * 
   */
   if (!result) /* 如果处于共享状态，那就一定是可写的，直接返回 FALSE */
     return result;
@@ -464,7 +483,11 @@ gst_mini_object_ref (GstMiniObject * mini_object)
   return mini_object;
 }
 
-/* 全局qdata锁调用 */
+/**
+ * @brief: 根据quark查找是qdata索引
+ * @param match_notify: false 不需要查看传入的notify与存储的notify，传入的data与存储qdata是否相等
+ *                      true 需要查看传入的notify与存储的notify，传入的data与存储qdata是否相等
+*/
 static gint
 find_notify (GstMiniObject * object, GQuark quark, gboolean match_notify,
     GstMiniObjectNotify notify, gpointer data)
@@ -510,7 +533,12 @@ remove_notify (GstMiniObject * object, gint index)
   }
 }
 
-/*确保我们分配了这个对象的PrivData，如果还没有发生的话*/
+/**
+ * @brief: 给结构体 PrivData 分配内存空间
+ * @calledby: gst_mini_object_add_parent: 只有在一个父对象的情况，ensure_priv_data 才会被调用。
+ * @note: 1. 如果 priv_data 没有处于 PRIV_DATA_STATE_PARENTS_OR_QDATA 就给结构体分配空间
+ *        2. 所以此时可能有一个parent，或者没有parent
+*/
 static void
 ensure_priv_data (GstMiniObject * object)
 {
@@ -855,7 +883,7 @@ gst_mini_object_weak_unref (GstMiniObject * object,
  * @data: 一个不透明的用户数据指针
  * @destroy: 当 @data 需要被释放时调用的函数，以 @data 作为参数
  *
- * 这个函数在一个迷你对象（miniobject）上设置一个不透明的、命名的指针。
+ * 这个函数在一个GstMiniObject上设置一个不透明的、命名的指针。
  * 名称通过一个 #GQuark 来指定（可以通过 g_quark_from_static_string() 等方式获取），
  * 而指针可以通过 gst_mini_object_get_qdata() 从 @object 中获取，直到 @object 被销毁。
  * 如果设置了之前已经设置的用户数据指针，它会覆盖（释放）旧的指针设置，使用 %NULL 作为指针
