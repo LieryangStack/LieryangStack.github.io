@@ -451,7 +451,7 @@ gst_mini_object_unlock (GstMiniObject * object, GstLockFlags flags)
 - 可写状况： 对象可锁，只有一个用户上独有锁或者对象只读，引用计数等于 1 的时候
 
   1. 只有一个用户上独有锁，只有一个父对象且父对象本身是可写的，返回可写
-  
+
   2. 只有一个用户上独有锁，没有父对象，返回可写。
 
 #### 3.3.1 gst_mini_object_is_writable
@@ -571,11 +571,11 @@ gst_mini_object_make_writable (GstMiniObject * mini_object)
 }
 ```
 
-### 父对象
+### 3.4 GstMiniObject父对象
 
-### GstQData
+### 3.5 GstMiniObject对的GstQData
 
-### 虚引用
+### 3.6 GstMiniObject对象的虚引用
 
 
 
