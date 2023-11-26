@@ -14,8 +14,11 @@
  * gst_allocator_find() 检索。gst_allocator_set_default() 可用于更改默认分配器。
  *
  * 可以使用 gst_memory_new_wrapped() 创建新的内存，该方法包装在其他地方分配的内存。
+ * 
+ * @note：这个源文件有两个对象的实现
+ *        1. 第一个是抽象对象GstAllocator
+ *        2. 另一个是基于GstAllocator的GstAllocatorSysmem
  */
-
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -26,6 +29,8 @@
 
 GST_DEBUG_CATEGORY_STATIC (gst_allocator_debug);
 #define GST_CAT_DEFAULT gst_allocator_debug
+
+/********************************************抽象类GstAllocator实现*******************************************/
 
 struct _GstAllocatorPrivate
 {
@@ -121,23 +126,20 @@ G_DEFINE_BOXED_TYPE (GstAllocationParams, gst_allocation_params,
 /**
  * gst_allocation_params_new:
  *
- * Create a new #GstAllocationParams on the heap.  This function is for
- * use in GStreamer language bindings.  In your own code, you can just
- * declare a #GstAllocationParams on the stack or in a struct, and
- * call gst_allocation_params_init() to initialize it.
+ * 在堆上创建一个新的 #GstAllocationParams。此函数适用于在 GStreamer 语言绑定中使用。
+ * 在你自己的代码中，你可以直接在栈上或在结构体中声明一个 #GstAllocationParams，
+ * 并调用 gst_allocation_params_init() 来初始化它。
  *
- * You do not need to call gst_allocation_params_init() on the instance
- * returned by this function.
+ * 你不需要对此函数返回的实例调用 gst_allocation_params_init()。
  *
- * Returns: (transfer full) (not nullable): a new #GstAllocationParams
+ * 返回值：(transfer full) (not nullable)：一个新的 #GstAllocationParams
  *
- * Since: 1.20
+ * 自版本 1.20 起。
  */
 GstAllocationParams *
 gst_allocation_params_new (void)
 {
-  /* Call new() and then init(), rather than calling new0(), in case
-   * init() ever changes to something other than a memset(). */
+  /* 调用 new() 然后调用 init()，而不是调用 new0()，以防万一 init() 的实现将来改变成除了 memset() 以外的其他操作。 */
   GstAllocationParams *result = g_slice_new (GstAllocationParams);
   gst_allocation_params_init (result);
   return result;
@@ -159,11 +161,11 @@ gst_allocation_params_init (GstAllocationParams * params)
 
 /**
  * gst_allocation_params_copy:
- * @params: (transfer none) (nullable): a #GstAllocationParams
+ * @params: (transfer none) (nullable): 一个 #GstAllocationParams
  *
- * Create a copy of @params.
+ * 创建一个 @params 的副本。
  *
- * Returns: (transfer full) (nullable): a new #GstAllocationParams.
+ * 返回值：(transfer full) (nullable)：一个新的 #GstAllocationParams。
  */
 GstAllocationParams *
 gst_allocation_params_copy (const GstAllocationParams * params)
@@ -180,9 +182,9 @@ gst_allocation_params_copy (const GstAllocationParams * params)
 
 /**
  * gst_allocation_params_free:
- * @params: (in) (transfer full): a #GstAllocationParams
+ * @params: (in) (transfer full): 一个 #GstAllocationParams
  *
- * Free @params
+ * 释放 @params
  */
 void
 gst_allocation_params_free (GstAllocationParams * params)
@@ -192,10 +194,10 @@ gst_allocation_params_free (GstAllocationParams * params)
 
 /**
  * gst_allocator_register:
- * @name: the name of the allocator
+ * @name: 分配器的名称
  * @allocator: (transfer full): #GstAllocator
  *
- * Registers the memory @allocator with @name.
+ * 使用 name 注册内存 @allocator。
  */
 void
 gst_allocator_register (const gchar * name, GstAllocator * allocator)
@@ -216,13 +218,12 @@ gst_allocator_register (const gchar * name, GstAllocator * allocator)
 
 /**
  * gst_allocator_find:
- * @name: (nullable): the name of the allocator
+ * @name: (nullable): 分配器的名称
  *
- * Find a previously registered allocator with @name. When @name is %NULL, the
- * default allocator will be returned.
+ * 查找之前使用 @name 注册的分配器。当 @name 为 %NULL 时，将返回默认分配器。
  *
- * Returns: (transfer full) (nullable): a #GstAllocator or %NULL when
- * the allocator with @name was not registered.
+ * 返回值：(transfer full) (nullable): 一个 #GstAllocator 或在
+ * 名为 @name 的分配器未被注册时返回 %NULL。
  */
 GstAllocator *
 gst_allocator_find (const gchar * name)
@@ -244,9 +245,9 @@ gst_allocator_find (const gchar * name)
 
 /**
  * gst_allocator_set_default:
- * @allocator: (transfer full): a #GstAllocator
+ * @allocator: (transfer full): 一个 #GstAllocator
  *
- * Set the default allocator.
+ * 设置默认分配器。
  */
 void
 gst_allocator_set_default (GstAllocator * allocator)
@@ -266,31 +267,25 @@ gst_allocator_set_default (GstAllocator * allocator)
 
 /**
  * gst_allocator_alloc:
- * @allocator: (transfer none) (nullable): a #GstAllocator to use
- * @size: size of the visible memory area
- * @params: (transfer none) (nullable): optional parameters
+ * @allocator: (transfer none) (nullable): 要使用的 #GstAllocator
+ * @size: 可见内存区域的大小
+ * @params: (transfer none) (nullable): 可选参数
  *
- * Use @allocator to allocate a new memory block with memory that is at least
- * @size big.
+ * 使用 @allocator 分配一个新的内存块，该内存块至少有 @size 大小。
  *
- * The optional @params can specify the prefix and padding for the memory. If
- * %NULL is passed, no flags, no extra prefix/padding and a default alignment is
- * used.
+ * 可选的 @params 可以指定内存的前缀和填充。如果传递 %NULL，将使用默认对齐方式，并且不使用额外的前缀/填充和标志。
  *
- * The prefix/padding will be filled with 0 if flags contains
- * #GST_MEMORY_FLAG_ZERO_PREFIXED and #GST_MEMORY_FLAG_ZERO_PADDED respectively.
+ * 如果标志包含 #GST_MEMORY_FLAG_ZERO_PREFIXED 和 #GST_MEMORY_FLAG_ZERO_PADDED，前缀/填充将被填充为 0。
  *
- * When @allocator is %NULL, the default allocator will be used.
+ * 当 @allocator 为 %NULL 时，将使用默认分配器。
  *
- * The alignment in @params is given as a bitmask so that @align + 1 equals
- * the amount of bytes to align to. For example, to align to 8 bytes,
- * use an alignment of 7.
+ * 在 @params 中的对齐方式是以位掩码给出的，所以 @align + 1 等于对齐的字节数。例如，要对齐到 8 字节，使用 7 作为对齐值。
  *
- * Returns: (transfer full) (nullable): a new #GstMemory.
+ * 返回值：(transfer full) (nullable): 一个新的 #GstMemory。
  */
 GstMemory *
 gst_allocator_alloc (GstAllocator * allocator, gsize size,
-    GstAllocationParams * params)
+                     GstAllocationParams * params)
 {
   GstMemory *mem;
   static GstAllocationParams defparams = { 0, 0, 0, 0, };
@@ -316,10 +311,10 @@ gst_allocator_alloc (GstAllocator * allocator, gsize size,
 
 /**
  * gst_allocator_free:
- * @allocator: (transfer none): a #GstAllocator to use
- * @memory: (transfer full): the memory to free
+ * @allocator: (transfer none): 要使用的 #GstAllocator
+ * @memory: (transfer full): 要释放的内存
  *
- * Free @memory that was previously allocated with gst_allocator_alloc().
+ * 释放之前用 gst_allocator_alloc() 分配的 @memory。
  */
 void
 gst_allocator_free (GstAllocator * allocator, GstMemory * memory)
@@ -334,6 +329,8 @@ gst_allocator_free (GstAllocator * allocator, GstMemory * memory)
   if (aclass->free)
     aclass->free (allocator, memory);
 }
+
+/********************************************默认的内存分配器实现GstAllocatorSysmem*******************************************/
 
 /* default memory implementation */
 typedef struct
@@ -360,7 +357,6 @@ typedef struct
 static GType gst_allocator_sysmem_get_type (void);
 G_DEFINE_TYPE (GstAllocatorSysmem, gst_allocator_sysmem, GST_TYPE_ALLOCATOR);
 
-/* initialize the fields */
 static inline void
 _sysmem_init (GstMemorySystem * mem, GstMemoryFlags flags,
     GstMemory * parent, gsize slice_size,
@@ -376,7 +372,7 @@ _sysmem_init (GstMemorySystem * mem, GstMemoryFlags flags,
   mem->notify = notify;
 }
 
-/* create a new memory block that manages the given memory */
+/* 创建一个新的内存块来管理给定的内存 */
 static inline GstMemorySystem *
 _sysmem_new (GstMemoryFlags flags,
     GstMemory * parent, gpointer data, gsize maxsize, gsize align, gsize offset,
@@ -394,7 +390,7 @@ _sysmem_new (GstMemoryFlags flags,
   return mem;
 }
 
-/* allocate the memory and structure in one block */
+/* 在一个块中分配内存和结构体 */
 static GstMemorySystem *
 _sysmem_new_block (GstMemoryFlags flags,
     gsize maxsize, gsize align, gsize offset, gsize size)
@@ -614,20 +610,19 @@ _priv_gst_allocator_cleanup (void)
 /**
  * gst_memory_new_wrapped:
  * @flags: #GstMemoryFlags
- * @data: (array length=size) (element-type guint8) (transfer none): data to
- *   wrap
- * @maxsize: allocated size of @data
- * @offset: offset in @data
- * @size: size of valid data
- * @user_data: (nullable): user_data
- * @notify: (nullable) (scope async) (closure user_data): called with @user_data when the memory is freed
+ * @data: (array length=size) (element-type guint8) (transfer none): 要包装的数据
+ * @maxsize: @data 的分配大小
+ * @offset: 在 @data 中的偏移量
+ * @size: 有效数据的大小
+ * @user_data: (nullable): 用户数据
+ * @notify: (nullable) (scope async) (closure user_data): 当内存被释放时，用 @user_data 调用此函数
  *
- * Allocate a new memory block that wraps the given @data.
+ * 分配一个新的内存块来包装给定的 @data。
  *
- * The prefix/padding must be filled with 0 if @flags contains
- * #GST_MEMORY_FLAG_ZERO_PREFIXED and #GST_MEMORY_FLAG_ZERO_PADDED respectively.
+ * 如果 @flags 包含 #GST_MEMORY_FLAG_ZERO_PREFIXED 和 #GST_MEMORY_FLAG_ZERO_PADDED，
+ * 则前缀/填充必须分别用 0 填充。
  *
- * Returns: (transfer full) (nullable): a new #GstMemory.
+ * 返回值：(transfer full) (nullable): 一个新的 #GstMemory。
  */
 GstMemory *
 gst_memory_new_wrapped (GstMemoryFlags flags, gpointer data,

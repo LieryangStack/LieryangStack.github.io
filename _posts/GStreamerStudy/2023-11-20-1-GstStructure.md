@@ -162,7 +162,7 @@ typedef struct
 
 ```
 
-## 3 GstStructure对象函数总结
+## 3 GstStructure对象相关函数总结
 
 对于常用的一些 `GstStructure` 函数进行总结。
 

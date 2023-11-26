@@ -260,7 +260,7 @@ typedef struct {
 } PrivData;
 ```
 
-## 3 GstMiniObject对象函数总结
+## 3 GstMiniObject对象相关函数总结
 
 ### 3.1 初始化函数
 
@@ -573,25 +573,334 @@ gst_mini_object_make_writable (GstMiniObject * mini_object)
 
 ### 3.4 GstMiniObject父对象
 
+这里其实没有什么好讲的，具体函数可以看源代码。
+
+**注意**： 
+- `gst_mini_object_add_parent` 函数将 @parent 添加为 @object 的一个父对象。
+
+- 拥有一个或多个父对象会影响 GstMiniObject 的可写性：如果一个 @parent 不可写，那么 @GstMiniObject 也不可写，无论其引用计数是多少。@GstMiniObject 只有在所有父对象都是可写的，并且其自身的引用计数正好为1时，才是可写的。
+
+- 注意：这个函数不会获取 @parent 的所有权，也不会增加额外的引用计数。
+
+- 调用者有责任在之后的某个时间点移除父对象。
+
+#### 3.4.1 gst_mini_object_add_parent
+
+```c
+/**
+ * gst_mini_object_add_parent:
+ * @object: 一个 #GstMiniObject
+ * @parent: 一个父 #GstMiniObject
+ *
+ * 这个函数将 @parent 添加为 @object 的一个父对象。拥有一个或多个父对象会影响
+ * @object 的可写性：如果一个 @parent 不可写，那么 @object 也不可写，
+ * 无论其引用计数是多少。@object 只有在所有父对象都是可写的，并且其自身的引用计数
+ * 正好为1时，才是可写的。
+ *
+ * 注意：这个函数不会获取 @parent 的所有权，也不会增加额外的引用计数。
+ * 调用者有责任在之后的某个时间点移除父对象。
+ *
+ * 自版本 1.16 起可用
+ */
+
+void
+gst_mini_object_add_parent (GstMiniObject * object, GstMiniObject * parent)
+{
+  gint priv_state;
+
+  g_return_if_fail (object != NULL);
+
+  GST_CAT_TRACE (GST_CAT_REFCOUNTING, "adding parent %p to object %p", parent,
+      object);
+
+  priv_state = lock_priv_pointer (object);
+  
+  /*如果已经有一个父对象，现在需要分配整个（完整）结构体*/
+  if (priv_state == PRIV_DATA_STATE_ONE_PARENT) {
+    /* Unlock again */
+    g_atomic_int_set ((gint *) & object->priv_uint, priv_state);
+
+    ensure_priv_data (object);
+    priv_state = PRIV_DATA_STATE_PARENTS_OR_QDATA;
+  }
+
+  /* 现在我们要么需要将新的父对象添加到完整的结构体中，要么将我们唯一的一个父对象添加到指针字段中 */
+  if (priv_state == PRIV_DATA_STATE_PARENTS_OR_QDATA) {
+    PrivData *priv_data = object->priv_pointer;
+
+    /* Lock parents */
+    while (!g_atomic_int_compare_and_exchange (&priv_data->parent_lock, 0, 1));
+
+    if (priv_data->n_parents >= priv_data->n_parents_len) {
+      priv_data->n_parents_len *= 2;
+      if (priv_data->n_parents_len == 0)
+        priv_data->n_parents_len = 16;
+
+      priv_data->parents =
+          g_realloc (priv_data->parents,
+          priv_data->n_parents_len * sizeof (GstMiniObject *));
+    }
+    priv_data->parents[priv_data->n_parents] = parent;
+    priv_data->n_parents++;
+
+    /* Unlock again */
+    g_atomic_int_set (&priv_data->parent_lock, 0);
+  } else if (priv_state == PRIV_DATA_STATE_NO_PARENT) {
+    object->priv_pointer = parent;
+
+    /* Unlock again */
+    g_atomic_int_set ((gint *) & object->priv_uint, PRIV_DATA_STATE_ONE_PARENT);
+  } else {
+    g_assert_not_reached ();
+  }
+}
+```
+
+#### 3.4.2 gst_mini_object_remove_parent
+
+```c
+/**
+ * gst_mini_object_remove_parent:
+ * @object: a #GstMiniObject
+ * @parent: a parent #GstMiniObject
+ *
+ * This removes @parent as a parent for @object. See
+ * gst_mini_object_add_parent().
+ *
+ * Since: 1.16
+ */
+void
+gst_mini_object_remove_parent (GstMiniObject * object, GstMiniObject * parent)
+{
+  gint priv_state;
+
+  g_return_if_fail (object != NULL);
+
+  GST_CAT_TRACE (GST_CAT_REFCOUNTING, "removing parent %p from object %p",
+      parent, object);
+
+  priv_state = lock_priv_pointer (object);
+
+  /* 现在我们必须将新的父元素添加到完整的结构中，或者将我们唯一的父元素添加到指针字段中 */
+  if (priv_state == PRIV_DATA_STATE_PARENTS_OR_QDATA) {
+    PrivData *priv_data = object->priv_pointer;
+    guint i;
+
+    /* Lock parents */
+    while (!g_atomic_int_compare_and_exchange (&priv_data->parent_lock, 0, 1));
+
+    /* 在parent数组里面找到要要删除的那个parent */
+    for (i = 0; i < priv_data->n_parents; i++)
+      if (parent == priv_data->parents[i])
+        break;
+
+    if (i != priv_data->n_parents) {
+      priv_data->n_parents--;
+      if (priv_data->n_parents != i)
+        priv_data->parents[i] = priv_data->parents[priv_data->n_parents];
+    } else {
+      g_warning ("%s: couldn't find parent %p (object:%p)", G_STRFUNC,
+          object, parent);
+    }
+
+    /* Unlock again */
+    g_atomic_int_set (&priv_data->parent_lock, 0);
+  } else if (priv_state == PRIV_DATA_STATE_ONE_PARENT) {
+    if (object->priv_pointer != parent) {
+      g_warning ("%s: couldn't find parent %p (object:%p)", G_STRFUNC,
+          object, parent);
+      /* Unlock again */
+      g_atomic_int_set ((gint *) & object->priv_uint, priv_state);
+    } else {
+      object->priv_pointer = NULL;
+      /* Unlock again */
+      g_atomic_int_set ((gint *) & object->priv_uint,
+          PRIV_DATA_STATE_NO_PARENT);
+    }
+  } else {
+    /* Unlock again */
+    g_atomic_int_set ((gint *) & object->priv_uint, PRIV_DATA_STATE_NO_PARENT);
+  }
+}
+```
+
 ### 3.5 GstMiniObject对的GstQData
+
+#### 3.5.1 gst_mini_object_set_qdata
+
+```c
+/**
+ * gst_mini_object_set_qdata:
+ * @object: 一个 #GstMiniObject
+ * @quark: 一个 #GQuark，用于命名用户数据指针
+ * @data: 一个不透明的用户数据指针
+ * @destroy: 当 @data 需要被释放时调用的函数，以 @data 作为参数
+ *
+ * 这个函数在一个GstMiniObject上设置一个不透明的、命名的指针。
+ * 名称通过一个 #GQuark 来指定（可以通过 g_quark_from_static_string() 等方式获取），
+ * 而指针可以通过 gst_mini_object_get_qdata() 从 @object 中获取，直到 @object 被销毁。
+ * 如果设置了之前已经设置的用户数据指针，它会覆盖（释放）旧的指针设置，使用 %NULL 作为指针
+ * 实际上会移除存储的数据。
+ *
+ * 当 @object 被销毁，或者数据被通过具有相同 @quark 的 gst_mini_object_set_qdata() 调用覆盖时，
+ * 可以指定 @destroy，它会以 @data 作为参数调用。
+ */
+
+void
+gst_mini_object_set_qdata (GstMiniObject * object, GQuark quark,
+    gpointer data, GDestroyNotify destroy)
+{
+  gint i;
+  gpointer old_data = NULL;
+  GDestroyNotify old_notify = NULL;
+
+  g_return_if_fail (object != NULL);
+  g_return_if_fail (quark > 0);
+
+  G_LOCK (qdata_mutex);
+  if ((i = find_notify (object, quark, FALSE, NULL, NULL)) != -1) {
+    PrivData *priv_data = object->priv_pointer;
+
+    old_data = QDATA_DATA (priv_data, i);
+    old_notify = QDATA_DESTROY (priv_data, i);
+
+    if (data == NULL)
+      remove_notify (object, i);
+  }
+  if (data != NULL)
+    set_notify (object, i, quark, NULL, data, destroy);
+  G_UNLOCK (qdata_mutex);
+
+  if (old_notify)
+    old_notify (old_data);
+}
+```
+
+#### 3.5.2 gst_mini_object_get_qdata
+
+```c
+/**
+ * gst_mini_object_get_qdata:
+ * @object: 用于从中获取存储的用户数据指针的 GstMiniObject
+ * @quark: 一个 #GQuark，用于命名用户数据指针
+ *
+ * 这个函数用于获取通过 gst_mini_object_set_qdata() 存储的用户数据指针。
+ *
+ * 返回值：(transfer none) (nullable)：设置的用户数据指针，或者 %NULL
+ */
+gpointer
+gst_mini_object_get_qdata (GstMiniObject * object, GQuark quark)
+{
+  guint i;
+  gpointer result;
+
+  g_return_val_if_fail (object != NULL, NULL);
+  g_return_val_if_fail (quark > 0, NULL);
+
+  G_LOCK (qdata_mutex);
+  if ((i = find_notify (object, quark, FALSE, NULL, NULL)) != -1) {
+    PrivData *priv_data = object->priv_pointer;
+    result = QDATA_DATA (priv_data, i);
+  } else {
+    result = NULL;
+  }
+  G_UNLOCK (qdata_mutex);
+
+  return result;
+}
+```
+
+#### 3.5.3 gst_mini_object_steal_qdata
+
+**注意**： 从`GstQData *qdata`移除匹配的qdata，并且不触发调用`destroy`函数
+```c
+/**
+ * gst_mini_object_steal_qdata:
+ * @object: 用于从中获取存储的用户数据指针的 GstMiniObject
+ * @quark: 一个 #GQuark，用于命名用户数据指针
+ *
+ * 这个函数用于获取通过 gst_mini_object_set_qdata() 存储的用户数据指针，
+ * 并从 @object 中移除这些数据，同时不调用其 `destroy()` 函数（如果设置了的话）。
+ *
+ * 返回值：(transfer full) (nullable)：设置的用户数据指针，或者 %NULL
+ */
+gpointer
+gst_mini_object_steal_qdata (GstMiniObject * object, GQuark quark)
+{
+  guint i;
+  gpointer result;
+
+  g_return_val_if_fail (object != NULL, NULL);
+  g_return_val_if_fail (quark > 0, NULL);
+
+  G_LOCK (qdata_mutex);
+  if ((i = find_notify (object, quark, FALSE, NULL, NULL)) != -1) {
+    PrivData *priv_data = object->priv_pointer;
+    result = QDATA_DATA (priv_data, i);
+    remove_notify (object, i);
+  } else {
+    result = NULL;
+  }
+  G_UNLOCK (qdata_mutex);
+
+  return result;
+}
+```
 
 ### 3.6 GstMiniObject对象的虚引用
 
-
-
-
-
-
-### gst_mini_object_copy
-
+#### 3.6.1 gst_mini_object_weak_ref
 ```c
-GstMiniObject *
-gst_mini_object_copy (const GstMiniObject * mini_object) {
+/**
+ * gst_mini_object_weak_ref: (skip)
+ * @object: 要弱引用的 #GstMiniObject
+ * @notify: 在GstMiniObject被释放之前调用的回调函数
+ * @data: 传递给回调函数的额外数据
+ *
+ * 在一个GstMiniObject对象上添加一个弱引用回调函数。弱引用用于在GstMiniObject对象被销毁时进行通知。
+ * 它们被称为 "弱引用"，因为它们允许您安全地持有对GstMiniObject对象的指针，
+ * 而不需要调用 gst_mini_object_ref()（gst_mini_object_ref() 添加强引用，
+ * 即强制对象保持活动状态）。
+ */
+void
+gst_mini_object_weak_ref (GstMiniObject * object,
+    GstMiniObjectNotify notify, gpointer data)
+{
+  g_return_if_fail (object != NULL);
+  g_return_if_fail (notify != NULL);
+  g_return_if_fail (GST_MINI_OBJECT_REFCOUNT_VALUE (object) >= 1);
 
-  ...
+  G_LOCK (qdata_mutex);
+  set_notify (object, -1, weak_ref_quark, notify, data, NULL);
+  G_UNLOCK (qdata_mutex);
+}
+```
+#### 3.6.2 gst_mini_object_weak_unref
+```c
+/**
+ * gst_mini_object_weak_unref: (skip)
+ * @object: 用于移除弱引用的 #GstMiniObject
+ * @notify: 要搜索的回调函数
+ * @data: 要搜索的数据
+ *
+ * 从GstMiniObject对象中移除一个弱引用回调。
+ */
+void
+gst_mini_object_weak_unref (GstMiniObject * object,
+    GstMiniObjectNotify notify, gpointer data)
+{
+  gint i;
 
-  GstMiniObject *copy = mini_object->copy (mini_object);
+  g_return_if_fail (object != NULL);
+  g_return_if_fail (notify != NULL);
 
-  ...
+  G_LOCK (qdata_mutex);
+  if ((i = find_notify (object, weak_ref_quark, TRUE, notify, data)) != -1) {
+    remove_notify (object, i);
+  } else {
+    g_warning ("%s: couldn't find weak ref %p (object:%p data:%p)", G_STRFUNC,
+        notify, object, data);
+  }
+  G_UNLOCK (qdata_mutex);
 }
 ```

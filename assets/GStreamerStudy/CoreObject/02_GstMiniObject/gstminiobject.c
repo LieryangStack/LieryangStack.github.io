@@ -828,11 +828,11 @@ gst_mini_object_take (GstMiniObject ** olddata, GstMiniObject * newdata)
 /**
  * gst_mini_object_weak_ref: (skip)
  * @object: 要弱引用的 #GstMiniObject
- * @notify: 在迷你对象被释放之前调用的回调函数
+ * @notify: 在GstMiniObject被释放之前调用的回调函数
  * @data: 传递给回调函数的额外数据
  *
- * 在一个迷你对象上添加一个弱引用回调函数。弱引用用于在迷你对象被销毁时进行通知。
- * 它们被称为 "弱引用"，因为它们允许您安全地持有对迷你对象的指针，
+ * 在一个GstMiniObject对象上添加一个弱引用回调函数。弱引用用于在GstMiniObject对象被销毁时进行通知。
+ * 它们被称为 "弱引用"，因为它们允许您安全地持有对GstMiniObject对象的指针，
  * 而不需要调用 gst_mini_object_ref()（gst_mini_object_ref() 添加强引用，
  * 即强制对象保持活动状态）。
  */
@@ -851,11 +851,11 @@ gst_mini_object_weak_ref (GstMiniObject * object,
 
 /**
  * gst_mini_object_weak_unref: (skip)
- * @object: #GstMiniObject to remove a weak reference from
- * @notify: callback to search for
- * @data: data to search for
+ * @object: 用于移除弱引用的 #GstMiniObject
+ * @notify: 要搜索的回调函数
+ * @data: 要搜索的数据
  *
- * Removes a weak reference callback from a mini object.
+ * 从GstMiniObject对象中移除一个弱引用回调。
  */
 void
 gst_mini_object_weak_unref (GstMiniObject * object,
@@ -924,14 +924,12 @@ gst_mini_object_set_qdata (GstMiniObject * object, GQuark quark,
 
 /**
  * gst_mini_object_get_qdata:
- * @object: The GstMiniObject to get a stored user data pointer from
- * @quark: A #GQuark, naming the user data pointer
+ * @object: 用于从中获取存储的用户数据指针的 GstMiniObject
+ * @quark: 一个 #GQuark，用于命名用户数据指针
  *
- * This function gets back user data pointers stored via
- * gst_mini_object_set_qdata().
+ * 这个函数用于获取通过 gst_mini_object_set_qdata() 存储的用户数据指针。
  *
- * Returns: (transfer none) (nullable): The user data pointer set, or
- * %NULL
+ * 返回值：(transfer none) (nullable)：设置的用户数据指针，或者 %NULL
  */
 gpointer
 gst_mini_object_get_qdata (GstMiniObject * object, GQuark quark)
@@ -956,15 +954,13 @@ gst_mini_object_get_qdata (GstMiniObject * object, GQuark quark)
 
 /**
  * gst_mini_object_steal_qdata:
- * @object: The GstMiniObject to get a stored user data pointer from
- * @quark: A #GQuark, naming the user data pointer
+ * @object: 用于从中获取存储的用户数据指针的 GstMiniObject
+ * @quark: 一个 #GQuark，用于命名用户数据指针
  *
- * This function gets back user data pointers stored via gst_mini_object_set_qdata()
- * and removes the data from @object without invoking its `destroy()` function (if
- * any was set).
+ * 这个函数用于获取通过 gst_mini_object_set_qdata() 存储的用户数据指针，
+ * 并从 @object 中移除这些数据，同时不调用其 `destroy()` 函数（如果设置了的话）。
  *
- * Returns: (transfer full) (nullable): The user data pointer set, or
- * %NULL
+ * 返回值：(transfer full) (nullable)：设置的用户数据指针，或者 %NULL
  */
 gpointer
 gst_mini_object_steal_qdata (GstMiniObject * object, GQuark quark)
@@ -1078,8 +1074,7 @@ gst_mini_object_remove_parent (GstMiniObject * object, GstMiniObject * parent)
 
   priv_state = lock_priv_pointer (object);
 
-  /* Now we either have to add the new parent to the full struct, or add
-   * our one and only parent to the pointer field */
+  /* 现在我们必须将新的父元素添加到完整的结构中，或者将我们唯一的父元素添加到指针字段中 */
   if (priv_state == PRIV_DATA_STATE_PARENTS_OR_QDATA) {
     PrivData *priv_data = object->priv_pointer;
     guint i;
@@ -1087,6 +1082,7 @@ gst_mini_object_remove_parent (GstMiniObject * object, GstMiniObject * parent)
     /* Lock parents */
     while (!g_atomic_int_compare_and_exchange (&priv_data->parent_lock, 0, 1));
 
+    /* 在parent数组里面找到要要删除的那个parent */
     for (i = 0; i < priv_data->n_parents; i++)
       if (parent == priv_data->parents[i])
         break;
