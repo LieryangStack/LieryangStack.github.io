@@ -196,28 +196,20 @@ gst_custom_meta_has_name (GstCustomMeta * meta, const gchar * name)
 
 /**
  * gst_meta_register_custom:
- * @name: the name of the #GstMeta implementation
- * @tags: (array zero-terminated=1): tags for @api
- * @transform_func: (scope notified) (nullable): a #GstMetaTransformFunction
- * @user_data: (closure): user data passed to @transform_func
- * @destroy_data: #GDestroyNotify for user_data
+ * @breif: 实现注册一个custom GstMeta
+ * @param name: 实现#GstMeta的名字
+ * @param tags: (array zero-terminated=1): tags for @api
+ * @param transform_func: (scope notified) (nullable): a #GstMetaTransformFunction
+ * @param user_data: (closure): user data passed to @transform_func
+ * @param destroy_data: #GDestroyNotify for user_data
+ * @return(transfer none): 一个 #GstMetaInfo，可用于访问元数据。
  *
- * Register a new custom #GstMeta implementation, backed by an opaque
- * structure holding a #GstStructure.
+ * 之后可以通过使用 @name 作为关键字的 gst_meta_get_info() 来检索已注册的信息。
+ * 
+ * 可以通过 gst_custom_meta_get_structure() 检索支持的 #GstStructure，其可变性取决于元数据附加到的缓冲区的可写性。
  *
- * The registered info can be retrieved later with gst_meta_get_info() by using
- * @name as the key.
+ * 当 @transform_func 为 %NULL 时，元数据及其支持的 #GstStructure 在转换操作为复制时将始终被复制，其他操作将被丢弃，复制区域被忽略。
  *
- * The backing #GstStructure can be retrieved with
- * gst_custom_meta_get_structure(), its mutability is conditioned by the
- * writability of the buffer the meta is attached to.
- *
- * When @transform_func is %NULL, the meta and its backing #GstStructure
- * will always be copied when the transform operation is copy, other operations
- * are discarded, copy regions are ignored.
- *
- * Returns: (transfer none): a #GstMetaInfo that can be used to
- * access metadata.
  * Since: 1.20
  */
 const GstMetaInfo *
@@ -312,23 +304,20 @@ gst_meta_api_type_get_tags (GType api)
 }
 
 /**
- * gst_meta_register:
- * @api: the type of the #GstMeta API
- * @impl: the name of the #GstMeta implementation
- * @size: the size of the #GstMeta structure
+ * @name: gst_meta_register
+ * @brief: 实现注册一个新的 #GstMeta
+ * @param api: #GstMeta API的类型值
+ * @param impl: #GstMeta实现的名字
+ * @size: #GstMeta结构体所占内存大小
  * @init_func: (scope async): a #GstMetaInitFunction
  * @free_func: (scope async): a #GstMetaFreeFunction
  * @transform_func: (scope async): a #GstMetaTransformFunction
- *
- * Register a new #GstMeta implementation.
- *
- * The same @info can be retrieved later with gst_meta_get_info() by using
- * @impl as the key.
+ * 
+ * @note: 通过使用@imple作为关键词，使用gst_meta_get_info函数，相同的@info可能被检索到
  *
  * Returns: (transfer none): a #GstMetaInfo that can be used to
  * access metadata.
  */
-
 const GstMetaInfo *
 gst_meta_register (GType api, const gchar * impl, gsize size,
     GstMetaInitFunction init_func, GstMetaFreeFunction free_func,
@@ -345,9 +334,8 @@ gst_meta_register (GType api, const gchar * impl, gsize size,
     g_critical ("Registering meta implementation '%s' without init function",
         impl);
 
-  /* first try to register the implementation name. It's possible
-   * that this fails because it was already registered. Don't warn,
-   * glib did this for us already. */
+  /* 首先尝试注册实现名称。这可能会失败，因为它已经被注册过了。不要发出警告，
+    glib 已经为我们做了这件事。 */
   type = g_pointer_type_register_static (impl);
   if (type == G_TYPE_INVALID)
     return NULL;
