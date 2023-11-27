@@ -80,8 +80,8 @@ typedef enum {
 /**
  * GstAllocatorClass:
  * @object_class: 父类对象
- * @alloc: 用于获取内存的实现
- * @free: 用于释放内存的实现
+ * @alloc: 用于获取内存的实现，被`gst_allocator_alloc`函数调用。
+ * @free: 用于释放内存的实现,被`gst_allocator_free`函数调用。
  *
  * #GstAllocator 用于创建新内存。
  */
@@ -108,14 +108,14 @@ struct _GstAllocatorClass {
 /**
  * GstAllocator:
  * @name: 分配器的名称
- * @mem_map: GstMemoryMapFunction 的实现
- * @mem_unmap: GstMemoryUnmapFunction 的实现
- * @mem_copy: GstMemoryCopyFunction 的实现
- * @mem_share: GstMemoryShareFunction 的实现
- * @mem_is_span: GstMemoryIsSpanFunction 的实现
- * @mem_map_full: GstMemoryMapFullFunction 的实现。
+ * @mem_map: GstMemoryMapFunction 的实现，这个函数的实现包含的用户存储数据指针的映射，被gst_memory_map函数调用。
+ * @mem_unmap: GstMemoryUnmapFunction 的实现，这个函数的实现包含的用户存储数据指针的解映射，被gst_memory_unmap函数调用。
+ * @mem_copy: GstMemoryCopyFunction 的实现，拷贝GstMemory数据到一个新的GstMemory，被gst_memory_copy函数调用。
+ * @mem_share: GstMemoryShareFunction 的实现，被gst_memory_share函数调用。
+ * @mem_is_span: GstMemoryIsSpanFunction 的实现，合并两个GstMemory，被gst_memory_is_span函数调用。
+ * @mem_map_full: GstMemoryMapFullFunction 的实现，和mem_map实现的功能类似，优先使用mem_map_full。
  *      如果存在，将代替 @mem_map 使用。（自版本 1.6 起）
- * @mem_unmap_full: GstMemoryUnmapFullFunction 的实现。
+ * @mem_unmap_full: GstMemoryUnmapFullFunction 的实现,和mem_map实现的功能类似，优先使用mem_unmap_full。
  *      如果存在，将代替 @mem_unmap 使用。（自版本 1.6 起）
  *
  * #GstAllocator 用于创建新内存。
@@ -151,8 +151,7 @@ struct _GstAllocator
 /**
  * GstAllocationParams:
  * @flags: 控制内存分配的标志
- * @align: 期望的内存对齐方式
- * @prefix: 期望的前缀
+ * @align: 期望的内存对齐方式，必须是2的幂次减一
  * @padding: 期望的填充
  *
  * 用于控制内存分配的参数
@@ -251,9 +250,12 @@ typedef struct
 } GstAllocatorSysmemClass;
 ```
 
-### 4.3 GstAllocator类型注册函数
+### 4.3 GstAllocatorSysmem类型注册函数
 
 ```c
 static GType gst_allocator_sysmem_get_type (void);
 G_DEFINE_TYPE (GstAllocatorSysmem, gst_allocator_sysmem, GST_TYPE_ALLOCATOR);
 ```
+
+### 4.4 GstAllocatorSysmem实现类和实例中的函数指针
+

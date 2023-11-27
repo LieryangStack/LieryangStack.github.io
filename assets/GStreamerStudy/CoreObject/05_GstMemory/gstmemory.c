@@ -6,9 +6,15 @@
 #include "gst_private.h"
 #include "gstmemory.h"
 
+/* lieryang add */
+#include <gst/gst.h>
+
 GType _gst_memory_type = 0;
 GST_DEFINE_MINI_OBJECT_TYPE (GstMemory, gst_memory);
 
+/**
+ * 实际调用的是分配器实例中的内存拷贝函数
+*/
 static GstMemory *
 _gst_memory_copy (GstMemory * mem)
 {
@@ -16,6 +22,9 @@ _gst_memory_copy (GstMemory * mem)
   return gst_memory_copy (mem, 0, -1);
 }
 
+/**
+ * 实际调用的是分配器类中的内存释放函数
+*/
 static void
 _gst_memory_free (GstMemory * mem)
 {
@@ -37,6 +46,7 @@ _gst_memory_free (GstMemory * mem)
 
 /**
  * gst_memory_init: (skip)
+ * @breif: 使用给定参数初始化新分配的 @mem。这个函数会调用 gst_mini_object_init() 并使用默认的内存参数。
  * @mem: 一个 #GstMemory
  * @flags: #GstMemoryFlags
  * @allocator: #GstAllocator
@@ -45,14 +55,15 @@ _gst_memory_free (GstMemory * mem)
  * @align: 内存的对齐方式
  * @offset: 内存中的偏移量
  * @size: 内存中有效数据的大小
- *
- * 使用给定参数初始化新分配的 @mem。这个函数会调用 gst_mini_object_init() 并使用默认的内存参数。
+ * 
+ * @note: 初始化GstMemory对象GST_MINI_OBJECT_FLAG_LOCKABLE
  */
 void
 gst_memory_init (GstMemory * mem, GstMemoryFlags flags,
     GstAllocator * allocator, GstMemory * parent, gsize maxsize, gsize align,
     gsize offset, gsize size)
 {
+
   gst_mini_object_init (GST_MINI_OBJECT_CAST (mem),
       flags | GST_MINI_OBJECT_FLAG_LOCKABLE, GST_TYPE_MEMORY,
       (GstMiniObjectCopyFunction) _gst_memory_copy, NULL,
@@ -77,12 +88,10 @@ gst_memory_init (GstMemory * mem, GstMemoryFlags flags,
 
 /**
  * gst_memory_is_type:
+ * @brief: 传入的@mem_type和分配器名称比较。检查 @mem 是否是使用分配给 @mem_type 的分配器分配的。
  * @mem: 一个 #GstMemory
  * @mem_type: 一种内存类型
- *
- * 检查 @mem 是否是使用分配给 @mem_type 的分配器分配的。
- *
- * 返回值：如果 @mem 是从分配给 @mem_type 的分配器分配的，则返回 %TRUE。
+ * @return 返回值：如果 @mem 是从分配给 @mem_type 的分配器分配的，则返回 %TRUE。
  *
  * 自版本 1.2 起。
  */
@@ -98,6 +107,7 @@ gst_memory_is_type (GstMemory * mem, const gchar * mem_type)
 
 /**
  * gst_memory_get_sizes:
+ * @brief: 获取GstMemory结构体中存储的offset和maxsize到指针参数中
  * @mem: 一个 #GstMemory
  * @offset: (out) (allow-none): 指向偏移量的指针
  * @maxsize: (out) (allow-none): 指向最大大小的指针
@@ -197,6 +207,9 @@ cannot_map:
 
 /**
  * gst_memory_map:
+ * @brief: 因为GstMemory结构体中并不包含用户存储数据的data，通常用户会根据实际需要创建一个继承于GstMemory的结构体，存储data。
+ *         使用用户继承于的GstAllocator的分配器，分配GstMemory内存。
+ *         map函数就是把data经过一些处理（偏移等操作），赋值到GstMapInfo结构体中。
  * @mem: 一个 #GstMemory
  * @info: (out caller-allocates): 用于信息的指针
  * @flags: 映射标志
@@ -227,6 +240,7 @@ gst_memory_map (GstMemory * mem, GstMapInfo * info, GstMapFlags flags)
   info->size = mem->size;
   info->maxsize = mem->maxsize - mem->offset;
 
+  /* 关键部分 info->data才是存储用户数据的指针 */
   if (mem->allocator->mem_map_full)
     info->data = mem->allocator->mem_map_full (mem, info, mem->maxsize);
   else
@@ -306,7 +320,8 @@ gst_memory_copy (GstMemory * mem, gssize offset, gssize size)
  * @offset: 要共享的偏移量
  * @size: 要共享的大小，或者 -1 表示共享到内存区域的末尾
  *
- * 从 @mem 的 @offset 开始返回 @size 字节的共享副本。不执行内存复制，内存区域简单地被共享。结果保证是不可写的。@size 可以设置为 -1 来返回从 @offset 到内存区域末尾的共享副本。
+ * 从 @mem 的 @offset 开始返回 @size 字节的共享副本。不执行内存复制，内存区域简单地被共享。结果保证是不可写的。
+ * @size 可以设置为 -1 来返回从 @offset 到内存区域末尾的共享副本。
  *
  * 返回值：一个新的 #GstMemory。
  */
@@ -325,8 +340,7 @@ gst_memory_share (GstMemory * mem, gssize offset, gssize size)
   if (!gst_memory_lock (mem, GST_LOCK_FLAG_EXCLUSIVE))
     return NULL;
 
-  /* double lock to ensure we are not mapped writable without an
-   * exclusive lock. */
+  /* 两次独有锁的时候，其他用户不能再上写锁 */
   if (!gst_memory_lock (mem, GST_LOCK_FLAG_EXCLUSIVE)) {
     gst_memory_unlock (mem, GST_LOCK_FLAG_EXCLUSIVE);
     return NULL;
@@ -359,7 +373,7 @@ gst_memory_is_span (GstMemory * mem1, GstMemory * mem2, gsize * offset)
   g_return_val_if_fail (mem1 != NULL, FALSE);
   g_return_val_if_fail (mem2 != NULL, FALSE);
 
-  /* need to have the same allocators */
+  /* 必须是相同的内存分配器 */
   if (mem1->allocator != mem2->allocator)
     return FALSE;
 

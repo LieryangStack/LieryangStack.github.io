@@ -27,6 +27,9 @@
 #include "gst_private.h"
 #include "gstmemory.h"
 
+/* lieryang add */
+#include <gst/gst.h>
+
 GST_DEBUG_CATEGORY_STATIC (gst_allocator_debug);
 #define GST_CAT_DEFAULT gst_allocator_debug
 
@@ -292,6 +295,7 @@ gst_allocator_alloc (GstAllocator * allocator, gsize size,
   GstAllocatorClass *aclass;
 
   if (params) {
+    /* 对齐数必须是2的幂次减一  */
     g_return_val_if_fail (((params->align + 1) & params->align) == 0, NULL);
   } else {
     params = &defparams;
@@ -357,6 +361,13 @@ typedef struct
 static GType gst_allocator_sysmem_get_type (void);
 G_DEFINE_TYPE (GstAllocatorSysmem, gst_allocator_sysmem, GST_TYPE_ALLOCATOR);
 
+/**
+ * @berif: 实际调用的是 gst_memory_init， gst_memory_init调用了gst_mini_object_init(在GstMiniObject初始化函数中，ref赋值为1)
+ * @calledby: 被_sysmem_new调用（其实这是一个内联函数，会展开到_sysmem_new中），_sysmem_new被
+ * @param slice_size: 实际请求的所有内存（slice_size = align + sizeof (GstMemorySystem) + maxsize）
+ * @param maxsize: 对齐size + 前缀size + 用户请求size + 填充size
+ * @param size: 用户实际请求的size
+*/
 static inline void
 _sysmem_init (GstMemorySystem * mem, GstMemoryFlags flags,
     GstMemory * parent, gsize slice_size,
@@ -372,7 +383,11 @@ _sysmem_init (GstMemorySystem * mem, GstMemoryFlags flags,
   mem->notify = notify;
 }
 
-/* 创建一个新的内存块来管理给定的内存 */
+/**
+ * @brief: 给GstMemorySystem结构体分配内存空间，用来管理用户数据内存。
+ * @calledby: _sysmem_share
+ *            _sysmem_is_span
+*/
 static inline GstMemorySystem *
 _sysmem_new (GstMemoryFlags flags,
     GstMemory * parent, gpointer data, gsize maxsize, gsize align, gsize offset,
@@ -390,7 +405,17 @@ _sysmem_new (GstMemoryFlags flags,
   return mem;
 }
 
-/* 在一个块中分配内存和结构体 */
+/*  */
+/**
+ * @brief: 在一个块中分配内存和结构体
+ * @calledby: _sysmem_copy
+ *            default_alloc
+ * @param maxsize: 前缀size + 用户请求size + 填充size
+ * @param align: 对齐size，GstAllocationParams->align
+ * @param offset: 前缀size， GstAllocationParams->prefix
+ * @param size: 用户请求的内存空间大小
+ * @note: slice_size = align + sizeof (GstMemorySystem) + maxsize
+*/
 static GstMemorySystem *
 _sysmem_new_block (GstMemoryFlags flags,
     gsize maxsize, gsize align, gsize offset, gsize size)
@@ -399,20 +424,26 @@ _sysmem_new_block (GstMemoryFlags flags,
   gsize aoffset, slice_size, padding;
   guint8 *data;
 
-  /* ensure configured alignment */
+  /* 确保被配置对齐 */
   align |= gst_memory_alignment;
-  /* allocate more to compensate for alignment */
+  /* 分配更多以补偿对齐, 这里的maxsize = align + prefix + size + padding */
   maxsize += align;
-  /* alloc header and data in one block */
+  /* slice_size = 管理内存结构体大小 + 用户存储数据data大小 */
   slice_size = sizeof (GstMemorySystem) + maxsize;
 
   mem = g_slice_alloc (slice_size);
   if (mem == NULL)
     return NULL;
 
+  g_print ("gst_memory_alignment = %d\n", gst_memory_alignment);
+  g_print ("align = %d\n", align);
+  g_print ("maxsize = %ld\n", maxsize);
+
   data = (guint8 *) mem + sizeof (GstMemorySystem);
 
-  /* do alignment */
+  g_print ("data = %p\n", data);
+
+  /* 做对齐 */
   if ((aoffset = ((guintptr) data & align))) {
     aoffset = (align + 1) - aoffset;
     data += aoffset;
@@ -494,21 +525,35 @@ _sysmem_is_span (GstMemorySystem * mem1, GstMemorySystem * mem2, gsize * offset)
     *offset = mem1->mem.offset - parent->mem.offset;
   }
 
+  g_print ("mem1->data = %p\n", mem1->data);
+  g_print ("mem1->size = %p\n", mem1->mem.size);
+  g_print ("mem2->data = %p\n", mem2->data);
+  g_print ("mem1->data + mem1->mem.offset + mem1->mem.size = %p\n", mem1->data + mem1->mem.offset + mem1->mem.size);
+  g_print ("mem2->data + mem2->mem.offset = %p\n", mem2->data + mem2->mem.offset);
+
   /* and memory is contiguous */
   return mem1->data + mem1->mem.offset + mem1->mem.size ==
       mem2->data + mem2->mem.offset;
 }
 
+/**
+ * @brief: 一块内存申请，一块内存 = 内存管理结构体 + 存储数据内存
+ *         GstAllocatorClass类中的alloc虚函数的实现
+*/
 static GstMemory *
 default_alloc (GstAllocator * allocator, gsize size,
     GstAllocationParams * params)
 {
+  /* 最大内存是 用户请求的size + 前缀size + 填充size */
   gsize maxsize = size + params->prefix + params->padding;
 
   return (GstMemory *) _sysmem_new_block (params->flags,
       maxsize, params->align, params->prefix, size);
 }
 
+/**
+ * @brief: 
+*/
 static void
 default_free (GstAllocator * allocator, GstMemory * mem)
 {
@@ -609,6 +654,7 @@ _priv_gst_allocator_cleanup (void)
 
 /**
  * gst_memory_new_wrapped:
+ * @brief: 用户提供data内存，然后创建一个GstMemory进行管理该内存空间
  * @flags: #GstMemoryFlags
  * @data: (array length=size) (element-type guint8) (transfer none): 要包装的数据
  * @maxsize: @data 的分配大小

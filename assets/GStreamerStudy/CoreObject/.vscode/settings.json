@@ -37,7 +37,8 @@
     "glib_trace.h": "c",
     "gstmemory.h": "c",
     "gststructure.h": "c",
-    "gstclock.h": "c"
+    "gstclock.h": "c",
+    "string": "c"
   },
   "C_Cpp.errorSquiggles": "disabled",
   "C_Cpp_Runner.msvcBatchPath": "",

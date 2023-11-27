@@ -219,7 +219,17 @@ enum {
 
 ### 2.3 GstMiniObject类型相关结构体定义
 
-`GstMiniObject`是主要结构体，成员`priv_pointer`有时候存储的就是结构体`PrivData`。
+`GstMiniObject`是主要结构体
+
+- **priv_pointer**：有时候存储的就是结构体`PrivData`。
+- **lockstate**：该变量是gint类型，一共有4个字节。
+  - 第一个字节：存储读或者写状态，也就是0x01或者0x02。
+  - 第二个字节：比如说，有三个用户进行读，第二个字节就是存储有多少个用户进行读或者写。0x301表示三个用户就行读。
+  - 第三个字节：独有锁，有几个用户上独有锁，这个变量存储在第三个字节。0x20000。
+- **flags**：使用的是枚举`GstMiniObjectFlags`，子类会在该枚举的最后一个后面继续添加子类的flag。
+  比如`GstMemory：
+  - 第一个字节：`GstMiniObjectFlags`。
+  - 第二个字节：`GstMemoryFlags`。
 
 ```c
 /* filename: gstminiobject.h */
