@@ -205,7 +205,12 @@ _get_merged_memory (GstBuffer * buffer, guint idx, guint length)
   return _actual_merged_memory (buffer, idx, length);
 }
 
-
+/**
+ * @brief: 从@idx开始删除@length个位置的GstMemory，如果@mem不为空，idx位置修改为@mem
+ * @param len: 一般都是@buffer->len成员的值，即GstMemory的数量
+ * @param idx: 要开始处理(GstBufferImpl*)buffer->mem[idx]的索引
+ * @param length: 从@idx开始，要处理多少个GstMemory
+*/
 static void
 _replace_memory (GstBuffer * buffer, guint len, guint idx, guint length,
     GstMemory * mem)
@@ -218,7 +223,7 @@ _replace_memory (GstBuffer * buffer, guint len, guint idx, guint length,
       "buffer %p replace %u-%" G_GSIZE_FORMAT " with memory %p", buffer, idx,
       end, mem);
 
-  /* unref old memory */
+  /* 解引用之前存储的GstMemory，如果此时GstMemory引用数是1，就会释放掉GstMemory的所有内存 */
   for (i = idx; i < end; i++) {
     GstMemory *old = GST_BUFFER_MEM_PTR (buffer, i);
 
@@ -228,6 +233,7 @@ _replace_memory (GstBuffer * buffer, guint len, guint idx, guint length,
     gst_memory_unref (old);
   }
 
+  /* 如果@mem不为空，就把@idx处的GstMemory替换为@mem */
   if (mem != NULL) {
     /* replace with single memory */
     gst_mini_object_add_parent (GST_MINI_OBJECT_CAST (mem),
@@ -238,6 +244,7 @@ _replace_memory (GstBuffer * buffer, guint len, guint idx, guint length,
     length--;
   }
 
+  /* 因为中间删除一部分数据，所以要把end后面的指针数组移到idx后面 */
   if (end < len) {
     memmove (&GST_BUFFER_MEM_PTR (buffer, idx),
         &GST_BUFFER_MEM_PTR (buffer, end), (len - end) * sizeof (gpointer));
@@ -1049,17 +1056,7 @@ _get_mapped (GstBuffer * buffer, guint idx, GstMapInfo * info,
   return mapped;
 }
 
-/**
- * gst_buffer_peek_memory:
- * @buffer: a #GstBuffer.
- * @idx: an index
- *
- * Gets the memory block at @idx in @buffer. The memory block stays valid until
- * the memory block in @buffer is removed, replaced or merged, typically with
- * any call that modifies the memory in @buffer.
- *
- * Returns: (transfer none) (nullable): the #GstMemory at @idx.
- */
+/* 直接获取指定@idx处的GstMemory（不是通过share或者copy） */
 GstMemory *
 gst_buffer_peek_memory (GstBuffer * buffer, guint idx)
 {
@@ -1069,31 +1066,14 @@ gst_buffer_peek_memory (GstBuffer * buffer, guint idx)
   return GST_BUFFER_MEM_PTR (buffer, idx);
 }
 
-/**
- * gst_buffer_get_memory:
- * @buffer: a #GstBuffer.
- * @idx: an index
- *
- * Gets the memory block at index @idx in @buffer.
- *
- * Returns: (transfer full) (nullable): a #GstMemory that contains the data of the
- * memory block at @idx.
- */
+/* 使用@dix得到指定的GstMemory */
 GstMemory *
 gst_buffer_get_memory (GstBuffer * buffer, guint idx)
 {
   return gst_buffer_get_memory_range (buffer, idx, 1);
 }
 
-/**
- * gst_buffer_get_all_memory:
- * @buffer: a #GstBuffer.
- *
- * Gets all the memory blocks in @buffer. The memory blocks will be merged
- * into one large #GstMemory.
- *
- * Returns: (transfer full) (nullable): a #GstMemory that contains the merged memory.
- */
+/* 合并所有的GstMemory */
 GstMemory *
 gst_buffer_get_all_memory (GstBuffer * buffer)
 {
@@ -1101,19 +1081,10 @@ gst_buffer_get_all_memory (GstBuffer * buffer)
 }
 
 /**
- * gst_buffer_get_memory_range:
- * @buffer: a #GstBuffer.
- * @idx: an index
- * @length: a length
- *
- * Gets @length memory blocks in @buffer starting at @idx. The memory blocks will
- * be merged into one large #GstMemory.
- *
- * If @length is -1, all memory starting from @idx is merged.
- *
- * Returns: (transfer full) (nullable): a #GstMemory that contains the merged data of @length
- *    blocks starting at @idx.
- */
+ * @brief: 得到一个新的GstMemory，这个新的GstMemory是合并了从@idx开始，@length个GstMemory
+ *         如果@length是 -1，则从@idx开始往后的所有GstMemory将会被合并
+ * 
+*/
 GstMemory *
 gst_buffer_get_memory_range (GstBuffer * buffer, guint idx, gint length)
 {
@@ -1132,27 +1103,14 @@ gst_buffer_get_memory_range (GstBuffer * buffer, guint idx, gint length)
   return _get_merged_memory (buffer, idx, length);
 }
 
-/**
- * gst_buffer_replace_memory:
- * @buffer: a #GstBuffer.
- * @idx: an index
- * @mem: (transfer full): a #GstMemory
- *
- * 用@mem替换@buffer中索引@idx处的内存块。
- */
+/* 用@mem替换@buffer中索引@idx处的内存块 */
 void
 gst_buffer_replace_memory (GstBuffer * buffer, guint idx, GstMemory * mem)
 {
   gst_buffer_replace_memory_range (buffer, idx, 1, mem);
 }
 
-/**
- * gst_buffer_replace_all_memory:
- * @buffer: a #GstBuffer.
- * @mem: (transfer full): a #GstMemory
- *
- * Replaces all memory in @buffer with @mem.
- */
+/* 将@buffer中的所有GstMemory删除，第一个buffer->mem就是@mem */
 void
 gst_buffer_replace_all_memory (GstBuffer * buffer, GstMemory * mem)
 {
@@ -1161,14 +1119,14 @@ gst_buffer_replace_all_memory (GstBuffer * buffer, GstMemory * mem)
 
 /**
  * gst_buffer_replace_memory_range:
+ * @brief: 如果@mem是NULL，就删除@idx后@length个GstMemory
+ *         如果@mem不是NULL，就把@idx后@length个GstMemory替换为一个@mem
  * @buffer: a #GstBuffer.
  * @idx: an index
  * @length: a length, should not be 0
  * @mem: (transfer full): a #GstMemory
- *
- * 将@buffer中从@idx开始的@length内存块替换为@mem
  * 
- * 如果@length为-1，从@idx开始的所有内存将被删除并替换为@mem
+ * @note： 这里的替换并不是所有的都替换成@mem，这样也没有意义，就是idx这个替换成@mem，其余的GstMemory都删除了
  *
  * @buffer should be writable.
  */
@@ -1193,25 +1151,14 @@ gst_buffer_replace_memory_range (GstBuffer * buffer, guint idx, gint length,
   _replace_memory (buffer, len, idx, length, mem);
 }
 
-/**
- * gst_buffer_remove_memory:
- * @buffer: a #GstBuffer.
- * @idx: an index
- *
- * Removes the memory block in @b at index @i.
- */
+/* 删除第@idx个GstMemory */
 void
 gst_buffer_remove_memory (GstBuffer * buffer, guint idx)
 {
   gst_buffer_remove_memory_range (buffer, idx, 1);
 }
 
-/**
- * gst_buffer_remove_all_memory:
- * @buffer: a #GstBuffer.
- *
- * Removes all the memory blocks in @buffer.
- */
+/* 删除所有的GstMemory */
 void
 gst_buffer_remove_all_memory (GstBuffer * buffer)
 {
@@ -1220,15 +1167,9 @@ gst_buffer_remove_all_memory (GstBuffer * buffer)
 }
 
 /**
- * gst_buffer_remove_memory_range:
- * @buffer: a #GstBuffer.
- * @idx: an index
- * @length: a length
- *
- * 从@idx开始移除@buffer中的@length个内存块。
- *
- * @length可以是-1，在这种情况下，从@idx开始的所有内存都会被移除。
- */
+ * @brief: @idx开始移除@buffer中的@length个内存块。
+ *         @length可以是-1，在这种情况下，从@idx开始的所有内存都会被移除。
+*/
 void
 gst_buffer_remove_memory_range (GstBuffer * buffer, guint idx, gint length)
 {
