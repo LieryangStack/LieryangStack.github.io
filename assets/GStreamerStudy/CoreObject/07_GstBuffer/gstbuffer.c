@@ -126,6 +126,9 @@ _is_span (GstMemory ** mem, gsize len, gsize * poffset, GstMemory ** parent)
   return have_offset;
 }
 
+/**
+ * @brief: 从@idx开始到@length的所有GstMemory合并到一个新的GstMemory（data也申请了一个新的）
+*/
 static GstMemory *
 _actual_merged_memory (GstBuffer * buffer, guint idx, guint length)
 {
@@ -184,6 +187,9 @@ _actual_merged_memory (GstBuffer * buffer, guint idx, guint length)
   return result;
 }
 
+/**
+ * @brief: 从@idx开始到@length的所有GstMemory合并到一个新的GstMemory（data也申请了一个新的）
+*/
 static inline GstMemory *
 _get_merged_memory (GstBuffer * buffer, guint idx, guint length)
 {
@@ -240,50 +246,24 @@ _replace_memory (GstBuffer * buffer, guint len, guint idx, guint length,
   GST_BUFFER_FLAG_SET (buffer, GST_BUFFER_FLAG_TAG_MEMORY);
 }
 
-/**
- * gst_buffer_get_flags:
- * @buffer: 一个 #GstBuffer
- *
- * 获取设置在这个GstBuffer上的 #GstBufferFlags 标志。
- *
- * 返回值：设置在这个GstBuffer上的标志。
- *
- * 自版本 1.10 起。
- */
+
+/* 获取设置在这个GstBuffer上的 #GstBufferFlags 标志 */
 GstBufferFlags
 gst_buffer_get_flags (GstBuffer * buffer)
 {
   return (GstBufferFlags) GST_BUFFER_FLAGS (buffer);
 }
 
-/**
- * gst_buffer_has_flags:
- * @buffer: 一个 #GstBuffer
- * @flags: 要检查的 #GstBufferFlags 标志。
- *
- * 检查缓冲区上特定标志的状态。
- *
- * 返回值：如果在 @buffer 上找到 @flags 中的所有标志，则返回 %TRUE。
- *
- * 自版本 1.10 起。
- */
+
+/* 检查 GstBuffer上是否被设定了@flags */
 gboolean
 gst_buffer_has_flags (GstBuffer * buffer, GstBufferFlags flags)
 {
   return GST_BUFFER_FLAG_IS_SET (buffer, flags);
 }
 
-/**
- * gst_buffer_set_flags:
- * @buffer: 一个 #GstBuffer
- * @flags: 要设置的 #GstBufferFlags。
- *
- * 在缓冲区上设置一个或多个缓冲区标志。
- *
- * 返回值：如果 @flags 成功设置在缓冲区上，则返回 %TRUE。
- *
- * 自版本 1.10 起。
- */
+
+/* 设定@flags到GstBuffer上 */
 gboolean
 gst_buffer_set_flags (GstBuffer * buffer, GstBufferFlags flags)
 {
@@ -291,17 +271,8 @@ gst_buffer_set_flags (GstBuffer * buffer, GstBufferFlags flags)
   return TRUE;
 }
 
-/**
- * gst_buffer_unset_flags:
- * @buffer: 一个 #GstBuffer
- * @flags: 要清除的 #GstBufferFlags
- *
- * 清除一个或多个缓冲区标志。
- *
- * 返回值：如果 @flags 成功从缓冲区清除，则返回 true。
- *
- * 自版本 1.10 起。
- */
+
+/* 删除GstBuffer上的@flags */
 gboolean
 gst_buffer_unset_flags (GstBuffer * buffer, GstBufferFlags flags)
 {
@@ -310,18 +281,20 @@ gst_buffer_unset_flags (GstBuffer * buffer, GstBufferFlags flags)
 }
 
 
-
-/* transfer full for return and transfer none for @mem */
+/**
+ * @brief: 如果@mem还能上独有锁，就返回@mem引用
+ *         如果@mem被上独有锁 + 写锁，返回一个新拷贝的GstMemory
+*/
 static inline GstMemory *
 _memory_get_exclusive_reference (GstMemory * mem)
 {
   GstMemory *ret = NULL;
 
+  /* 如果@mem还能上独有锁，就返回@mem引用 */
   if (gst_memory_lock (mem, GST_LOCK_FLAG_EXCLUSIVE)) {
     ret = gst_memory_ref (mem);
   } else {
-    /* we cannot take another exclusive lock as the memory is already
-     * locked WRITE + EXCLUSIVE according to part-miniobject.txt */
+
     ret = gst_memory_copy (mem, 0, -1);
 
     if (ret) {
@@ -339,6 +312,11 @@ _memory_get_exclusive_reference (GstMemory * mem)
   return ret;
 }
 
+/**
+ * @brief: 添加GstMemory到buffer->mem[idx]
+ * @param idx: -1 表示GstMemory插入到最后
+ *             idx <= len 插入到mem[idx]
+*/
 static inline void
 _memory_add (GstBuffer * buffer, gint idx, GstMemory * mem)
 {
@@ -361,21 +339,27 @@ _memory_add (GstBuffer * buffer, gint idx, GstMemory * mem)
   if (idx == -1)
     idx = len;
 
+  /* 检测是否是在len中间插入idx */
   for (i = len; i > idx; i--) {
     /* move buffers to insert, FIXME, we need to insert first and then merge */
     GST_BUFFER_MEM_PTR (buffer, i) = GST_BUFFER_MEM_PTR (buffer, i - 1);
   }
-  /* and insert the new buffer */
+  /* 把GstMemory添加到 buffer->mem[idx] */
   GST_BUFFER_MEM_PTR (buffer, idx) = mem;
+  /* buffer->len加一 */
   GST_BUFFER_MEM_LEN (buffer) = len + 1;
   gst_mini_object_add_parent (GST_MINI_OBJECT_CAST (mem),
       GST_MINI_OBJECT_CAST (buffer));
 
+  /* GstBuffer的flag设定GST_BUFFER_FLAG_TAG_MEMORY（表示内存被添加） */
   GST_BUFFER_FLAG_SET (buffer, GST_BUFFER_FLAG_TAG_MEMORY);
 }
 
 GST_DEFINE_MINI_OBJECT_TYPE (GstBuffer, gst_buffer);
 
+/**
+ * @calledby: gst_init调用
+*/
 void
 _priv_gst_buffer_initialize (void)
 {
@@ -387,17 +371,8 @@ _priv_gst_buffer_initialize (void)
 #endif
 }
 
-/**
- * gst_buffer_get_max_memory:
- *
- * 获取一个缓冲区可以容纳的最大内存块数量。这是一个编译时常量，可以通过该函数查询。
- *
- * 当添加更多内存块时，现有的内存块将被合并以为新块腾出空间。
- *
- * 返回值：缓冲区可以容纳的最大内存块数量。
- *
- * 自版本 1.2 起。
- */
+
+/* 获取GstBuffer上最大可以容纳GstMemory的数量 */
 guint
 gst_buffer_get_max_memory (void)
 {
@@ -405,14 +380,14 @@ gst_buffer_get_max_memory (void)
 }
 
 /**
- * gst_buffer_copy_into:
- * @dest: 目标 #GstBuffer
- * @src: 源 #GstBuffer
- * @flags: 指示应该复制哪些元数据字段的标志。
- * @offset: 从哪里开始复制
- * @size: 要复制的总大小。如果是 -1，则复制所有数据。
+ * @name gst_buffer_copy_into:
+ * @param dest: 目标 #GstBuffer
+ * @param src: 源 #GstBuffer
+ * @param flags: 指示应该复制哪些元数据字段的标志。
+ * @param offset: 从哪里开始复制
+ * @param size: 要复制的总大小。如果是 -1，则复制所有数据。
  *
- * 将 @src 的信息复制到 @dest。
+ * @brief: 将 @src 的信息复制到 @dest。
  *
  * 如果 @dest 已经包含内存并且 @flags 包含 GST_BUFFER_COPY_MEMORY，那么 @src 的内存将被附加到 @dest。
  *
@@ -431,12 +406,13 @@ gst_buffer_copy_into (GstBuffer * dest, GstBuffer * src,
   g_return_val_if_fail (dest != NULL, FALSE);
   g_return_val_if_fail (src != NULL, FALSE);
 
-  /* nothing to copy if the buffers are the same */
+  /* 如果 dest 等于 src，就没有什么要做的 */
   if (G_UNLIKELY (dest == src))
     return TRUE;
 
   g_return_val_if_fail (gst_buffer_is_writable (dest), FALSE);
 
+  /* 所有GstMemory中实际存储data的大小之和 */
   bufsize = gst_buffer_get_size (src);
   g_return_val_if_fail (bufsize >= offset, FALSE);
   if (offset > 0)
@@ -451,21 +427,24 @@ gst_buffer_copy_into (GstBuffer * dest, GstBuffer * src,
       "-%" G_GSIZE_FORMAT "/%" G_GSIZE_FORMAT, src, dest, offset, size,
       bufsize);
 
-  if (flags & GST_BUFFER_COPY_FLAGS) {
-    /* copy flags */
+  /* 判断是否需要拷贝 flags */
+  if (flags & GST_BUFFER_COPY_FLAGS) {  
+   
     guint flags_mask = ~GST_BUFFER_FLAG_TAG_MEMORY;
-
+    
+    /* 把src除GST_BUFFER_FLAG_TAG_MEMORY以外的所有flags都赋值给dest（如果dest有GST_BUFFER_FLAG_TAG_MEMORY，该flag会保留） */
     GST_MINI_OBJECT_FLAGS (dest) =
-        (GST_MINI_OBJECT_FLAGS (src) & flags_mask) |
-        (GST_MINI_OBJECT_FLAGS (dest) & ~flags_mask);
+        (GST_MINI_OBJECT_FLAGS (src) & flags_mask) |  /* 获得除GST_BUFFER_FLAG_TAG_MEMORY以外的所有flags */
+        (GST_MINI_OBJECT_FLAGS (dest) & ~flags_mask); /* 查看dest是否有GST_BUFFER_FLAG_TAG_MEMORY */
   }
 
+  /* 拷贝src中的时间戳变量 */
   if (flags & GST_BUFFER_COPY_TIMESTAMPS) {
     if (offset == 0) {
       GST_BUFFER_PTS (dest) = GST_BUFFER_PTS (src);
       GST_BUFFER_DTS (dest) = GST_BUFFER_DTS (src);
       GST_BUFFER_OFFSET (dest) = GST_BUFFER_OFFSET (src);
-      if (size == bufsize) {
+      if (size == bufsize) { /* 如果传入@size=-1 或者 传入的@size等于bufsize */
         GST_BUFFER_DURATION (dest) = GST_BUFFER_DURATION (src);
         GST_BUFFER_OFFSET_END (dest) = GST_BUFFER_OFFSET_END (src);
       }
@@ -478,34 +457,41 @@ gst_buffer_copy_into (GstBuffer * dest, GstBuffer * src,
     }
   }
 
+  /* 拷贝GstMemory */
   if (flags & GST_BUFFER_COPY_MEMORY) {
     gsize skip, left, len, dest_len, i, bsize;
     gboolean deep;
 
     deep = flags & GST_BUFFER_COPY_DEEP;
 
+    /* 得到有多少个GstMemory */
     len = GST_BUFFER_MEM_LEN (src);
     dest_len = GST_BUFFER_MEM_LEN (dest);
     left = size;
     skip = offset;
 
     /* copy and make regions of the memory */
+    /* 遍历获取src中的每个GstMemory */
     for (i = 0; i < len && left > 0; i++) {
+
       GstMemory *mem = GST_BUFFER_MEM_PTR (src, i);
 
       bsize = mem->size;
 
-      if (bsize <= skip) {
-        /* don't copy buffer */
+      if (bsize <= skip) { /* 如果@offset >= 用户实际拥有data的大小 */
+        /* 不能拷贝内存 */
         skip -= bsize;
       } else {
         GstMemory *newmem = NULL;
         gsize tocopy;
 
-        tocopy = MIN (bsize - skip, left);
+        /* 一般tocopy都是bsize（当前这个GstMemory存储data的大小） */
+        tocopy = MIN (bsize - skip, left); /* 此时left等于src所有data的大小之和 */
 
+        /* 如果要拷贝的size < GstMemory的数据size && 不需要深拷贝 && 该GstMemory能共享 */
         if (tocopy < bsize && !deep && !GST_MEMORY_IS_NO_SHARE (mem)) {
-          /* we need to clip something */
+
+          /* 共享原始data的地址到新的GstMemory，也是newmem */
           newmem = gst_memory_share (mem, skip, tocopy);
           if (newmem) {
             gst_memory_lock (newmem, GST_LOCK_FLAG_EXCLUSIVE);
@@ -513,27 +499,35 @@ gst_buffer_copy_into (GstBuffer * dest, GstBuffer * src,
           }
         }
 
+        /* 如果要进行深拷贝 || GstMemory不能共享 || （新的GstMemory为空 && @offset > 0） */
         if (deep || GST_MEMORY_IS_NO_SHARE (mem) || (!newmem && tocopy < bsize)) {
-          /* deep copy or we're not allowed to share this memory
-           * between buffers, always copy then */
+          /* 深拷贝，创建新的data内存空间 */
           newmem = gst_memory_copy (mem, skip, tocopy);
           if (newmem) {
             gst_memory_lock (newmem, GST_LOCK_FLAG_EXCLUSIVE);
             skip = 0;
           }
         } else if (!newmem) {
+          /* 如果此时GstMemory处于写锁 + 独有锁状态，newmem = gst_memory_copy (mem, 0, -1);
+           * 否则就返回 ref(mem)  
+           */
           newmem = _memory_get_exclusive_reference (mem);
         }
-
+        
+        /* 如果没有共享或者拷贝成功GstMemory */
         if (!newmem) {
+          /* 传入的@idx = GST_BUFFER_MEM_LEN (dest)，该函数不是从@idx处开始移除内存吗？？，现在idx就是len啊！！！ */
           gst_buffer_remove_memory_range (dest, dest_len, -1);
           return FALSE;
         }
 
+        /* 新的GstMemory添加到目标GstBuffer */
         _memory_add (dest, -1, newmem);
         left -= tocopy;
       }
     }
+
+    /* 如果是拷贝合并 GST_BUFFER_COPY_MERGE */
     if (flags & GST_BUFFER_COPY_MERGE) {
       GstMemory *mem;
 
@@ -615,6 +609,9 @@ gst_buffer_copy_with_flags (const GstBuffer * buffer, GstBufferCopyFlags flags)
   return copy;
 }
 
+/**
+ * @brief: GstMiniObject->copy虚函数实现
+*/
 static GstBuffer *
 _gst_buffer_copy (const GstBuffer * buffer)
 {
@@ -707,6 +704,10 @@ _gst_buffer_free (GstBuffer * buffer)
   }
 }
 
+/**
+ * @brief: 1. 初始化GstBufferImpl结构体成员变量
+ *         2. 调用 gst_mini_object_init 函数
+*/
 static void
 gst_buffer_init (GstBufferImpl * buffer, gsize size)
 {
@@ -729,11 +730,10 @@ gst_buffer_init (GstBufferImpl * buffer, gsize size)
 }
 
 /**
- * gst_buffer_new:
- *
- * Creates a newly allocated buffer without any data.
- *
- * Returns: (transfer full): the new #GstBuffer.
+ * @name: gst_buffer_new
+ * @brief: 创建一个GstBufferImpl，并且初始化
+ * @note: 此时的GstBuffer是空的，没有data（GstMemory）
+ * @return: 新创建的GstBuffer
  */
 GstBuffer *
 gst_buffer_new (void)
@@ -749,21 +749,10 @@ gst_buffer_new (void)
 }
 
 /**
- * gst_buffer_new_allocate:
- * @allocator: (transfer none) (allow-none): the #GstAllocator to use, or %NULL to use the
- *     default allocator
- * @size: the size in bytes of the new buffer's data.
- * @params: (transfer none) (allow-none): optional parameters
- *
- * Tries to create a newly allocated buffer with data of the given size and
- * extra parameters from @allocator. If the requested amount of memory can't be
- * allocated, %NULL will be returned. The allocated buffer memory is not cleared.
- *
- * When @allocator is %NULL, the default memory allocator will be used.
- *
- * Note that when @size == 0, the buffer will not have memory associated with it.
- *
- * Returns: (transfer full) (nullable): a new #GstBuffer
+ * @name: gst_buffer_new_allocate
+ * @param allocator: 分配内存所使用的分配器，NULL使用默认的分配器
+ * @param size: 新创建的buffer占用多少字节
+ * @param params: 分配器参数选项结构体指针
  */
 GstBuffer *
 gst_buffer_new_allocate (GstAllocator * allocator, gsize size,
@@ -788,6 +777,7 @@ gst_buffer_new_allocate (GstAllocator * allocator, gsize size,
   newbuf = gst_buffer_new ();
 
   if (mem != NULL) {
+    /* 给GstMemory上专有锁 */
     gst_memory_lock (mem, GST_LOCK_FLAG_EXCLUSIVE);
     _memory_add (newbuf, -1, mem);
   }
@@ -1148,7 +1138,7 @@ gst_buffer_get_memory_range (GstBuffer * buffer, guint idx, gint length)
  * @idx: an index
  * @mem: (transfer full): a #GstMemory
  *
- * Replaces the memory block at index @idx in @buffer with @mem.
+ * 用@mem替换@buffer中索引@idx处的内存块。
  */
 void
 gst_buffer_replace_memory (GstBuffer * buffer, guint idx, GstMemory * mem)
@@ -1176,10 +1166,9 @@ gst_buffer_replace_all_memory (GstBuffer * buffer, GstMemory * mem)
  * @length: a length, should not be 0
  * @mem: (transfer full): a #GstMemory
  *
- * Replaces @length memory blocks in @buffer starting at @idx with @mem.
- *
- * If @length is -1, all memory starting from @idx will be removed and
- * replaced with @mem.
+ * 将@buffer中从@idx开始的@length内存块替换为@mem
+ * 
+ * 如果@length为-1，从@idx开始的所有内存将被删除并替换为@mem
  *
  * @buffer should be writable.
  */
@@ -1236,9 +1225,9 @@ gst_buffer_remove_all_memory (GstBuffer * buffer)
  * @idx: an index
  * @length: a length
  *
- * Removes @length memory blocks in @buffer starting from @idx.
+ * 从@idx开始移除@buffer中的@length个内存块。
  *
- * @length can be -1, in which case all memory starting from @idx is removed.
+ * @length可以是-1，在这种情况下，从@idx开始的所有内存都会被移除。
  */
 void
 gst_buffer_remove_memory_range (GstBuffer * buffer, guint idx, gint length)
@@ -1255,7 +1244,7 @@ gst_buffer_remove_memory_range (GstBuffer * buffer, guint idx, gint length)
       (length == -1 && idx < len) || length + idx <= len);
 
   if (length == -1)
-    length = len - idx;
+    length = len - idx; 
 
   _replace_memory (buffer, len, idx, length, NULL);
 }
@@ -2861,19 +2850,7 @@ gst_buffer_unref (GstBuffer * buf)
   gst_mini_object_unref (GST_MINI_OBJECT_CAST (buf));
 }
 
-/**
- * gst_clear_buffer: (skip)
- * @buf_ptr: a pointer to a #GstBuffer reference
- *
- * Clears a reference to a #GstBuffer.
- *
- * @buf_ptr must not be %NULL.
- *
- * If the reference is %NULL then this function does nothing. Otherwise, the
- * reference count of the buffer is decreased and the pointer is set to %NULL.
- *
- * Since: 1.16
- */
+
 void
 gst_clear_buffer (GstBuffer ** buf_ptr)
 {
