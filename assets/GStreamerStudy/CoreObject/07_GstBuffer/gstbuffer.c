@@ -37,14 +37,14 @@ GType _gst_buffer_type = 0;
 #define GST_BUFFER_META(b)         (((GstBufferImpl *)(b))->item)
 #define GST_BUFFER_TAIL_META(b)    (((GstBufferImpl *)(b))->tail_item)
 
+/* GstBuffer对象实际创建的结构体 */
 typedef struct
 {
-  GstBuffer buffer;
+  GstBuffer buffer; /* 第一个成员变量是GstBuffer */
 
   gsize slice_size;
 
-  /* the memory blocks */
-  guint len;
+  guint len; /* mem存储的GstMemory数量 */
   GstMemory *mem[GST_BUFFER_MEM_MAX];
 
   /* memory of the buffer when allocated from 1 chunk */
@@ -92,6 +92,12 @@ gst_atomic_int64_inc (gint64 * atomic)
 }
 #endif
 
+/**
+ * @brief: 检查从传入的@mem开始，移除两个检测是否存在有连续的data，直到第len个结束
+ *         只要有一个组不连续就返回FALSE
+ * @param poffset: 第一组连续GstMemory的偏移值被赋值给@poffset
+ * @calledby: _actual_merged_memory
+*/
 static gboolean
 _is_span (GstMemory ** mem, gsize len, gsize * poffset, GstMemory ** parent)
 {
@@ -109,7 +115,7 @@ _is_span (GstMemory ** mem, gsize len, gsize * poffset, GstMemory ** parent)
     if (mprv && mcur) {
       gsize poffs;
 
-      /* check if memory is contiguous */
+      /* 检查内存是否连续，就是@mprv和@mcur的GstMemory中的data是否连续的 */
       if (!gst_memory_is_span (mprv, mcur, &poffs))
         return FALSE;
 
@@ -548,14 +554,16 @@ gst_buffer_copy_into (GstBuffer * dest, GstBuffer * src,
     }
   }
 
+  /* 拷贝元数据metadata */
   if (flags & GST_BUFFER_COPY_META) {
     gboolean deep;
 
+    /* 是否被标记深拷贝 */
     deep = (flags & GST_BUFFER_COPY_DEEP) != 0;
 
-    /* NOTE: GstGLSyncMeta copying relies on the meta
-     *       being copied now, after the buffer data,
-     *       so this has to happen last */
+    /* 注意：GstGLSyncMeta 的复制依赖于元数据
+     *      现在被复制，也就是在缓冲区数据之后，
+     *      所以这必须最后发生 */
     for (walk = GST_BUFFER_META (src); walk; walk = walk->next) {
       GstMeta *meta = &walk->meta;
       const GstMetaInfo *info = meta->info;
@@ -603,14 +611,14 @@ gst_buffer_copy_with_flags (const GstBuffer * buffer, GstBufferCopyFlags flags)
   g_return_val_if_fail (buffer != NULL, NULL);
 
   /* create a fresh new buffer */
+  /* 创建一个新的buffer */
   copy = gst_buffer_new ();
 
-  /* copy what the 'flags' want from our parent */
-  /* FIXME why we can't pass const to gst_buffer_copy_into() ? */
   if (!gst_buffer_copy_into (copy, (GstBuffer *) buffer, flags, 0, -1))
-    gst_buffer_replace (&copy, NULL);
+    gst_buffer_replace (&copy, NULL); /* 如果没有拷贝成功，就清空copy中的GstMemory */
 
   if (copy)
+    /* 为什么要移除此flag？？？？ */
     GST_BUFFER_FLAG_UNSET (copy, GST_BUFFER_FLAG_TAG_MEMORY);
 
   return copy;
@@ -622,19 +630,11 @@ gst_buffer_copy_with_flags (const GstBuffer * buffer, GstBufferCopyFlags flags)
 static GstBuffer *
 _gst_buffer_copy (const GstBuffer * buffer)
 {
+  /* GST_BUFFER_COPY_ALL也就是GST_BUFFER_COPY_METADATA | GST_BUFFER_COPY_MEMORY */
   return gst_buffer_copy_with_flags (buffer, GST_BUFFER_COPY_ALL);
 }
 
-/**
- * gst_buffer_copy_deep:
- * @buf: 一个 #GstBuffer。
- *
- * 创建给定缓冲区的副本。这将对源缓冲区包含的数据进行新的分配复制。
- *
- * 返回值：(transfer full) (nullable): 如果复制成功，返回 @buf 的新副本；否则返回 %NULL。
- *
- * 自版本 1.6 起。
- */
+/* 对于buffer中的数据进行深拷贝（不是ref） */
 GstBuffer *
 gst_buffer_copy_deep (const GstBuffer * buffer)
 {
@@ -642,26 +642,31 @@ gst_buffer_copy_deep (const GstBuffer * buffer)
       GST_BUFFER_COPY_ALL | GST_BUFFER_COPY_DEEP);
 }
 
-/* the default dispose function revives the buffer and returns it to the
- * pool when there is a pool */
+/**
+ * @brief: GstMiniObject->dispose虚函数实现
+ * @note: 如果返回TRUE，GstBuffer就会被调用 _gst_buffer_free 函数
+*/
 static gboolean
 _gst_buffer_dispose (GstBuffer * buffer)
 {
   GstBufferPool *pool;
 
-  /* no pool, do free */
+  /* 如果不是GstBufferPool中的GstBuffer，就返回TRUE，就会调用free函数 */
   if ((pool = buffer->pool) == NULL)
     return TRUE;
 
-  /* keep the buffer alive */
+  /* 不释放GstBuffer，保存buffer存活 */
   gst_buffer_ref (buffer);
-  /* return the buffer to the pool */
+  /* 把GstBuffer归还到GstBufferPool */
   GST_CAT_LOG (GST_CAT_BUFFER, "release %p to pool %p", buffer, pool);
   gst_buffer_pool_release_buffer (pool, buffer);
 
   return FALSE;
 }
 
+/**
+ * @brief: GstMiniObject->free虚函数实现
+*/
 static void
 _gst_buffer_free (GstBuffer * buffer)
 {
@@ -673,7 +678,7 @@ _gst_buffer_free (GstBuffer * buffer)
 
   GST_CAT_LOG (GST_CAT_BUFFER, "finalize %p", buffer);
 
-  /* free metadata */
+  /* 释放元数据metadata */
   for (walk = GST_BUFFER_META (buffer); walk; walk = next) {
     GstMeta *meta = &walk->meta;
     const GstMetaInfo *info = meta->info;
@@ -687,11 +692,10 @@ _gst_buffer_free (GstBuffer * buffer)
     g_slice_free1 (ITEM_SIZE (info), walk);
   }
 
-  /* get the size, when unreffing the memory, we could also unref the buffer
-   * itself */
+  /* 获取GstBufferImpl结构体的size */
   msize = GST_BUFFER_SLICE_SIZE (buffer);
 
-  /* free our memory */
+  /* 释放GstMemory */
   len = GST_BUFFER_MEM_LEN (buffer);
   for (i = 0; i < len; i++) {
     gst_memory_unlock (GST_BUFFER_MEM_PTR (buffer, i), GST_LOCK_FLAG_EXCLUSIVE);
@@ -700,13 +704,14 @@ _gst_buffer_free (GstBuffer * buffer)
     gst_memory_unref (GST_BUFFER_MEM_PTR (buffer, i));
   }
 
-  /* we set msize to 0 when the buffer is part of the memory block */
+  /* 如果buffer是GstMemory的一部分，我们的msize应该被设定到0 */
   if (msize) {
 #ifdef USE_POISONING
     memset (buffer, 0xff, msize);
 #endif
     g_slice_free1 (msize, buffer);
   } else {
+    /* buffer->bufmem */
     gst_memory_unref (GST_BUFFER_BUFMEM (buffer));
   }
 }
