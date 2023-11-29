@@ -1144,34 +1144,25 @@ gst_buffer_remove_memory_range (GstBuffer * buffer, guint idx, gint length)
   _replace_memory (buffer, len, idx, length, NULL);
 }
 
-/**
- * gst_buffer_find_memory:
- *
- * Finds the memory blocks that span @size bytes starting from @offset
- * in @buffer.
- *
- * When this function returns %TRUE, @idx will contain the index of the first
- * memory block where the byte for @offset can be found and @length contains the
- * number of memory blocks containing the @size remaining bytes. @skip contains
- * the number of bytes to skip in the memory block at @idx to get to the byte
- * for @offset.
- *
- * @size can be -1 to get all the memory blocks after @idx.
- *
- * Returns: %TRUE when @size bytes starting from @offset could be found in
- * @buffer and @idx, @length and @skip will be filled.
- */
+
 /**
  * @name: gst_buffer_find_memory
  * @param buffer: a #GstBuffer.
  * @param offset: an offset
- * @param size: a size
+ * @param size: a size，如果 -1，就会得到从@idx开始的所有内存块
  * @param idx: (out): pointer to index
  * @param length: (out): pointer to length
  * @param skip: (out): pointer to skip
  * 
- * @brief: 
- * 
+ * @brief: 找到符合要求的内存块（一个buffer有很多内存块，但是每个内存块可能不一样）
+ *         要求是偏移@offset，能够存储数据大小@size。
+ *         如果找到符合要求的内存块，返回TRUE，
+ *               @idx是符合要求内存块的起始索引
+ *               @length是横跨几个连续的内存块组成的。（这个符合@size的内存块可能是由几个内存块才能组成）
+ *               @skip是在@idx内存块上的偏移量
+ *  
+ * 比如现在我有两个内存块，第0个内存块是5Byte，第1个内存块是10Byte。现在查询offset = 6 size = 5的内存块
+ * 此时，@skip返回值就是 1 @idx = 1 @length = 1
 */
 gboolean
 gst_buffer_find_memory (GstBuffer * buffer, gsize offset, gsize size,
@@ -1225,23 +1216,13 @@ gst_buffer_find_memory (GstBuffer * buffer, gsize offset, gsize size,
   return FALSE;
 }
 
+
 /**
- * gst_buffer_is_memory_range_writable:
- * @buffer: a #GstBuffer.
- * @idx: an index
- * @length: a length, should not be 0
- *
- * Checks if @length memory blocks in @buffer starting from @idx are writable.
- *
- * @length can be -1 to check all the memory blocks after @idx.
- *
- * Note that this function does not check if @buffer is writable, use
- * gst_buffer_is_writable() to check that if needed.
- *
- * Returns: %TRUE if the memory range is writable
- *
- * Since: 1.4
- */
+ * @name: gst_buffer_is_memory_range_writable
+ * @brief: 检查从@idx开始，@length这一段GstMemory是否可写，如果有一个不可，返回FALSE
+ *         如果 length = -1，检测从@idx开始的所有内存块
+ * @note: 这个函数没有检测@buffer是否可写，检测@buffer是否可写使用 gst_buffer_is_writable()
+*/
 gboolean
 gst_buffer_is_memory_range_writable (GstBuffer * buffer, guint idx, gint length)
 {
@@ -1268,55 +1249,33 @@ gst_buffer_is_memory_range_writable (GstBuffer * buffer, guint idx, gint length)
   return TRUE;
 }
 
+
 /**
- * gst_buffer_is_all_memory_writable:
- * @buffer: a #GstBuffer.
- *
- * Checks if all memory blocks in @buffer are writable.
- *
- * Note that this function does not check if @buffer is writable, use
- * gst_buffer_is_writable() to check that if needed.
- *
- * Returns: %TRUE if all memory blocks in @buffer are writable
- *
- * Since: 1.4
- */
+ * @name: gst_buffer_is_all_memory_writable
+ * @brief: 检查@buffer的所有内存块是否可写
+ * @note: 这个函数没有检测@buffer是否可写，检测@buffer是否可写使用 gst_buffer_is_writable()
+*/
 gboolean
 gst_buffer_is_all_memory_writable (GstBuffer * buffer)
 {
   return gst_buffer_is_memory_range_writable (buffer, 0, -1);
 }
 
+
 /**
- * gst_buffer_get_sizes:
- * @buffer: a #GstBuffer.
- * @offset: (out) (allow-none): a pointer to the offset
- * @maxsize: (out) (allow-none): a pointer to the maxsize
- *
- * Gets the total size of the memory blocks in @buffer.
- *
- * When not %NULL, @offset will contain the offset of the data in the
- * first memory block in @buffer and @maxsize will contain the sum of
- * the size and @offset and the amount of extra padding on the last
- * memory block.  @offset and @maxsize can be used to resize the
- * buffer memory blocks with gst_buffer_resize().
- *
- * Returns: total size of the memory blocks in @buffer.
- */
+ * @name: gst_buffer_get_sizes
+ * @param offset(out): @idx内存块偏移量（这里是第零个内存块）
+ * @param maxsize(out): 输出所有内存块最大maxsize之和
+ * @brief: 得到@buffer中所有内存块的和
+*/
 gsize
 gst_buffer_get_sizes (GstBuffer * buffer, gsize * offset, gsize * maxsize)
 {
   return gst_buffer_get_sizes_range (buffer, 0, -1, offset, maxsize);
 }
 
-/**
- * gst_buffer_get_size:
- * @buffer: a #GstBuffer.
- *
- * Gets the total size of the memory blocks in @buffer.
- *
- * Returns: total size of the memory blocks in @buffer.
- */
+
+/* 得到@buffer所有内存块数据size之和 */
 gsize
 gst_buffer_get_size (GstBuffer * buffer)
 {
@@ -1332,31 +1291,23 @@ gst_buffer_get_size (GstBuffer * buffer)
   return size;
 }
 
+
 /**
- * gst_buffer_get_sizes_range:
- * @buffer: a #GstBuffer.
- * @idx: an index
- * @length: a length
- * @offset: (out) (allow-none): a pointer to the offset
- * @maxsize: (out) (allow-none): a pointer to the maxsize
- *
- * Gets the total size of @length memory blocks stating from @idx in @buffer.
- *
- * When not %NULL, @offset will contain the offset of the data in the
- * memory block in @buffer at @idx and @maxsize will contain the sum of the size
- * and @offset and the amount of extra padding on the memory block at @idx +
- * @length -1.
- * @offset and @maxsize can be used to resize the buffer memory blocks with
- * gst_buffer_resize_range().
- *
- * Returns: total size of @length memory blocks starting at @idx in @buffer.
- */
+ * @name: gst_buffer_get_sizes_range
+ * @param buffer: a #GstBuffer.
+ * @param idx: an index
+ * @param length: a length 如果 @length是-1，就是全部内存块
+ * @param offset: (out) (allow-none): @idx内存块的偏移量offset
+ * @param maxsize: (out) (allow-none): 内存块GstMemory->maxsize之和
+ * @brief: 
+ *        得到从@idx开始，横跨@length个内存块的size和
+*/
 gsize
 gst_buffer_get_sizes_range (GstBuffer * buffer, guint idx, gint length,
     gsize * offset, gsize * maxsize)
 {
   guint len;
-  gsize size;
+  gsize size; /* 返回值@return size */
   GstMemory *mem;
 
   g_return_val_if_fail (GST_IS_BUFFER (buffer), 0);
@@ -1371,7 +1322,7 @@ gst_buffer_get_sizes_range (GstBuffer * buffer, guint idx, gint length,
     /* common case */
     mem = GST_BUFFER_MEM_PTR (buffer, idx);
     size = gst_memory_get_sizes (mem, offset, maxsize);
-  } else if (offset == NULL && maxsize == NULL) {
+  } else if (offset == NULL && maxsize == NULL) { /* 如果传入参数@offset和@maxsize都是NULL，执行 */
     /* FAST PATH ! */
     guint i, end;
 
@@ -1381,7 +1332,7 @@ gst_buffer_get_sizes_range (GstBuffer * buffer, guint idx, gint length,
       mem = GST_BUFFER_MEM_PTR (buffer, i);
       size += mem->size;
     }
-  } else {
+  } else { /* 如果 length ！= 1 && offset ！= NULL && maxsize ！= NULL 执行 */
     guint i, end;
     gsize extra, offs;
 
@@ -1414,46 +1365,27 @@ gst_buffer_get_sizes_range (GstBuffer * buffer, guint idx, gint length,
   return size;
 }
 
-/**
- * gst_buffer_resize:
- * @buffer: a #GstBuffer.
- * @offset: the offset adjustment
- * @size: the new size or -1 to just adjust the offset
- *
- * Sets the offset and total size of the memory blocks in @buffer.
- */
+
+/* 根据@offset和@size更改整个Buffer的偏移量和大小 */
 void
 gst_buffer_resize (GstBuffer * buffer, gssize offset, gssize size)
 {
   gst_buffer_resize_range (buffer, 0, -1, offset, size);
 }
 
-/**
- * gst_buffer_set_size:
- * @buffer: a #GstBuffer.
- * @size: the new size
- *
- * Sets the total size of the memory blocks in @buffer.
- */
+
+/* 改变整个Buffer的内存块大小 */
 void
 gst_buffer_set_size (GstBuffer * buffer, gssize size)
 {
   gst_buffer_resize_range (buffer, 0, -1, 0, size);
 }
 
+
 /**
- * gst_buffer_resize_range:
- * @buffer: a #GstBuffer.
- * @idx: an index
- * @length: a length
- * @offset: the offset adjustment
- * @size: the new size or -1 to just adjust the offset
- *
- * Sets the total size of the @length memory blocks starting at @idx in
- * @buffer
- *
- * Returns: %TRUE if resizing succeeded, %FALSE otherwise.
- */
+ * @name: gst_buffer_resize_range
+ * @brief: 更改从@idx开始横跨@length个内存块的内存大小到@size
+*/
 gboolean
 gst_buffer_resize_range (GstBuffer * buffer, guint idx, gint length,
     gssize offset, gssize size)
@@ -1471,6 +1403,7 @@ gst_buffer_resize_range (GstBuffer * buffer, guint idx, gint length,
   if (length == -1)
     length = len - idx;
 
+  /* 整个buffer的内存块大小之和 */
   bufsize = gst_buffer_get_sizes_range (buffer, idx, length, &bufoffs, &bufmax);
 
   GST_CAT_LOG (GST_CAT_BUFFER, "trim %p %" G_GSSIZE_FORMAT "-%" G_GSSIZE_FORMAT
@@ -1487,7 +1420,7 @@ gst_buffer_resize_range (GstBuffer * buffer, guint idx, gint length,
   }
   g_return_val_if_fail (bufmax >= bufoffs + offset + size, FALSE);
 
-  /* no change */
+  /* 没有变化 */
   if (offset == 0 && size == bufsize)
     return TRUE;
 
@@ -1502,17 +1435,18 @@ gst_buffer_resize_range (GstBuffer * buffer, guint idx, gint length,
 
     noffs = 0;
     /* last buffer always gets resized to the remaining size */
+    /*  */
     if (i + 1 == end)
       left = size;
-    /* shrink buffers before the offset */
-    else if ((gssize) bsize <= offset) {
+    else if ((gssize) bsize <= offset) { /* 如果第一个内存块不够抵消偏移量 */
       left = 0;
-      noffs = offset - bsize;
+      /* 因为 offset >= offset，所以noffs > 0 还有偏移量没有去掉*/
+      noffs = offset - bsize; /* 传入的偏移量@offset减去idx内存块的size */
       offset = 0;
     }
-    /* clip other buffers */
+    /* 修剪其他内存块 */
     else
-      left = MIN (bsize - offset, size);
+      left = MIN (bsize - offset, size); /*  */
 
     if (offset != 0 || left != bsize) {
       if (gst_memory_is_writable (mem)) {
@@ -1550,25 +1484,20 @@ gst_buffer_resize_range (GstBuffer * buffer, guint idx, gint length,
 }
 
 /**
- * gst_buffer_map:
- * @buffer: a #GstBuffer.
- * @info: (out caller-allocates): info about the mapping
- * @flags: flags for the mapping
+ * @name: gst_buffer_map:
+ * @param buffer：一个 #GstBuffer。
+ * @param info（out）:关于映射的信息
+ * @param flags：映射的标志
  *
- * Fills @info with the #GstMapInfo of all merged memory blocks in @buffer.
+ * 使用 @buffer 中所有合并内存块的 #GstMapInfo 填充 @info。
  *
- * @flags describe the desired access of the memory. When @flags is
- * #GST_MAP_WRITE, @buffer should be writable (as returned from
- * gst_buffer_is_writable()).
+ * @flags 描述了对内存的期望访问方式。当 @flags 为 #GST_MAP_WRITE 时，@buffer 应该是可写的（如从 gst_buffer_is_writable() 返回的那样）。
  *
- * When @buffer is writable but the memory isn't, a writable copy will
- * automatically be created and returned. The readonly copy of the
- * buffer memory will then also be replaced with this writable copy.
+ * 当 @buffer 可写但内存不是时，将自动创建并返回一个可写副本。缓冲区内存的只读副本也将被这个可写副本替换。
  *
- * The memory in @info should be unmapped with gst_buffer_unmap() after
- * usage.
+ * 使用完毕后，应使用 gst_buffer_unmap() 对 @info 中的内存进行解映射。
  *
- * Returns: %TRUE if the map succeeded and @info contains valid data.
+ * 返回：%TRUE 表示映射成功且 @info 包含有效数据。
  */
 gboolean
 gst_buffer_map (GstBuffer * buffer, GstMapInfo * info, GstMapFlags flags)
@@ -1576,31 +1505,14 @@ gst_buffer_map (GstBuffer * buffer, GstMapInfo * info, GstMapFlags flags)
   return gst_buffer_map_range (buffer, 0, -1, info, flags);
 }
 
+
 /**
- * gst_buffer_map_range:
- * @buffer: a #GstBuffer.
- * @idx: an index
- * @length: a length
- * @info: (out caller-allocates): info about the mapping
- * @flags: flags for the mapping
- *
- * Fills @info with the #GstMapInfo of @length merged memory blocks
- * starting at @idx in @buffer. When @length is -1, all memory blocks starting
- * from @idx are merged and mapped.
- *
- * @flags describe the desired access of the memory. When @flags is
- * #GST_MAP_WRITE, @buffer should be writable (as returned from
- * gst_buffer_is_writable()).
- *
- * When @buffer is writable but the memory isn't, a writable copy will
- * automatically be created and returned. The readonly copy of the buffer memory
- * will then also be replaced with this writable copy.
- *
- * The memory in @info should be unmapped with gst_buffer_unmap() after usage.
- *
- * Returns: %TRUE if the map succeeded and @info contains valid
- * data.
- */
+ * @name: gst_buffer_map_range
+ * @brief: 
+ * 
+ * 先合并从@dix开始@length个内存块，然后对这个内存块 gst_memory_make_mapped，内存信息赋值给 @info结构体
+ * 当 @length 为 -1 时，从 @idx 开始的所有内存块被合并并映射。
+*/
 gboolean
 gst_buffer_map_range (GstBuffer * buffer, guint idx, gint length,
     GstMapInfo * info, GstMapFlags flags)
@@ -1676,13 +1588,7 @@ cannot_map:
   }
 }
 
-/**
- * gst_buffer_unmap:
- * @buffer: a #GstBuffer.
- * @info: a #GstMapInfo
- *
- * Releases the memory previously mapped with gst_buffer_map().
- */
+
 void
 gst_buffer_unmap (GstBuffer * buffer, GstMapInfo * info)
 {
@@ -1694,15 +1600,14 @@ gst_buffer_unmap (GstBuffer * buffer, GstMapInfo * info)
 
 /**
  * gst_buffer_fill:
- * @buffer: a #GstBuffer.
- * @offset: the offset to fill
- * @src: (array length=size) (element-type guint8): the source address
- * @size: the size to fill
+ * @buffer：一个 #GstBuffer。
+ * @offset：偏移量
+ * @src：元素类型 guint8）：源地址
+ * @size：要复制src的大小
  *
- * Copies @size bytes from @src to @buffer at @offset.
+ * 从 @src 复制 @size 字节到 @buffer 的 @offset 位置。
  *
- * Returns: The amount of bytes copied. This value can be lower than @size
- *    when @buffer did not contain enough data.
+ * 返回：复制的字节数。当 @buffer 中的数据不足时，这个值可能低于 @size。
  */
 gsize
 gst_buffer_fill (GstBuffer * buffer, gsize offset, gconstpointer src,
@@ -1744,19 +1649,8 @@ gst_buffer_fill (GstBuffer * buffer, gsize offset, gconstpointer src,
   return size - left;
 }
 
-/**
- * gst_buffer_extract:
- * @buffer: a #GstBuffer.
- * @offset: the offset to extract
- * @dest: (out caller-allocates) (array length=size) (element-type guint8):
- *     the destination address
- * @size: the size to extract
- *
- * Copies @size bytes starting from @offset in @buffer to @dest.
- *
- * Returns: The amount of bytes extracted. This value can be lower than @size
- *    when @buffer did not contain enough data.
- */
+
+/* 从 @buffer 中的 @offset开始 复制 @size 字节到 @dest 中 */
 gsize
 gst_buffer_extract (GstBuffer * buffer, gsize offset, gpointer dest, gsize size)
 {
@@ -1795,17 +1689,7 @@ gst_buffer_extract (GstBuffer * buffer, gsize offset, gpointer dest, gsize size)
   return size - left;
 }
 
-/**
- * gst_buffer_memcmp:
- * @buffer: a #GstBuffer.
- * @offset: the offset in @buffer
- * @mem: (array length=size) (element-type guint8): the memory to compare
- * @size: the size to compare
- *
- * Compares @size bytes starting from @offset in @buffer with the memory in @mem.
- *
- * Returns: 0 if the memory is equal.
- */
+/* 比较从 @buffer 中的 @offset 处开始的 @size 字节与 @mem 中的内存。 */
 gint
 gst_buffer_memcmp (GstBuffer * buffer, gsize offset, gconstpointer mem,
     gsize size)
@@ -1848,18 +1732,7 @@ gst_buffer_memcmp (GstBuffer * buffer, gsize offset, gconstpointer mem,
   return res;
 }
 
-/**
- * gst_buffer_memset:
- * @buffer: a #GstBuffer.
- * @offset: the offset in @buffer
- * @val: the value to set
- * @size: the size to set
- *
- * Fills @buf with @size bytes with @val starting from @offset.
- *
- * Returns: The amount of bytes filled. This value can be lower than @size
- *    when @buffer did not contain enough data.
- */
+/* 从 @offset 处开始，用 @val 填充 @buffer 中的 @size 字节。 */
 gsize
 gst_buffer_memset (GstBuffer * buffer, gsize offset, guint8 val, gsize size)
 {
@@ -1896,27 +1769,7 @@ gst_buffer_memset (GstBuffer * buffer, gsize offset, guint8 val, gsize size)
   return size - left;
 }
 
-/**
- * gst_buffer_copy_region:
- * @parent: a #GstBuffer.
- * @flags: the #GstBufferCopyFlags
- * @offset: the offset into parent #GstBuffer at which the new sub-buffer
- *          begins.
- * @size: the size of the new #GstBuffer sub-buffer, in bytes. If -1, all
- *        data is copied.
- *
- * Creates a sub-buffer from @parent at @offset and @size.
- * This sub-buffer uses the actual memory space of the parent buffer.
- * This function will copy the offset and timestamp fields when the
- * offset is 0. If not, they will be set to #GST_CLOCK_TIME_NONE and
- * #GST_BUFFER_OFFSET_NONE.
- * If @offset equals 0 and @size equals the total size of @buffer, the
- * duration and offset end fields are also copied. If not they will be set
- * to #GST_CLOCK_TIME_NONE and #GST_BUFFER_OFFSET_NONE.
- *
- * Returns: (transfer full) (nullable): the new #GstBuffer or %NULL if copying
- *     failed.
- */
+/* 从 @parent 中在 @offset 和 @size 处复制创建一个子缓冲区 */
 GstBuffer *
 gst_buffer_copy_region (GstBuffer * buffer, GstBufferCopyFlags flags,
     gsize offset, gsize size)
@@ -1937,37 +1790,16 @@ gst_buffer_copy_region (GstBuffer * buffer, GstBufferCopyFlags flags,
   return copy;
 }
 
-/**
- * gst_buffer_append:
- * @buf1: (transfer full): the first source #GstBuffer to append.
- * @buf2: (transfer full): the second source #GstBuffer to append.
- *
- * Appends all the memory from @buf2 to @buf1. The result buffer will contain a
- * concatenation of the memory of @buf1 and @buf2.
- *
- * Returns: (transfer full): the new #GstBuffer that contains the memory
- *     of the two source buffers.
- */
+
+/* 把@buf2的所有内存块添加到@buf1 */
 GstBuffer *
 gst_buffer_append (GstBuffer * buf1, GstBuffer * buf2)
 {
   return gst_buffer_append_region (buf1, buf2, 0, -1);
 }
 
-/**
- * gst_buffer_append_region:
- * @buf1: (transfer full): the first source #GstBuffer to append.
- * @buf2: (transfer full): the second source #GstBuffer to append.
- * @offset: the offset in @buf2
- * @size: the size or -1 of @buf2
- *
- * Appends @size bytes at @offset from @buf2 to @buf1. The result buffer will
- * contain a concatenation of the memory of @buf1 and the requested region of
- * @buf2.
- *
- * Returns: (transfer full): the new #GstBuffer that contains the memory
- *     of the two source buffers.
- */
+
+/* 从@buf2偏移@offset开始，把@buf2的内存块添加到@buf1 */
 GstBuffer *
 gst_buffer_append_region (GstBuffer * buf1, GstBuffer * buf2, gssize offset,
     gssize size)
@@ -2210,20 +2042,7 @@ gst_buffer_iterate_meta_filtered (GstBuffer * buffer, gpointer * state,
     return NULL;
 }
 
-/**
- * gst_buffer_foreach_meta:
- * @buffer: a #GstBuffer
- * @func: (scope call): a #GstBufferForeachMetaFunc to call
- * @user_data: (closure): user data passed to @func
- *
- * Calls @func with @user_data for each meta in @buffer.
- *
- * @func can modify the passed meta pointer or its contents. The return value
- * of @func defines if this function returns or if the remaining metadata items
- * in the buffer should be skipped.
- *
- * Returns: %FALSE when @func returned %FALSE for one of the metadata.
- */
+/* 遍历buffer所有的元数据，调用@func函数，如果此函数返回FALSE，就会停止遍历 */
 gboolean
 gst_buffer_foreach_meta (GstBuffer * buffer, GstBufferForeachMetaFunc func,
     gpointer user_data)
@@ -2282,21 +2101,9 @@ gst_buffer_foreach_meta (GstBuffer * buffer, GstBufferForeachMetaFunc func,
   return res;
 }
 
-/**
- * gst_buffer_extract_dup:
- * @buffer: a #GstBuffer
- * @offset: the offset to extract
- * @size: the size to extract
- * @dest: (array length=dest_size) (element-type guint8) (out): A pointer where
- *  the destination array will be written. Might be %NULL if the size is 0.
- * @dest_size: (out): A location where the size of @dest can be written
- *
- * Extracts a copy of at most @size bytes the data at @offset into
- * newly-allocated memory. @dest must be freed using g_free() when done.
- *
- * Since: 1.0.10
+/* 从 @offset 处提取最多 @size 字节的数据，将其复制到新分配的内存中。完成后，必须
+ * 使用 g_free() 释放 @dest。 
  */
-
 void
 gst_buffer_extract_dup (GstBuffer * buffer, gsize offset, gsize size,
     gpointer * dest, gsize * dest_size)
@@ -2318,16 +2125,8 @@ gst_buffer_extract_dup (GstBuffer * buffer, gsize offset, gsize size,
 GST_DEBUG_CATEGORY_STATIC (gst_parent_buffer_meta_debug);
 
 /**
- * gst_buffer_add_parent_buffer_meta:
- * @buffer: (transfer none): a #GstBuffer
- * @ref: (transfer none): a #GstBuffer to ref
- *
- * Adds a #GstParentBufferMeta to @buffer that holds a reference on
- * @ref until the buffer is freed.
- *
- * Returns: (transfer none) (nullable): The #GstParentBufferMeta that was added to the buffer
- *
- * Since: 1.6
+ * 向 @buffer 添加一个 #GstParentBufferMeta，该元数据会在缓冲区被释放之前
+ * 保持对 @ref 的引用。
  */
 GstParentBufferMeta *
 gst_buffer_add_parent_buffer_meta (GstBuffer * buffer, GstBuffer * ref)
@@ -2347,6 +2146,8 @@ gst_buffer_add_parent_buffer_meta (GstBuffer * buffer, GstBuffer * ref)
 
   return meta;
 }
+
+/*******************************GstParentBufferMeta元数据定义***********START*********************************/
 
 static gboolean
 _gst_parent_buffer_meta_transform (GstBuffer * dest, GstMeta * meta,
@@ -2445,6 +2246,8 @@ gst_parent_buffer_meta_get_info (void)
 
   return meta_info;
 }
+
+/*******************************GstParentBufferMeta元数据定义***********END*********************************/
 
 GST_DEBUG_CATEGORY_STATIC (gst_reference_timestamp_meta_debug);
 
