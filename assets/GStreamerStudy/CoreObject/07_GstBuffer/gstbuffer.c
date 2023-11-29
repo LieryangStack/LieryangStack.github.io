@@ -21,10 +21,19 @@
 /* lieryang add */
 #include <gst/gst.h>
 
+
 GType _gst_buffer_type = 0;
 
-/* info->size will be sizeof(FooMeta) which contains a GstMeta at the beginning
- * too, and then there is again a GstMeta in GstMetaItem, so subtract one. */
+/** 
+ * struct _GstMetaItem {
+ *   GstMetaItem *next;
+ *   guint64 seq_num;
+ *   GstMeta meta;
+ *};
+*/
+/* info->size是sizeof(FooMeta)，sizeof(FooMeta的第一个成员变量已经包含了GstMeta) 
+   GstMetaItem也有一个GstMeta，所以要减去一个GstMeta
+ */
 #define ITEM_SIZE(info) ((info)->size + sizeof (GstMetaItem) - sizeof (GstMeta))
 
 #define GST_BUFFER_MEM_MAX         16
@@ -683,12 +692,12 @@ _gst_buffer_free (GstBuffer * buffer)
     GstMeta *meta = &walk->meta;
     const GstMetaInfo *info = meta->info;
 
-    /* call free_func if any */
+    /* 调用元数据自己定义的free函数 */
     if (info->free_func)
       info->free_func (meta, buffer);
 
     next = walk->next;
-    /* and free the slice */
+    /* 释放GstMetaInfo内存  */
     g_slice_free1 (ITEM_SIZE (info), walk);
   }
 
@@ -855,6 +864,8 @@ no_memory:
 
 /**
  * gst_buffer_new_wrapped_full:
+ * @name: gst_buffer_new_wrapped_full
+ * @brief: 分配一个新的buffer，创建一个新的GstMemory包装data
  * @flags: #GstMemoryFlags
  * @data: (array length=size) (element-type guint8) (transfer none): data to wrap
  * @maxsize: allocated size of @data
@@ -893,33 +904,15 @@ gst_buffer_new_wrapped_full (GstMemoryFlags flags, gpointer data,
   return newbuf;
 }
 
-/**
- * gst_buffer_new_wrapped:
- * @data: (array length=size) (element-type guint8) (transfer full): data to wrap
- * @size: allocated size of @data
- *
- * Creates a new buffer that wraps the given @data. The memory will be freed
- * with g_free() and will be marked writable.
- *
- * Returns: (transfer full): a new #GstBuffer
- */
+
+/* 创建一个新的buffer包装data，这个data最后会被g_free释放 */
 GstBuffer *
 gst_buffer_new_wrapped (gpointer data, gsize size)
 {
   return gst_buffer_new_wrapped_full (0, data, size, 0, size, data, g_free);
 }
 
-/**
- * gst_buffer_new_wrapped_bytes:
- * @bytes: (transfer none): a #GBytes to wrap
- *
- * Creates a new #GstBuffer that wraps the given @bytes. The data inside
- * @bytes cannot be %NULL and the resulting buffer will be marked as read only.
- *
- * Returns: (transfer full): a new #GstBuffer wrapping @bytes
- *
- * Since: 1.16
- */
+
 GstBuffer *
 gst_buffer_new_wrapped_bytes (GBytes * bytes)
 {
@@ -934,17 +927,8 @@ gst_buffer_new_wrapped_bytes (GBytes * bytes)
       size, 0, size, g_bytes_ref (bytes), (GDestroyNotify) g_bytes_unref);
 }
 
-/**
- * gst_buffer_new_memdup:
- * @data: (array length=size) (element-type guint8) (transfer none): data to copy into new buffer
- * @size: size of @data in bytes
- *
- * Creates a new buffer of size @size and fills it with a copy of @data.
- *
- * Returns: (transfer full): a new #GstBuffer
- *
- * Since: 1.20
- */
+
+/* 拷贝一份data，给一个新的GstBuffer */
 GstBuffer *
 gst_buffer_new_memdup (gconstpointer data, gsize size)
 {
@@ -953,15 +937,7 @@ gst_buffer_new_memdup (gconstpointer data, gsize size)
   return gst_buffer_new_wrapped_full (0, data2, size, 0, size, data2, g_free);
 }
 
-/**
- * gst_buffer_n_memory:
- * @buffer: a #GstBuffer.
- *
- * Gets the amount of memory blocks that this buffer has. This amount is never
- * larger than what gst_buffer_get_max_memory() returns.
- *
- * Returns: the number of memory blocks this buffer is made of.
- */
+/* 得到GstMemory内存块的数量 */
 guint
 gst_buffer_n_memory (GstBuffer * buffer)
 {
@@ -970,53 +946,22 @@ gst_buffer_n_memory (GstBuffer * buffer)
   return GST_BUFFER_MEM_LEN (buffer);
 }
 
-/**
- * gst_buffer_prepend_memory:
- * @buffer: a #GstBuffer.
- * @mem: (transfer full): a #GstMemory.
- *
- * Prepends the memory block @mem to @buffer. This function takes
- * ownership of @mem and thus doesn't increase its refcount.
- *
- * This function is identical to gst_buffer_insert_memory() with an index of 0.
- * See gst_buffer_insert_memory() for more details.
- */
+/* 最前面追加@mem */
 void
 gst_buffer_prepend_memory (GstBuffer * buffer, GstMemory * mem)
 {
   gst_buffer_insert_memory (buffer, 0, mem);
 }
 
-/**
- * gst_buffer_append_memory:
- * @buffer: a #GstBuffer.
- * @mem: (transfer full): a #GstMemory.
- *
- * Appends the memory block @mem to @buffer. This function takes
- * ownership of @mem and thus doesn't increase its refcount.
- *
- * This function is identical to gst_buffer_insert_memory() with an index of -1.
- * See gst_buffer_insert_memory() for more details.
- */
+/* 最后面追加@mem */
 void
 gst_buffer_append_memory (GstBuffer * buffer, GstMemory * mem)
 {
   gst_buffer_insert_memory (buffer, -1, mem);
 }
 
-/**
- * gst_buffer_insert_memory:
- * @buffer: a #GstBuffer.
- * @idx: the index to add the memory at, or -1 to append it to the end
- * @mem: (transfer full): a #GstMemory.
- *
- * Inserts the memory block @mem into @buffer at @idx. This function takes ownership
- * of @mem and thus doesn't increase its refcount.
- *
- * Only gst_buffer_get_max_memory() can be added to a buffer. If more memory is
- * added, existing memory blocks will automatically be merged to make room for
- * the new memory.
- */
+
+/* @idx如果是 -1，表示在最后追加GstMemory */
 void
 gst_buffer_insert_memory (GstBuffer * buffer, gint idx, GstMemory * mem)
 {
@@ -1034,6 +979,8 @@ gst_buffer_insert_memory (GstBuffer * buffer, gint idx, GstMemory * mem)
   _memory_add (buffer, idx, tmp);
 }
 
+/* @idx索引位置的GstMemory是否可写，如果可写，返回@idx处的GstMemory
+                                 如果不可写做一个可写副本，返回可写副本 */
 static GstMemory *
 _get_mapped (GstBuffer * buffer, guint idx, GstMapInfo * info,
     GstMapFlags flags)
@@ -1044,13 +991,15 @@ _get_mapped (GstBuffer * buffer, guint idx, GstMapInfo * info,
 
   mapped = gst_memory_make_mapped (mem, info, flags);
 
-  if (mapped != mem) {
-    /* memory changed, lock new memory */
+  if (mapped != mem) { /* 如果不相等的情况，就是创建了一个新的可写的mapped */
+   
+    /* 此时要把可修改的GstMemory替换掉不可修改的GstMemory */
     gst_mini_object_add_parent (GST_MINI_OBJECT_CAST (mapped),
         GST_MINI_OBJECT_CAST (buffer));
     gst_memory_lock (mapped, GST_LOCK_FLAG_EXCLUSIVE);
     GST_BUFFER_MEM_PTR (buffer, idx) = mapped;
-    /* unlock old memory */
+
+    /* 解锁旧的的GstMemory */
     gst_memory_unlock (mem, GST_LOCK_FLAG_EXCLUSIVE);
     gst_mini_object_remove_parent (GST_MINI_OBJECT_CAST (mem),
         GST_MINI_OBJECT_CAST (buffer));
@@ -1197,12 +1146,6 @@ gst_buffer_remove_memory_range (GstBuffer * buffer, guint idx, gint length)
 
 /**
  * gst_buffer_find_memory:
- * @buffer: a #GstBuffer.
- * @offset: an offset
- * @size: a size
- * @idx: (out): pointer to index
- * @length: (out): pointer to length
- * @skip: (out): pointer to skip
  *
  * Finds the memory blocks that span @size bytes starting from @offset
  * in @buffer.
@@ -1218,6 +1161,18 @@ gst_buffer_remove_memory_range (GstBuffer * buffer, guint idx, gint length)
  * Returns: %TRUE when @size bytes starting from @offset could be found in
  * @buffer and @idx, @length and @skip will be filled.
  */
+/**
+ * @name: gst_buffer_find_memory
+ * @param buffer: a #GstBuffer.
+ * @param offset: an offset
+ * @param size: a size
+ * @param idx: (out): pointer to index
+ * @param length: (out): pointer to length
+ * @param skip: (out): pointer to skip
+ * 
+ * @brief: 
+ * 
+*/
 gboolean
 gst_buffer_find_memory (GstBuffer * buffer, gsize offset, gsize size,
     guint * idx, guint * length, gsize * skip)
@@ -1232,16 +1187,18 @@ gst_buffer_find_memory (GstBuffer * buffer, gsize offset, gsize size,
   len = GST_BUFFER_MEM_LEN (buffer);
 
   found = 0;
+
+  /* 遍历buffer中的所有mem */
   for (i = 0; i < len; i++) {
     GstMemory *mem;
     gsize s;
 
     mem = GST_BUFFER_MEM_PTR (buffer, i);
+    /* 这个mem存储data的大小 */
     s = mem->size;
 
     if (s <= offset) {
-      /* block before offset, or empty block, skip */
-      offset -= s;
+      offset -= s; /* 内存块大小小于offset或者是空的内存块，我们应该跳过 */
     } else {
       /* block after offset */
       if (found == 0) {
@@ -1249,7 +1206,7 @@ gst_buffer_find_memory (GstBuffer * buffer, gsize offset, gsize size,
         *idx = i;
         *skip = offset;
         if (size == -1) {
-          /* return remaining blocks */
+          /* 赋值剩余下几个内存块 */
           *length = len - i;
           return TRUE;
         }
@@ -2044,18 +2001,12 @@ gst_buffer_append_region (GstBuffer * buf1, GstBuffer * buf2, gssize offset,
 }
 
 /**
- * gst_buffer_get_meta:
- * @buffer: a #GstBuffer
- * @api: the #GType of an API
- *
- * Gets the metadata for @api on buffer. When there is no such metadata, %NULL is
- * returned. If multiple metadata with the given @api are attached to this
- * buffer only the first one is returned.  To handle multiple metadata with a
- * given API use gst_buffer_iterate_meta() or gst_buffer_foreach_meta() instead
- * and check the `meta->info.api` member for the API type.
- *
- * Returns: (transfer none) (nullable): the metadata for @api on @buffer.
- */
+ * @name: gst_buffer_get_meta
+ * @brief: 根据@api获取GstMeta，如果没有找到，则返回NULL。
+ * @note: 如果有多个GstMeta使用了同一个API，则返回第一个GstMeta
+ *        处理多个GstMeta使用了同一个API，使用函数 gst_buffer_iterate_meta() 或者  gst_buffer_foreach_meta()
+ *        然后检查 `meta->info.api` member for the API type.
+*/
 GstMeta *
 gst_buffer_get_meta (GstBuffer * buffer, GType api)
 {
@@ -2076,15 +2027,10 @@ gst_buffer_get_meta (GstBuffer * buffer, GType api)
   return result;
 }
 
+
 /**
- * gst_buffer_get_n_meta:
- * @buffer: a #GstBuffer
- * @api_type: the #GType of an API
- *
- * Returns: number of metas of type @api_type on @buffer.
- *
- * Since: 1.14
- */
+ * @brief: @api_type的Metadata有多少个
+*/
 guint
 gst_buffer_get_n_meta (GstBuffer * buffer, GType api_type)
 {
@@ -2098,16 +2044,11 @@ gst_buffer_get_n_meta (GstBuffer * buffer, GType api_type)
   return n;
 }
 
+
 /**
- * gst_buffer_add_meta:
- * @buffer: a #GstBuffer
- * @info: a #GstMetaInfo
- * @params: params for @info
- *
- * Adds metadata for @info to @buffer using the parameters in @params.
- *
- * Returns: (transfer none) (nullable): the metadata for the api in @info on @buffer.
- */
+ * @name: gst_buffer_add_meta
+ * @brief: 把@info信息添加到GstBuffer->item
+*/
 GstMeta *
 gst_buffer_add_meta (GstBuffer * buffer, const GstMetaInfo * info,
     gpointer params)
@@ -2120,24 +2061,25 @@ gst_buffer_add_meta (GstBuffer * buffer, const GstMetaInfo * info,
   g_return_val_if_fail (info != NULL, NULL);
   g_return_val_if_fail (gst_buffer_is_writable (buffer), NULL);
 
-  /* create a new slice */
+  /* slice = sizeof(FooMeta) + sizeof(GstMetaItem) - sizeof(GstMeta) */
   size = ITEM_SIZE (info);
-  /* We warn in gst_meta_register() about metas without
-   * init function but let's play safe here and prevent
-   * uninitialized memory
-   */
+
   if (!info->init_func)
     item = g_slice_alloc0 (size);
   else
     item = g_slice_alloc (size);
+  
+  /* 因为GstMetaItem对象不可见 */
   result = &item->meta;
+
+  /* 其实修改的是GstMetaItem中的GstMeta */
   result->info = info;
   result->flags = GST_META_FLAG_NONE;
   GST_CAT_DEBUG (GST_CAT_BUFFER,
       "alloc metadata %p (%s) of size %" G_GSIZE_FORMAT, result,
       g_type_name (info->type), info->size);
 
-  /* call the init_func when needed */
+  /* 调用用户定义的GstMeta初始化函数 */
   if (info->init_func)
     if (!info->init_func (result, params, buffer))
       goto init_failed;
@@ -2162,16 +2104,11 @@ init_failed:
   }
 }
 
+
 /**
- * gst_buffer_remove_meta:
- * @buffer: a #GstBuffer
- * @meta: a #GstMeta
- *
- * Removes the metadata for @meta on @buffer.
- *
- * Returns: %TRUE if the metadata existed and was removed, %FALSE if no such
- * metadata was on @buffer.
- */
+ * @brief: 删除GstBuffer中的@meta
+ *         如果metadata存在，被删除后返回TRUE，如果没有@meta，返回FALSE
+*/
 gboolean
 gst_buffer_remove_meta (GstBuffer * buffer, GstMeta * meta)
 {
@@ -2216,19 +2153,11 @@ gst_buffer_remove_meta (GstBuffer * buffer, GstMeta * meta)
   return walk != NULL;
 }
 
+
 /**
- * gst_buffer_iterate_meta: (skip)
- * @buffer: a #GstBuffer
- * @state: (out caller-allocates): an opaque state pointer
- *
- * Retrieves the next #GstMeta after @current. If @state points
- * to %NULL, the first metadata is returned.
- *
- * @state will be updated with an opaque state pointer
- *
- * Returns: (transfer none) (nullable): The next #GstMeta or %NULL
- * when there are no more items.
- */
+ * @name: gst_buffer_iterate_meta
+ * @brief: 检索当前@state的下一个GstMetaItem，返回下个GstMetaItem->meta
+*/
 GstMeta *
 gst_buffer_iterate_meta (GstBuffer * buffer, gpointer * state)
 {
@@ -2239,10 +2168,8 @@ gst_buffer_iterate_meta (GstBuffer * buffer, gpointer * state)
 
   meta = (GstMetaItem **) state;
   if (*meta == NULL)
-    /* state NULL, move to first item */
     *meta = GST_BUFFER_META (buffer);
   else
-    /* state !NULL, move to next item in list */
     *meta = (*meta)->next;
 
   if (*meta)
@@ -2251,23 +2178,12 @@ gst_buffer_iterate_meta (GstBuffer * buffer, gpointer * state)
     return NULL;
 }
 
+
 /**
- * gst_buffer_iterate_meta_filtered: (skip)
- * @buffer: a #GstBuffer
- * @state: (out caller-allocates): an opaque state pointer
- * @meta_api_type: only return #GstMeta of this type
- *
- * Retrieves the next #GstMeta of type @meta_api_type after the current one
- * according to @state. If @state points to %NULL, the first metadata of
- * type @meta_api_type is returned.
- *
- * @state will be updated with an opaque state pointer
- *
- * Returns: (transfer none) (nullable): The next #GstMeta of type
- * @meta_api_type or %NULL when there are no more items.
- *
- * Since: 1.12
- */
+ * @name: gst_buffer_iterate_meta_filtered
+ * @brief: 根据传入的GstMetaItem也就是（@state），遍历得到符合@meta_api_type的GstMeta
+ * @param state(out): 如果找到符合@meta_api_type的GstMeta，state是GstMeta此时对应的GstMetaItem
+*/
 GstMeta *
 gst_buffer_iterate_meta_filtered (GstBuffer * buffer, gpointer * state,
     GType meta_api_type)
@@ -2278,11 +2194,11 @@ gst_buffer_iterate_meta_filtered (GstBuffer * buffer, gpointer * state,
   g_return_val_if_fail (state != NULL, NULL);
 
   meta = (GstMetaItem **) state;
-  if (*meta == NULL)
-    /* state NULL, move to first item */
+  
+  if (*meta == NULL) /* 如果传入的 state 指向 NULL */
+    /* GstBuffer的第一个item赋值给state */
     *meta = GST_BUFFER_META (buffer);
-  else
-    /* state !NULL, move to next item in list */
+  else /* 如果传入的state不为空，遍历得到next item */
     *meta = (*meta)->next;
 
   while (*meta != NULL && (*meta)->meta.info->api != meta_api_type)
