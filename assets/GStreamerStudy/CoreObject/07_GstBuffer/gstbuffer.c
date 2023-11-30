@@ -2251,21 +2251,9 @@ gst_parent_buffer_meta_get_info (void)
 
 GST_DEBUG_CATEGORY_STATIC (gst_reference_timestamp_meta_debug);
 
-/**
- * gst_buffer_add_reference_timestamp_meta:
- * @buffer: (transfer none): a #GstBuffer
- * @reference: (transfer none): identifier for the timestamp reference.
- * @timestamp: timestamp
- * @duration: duration, or %GST_CLOCK_TIME_NONE
- *
- * Adds a #GstReferenceTimestampMeta to @buffer that holds a @timestamp and
- * optionally @duration based on a specific timestamp @reference. See the
- * documentation of #GstReferenceTimestampMeta for details.
- *
- * Returns: (transfer none) (nullable): The #GstReferenceTimestampMeta that was added to the buffer
- *
- * Since: 1.14
- */
+/*******************************GstReferenceTimestampMeta元数据定义***********START*********************************/
+
+/* 向 @buffer 添加一个 #GstReferenceTimestampMeta，该元数据包含基于特定时间戳 @reference 的 @timestamp 和 可选的 @duration */
 GstReferenceTimestampMeta *
 gst_buffer_add_reference_timestamp_meta (GstBuffer * buffer,
     GstCaps * reference, GstClockTime timestamp, GstClockTime duration)
@@ -2286,24 +2274,13 @@ gst_buffer_add_reference_timestamp_meta (GstBuffer * buffer,
   meta->timestamp = timestamp;
   meta->duration = duration;
 
-  return meta;
+  return meta; /* 返回成功添加的 GstReferenceTimestampMeta */
 }
 
-/**
- * gst_buffer_get_reference_timestamp_meta:
- * @buffer: a #GstBuffer
- * @reference: (allow-none): a reference #GstCaps
- *
- * Finds the first #GstReferenceTimestampMeta on @buffer that conforms to
- * @reference. Conformance is tested by checking if the meta's reference is a
- * subset of @reference.
- *
- * Buffers can contain multiple #GstReferenceTimestampMeta metadata items.
- *
- * Returns: (transfer none) (nullable): the #GstReferenceTimestampMeta or %NULL when there
- * is no such metadata on @buffer.
- *
- * Since: 1.14
+/** 
+ * @brief:查找第一个符合 @reference 的 #GstReferenceTimestampMeta 
+ * @note: 缓冲区可以包含多个 #GstReferenceTimestampMeta 元数据项
+ *        同一个 @reference也可以被多次成功添加
  */
 GstReferenceTimestampMeta *
 gst_buffer_get_reference_timestamp_meta (GstBuffer * buffer,
@@ -2375,9 +2352,7 @@ _gst_reference_timestamp_meta_init (GstReferenceTimestampMeta * meta,
   return TRUE;
 }
 
-/**
- * gst_reference_timestamp_meta_api_get_type: (attributes doc.skip=true)
- */
+
 GType
 gst_reference_timestamp_meta_api_get_type (void)
 {
@@ -2393,15 +2368,7 @@ gst_reference_timestamp_meta_api_get_type (void)
   return type;
 }
 
-/**
- * gst_reference_timestamp_meta_get_info:
- *
- * Gets the global #GstMetaInfo describing the #GstReferenceTimestampMeta meta.
- *
- * Returns: (transfer none): The #GstMetaInfo
- *
- * Since: 1.14
- */
+
 const GstMetaInfo *
 gst_reference_timestamp_meta_get_info (void)
 {
@@ -2421,18 +2388,15 @@ gst_reference_timestamp_meta_get_info (void)
   return meta_info;
 }
 
+/*******************************GstReferenceTimestampMeta元数据定义***********END*********************************/
+
 /**
- * gst_buffer_add_custom_meta:
- * @buffer: (transfer none): a #GstBuffer
- * @name: the registered name of the desired custom meta
- *
- * Creates and adds a #GstCustomMeta for the desired @name. @name must have
- * been successfully registered with gst_meta_register_custom().
- *
- * Returns: (transfer none) (nullable): The #GstCustomMeta that was added to the buffer
- *
- * Since: 1.20
- */
+ * @name: gst_buffer_add_custom_meta
+ * @param name: 所需自定义元数据的已注册名称
+ * @brief: 创建并添加一个所需 @name 的 #GstCustomMeta。@name 必须已经成功地
+ *         使用 gst_meta_register_custom() 进行注册。
+ * @return: 已添加到缓冲区的 #GstCustomMeta
+*/
 GstCustomMeta *
 gst_buffer_add_custom_meta (GstBuffer * buffer, const gchar * name)
 {
@@ -2452,17 +2416,8 @@ gst_buffer_add_custom_meta (GstBuffer * buffer, const gchar * name)
   return meta;
 }
 
-/**
- * gst_buffer_get_custom_meta:
- * @buffer: a #GstBuffer
- * @name: the registered name of the custom meta to retrieve.
- *
- * Finds the first #GstCustomMeta on @buffer for the desired @name.
- *
- * Returns: (transfer none) (nullable): the #GstCustomMeta
- *
- * Since: 1.20
- */
+
+/* 通过 @name 找到相应的 #GstCustomMeta */
 GstCustomMeta *
 gst_buffer_get_custom_meta (GstBuffer * buffer, const gchar * name)
 {
@@ -2482,33 +2437,14 @@ gst_buffer_get_custom_meta (GstBuffer * buffer, const gchar * name)
   return (GstCustomMeta *) gst_buffer_get_meta (buffer, info->api);
 }
 
-/**
- * gst_buffer_ref: (skip)
- * @buf: a #GstBuffer.
- *
- * Increases the refcount of the given buffer by one.
- *
- * Note that the refcount affects the writability
- * of @buf and its metadata, see gst_buffer_is_writable().
- * It is important to note that keeping additional references to
- * GstBuffer instances can potentially increase the number
- * of `memcpy` operations in a pipeline.
- *
- * Returns: (transfer full): @buf
- */
+
 GstBuffer *
 gst_buffer_ref (GstBuffer * buf)
 {
   return (GstBuffer *) gst_mini_object_ref (GST_MINI_OBJECT_CAST (buf));
 }
 
-/**
- * gst_buffer_unref: (skip)
- * @buf: (transfer full): a #GstBuffer.
- *
- * Decreases the refcount of the buffer. If the refcount reaches 0, the buffer
- * with the associated metadata and memory will be freed.
- */
+
 void
 gst_buffer_unref (GstBuffer * buf)
 {
@@ -2522,40 +2458,14 @@ gst_clear_buffer (GstBuffer ** buf_ptr)
   gst_clear_mini_object ((GstMiniObject **) buf_ptr);
 }
 
-/**
- * gst_buffer_copy: (skip)
- * @buf: a #GstBuffer.
- *
- * Creates a copy of the given buffer. This will only copy the buffer's
- * data to a newly allocated memory if needed (if the type of memory
- * requires it), otherwise the underlying data is just referenced.
- * Check gst_buffer_copy_deep() if you want to force the data
- * to be copied to newly allocated memory.
- *
- * Returns: (transfer full) (nullable): a new copy of @buf if the copy succeeded, %NULL otherwise.
- */
+
 GstBuffer *
 gst_buffer_copy (const GstBuffer * buf)
 {
   return GST_BUFFER (gst_mini_object_copy (GST_MINI_OBJECT_CONST_CAST (buf)));
 }
 
-/**
- * gst_buffer_replace: (skip)
- * @obuf: (inout) (transfer full) (nullable): pointer to a pointer to
- *     a #GstBuffer to be replaced.
- * @nbuf: (transfer none) (allow-none): pointer to a #GstBuffer that will
- *     replace the buffer pointed to by @obuf.
- *
- * Modifies a pointer to a #GstBuffer to point to a different #GstBuffer. The
- * modification is done atomically (so this is useful for ensuring thread safety
- * in some cases), and the reference counts are updated appropriately (the old
- * buffer is unreffed, the new is reffed).
- *
- * Either @nbuf or the #GstBuffer pointed to by @obuf may be %NULL.
- *
- * Returns: %TRUE when @obuf was different from @nbuf.
- */
+
 gboolean
 gst_buffer_replace (GstBuffer ** obuf, GstBuffer * nbuf)
 {
