@@ -74,11 +74,11 @@ typedef enum
 
 struct _GstPoll
 {
-  GstPollMode mode;
+  GstPollMode mode;  /* 轮询模式 */
 
-  GMutex lock;
+  GMutex lock; 
   /* array of fds, always written to and read from with lock */
-  GArray *fds;
+  GArray *fds; /*  */
   /* array of active fds, only written to from the waiting thread with the
    * lock and read from with the lock or without the lock from the waiting
    * thread */
@@ -94,8 +94,8 @@ struct _GstPoll
 
   HANDLE wakeup_event;
 #endif
-
-  gboolean controllable;
+  /* 是否有可控制等待（多线程中，中断GstPoll等待，中断堵塞） */
+  gboolean controllable; 
   gint waiting;
   gint control_pending;
   gint flushing;
@@ -604,41 +604,39 @@ gst_poll_collect_winsock_events (GstPoll * set)
 }
 #endif
 
+
 /**
- * gst_poll_new: (skip)
- * @controllable: whether it should be possible to control a wait.
- *
- * Create a new file descriptor set. If @controllable, it
- * is possible to restart or flush a call to gst_poll_wait() with
- * gst_poll_restart() and gst_poll_set_flushing() respectively.
- *
- * Free-function: gst_poll_free
- *
- * Returns: (transfer full) (nullable): a new #GstPoll, or %NULL in
- *     case of an error.  Free with gst_poll_free().
- */
+ * @name: gst_poll_new
+ * @param controllable: 是否有可控制等待
+ * @note: 释放函数 gst_poll_free
+ * 
+ * @brief: 创建一个新的文件描述符集合。如果设置为@controllable，可以分别使用
+ *         gst_poll_restart() 和 gst_poll_set_flushing() 来重启或刷新对 gst_poll_wait() 的调用。
+ * 
+*/
 GstPoll *
 gst_poll_new (gboolean controllable)
 {
   GstPoll *nset;
-
+  
   nset = g_slice_new0 (GstPoll);
   GST_DEBUG ("%p: new controllable : %d", nset, controllable);
   g_mutex_init (&nset->lock);
 #ifndef G_OS_WIN32
-  nset->mode = GST_POLL_MODE_AUTO;
+  nset->mode = GST_POLL_MODE_AUTO; /* 设定轮询模式 */
   nset->fds = g_array_new (FALSE, FALSE, sizeof (struct pollfd));
   nset->active_fds = g_array_new (FALSE, FALSE, sizeof (struct pollfd));
-  nset->control_read_fd.fd = -1;
-  nset->control_write_fd.fd = -1;
+  nset->control_read_fd.fd = -1; /* 未设定 */
+  nset->control_write_fd.fd = -1; /* 未设定 */
   {
     gint control_sock[2];
 
+    /* 创建一对相互连接的套接字 */
     if (socketpair (PF_UNIX, SOCK_STREAM, 0, control_sock) < 0)
       goto no_socket_pair;
 
-    nset->control_read_fd.fd = control_sock[0];
-    nset->control_write_fd.fd = control_sock[1];
+    nset->control_read_fd.fd = control_sock[0]; /* 读 */
+    nset->control_write_fd.fd = control_sock[1];  /* 写 */
 
     gst_poll_add_fd_unlocked (nset, &nset->control_read_fd);
     gst_poll_fd_ctl_read_unlocked (nset, &nset->control_read_fd, TRUE);
