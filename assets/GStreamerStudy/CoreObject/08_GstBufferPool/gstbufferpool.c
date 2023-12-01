@@ -102,7 +102,7 @@ gst_buffer_pool_init (GstBufferPool * pool)
 
   g_rec_mutex_init (&priv->rec_lock);
 
-  priv->poll = gst_poll_new_timer ();
+  priv->poll = gst_poll_new_timer ();  /* 创建了一个定时器poll轮询对象 */
   priv->queue = gst_atomic_queue_new (16);
   pool->flushing = 1;
   priv->active = FALSE;

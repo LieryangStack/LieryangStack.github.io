@@ -97,9 +97,9 @@ struct _GstPoll
   /* 是否有可控制等待（多线程中，中断GstPoll等待，中断堵塞） */
   gboolean controllable; 
   gint waiting;
-  gint control_pending;
+  gint control_pending; /* 如果wake_evnt调用一次，该变量+1 */
   gint flushing;
-  gboolean timer;
+  gboolean timer; /* 是否是一个定时器 */
   gint rebuild;
 };
 
@@ -119,6 +119,11 @@ static gboolean gst_poll_add_fd_unlocked (GstPoll * set, GstPollFD * fd);
 
 #ifndef G_OS_WIN32
 
+/**
+ * @brief: 向set存储的可控制写套接字写一个字符'W'
+ * @calledby: raise_wakeup ()
+ * @return: 写入成功返回TURE
+*/
 static gboolean
 wake_event (GstPoll * set)
 {
@@ -220,8 +225,17 @@ release_event (GstPoll * set)
 
 #endif
 
-/* the poll/select call is also performed on a control socket, that way
- * we can send special commands to control it */
+/**
+ * @name: raise_wakeup
+ * @param set: #GstPoll对象
+ * @call: wake_event ()
+ * @calledby: gst_poll_write_control ()
+ *            gst_poll_restart ()
+ *            gst_poll_set_flushing ()
+ * @note: poll/select调用也在控制套接字上执行，这样我们可以发送特殊命令来控制它
+ * @brief: 
+ * 
+*/
 static inline gboolean
 raise_wakeup (GstPoll * set)
 {
@@ -237,7 +251,7 @@ raise_wakeup (GstPoll * set)
   }
 
   if (result) {
-    set->control_pending++;
+    set->control_pending++; /* 未处理控制 +1 */
   }
 
   g_mutex_unlock (&set->lock);
@@ -671,42 +685,32 @@ no_socket_pair:
 #endif
 }
 
+
 /**
- * gst_poll_new_timer: (skip)
- *
- * Create a new poll object that can be used for scheduling cancellable
- * timeouts.
- *
- * A timeout is performed with gst_poll_wait(). Multiple timeouts can be
- * performed from different threads.
- *
- * Free-function: gst_poll_free
- *
- * Returns: (transfer full) (nullable): a new #GstPoll, or %NULL in
- *     case of an error.  Free with gst_poll_free().
- */
+ * @name: gst_poll_new_timer
+ * @brief: 创建一个poll对象，可以用于可取消的超时
+ *         超时操作是通过 gst_poll_wait () 执行的。不同线程可以执行多个超时操作。
+ * @note: 该对象通过 gst_poll_free () 释放
+ * 
+*/
 GstPoll *
 gst_poll_new_timer (void)
 {
   GstPoll *poll;
 
-  /* make a new controllable poll set */
+  /* 创建了一个可控制阻塞（等待）的poll轮询对象*/
   if (!(poll = gst_poll_new (TRUE)))
     goto done;
 
-  /* we are a timer */
+  /* 我们是一个定时器 */
   poll->timer = TRUE;
 
 done:
   return poll;
 }
 
-/**
- * gst_poll_free:
- * @set: (transfer full): a file descriptor set.
- *
- * Free a file descriptor set.
- */
+
+/* 释放一组文件描述符 */
 void
 gst_poll_free (GstPoll * set)
 {
@@ -825,15 +829,8 @@ gst_poll_add_fd_unlocked (GstPoll * set, GstPollFD * fd)
   return TRUE;
 }
 
-/**
- * gst_poll_add_fd:
- * @set: a file descriptor set.
- * @fd: a file descriptor.
- *
- * Add a file descriptor to the file descriptor set.
- *
- * Returns: %TRUE if the file descriptor was successfully added to the set.
- */
+
+/* 添加@fd到@set */
 gboolean
 gst_poll_add_fd (GstPoll * set, GstPollFD * fd)
 {
@@ -852,15 +849,8 @@ gst_poll_add_fd (GstPoll * set, GstPollFD * fd)
   return ret;
 }
 
-/**
- * gst_poll_remove_fd:
- * @set: a file descriptor set.
- * @fd: a file descriptor.
- *
- * Remove a file descriptor from the file descriptor set.
- *
- * Returns: %TRUE if the file descriptor was successfully removed from the set.
- */
+
+/* 从@set移除@fd */
 gboolean
 gst_poll_remove_fd (GstPoll * set, GstPollFD * fd)
 {
@@ -899,17 +889,15 @@ gst_poll_remove_fd (GstPoll * set, GstPollFD * fd)
   return idx >= 0;
 }
 
+
 /**
- * gst_poll_fd_ctl_write:
- * @set: a file descriptor set.
- * @fd: a file descriptor.
- * @active: a new status.
- *
- * Control whether the descriptor @fd in @set will be monitored for
- * writability.
- *
- * Returns: %TRUE if the descriptor was successfully updated.
- */
+ * @name: gst_poll_fd_ctl_write
+ * @param set: a file descriptor set.
+ * @param fd: a file descriptor.
+ * @param active: a new status.
+ * @call: gst_poll_fd_ctl_read_unlocked
+ * @brief: 控制@set中的@fd文件描述符能够可写
+*/
 gboolean
 gst_poll_fd_ctl_write (GstPoll * set, GstPollFD * fd, gboolean active)
 {
@@ -978,17 +966,15 @@ gst_poll_fd_ctl_read_unlocked (GstPoll * set, GstPollFD * fd, gboolean active)
   return idx >= 0;
 }
 
+
 /**
- * gst_poll_fd_ctl_read:
- * @set: a file descriptor set.
- * @fd: a file descriptor.
- * @active: a new status.
- *
- * Control whether the descriptor @fd in @set will be monitored for
- * readability.
- *
- * Returns: %TRUE if the descriptor was successfully updated.
- */
+ * @name: gst_poll_fd_ctl_read
+ * @param set: a file descriptor set.
+ * @param fd: a file descriptor.
+ * @param active: a new status.
+ * @call: gst_poll_fd_ctl_read_unlocked
+ * @brief: 控制@set中的@fd文件描述符能够可读
+*/
 gboolean
 gst_poll_fd_ctl_read (GstPoll * set, GstPollFD * fd, gboolean active)
 {
@@ -1324,26 +1310,20 @@ gst_poll_fd_has_pri (const GstPoll * set, GstPollFD * fd)
 #endif
 }
 
+
 /**
- * gst_poll_wait:
- * @set: a #GstPoll.
- * @timeout: a timeout in nanoseconds.
- *
- * Wait for activity on the file descriptors in @set. This function waits up to
- * the specified @timeout.  A timeout of #GST_CLOCK_TIME_NONE waits forever.
- *
- * For #GstPoll objects created with gst_poll_new(), this function can only be
- * called from a single thread at a time.  If called from multiple threads,
- * -1 will be returned with errno set to EPERM.
- *
- * This is not true for timer #GstPoll objects created with
- * gst_poll_new_timer(), where it is allowed to have multiple threads waiting
- * simultaneously.
- *
- * Returns: The number of #GstPollFD in @set that have activity or 0 when no
- * activity was detected after @timeout. If an error occurs, -1 is returned
- * and errno is set.
- */
+ * @name: gst_poll_wait
+ * @param set: a #GstPoll
+ * @param timeout: ns为单位的超时时间
+ * @call: 
+ * @calledby: 
+ * @note: 在 @set 中有活动的 #GstPollFD 的数量，或者在 @timeout 后没有检测到活动时返回 0。如果发生错误，返回 -1 并设置 errno。
+ * @brief: 
+ * 
+ * 等待 @set 中的文件描述符上的活动。这个函数最多等待指定的 @timeout。#GST_CLOCK_TIME_NONE 的超时意味着无限期等待。
+ * 对于用 gst_poll_new() 创建的 #GstPoll 对象，这个函数一次只能在一个线程中被调用。如果在多个线程中调用，将返回 -1 并将 errno 设置为 EPERM。
+ * 对于用 gst_poll_new_timer() 创建的计时器 #GstPoll 对象来说，这个规则不适用，在这种情况下允许多个线程同时等待。
+*/
 gint
 gst_poll_wait (GstPoll * set, GstClockTime timeout)
 {
@@ -1466,6 +1446,7 @@ gst_poll_wait (GstPoll * set, GstClockTime timeout)
           }
 
           GST_DEBUG ("%p: Calling select", set);
+          /* 至少有一个文件准备好 || 超时时间已到 就会返回res */
           res = select (max_fd + 1, &readfds, &writefds, &errorfds, tvptr);
           GST_DEBUG ("%p: After select, res:%d", set, res);
         } else {
@@ -1671,26 +1652,20 @@ gst_poll_set_flushing (GstPoll * set, gboolean flushing)
   }
 }
 
+
 /**
- * gst_poll_write_control:
- * @set: a #GstPoll.
- *
- * Write a byte to the control socket of the controllable @set.
- * This function is mostly useful for timer #GstPoll objects created with
- * gst_poll_new_timer().
- *
- * It will make any current and future gst_poll_wait() function return with
- * 1, meaning the control socket is set. After an equal amount of calls to
- * gst_poll_read_control() have been performed, calls to gst_poll_wait() will
- * block again until their timeout expired.
- *
- * This function only works for timer #GstPoll objects created with
- * gst_poll_new_timer().
- *
- * Returns: %TRUE on success. %FALSE when when the byte could not be written.
- * errno contains the detailed error code but will never be EAGAIN, EINTR or
- * EWOULDBLOCK. %FALSE always signals a critical error.
- */
+ * @name: gst_poll_write_control
+ * @param set: 一个GstPoll对象
+ * @call: raise_wakeup (set)
+ * @note: 这个函数仅适用于由 gst_poll_new_timer() 创建的计时器 #GstPoll对象
+ * @brief: 
+ * 
+ * set->control_write_fd.fd写入一个字节。 最终调用的就是 write (set->control_write_fd.fd, "W", 1))
+ * 这个函数主要用于由 gst_poll_new_timer() 创建的计时器 #GstPoll 对象。
+ * 
+ * 它会使任何当前和未来的 gst_poll_wait () 函数返回 1，意味着可控制socket被设定。
+ * 在调用了相等数量的 gst_poll_read_control () 函数后，gst_poll_wait () 的调用将再次堵塞。直到它们的超时期限失效。
+*/
 gboolean
 gst_poll_write_control (GstPoll * set)
 {
@@ -1704,20 +1679,16 @@ gst_poll_write_control (GstPoll * set)
   return res;
 }
 
+
 /**
- * gst_poll_read_control:
- * @set: a #GstPoll.
- *
- * Read a byte from the control socket of the controllable @set.
- *
- * This function only works for timer #GstPoll objects created with
- * gst_poll_new_timer().
- *
- * Returns: %TRUE on success. %FALSE when when there was no byte to read or
- * reading the byte failed. If there was no byte to read, and only then, errno
- * will contain EWOULDBLOCK or EAGAIN. For all other values of errno this always signals a
- * critical error.
- */
+ * @name: gst_poll_read_control
+ * @param set: a #GstPoll
+ * @call: release_wakeup ()
+ * @note: 这个函数仅仅对调用 gst_poll_new_timer () 创建的定时器GstPoll对象有用。
+ * @return: 返回%TRUE表示成功，当没有任何字节或读取失败返回%FALSE。
+ * @brief: 从set->control_read_fd.fd读取一个字节   read (set->control_read_fd.fd, buf, 1))
+ * 
+*/
 gboolean
 gst_poll_read_control (GstPoll * set)
 {
