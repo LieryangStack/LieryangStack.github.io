@@ -29,8 +29,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": false,
-      "cwd": "/home/lieryang/Desktop/LieryangStack.github.io/assets/GStreamerStudy/CoreObject/9_GstPoll",
-      "program": "/home/lieryang/Desktop/LieryangStack.github.io/assets/GStreamerStudy/CoreObject/9_GstPoll/build/Debug/outDebug",
+      "cwd": "/home/lieryang/Desktop/LieryangStack.github.io/assets/GStreamerStudy/CoreObject/13_GstTagList",
+      "program": "/home/lieryang/Desktop/LieryangStack.github.io/assets/GStreamerStudy/CoreObject/13_GstTagList/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [

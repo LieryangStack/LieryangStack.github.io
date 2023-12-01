@@ -18,6 +18,7 @@
 
 /* lieryang add */
 #include <gst/gst.h>
+#include <glib/gstring.h>
 
 /* FIXME: add category for tags */
 #define GST_CAT_TAGS GST_CAT_DEFAULT
@@ -35,16 +36,17 @@ typedef struct _GstTagListImpl
 #define GST_TAG_LIST_STRUCTURE(taglist)  ((GstTagListImpl*)(taglist))->structure
 #define GST_TAG_LIST_SCOPE(taglist)  ((GstTagListImpl*)(taglist))->scope
 
+/* 该结构体存储在哈希表中，每个name对应一个GstTagInfo */
 typedef struct
 {
-  GType type;                   /* type the data is in */
+  GType type;                   /* Tag存储的数据类型是 */
 
-  const gchar *nick;            /* translated short description */
-  const gchar *blurb;           /* translated long description  */
+  const gchar *nick;            /* 剪短的描述 */
+  const gchar *blurb;           /* 详细的描述 */
 
-  GstTagMergeFunc merge_func;   /* functions to merge the values */
-  GstTagFlag flag;              /* type of tag */
-  GQuark name_quark;            /* quark for the name */
+  GstTagMergeFunc merge_func;   /* 合并值的函数*/
+  GstTagFlag flag;              /* 类型的标记 */
+  GQuark name_quark;            /* 名称的quark */
 }
 GstTagInfo;
 
@@ -54,7 +56,7 @@ static GMutex __tag_mutex;
 #define TAG_LOCK g_mutex_lock (&__tag_mutex)
 #define TAG_UNLOCK g_mutex_unlock (&__tag_mutex)
 
-/* tags hash table: 将标签名称字符串映射到GstTagInfo */
+/* tags hash table: 将标签name字符串映射到GstTagInfo */
 static GHashTable *__tags;
 
 GType _gst_tag_list_type = 0;
@@ -74,10 +76,14 @@ _priv_gst_tag_initialize (void)
 
   _gst_tag_list_type = gst_tag_list_get_type ();
 
+  /* 新建一个哈希表，用来存储多个GstTagInfo */
   __tags = g_hash_table_new (g_str_hash, g_str_equal);
+
+
   gst_tag_register_static (GST_TAG_TITLE, GST_TAG_FLAG_META,
       G_TYPE_STRING,
       _("title"), _("commonly used title"), gst_tag_merge_strings_with_comma);
+
   gst_tag_register_static (GST_TAG_TITLE_SORTNAME, GST_TAG_FLAG_META,
       G_TYPE_STRING,
       _("title sortname"), _("commonly used title for sorting purposes"), NULL);
@@ -384,14 +390,8 @@ _priv_gst_tag_initialize (void)
 
 }
 
-/**
- * gst_tag_merge_use_first:
- * @dest: (out caller-allocates): uninitialized GValue to store result in
- * @src: GValue to copy from
- *
- * This is a convenience function for the func argument of gst_tag_register().
- * It creates a copy of the first value from the list.
- */
+
+/* 把@src列表中的第一个GValue拷贝给@dest */
 void
 gst_tag_merge_use_first (GValue * dest, const GValue * src)
 {
@@ -401,15 +401,11 @@ gst_tag_merge_use_first (GValue * dest, const GValue * src)
   g_value_copy (ret, dest);
 }
 
+
 /**
- * gst_tag_merge_strings_with_comma:
- * @dest: (out caller-allocates): uninitialized GValue to store result in
- * @src: GValue to copy from
- *
- * This is a convenience function for the func argument of gst_tag_register().
- * It concatenates all given strings using a comma. The tag must be registered
- * as a G_TYPE_STRING or this function will fail.
- */
+ * @brief: 这是 gst_tag_register() 的 func 参数的一个便利函数。
+ *         它使用逗号连接所有给定的字符串。标签必须注册为 G_TYPE_STRING，否则此函数将失败。
+*/
 void
 gst_tag_merge_strings_with_comma (GValue * dest, const GValue * src)
 {
@@ -426,9 +422,11 @@ gst_tag_merge_strings_with_comma (GValue * dest, const GValue * src)
   }
 
   g_value_init (dest, G_TYPE_STRING);
+  /* 只释放 GString结构体内存，内部的字符串指针以及给到了GValue，FALSE表示不需要释放字符串内存 */
   g_value_take_string (dest, g_string_free (str, FALSE));
 }
 
+/* 从哈希表找到对应的GstTagInfo */
 static GstTagInfo *
 gst_tag_lookup (const gchar * tag_name)
 {
@@ -441,37 +439,26 @@ gst_tag_lookup (const gchar * tag_name)
   return ret;
 }
 
+
 /**
- * gst_tag_register: (skip)
- * @name: the name or identifier string
- * @flag: a flag describing the type of tag info
- * @type: the type this data is in
- * @nick: human-readable name
- * @blurb: a human-readable description about this tag
- * @func: (allow-none): function for merging multiple values of this tag, or %NULL
+ * @name: gst_tag_register 
+ * @note: 使用了 g_intern_string 函数将字符串转换成字符串常量
+ * @brief: 为 GStreamer 的类型系统注册一个新的标签类型。如果已经注册了一个具有该名称的类型，
+ * 则会使用那个。不过，旧的注册可能使用了不同的类型（会声明失败）。因此，不要依赖于你提供的值。
+ * 
+ * @note: 如果你不提供合并函数，这意味着在标签列表中此标签只能有一个单一值，
+ * 任何额外的值在添加时将被默默丢弃（除非使用 #GST_TAG_MERGE_REPLACE、
+ * #GST_TAG_MERGE_REPLACE_ALL 或 #GST_TAG_MERGE_PREPEND 作为合并模式，
+ * 在这种情况下，新值将在列表中替换旧值）。
  *
- * Registers a new tag type for the use with GStreamer's type system. If a type
- * with that name is already registered, that one is used.
- * The old registration may have used a different type however. So don't rely
- * on your supplied values.
+ * 当需要将一个或多个标签值压缩为一个单一值时，将从 gst_tag_list_copy_value()
+ * 调用合并函数。这可能发生在 gst_tag_list_get_string()、
+ * gst_tag_list_get_int()、gst_tag_list_get_double() 等情况下。在这种情况下
+ * 将发生什么取决于标签是如何注册的，是否提供了合并函数，如果提供了，是哪一个。
  *
- * Important: if you do not supply a merge function the implication will be
- * that there can only be one single value for this tag in a tag list and
- * any additional values will silently be discarded when being added (unless
- * #GST_TAG_MERGE_REPLACE, #GST_TAG_MERGE_REPLACE_ALL, or
- * #GST_TAG_MERGE_PREPEND is used as merge mode, in which case the new
- * value will replace the old one in the list).
- *
- * The merge function will be called from gst_tag_list_copy_value() when
- * it is required that one or more values for a tag be condensed into
- * one single value. This may happen from gst_tag_list_get_string(),
- * gst_tag_list_get_int(), gst_tag_list_get_double() etc. What will happen
- * exactly in that case depends on how the tag was registered and if a
- * merge function was supplied and if so which one.
- *
- * Two default merge functions are provided: gst_tag_merge_use_first() and
- * gst_tag_merge_strings_with_comma().
- */
+ * 提供了两个默认的合并函数：gst_tag_merge_use_first() 和
+ * gst_tag_merge_strings_with_comma()。
+*/
 void
 gst_tag_register (const gchar * name, GstTagFlag flag, GType type,
     const gchar * nick, const gchar * blurb, GstTagMergeFunc func)
@@ -485,28 +472,27 @@ gst_tag_register (const gchar * name, GstTagFlag flag, GType type,
       g_intern_string (nick), g_intern_string (blurb), func);
 }
 
+
 /**
- * gst_tag_register_static: (skip)
- * @name: the name or identifier string (string constant)
- * @flag: a flag describing the type of tag info
- * @type: the type this data is in
- * @nick: human-readable name or short description (string constant)
- * @blurb: a human-readable description for this tag (string constant)
- * @func: (allow-none): function for merging multiple values of this tag, or %NULL
- *
- * Registers a new tag type for the use with GStreamer's type system.
- *
- * Same as gst_tag_register(), but @name, @nick, and @blurb must be
- * static strings or inlined strings, as they will not be copied. (GStreamer
- * plugins will be made resident once loaded, so this function can be used
- * even from dynamically loaded plugins.)
- */
+ * @name: gst_tag_register_static
+ * @param name: 名称或标识符字符串（字符串常量）
+ * @param flag: 描述GstTagInfo的标志
+ * @param type: 此数据的类型
+ * @param nick: 简短描述
+ * @param blurb: 人类可理解的可读描述
+ * @param func: 合并此标签的多个值的函数
+ * @brief: 为 GStreamer 的类型系统注册一个新的标签类型。
+ * 
+ * 与 gst_tag_register() 相同，但是 @name、@nick 和 @blurb 必须是
+ * 静态字符串或内联字符串，因为它们不会被复制。（GStreamer 插件一旦加载，
+ * 将会变为常驻内存，所以即使在动态加载的插件中也可以使用此函数。）
+*/
 void
 gst_tag_register_static (const gchar * name, GstTagFlag flag, GType type,
     const gchar * nick, const gchar * blurb, GstTagMergeFunc func)
 {
   GstTagInfo *info;
-
+gst_tag_register
   g_return_if_fail (name != NULL);
   g_return_if_fail (nick != NULL);
   g_return_if_fail (blurb != NULL);
@@ -534,11 +520,11 @@ gst_tag_register_static (const gchar * name, GstTagFlag flag, GType type,
 
 /**
  * gst_tag_exists:
- * @tag: name of the tag
+ * @tag: 标签的名称
  *
- * Checks if the given type is already registered.
+ * 检查给定的类型是否已经注册。
  *
- * Returns: %TRUE if the type is already registered
+ * 返回：如果类型已经注册，则为 %TRUE
  */
 gboolean
 gst_tag_exists (const gchar * tag)
@@ -550,11 +536,11 @@ gst_tag_exists (const gchar * tag)
 
 /**
  * gst_tag_get_type:
- * @tag: the tag
+ * @tag: 标签
  *
- * Gets the #GType used for this tag.
+ * 获取用于此标签的 #GType。
  *
- * Returns: the #GType of this tag
+ * 返回：此标签的 #GType
  */
 GType
 gst_tag_get_type (const gchar * tag)
@@ -570,12 +556,11 @@ gst_tag_get_type (const gchar * tag)
 
 /**
  * gst_tag_get_nick:
- * @tag: the tag
+ * @tag: 标签
  *
- * Returns the human-readable name of this tag, You must not change or free
- * this string.
+ * 返回此标签的人类可读名称。你不应更改或释放这个字符串。
  *
- * Returns: the human-readable name of this tag
+ * 返回：此标签的人类可读名称
  */
 const gchar *
 gst_tag_get_nick (const gchar * tag)
@@ -595,12 +580,11 @@ gst_tag_get_nick (const gchar * tag)
 
 /**
  * gst_tag_get_description:
- * @tag: the tag
+ * @tag: 标签
  *
- * Returns the human-readable description of this tag, You must not change or
- * free this string.
+ * 返回此标签的人类可读描述。你不应更改或释放这个字符串。
  *
- * Returns: the human-readable description of this tag
+ * 返回：此标签的人类可读描述
  */
 const gchar *
 gst_tag_get_description (const gchar * tag)
@@ -616,11 +600,11 @@ gst_tag_get_description (const gchar * tag)
 
 /**
  * gst_tag_get_flag:
- * @tag: the tag
+ * @tag: 标签
  *
- * Gets the flag of @tag.
+ * 获取 @tag 的标志。
  *
- * Returns: the flag of this tag.
+ * 返回：此标签的标志。 #GstTagFlag类型
  */
 GstTagFlag
 gst_tag_get_flag (const gchar * tag)
@@ -636,12 +620,11 @@ gst_tag_get_flag (const gchar * tag)
 
 /**
  * gst_tag_is_fixed:
- * @tag: tag to check
+ * @tag: 要检查的标签
+ * @note: 默认没有提供合并函数表示就是固定标签，只能包含一直值
+ * 检查给定标签是否是固定的。固定标签只能包含一个值。非固定标签可以包含值的列表。
  *
- * Checks if the given tag is fixed. A fixed tag can only contain one value.
- * Unfixed tags can contain lists of values.
- *
- * Returns: %TRUE, if the given tag is fixed.
+ * 返回：如果给定标签是固定的，则为 %TRUE。
  */
 gboolean
 gst_tag_is_fixed (const gchar * tag)
@@ -709,15 +692,8 @@ __gst_tag_list_copy (const GstTagList * list)
       GST_TAG_LIST_SCOPE (list));
 }
 
-/**
- * gst_tag_list_new_empty:
- *
- * Creates a new empty GstTagList.
- *
- * Free-function: gst_tag_list_unref
- *
- * Returns: (transfer full): An empty tag list
- */
+
+/* 创建一个新的空 GstTagList */
 GstTagList *
 gst_tag_list_new_empty (void)
 {
@@ -731,25 +707,20 @@ gst_tag_list_new_empty (void)
 
 /**
  * gst_tag_list_new:
- * @tag: tag
- * @...: %NULL-terminated list of values to set
+ * @tag: 标签
+ * @...: 设置值的 %NULL 结尾的列表
  *
- * Creates a new taglist and appends the values for the given tags. It expects
- * tag-value pairs like gst_tag_list_add(), and a %NULL terminator after the
- * last pair. The type of the values is implicit and is documented in the API
- * reference, but can also be queried at runtime with gst_tag_get_type(). It
- * is an error to pass a value of a type not matching the tag type into this
- * function. The tag list will make copies of any arguments passed
- * (e.g. strings, buffers).
+ * 创建一个新的标签列表并为给定的标签附加值。它期望标签-值对，就像 gst_tag_list_add()，
+ * 并在最后一对之后有一个 %NULL 终止符。值的类型是隐式的，并在 API 参考文档中有说明，
+ * 但也可以在运行时通过 gst_tag_get_type() 查询。将类型与标签类型不匹配的值传递到此函数中是错误的。
+ * 标签列表将会复制所有传递的参数（例如字符串，缓冲区）。
  *
- * After creation you might also want to set a #GstTagScope on the returned
- * taglist to signal if the contained tags are global or stream tags. By
- * default stream scope is assumes. See gst_tag_list_set_scope().
+ * 创建后，你可能还想在返回的标签列表上设置 #GstTagScope，以表示包含的标签是全局标签还是流标签。
+ * 默认情况下假设是流范围。参见 gst_tag_list_set_scope()。
  *
- * Free-function: gst_tag_list_unref
+ * 释放函数: gst_tag_list_unref
  *
- * Returns: (transfer full): a new #GstTagList. Free with gst_tag_list_unref()
- *     when no longer needed.
+ * 返回：(完全传递): 一个新的 #GstTagList。当不再需要时，使用 gst_tag_list_unref() 释放。
  */
 GstTagList *
 gst_tag_list_new (const gchar * tag, ...)
@@ -1234,12 +1205,12 @@ gst_tag_list_add_values (GstTagList * list, GstTagMergeMode mode,
 
 /**
  * gst_tag_list_add_valist:
- * @list: list to set tags in
- * @mode: the mode to use
- * @tag: tag
- * @var_args: tag / value pairs to set
+ * @list: 要设置标签的列表
+ * @mode: 使用的模式
+ * @tag: 标签
+ * @var_args: 要设置的标签/值对
  *
- * Sets the values for the given tags using the specified mode.
+ * 使用指定的模式设置给定标签的值。
  */
 void
 gst_tag_list_add_valist (GstTagList * list, GstTagMergeMode mode,
