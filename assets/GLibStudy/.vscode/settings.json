@@ -5,7 +5,10 @@
     "signal-demo.h": "c",
     "glib-object.h": "c",
     "gobject.h": "c",
-    "glib.h": "c"
+    "glib.h": "c",
+    "gthreadprivate.h": "c",
+    "glib_trace.h": "c",
+    "stdio.h": "c"
   },
   "C_Cpp_Runner.msvcBatchPath": "",
   "C_Cpp_Runner.cCompilerPath": "gcc",
@@ -63,5 +66,6 @@
   "C_Cpp_Runner.useLeakSanitizer": false,
   "C_Cpp_Runner.showCompilationTime": false,
   "C_Cpp_Runner.useLinkTimeOptimization": false,
-  "C_Cpp_Runner.msvcSecureNoWarnings": false
+  "C_Cpp_Runner.msvcSecureNoWarnings": false,
+  "C_Cpp.errorSquiggles": "disabled"
 }

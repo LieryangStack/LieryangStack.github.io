@@ -27,8 +27,30 @@ GstContext 可以是持久的。一个持久的 GstContext 在元素达到 GST_S
 
 ### 2.1 GstContext类型注册宏定义
 
-### 2.2 GstContext类型相关枚举
+```c
+/* filename: gstcontext.h */
+GST_API GType _gst_context_type;
+#define GST_TYPE_CONTEXT                         (_gst_context_type)
 
-### 2.3 GstContext相关结构体
+GST_API
+GType           gst_context_get_type            (void);
+/* filename: gstcontext.c */
+GType _gst_context_type = 0;
+GST_DEFINE_MINI_OBJECT_TYPE (GstContext, gst_context);
+```
+
+### 2.2 GstContext结构体
+
+```c
+/* filename: gstcontext.c */
+struct _GstContext
+{
+  GstMiniObject mini_object;
+
+  gchar *context_type; /* 上下文类型名称 */
+  GstStructure *structure;
+  gboolean persistent; /* 是否是持久性上下文 */
+};
+```
 
 ## 3 GstContext对象相关函数

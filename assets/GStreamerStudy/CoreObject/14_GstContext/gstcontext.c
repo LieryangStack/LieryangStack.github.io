@@ -23,9 +23,6 @@ _priv_gst_context_initialize (void)
 {
   GST_CAT_INFO (GST_CAT_GST_INIT, "init contexts");
 
-  /* the GstMiniObject types need to be class_ref'd once before it can be
-   * done from multiple threads;
-   * see http://bugzilla.gnome.org/show_bug.cgi?id=304551 */
   gst_context_get_type ();
 
   _gst_context_type = gst_context_get_type ();
@@ -90,17 +87,15 @@ gst_context_init (GstContext * context)
       (GstMiniObjectFreeFunction) _gst_context_free);
 }
 
+
 /**
- * gst_context_new:
- * @context_type: Context type
- * @persistent: Persistent context
- *
- * Creates a new context.
- *
- * Returns: (transfer full): The new context.
- *
- * Since: 1.2
- */
+ * @name: gst_context_new
+ * @param context_type: 上下文类型
+ * @param persistent: 是否是持久的（持久context在元素达到GST_STATE_NULL会保留）
+ * @brief: 创建一个新的上下文
+ * @note: 持久的GstContext在元素达到GST_STATE_NULL时会被保留，非持久的上下文将被移除。
+ *        此外，非持久的上下文不会覆盖之前设置到元素上的持久上下文
+*/
 GstContext *
 gst_context_new (const gchar * context_type, gboolean persistent)
 {
@@ -124,16 +119,7 @@ gst_context_new (const gchar * context_type, gboolean persistent)
   return context;
 }
 
-/**
- * gst_context_get_context_type:
- * @context: The #GstContext.
- *
- * Gets the type of @context.
- *
- * Returns: The type of the context.
- *
- * Since: 1.2
- */
+/* 得到上下文的类型 */
 const gchar *
 gst_context_get_context_type (const GstContext * context)
 {
@@ -142,17 +128,8 @@ gst_context_get_context_type (const GstContext * context)
   return context->context_type;
 }
 
-/**
- * gst_context_has_context_type:
- * @context: The #GstContext.
- * @context_type: Context type to check.
- *
- * Checks if @context has @context_type.
- *
- * Returns: %TRUE if @context has @context_type.
- *
- * Since: 1.2
- */
+
+/* 判断@context是否是@context_type类型 */
 gboolean
 gst_context_has_context_type (const GstContext * context,
     const gchar * context_type)
@@ -163,18 +140,8 @@ gst_context_has_context_type (const GstContext * context,
   return strcmp (context->context_type, context_type) == 0;
 }
 
-/**
- * gst_context_get_structure:
- * @context: The #GstContext.
- *
- * Accesses the structure of the context.
- *
- * Returns: (transfer none): The structure of the context. The structure is
- * still owned by the context, which means that you should not modify it,
- * free it and that the pointer becomes invalid when you free the context.
- *
- * Since: 1.2
- */
+
+/* 获取到上下文的GstStructure，这个返回值你不该应该修改或者释放 */
 const GstStructure *
 gst_context_get_structure (const GstContext * context)
 {
@@ -185,16 +152,14 @@ gst_context_get_structure (const GstContext * context)
 
 /**
  * gst_context_writable_structure:
- * @context: The #GstContext.
+ * @context: 要访问的 #GstContext。
  *
- * Gets a writable version of the structure.
+ * 获取上下文结构的可写版本。
  *
- * Returns: (transfer none): The structure of the context. The structure is still
- * owned by the context, which means that you should not free it and
- * that the pointer becomes invalid when you free the context.
- * This function checks if @context is writable.
+ * 返回: (transfer none): 上下文的结构。结构仍然由上下文拥有，这意味着您不应该释放它，并且在释放上下文时指针将变为无效。
+ * 此函数检查 @context 是否可写。
  *
- * Since: 1.2
+ * 自版本: 1.2
  */
 GstStructure *
 gst_context_writable_structure (GstContext * context)
@@ -205,16 +170,7 @@ gst_context_writable_structure (GstContext * context)
   return GST_CONTEXT_STRUCTURE (context);
 }
 
-/**
- * gst_context_is_persistent:
- * @context: The #GstContext.
- *
- * Checks if @context is persistent.
- *
- * Returns: %TRUE if the context is persistent.
- *
- * Since: 1.2
- */
+/* 判断是否是持久性上下文 */
 gboolean
 gst_context_is_persistent (const GstContext * context)
 {
