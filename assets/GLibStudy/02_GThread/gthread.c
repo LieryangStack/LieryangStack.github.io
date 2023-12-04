@@ -199,12 +199,6 @@
 
 /**
  * GRecMutex（递归互斥锁）：
- *
- * The GRecMutex struct is an opaque data structure to represent a
- * recursive mutex. It is similar to a #GMutex with the difference
- * that it is possible to lock a GRecMutex multiple times in the same
- * thread without deadlock. When doing so, care has to be taken to
- * unlock the recursive mutex as often as it has been locked.
  *  
  * GRecMutex结构体是一个不透明的数据结构，用于表示递归互斥锁。它类似于#GMutex，
  * 但不同之处在于在同一线程中可以多次锁定GRecMutex而不会发生死锁。在这样做时，必须小心确保解锁递归互斥锁的次数与锁定的次数相同。

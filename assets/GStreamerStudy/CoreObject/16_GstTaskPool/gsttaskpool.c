@@ -481,15 +481,13 @@ gst_shared_task_pool_get_max_threads (GstSharedTaskPool * pool)
 /**
  * gst_shared_task_pool_new:
  *
- * Create a new shared task pool. The shared task pool will queue tasks on
- * a maximum number of threads, 1 by default.
+ * 创建一个新的共享任务池。共享任务池将任务排队在最大数量的线程上，默认为1个线程。
  *
- * Do not use a #GstSharedTaskPool to manage potentially inter-dependent tasks such
- * as pad tasks, as having one task waiting on another to return before returning
- * would cause obvious deadlocks if they happen to share the same thread.
+ * 不要使用 #GstSharedTaskPool 来管理可能相互依赖的任务，比如 pad tasks（端口任务），
+ * 因为如果一个任务等待另一个任务返回后才能返回，如果它们恰好共享同一个线程，就会导致明显的死锁问题。
  *
- * Returns: (transfer full): a new #GstSharedTaskPool. gst_object_unref() after usage.
- * Since: 1.20
+ * 返回值: （完全转移）一个新的 #GstSharedTaskPool。在使用后请使用 gst_object_unref() 释放。
+ * 自：1.20版本起
  */
 GstTaskPool *
 gst_shared_task_pool_new (void)

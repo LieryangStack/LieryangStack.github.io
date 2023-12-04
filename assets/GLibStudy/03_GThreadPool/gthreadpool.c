@@ -649,33 +649,23 @@ g_thread_pool_push (GThreadPool  *pool,
 
 /**
  * g_thread_pool_set_max_threads:
- * @pool: a #GThreadPool
- * @max_threads: a new maximal number of threads for @pool,
- *     or -1 for unlimited
- * @error: return location for error, or %NULL
+ * @pool: 一个 #GThreadPool
+ * @max_threads: @pool 的新最大线程数，或者 -1 表示无限制
+ * @error: 错误返回位置，或者 %NULL
  *
- * Sets the maximal allowed number of threads for @pool.
- * A value of -1 means that the maximal number of threads
- * is unlimited. If @pool is an exclusive thread pool, setting
- * the maximal number of threads to -1 is not allowed.
+ * 设置 @pool 允许的最大线程数。
+ * -1 表示最大线程数无限制。如果 @pool 是一个独占线程池，将最大线程数设置为 -1 是不允许的。
  *
- * Setting @max_threads to 0 means stopping all work for @pool.
- * It is effectively frozen until @max_threads is set to a non-zero
- * value again.
+ * 将 @max_threads 设置为 0 表示停止 @pool 的所有工作。它会被冻结，直到 @max_threads 再次被设置为非零值。
  *
- * A thread is never terminated while calling @func, as supplied by
- * g_thread_pool_new(). Instead the maximal number of threads only
- * has effect for the allocation of new threads in g_thread_pool_push().
- * A new thread is allocated, whenever the number of currently
- * running threads in @pool is smaller than the maximal number.
+ * 在调用 g_thread_pool_new() 提供的 @func 时，线程永远不会被终止。相反，最大线程数仅影响 g_thread_pool_push() 中新线程的分配。
+ * 只有当 @pool 中当前运行的线程数小于最大线程数时，才会分配新的线程。
  *
- * @error can be %NULL to ignore errors, or non-%NULL to report
- * errors. An error can only occur when a new thread couldn't be
- * created.
+ * @error 可以是 %NULL，以忽略错误，也可以是非 %NULL，以报告错误。只有当无法创建新线程时，才会发生错误。
  *
- * Before version 2.32, this function did not return a success status.
+ * 在2.32版本之前，此函数没有返回成功状态。
  *
- * Returns: %TRUE on success, %FALSE if an error occurred
+ * 返回值：在成功时返回 %TRUE，在发生错误时返回 %FALSE
  */
 gboolean
 g_thread_pool_set_max_threads (GThreadPool  *pool,
@@ -723,11 +713,11 @@ g_thread_pool_set_max_threads (GThreadPool  *pool,
 
 /**
  * g_thread_pool_get_max_threads:
- * @pool: a #GThreadPool
+ * @pool: 一个 #GThreadPool
  *
- * Returns the maximal number of threads for @pool.
+ * 返回 @pool 的最大线程数。
  *
- * Returns: the maximal number of threads
+ * 返回值：最大线程数
  */
 gint
 g_thread_pool_get_max_threads (GThreadPool *pool)
@@ -749,11 +739,11 @@ g_thread_pool_get_max_threads (GThreadPool *pool)
 
 /**
  * g_thread_pool_get_num_threads:
- * @pool: a #GThreadPool
+ * @pool: 一个 #GThreadPool
  *
- * Returns the number of threads currently running in @pool.
+ * 返回 @pool 当前正在运行的线程数。
  *
- * Returns: the number of threads currently running
+ * 返回值：当前正在运行的线程数
  */
 guint
 g_thread_pool_get_num_threads (GThreadPool *pool)
@@ -775,11 +765,11 @@ g_thread_pool_get_num_threads (GThreadPool *pool)
 
 /**
  * g_thread_pool_unprocessed:
- * @pool: a #GThreadPool
+ * @pool: 一个 #GThreadPool
  *
- * Returns the number of tasks still unprocessed in @pool.
+ * 返回 @pool 中仍未处理的任务数。
  *
- * Returns: the number of unprocessed tasks
+ * 返回值：未处理的任务数
  */
 guint
 g_thread_pool_unprocessed (GThreadPool *pool)
@@ -799,24 +789,22 @@ g_thread_pool_unprocessed (GThreadPool *pool)
 
 /**
  * g_thread_pool_free:
- * @pool: a #GThreadPool
- * @immediate: should @pool shut down immediately?
- * @wait_: should the function wait for all tasks to be finished?
+ * @pool: 一个 #GThreadPool
+ * @immediate: 是否应立即关闭 @pool？
+ * @wait_: 函数是否应等待所有任务完成？
  *
- * Frees all resources allocated for @pool.
+ * 释放为 @pool 分配的所有资源。
  *
- * If @immediate is %TRUE, no new task is processed for @pool.
- * Otherwise @pool is not freed before the last task is processed.
- * Note however, that no thread of this pool is interrupted while
- * processing a task. Instead at least all still running threads
- * can finish their tasks before the @pool is freed.
+ * 如果 @immediate 为 %TRUE，则不会处理 @pool 的新任务。
+ * 否则，在最后一个任务处理之前，@pool 不会被释放。
+ * 但请注意，在处理任务时不会中断此池的任何线程。相反，至少所有仍在运行的线程
+ * 可以在 @pool 被释放之前完成它们的任务。
  *
- * If @wait_ is %TRUE, this function does not return before all
- * tasks to be processed (dependent on @immediate, whether all
- * or only the currently running) are ready.
- * Otherwise this function returns immediately.
+ * 如果 @wait_ 为 %TRUE，则此函数在所有任务被处理完毕之前（取决于 @immediate，
+ * 是所有任务还是只有当前正在运行的任务）不会返回。
+ * 否则此函数立即返回。
  *
- * After calling this function @pool must not be used anymore.
+ * 调用此函数后，@pool 不得再被使用。
  */
 void
 g_thread_pool_free (GThreadPool *pool,
