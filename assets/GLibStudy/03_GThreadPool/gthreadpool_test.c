@@ -1,26 +1,3 @@
-/* Unit tests for GThreadPool
- * Copyright (C) 2020 Sebastian Dröge <sebastian@centricular.com>
- *
- * SPDX-License-Identifier: LicenseRef-old-glib-tests
- *
- * This work is provided "as is"; redistribution and modification
- * in whole or in part, in any medium, physical or electronic is
- * permitted without restriction.
- *
- * This work is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- *
- * In no event shall the authors or contributors be liable for any
- * direct, indirect, incidental, special, exemplary, or consequential
- * damages (including, but not limited to, procurement of substitute
- * goods or services; loss of use, data, or profits; or business
- * interruption) however caused and on any theory of liability, whether
- * in contract, strict liability, or tort (including negligence or
- * otherwise) arising in any way out of the use of this software, even
- * if advised of the possibility of such damage.
- */
-
 #include <config.h>
 
 #include <glib.h>
@@ -32,8 +9,9 @@ typedef struct {
 } MutexCond;
 
 static void
-pool_func (gpointer data, gpointer user_data)
-{
+pool_func (gpointer data, gpointer user_data) {
+  g_print ("%s\n", __func__);
+
   MutexCond *m = user_data;
 
   g_mutex_lock (&m->mutex);
@@ -71,7 +49,7 @@ test_simple (gconstpointer shared)
 
   g_mutex_lock (&m.mutex);
   m.signalled = FALSE;
-
+  g_print ("g_thread_pool_push\n");
   success = g_thread_pool_push (pool, GUINT_TO_POINTER (123), &err);
   g_assert_no_error (err);
   g_assert_true (success);
@@ -256,15 +234,15 @@ test_thread_pool_full (gconstpointer shared_first)
 }
 
 int
-main (int argc, char *argv[])
-{
-  g_test_init (&argc, &argv, NULL);
+main (int argc, char *argv[]) {
+  
+  test_simple (GINT_TO_POINTER (FALSE));
 
-  g_test_add_data_func ("/thread_pool/shared", GINT_TO_POINTER (TRUE), test_simple);
-  g_test_add_data_func ("/thread_pool/exclusive", GINT_TO_POINTER (FALSE), test_simple);
-  g_test_add_data_func ("/thread_pool/create_shared_after_exclusive", GINT_TO_POINTER (FALSE), test_create_first_pool);
-  g_test_add_data_func ("/thread_pool/create_full", NULL, test_thread_pool_full);
-  g_test_add_data_func ("/thread_pool/create_exclusive_after_shared", GINT_TO_POINTER (TRUE), test_create_first_pool);
+  // g_test_add_data_func ("/thread_pool/shared", GINT_TO_POINTER (TRUE), test_simple);
+  // g_test_add_data_func ("/thread_pool/exclusive", GINT_TO_POINTER (FALSE), test_simple);
+  // g_test_add_data_func ("/thread_pool/create_shared_after_exclusive", GINT_TO_POINTER (FALSE), test_create_first_pool);
+  // g_test_add_data_func ("/thread_pool/create_full", NULL, test_thread_pool_full);
+  // g_test_add_data_func ("/thread_pool/create_exclusive_after_shared", GINT_TO_POINTER (TRUE), test_create_first_pool);
 
-  return g_test_run ();
+  return 0;
 }

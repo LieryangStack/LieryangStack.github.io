@@ -24,6 +24,11 @@ typedef struct
   gpointer user_data;
 } TaskData;
 
+/**
+ * @brief: 线程池默认执行函数
+ * @param tdata: push函数传入的数据
+ * @param pool: new新建线程池的时候传入的数据
+*/
 static void
 default_func (TaskData * tdata, GstTaskPool * pool)
 {
@@ -165,15 +170,11 @@ gst_task_pool_prepare (GstTaskPool * pool, GError ** error)
     klass->prepare (pool, error);
 }
 
+
 /**
- * gst_task_pool_cleanup:
- * @pool: a #GstTaskPool
- *
- * Wait for all tasks to be stopped. This is mainly used internally
- * to ensure proper cleanup of internal data structures in test suites.
- *
- * MT safe.
- */
+ * @name: gst_task_pool_cleanup
+ * @brief: 等等所有tasks都被停止，这主要在内部使用确保正确清理测试套件中的内部数据结构。
+*/
 void
 gst_task_pool_cleanup (GstTaskPool * pool)
 {
@@ -187,21 +188,19 @@ gst_task_pool_cleanup (GstTaskPool * pool)
     klass->cleanup (pool);
 }
 
+
 /**
- * gst_task_pool_push:
- * @pool: a #GstTaskPool
- * @func: (scope async): the function to call
- * @user_data: (closure): data to pass to @func
- * @error: return location for an error
- *
- * Start the execution of a new thread from @pool.
- *
- * Returns: (transfer full) (nullable): a pointer that should be used
- * for the gst_task_pool_join function. This pointer can be %NULL, you
- * must check @error to detect errors. If the pointer is not %NULL and
- * gst_task_pool_join() is not used, call gst_task_pool_dispose_handle()
- * instead.
- */
+ * @name: gst_task_pool_push
+ * @param pool: 一个 #GstTaskPool
+ * @param func: 异步调用的函数
+ * @param user_data: 传递给 @func 的数据
+ * @param error: 用于返回发生错误的位置
+ * @brief: 从@pool中开始执行一个新线程
+ * @return: 一个指针，应该用于 gst_task_pool_join 函数。
+ * @note: 这个返回值一般是给 gst_task_pool_join () 函数的第二个参数使用。
+ *        如果@return不是NULL，并且没有使用 gst_task_pool_join(),请使用gst_task_pool_dispose_handle()
+ *        必须检查@error是否发生错误。
+*/
 gpointer
 gst_task_pool_push (GstTaskPool * pool, GstTaskPoolFunction func,
     gpointer user_data, GError ** error)
@@ -225,18 +224,14 @@ not_supported:
   }
 }
 
+
 /**
- * gst_task_pool_join:
- * @pool: a #GstTaskPool
- * @id: (transfer full) (nullable): the id
- *
- * Join a task and/or return it to the pool. @id is the id obtained from
- * gst_task_pool_push(). The default implementation does nothing, as the
- * default #GstTaskPoolClass::push implementation always returns %NULL.
- *
- * This method should only be called with the same @pool instance that provided
- * @id.
- */
+ * @name: gst_task_pool_join
+ * @param pool: 一个 #GstTask对象
+ * @param id: 任务的ID
+ * @brief: 加入一个任务，或者将其返回到池中。@id是从 gst_task_pool_push() 函数返回值获取到。
+ *         源代码中的默认实现什么也没有做，因为默认的 #GstTaskPoolClass::push 实现始终返回 %NULL。
+*/
 void
 gst_task_pool_join (GstTaskPool * pool, gpointer id)
 {
@@ -252,20 +247,15 @@ gst_task_pool_join (GstTaskPool * pool, gpointer id)
 
 /**
  * gst_task_pool_dispose_handle:
- * @pool: a #GstTaskPool
- * @id: (transfer full) (nullable): the id
+ * @pool: 一个 #GstTaskPool
+ * @id: （完全转移）（可为空）：任务的 ID
  *
- * Dispose of the handle returned by gst_task_pool_push(). This does
- * not need to be called with the default implementation as the default
- * #GstTaskPoolClass::push implementation always returns %NULL. This does not need to be
- * called either when calling gst_task_pool_join(), but should be called
- * when joining is not necessary, but gst_task_pool_push() returned a
- * non-%NULL value.
+ * 处置由 gst_task_pool_push() 返回的句柄。对于默认实现，这不需要调用，因为默认的 #GstTaskPoolClass::push 实现始终返回 %NULL。
+ * 在调用 gst_task_pool_join() 时也不需要调用此方法，但当不需要gst_task_pool_join () 但 gst_task_pool_push() 返回了非 %NULL 值时，应该调用此方法。
  *
- * This method should only be called with the same @pool instance that provided
- * @id.
+ * 这个方法只应该使用与提供 @id 的相同 @pool 实例。
  *
- * Since: 1.20
+ * 自版本：1.20
  */
 void
 gst_task_pool_dispose_handle (GstTaskPool * pool, gpointer id)

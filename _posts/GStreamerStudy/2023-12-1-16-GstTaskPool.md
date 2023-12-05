@@ -48,37 +48,28 @@ struct _GstTaskPool {
 #### 2.2.2 GstTaskPoolClass
 
 ```c
-/* filename: gsttaskpool.h */
-/**
- * GstTaskPoolClass:
- * @parent_class: the parent class structure
- * @prepare: prepare the threadpool
- * @cleanup: make sure all threads are stopped
- * @push: start a new thread
- * @join: join a thread
- *
- * The #GstTaskPoolClass object.
- */
 struct _GstTaskPoolClass {
   GstObjectClass parent_class;
 
   /*< public >*/
+  /* 默认的prepare函数就是创建一个GThreadPool对象，准备一个线程池对象 
+   * 使用 gst_task_pool_prepare 函数调用此虚函数
+   */
   void      (*prepare)  (GstTaskPool *pool, GError **error);
+  
+  /* 默认的cleanup函数就是释放GThreadPool对象 
+   * 使用 gst_task_pool_cleanup 函数调用此虚函数
+   */
   void      (*cleanup)  (GstTaskPool *pool);
 
+  /* 从线程池中执行@func */
   gpointer  (*push)     (GstTaskPool *pool, GstTaskPoolFunction func,
                          gpointer user_data, GError **error);
+
+  /* 检查@func是否完成之类的操作，默认的join什么都没有做 */
   void      (*join)     (GstTaskPool *pool, gpointer id);
 
-  /**
-   * GstTaskPoolClass::dispose_handle:
-   * @pool: a #GstTaskPool
-   * @id: (transfer full): the handle to dispose of
-   *
-   * free / unref the handle returned in GstTaskPoolClass::push.
-   *
-   * Since: 1.20
-   */
+  /* 用来释放 GstTaskPoolClass::push 的返回值*/
   void      (*dispose_handle) (GstTaskPool *pool, gpointer id);
 
   /*< private >*/

@@ -1,5 +1,5 @@
 /*************************************************************************************************************************************************
- * @filename: cond.c
+ * @filename: cond_signal.c
  * @author: EryangLi
  * @version: 1.0
  * @date: Dec-4-2023
@@ -40,6 +40,10 @@ static gpointer
 push_value (gpointer data)
 {
   g_mutex_lock (&mutex);
+  /**
+   * g_cond_broadcast 唤醒所有等待线程
+   * g_cond_signal 唤醒所有等待线程中的某一个线程
+  */
   g_cond_broadcast (&cond);
   // g_cond_signal (&cond);
   g_mutex_unlock (&mutex);
