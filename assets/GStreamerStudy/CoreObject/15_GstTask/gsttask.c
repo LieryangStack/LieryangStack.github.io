@@ -180,7 +180,7 @@ gst_task_init (GstTask * task)
   g_cond_init (&task->cond);
   SET_TASK_STATE (task, GST_TASK_STOPPED);
 
-  /* 使用此任务的默认类池，用户可以稍后覆盖此选项 */
+  /* 使用此任务的默认类池，可以通过设定gst_task_set_pool覆盖此方法 */
   g_mutex_lock (&pool_lock);
   ensure_klass_pool (klass);
   task->priv->pool = gst_object_ref (klass->pool);
@@ -255,6 +255,9 @@ gst_task_configure_name (GstTask * task)
 #endif
 }
 
+/**
+ * 线程池push函数，最终执行任务函数
+*/
 static void
 gst_task_func (GstTask * task)
 {
@@ -280,7 +283,7 @@ gst_task_func (GstTask * task)
   task->thread = tself;
   GST_OBJECT_UNLOCK (task);
 
-  /* fire the enter_func callback when we need to */
+  /* 如果设定的在进入任务前调用回调函数 */
   if (priv->enter_func)
     priv->enter_func (task, tself, priv->enter_user_data);
 
@@ -378,30 +381,17 @@ gst_task_cleanup_all (void)
   _priv_gst_element_cleanup ();
 }
 
+
 /**
- * gst_task_new:
- * @func: The #GstTaskFunction to use
- * @user_data: User data to pass to @func
- * @notify: the function to call when @user_data is no longer needed.
- *
- * Create a new Task that will repeatedly call the provided @func
- * with @user_data as a parameter. Typically the task will run in
- * a new thread.
- *
- * The function cannot be changed after the task has been created. You
- * must create a new #GstTask to change the function.
- *
- * This function will not yet create and start a thread. Use gst_task_start() or
- * gst_task_pause() to create and start the GThread.
- *
- * Before the task can be used, a #GRecMutex must be configured using the
- * gst_task_set_lock() function. This lock will always be acquired while
- * @func is called.
- *
- * Returns: (transfer full): A new #GstTask.
- *
- * MT safe.
- */
+ * @name: gst_task_new
+ * @param func: 要使用的 #GstTaskFunction
+ * @param user_data: 传递给 @func 的用户数据
+ * @param notify: 当@user_data不再需要的时候被自动调用函数
+ * @brief: 创建一个新的任务，该任务将重复调用提供的 @func，并将 @user_data 作为参数。通常任务会在一个新线程中运行。
+ *         任务创建后无法更改函数。要更改函数，必须创建一个新的 #GstTask。
+ *         此函数还不会创建和启动线程。使用 gst_task_start() 或 gst_task_pause() 来创建和启动 GThread。
+ *         在任务可以使用之前，必须使用 gst_task_set_lock() 函数配置一个 #GRecMutex。该锁将在调用 @func 时始终被获取。
+*/
 GstTask *
 gst_task_new (GstTaskFunction func, gpointer user_data, GDestroyNotify notify)
 {
@@ -422,19 +412,16 @@ gst_task_new (GstTaskFunction func, gpointer user_data, GDestroyNotify notify)
   return task;
 }
 
+
 /**
- * gst_task_set_lock:
- * @task: The #GstTask to use
- * @mutex: The #GRecMutex to use
- *
- * Set the mutex used by the task. The mutex will be acquired before
- * calling the #GstTaskFunction.
- *
- * This function has to be called before calling gst_task_pause() or
- * gst_task_start().
- *
- * MT safe.
- */
+ * @name: gst_task_set_lock
+ * @param task: 要使用的 #GstTask
+ * @param mutex: 要使用的 #GRecMutex
+ * @brief: 设置任务使用的互斥锁。在调用 #GstTaskFunction 之前将获取该互斥锁。
+ * @note: 在调用 gst_task_pause() 或 gst_task_start() 之前必须调用此函数。
+ * 
+ * MT safe
+*/
 void
 gst_task_set_lock (GstTask * task, GRecMutex * mutex)
 {
@@ -457,18 +444,8 @@ is_running:
   }
 }
 
-/**
- * gst_task_get_pool:
- * @task: a #GstTask
- *
- * Get the #GstTaskPool that this task will use for its streaming
- * threads.
- *
- * MT safe.
- *
- * Returns: (transfer full): the #GstTaskPool used by @task. gst_object_unref()
- * after usage.
- */
+
+/* 获取@task中的线程池 */
 GstTaskPool *
 gst_task_get_pool (GstTask * task)
 {
@@ -486,16 +463,8 @@ gst_task_get_pool (GstTask * task)
   return result;
 }
 
-/**
- * gst_task_set_pool:
- * @task: a #GstTask
- * @pool: (transfer none): a #GstTaskPool
- *
- * Set @pool as the new GstTaskPool for @task. Any new streaming threads that
- * will be created by @task will now use @pool.
- *
- * MT safe.
- */
+
+/* 将 @pool 设置为 @task 的新 GstTaskPool。@task 将来创建的任何新的streaming thread将使用 @pool。 */
 void
 gst_task_set_pool (GstTask * task, GstTaskPool * pool)
 {
@@ -520,15 +489,13 @@ gst_task_set_pool (GstTask * task, GstTaskPool * pool)
 }
 
 /**
- * gst_task_set_enter_callback:
- * @task: The #GstTask to use
- * @enter_func: (in): a #GstTaskThreadFunc
- * @user_data: user data passed to @enter_func
- * @notify: called when @user_data is no longer referenced
+ * @name: gst_task_set_enter_callback:
+ * @task: 要使用的 #GstTask
+ * @enter_func: （in）：一个 #GstTaskThreadFunc
+ * @user_data: 传递给 @enter_func 的用户数据
+ * @notify: 在 @user_data 不再被引用时调用
  *
- * Call @enter_func when the task function of @task is entered. @user_data will
- * be passed to @enter_func and @notify will be called when @user_data is no
- * longer referenced.
+ * 在进入 @task 的任务函数时调用 @enter_func。@user_data 将被传递给 @enter_func，并且在 @user_data 不再被引用时将调用 @notify。
  */
 void
 gst_task_set_enter_callback (GstTask * task, GstTaskThreadFunc enter_func,
@@ -558,15 +525,13 @@ gst_task_set_enter_callback (GstTask * task, GstTaskThreadFunc enter_func,
 }
 
 /**
- * gst_task_set_leave_callback:
- * @task: The #GstTask to use
- * @leave_func: (in): a #GstTaskThreadFunc
- * @user_data: user data passed to @leave_func
- * @notify: called when @user_data is no longer referenced
+ * @name: gst_task_set_leave_callback:
+ * @task: 要使用的 #GstTask
+ * @leave_func: （输入）：一个 #GstTaskThreadFunc
+ * @user_data: 传递给 @leave_func 的用户数据
+ * @notify: 在 @user_data 不再被引用时调用
  *
- * Call @leave_func when the task function of @task is left. @user_data will
- * be passed to @leave_func and @notify will be called when @user_data is no
- * longer referenced.
+ * 在离开 @task 的任务函数时调用 @leave_func。@user_data 将被传递给 @leave_func，并且在 @user_data 不再被引用时将调用 @notify。
  */
 void
 gst_task_set_leave_callback (GstTask * task, GstTaskThreadFunc leave_func,
@@ -726,15 +691,12 @@ gst_task_set_state (GstTask * task, GstTaskState state)
 }
 
 /**
- * gst_task_start:
- * @task: The #GstTask to start
+ * @name: gst_task_start
+ * @param task: 要启动的 #GstTask
+ * @brief: 启动 @task。@task 必须使用 gst_task_set_lock() 关联一个锁，否则此函数将返回 %FALSE。
+ * @return: 如果任务能够启动，则为 %TRUE。
  *
- * Starts @task. The @task must have a lock associated with it using
- * gst_task_set_lock() or this function will return %FALSE.
- *
- * Returns: %TRUE if the task could be started.
- *
- * MT safe.
+ * MT safe
  */
 gboolean
 gst_task_start (GstTask * task)
@@ -742,17 +704,14 @@ gst_task_start (GstTask * task)
   return gst_task_set_state (task, GST_TASK_STARTED);
 }
 
+
 /**
- * gst_task_stop:
- * @task: The #GstTask to stop
+ * @name: gst_task_stop
+ * @param task: 要停止的 #GstTask
+ * @brief: 停止 @task。此方法仅安排任务停止，并不会等待任务完全停止。使用 gst_task_join() 来停止并等待完成。
+ * @return: 如果任务能够停止，则为 %TRUE。
  *
- * Stops @task. This method merely schedules the task to stop and
- * will not wait for the task to have completely stopped. Use
- * gst_task_join() to stop and wait for completion.
- *
- * Returns: %TRUE if the task could be stopped.
- *
- * MT safe.
+ * MT safe
  */
 gboolean
 gst_task_stop (GstTask * task)
@@ -760,18 +719,14 @@ gst_task_stop (GstTask * task)
   return gst_task_set_state (task, GST_TASK_STOPPED);
 }
 
+
 /**
- * gst_task_pause:
- * @task: The #GstTask to pause
+ * @name: gst_task_pause
+ * @param task: 要暂停的 #GstTask
+ * @brief: 暂停 @task。这个方法也可以在停止状态下调用，此时将启动一个线程并保持暂停状态。此函数不会等待任务完成暂停状态。
+ * @return: 如果任务能够停止，则为 %TRUE。
  *
- * Pauses @task. This method can also be called on a task in the
- * stopped state, in which case a thread will be started and will remain
- * in the paused state. This function does not wait for the task to complete
- * the paused state.
- *
- * Returns: %TRUE if the task could be paused.
- *
- * MT safe.
+ * MT safe
  */
 gboolean
 gst_task_pause (GstTask * task)
@@ -779,17 +734,14 @@ gst_task_pause (GstTask * task)
   return gst_task_set_state (task, GST_TASK_PAUSED);
 }
 
+
 /**
- * gst_task_resume:
- * @task: The #GstTask to resume
+ * @name: gst_task_resume
+ * @param task: 要恢复的 #GstTask
+ * @brief: 恢复 @task。如果任务是停止状态stopped，将返回FALSE。只有暂停Pause状态，才能恢复。
+ * @return: 如果任务能够恢复，则为 %TRUE。
  *
- * Resume @task in case it was paused. If the task was stopped, it will
- * remain in that state and this function will return %FALSE.
- *
- * Returns: %TRUE if the task could be resumed.
- *
- * MT safe.
- * Since: 1.18
+ * MT safe
  */
 gboolean
 gst_task_resume (GstTask * task)
@@ -805,22 +757,16 @@ gst_task_resume (GstTask * task)
   return res;
 }
 
+
 /**
- * gst_task_join:
- * @task: The #GstTask to join
+ * @name: gst_task_join
+ * @param task: 要加入的 #GstTask
+ * @brief: 加入 @task。在此调用之后，可以安全地取消引用任务，并清理使用 gst_task_set_lock() 设置的锁。
+ *         如果调用此函数，任务将会自动被停止
+ * @note: 此函数不能从任务函数内部调用，因为这会导致死锁。函数将检测到这一点并打印一个 g_warning。
+ * @return: 如果任务能够被加入，则为 %TRUE。
  *
- * Joins @task. After this call, it is safe to unref the task
- * and clean up the lock set with gst_task_set_lock().
- *
- * The task will automatically be stopped with this call.
- *
- * This function cannot be called from within a task function as this
- * would cause a deadlock. The function will detect this and print a
- * g_warning.
- *
- * Returns: %TRUE if the task could be joined.
- *
- * MT safe.
+ * MT safe
  */
 gboolean
 gst_task_join (GstTask * task)

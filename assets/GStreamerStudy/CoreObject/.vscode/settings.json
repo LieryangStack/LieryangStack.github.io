@@ -1,6 +1,10 @@
 {
   "C_Cpp.errorSquiggles": "disabled",
   "files.associations": {
-    "gstcontext.h": "c"
+    "gstcontext.h": "c",
+    "gstevent.h": "c",
+    "gstmessage.h": "c",
+    "gststreams.h": "c",
+    "gststreamcollection.h": "c"
   }
 }
