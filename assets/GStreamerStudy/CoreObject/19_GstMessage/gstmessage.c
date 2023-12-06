@@ -83,23 +83,19 @@ _priv_gst_message_initialize (void)
 
   GST_CAT_INFO (GST_CAT_GST_INIT, "init messages");
 
+  /* name获取到对应的quark */
   for (i = 0; message_quarks[i].name; i++) {
     message_quarks[i].quark =
         g_quark_from_static_string (message_quarks[i].name);
   }
   details_quark = g_quark_from_static_string ("details");
 
+  /* 注册GST_TYPE_MESSAGE类型 */
   _gst_message_type = gst_message_get_type ();
 }
 
-/**
- * gst_message_type_get_name:
- * @type: the message type
- *
- * Get a printable name for the given message type. Do not modify or free.
- *
- * Returns: a reference to the static name of the message.
- */
+
+/* 获取给定消息类型的可打印名称。请勿修改或释放。 */
 const gchar *
 gst_message_type_get_name (GstMessageType type)
 {
@@ -112,14 +108,7 @@ gst_message_type_get_name (GstMessageType type)
   return "unknown";
 }
 
-/**
- * gst_message_type_to_quark:
- * @type: the message type
- *
- * Get the unique quark for the given message type.
- *
- * Returns: the quark associated with the message type
- */
+/* 获取给定消息类型的唯一 quark（标识符）。 */
 GQuark
 gst_message_type_to_quark (GstMessageType type)
 {
@@ -137,6 +126,7 @@ _gst_message_dispose (GstMessage * message)
 {
   gboolean do_free = TRUE;
 
+  /* 如果消息是异步传送 */
   if (GST_MINI_OBJECT_FLAG_IS_SET (message, GST_MESSAGE_FLAG_ASYNC_DELIVERY)) {
     /* revive message, so bus can finish with it and clean it up */
     gst_message_ref (message);
@@ -234,20 +224,14 @@ gst_message_init (GstMessageImpl * message, GstMessageType type,
 
 
 /**
- * gst_message_new_custom:
- * @type: The #GstMessageType to distinguish messages
- * @src: (transfer none) (nullable): The object originating the message.
- * @structure: (transfer full) (nullable): the structure for the
- *     message. The message will take ownership of the structure.
- *
- * Create a new custom-typed message. This can be used for anything not
- * handled by other message-specific functions to pass a message to the
- * app. The structure field can be %NULL.
- *
- * Returns: (transfer full): The new message.
- *
+ * @name: gst_message_new_custom
+ * @param type: 用于区分消息的 #GstMessageType 类型
+ * @param src: 产生消息的对象。
+ * @param structure（可空）: 消息的结构体。消息将拥有此结构。
+ * @brief: 创建一个新的自定义类型消息。这可以用于其他消息特定函数无法处理的任何情况，以向应用程序传递消息。结构体字段可以为 %NULL。
+ * 
  * MT safe.
- */
+*/
 GstMessage *
 gst_message_new_custom (GstMessageType type, GstObject * src,
     GstStructure * structure)

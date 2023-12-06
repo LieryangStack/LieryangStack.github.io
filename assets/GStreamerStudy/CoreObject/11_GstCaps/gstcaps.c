@@ -331,16 +331,14 @@ gst_caps_new_full_valist (GstStructure * structure, va_list var_args)
 
 G_DEFINE_POINTER_TYPE (GstStaticCaps, gst_static_caps);
 
+
 /**
- * gst_static_caps_get:
- * @static_caps: the #GstStaticCaps to convert
- *
- * Converts a #GstStaticCaps to a #GstCaps.
- *
- * Returns: (transfer full) (nullable): a pointer to the #GstCaps. Since the
- *     core holds an additional ref to the returned caps, use
- *     gst_caps_make_writable() on the returned caps to modify it.
- */
+ * @name: gst_static_caps_get
+ * @param static_caps: #GstStaticCaps
+ * @brief: 该函数将 #GstStaticCaps 转换为 #GstCaps
+ * @return: 函数返回一个指向 GstCaps 的指针。
+ * @note: 由于核心（GStreamer框架）保留了返回的caps的额外引用，因此若需修改它，请使用 gst_caps_make_writable() 函数。
+*/
 GstCaps *
 gst_static_caps_get (GstStaticCaps * static_caps)
 {

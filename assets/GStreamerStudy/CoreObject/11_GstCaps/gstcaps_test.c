@@ -1270,7 +1270,7 @@ GST_START_TEST (test_features)
   fail_unless (s1 == s2);
   f2 = gst_caps_get_features (c1, 0);
   fail_unless (f1 == f2);
-
+  
   str1 = gst_caps_to_string (c1);
   fail_unless (str1 != NULL);
   c2 = gst_caps_from_string (str1);
