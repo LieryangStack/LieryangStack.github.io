@@ -5,6 +5,7 @@
     "gstevent.h": "c",
     "gstmessage.h": "c",
     "gststreams.h": "c",
-    "gststreamcollection.h": "c"
+    "gststreamcollection.h": "c",
+    "gstclock.h": "c"
   }
 }

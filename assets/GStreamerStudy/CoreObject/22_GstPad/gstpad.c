@@ -12,7 +12,7 @@
 
 #define GST_CAT_DEFAULT GST_CAT_PADS
 
-/* Pad signals and args */
+/* Pad信号枚举 */
 enum
 {
   PAD_LINKED,
@@ -21,6 +21,7 @@ enum
   LAST_SIGNAL
 };
 
+/* Pad属性 */
 enum
 {
   PAD_PROP_0,
@@ -46,21 +47,19 @@ typedef struct
 struct _GstPadPrivate
 {
   guint events_cookie;
-  GArray *events;
+  GArray *events; /* 使用GArray存储事件 */
   guint last_cookie;
 
-  gint using;
+  gint using; /* Pad正在被使用的数量 */
   guint probe_list_cookie;
 
-  /* counter of how many idle probes are running directly from the add_probe
-   * call. Used to block any data flowing in the pad while the idle callback
-   * Doesn't finish its work */
+  /* 计数器，表示直接通过add_probe调用正在运行的空闲探针回调函数的数目。
+     用于在idle回调函数未执行完成时，需要阻塞pad中流动的任何数据*/
   gint idle_running;
 
-  /* conditional and variable used to ensure pads only get (de)activated
-   * by a single thread at a time. Protected by the object lock */
-  GCond activation_cond;
-  gboolean in_activation;
+  /*条件和变量，用于确保一次只有一个线程激活或取消激活 pad。由对象锁保护*/
+  GCond activation_cond; /* 如果Pad已经被激活，预激活处理函数会进入阻塞等待此条件 */
+  gboolean in_activation; /* Pad是否已经被激活 */
 };
 
 typedef struct
@@ -115,6 +114,8 @@ static GQuark buffer_quark;
 static GQuark buffer_list_quark;
 static GQuark event_quark;
 
+
+/* GstFlowReturn流返回值对应的quark和字符串 */
 typedef struct
 {
   const gint ret;
@@ -134,14 +135,8 @@ static GstFlowQuarks flow_quarks[] = {
   {GST_FLOW_CUSTOM_ERROR, "custom-error", 0}
 };
 
-/**
- * gst_flow_get_name:
- * @ret: a #GstFlowReturn to get the name of.
- *
- * Gets a string representing the given flow return.
- *
- * Returns: a static string with the name of the flow return.
- */
+
+/* 获取到 #GstFlowReturn 中 @ret的字符串名称  */
 const gchar *
 gst_flow_get_name (GstFlowReturn ret)
 {
@@ -156,15 +151,8 @@ gst_flow_get_name (GstFlowReturn ret)
   return "unknown";
 }
 
-/**
- * gst_flow_to_quark:
- * @ret: a #GstFlowReturn to get the quark of.
- *
- * Get the unique quark for the given GstFlowReturn.
- *
- * Returns: the quark associated with the flow return or 0 if an
- * invalid return was specified.
- */
+
+/* 得到@ret对应的quark */
 GQuark
 gst_flow_to_quark (GstFlowReturn ret)
 {
@@ -179,16 +167,8 @@ gst_flow_to_quark (GstFlowReturn ret)
   return 0;
 }
 
-/**
- * gst_pad_link_get_name:
- * @ret: a #GstPadLinkReturn to get the name of.
- *
- * Gets a string representing the given pad-link return.
- *
- * Returns: a static string with the name of the pad-link return.
- *
- * Since: 1.4
- */
+
+/* #GstPadLinkReturn中@ret对应的字符串名称 */
 const gchar *
 gst_pad_link_get_name (GstPadLinkReturn ret)
 {
@@ -244,27 +224,28 @@ gst_pad_class_init (GstPadClass * klass)
   gobject_class->get_property = gst_pad_get_property;
 
   /**
-   * GstPad::linked:
-   * @pad: the pad that emitted the signal
-   * @peer: the peer pad that has been connected
-   *
-   * Signals that a pad has been linked to the peer pad.
-   */
+   * Pad被链接到对端Pad后，会发射该信号。
+   * 信号连接函数（没有返回值，除了默认的一个参数（发射信号的对象），再增加一个参数）：
+   * @pad: 发射信号的pad
+   * @peer: 被连接的pad（对端的pad）
+   * @return: 没有返回值
+  */
   gst_pad_signals[PAD_LINKED] =
       g_signal_new ("linked", G_TYPE_FROM_CLASS (klass), G_SIGNAL_RUN_LAST,
       G_STRUCT_OFFSET (GstPadClass, linked), NULL, NULL,
-      NULL, G_TYPE_NONE, 1, GST_TYPE_PAD);
+      NULL, G_TYPE_NONE, 1, GST_TYPE_PAD); /* G_STRUCT_OFFSET (GstPadClass, linked)表示默认的信号连接函数 */
+
   /**
-   * GstPad::unlinked:
-   * @pad: the pad that emitted the signal
-   * @peer: the peer pad that has been disconnected
-   *
-   * Signals that a pad has been unlinked from the peer pad.
-   */
+   * Pad被解除链接后，会发射该信号。
+   * 信号连接函数（没有返回值，除了默认的一个参数（发射信号的对象），再增加一个参数）：
+   * @pad: 发射信号的pad
+   * @peer: 被解除连接的pad（对端的pad）
+   * @return: 没有返回值
+  */
   gst_pad_signals[PAD_UNLINKED] =
       g_signal_new ("unlinked", G_TYPE_FROM_CLASS (klass), G_SIGNAL_RUN_LAST,
       G_STRUCT_OFFSET (GstPadClass, unlinked), NULL, NULL,
-      NULL, G_TYPE_NONE, 1, GST_TYPE_PAD);
+      NULL, G_TYPE_NONE, 1, GST_TYPE_PAD); /* G_STRUCT_OFFSET (GstPadClass, unlinked)表示默认的信号连接函数 */
 
   pspec_caps = g_param_spec_boxed ("caps", "Caps",
       "The capabilities of the pad", GST_TYPE_CAPS,
@@ -403,7 +384,13 @@ found:
   return ev;
 }
 
-/* should be called with OBJECT lock */
+
+/**
+ * @name: find_event
+ * @calledby: schedule_events ()
+ * @brief: 检查@pad是否有@event事件（通过事件对象地址判断的）
+ * @note: 该函数被调用应该使用对象锁
+*/
 static PadEvent *
 find_event (GstPad * pad, GstEvent * event)
 {
@@ -462,10 +449,14 @@ remove_event_by_type (GstPad * pad, GstEventType type)
   }
 }
 
-/* check all events on srcpad against those on sinkpad. All events that are not
- * on sinkpad are marked as received=%FALSE and the PENDING_EVENTS is set on the
- * srcpad so that the events will be sent next time */
-/* should be called with srcpad and sinkpad LOCKS */
+
+/**
+ * @name: schedule_events
+ * @calledby: pre_activate ()
+ *            gst_pad_link_full ()
+ * @brief: 如果 @sinkpad为NULL，或者在@sinkpad中无法找到@srcpad中对应的事件，标记@srcpad有未处理事件flag，以便下次发送这些事件
+ * @note: 应该在srcpad和sinkpad在互斥锁下被调用该函数
+*/
 static void
 schedule_events (GstPad * srcpad, GstPad * sinkpad)
 {
@@ -482,7 +473,7 @@ schedule_events (GstPad * srcpad, GstPad * sinkpad)
     if (ev->event == NULL)
       continue;
 
-    if (sinkpad == NULL || !find_event (sinkpad, ev->event)) {
+    if (sinkpad == NULL || !find_event (sinkpad, ev->event)) { 
       ev->received = FALSE;
       pending = TRUE;
     }
@@ -494,7 +485,7 @@ schedule_events (GstPad * srcpad, GstPad * sinkpad)
 typedef gboolean (*PadEventFunction) (GstPad * pad, PadEvent * ev,
     gpointer user_data);
 
-/* should be called with pad LOCK */
+/* 调用前应该对 Pad 上锁 */
 static void
 events_foreach (GstPad * pad, PadEventFunction func, gpointer user_data)
 {
@@ -516,7 +507,7 @@ restart:
     if (G_UNLIKELY (ev->event == NULL))
       goto next;
 
-    /* take additional ref, func might release the lock */
+    /* 获取额外的ref, func可能会释放锁 */
     ev_ret.sticky_order = ev->sticky_order;
     ev_ret.event = gst_event_ref (ev->event);
     ev_ret.received = ev->received;
@@ -848,6 +839,13 @@ gst_pad_get_direction (GstPad * pad)
   return result;
 }
 
+/**
+ * @name: gst_pad_activate_default
+ * @param pad: #GstPad
+ * @param parent: @pad父对象
+ * @calledby: pad->activatefunc = gst_pad_activate_default;
+ * @brief: 设定@pad为GST_PAD_MODE_PUSH模式激活状态
+*/
 static gboolean
 gst_pad_activate_default (GstPad * pad, GstObject * parent)
 {
@@ -880,15 +878,22 @@ gst_pad_mode_get_name (GstPadMode mode)
   return "unknown";
 }
 
-/* Returns TRUE if pad wasn't already in the new_mode */
+
+/**
+ * @name: pre_activate
+ * @call: 
+ * @calledby: activate_mode_internal ()
+ * @note: 
+ * @brief: 如果我们之前还没有切换到'new'模式，pre_activate返回TRUE
+*/
 static gboolean
 pre_activate (GstPad * pad, GstPadMode new_mode)
 {
   switch (new_mode) {
     case GST_PAD_MODE_NONE:
       GST_OBJECT_LOCK (pad);
-      while (G_UNLIKELY (pad->priv->in_activation))
-        g_cond_wait (&pad->priv->activation_cond, GST_OBJECT_GET_LOCK (pad));
+      while (G_UNLIKELY (pad->priv->in_activation)) 
+        g_cond_wait (&pad->priv->activation_cond, GST_OBJECT_GET_LOCK (pad)); 
       if (new_mode == GST_PAD_MODE (pad)) {
         GST_WARNING_OBJECT (pad,
             "Pad is already in the process of being deactivated");
@@ -900,14 +905,14 @@ pre_activate (GstPad * pad, GstPadMode new_mode)
       GST_PAD_SET_FLUSHING (pad);
       pad->ABI.abi.last_flowret = GST_FLOW_FLUSHING;
       GST_PAD_MODE (pad) = new_mode;
-      /* unlock blocked pads so element can resume and stop */
+      /* 解锁阻塞pads，以便元素能够恢复或者停止 */
       GST_PAD_BLOCK_BROADCAST (pad);
       GST_OBJECT_UNLOCK (pad);
       break;
     case GST_PAD_MODE_PUSH:
     case GST_PAD_MODE_PULL:
       GST_OBJECT_LOCK (pad);
-      while (G_UNLIKELY (pad->priv->in_activation))
+      while (G_UNLIKELY (pad->priv->in_activation)) /* 默认情况下，应该都是未激活状态，该循环就不会执行 */
         g_cond_wait (&pad->priv->activation_cond, GST_OBJECT_GET_LOCK (pad));
       if (new_mode == GST_PAD_MODE (pad)) {
         GST_WARNING_OBJECT (pad,
@@ -921,9 +926,9 @@ pre_activate (GstPad * pad, GstPadMode new_mode)
       GST_PAD_UNSET_FLUSHING (pad);
       pad->ABI.abi.last_flowret = GST_FLOW_OK;
       GST_PAD_MODE (pad) = new_mode;
-      if (GST_PAD_IS_SINK (pad)) {
+      if (GST_PAD_IS_SINK (pad)) {  /* 如果是sink pad */
         GstPad *peer;
-        /* make sure the peer src pad sends us all events */
+        /* 确保对端src pad把所有事件发送给我们 */
         if ((peer = GST_PAD_PEER (pad))) {
           gst_object_ref (peer);
           GST_OBJECT_UNLOCK (pad);
@@ -947,6 +952,11 @@ pre_activate (GstPad * pad, GstPadMode new_mode)
   return TRUE;
 }
 
+
+/**
+ * @name: post_activate 
+ * @calledby: activate_mode_internal ()
+*/
 static void
 post_activate (GstPad * pad, GstPadMode new_mode)
 {
@@ -1061,6 +1071,14 @@ failed:
   }
 }
 
+/**
+ * @name: activate_mode_internal
+ * @param A: 
+ * @call: 
+ * @calledby: 
+ * @note: 
+ * @brief: 
+*/
 static gboolean
 activate_mode_internal (GstPad * pad, GstObject * parent, GstPadMode mode,
     gboolean active)
@@ -1077,42 +1095,40 @@ activate_mode_internal (GstPad * pad, GstObject * parent, GstPadMode mode,
 
   new = active ? mode : GST_PAD_MODE_NONE;
 
-  if (old == new)
+  if (old == new) /* 如果已经被激活 */
     goto was_ok;
 
   if (active && old != mode && old != GST_PAD_MODE_NONE) {
-    /* pad was activate in the wrong direction, deactivate it
-     * and reactivate it in the requested mode */
+    /* Pad在错误的@mode模式下已经被激活，我们先把以前的模式停用，再继续激活 */
     GST_DEBUG_OBJECT (pad, "deactivating pad from %s mode",
         gst_pad_mode_get_name (old));
 
-    if (G_UNLIKELY (!activate_mode_internal (pad, parent, old, FALSE)))
+    if (G_UNLIKELY (!activate_mode_internal (pad, parent, old, FALSE)))  /* 停用以前的模式 */
       goto deactivate_failed;
     old = GST_PAD_MODE_NONE;
   }
 
   switch (mode) {
-    case GST_PAD_MODE_PULL:
+    case GST_PAD_MODE_PULL: /* Pull模式 */
     {
-      if (dir == GST_PAD_SINK) {
+      if (dir == GST_PAD_SINK) {  /* Pull模式，如果Pad方向是Sink */
         if ((peer = gst_pad_get_peer (pad))) {
           GST_DEBUG_OBJECT (pad, "calling peer");
-          if (G_UNLIKELY (!gst_pad_activate_mode (peer, mode, active)))
+          if (G_UNLIKELY (!gst_pad_activate_mode (peer, mode, active)))  /* 查看对端Pad是否已经被激活 */
             goto peer_failed;
           gst_object_unref (peer);
         } else {
-          /* there is no peer, this is only fatal when we activate. When we
-           * deactivate, we must assume the application has unlinked the peer and
-           * will deactivate it eventually. */
+          /* 没有对端Pad，当我们去激活，这里是一个致命的错误。 
+           * 我们必须假设应用程序已经解除链接对端Pad，并且使其停用
+           */
           if (active)
             goto not_linked;
           else
             GST_DEBUG_OBJECT (pad, "deactivating unlinked pad");
         }
-      } else {
+      } else {  /* Pull模式，如果Pad方向是Src */
         if (G_UNLIKELY (GST_PAD_GETRANGEFUNC (pad) == NULL))
-          goto failure;         /* Can't activate pull on a src without a
-                                   getrange function */
+          goto failure;     /* 如果没有一个 getrange函数，不能在Pull模式下激活src */   
       }
       break;
     }
@@ -1120,15 +1136,14 @@ activate_mode_internal (GstPad * pad, GstObject * parent, GstPadMode mode,
       break;
   }
 
-  /* Mark pad as needing reconfiguration */
+  /* 标记Pad需要重新配置 */
   if (active)
     GST_OBJECT_FLAG_SET (pad, GST_PAD_FLAG_NEED_RECONFIGURE);
 
-  /* pre_activate returns TRUE if we weren't already in the process of
-   * switching to the 'new' mode */
-  if (pre_activate (pad, new)) {
+  /* 如果我们之前还没有切换到'new'模式，pre_activate返回TRUE（这里面设定in_activation=TRUE） */
+  if (pre_activate (pad, new)) { /* 一般情况下都是返回TRUE */
 
-    if (GST_PAD_ACTIVATEMODEFUNC (pad)) {
+    if (GST_PAD_ACTIVATEMODEFUNC (pad)) { /* 如果有激活模式函数，则执行 */
       if (G_UNLIKELY (!GST_PAD_ACTIVATEMODEFUNC (pad) (pad, parent, mode,
                   active)))
         goto failure;
@@ -1136,6 +1151,7 @@ activate_mode_internal (GstPad * pad, GstObject * parent, GstPadMode mode,
       /* can happen for sinks of passthrough elements */
     }
 
+    /* 设置  pad->priv->in_activation = FALSE; 为什么要设置？？？？ */
     post_activate (pad, new);
   }
 
@@ -1199,21 +1215,15 @@ failure:
   }
 }
 
+
 /**
- * gst_pad_activate_mode:
- * @pad: the #GstPad to activate or deactivate.
- * @mode: the requested activation mode
- * @active: whether or not the pad should be active.
- *
- * Activates or deactivates the given pad in @mode via dispatching to the
- * pad's activatemodefunc. For use from within pad activation functions only.
- *
- * If you don't know what this is, you probably don't want to call it.
- *
- * Returns: %TRUE if the operation was successful.
- *
+ * @name: gst_pad_activate_mode
+ * @calledby: activate_mode_internal ()
+ * @brief: 根据参数调用 activate_mode_internal () 函数使 @pad 处于响应的激活/未激活状态。
+ * @note: 该函数仅供内部激活函数使用
+ * 
  * MT safe.
- */
+*/
 gboolean
 gst_pad_activate_mode (GstPad * pad, GstPadMode mode, gboolean active)
 {
@@ -1312,29 +1322,25 @@ cleanup_hook (GstPad * pad, GHook * hook)
   pad->num_probes--;
 }
 
+
 /**
- * gst_pad_add_probe:
+ * @name: gst_pad_add_probe:
  * @pad: the #GstPad to add the probe to
  * @mask: the probe mask
- * @callback: #GstPadProbeCallback that will be called with notifications of
- *           the pad state
+ * @callback: #GstPadProbeCallback that will be called with notifications of the pad state
  * @user_data: (closure): user data passed to the callback
  * @destroy_data: #GDestroyNotify for user_data
- *
- * Be notified of different states of pads. The provided callback is called for
- * every state that matches @mask.
- *
- * Probes are called in groups: First GST_PAD_PROBE_TYPE_BLOCK probes are
- * called, then others, then finally GST_PAD_PROBE_TYPE_IDLE. The only
- * exception here are GST_PAD_PROBE_TYPE_IDLE probes that are called
- * immediately if the pad is already idle while calling gst_pad_add_probe().
- * In each of the groups, probes are called in the order in which they were
- * added.
- *
- * Returns: an id or 0 if no probe is pending. The id can be used to remove the
- * probe with gst_pad_remove_probe(). When using GST_PAD_PROBE_TYPE_IDLE it can
- * happen that the probe can be run immediately and if the probe returns
- * GST_PAD_PROBE_REMOVE this functions returns 0.
+ * 
+ * 通知Pads不同状态的变化。提供的回调函数会在与 @mask 匹配的每个状态下被调用。
+ * 
+ * 监听函数以组被调用：首先调用的是 GST_PAD_PROBE_TYPE_BLOCK 探针，然后是其他类型的探针，
+ *                  最后是 GST_PAD_PROBE_TYPE_IDLE。唯一的例外是 GST_PAD_PROBE_TYPE_IDLE 探针，
+ *                  如果在调用 gst_pad_add_probe() 时Pad已经处于空闲状态，这些探针将立即被调用。
+ *                  在每个组中，探针按照它们被添加的顺序被调用。
+ * 
+ * @return: 一个 ID，如果没有挂起的探针则返回 0。该 ID 可用于使用 gst_pad_remove_probe() 删除探针。
+ *          当使用 GST_PAD_PROBE_TYPE_IDLE 时，如果探针可以立即运行，并且探针返回
+ *          GST_PAD_PROBE_REMOVE，此函数返回 0。
  *
  * MT safe.
  */
@@ -1351,20 +1357,19 @@ gst_pad_add_probe (GstPad * pad, GstPadProbeType mask,
 
   GST_OBJECT_LOCK (pad);
 
-  /* make a new probe */
+  /* 做一个新的探针probe */
   hook = g_hook_alloc (&pad->probes);
 
   GST_CAT_LOG_OBJECT (GST_CAT_SCHEDULING, pad, "adding probe for mask 0x%08x",
       mask);
 
-  /* when no constraints are given for the types, assume all types are
-   * acceptable */
+  /*如果没有对类型给出约束，则假定所有类型都是可接受的*/
   if ((mask & _PAD_PROBE_TYPE_ALL_BOTH_AND_FLUSH) == 0)
     mask |= GST_PAD_PROBE_TYPE_ALL_BOTH;
   if ((mask & GST_PAD_PROBE_TYPE_SCHEDULING) == 0)
     mask |= GST_PAD_PROBE_TYPE_SCHEDULING;
 
-  /* store our flags and other fields */
+  /* 存储我们的flags和其它字段fields */
   hook->flags |= (mask << G_HOOK_FLAG_USER_SHIFT);
   hook->func = callback;
   hook->data = user_data;
@@ -1373,11 +1378,10 @@ gst_pad_add_probe (GstPad * pad, GstPadProbeType mask,
   /* add the probe */
   g_hook_append (&pad->probes, hook);
   pad->num_probes++;
-  /* incremenent cookie so that the new hook gets called */
+  /*增加cookie，以便调用新的hook*/
   pad->priv->probe_list_cookie++;
 
-  /* get the id of the hook, we return this and it can be used to remove the
-   * probe later */
+  /* 获取hook的id，我们返回它，以后可以用它来删除probe */
   res = hook->hook_id;
 
   GST_CAT_LOG_OBJECT (GST_CAT_SCHEDULING, pad, "got probe id %lu", res);
@@ -1389,35 +1393,37 @@ gst_pad_add_probe (GstPad * pad, GstPadProbeType mask,
     GST_CAT_LOG_OBJECT (GST_CAT_SCHEDULING, pad, "added blocking probe, "
         "now %d blocking probes", pad->num_blocked);
 
-    /* Might have new probes now that want to be called */
+    /* 可能有新的探针需要调用 */
     GST_PAD_BLOCK_BROADCAST (pad);
   }
 
-  /* call the callback if we need to be called for idle callbacks */
+  /* 如果需要调用空闲回调函数，则调用回调函数 */
   if ((mask & GST_PAD_PROBE_TYPE_IDLE) && (callback != NULL)) {
-    if (pad->priv->using > 0) {
-      /* the pad is in use, we can't signal the idle callback yet. Since we set the
-       * flag above, the last thread to leave the push will do the callback. New
-       * threads going into the push will block. */
+    if (pad->priv->using > 0) {    /* pad还没有空闲 */
+      /* pad正在使用中，我们还不能给idle回调发送信号。
+        由于我们在上面设置了标志，最后一个退出推送的线程将执行回调。
+        新线程进入push会阻塞。*/
       GST_CAT_LOG_OBJECT (GST_CAT_SCHEDULING, pad,
           "pad is in use, delay idle callback");
       GST_OBJECT_UNLOCK (pad);
-    } else {
+    } else {  /* Pad空闲 */
       GstPadProbeInfo info = { GST_PAD_PROBE_TYPE_IDLE, res, };
       GstPadProbeReturn ret;
 
-      /* Keep another ref, the callback could destroy the pad */
+      /*保留另一个ref，回调函数可能会销毁该pad */
       gst_object_ref (pad);
       pad->priv->idle_running++;
 
-      /* Ref the hook, it could be destroyed by the callback or concurrently */
+      /* Ref钩子，它可以被回调销毁*/
       g_hook_ref (&pad->probes, hook);
 
-      /* the pad is idle now, we can signal the idle callback now */
+
+      /* pad现在处于空闲状态，我们可以给idle回调发送信号*/
       GST_CAT_LOG_OBJECT (GST_CAT_SCHEDULING, pad,
           "pad is idle, trigger idle callback");
       GST_OBJECT_UNLOCK (pad);
 
+      /* 空闲回调函数执行 */
       ret = callback (pad, &info, user_data);
 
       GST_OBJECT_LOCK (pad);
@@ -1690,11 +1696,10 @@ gst_pad_set_activatemode_function_full (GstPad * pad,
 
 /**
  * gst_pad_set_chain_function:
- * @p: a sink #GstPad.
- * @f: the #GstPadChainFunction to set.
+ * @p: 一个sink #GstPad.
+ * @f: #GstPadChainFunction被设定 pad->chainfunc = chain
  *
- * Calls gst_pad_set_chain_function_full() with %NULL for the user_data and
- * notify.
+ * @user_data 和 @notify 是 NULL，调用 gst_pad_set_chain_function_full()
  */
 /**
  * gst_pad_set_chain_function_full:
@@ -1702,9 +1707,8 @@ gst_pad_set_activatemode_function_full (GstPad * pad,
  * @chain: the #GstPadChainFunction to set.
  * @user_data: user_data passed to @notify
  * @notify: notify called when @chain will not be used anymore.
- *
- * Sets the given chain function for the pad. The chain function is called to
- * process a #GstBuffer input buffer. see #GstPadChainFunction for more details.
+ * 
+ * @brief: @chain设定为pad->chainfunc。这个链函数会被调用去处理传入的 #GstBuffer
  */
 void
 gst_pad_set_chain_function_full (GstPad * pad, GstPadChainFunction chain,
@@ -2677,17 +2681,14 @@ gst_pad_get_pad_template_caps (GstPad * pad)
   return gst_caps_ref (GST_CAPS_ANY);
 }
 
+
 /**
- * gst_pad_get_peer:
- * @pad: a #GstPad to get the peer of.
- *
- * Gets the peer of @pad. This function refs the peer pad so
- * you need to unref it after use.
- *
- * Returns: (transfer full) (nullable): the peer #GstPad. Unref after usage.
- *
+ * @name: gst_pad_get_peer
+ * @param pad: 对端 #GstPad
+ * @brief: 获得对端 #GstPad
+ * @note: 这个函数ref引用了对端Pad，使用完之后被调用者需要unref对端Pad
  * MT safe.
- */
+*/
 GstPad *
 gst_pad_get_peer (GstPad * pad)
 {
@@ -3577,6 +3578,7 @@ probe_hook_marshal (GHook * hook, ProbeMarshall * data)
 
   GST_OBJECT_UNLOCK (pad);
 
+  /* 探针函数执行 */
   ret = callback (pad, info, hook->data);
 
   GST_OBJECT_LOCK (pad);
@@ -3663,6 +3665,7 @@ already_called:
     }								\
   } G_STMT_END
 
+
 #define PROBE_FULL(pad,mask,data,offs,size,label,handleable,handle_label) \
   G_STMT_START {							\
     if (G_UNLIKELY (pad->num_probes)) {					\
@@ -3710,7 +3713,7 @@ do_pad_idle_probe_wait (GstPad * pad)
 #define PROBE_TYPE_IS_SERIALIZED(i) \
     ( \
       ( \
-        (((i)->type & (GST_PAD_PROBE_TYPE_EVENT_DOWNSTREAM | \
+        (((i)->type & (GST_PAD_PROBE_TYPE_EVENT_DOWNSTREAM | \  
         GST_PAD_PROBE_TYPE_EVENT_FLUSH)) && \
         GST_EVENT_IS_SERIALIZED ((i)->data)) \
       ) || ( \
@@ -3721,6 +3724,22 @@ do_pad_idle_probe_wait (GstPad * pad)
         GST_PAD_PROBE_TYPE_BUFFER_LIST))  \
       ) \
     )
+
+/* lieryang add */
+static void
+test () {
+  ( 
+    
+      ((((i)->type & (GST_PAD_PROBE_TYPE_EVENT_DOWNSTREAM | GST_PAD_PROBE_TYPE_EVENT_FLUSH)) &&  GST_EVENT_IS_SERIALIZED ((i)->data)) ) 
+  || 
+      (((i)->type & GST_PAD_PROBE_TYPE_QUERY_DOWNSTREAM) && GST_QUERY_IS_SERIALIZED ((i)->data)  ) 
+  || 
+      ( (i)->type & (GST_PAD_PROBE_TYPE_BUFFER |  GST_PAD_PROBE_TYPE_BUFFER_LIST))  
+        
+        
+  )
+}
+
 
 static GstFlowReturn
 do_probe_callbacks (GstPad * pad, GstPadProbeInfo * info,
@@ -3737,8 +3756,8 @@ do_probe_callbacks (GstPad * pad, GstPadProbeInfo * info,
   data.handled = FALSE;
   data.dropped = FALSE;
 
-  /* We stack-allocate for N_STACK_ALLOCATE_PROBES hooks as a first step. If more are needed,
-   * we will re-allocate with g_malloc(). This should usually never be needed
+  /* 第一步是对 N_STACK_ALLOCATE_PROBES hooks进行栈分配。
+   * 如果需要更多，我们将使用g_malloc()重新分配。这通常不需要
    */
   data.called_probes = called_probes;
   data.n_called_probes = 0;
@@ -3748,7 +3767,7 @@ do_probe_callbacks (GstPad * pad, GstPadProbeInfo * info,
   is_block =
       (info->type & GST_PAD_PROBE_TYPE_BLOCK) == GST_PAD_PROBE_TYPE_BLOCK;
 
-  if (is_block && PROBE_TYPE_IS_SERIALIZED (info)) {
+  if (is_block && PROBE_TYPE_IS_SERIALIZED (info)) {      /* 如果是阻塞，info->type是数据流序列化，就会进入阻塞等待 */
     if (do_pad_idle_probe_wait (pad) == GST_FLOW_FLUSHING)
       goto flushing;
   }
@@ -3757,15 +3776,14 @@ again:
   GST_CAT_LOG_OBJECT (GST_CAT_SCHEDULING, pad, "do probes");
   cookie = pad->priv->probe_list_cookie;
 
-  /* Clear the marshalled flag before doing callbacks. Only if
-   * there are matching callbacks still will it get set */
+  /*在执行回调之前清除编组marshal标志。只有当有匹配的回调函数时，它才会被设置*/
   data.marshalled = FALSE;
 
+  /* GHookList里面的所有Hook会被 probe_hook_marshal 遍历执行相关探针函数*/
   g_hook_list_marshal (&pad->probes, TRUE,
       (GHookMarshaller) probe_hook_marshal, &data);
 
-  /* if the list changed, call the new callbacks (they will not be in
-   * called_probes yet) */
+  /* 如果链表改变，调用新的回调函数(它们还不在called_probes中) */
   if (cookie != pad->priv->probe_list_cookie) {
     GST_CAT_LOG_OBJECT (GST_CAT_SCHEDULING, pad,
         "probe list changed, restarting");
@@ -4013,8 +4031,7 @@ push_sticky (GstPad * pad, PadEvent * ev, gpointer user_data)
   return data->ret == GST_FLOW_OK;
 }
 
-/* check sticky events and push them when needed. should be called
- * with pad LOCK */
+/* 检查粘性事件并在需要时推送它们。应该用pad LOCK调用 */
 static inline GstFlowReturn
 check_sticky (GstPad * pad, GstEvent * event)
 {
@@ -4300,13 +4317,17 @@ probe_stopped:
   }
 }
 
-/**********************************************************************
- * Data passing functions
+/****************************************************************************************************
+ * 数据通过函数
  */
 
-/* this is the chain function that does not perform the additional argument
- * checking for that little extra speed.
- */
+
+/* 这就是chain函数，它不执行额外的参数检查以获得额外的速度。 */
+/**
+ * @name: gst_pad_chain_data_unchecked
+ * @param data: #GstBuffer或者#GstBufferList
+ * @brief: 
+*/
 static inline GstFlowReturn
 gst_pad_chain_data_unchecked (GstPad * pad, GstPadProbeType type, void *data)
 {
@@ -4348,20 +4369,19 @@ gst_pad_chain_data_unchecked (GstPad * pad, GstPadProbeType type, void *data)
   }
 #endif
 
-  PROBE_HANDLE (pad, type | GST_PAD_PROBE_TYPE_BLOCK, data, probe_stopped,
-      probe_handled);
+  /* 这里会依次调用探针函数 */
+  PROBE_HANDLE (pad, type | GST_PAD_PROBE_TYPE_BLOCK, data, probe_stopped, probe_handled);
 
   PROBE_HANDLE (pad, type, data, probe_stopped, probe_handled);
 
   ACQUIRE_PARENT (pad, parent, no_parent);
+
   GST_OBJECT_UNLOCK (pad);
 
-  /* NOTE: we read the chainfunc unlocked.
-   * we cannot hold the lock for the pad so we might send
-   * the data to the wrong function. This is not really a
-   * problem since functions are assigned at creation time
-   * and don't change that often... */
-  if (G_LIKELY (type & GST_PAD_PROBE_TYPE_BUFFER)) {
+  /* 注意:我们读取了未锁定的chainfunc。我们无法保持pad的锁，
+   * 所以我们可能会将数据发送给错误的函数。这实际上不是一个问题，
+   * 因为函数在创建时赋值，并且不会经常更改…… */
+  if (G_LIKELY (type & GST_PAD_PROBE_TYPE_BUFFER)) {  /* GstBuffer执行 */
     GstPadChainFunction chainfunc;
 
     if (G_UNLIKELY ((chainfunc = GST_PAD_CHAINFUNC (pad)) == NULL))
@@ -4371,12 +4391,13 @@ gst_pad_chain_data_unchecked (GstPad * pad, GstPadProbeType type, void *data)
         "calling chainfunction &%s with buffer %" GST_PTR_FORMAT,
         GST_DEBUG_FUNCPTR_NAME (chainfunc), GST_BUFFER (data));
 
+    /* 执行链函数 */
     ret = chainfunc (pad, parent, GST_BUFFER_CAST (data));
 
     GST_CAT_DEBUG_OBJECT (GST_CAT_SCHEDULING, pad,
         "called chainfunction &%s with buffer %p, returned %s",
         GST_DEBUG_FUNCPTR_NAME (chainfunc), data, gst_flow_get_name (ret));
-  } else {
+  } else {   /* GstBufferList 执行 */
     GstPadChainListFunction chainlistfunc;
 
     if (G_UNLIKELY ((chainlistfunc = GST_PAD_CHAINLISTFUNC (pad)) == NULL))
@@ -4386,6 +4407,7 @@ gst_pad_chain_data_unchecked (GstPad * pad, GstPadProbeType type, void *data)
         "calling chainlistfunction &%s",
         GST_DEBUG_FUNCPTR_NAME (chainlistfunc));
 
+    /* 执行相关链函数 */
     ret = chainlistfunc (pad, parent, GST_BUFFER_LIST_CAST (data));
 
     GST_CAT_DEBUG_OBJECT (GST_CAT_SCHEDULING, pad,
@@ -4489,26 +4511,20 @@ no_function:
 }
 
 /**
- * gst_pad_chain:
- * @pad: a sink #GstPad, returns GST_FLOW_ERROR if not.
- * @buffer: (transfer full): the #GstBuffer to send, return GST_FLOW_ERROR
- *     if not.
+ * @name: gst_pad_chain:
+ * @pad: 一个sink #GstPad, 如果不是，则返回 GST_FLOW_ERROR。
+ * @buffer: (transfer full): 要发送的 #GstBuffer，如果不是，则返回 GST_FLOW_ERROR。
  *
- * Chain a buffer to @pad.
+ * 将一个buffer链接到 @pad。
+ * 
+ * 如果pad正在刷新，则该函数返回 #GST_FLOW_FLUSHING。
+ * 
+ * 如果buffer类型对 @pad 不可接受（通过前面的 GST_EVENT_CAPS 事件协商），则该函数返回 #GST_FLOW_NOT_NEGOTIATED。
  *
- * The function returns #GST_FLOW_FLUSHING if the pad was flushing.
+ * 该函数继续调用安装在 @pad 上的链函数（参见 gst_pad_set_chain_function()），
+ * 并将该函数的返回值返回给调用者。如果 @pad 没有链函数，则返回 #GST_FLOW_NOT_SUPPORTED。
  *
- * If the buffer type is not acceptable for @pad (as negotiated with a
- * preceding GST_EVENT_CAPS event), this function returns
- * #GST_FLOW_NOT_NEGOTIATED.
- *
- * The function proceeds calling the chain function installed on @pad (see
- * gst_pad_set_chain_function()) and the return value of that function is
- * returned to the caller. #GST_FLOW_NOT_SUPPORTED is returned if @pad has no
- * chain function.
- *
- * In all cases, success or failure, the caller loses its reference to @buffer
- * after calling this function.
+ * 在所有情况下，无论成功与否，调用该函数后，调用者都会失去对 @buffer 的引用。
  *
  * Returns: a #GstFlowReturn from the pad.
  *
@@ -4553,25 +4569,21 @@ gst_pad_chain_list_default (GstPad * pad, GstObject * parent,
 }
 
 /**
- * gst_pad_chain_list:
- * @pad: a sink #GstPad, returns GST_FLOW_ERROR if not.
- * @list: (transfer full): the #GstBufferList to send, return GST_FLOW_ERROR
- *     if not.
+ * @name: gst_pad_chain_list:
+ * @pad: 如果不是 sink #GstPad 返回 GST_FLOW_ERROR 
+ * @list: (transfer full): t要发送的 #GstBufferList，如果不是，则返回 GST_FLOW_ERROR
  *
- * Chain a bufferlist to @pad.
+ * 链接一个 bufferlist到 @pad
+ * 
+ * 如果 @pad正处于刷新状态，该函数返回 #GST_FLOW_FLUSHING
  *
- * The function returns #GST_FLOW_FLUSHING if the pad was flushing.
- *
- * If @pad was not negotiated properly with a CAPS event, this function
- * returns #GST_FLOW_NOT_NEGOTIATED.
- *
- * The function proceeds calling the chainlist function installed on @pad (see
- * gst_pad_set_chain_list_function()) and the return value of that function is
- * returned to the caller. #GST_FLOW_NOT_SUPPORTED is returned if @pad has no
- * chainlist function.
- *
- * In all cases, success or failure, the caller loses its reference to @list
- * after calling this function.
+ * 如果 @pad 没有使用 CAPS 事件正确协商，则该函数返回 #GST_FLOW_NOT_NEGOTIATED。
+ * 
+ * 
+ * 该函数继续调用安装在 @pad 上的链表函数（参见 gst_pad_set_chain_list_function()），
+ * 并将该函数的返回值返回给调用者。如果 @pad 没有链表函数，则返回 #GST_FLOW_NOT_SUPPORTED。
+ * 
+ * 在所有情况下，无论成功与否，调用该函数后，调用者都会失去对 @list 的引用。
  *
  * MT safe.
  *
@@ -4587,6 +4599,7 @@ gst_pad_chain_list (GstPad * pad, GstBufferList * list)
   return gst_pad_chain_data_unchecked (pad,
       GST_PAD_PROBE_TYPE_BUFFER_LIST | GST_PAD_PROBE_TYPE_PUSH, list);
 }
+
 
 static GstFlowReturn
 gst_pad_push_data (GstPad * pad, GstPadProbeType type, void *data)
@@ -4625,8 +4638,7 @@ gst_pad_push_data (GstPad * pad, GstPadProbeType type, void *data)
     goto events_error;
 
   /* do block probes */
-  PROBE_HANDLE (pad, type | GST_PAD_PROBE_TYPE_BLOCK, data, probe_stopped,
-      probe_handled);
+  PROBE_HANDLE (pad, type | GST_PAD_PROBE_TYPE_BLOCK, data, probe_stopped, probe_handled);
 
   /* recheck sticky events because the probe might have cause a relink */
   if (G_UNLIKELY ((ret = check_sticky (pad, NULL))) != GST_FLOW_OK)
@@ -4647,6 +4659,7 @@ gst_pad_push_data (GstPad * pad, GstPadProbeType type, void *data)
   pad->priv->using++;
   GST_OBJECT_UNLOCK (pad);
 
+  /* 调用对端Pad的链函数 */
   ret = gst_pad_chain_data_unchecked (peer, type, data);
   data = NULL;
 
@@ -4656,7 +4669,7 @@ gst_pad_push_data (GstPad * pad, GstPadProbeType type, void *data)
   pad->ABI.abi.last_flowret = ret;
   pad->priv->using--;
   if (pad->priv->using == 0) {
-    /* pad is not active anymore, trigger idle callbacks */
+    /* pad不再活动，触发空闲回调函数*/
     PROBE_NO_DATA (pad, GST_PAD_PROBE_TYPE_PUSH | GST_PAD_PROBE_TYPE_IDLE,
         probe_stopped, ret);
   }
@@ -4740,17 +4753,14 @@ not_linked:
  * @buffer: (transfer full): the #GstBuffer to push returns GST_FLOW_ERROR
  *     if not.
  *
- * Pushes a buffer to the peer of @pad.
+ * 推送 @buffer 到对端pad （一般都是src Pad上的数据Push到 sink Pad）
+ * 
+ * 在触发任何已经被安装的data探针函数之前，这个函数将会调用已经被安装到 src pad的阻塞探针函数。
  *
- * This function will call installed block probes before triggering any
- * installed data probes.
  *
- * The function proceeds calling gst_pad_chain() on the peer pad and returns
- * the value from that function. If @pad has no peer, #GST_FLOW_NOT_LINKED will
- * be returned.
+ * 该函数继续在另一端的pad上调用gst_pad_chain()并返回该函数的值。如果@pad没有peer，则返回#GST_FLOW_NOT_LINKED。
  *
- * In all cases, success or failure, the caller loses its reference to @buffer
- * after calling this function.
+ * 无论成功还是失败，调用者在调用这个函数后都会失去对@buffer的引用。
  *
  * Returns: a #GstFlowReturn from the peer pad.
  *
