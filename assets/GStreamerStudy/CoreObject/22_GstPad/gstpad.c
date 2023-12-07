@@ -514,8 +514,7 @@ restart:
 
     ret = func (pad, &ev_ret, user_data);
 
-    /* recheck the cookie, lock might have been released and the list could have
-     * changed */
+    /* 重新检查cookie，锁可能已被释放，列表可能已更改 */
     if (G_UNLIKELY (cookie != pad->priv->events_cookie)) {
       if (G_LIKELY (ev_ret.event))
         gst_event_unref (ev_ret.event);
@@ -3505,11 +3504,13 @@ probe_hook_marshal (GHook * hook, ProbeMarshall * data)
   GstPadProbeReturn ret;
   gpointer original_data;
 
+  /* flags是探针函数中设定的 GstPadProbeType */
   flags = hook->flags >> G_HOOK_FLAG_USER_SHIFT;
+  /* type是info传入参数，调用者赋值的type */
   type = info->type;
   original_data = info->data;
 
-  /* one of the scheduling types */
+  /* 调度类型之一 */
   if ((flags & GST_PAD_PROBE_TYPE_SCHEDULING & type) == 0)
     goto no_match;
 
@@ -3524,7 +3525,7 @@ probe_hook_marshal (GHook * hook, ProbeMarshall * data)
   }
 
   if (type & GST_PAD_PROBE_TYPE_PUSH) {
-    /* one of the data types for non-idle probes */
+    /* type没有空闲探针类型 */
     if ((type & GST_PAD_PROBE_TYPE_IDLE) == 0
         && (flags & _PAD_PROBE_TYPE_ALL_BOTH_AND_FLUSH & type) == 0)
       goto no_match;
@@ -3764,9 +3765,17 @@ do_probe_callbacks (GstPad * pad, GstPadProbeInfo * info,
   data.called_probes_size = N_STACK_ALLOCATE_PROBES;
   data.retry = FALSE;
 
+  /**
+   * sink pad 和 src pad都会调用两次 do_probe_callbacks 函数
+   * 第一个会使 @info->type | GST_PAD_PROBE_TYPE_BLOCK
+   * 第二次不会与运算 GST_PAD_PROBE_TYPE_BLOCK
+  */
   is_block =
       (info->type & GST_PAD_PROBE_TYPE_BLOCK) == GST_PAD_PROBE_TYPE_BLOCK;
 
+  /**
+   * GST_PAD_PROBE_TYPE_BUFFER 和 GST_PAD_PROBE_TYPE_BUFFER_LIST 就是序列化类型
+  */
   if (is_block && PROBE_TYPE_IS_SERIALIZED (info)) {      /* 如果是阻塞，info->type是数据流序列化，就会进入阻塞等待 */
     if (do_pad_idle_probe_wait (pad) == GST_FLOW_FLUSHING)
       goto flushing;
@@ -4369,7 +4378,10 @@ gst_pad_chain_data_unchecked (GstPad * pad, GstPadProbeType type, void *data)
   }
 #endif
 
-  /* 这里会依次调用探针函数 */
+  /* 此时 type 可能情况有：
+   * type = GST_PAD_PROBE_TYPE_BUFFER_LIST | GST_PAD_PROBE_TYPE_PUSH
+   * type = GST_PAD_PROBE_TYPE_BUFFER | GST_PAD_PROBE_TYPE_PUSH
+   */
   PROBE_HANDLE (pad, type | GST_PAD_PROBE_TYPE_BLOCK, data, probe_stopped, probe_handled);
 
   PROBE_HANDLE (pad, type, data, probe_stopped, probe_handled);
