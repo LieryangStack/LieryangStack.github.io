@@ -6,6 +6,9 @@
     "gstmessage.h": "c",
     "gststreams.h": "c",
     "gststreamcollection.h": "c",
-    "gstclock.h": "c"
+    "gstclock.h": "c",
+    "array": "c",
+    "string": "c",
+    "string_view": "c"
   }
 }

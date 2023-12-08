@@ -32,11 +32,23 @@ enum
       /* FILL ME */
 };
 
+/**
+ * _PAD_PROBE_TYPE_ALL_BOTH_AND_FLUSH 表示这五种
+ * 
+ * GST_PAD_PROBE_TYPE_BUFFER
+ * GST_PAD_PROBE_TYPE_BUFFER_LIST
+ * GST_PAD_PROBE_TYPE_EVENT_DOWNSTREAM,
+ * GST_PAD_PROBE_TYPE_EVENT_UPSTREAM,
+ * GST_PAD_PROBE_TYPE_QUERY_DOWNSTREAM
+ * GST_PAD_PROBE_TYPE_QUERY_UPSTREAM,
+*/
 #define _PAD_PROBE_TYPE_ALL_BOTH_AND_FLUSH (GST_PAD_PROBE_TYPE_ALL_BOTH | GST_PAD_PROBE_TYPE_EVENT_FLUSH)
 
-/* we have a pending and an active event on the pad. On source pads only the
- * active event is used. On sinkpads, events are copied to the pending entry and
- * moved to the active event when the eventfunc returned %TRUE. */
+/**
+ * 我们在Pad有一个待处理和active事件。
+ * 在srcpad仅仅有active事件被使用。
+ * 在sinkpad，事件会被拷贝到挂起的entry，当eventfunc函数返回TRUE，移动这个active事件。
+*/
 typedef struct
 {
   gboolean received;
@@ -48,10 +60,10 @@ struct _GstPadPrivate
 {
   guint events_cookie;
   GArray *events; /* 使用GArray存储事件 */
-  guint last_cookie;
+  guint last_cookie; /* 只有使能额外检查的情况下才会使用 */
 
   gint using; /* Pad正在被使用的数量 */
-  guint probe_list_cookie;
+  guint probe_list_cookie; /* 记录探针函数的数量，@note: 这个值只会增加，不会在删除探针函数后就相应减少 */
 
   /* 计数器，表示直接通过add_probe调用正在运行的空闲探针回调函数的数目。
      用于在idle回调函数未执行完成时，需要阻塞pad中流动的任何数据*/
@@ -70,19 +82,23 @@ typedef struct
 #define GST_PAD_IS_RUNNING_IDLE_PROBE(p) \
     (((GstPad *)(p))->priv->idle_running > 0)
 
+/**
+ * 遍历探针列表时候，传入的结构体 #ProbeMarshall
+ * 用于记录探针是否被调用
+*/
 typedef struct
 {
   GstPad *pad;
-  GstPadProbeInfo *info;
+  GstPadProbeInfo *info; /* 用于判断探针类型是否与info->type匹配，执行相应的探针函数 */
   gboolean dropped;
   gboolean pass;
   gboolean handled;
   gboolean marshalled;
 
-  gulong *called_probes;
-  guint n_called_probes;
-  guint called_probes_size;
-  gboolean retry;
+  gulong *called_probes; /* 数组记录探针ID */
+  guint n_called_probes; /* 目前已经记录了多少个探针 */
+  guint called_probes_size; /* called_probes可以记录多少个探针ID */
+  gboolean retry; /* 探针函数列表发生变化了，需要二次遍历调用探针函数 */
 } ProbeMarshall;
 
 static void gst_pad_dispose (GObject * object);
@@ -1304,12 +1320,12 @@ cleanup_hook (GstPad * pad, GHook * hook)
   type = (hook->flags) >> G_HOOK_FLAG_USER_SHIFT;
 
   if (type & GST_PAD_PROBE_TYPE_BLOCKING) {
-    /* unblock when we remove the last blocking probe */
+    /* 如果是 GST_PAD_PROBE_TYPE_IDLE 或者 GST_PAD_PROBE_TYPE_BLOCK类型探针，阻塞探针计数减一 */
     pad->num_blocked--;
     GST_DEBUG_OBJECT (pad, "remove blocking probe, now %d left",
         pad->num_blocked);
 
-    /* Might have new probes now that want to be called */
+    /* 可能由新的探针函数响应被调用 */
     GST_PAD_BLOCK_BROADCAST (pad);
 
     if (pad->num_blocked == 0) {
@@ -1325,7 +1341,8 @@ cleanup_hook (GstPad * pad, GHook * hook)
 /**
  * @name: gst_pad_add_probe:
  * @pad: the #GstPad to add the probe to
- * @mask: the probe mask
+ * @mask: 如果mask没有_PAD_PROBE_TYPE_ALL_BOTH_AND_FLUSH其中一种，就会 mask |= GST_PAD_PROBE_TYPE_ALL_BOTH （这里不包含上下游查询）
+ *        如果mask没有调度模式， mask |= GST_PAD_PROBE_TYPE_SCHEDULING
  * @callback: #GstPadProbeCallback that will be called with notifications of the pad state
  * @user_data: (closure): user data passed to the callback
  * @destroy_data: #GDestroyNotify for user_data
@@ -1362,9 +1379,10 @@ gst_pad_add_probe (GstPad * pad, GstPadProbeType mask,
   GST_CAT_LOG_OBJECT (GST_CAT_SCHEDULING, pad, "adding probe for mask 0x%08x",
       mask);
 
-  /*如果没有对类型给出约束，则假定所有类型都是可接受的*/
   if ((mask & _PAD_PROBE_TYPE_ALL_BOTH_AND_FLUSH) == 0)
     mask |= GST_PAD_PROBE_TYPE_ALL_BOTH;
+  
+  /* 这里会赋值调度模式 */
   if ((mask & GST_PAD_PROBE_TYPE_SCHEDULING) == 0)
     mask |= GST_PAD_PROBE_TYPE_SCHEDULING;
 
@@ -1385,9 +1403,9 @@ gst_pad_add_probe (GstPad * pad, GstPadProbeType mask,
 
   GST_CAT_LOG_OBJECT (GST_CAT_SCHEDULING, pad, "got probe id %lu", res);
 
-  if (mask & GST_PAD_PROBE_TYPE_BLOCKING) {
-    /* we have a block probe */
-    pad->num_blocked++;
+  if (mask & GST_PAD_PROBE_TYPE_BLOCKING) {  /* 空闲探针和阻塞探针都是阻塞类型 */
+    
+    pad->num_blocked++; /* 阻塞类型探针计数加一 */
     GST_OBJECT_FLAG_SET (pad, GST_PAD_FLAG_BLOCKED);
     GST_CAT_LOG_OBJECT (GST_CAT_SCHEDULING, pad, "added blocking probe, "
         "now %d blocking probes", pad->num_blocked);
@@ -1396,7 +1414,9 @@ gst_pad_add_probe (GstPad * pad, GstPadProbeType mask,
     GST_PAD_BLOCK_BROADCAST (pad);
   }
 
-  /* 如果需要调用空闲回调函数，则调用回调函数 */
+  /* 如果我们设定了空闲类型，现在就会直接检查Pad是否处于空闲状态
+   * 如果此时Pad处于空闲状态，会直接调用空闲探针函数。
+   */
   if ((mask & GST_PAD_PROBE_TYPE_IDLE) && (callback != NULL)) {
     if (pad->priv->using > 0) {    /* pad还没有空闲 */
       /* pad正在使用中，我们还不能给idle回调发送信号。
@@ -1465,12 +1485,8 @@ gst_pad_add_probe (GstPad * pad, GstPadProbeType mask,
 }
 
 /**
- * gst_pad_remove_probe:
- * @pad: the #GstPad with the probe
- * @id: the probe id to remove
- *
- * Remove the probe with @id from @pad.
- *
+ * @name: gst_pad_remove_probe
+ * @brief: 根据@id移除附加到@pad上的探针
  * MT safe.
  */
 void
@@ -3454,17 +3470,22 @@ gst_pad_query_default (GstPad * pad, GstObject * parent, GstQuery * query)
 
 #define N_STACK_ALLOCATE_PROBES (16)
 
-/* A helper that checks if a probe was already
- * in the called_probes list, and adds it if
- * not. Used to avoid calling probes a 2nd time when
- * looping again after probe removal */
+
+/**
+ * @name: check_probe_already_called
+ * @brief: data->called_probes 列表中，如果没有，则添加它。
+ *         用于避免在移除探针后再次循环时再次调用探针。
+ * @return: 如果探针函数已经被调用，返回TRUE；反则FALSE。
+*/
 static gboolean
 check_probe_already_called (GHook * hook, ProbeMarshall * data)
 {
   guint i;
 
-  /* if we have called this callback, do nothing. But only check
-   * if we're actually calling probes a second time */
+  /**
+   * 如果探针函数列表发生了变化，我们需要二次调用探针函数（为了调用新添加的探针函数）
+   * 此时才会把 data->retry 设定为 TRUE
+  */
   if (data->retry) {
     for (i = 0; i < data->n_called_probes; i++) {
       if (data->called_probes[i] == hook->hook_id) {
@@ -3473,7 +3494,7 @@ check_probe_already_called (GHook * hook, ProbeMarshall * data)
     }
   }
 
-  /* reallocate on the heap if we had more than 16 probes */
+  /* 如果有超过16个探针函数，则在堆上重新分配 */
   if (data->n_called_probes == data->called_probes_size) {
     if (data->called_probes_size > N_STACK_ALLOCATE_PROBES) {
       data->called_probes_size *= 2;
@@ -3490,10 +3511,13 @@ check_probe_already_called (GHook * hook, ProbeMarshall * data)
   }
   data->called_probes[data->n_called_probes++] = hook->hook_id;
 
-  /* This probe was not alraedy called */
+  /* 这个探针尚未被调用 */
   return FALSE;
 }
 
+/**
+ * 遍历存储的每个探针，相应的回调函数
+*/
 static void
 probe_hook_marshal (GHook * hook, ProbeMarshall * data)
 {
@@ -3510,7 +3534,9 @@ probe_hook_marshal (GHook * hook, ProbeMarshall * data)
   type = info->type;
   original_data = info->data;
 
-  /* 调度类型之一 */
+  /* type和探针函数类型必须要有Push或者Pull调度类型 
+   * 探针如果没有设定调度类型，添加探针函数会自动赋值或运算 GST_PAD_PROBE_TYPE_SCHEDULING
+   */
   if ((flags & GST_PAD_PROBE_TYPE_SCHEDULING & type) == 0)
     goto no_match;
 
@@ -3524,40 +3550,72 @@ probe_hook_marshal (GHook * hook, ProbeMarshall * data)
     goto no_match;
   }
 
-  if (type & GST_PAD_PROBE_TYPE_PUSH) {
-    /* type没有空闲探针类型 */
+  /**
+   * _PAD_PROBE_TYPE_ALL_BOTH_AND_FLUSH 表示这五种
+   * 
+   * GST_PAD_PROBE_TYPE_BUFFER
+   * GST_PAD_PROBE_TYPE_BUFFER_LIST
+   * GST_PAD_PROBE_TYPE_EVENT_DOWNSTREAM,
+   * GST_PAD_PROBE_TYPE_EVENT_UPSTREAM,
+   * GST_PAD_PROBE_TYPE_QUERY_DOWNSTREAM
+   * GST_PAD_PROBE_TYPE_QUERY_UPSTREAM,
+  */
+
+  if (type & GST_PAD_PROBE_TYPE_PUSH) { /* type是Push类型 */
+    /**
+     * type 没有 GST_PAD_PROBE_TYPE_IDLE 类型
+     * 同时，探针函数类型和type没有 上面五种 类型
+     * 则执行 no_match
+    */
     if ((type & GST_PAD_PROBE_TYPE_IDLE) == 0
-        && (flags & _PAD_PROBE_TYPE_ALL_BOTH_AND_FLUSH & type) == 0)
+        && (flags & _PAD_PROBE_TYPE_ALL_BOTH_AND_FLUSH & type) == 0)   
       goto no_match;
-  } else if (type & GST_PAD_PROBE_TYPE_PULL) {
-    /* one of the data types for non-idle probes */
+  } else if (type & GST_PAD_PROBE_TYPE_PULL) { /* type是Pull类型 */
+    /**
+     * type 没有 GST_PAD_PROBE_TYPE_IDLE 和 GST_PAD_PROBE_TYPE_BLOCK类型
+     * 同时，探针函数类型和type没有 上面五种 类型
+     * 则执行 no_match
+    */
     if ((type & GST_PAD_PROBE_TYPE_BLOCKING) == 0
         && (flags & _PAD_PROBE_TYPE_ALL_BOTH_AND_FLUSH & type) == 0)
       goto no_match;
   } else {
-    /* Type must have PULL or PUSH probe types */
+    /* 类型必须有PULL或PUSH探针类型 */
     g_assert_not_reached ();
   }
 
-  /* one of the blocking types must match */
+
+  /**
+   * type 有 GST_PAD_PROBE_TYPE_IDLE 或者 GST_PAD_PROBE_TYPE_BLOCK类型
+   * 同时，探针函数类型flags没有 GST_PAD_PROBE_TYPE_IDLE 或者 GST_PAD_PROBE_TYPE_BLOCK类型
+   * 则执行 no_match
+  */
   if ((type & GST_PAD_PROBE_TYPE_BLOCKING) &&
       (flags & GST_PAD_PROBE_TYPE_BLOCKING & type) == 0)
     goto no_match;
+  
+  /**
+   * type 没有  GST_PAD_PROBE_TYPE_IDLE 或者 GST_PAD_PROBE_TYPE_BLOCK类型
+   * 同时，探针函数类型flags有 GST_PAD_PROBE_TYPE_IDLE 或者 GST_PAD_PROBE_TYPE_BLOCK类型
+   * 则执行 no_match
+  */
   if ((type & GST_PAD_PROBE_TYPE_BLOCKING) == 0 &&
       (flags & GST_PAD_PROBE_TYPE_BLOCKING))
     goto no_match;
-  /* only probes that have GST_PAD_PROBE_TYPE_EVENT_FLUSH set */
+
+  
+  /**
+   * type 有 GST_PAD_PROBE_TYPE_EVENT_FLUSH 类型
+   * 同时，探针函数类型flags没有 GST_PAD_PROBE_TYPE_EVENT_FLUSH 类型
+   * 则执行 no_match
+  */
   if ((type & GST_PAD_PROBE_TYPE_EVENT_FLUSH) &&
       (flags & GST_PAD_PROBE_TYPE_EVENT_FLUSH & type) == 0)
     goto no_match;
 
+
   if (check_probe_already_called (hook, data)) {
-    /* Reset marshalled = TRUE here, because the probe
-     * was already called and set it the first time around,
-     * and we may want to keep blocking on it.
-     *
-     * https://gitlab.freedesktop.org/gstreamer/gstreamer/-/issues/658
-     */
+    /* 重置 marshalled = TRUE ,因为探针早已被执行过了 */
     data->marshalled = TRUE;
     goto already_called;
   }
@@ -3567,13 +3625,14 @@ probe_hook_marshal (GHook * hook, ProbeMarshall * data)
 
   callback = (GstPadProbeCallback) hook->func;
   if (callback == NULL) {
-    /* No callback is equivalent to just returning GST_PAD_PROBE_OK */
+    /* 探针没有回调函数，只返回GST_PAD_PROBE_OK */
     data->marshalled = TRUE;
     return;
   }
 
   info->id = hook->hook_id;
 
+  /* 如果flags有空闲类型 */
   if ((flags & GST_PAD_PROBE_TYPE_IDLE))
     pad->priv->idle_running++;
 
@@ -3584,15 +3643,11 @@ probe_hook_marshal (GHook * hook, ProbeMarshall * data)
 
   GST_OBJECT_LOCK (pad);
 
-  /* If the probe callback asked for the
-   * probe to be removed, don't set the marshalled flag
-   * otherwise, you can get a case where you return
-   * GST_PAD_PROBE_REMOVE from a buffer probe and
-   * then the pad blocks anyway if there's any other
-   * blocking probes installed.
-   *
-   * https://gitlab.freedesktop.org/gstreamer/gstreamer/-/issues/658
-   */
+  /**
+   * 如果探针回调函数要求被删除，就不用设定marshlled为TRUE。
+   * 否则，你可能会遇到这种情况：从buffer探针返回 GST_PAD_PROBE_REMOVE，
+   * 然后如果安装了其他任何阻塞探针，则pad会阻塞。
+  */
   if (ret != GST_PAD_PROBE_REMOVE)
     data->marshalled = TRUE;
 
@@ -3652,7 +3707,10 @@ already_called:
   }
 }
 
-/* a probe that does not take or return any data */
+/**
+ * 用来执行空闲探针函数
+ * info->data = NULL，不会传入任何数据
+*/
 #define PROBE_NO_DATA(pad,mask,label,defaultval)                \
   G_STMT_START {						\
     if (G_UNLIKELY (pad->num_probes)) {				\
@@ -3667,6 +3725,10 @@ already_called:
   } G_STMT_END
 
 
+/**
+ * 不同mask调用情况：
+ * 一、Push模式下的Buffer或者BuffList，附加是否阻塞
+*/
 #define PROBE_FULL(pad,mask,data,offs,size,label,handleable,handle_label) \
   G_STMT_START {							\
     if (G_UNLIKELY (pad->num_probes)) {					\
@@ -3687,17 +3749,40 @@ already_called:
     }									\
   } G_STMT_END
 
+
+
+/**
+ * Event和Query
+*/
 #define PROBE_PUSH(pad,mask,data,label)		\
   PROBE_FULL(pad, mask, data, -1, -1, label, FALSE, label);
+
+/**
+ * mask 有以下几种情况（其实就是Push模式下Buffer或者BufferList，再者加上是否堵塞）：
+ * mask = GST_PAD_PROBE_TYPE_BUFFER_LIST | GST_PAD_PROBE_TYPE_PUSH | GST_PAD_PROBE_TYPE_BLOCK
+ * mask = GST_PAD_PROBE_TYPE_BUFFER | GST_PAD_PROBE_TYPE_PUSH | GST_PAD_PROBE_TYPE_BLOCK
+ * mask = GST_PAD_PROBE_TYPE_BUFFER_LIST | GST_PAD_PROBE_TYPE_PUSH
+ * mask = GST_PAD_PROBE_TYPE_BUFFER | GST_PAD_PROBE_TYPE_PUSH
+*/
 #define PROBE_HANDLE(pad,mask,data,label,handle_label)	\
   PROBE_FULL(pad, mask, data, -1, -1, label, TRUE, handle_label);
+
+/**
+ * Pull模式
+*/
 #define PROBE_PULL(pad,mask,data,offs,size,label)		\
   PROBE_FULL(pad, mask, data, offs, size, label, FALSE, label);
 
+
+/**
+ * @name: do_pad_idle_probe_wait
+ * @calledby: do_probe_callbacks ()
+ * @brief: 等待空闲探针函数执行完毕
+*/
 static GstFlowReturn
 do_pad_idle_probe_wait (GstPad * pad)
 {
-  while (GST_PAD_IS_RUNNING_IDLE_PROBE (pad)) {
+  while (GST_PAD_IS_RUNNING_IDLE_PROBE (pad)) {  /* 等待空闲监听函数执行完毕 */
     GST_CAT_LOG_OBJECT (GST_CAT_SCHEDULING, pad,
         "waiting idle probe to be removed");
     GST_OBJECT_FLAG_SET (pad, GST_PAD_FLAG_BLOCKING);
@@ -3711,37 +3796,28 @@ do_pad_idle_probe_wait (GstPad * pad)
   return GST_FLOW_OK;
 }
 
+
 #define PROBE_TYPE_IS_SERIALIZED(i) \
     ( \
       ( \
-        (((i)->type & (GST_PAD_PROBE_TYPE_EVENT_DOWNSTREAM | \  
+        (((i)->type & (GST_PAD_PROBE_TYPE_EVENT_DOWNSTREAM | \  /* 往下游传递事件或者FLUSH事件 && 事件类型是序列化类型 */
         GST_PAD_PROBE_TYPE_EVENT_FLUSH)) && \
         GST_EVENT_IS_SERIALIZED ((i)->data)) \
       ) || ( \
-        (((i)->type & GST_PAD_PROBE_TYPE_QUERY_DOWNSTREAM) && \
+        (((i)->type & GST_PAD_PROBE_TYPE_QUERY_DOWNSTREAM) && \  /* 查询下游 && 查询类型是序列化类型 */
         GST_QUERY_IS_SERIALIZED ((i)->data)) \
       ) || ( \
-        ((i)->type & (GST_PAD_PROBE_TYPE_BUFFER | \
+        ((i)->type & (GST_PAD_PROBE_TYPE_BUFFER | \           /* type是GST_PAD_PROBE_TYPE_BUFFER或GST_PAD_PROBE_TYPE_BUFFER_LIST就是序列化监听 */
         GST_PAD_PROBE_TYPE_BUFFER_LIST))  \
       ) \
     )
 
-/* lieryang add */
-static void
-test () {
-  ( 
-    
-      ((((i)->type & (GST_PAD_PROBE_TYPE_EVENT_DOWNSTREAM | GST_PAD_PROBE_TYPE_EVENT_FLUSH)) &&  GST_EVENT_IS_SERIALIZED ((i)->data)) ) 
-  || 
-      (((i)->type & GST_PAD_PROBE_TYPE_QUERY_DOWNSTREAM) && GST_QUERY_IS_SERIALIZED ((i)->data)  ) 
-  || 
-      ( (i)->type & (GST_PAD_PROBE_TYPE_BUFFER |  GST_PAD_PROBE_TYPE_BUFFER_LIST))  
-        
-        
-  )
-}
 
-
+/**
+ * @name: do_probe_callbacks
+ * @brief: 根据 info->type 是否匹配 pad->probes->type 调用探针函数
+ *         info->data 根据调用者，可能是 Buffer、BufferList、Event、Query
+*/
 static GstFlowReturn
 do_probe_callbacks (GstPad * pad, GstPadProbeInfo * info,
     GstFlowReturn defaultval)
@@ -3763,20 +3839,17 @@ do_probe_callbacks (GstPad * pad, GstPadProbeInfo * info,
   data.called_probes = called_probes;
   data.n_called_probes = 0;
   data.called_probes_size = N_STACK_ALLOCATE_PROBES;
-  data.retry = FALSE;
+  data.retry = FALSE; /* 重新遍历探针函数flag */
 
   /**
-   * sink pad 和 src pad都会调用两次 do_probe_callbacks 函数
-   * 第一个会使 @info->type | GST_PAD_PROBE_TYPE_BLOCK
-   * 第二次不会与运算 GST_PAD_PROBE_TYPE_BLOCK
-  */
+   * 调用者 type | GST_PAD_PROBE_TYPE_BLOCK，则 is_block = TRUE
+   */
   is_block =
       (info->type & GST_PAD_PROBE_TYPE_BLOCK) == GST_PAD_PROBE_TYPE_BLOCK;
 
-  /**
-   * GST_PAD_PROBE_TYPE_BUFFER 和 GST_PAD_PROBE_TYPE_BUFFER_LIST 就是序列化类型
-  */
-  if (is_block && PROBE_TYPE_IS_SERIALIZED (info)) {      /* 如果是阻塞，info->type是数据流序列化，就会进入阻塞等待 */
+
+  /* info类型如果是序列化类型（一般向下游传递的查询和事件以及数据流都是序列化类型） */
+  if (is_block && PROBE_TYPE_IS_SERIALIZED (info)) {      /* 如果是阻塞，info->type是数据流序列化，就会进入阻塞等待空闲探针函数执行完毕 */
     if (do_pad_idle_probe_wait (pad) == GST_FLOW_FLUSHING)
       goto flushing;
   }
@@ -3788,7 +3861,10 @@ again:
   /*在执行回调之前清除编组marshal标志。只有当有匹配的回调函数时，它才会被设置*/
   data.marshalled = FALSE;
 
-  /* GHookList里面的所有Hook会被 probe_hook_marshal 遍历执行相关探针函数*/
+  /** 
+   * GHookList里面的所有Hook会被 probe_hook_marshal 遍历
+   * 根据data->info->type执行相关探针函数
+   */
   g_hook_list_marshal (&pad->probes, TRUE,
       (GHookMarshaller) probe_hook_marshal, &data);
 
@@ -3800,23 +3876,25 @@ again:
     goto again;
   }
 
-  /* the first item that dropped will stop the hooks and then we drop here */
+  /**
+   * 因为一个Pad可以附加很多探针函数，每个探针函数的返回值可能不同，但是每个探针都使用了同一个变量 ProbeMarshall data
+   * 只要有一个探针函数返回值是丢弃数据，则 data.dropped = TRUE。
+  */
   if (data.dropped)
     goto dropped;
 
-  /* If one handler took care of it, let the the item pass */
   if (data.handled) {
     goto handled;
   }
 
-  /* if no handler matched and we are blocking, let the item pass */
+  /* 一般情况下， marshalled都会被设定为 TRUE  */
   if (!data.marshalled && is_block)
     goto passed;
 
-  /* At this point, all handlers returned either OK or PASS. If one handler
-   * returned PASS, let the item pass */
+  /* 此时，所有处理程序都返回OK或PASS。如果一个处理程序返回PASS，则让该项通过 */
   if (data.pass)
     goto passed;
+
 
   if (is_block) {
     while (GST_PAD_IS_BLOCKED (pad)) {
@@ -4334,6 +4412,7 @@ probe_stopped:
 /* 这就是chain函数，它不执行额外的参数检查以获得额外的速度。 */
 /**
  * @name: gst_pad_chain_data_unchecked
+ * @param pad: 一定是 sink pad
  * @param data: #GstBuffer或者#GstBufferList
  * @brief: 
 */
@@ -4382,9 +4461,9 @@ gst_pad_chain_data_unchecked (GstPad * pad, GstPadProbeType type, void *data)
    * type = GST_PAD_PROBE_TYPE_BUFFER_LIST | GST_PAD_PROBE_TYPE_PUSH
    * type = GST_PAD_PROBE_TYPE_BUFFER | GST_PAD_PROBE_TYPE_PUSH
    */
-  PROBE_HANDLE (pad, type | GST_PAD_PROBE_TYPE_BLOCK, data, probe_stopped, probe_handled);
+  PROBE_HANDLE (pad, type | GST_PAD_PROBE_TYPE_BLOCK, data, probe_stopped, probe_handled); /* 会执行含有阻塞的和Buffer探针函数 */
 
-  PROBE_HANDLE (pad, type, data, probe_stopped, probe_handled);
+  PROBE_HANDLE (pad, type, data, probe_stopped, probe_handled); /* 非阻塞的Buffer探针函数 */
 
   ACQUIRE_PARENT (pad, parent, no_parent);
 
@@ -4613,6 +4692,10 @@ gst_pad_chain_list (GstPad * pad, GstBufferList * list)
 }
 
 
+/**
+ * @name: gst_pad_push_data
+ * @param pad: 一定是src pad
+*/
 static GstFlowReturn
 gst_pad_push_data (GstPad * pad, GstPadProbeType type, void *data)
 {
@@ -4857,13 +4940,12 @@ gst_pad_get_range_unchecked (GstPad * pad, guint64 offset, guint size,
 
   res_buf = *buffer;
 
-  /* when one of the probes returns DROPPED, probe_stopped will be called
-   * and we skip calling the getrange function, res_buf should then contain a
-   * valid result buffer */
+  /* 当探针中的一个返回 DROPPED 时，将调用 probe_stopped，并且我们会跳过调用 getrange 函数，
+   * 此时 res_buf 应包含一个有效的结果缓冲区。 */
   PROBE_PULL (pad, GST_PAD_PROBE_TYPE_PULL | GST_PAD_PROBE_TYPE_BLOCK,
       res_buf, offset, size, probe_stopped);
 
-  /* recheck sticky events because the probe might have cause a relink */
+  /* 重新检查粘性事件，因为探针可能导致Pad重新链接。 */
   if (G_UNLIKELY ((ret = check_sticky (pad, NULL))) != GST_FLOW_OK)
     goto events_error;
 
@@ -4886,7 +4968,7 @@ gst_pad_get_range_unchecked (GstPad * pad, guint64 offset, guint size,
   if (G_UNLIKELY (ret != GST_FLOW_OK))
     goto get_range_failed;
 
-  /* can only fire the signal if we have a valid buffer */
+  /* 只有在我们有一个有效的缓冲区时才能触发信号。 */
 probed_data:
   PROBE_PULL (pad, GST_PAD_PROBE_TYPE_PULL | GST_PAD_PROBE_TYPE_BUFFER,
       res_buf, offset, size, probe_stopped_unref);
@@ -4895,8 +4977,8 @@ probed_data:
 
   GST_PAD_STREAM_UNLOCK (pad);
 
-  /* If the caller provided a buffer it must be filled by the getrange
-   * function instead of it returning a new buffer */
+  
+  /* 如果调用者提供了一个缓冲区，它必须由 getrange 函数填充，而不是返回一个新的缓冲区。 */
   g_return_val_if_fail (!*buffer || res_buf == *buffer, GST_FLOW_ERROR);
 
   *buffer = res_buf;
@@ -4997,38 +5079,29 @@ get_range_failed:
 
 /**
  * gst_pad_get_range:
- * @pad: a src #GstPad, returns #GST_FLOW_ERROR if not.
- * @offset: The start offset of the buffer
- * @size: The length of the buffer
- * @buffer: (out callee-allocates): a pointer to hold the #GstBuffer,
- *     returns #GST_FLOW_ERROR if %NULL.
+ * @pad: 一个src pad，如果不是src pad；返回#GST_FLOW_ERROR
+ * @offset: 从Buffer开始偏移多少获取
+ * @size: 获取Buffer的大小
+ * @buffer: (out callee-allocates): 一个二级指针，持有 #GstBuffer；
+ *                                  如果#GstBuffer为NULL，则返回 #GST_FLOW_ERROR
  *
- * When @pad is flushing this function returns #GST_FLOW_FLUSHING
- * immediately and @buffer is %NULL.
+ * 当 @pad 在刷新时，此函数会立即返回 #GST_FLOW_FLUSHING，且 @buffer 为 %NULL。
  *
- * Calls the getrange function of @pad, see #GstPadGetRangeFunction for a
- * description of a getrange function. If @pad has no getrange function
- * installed (see gst_pad_set_getrange_function()) this function returns
- * #GST_FLOW_NOT_SUPPORTED.
+ * 调用 @pad 的 getrange 函数，详见 #GstPadGetRangeFunction 以获取关于 getrange 函数的描述。
+ * 如果 @pad 没有安装 getrange 函数（参见 gst_pad_set_getrange_function()），此函数返回 #GST_FLOW_NOT_SUPPORTED。
+ * 
+ * 如果 @buffer 指向一个保存 %NULL 的变量，当此函数返回 #GST_FLOW_OK 时，将在 @buffer 中放置一个有效的新 #GstBuffer。
+ * 在使用后，新缓冲区必须使用 gst_buffer_unref() 进行释放。
  *
- * If @buffer points to a variable holding %NULL, a valid new #GstBuffer will be
- * placed in @buffer when this function returns #GST_FLOW_OK. The new buffer
- * must be freed with gst_buffer_unref() after usage.
+ * 当 @buffer 指向一个指向有效 #GstBuffer 的变量时，当此函数返回 #GST_FLOW_OK 时，
+ * 结果数据将填充到缓冲区中。如果提供的缓冲区大于 @size，则只会填充 @size 字节到结果缓冲区中，并相应更新其大小。
  *
- * When @buffer points to a variable that points to a valid #GstBuffer, the
- * buffer will be filled with the result data when this function returns
- * #GST_FLOW_OK. If the provided buffer is larger than @size, only
- * @size bytes will be filled in the result buffer and its size will be updated
- * accordingly.
- *
- * Note that less than @size bytes can be returned in @buffer when, for example,
- * an EOS condition is near or when @buffer is not large enough to hold @size
- * bytes. The caller should check the result buffer size to get the result size.
- *
- * When this function returns any other result value than #GST_FLOW_OK, @buffer
- * will be unchanged.
- *
- * This is a lowlevel function. Usually gst_pad_pull_range() is used.
+ * 请注意，当缓冲区的大小不足以容纳 @size 字节时，@buffer 中可能会返回少于 @size 字节的数据，例如，
+ * 当接近 EOS（流结束）条件或者 @buffer 大小不足以容纳 @size 字节时。调用者应检查结果缓冲区的大小以获取结果大小。
+ * 
+ * 当此函数返回除 #GST_FLOW_OK 以外的任何其他结果值时，@buffer 不会发生变化。
+ * 
+ * 这是一个底层函数。通常使用 gst_pad_pull_range()。
  *
  * Returns: a #GstFlowReturn from the pad.
  *
@@ -5515,7 +5588,7 @@ gst_pad_push_event_unchecked (GstPad * pad, GstEvent * event,
   GST_OBJECT_LOCK (pad);
   pad->priv->using--;
   if (pad->priv->using == 0) {
-    /* pad is not active anymore, trigger idle callbacks */
+    /* 调用空闲探针函数 */
     PROBE_NO_DATA (pad, GST_PAD_PROBE_TYPE_PUSH | GST_PAD_PROBE_TYPE_IDLE,
         idle_probe_stopped, ret);
   }
