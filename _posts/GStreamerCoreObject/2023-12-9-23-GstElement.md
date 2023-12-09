@@ -124,6 +124,7 @@ typedef enum {
  *   * 实时源返回%GST_STATE_CHANGE_NO_PREROLL并且不生成数据。
  * @GST_STATE_CHANGE_PAUSED_TO_PLAYING: 从PAUSED状态到PLAYING状态的状态改变。
  *   * 大多数元素忽略此状态改变。
+ *   * 管道选择一个#GstClock并在将其设置为PLAYING之前将其分发给所有子元素。这意味着只允许在PLAYING状态下对#GstClock进行同步。
  *   * The pipeline selects a #GstClock and distributes this to all the children
  *     before setting them to PLAYING. This means that it is only allowed to
  *     synchronize on the #GstClock in the PLAYING state.
