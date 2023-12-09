@@ -1638,25 +1638,21 @@ gst_pad_mark_reconfigure (GstPad * pad)
 }
 
 /**
- * gst_pad_set_activate_function:
- * @p: a #GstPad.
- * @f: the #GstPadActivateFunction to set.
- *
- * Calls gst_pad_set_activate_function_full() with %NULL for the user_data and
- * notify.
+ * @name: gst_pad_set_activate_function
+ * @param p: a #GstPad.
+ * @param f: the #GstPadActivateFunction to set.
+ * @breif: 这是一个宏定义 #define gst_pad_set_activate_function(p,f)      gst_pad_set_activate_function_full((p),(f),NULL,NULL)
+ *         @user_data和@notify的参数为NULL，调用gst_pad_set_activate_function_full()
  */
 /**
- * gst_pad_set_activate_function_full:
+ * @name: gst_pad_set_activate_function_full
  * @pad: a #GstPad.
  * @activate: the #GstPadActivateFunction to set.
  * @user_data: user_data passed to @notify
  * @notify: notify called when @activate will not be used anymore.
  *
- * Sets the given activate function for @pad. The activate function will
- * dispatch to gst_pad_activate_mode() to perform the actual activation.
- * Only makes sense to set on sink pads.
- *
- * Call this function if your sink pad can start a pull-based task.
+ * 为 @pad 设置给定的激活函数 @activate。激活函数会分配给 gst_pad_activate_mode()来执行实际的激活。
+ * 只有在 sink pad设置才有意义。如果您的 sinkpad可以启动基于PUll的任务，请调用这个函数。
  */
 void
 gst_pad_set_activate_function_full (GstPad * pad,

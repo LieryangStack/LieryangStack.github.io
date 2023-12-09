@@ -161,11 +161,10 @@ static guint gst_element_signals[LAST_SIGNAL] = { 0 };
 static GMutex _element_pool_lock;
 static GThreadPool *gst_element_pool = NULL;
 
-/* this is used in gstelementfactory.c:gst_element_register() */
+/* 这会被使用在gstelementfactory.c:gst_element_register() */
 GQuark __gst_elementclass_factory = 0;
 
-/* used for gst_element_type_set_skip_documentation() and
- * gst_element_factory_get_skip_documentation() */
+/*用于gst_element_type_set_skip_documentation()和gst_element_factory_get_skip_documentation() */
 GQuark __gst_elementclass_skip_doc = 0;
 
 GType
