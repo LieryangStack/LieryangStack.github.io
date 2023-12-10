@@ -113,67 +113,52 @@ typedef enum {
 /**
  * GstStateChange:
  * @GST_STATE_CHANGE_NULL_TO_READY    : 从NULL状态到READY状态的状态改变。
- *   * 元素必须检查所需的资源是否可用。设备的sink和source通常会尝试探测设备以限制它们的caps。
- *   * 元素打开设备（以便一些特性可以被probe）。
+ *   1. 元素必须检查所需的资源是否可用。设备的sink和source通常会尝试探测设备以限制它们的caps。
+ *   2. 元素打开设备（以便一些特性可以被probe）。
  * @GST_STATE_CHANGE_READY_TO_PAUSED  : 从READY状态到PAUSED状态的状态改变。
- *   * 元素的pad被激活以准备接收数据。开始流线程。
- *   * 一些元素可能需要返回%GST_STATE_CHANGE_ASYNC，并在有足够信息时完成状态改变。对于sink来说，返回%GST_STATE_CHANGE_ASYNC
+ *   1. 元素的pad被激活以准备接收数据。开始流线程。
+ *   2. 一些元素可能需要返回%GST_STATE_CHANGE_ASYNC，并在有足够信息时完成状态改变。对于sink来说，返回%GST_STATE_CHANGE_ASYNC
  *     当它们收到第一个缓冲区或%GST_EVENT_EOS（预滚动）时，完成状态改变。
  *     在PAUSED状态下，当收到第一个缓冲区或%GST_EVENT_EOS（预滚动）时，sink还会阻塞数据流。 
- *   * 管道将running_time重置为0。
- *   * 实时源返回%GST_STATE_CHANGE_NO_PREROLL并且不生成数据。
+ *   3. 管道将running_time重置为0。
+ *   4. 实时源返回%GST_STATE_CHANGE_NO_PREROLL并且不生成数据。
  * @GST_STATE_CHANGE_PAUSED_TO_PLAYING: 从PAUSED状态到PLAYING状态的状态改变。
- *   * 大多数元素忽略此状态改变。
- *   * 管道选择一个#GstClock并在将其设置为PLAYING之前将其分发给所有子元素。这意味着只允许在PLAYING状态下对#GstClock进行同步。
- *   * The pipeline selects a #GstClock and distributes this to all the children
- *     before setting them to PLAYING. This means that it is only allowed to
- *     synchronize on the #GstClock in the PLAYING state.
- *   * The pipeline uses the #GstClock and the running_time to calculate the
- *     base_time. The base_time is distributed to all children when performing
- *     the state change.
- *   * Sink elements stop blocking on the preroll buffer or event and start
- *     rendering the data.
- *   * Sinks can post %GST_MESSAGE_EOS in the PLAYING state. It is not allowed
- *     to post %GST_MESSAGE_EOS when not in the PLAYING state.
- *   * While streaming in PAUSED or PLAYING elements can create and remove
- *     sometimes pads.
- *   * Live sources start generating data and return %GST_STATE_CHANGE_SUCCESS.
- * @GST_STATE_CHANGE_PLAYING_TO_PAUSED: state change from PLAYING to PAUSED.
- *   * Most elements ignore this state change.
- *   * The pipeline calculates the running_time based on the last selected
- *     #GstClock and the base_time. It stores this information to continue
- *     playback when going back to the PLAYING state.
- *   * Sinks unblock any #GstClock wait calls.
- *   * When a sink does not have a pending buffer to play, it returns
- *     #GST_STATE_CHANGE_ASYNC from this state change and completes the state
- *     change when it receives a new buffer or an %GST_EVENT_EOS.
- *   * Any queued %GST_MESSAGE_EOS items are removed since they will be reposted
- *     when going back to the PLAYING state. The EOS messages are queued in
- *     #GstBin containers.
- *   * Live sources stop generating data and return %GST_STATE_CHANGE_NO_PREROLL.
- * @GST_STATE_CHANGE_PAUSED_TO_READY  : state change from PAUSED to READY.
- *   * Sinks unblock any waits in the preroll.
- *   * Elements unblock any waits on devices
- *   * Chain or get_range functions return %GST_FLOW_FLUSHING.
- *   * The element pads are deactivated so that streaming becomes impossible and
- *     all streaming threads are stopped.
- *   * The sink forgets all negotiated formats
- *   * Elements remove all sometimes pads
- * @GST_STATE_CHANGE_READY_TO_NULL    : state change from READY to NULL.
- *   * Elements close devices
- *   * Elements reset any internal state.
+ *   1. 大多数元素忽略此状态改变。
+ *   2. 管道选择一个#GstClock并在将其设置为PLAYING之前将其分发给所有子元素。这意味着只允许在PLAYING状态下对#GstClock进行同步。
+ *   3. 管道使用 #GstClock和 running_time来计算base_time。在执行状态改变时，将base_time分发给所有子元素。
+ *   4. Sink元素停止在预滚动prepoll缓冲区或事件上阻塞，并开始渲染数据。
+ *   5. The pipeline uses the #GstClock and the running_time to calculate the
+ *   6. Sink可以在PLAYING状态下发布%GST_MESSAGE_EOS。不允许在不是PLAYING状态时发布%GST_MESSAGE_EOS。
+ *   7. 在PAUSED或PLAYING状态中进行流式传输时，元素有时会创建和移除pad。
+ *   8. 实时源开始生成数据并返回%GST_STATE_CHANGE_SUCCESS。
+ * 
+ * @GST_STATE_CHANGE_PLAYING_TO_PAUSED: 从 PLAYING 到 PAUSED 的状态变化。
+ *   1. Sink 解除所有 #GstClock 的等待调用。
+ *   2. 当 Sink 没有待播放的缓冲区时，它会从此状态变化返回 #GST_STATE_CHANGE_ASYNC，并在接收到新的缓冲区或 %GST_EVENT_EOS 时完成状态变化。
+ *   3. 任何排队的 %GST_MESSAGE_EOS 都会被移除，因为它们将在返回 PLAYING 状态时重新发布。这些 EOS 消息被排在 #GstBin 容器中。
+ *   4. 实时源停止生成数据并返回 %GST_STATE_CHANGE_NO_PREROLL。
+ * @GST_STATE_CHANGE_PAUSED_TO_READY  : 从 PAUSED 到 READY 的状态变化。
+ *   1. Sink 解除 preroll 中的所有等待。
+ *   2. 元素解除设备上的所有等待。
+ *   3. Chain 或 get_range 函数返回 %GST_FLOW_FLUSHING。
+ *   4. 元素的 pads 被停用，因此无法进行流传输，并停止所有流传输线程。
+ *   5. Sink 忘记所有已协商的格式。
+ *   6. 元素移除所有 sometimes pads。
+ * @GST_STATE_CHANGE_READY_TO_NULL    : 从 READY 到 NULL 的状态变化。
+ *   1. 元素关闭设备。
+ *   2. 元素重置任何内部状态。
+ * 
  * @GST_STATE_CHANGE_NULL_TO_NULL       : state change from NULL to NULL. (Since: 1.14)
  * @GST_STATE_CHANGE_READY_TO_READY     : state change from READY to READY,
  * This might happen when going to PAUSED asynchronously failed, in that case
- * elements should make sure they are in a proper, coherent READY state. (Since: 1.14)
+ * 这可能发生在异步转换到 PAUSED 失败的情况下，在这种情况下，元素应确保它们处于适当、一致的 READY 状态。 (自 1.14 版本开始)
  * @GST_STATE_CHANGE_PAUSED_TO_PAUSED   : state change from PAUSED to PAUSED.
- * This might happen when elements were in PLAYING state and 'lost state',
- * they should make sure to go back to real 'PAUSED' state (prerolling for example). (Since: 1.14)
+ * 这可能发生在元素处于 PLAYING 状态但是 'lost state' 的情况下，它们应确保返回真正的 'PAUSED' 状态（例如，预滚动）。 (自 1.14 版本开始)
  * @GST_STATE_CHANGE_PLAYING_TO_PLAYING : state change from PLAYING to PLAYING. (Since: 1.14)
  *
- * These are the different state changes an element goes through.
- * %GST_STATE_NULL &rArr; %GST_STATE_PLAYING is called an upwards state change
- * and %GST_STATE_PLAYING &rArr; %GST_STATE_NULL a downwards state change.
+ * 这些是元素经历的不同状态变化。
+ * %GST_STATE_NULL ⇒ %GST_STATE_PLAYING 被称为上升状态变化，
+ * 而 %GST_STATE_PLAYING ⇒ %GST_STATE_NULL 则是下降状态变化。
  */
 typedef enum /*< flags=0 >*/
 {
@@ -197,8 +182,197 @@ typedef enum /*< flags=0 >*/
 ```c
 /* gstelement.h */
 
+/**
+ * GstElementFlags:
+ * @GST_ELEMENT_FLAG_LOCKED_STATE: ignore state changes from parent
+ * @GST_ELEMENT_FLAG_SINK: the element is a sink
+ * @GST_ELEMENT_FLAG_SOURCE: the element is a source.
+ * @GST_ELEMENT_FLAG_PROVIDE_CLOCK: the element can provide a clock
+ * @GST_ELEMENT_FLAG_REQUIRE_CLOCK: the element requires a clock
+ * @GST_ELEMENT_FLAG_INDEXABLE: the element can use an index
+ * @GST_ELEMENT_FLAG_LAST: offset to define more flags
+ *
+ * 元素可能具有的标准flags。
+ */
+typedef enum
+{
+  GST_ELEMENT_FLAG_LOCKED_STATE   = (GST_OBJECT_FLAG_LAST << 0),
+  GST_ELEMENT_FLAG_SINK           = (GST_OBJECT_FLAG_LAST << 1),
+  GST_ELEMENT_FLAG_SOURCE         = (GST_OBJECT_FLAG_LAST << 2),
+  GST_ELEMENT_FLAG_PROVIDE_CLOCK  = (GST_OBJECT_FLAG_LAST << 3),
+  GST_ELEMENT_FLAG_REQUIRE_CLOCK  = (GST_OBJECT_FLAG_LAST << 4),
+  GST_ELEMENT_FLAG_INDEXABLE      = (GST_OBJECT_FLAG_LAST << 5),
+  /* padding */
+  GST_ELEMENT_FLAG_LAST           = (GST_OBJECT_FLAG_LAST << 10)
+} GstElementFlags;
 ```
 
 ### 2.3 GstElement相关结构体
+
+#### 2.3.1 GstElement
+
+```c
+/**
+ * GstElement:
+ * @state_lock: Used to serialize execution of gst_element_set_state()
+ * @state_cond: Used to signal completion of a state change
+ * @state_cookie: Used to detect concurrent execution of
+ * gst_element_set_state() and gst_element_get_state()
+ * @target_state: the target state of an element as set by the application
+ * @current_state: the current state of an element
+ * @next_state: the next state of an element, can be #GST_STATE_VOID_PENDING if
+ * the element is in the correct state.
+ * @pending_state: the final state the element should go to, can be
+ * #GST_STATE_VOID_PENDING if the element is in the correct state
+ * @last_return: the last return value of an element state change
+ * @bus: the bus of the element. This bus is provided to the element by the
+ * parent element or the application. A #GstPipeline has a bus of its own.
+ * @clock: the clock of the element. This clock is usually provided to the
+ * element by the toplevel #GstPipeline.
+ * @base_time: the time of the clock right before the element is set to
+ * PLAYING. Subtracting @base_time from the current clock time in the PLAYING
+ * state will yield the running_time against the clock.
+ * @start_time: the running_time of the last PAUSED state
+ * @numpads: number of pads of the element, includes both source and sink pads.
+ * @pads: (element-type Gst.Pad): list of pads
+ * @numsrcpads: number of source pads of the element.
+ * @srcpads: (element-type Gst.Pad): list of source pads
+ * @numsinkpads: number of sink pads of the element.
+ * @sinkpads: (element-type Gst.Pad): list of sink pads
+ * @pads_cookie: updated whenever the a pad is added or removed
+ * @contexts: (element-type Gst.Context): list of contexts
+ *
+ * GStreamer element abstract base class.
+ */
+struct _GstElement
+{
+  GstObject             object; /* 用于 */
+
+  /*< public >*/ /* with LOCK */
+  GRecMutex             state_lock;
+
+  /* element state */
+  GCond                 state_cond;
+  guint32               state_cookie;
+  GstState              target_state;
+  GstState              current_state;
+  GstState              next_state;
+  GstState              pending_state;
+  GstStateChangeReturn  last_return;
+
+  GstBus               *bus;
+
+  /* allocated clock */
+  GstClock             *clock;
+  GstClockTimeDiff      base_time; /* NULL/READY: 0 - PAUSED: current time - PLAYING: difference to clock */
+  GstClockTime          start_time;
+
+  /* element pads, these lists can only be iterated while holding
+   * the LOCK or checking the cookie after each LOCK. */
+  guint16               numpads;
+  GList                *pads;
+  guint16               numsrcpads;
+  GList                *srcpads;
+  guint16               numsinkpads;
+  GList                *sinkpads;
+  guint32               pads_cookie;
+
+  /* with object LOCK */
+  GList                *contexts;
+
+  /*< private >*/
+  gpointer _gst_reserved[GST_PADDING-1];
+};
+```
+
+### 2.3.2 GstElementClass
+
+```c
+/**
+ * GstElementClass:
+ * @parent_class: the parent class structure
+ * @metadata: metadata for elements of this class
+ * @elementfactory: the #GstElementFactory that creates these elements
+ * @padtemplates: a #GList of #GstPadTemplate
+ * @numpadtemplates: the number of padtemplates
+ * @pad_templ_cookie: changed whenever the padtemplates change
+ * @request_new_pad: called when a new pad is requested
+ * @release_pad: called when a request pad is to be released
+ * @get_state: get the state of the element
+ * @set_state: set a new state on the element
+ * @change_state: called by @set_state to perform an incremental state change
+ * @set_bus: set a #GstBus on the element
+ * @provide_clock: gets the #GstClock provided by the element
+ * @set_clock: set the #GstClock on the element
+ * @send_event: send a #GstEvent to the element
+ * @query: perform a #GstQuery on the element
+ * @state_changed: called immediately after a new state was set.
+ * @post_message: called when a message is posted on the element. Chain up to
+ *                the parent class' handler to have it posted on the bus.
+ * @set_context: set a #GstContext on the element
+ *
+ * GStreamer element class. Override the vmethods to implement the element
+ * functionality.
+ */
+struct _GstElementClass
+{
+  GstObjectClass         parent_class;
+
+  /*< public >*/
+  /* the element metadata */
+  gpointer		 metadata;
+
+  /* factory that the element was created from */
+  GstElementFactory     *elementfactory;
+
+  /* templates for our pads */
+  GList                 *padtemplates;
+  gint                   numpadtemplates;
+  guint32                pad_templ_cookie;
+
+  /*< private >*/
+  /* signal callbacks */
+  void (*pad_added)     (GstElement *element, GstPad *pad);
+  void (*pad_removed)   (GstElement *element, GstPad *pad);
+  void (*no_more_pads)  (GstElement *element);
+
+  /*< public >*/
+  /* virtual methods for subclasses */
+
+  /* request/release pads */
+  /* FIXME 2.0 harmonize naming with gst_element_request_pad */
+  GstPad*               (*request_new_pad)      (GstElement *element, GstPadTemplate *templ,
+                                                 const gchar* name, const GstCaps *caps);
+
+  void                  (*release_pad)          (GstElement *element, GstPad *pad);
+
+  /* state changes */
+  GstStateChangeReturn (*get_state)             (GstElement * element, GstState * state,
+                                                 GstState * pending, GstClockTime timeout);
+  GstStateChangeReturn (*set_state)             (GstElement *element, GstState state);
+  GstStateChangeReturn (*change_state)          (GstElement *element, GstStateChange transition);
+  void                 (*state_changed)         (GstElement *element, GstState oldstate,
+                                                 GstState newstate, GstState pending);
+
+  /* bus */
+  void                  (*set_bus)              (GstElement * element, GstBus * bus);
+
+  /* set/get clocks */
+  GstClock*             (*provide_clock)        (GstElement *element);
+  gboolean              (*set_clock)            (GstElement *element, GstClock *clock);
+
+  /* query functions */
+  gboolean              (*send_event)           (GstElement *element, GstEvent *event);
+
+  gboolean              (*query)                (GstElement *element, GstQuery *query);
+
+  gboolean              (*post_message)         (GstElement *element, GstMessage *message);
+
+  void                  (*set_context)          (GstElement *element, GstContext *context);
+
+  /*< private >*/
+  gpointer _gst_reserved[GST_PADDING_LARGE-2];
+};
+```
 
 ## 3 GstElement对象相关函数
