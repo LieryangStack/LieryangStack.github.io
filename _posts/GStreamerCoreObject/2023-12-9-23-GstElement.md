@@ -214,33 +214,26 @@ typedef enum
 ```c
 /**
  * GstElement:
- * @state_lock: Used to serialize execution of gst_element_set_state()
- * @state_cond: Used to signal completion of a state change
- * @state_cookie: Used to detect concurrent execution of
- * gst_element_set_state() and gst_element_get_state()
- * @target_state: the target state of an element as set by the application
- * @current_state: the current state of an element
- * @next_state: the next state of an element, can be #GST_STATE_VOID_PENDING if
- * the element is in the correct state.
- * @pending_state: the final state the element should go to, can be
- * #GST_STATE_VOID_PENDING if the element is in the correct state
- * @last_return: the last return value of an element state change
- * @bus: the bus of the element. This bus is provided to the element by the
- * parent element or the application. A #GstPipeline has a bus of its own.
- * @clock: the clock of the element. This clock is usually provided to the
- * element by the toplevel #GstPipeline.
- * @base_time: the time of the clock right before the element is set to
- * PLAYING. Subtracting @base_time from the current clock time in the PLAYING
- * state will yield the running_time against the clock.
- * @start_time: the running_time of the last PAUSED state
- * @numpads: number of pads of the element, includes both source and sink pads.
- * @pads: (element-type Gst.Pad): list of pads
- * @numsrcpads: number of source pads of the element.
- * @srcpads: (element-type Gst.Pad): list of source pads
- * @numsinkpads: number of sink pads of the element.
- * @sinkpads: (element-type Gst.Pad): list of sink pads
- * @pads_cookie: updated whenever the a pad is added or removed
- * @contexts: (element-type Gst.Context): list of contexts
+ * @state_lock: 多线程执行  gst_element_set_state() 的锁
+ * @state_cond: 通知其它条件锁等待，状态改变完成
+ * @state_cookie: 用于检测 gst_element_set_state() 和 gst_element_get_state() 的并发执行
+ * @target_state: 应用程序设置的元素的目标状态
+ * @current_state: 元素当前的状态
+ * @next_state: 元素的下一个状态，如果元素正处于正确的状态，则可以是 #GST_STATE_VOID_PENDING
+ * @pending_state: 元素应该转换到的最终状态，如果元素处于正确的状态，则可以是 #GST_STATE_VOID_PENDING
+ * @last_return: 元素状态改变的最后返回值
+ * @bus: 元素的bus总线，这个总线由父元素或应用程序提供给元素。#GstPipeline 有自己的总线。
+ * @clock: 元素的时钟。通常由顶层 #GstPipeline 提供给元素。
+ * @base_time: 元素设置为 PLAYING 之前时钟的时间。在 PLAYING 状态下，从当前时钟时间减去 @base_time 将得到相对于时钟的 running_time。
+ * @start_time: 上一个 PAUSED 状态的 running_time
+ * @numpads: pads的数量，包括source pads和sink pads.
+ * @pads: (element-type Gst.Pad): 存储pads的列表
+ * @numsrcpads: source pads的数量
+ * @srcpads: (element-type Gst.Pad): source pads的数列表
+ * @numsinkpads: sink pads的数量
+ * @sinkpads: (element-type Gst.Pad): sink pads的列表
+ * @pads_cookie: 每当添加或移除一个 pad 时更新
+ * @contexts: (element-type Gst.Context): 上下文列表
  *
  * GStreamer element abstract base class.
  */
@@ -253,12 +246,12 @@ struct _GstElement
 
   /* element state */
   GCond                 state_cond;
-  guint32               state_cookie;
-  GstState              target_state;
-  GstState              current_state;
-  GstState              next_state;
-  GstState              pending_state;
-  GstStateChangeReturn  last_return;
+  guint32               state_cookie; /* 每次设定元素到新的状态，这个值就会加一（增量值，不会减少） */
+  GstState              target_state; /* 应用程序设定的元素目标状态，元素目标状态不应该和pengding_state相同吗？？ */
+  GstState              current_state; /* 元素当前状态 */
+  GstState              next_state; /* 元素的下一个状态，如果元素正处于正确的状态，则可以是 #GST_STATE_VOID_PENDING */
+  GstState              pending_state; /* 元素应该转换到的最终状态，如果元素处于正确的状态，则可以是 #GST_STATE_VOID_PENDING */
+  GstStateChangeReturn  last_return; /* 上一次状态改变后的返回值 */
 
   GstBus               *bus;
 
@@ -291,28 +284,26 @@ struct _GstElement
 /**
  * GstElementClass:
  * @parent_class: the parent class structure
- * @metadata: metadata for elements of this class
- * @elementfactory: the #GstElementFactory that creates these elements
- * @padtemplates: a #GList of #GstPadTemplate
- * @numpadtemplates: the number of padtemplates
- * @pad_templ_cookie: changed whenever the padtemplates change
- * @request_new_pad: called when a new pad is requested
- * @release_pad: called when a request pad is to be released
- * @get_state: get the state of the element
- * @set_state: set a new state on the element
- * @change_state: called by @set_state to perform an incremental state change
- * @set_bus: set a #GstBus on the element
- * @provide_clock: gets the #GstClock provided by the element
- * @set_clock: set the #GstClock on the element
- * @send_event: send a #GstEvent to the element
- * @query: perform a #GstQuery on the element
- * @state_changed: called immediately after a new state was set.
- * @post_message: called when a message is posted on the element. Chain up to
- *                the parent class' handler to have it posted on the bus.
- * @set_context: set a #GstContext on the element
+ * @metadata: 此类元素的元数据
+ * @elementfactory: 创建这些元素的 #GstElementFactory
+ * @padtemplates:  #GstPadTemplate 的 #GList
+ * @numpadtemplates: padtemplates 的数量
+ * @pad_templ_cookie:  每当 padtemplates 更改时都会更改
+ * @request_new_pad: 请求新 pad 时调用
+ * @release_pad: 当请求 pad 要释放时调用
+ * @get_state: 获取元素的状态
+ * @set_state: 在元素上设置新状态
+ * @change_state: 被 @set_state 调用以执行增量状态更改
+ * @set_bus: 在元素上设置 #GstBus
+ * @provide_clock: 获取元素提供的 #GstClock
+ * @set_clock: 在元素上设置 #GstClock
+ * @send_event: 向元素发送 #GstEvent
+ * @query: 在元素上执行 #GstQuery
+ * @state_changed: 在设置新状态后立即调用。
+ * @post_message: 在元素上发布消息时调用。链接到父类的处理程序以将其发布到总线上。
+ * @set_context: 在元素上设置 #GstContext
  *
- * GStreamer element class. Override the vmethods to implement the element
- * functionality.
+ * 重写以上虚函数以实现用户定义元素的功能
  */
 struct _GstElementClass
 {

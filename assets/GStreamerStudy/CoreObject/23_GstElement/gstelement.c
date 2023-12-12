@@ -2914,20 +2914,18 @@ only_async_start:
  * gst_element_set_state:
  * @element: a #GstElement to change state of.
  * @state: the element's new #GstState.
+ * @note: 默认的状态设定函数是 gst_element_set_state_func ()
+ * @brief: 
+ * 设置元素的状态。这个函数将会尝试去设定 @element 到 @state状态。
+ * 元素会经历中间状态，比如 NULL -> READY -> PAUSE -> PLAYING，调用类虚函数（set_state）
  *
- * Sets the state of the element. This function will try to set the
- * requested state by going through all the intermediary states and calling
- * the class's state change function for each.
- *
- * This function can return #GST_STATE_CHANGE_ASYNC, in which case the
- * element will perform the remainder of the state change asynchronously in
- * another thread.
- * An application can use gst_element_get_state() to wait for the completion
- * of the state change or it can wait for a %GST_MESSAGE_ASYNC_DONE or
- * %GST_MESSAGE_STATE_CHANGED on the bus.
- *
- * State changes to %GST_STATE_READY or %GST_STATE_NULL never return
- * #GST_STATE_CHANGE_ASYNC.
+ * 这个函数可能返回 #GST_STATE_CHANGE_ASYNC，在这种情况下，元素将在另一个线程中异步执行剩余的状态改变。
+ * 
+ * 应用程序可以使用 gst_element_get_state() 来等待状态改变的完成，
+ * 或者等待总线上的 %GST_MESSAGE_ASYNC_DONE 或 %GST_MESSAGE_STATE_CHANGED。
+ * 
+ * 到 %GST_STATE_READY 或 %GST_STATE_NULL 的状态改变永远不会返回
+ * #GST_STATE_CHANGE_ASYNC。
  *
  * Returns: Result of the state change using #GstStateChangeReturn.
  *
@@ -2950,8 +2948,7 @@ gst_element_set_state (GstElement * element, GstState state)
 }
 
 /*
- * default set state function, calculates the next state based
- * on current state and calls the change_state function
+ * 默认设置状态函数，根据当前状态计算下一个状态，并调用change_state函数
  */
 static GstStateChangeReturn
 gst_element_set_state_func (GstElement * element, GstState state)
@@ -2966,15 +2963,13 @@ gst_element_set_state_func (GstElement * element, GstState state)
   GST_CAT_DEBUG_OBJECT (GST_CAT_STATES, element, "set_state to %s",
       gst_element_state_get_name (state));
 
-  /* state lock is taken to protect the set_state() and get_state()
-   * procedures, it does not lock any variables. */
+  /*只是用于给set_state或者get_state上锁，不锁定任何变量*/
   GST_STATE_LOCK (element);
 
-  /* now calculate how to get to the new state */
+  /*现在计算如何到达新的状态*/
   GST_OBJECT_LOCK (element);
   old_ret = GST_STATE_RETURN (element);
-  /* previous state change returned an error, remove all pending
-   * and next states */
+  /* 上一个状态变化返回错误，删除所有未处理状态和下一个状态 */
   if (old_ret == GST_STATE_CHANGE_FAILURE) {
     GST_STATE_NEXT (element) = GST_STATE_VOID_PENDING;
     GST_STATE_PENDING (element) = GST_STATE_VOID_PENDING;
@@ -2983,19 +2978,17 @@ gst_element_set_state_func (GstElement * element, GstState state)
 
   current = GST_STATE (element);
   next = GST_STATE_NEXT (element);
-  old_pending = GST_STATE_PENDING (element);
+  old_pending = GST_STATE_PENDING (element); 
 
-  /* this is the (new) state we should go to. TARGET is the last state we set on
-   * the element. */
-  if (state != GST_STATE_TARGET (element)) {
+  /*这是我们应该进入的(新)状态。TARGET是我们在元素上设置的最后一个状态。*/
+  if (state != GST_STATE_TARGET (element)) { /* 如果本次设定的@state不等于上次元素被设定的target state,则执行 */
     GST_CAT_DEBUG_OBJECT (GST_CAT_STATES, element,
         "setting target state to %s", gst_element_state_get_name (state));
     GST_STATE_TARGET (element) = state;
-    /* increment state cookie so that we can track each state change. We only do
-     * this if this is actually a new state change. */
+    /*增量状态cookie，以便我们可以跟踪每个状态的变化。只有当这是一个新的状态变化时我们才这样做。*/
     element->state_cookie++;
   }
-  GST_STATE_PENDING (element) = state;
+  GST_STATE_PENDING (element) = state; /* 未处理状态等于目标状态 */
 
   GST_CAT_DEBUG_OBJECT (GST_CAT_STATES, element,
       "current %s, old_pending %s, next %s, old return %s",
@@ -3004,30 +2997,31 @@ gst_element_set_state_func (GstElement * element, GstState state)
       gst_element_state_get_name (next),
       gst_element_state_change_return_get_name (old_ret));
 
-  /* if the element was busy doing a state change, we just update the
-   * target state, it'll get to it async then. */
+  /*如果元素忙于状态更改，我们只需更新目标状态，然后它将异步到达它。*/
   if (old_pending != GST_STATE_VOID_PENDING) {
-    /* upwards state change will happen ASYNC */
+    /* 如果想上变化状态，状态改变将会是异步ASYNC发生 */
     if (old_pending <= state)
       goto was_busy;
-    /* element is going to this state already */
+    /* element 将要进入@state */
     else if (next == state)
       goto was_busy;
-    /* element was performing an ASYNC upward state change and
-     * we request to go downward again. Start from the next pending
-     * state then. */
+    
+    /**
+     * 元素正在执行向上的异步状态变化，我们请求向下变化。
+     * 那么就从下个待处理状态开始
+    */
     else if (next > state
         && GST_STATE_RETURN (element) == GST_STATE_CHANGE_ASYNC) {
       current = next;
     }
   }
   next = GST_STATE_GET_NEXT (current, state);
-  /* now we store the next state */
+  /*现在我们存储下一个状态*/
   GST_STATE_NEXT (element) = next;
-  /* mark busy, we need to check that there is actually a state change
-   * to be done else we could accidentally override SUCCESS/NO_PREROLL and
-   * the default element change_state function has no way to know what the
-   * old value was... could consider this a FIXME...*/
+
+  /* 标记为busy，我们需要检查是否确实需要进行状态更改，否则可能不小心覆盖SUCCESS/NO_PREROLL，
+   * 并且默认元素change_state函数无法知道原来的值是什么……可以认为这是一个修复…
+   */
   if (current != next)
     GST_STATE_RETURN (element) = GST_STATE_CHANGE_ASYNC;
 
@@ -3038,7 +3032,7 @@ gst_element_set_state_func (GstElement * element, GstState state)
       (next != state ? "intermediate" : "final"),
       gst_element_state_get_name (current), gst_element_state_get_name (next));
 
-  /* now signal any waiters, they will error since the cookie was incremented */
+  /*现在通知所有等待者，他们将会出错，因为cookie是递增的*/
   GST_STATE_BROADCAST (element);
 
   GST_OBJECT_UNLOCK (element);
@@ -3069,11 +3063,12 @@ was_busy:
  * gst_element_change_state:
  * @element: a #GstElement
  * @transition: the requested transition
+ * @note: 调用的是元素状态改变的虚函数，默认虚函数实现是 gst_element_change_state_func ()
+ * @brief: 
  *
- * Perform @transition on @element.
+ * 在 @element 元素上执行 @transition 转换。
  *
- * This function must be called with STATE_LOCK held and is mainly used
- * internally.
+ * 这个函数必须在持有 STATE_LOCK 的情况下调用，主要用于内部。
  *
  * Returns: the #GstStateChangeReturn of the state transition.
  */
@@ -3087,7 +3082,7 @@ gst_element_change_state (GstElement * element, GstStateChange transition)
 
   GST_TRACER_ELEMENT_CHANGE_STATE_PRE (element, transition);
 
-  /* call the state change function so it can set the state */
+  /* 调用状态改变函数，这样它可以设置状态 */
   if (oclass->change_state)
     ret = (oclass->change_state) (element, transition);
   else
@@ -3236,6 +3231,7 @@ gst_element_pads_activate (GstElement * element, gboolean active)
   GST_CAT_DEBUG_OBJECT (GST_CAT_ELEMENT_PADS, element,
       "%s pads", active ? "activate" : "deactivate");
 
+  /* 先激活src pad */
   iter = gst_element_iterate_src_pads (element);
   res =
       iterator_activate_fold_with_resync (iter,
@@ -3244,6 +3240,7 @@ gst_element_pads_activate (GstElement * element, gboolean active)
   if (G_UNLIKELY (!res))
     goto src_failed;
 
+  /* 再激活sink pad */
   iter = gst_element_iterate_sink_pads (element);
   res =
       iterator_activate_fold_with_resync (iter,
@@ -3272,7 +3269,7 @@ sink_failed:
   }
 }
 
-/* is called with STATE_LOCK */
+/* 被调用必须使用 STATE_LOCK */
 static GstStateChangeReturn
 gst_element_change_state_func (GstElement * element, GstStateChange transition)
 {
@@ -3284,7 +3281,7 @@ gst_element_change_state_func (GstElement * element, GstStateChange transition)
   state = (GstState) GST_STATE_TRANSITION_CURRENT (transition);
   next = GST_STATE_TRANSITION_NEXT (transition);
 
-  /* if the element already is in the given state, we just return success */
+  /* 如果元素已经处于给定状态，则返回success */
   if (next == GST_STATE_VOID_PENDING || state == next)
     goto was_ok;
 
@@ -3309,13 +3306,14 @@ gst_element_change_state_func (GstElement * element, GstStateChange transition)
     case GST_STATE_CHANGE_READY_TO_NULL:{
       GList *l;
 
-      /* deactivate pads in both cases, since they are activated on
-         ready->paused but the element might not have made it to paused */
+      /* PAUSED 到 READY 和 READY 到 NULL，在这两种情况下，停用Pads
+       * 因为他们已经被激活在 ready->paused
+       */
       if (!gst_element_pads_activate (element, FALSE)) {
         result = GST_STATE_CHANGE_FAILURE;
       }
 
-      /* Remove all non-persistent contexts */
+      /* 删除所有非持久上下文 */
       GST_OBJECT_LOCK (element);
       for (l = element->contexts; l;) {
         GstContext *context = l->data;

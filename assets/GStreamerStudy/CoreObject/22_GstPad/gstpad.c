@@ -1001,20 +1001,21 @@ post_activate (GstPad * pad, GstPadMode new_mode)
   }
 }
 
+
 /**
  * gst_pad_set_active:
  * @pad: the #GstPad to activate or deactivate.
  * @active: whether or not the pad should be active.
  *
- * Activates or deactivates the given pad.
- * Normally called from within core state change functions.
+ * 激活或停用给定的 pad。
+ * 通常在核心状态改变函数内部调用。
  *
- * If @active, makes sure the pad is active. If it is already active, either in
- * push or pull mode, just return. Otherwise dispatches to the pad's activate
- * function to perform the actual activation.
+ * 如果 @active 为真，确保 pad 处于激活状态。如果它已经在推送或拉取模式下激活，则直接返回。
+ * 否则分派到 pad 的激活函数来执行实际的激活操作。
  *
- * If not @active, calls gst_pad_activate_mode() with the pad's current mode
- * and a %FALSE argument.
+ * 如果 @active 为假，则调用 gst_pad_activate_mode() 函数，使用 pad 当前的模式和 %FALSE 参数。
+ * 
+ * @active为TRUE的时候，激活函数调用的是虚函数激活，默认的虚函数其实就是对 activate_mode_internal ()包装
  *
  * Returns: %TRUE if the operation was successful.
  *
@@ -1034,10 +1035,10 @@ gst_pad_set_active (GstPad * pad, gboolean active)
   ACQUIRE_PARENT (pad, parent, no_parent);
   GST_OBJECT_UNLOCK (pad);
 
-  if (active) {
+  if (active) { /* 激活Pad */
     if (old == GST_PAD_MODE_NONE) {
       GST_DEBUG_OBJECT (pad, "activating pad from none");
-      ret = (GST_PAD_ACTIVATEFUNC (pad)) (pad, parent);
+      ret = (GST_PAD_ACTIVATEFUNC (pad)) (pad, parent); /* 默认虚函数是，PUSH模式下激活 */
       if (ret)
         pad->ABI.abi.last_flowret = GST_FLOW_OK;
     } else {
@@ -1045,7 +1046,7 @@ gst_pad_set_active (GstPad * pad, gboolean active)
           gst_pad_mode_get_name (old));
       ret = TRUE;
     }
-  } else {
+  } else {  /* 停用Pad，调用内部函数会把Pad设定为None模式 */
     if (old == GST_PAD_MODE_NONE) {
       GST_DEBUG_OBJECT (pad, "pad was inactive");
       ret = TRUE;
@@ -1088,10 +1089,10 @@ failed:
 
 /**
  * @name: activate_mode_internal
- * @param A: 
  * @call: 
- * @calledby: 
- * @note: 
+ * @calledby: gst_pad_activate_default () 默认激活函数
+ *            gst_pad_activate_mode ()
+ * @note: 停用状态下的Pad，模式会被修改为 GST_PAD_MODE_NONE
  * @brief: 
 */
 static gboolean
@@ -1108,11 +1109,13 @@ activate_mode_internal (GstPad * pad, GstObject * parent, GstPadMode mode,
   dir = GST_PAD_DIRECTION (pad);
   GST_OBJECT_UNLOCK (pad);
 
+  /* 如果不是激活，新Pad状态就是 GST_PAD_MODE_NONE */
   new = active ? mode : GST_PAD_MODE_NONE;
 
-  if (old == new) /* 如果已经被激活 */
+  if (old == new) /* 如果old pad状态和更改的new pad状态相同，直接退出 */
     goto was_ok;
 
+  /* 如果Pad已经被激活处于Push或者Pull模式下，新状态和以前状态不同，则执行 */
   if (active && old != mode && old != GST_PAD_MODE_NONE) {
     /* Pad在错误的@mode模式下已经被激活，我们先把以前的模式停用，再继续激活 */
     GST_DEBUG_OBJECT (pad, "deactivating pad from %s mode",
@@ -1123,13 +1126,14 @@ activate_mode_internal (GstPad * pad, GstObject * parent, GstPadMode mode,
     old = GST_PAD_MODE_NONE;
   }
 
+
   switch (mode) {
     case GST_PAD_MODE_PULL: /* Pull模式 */
     {
       if (dir == GST_PAD_SINK) {  /* Pull模式，如果Pad方向是Sink */
         if ((peer = gst_pad_get_peer (pad))) {
           GST_DEBUG_OBJECT (pad, "calling peer");
-          if (G_UNLIKELY (!gst_pad_activate_mode (peer, mode, active)))  /* 查看对端Pad是否已经被激活 */
+          if (G_UNLIKELY (!gst_pad_activate_mode (peer, mode, active)))  /* 查看对端Src Pad是否已经被激活，如果没有激活就在Pull模式下激活 */
             goto peer_failed;
           gst_object_unref (peer);
         } else {
@@ -1155,7 +1159,7 @@ activate_mode_internal (GstPad * pad, GstObject * parent, GstPadMode mode,
   if (active)
     GST_OBJECT_FLAG_SET (pad, GST_PAD_FLAG_NEED_RECONFIGURE);
 
-  /* 如果我们之前还没有切换到'new'模式，pre_activate返回TRUE（这里面设定in_activation=TRUE） */
+  /* 如果我们之前还没有切换到'new'模式，pre_activate返回TRUE（这里面设定in_activation=TRUE），表示正在激活 */
   if (pre_activate (pad, new)) { /* 一般情况下都是返回TRUE */
 
     if (GST_PAD_ACTIVATEMODEFUNC (pad)) { /* 如果有激活模式函数，则执行 */
@@ -1166,7 +1170,7 @@ activate_mode_internal (GstPad * pad, GstObject * parent, GstPadMode mode,
       /* can happen for sinks of passthrough elements */
     }
 
-    /* 设置  pad->priv->in_activation = FALSE; 为什么要设置？？？？ */
+    /* 设置  pad->priv->in_activation = FALSE;  */
     post_activate (pad, new);
   }
 
@@ -1233,9 +1237,11 @@ failure:
 
 /**
  * @name: gst_pad_activate_mode
- * @calledby: activate_mode_internal ()
- * @brief: 根据参数调用 activate_mode_internal () 函数使 @pad 处于响应的激活/未激活状态。
+ * @calledby: activate_mode_internal () ，调用该函数的目的就是检查是否激活，
+ * @brief: 1.可以用来检测Pad是否激活，并且处于@mode激活模式下。
+ *         2.如果Pad目前不处于@mode，会根据@mode和@active激活或者停用Pad。
  * @note: 该函数仅供内部激活函数使用
+ *        停用状态下的Pad，模式一定会被内部修改为 GST_PAD_MODE_NONE
  * 
  * MT safe.
 */
