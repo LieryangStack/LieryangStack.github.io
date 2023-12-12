@@ -308,9 +308,9 @@ gst_pad_init (GstPad * pad)
 
   GST_PAD_DIRECTION (pad) = GST_PAD_UNKNOWN;
 
-  GST_PAD_ACTIVATEFUNC (pad) = gst_pad_activate_default;
-  GST_PAD_EVENTFUNC (pad) = gst_pad_event_default;
-  GST_PAD_QUERYFUNC (pad) = gst_pad_query_default;
+  GST_PAD_ACTIVATEFUNC (pad) = gst_pad_activate_default; /* 默认激活函数（默认Push模式） */
+  GST_PAD_EVENTFUNC (pad) = gst_pad_event_default; /* 默认事件处理函数 */
+  GST_PAD_QUERYFUNC (pad) = gst_pad_query_default; /* 默认查询处理函数 */
   GST_PAD_ITERINTLINKFUNC (pad) = gst_pad_iterate_internal_links_default;
   GST_PAD_CHAINLISTFUNC (pad) = gst_pad_chain_list_default;
 
@@ -3394,7 +3394,7 @@ query_forward_func (GstPad * pad, QueryData * data)
 
 /**
  * gst_pad_query_default:
- * @pad: a #GstPad to call the default query handler on.
+ * @pad: 一个 #GstPad被调用默认查询处理
  * @parent: (allow-none): the parent of @pad or %NULL
  * @query: (transfer none): the #GstQuery to handle.
  *
@@ -3413,7 +3413,7 @@ gst_pad_query_default (GstPad * pad, GstObject * parent, GstQuery * query)
 
   switch (GST_QUERY_TYPE (query)) {
     case GST_QUERY_SCHEDULING:
-      forward = GST_PAD_IS_PROXY_SCHEDULING (pad);
+      forward = GST_PAD_IS_PROXY_SCHEDULING (pad); 
       break;
     case GST_QUERY_ALLOCATION:
       forward = GST_PAD_IS_PROXY_ALLOCATION (pad);
@@ -4161,16 +4161,11 @@ check_sticky (GstPad * pad, GstEvent * event)
  * @pad: a #GstPad to invoke the default query on.
  * @query: (transfer none): the #GstQuery to perform.
  *
- * Dispatches a query to a pad. The query should have been allocated by the
- * caller via one of the type-specific allocation functions. The element that
- * the pad belongs to is responsible for filling the query with an appropriate
- * response, which should then be parsed with a type-specific query parsing
- * function.
+ * 向Pad发送一个查询。然后回调用Pad上设定的查询解析函数，解析查询。（查询解析函数是一个虚函数，）
+ * 
+ * 再次强调，调用者负责查询结构的分配和回收。
  *
- * Again, the caller is responsible for both the allocation and deallocation of
- * the query structure.
- *
- * Please also note that some queries might need a running pipeline to work.
+ * 请注意，某些查询可能需要一个运行中的管道才能工作。
  *
  * Returns: %TRUE if the query could be performed.
  */
@@ -4186,7 +4181,7 @@ gst_pad_query (GstPad * pad, GstQuery * query)
   g_return_val_if_fail (GST_IS_PAD (pad), FALSE);
   g_return_val_if_fail (GST_IS_QUERY (query), FALSE);
 
-  if (GST_PAD_IS_SRC (pad)) {
+  if (GST_PAD_IS_SRC (pad)) { /* 要查询@pad如果是src，肯定是对端sink查询我src，所以是上游查询 */
     if (G_UNLIKELY (!GST_QUERY_IS_UPSTREAM (query)))
       goto wrong_direction;
     type = GST_PAD_PROBE_TYPE_QUERY_UPSTREAM;
@@ -4294,10 +4289,9 @@ probe_stopped:
  * @pad: a #GstPad to invoke the peer query on.
  * @query: (transfer none): the #GstQuery to perform.
  *
- * Performs gst_pad_query() on the peer of @pad.
+ * 在@pad的对端执行 gst_pad_query()
  *
- * The caller is responsible for both the allocation and deallocation of
- * the query structure.
+ * 调用者负责查询结构的分配和释放。
  *
  * Returns: %TRUE if the query could be performed. This function returns %FALSE
  * if @pad has no peer.
@@ -4313,11 +4307,12 @@ gst_pad_peer_query (GstPad * pad, GstQuery * query)
   g_return_val_if_fail (GST_IS_PAD (pad), FALSE);
   g_return_val_if_fail (GST_IS_QUERY (query), FALSE);
 
+  /* 如果是src pad，肯定是要查询下游 */
   if (GST_PAD_IS_SRC (pad)) {
     if (G_UNLIKELY (!GST_QUERY_IS_DOWNSTREAM (query)))
       goto wrong_direction;
     type = GST_PAD_PROBE_TYPE_QUERY_DOWNSTREAM;
-  } else if (GST_PAD_IS_SINK (pad)) {
+  } else if (GST_PAD_IS_SINK (pad)) { /* 查询上游 */
     if (G_UNLIKELY (!GST_QUERY_IS_UPSTREAM (query)))
       goto wrong_direction;
     type = GST_PAD_PROBE_TYPE_QUERY_UPSTREAM;
@@ -4327,16 +4322,17 @@ gst_pad_peer_query (GstPad * pad, GstQuery * query)
   GST_DEBUG_OBJECT (pad, "peer query %p (%s)", query,
       GST_QUERY_TYPE_NAME (query));
 
+  /* 是否是序列化查询 */
   serialized = GST_QUERY_IS_SERIALIZED (query);
 
   GST_OBJECT_LOCK (pad);
   if (GST_PAD_IS_SRC (pad) && serialized) {
-    /* all serialized queries on the srcpad trigger push of
-     * sticky events */
+    /* srcpad上的所有序列化查询都会触发粘性事件的Push */
     if (check_sticky (pad, NULL) != GST_FLOW_OK)
       goto sticky_failed;
   }
 
+  /* 探针函数调用 */
   PROBE_PUSH (pad, type | GST_PAD_PROBE_TYPE_PUSH |
       GST_PAD_PROBE_TYPE_BLOCK, query, probe_stopped);
   PROBE_PUSH (pad, type | GST_PAD_PROBE_TYPE_PUSH, query, probe_stopped);
