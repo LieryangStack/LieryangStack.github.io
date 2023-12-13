@@ -1163,8 +1163,7 @@ activate_mode_internal (GstPad * pad, GstObject * parent, GstPadMode mode,
   if (pre_activate (pad, new)) { /* 一般情况下都是返回TRUE */
 
     if (GST_PAD_ACTIVATEMODEFUNC (pad)) { /* 如果有激活模式函数，则执行 */
-      if (G_UNLIKELY (!GST_PAD_ACTIVATEMODEFUNC (pad) (pad, parent, mode,
-                  active)))
+      if (G_UNLIKELY (!GST_PAD_ACTIVATEMODEFUNC (pad) (pad, parent, mode, active))) /* 调用激活调度模式虚函数 */
         goto failure;
     } else {
       /* can happen for sinks of passthrough elements */
