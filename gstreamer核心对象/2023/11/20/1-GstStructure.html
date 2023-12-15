@@ -1,0 +1,1235 @@
+<!DOCTYPE html>
+<html><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>一、GstStructure | 李尔阳主页</title>
+<meta name="generator" content="Jekyll v3.9.3" />
+<meta property="og:title" content="一、GstStructure" />
+<meta name="author" content="LieryangStack" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="1 GstStructure 基本概念" />
+<meta property="og:description" content="1 GstStructure 基本概念" />
+<link rel="canonical" href="https://lieryangstack.github.io//gstreamer%E6%A0%B8%E5%BF%83%E5%AF%B9%E8%B1%A1/2023/11/20/1-GstStructure.html" />
+<meta property="og:url" content="https://lieryangstack.github.io//gstreamer%E6%A0%B8%E5%BF%83%E5%AF%B9%E8%B1%A1/2023/11/20/1-GstStructure.html" />
+<meta property="og:site_name" content="李尔阳主页" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2023-11-20T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="一、GstStructure" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"LieryangStack"},"dateModified":"2023-11-20T00:00:00+00:00","datePublished":"2023-11-20T00:00:00+00:00","description":"1 GstStructure 基本概念","headline":"一、GstStructure","mainEntityOfPage":{"@type":"WebPage","@id":"https://lieryangstack.github.io//gstreamer%E6%A0%B8%E5%BF%83%E5%AF%B9%E8%B1%A1/2023/11/20/1-GstStructure.html"},"url":"https://lieryangstack.github.io//gstreamer%E6%A0%B8%E5%BF%83%E5%AF%B9%E8%B1%A1/2023/11/20/1-GstStructure.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="shortcut icon" type="image/x-icon" href="/lieryang.ico">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-noto-sans@0.0.72/index.min.css">
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <script src="/assets/js/main.js"></script><link type="application/atom+xml" rel="alternate" href="https://lieryangstack.github.io//feed.xml" title="李尔阳主页" /><link rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
+
+<!-- and it's easy to individually load additional languages -->
+<script charset="UTF-8"
+        src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/go.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+// Init highlight js
+document.addEventListener('DOMContentLoaded', function(event) {
+  var els = document.querySelectorAll('pre code')
+
+  function addLangData(block) {
+    var outer = block.parentElement.parentElement.parentElement;
+    var lang = block.getAttribute('data-lang');
+    for (var i = 0; i < outer.classList.length; i++) {
+      var cls = outer.classList[i];
+      if (cls.startsWith('language-')) {
+        lang = cls;
+        break;
+      }
+    }
+    if (!lang) {
+      cls = block.getAttribute('class');
+      lang = cls ? cls.replace('hljs ', '') : '';
+    }
+    if (lang.startsWith('language-')) {
+      lang = lang.substr(9);
+    }
+    block.setAttribute('class', 'hljs ' + lang);
+    block.parentNode.setAttribute('data-lang', lang);
+  }
+
+  function addBadge(block) {
+    var enabled = ('true' || 'true').toLowerCase();
+    if (enabled == 'true') {
+      var pre = block.parentElement;
+      pre.classList.add('badge');
+    }
+  }
+
+  function handle(block) {
+    addLangData(block);
+    addBadge(block)
+    hljs.highlightBlock(block);
+  }
+
+  for (var i = 0; i < els.length; i++) {
+    var el = els[i];
+    handle(el);
+  }
+});
+</script>
+
+<style>
+  /* code language badge */
+  pre.badge::before {
+    content: attr(data-lang);
+    color: #fff;
+    background-color: #ff4e00;
+    padding: 0 .5em;
+    border-radius: 0 2px;
+    text-transform: uppercase;
+    text-align: center;
+    min-width: 32px;
+    display: inline-block;
+    position: absolute;
+    right: 0;
+  }
+
+  /* fix wrong badge display for firefox browser */
+  code > table pre::before {
+    display: none;
+  }
+</style>
+<link href='https://lieryangstack.github.io//assets/css/syntax.css' rel='stylesheet' type='text/css' />
+</head>
+<body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<header class="site-header " role="banner">
+
+  <div class="wrapper">
+    <div class="site-header-inner"><span class="site-brand"><a class="site-brand-inner" rel="author" href="/">
+  <img class="site-favicon" title="李尔阳主页" src="" onerror="this.style.display='none'">
+  李尔阳主页
+</a>
+</span><nav class="site-nav">
+          <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+          <label for="nav-trigger">
+            <span class="menu-icon">
+              <svg viewBox="0 0 18 15" width="18px" height="15px">
+                <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+              </svg>
+            </span>
+          </label>
+
+          <!-- <div class="trigger"><a class="page-link" href="/about.html">关于</a><a class="page-link" href="/archives.html">归档</a><a class="page-link" href="/categories.html">分类</a><a class="page-link" href="/">主页</a><a class="page-link" href="/tags.html">标签</a>
+
+
+
+
+
+
+
+
+
+</div> -->
+
+          <div class="trigger">
+             <a class="page-link" href="/about.html">关于</a>
+            <a class="page-link" href="/categories.html">分类</a>
+            <a class="page-link" href="/archives.html">归档</a>
+            <a class="page-link" href="/tags.html">标签</a>
+            <a class="page-link" href="/assets/index.html">下载</a>
+            <!-- 在这里添加更多的导航项 -->
+          </div>
+          
+
+        </nav></div>
+  </div>
+</header>
+
+<script>
+  function initHeader() {
+    var lastScrollY = getScrollPos().y;
+    var documentElement = document.documentElement;
+
+    function storeScrollData() {
+      var y = getScrollPos().y;var scrollStatus = "";
+
+      if (y <= 0) {
+        scrollStatus = "top";
+      } else if ((window.innerHeight + y) >= document.body.offsetHeight) {
+        scrollStatus = "bottom";
+      } else {
+        var isScrollDown = (y - lastScrollY > 0) ? true : false;
+        scrollStatus = isScrollDown ? "down" : "up";
+      }
+
+      lastScrollY = y;
+      documentElement.setAttribute("data-scroll-status", scrollStatus);
+    }
+
+    window.addEventListener('scroll', function(e) {
+      storeScrollData();
+    });
+
+    storeScrollData();
+  }
+  document.addEventListener('DOMContentLoaded', initHeader);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  function hashLocate(hashValue) {
+    hashValue = hashValue.replace(/^.*#h-/, '');
+    hashValue = decodeURIComponent(hashValue);
+    var element = document.getElementById(hashValue);
+
+    if (!element) {
+      return;
+    }
+
+    var header = document.querySelector('header.site-header');
+    var headerRect = header.getBoundingClientRect();
+    var headerTop = Math.floor(headerRect.top);
+    var headerHeight = Math.floor(headerRect.height);
+    var scrollPos = getScrollPos();
+    var offsetY = element.offsetTop - (headerTop + headerHeight + 20);
+
+    if (offsetY == scrollPos.y) {
+      return;
+    }
+
+    if (headerTop == 0  && offsetY > scrollPos.y) {
+      offsetY += headerHeight + 2;
+    } else if (headerTop < 0  && offsetY < scrollPos.y) {
+      offsetY -= headerHeight - 2;
+    }
+
+    smoothScrollTo(offsetY);
+  }
+
+  // The first event occurred
+  window.addEventListener('load', function(event) {
+    if (window.location.hash) {
+      hashLocate(window.location.hash);
+    }
+  });
+
+  // The first event occurred
+  window.addEventListener('click', function(event) {
+    if (event.target.tagName.toLowerCase() == 'a') {
+      hashLocate(event.target.getAttribute('href'));
+    }
+  });
+</script>
+<div class="theme-toggle">
+  <input type="checkbox" id="theme-switch">
+  <label for="theme-switch">
+    <div class="toggle"></div>
+    <div class="names">
+      <p class="light">Light</p>
+      <p class="dark">Dark</p>
+    </div>
+  </label>
+</div>
+
+
+
+
+<script>
+  (function() {
+    var sw = document.getElementById('theme-switch');
+    var html = document.getElementsByTagName('html')[0];
+    var nightModeOption = ('auto' || 'auto').toLowerCase();
+    var storage = nightModeOption === 'manual'
+        ? localStorage
+        : sessionStorage;
+    var themeData = loadThemeData();
+
+    function saveThemeData(data) {
+      storage.setItem('theme', JSON.stringify(data));
+    }
+
+    function loadThemeData() {
+      var data = storage.getItem('theme');
+      try {
+        data = JSON.parse(data ? data : '');
+      } catch(e) {
+        data = { nightShift: undefined, autoToggleAt: 0 };
+        saveThemeData(data);
+      }
+      return data;
+    }
+
+    function handleThemeToggle(nightShift) {
+      themeData.nightShift = nightShift;
+      saveThemeData(themeData);
+      html.dataset.theme = nightShift ? 'dark' : 'light';
+      setTimeout(function() {
+        sw.checked = nightShift ? true : false;
+      }, 50);
+    }
+
+    function autoThemeToggle() {
+      // Next time point of theme toggle
+      var now = new Date();
+      var toggleAt = new Date();
+      var hours = now.getHours();
+      var nightShift = hours >= 19 || hours <=7;
+
+      if (nightShift) {
+        if (hours > 7) {
+          toggleAt.setDate(toggleAt.getDate() + 1);
+        }
+        toggleAt.setHours(7);
+      } else {
+        toggleAt.setHours(19);
+      }
+
+      toggleAt.setMinutes(0);
+      toggleAt.setSeconds(0);
+      toggleAt.setMilliseconds(0)
+
+      var delay = toggleAt.getTime() - now.getTime();
+
+      // auto toggle theme mode
+      setTimeout(function() {
+        handleThemeToggle(!nightShift);
+      }, delay);
+
+      return {
+        nightShift: nightShift,
+        toggleAt: toggleAt.getTime()
+      };
+    }
+
+    // Listen the theme toggle event
+    sw.addEventListener('change', function(event) {
+      handleThemeToggle(event.target.checked);
+    });
+
+    if (nightModeOption == 'auto') {
+      var data = autoThemeToggle();
+
+      // Toggle theme by local setting
+      if (data.toggleAt > themeData.autoToggleAt) {
+        themeData.autoToggleAt = data.toggleAt;
+        handleThemeToggle(data.nightShift);
+      } else {
+        handleThemeToggle(themeData.nightShift);
+      }
+    } else if (nightModeOption == 'manual') {
+      handleThemeToggle(themeData.nightShift);
+    } else {
+      var nightShift = themeData.nightShift;
+      if (nightShift === undefined) {
+        nightShift = nightModeOption === 'on';
+      }
+      handleThemeToggle(nightShift);
+    }
+  })();
+</script>
+<div id="click-to-top" class="click-to-top">
+  <i class="fa fa-arrow-up"></i>
+</div>
+<script>
+  (function () {
+    const clickToTop = document.getElementById('click-to-top');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 100) {
+        clickToTop.classList.add('show')
+      }else {
+        clickToTop.classList.remove('show')
+      }
+    });
+    clickToTop.addEventListener('click', () => {
+      window.smoothScrollTo(0);
+    });
+  })();
+</script>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <div class="framework">
+  <section class="main">
+
+     <div class="post">
+  <section>
+
+
+
+
+
+
+
+
+
+<header class="post-header">
+  <h1 class="post-title p-name" itemprop="name headline">一、GstStructure</h1>
+  <h2 class="post-subtitle"></h2>
+
+  <p class="post-meta">
+    <time class="dt-published" datetime="2023-11-20T00:00:00+00:00" itemprop="datePublished"><i class="fa fa-calendar"></i> Nov 20, 2023
+    </time>
+
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 7 mins</span>
+  </p><div class="post-tags"><a class="post-tag" href="/tags.html#GStreamer">#GStreamer</a></div></header>
+<article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+    <div class="post-content e-content" itemprop="articleBody">
+
+      <h2 id="1-gststructure-基本概念">1 GstStructure 基本概念</h2>
+
+<p>GstStructure 是一组键/值对的集合。键用 GQuarks 表示（GQuarks其实就是字符串，但是字符串和数字一一映射起来，为了字符串使用起来便利），而值可以是任何 GType 类型。</p>
+
+<p>除了键/值对，GstStructure 还有一个名称。名称以字母开头，可以由字母、数字以及”/-_.:”中的任何字符组成。</p>
+
+<p>GstStructure 被用于各种 GStreamer 子系统中，以一种灵活且可扩展的方式存储信息。</p>
+
+<p>GstStructure 没有引用计数，因为它通常是更高级对象的一部分，例如 GstCaps、GstMessage、GstEvent、GstQuery。它提供了一种通过父级的引用计数来实施可变性的方法，可以使用 gst_structure_set_parent_refcount 方法。</p>
+
+<p>可以使用 gst_structure_new_empty 或 gst_structure_new 创建 GstStructure。这两者都需要一个名称以及一组可选的键/值对和值的类型。</p>
+
+<p>可以使用 gst_structure_set_value 或 gst_structure_set 来更改字段值。</p>
+
+<p>可以使用 gst_structure_get_value 或更方便的 gst_structure_get_*() 函数来检索字段值。</p>
+
+<p>可以使用 gst_structure_remove_field 或 gst_structure_remove_fields 来删除字段。</p>
+
+<p>结构中的字符串必须是 ASCII 或 UTF-8 编码的。不允许使用其他编码。但字符串可以为 NULL。</p>
+
+<h3 id="11-序列化格式">1.1 序列化格式</h3>
+
+<p>序列化的字符串主要是在 <code class="language-plaintext highlighter-rouge">gst_structure_from_string</code> 函数中使用。后面也会在创建结构体章节中讲到该函数的具体使用方法。</p>
+
+<p>GstStructure的序列化格式将GstStructure的名称、键/GType/值序列化为逗号分隔的列表，其中结构名称作为第一个字段，没有值，其后跟着的是以key=value形式分开的键/值对。例如：</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s">"我的结构体name, key=value"</span>
+</code></pre></div></div>
+
+<p>如果没有明确指定，值的类型将会被推断，使用(GTypeName)value语法。例如，以下结构将有一个名为’is-string’的field，其值为字符串’true’：</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s">"a-struct, field-is-string=(string)true, field-is-boolean=true"</span>
+</code></pre></div></div>
+
+<p><strong>注意</strong>：</p>
+
+<ul>
+  <li>
+    <p>如果不指定(string)，field-is-string的类型将被推断为布尔型。</p>
+  </li>
+  <li>
+    <p>我们指定(string)为类型，即使gchararray是实际的string名称，为了方便，一些知名类型已被别名化或缩写。</p>
+  </li>
+  <li>
+    <p>当结构通过 <code class="language-plaintext highlighter-rouge">gst_structure_to_string</code> 序列化时，所有值都会被明确地类型化。</p>
+  </li>
+</ul>
+
+<p>为了避免指定类型，你可以给“类型系统”一些提示。例如，要指定一个值为double，你应该添加一个小数点（即1是一个int，而1.0是一个double）。</p>
+
+<p><strong>一些类型有特殊的分隔符</strong>：</p>
+
+<ul>
+  <li>
+    <p>GstValueArray在花括号 <code class="language-plaintext highlighter-rouge">{</code> 和 <code class="language-plaintext highlighter-rouge">}</code>内。例如a-structure, array={1, 2, 3}</p>
+  </li>
+  <li>
+    <p>范围在方括号 <code class="language-plaintext highlighter-rouge">[</code> 和 <code class="language-plaintext highlighter-rouge">]</code>内。例如a-structure, range=[1, 6, 2] 其中1是最小值，6是最大值，2是步长。要指定GST_TYPE_INT64_RANGE，你需要明确指定它，如：a-structure, a-int64-range=(gint64) [1, 5]</p>
+  </li>
+  <li>
+    <p>GstValueList在”小于和大于”符号 <code class="language-plaintext highlighter-rouge">&lt;</code> 和 <code class="language-plaintext highlighter-rouge">&gt;</code> 内。例如`a-structure, list=&lt;1, 2, 3&gt;</p>
+  </li>
+</ul>
+
+<p>结构体由空字符 <code class="language-plaintext highlighter-rouge">\0</code> 或分号 <code class="language-plaintext highlighter-rouge">;</code> 分隔，后者允许在同一个字符串中存储多个结构（见GstCaps）。</p>
+
+<p><code class="language-plaintext highlighter-rouge">引号</code>被用作”默认”分隔符，可以围绕任何不使用其他分隔符的类型（例如a-struct, i=(int)”1”）。它们用于允许在字符串内添加空格或特殊字符（如分隔符、分号等），并且可以使用反斜杠 <code class="language-plaintext highlighter-rouge">\</code>来转义其中的字符，例如：</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s">"a-struct, special="</span><span class="err">\</span><span class="s">"{[(;)]}</span><span class="se">\"</span><span class="s"> can be used inside quotes""</span><span class="err">
+</span></code></pre></div></div>
+
+<p>它们还允许嵌套结构，例如：</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s">"a-struct, nested=(GstStructure)"</span><span class="n">nested</span><span class="o">-</span><span class="k">struct</span><span class="p">,</span> <span class="n">nested</span><span class="o">=</span><span class="nb">true</span><span class="s">""</span>
+</code></pre></div></div>
+
+<p>自1.20版本起，嵌套结构和caps可以使用方括号 <code class="language-plaintext highlighter-rouge">[</code> 和 <code class="language-plaintext highlighter-rouge">]</code> 指定，例如：</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s">"a-struct, nested=[nested-struct, nested=true]"</span>
+</code></pre></div></div>
+
+<p><strong>注意</strong>:由于向后兼容性的原因，<code class="language-plaintext highlighter-rouge">gst_structure_to_string</code> 不会使用该语法，为此目的添加了 <code class="language-plaintext highlighter-rouge">gst_structure_serialize</code>。</p>
+
+<h2 id="2-gststructure类型结构">2 GstStructure类型结构</h2>
+
+<p>通过查看源文件和头文件，可以发现 <code class="language-plaintext highlighter-rouge">GstStructure</code> 是GBoxed类型，所以源文件定义了创建 <code class="language-plaintext highlighter-rouge">GstStructure</code> 内存函数 <code class="language-plaintext highlighter-rouge">gst_structure_new_empty</code> 或 <code class="language-plaintext highlighter-rouge">gst_structure_new</code>。但是本质上申请的是 <code class="language-plaintext highlighter-rouge">GstStructureImpl</code> 的结构体内存。</p>
+
+<p>释放结构体 <code class="language-plaintext highlighter-rouge">GstStructure</code> 内存函数 <code class="language-plaintext highlighter-rouge">gst_structure_free</code>。</p>
+
+<h3 id="21-gststructure类型注册宏定义">2.1 GstStructure类型注册宏定义</h3>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/* filename: gststructure.h */</span>
+<span class="k">extern</span> <span class="n">GType</span> <span class="n">_gst_structure_type</span><span class="p">;</span>
+
+<span class="cp">#define GST_TYPE_STRUCTURE   (_gst_structure_type)
+</span><span class="cm">/* filename: gststructure.c */</span>
+
+<span class="n">GType</span> <span class="n">_gst_structure_type</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+<span class="n">G_DEFINE_BOXED_TYPE</span> <span class="p">(</span><span class="n">GstStructure</span><span class="p">,</span> <span class="n">gst_structure</span><span class="p">,</span>
+    <span class="n">gst_structure_copy_conditional</span><span class="p">,</span> <span class="n">gst_structure_free</span><span class="p">);</span>
+
+<span class="cm">/**
+ *@brief: 该函数是注册GstStructure类型，调用类型注册函数
+ *@calledby: gst_init函数
+ */</span>
+<span class="kt">void</span>
+<span class="nf">_priv_gst_structure_initialize</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="n">_gst_structure_type</span> <span class="o">=</span> <span class="n">gst_structure_get_type</span> <span class="p">();</span>
+
+  <span class="n">g_value_register_transform_func</span> <span class="p">(</span><span class="n">_gst_structure_type</span><span class="p">,</span> <span class="n">G_TYPE_STRING</span><span class="p">,</span>
+      <span class="n">gst_structure_transform_to_string</span><span class="p">);</span>
+
+  <span class="n">GST_DEBUG_CATEGORY_INIT</span> <span class="p">(</span><span class="n">gst_structure_debug</span><span class="p">,</span> <span class="s">"structure"</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span>
+      <span class="s">"GstStructure debug"</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="22-gststructure类型相关结构体定义">2.2 GstStructure类型相关结构体定义</h3>
+
+<p>要分清楚那个才是主要的结构体</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/* filename: gststructure.h */</span>
+<span class="k">struct</span> <span class="n">_GstStructure</span> <span class="p">{</span>
+  <span class="n">GType</span> <span class="n">type</span><span class="p">;</span>
+
+  <span class="cm">/*&lt; private &gt;*/</span>
+  <span class="n">GQuark</span> <span class="n">name</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="cm">/* filename: gststructure.c */</span>
+<span class="cm">/**
+ * 源文件下面这两个结构体对外都是私有的，外部不能访问，只能通过函数操作
+ * 每个键值对存储结构体 
+ */</span>
+<span class="k">struct</span> <span class="n">_GstStructureField</span>
+<span class="p">{</span>
+  <span class="n">GQuark</span> <span class="n">name</span><span class="p">;</span>
+  <span class="n">GValue</span> <span class="n">value</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="cm">/* GstStructureImpl才是最重要的结构体，因为该结构体的第一个成员是GstStructure，内存申请也是申请该结构体占用内存 */</span>
+<span class="k">typedef</span> <span class="k">struct</span>
+<span class="p">{</span>
+  <span class="n">GstStructure</span> <span class="n">s</span><span class="p">;</span>
+
+  <span class="cm">/* owned by parent structure, NULL if no parent */</span>
+  <span class="n">gint</span> <span class="o">*</span><span class="n">parent_refcount</span><span class="p">;</span>
+
+  <span class="n">guint</span> <span class="n">fields_len</span><span class="p">;</span>             <span class="cm">/* Number of valid items in fields */</span>
+  <span class="n">guint</span> <span class="n">fields_alloc</span><span class="p">;</span>           <span class="cm">/* Allocated items in fields */</span>
+
+  <span class="cm">/* Fields are allocated if GST_STRUCTURE_IS_USING_DYNAMIC_ARRAY(),
+   *  else it's a pointer to the arr field. */</span>
+  <span class="n">GstStructureField</span> <span class="o">*</span><span class="n">fields</span><span class="p">;</span>
+
+  <span class="n">GstStructureField</span> <span class="n">arr</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+<span class="p">}</span> <span class="n">GstStructureImpl</span><span class="p">;</span>
+
+</code></pre></div></div>
+
+<h2 id="3-gststructure对象相关函数总结">3 GstStructure对象相关函数总结</h2>
+
+<p>对于常用的一些 <code class="language-plaintext highlighter-rouge">GstStructure</code> 函数进行总结。</p>
+
+<h3 id="31-gststructure-创建函数">3.1 GstStructure 创建函数</h3>
+
+<h4 id="311-gst_structure_new_empty">3.1.1 gst_structure_new_empty</h4>
+
+<p>以下两个函数都是创建零个键值对<code class="language-plaintext highlighter-rouge">GstStructure</code>，只是一个使用字符串，一个使用GQuark。</p>
+
+<p><strong>注意</strong>：<code class="language-plaintext highlighter-rouge">GstStructure</code>必须有<code class="language-plaintext highlighter-rouge">name</code>。</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/*只传入GstStructure名字，创建空成员结构体，没有键值对*/</span>
+<span class="n">GstStructure</span> <span class="o">*</span><span class="nf">gst_structure_new_empty</span> <span class="p">(</span><span class="k">const</span> <span class="n">gchar</span> <span class="o">*</span> <span class="n">name</span><span class="p">);</span>
+
+<span class="n">GstStructure</span> <span class="o">*</span><span class="nf">gst_structure_new_id_empty</span> <span class="p">(</span><span class="n">GQuark</span> <span class="n">quark</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h4 id="312-gst_structure_new">3.1.2 gst_structure_new</h4>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">GstStructure</span> <span class="o">*</span><span class="nf">gst_structure_new</span>  <span class="p">(</span><span class="k">const</span> <span class="n">gchar</span> <span class="o">*</span> <span class="n">name</span><span class="p">,</span>
+                                  <span class="k">const</span> <span class="n">gchar</span> <span class="o">*</span> <span class="n">firstfield</span><span class="p">,</span>
+                                  <span class="p">...);</span>
+
+
+<span class="n">GstStructure</span> <span class="o">*</span><span class="nf">gst_structure_new_valist</span>  <span class="p">(</span><span class="k">const</span> <span class="n">gchar</span> <span class="o">*</span> <span class="n">name</span><span class="p">,</span>
+                                         <span class="k">const</span> <span class="n">gchar</span> <span class="o">*</span> <span class="n">firstfield</span><span class="p">,</span>
+                                         <span class="kt">va_list</span>       <span class="n">varargs</span><span class="p">);</span>
+
+<span class="n">GstStructure</span> <span class="o">*</span><span class="nf">gst_structure_new_id</span>  <span class="p">(</span><span class="n">GQuark</span> <span class="n">name_quark</span><span class="p">,</span>
+                                     <span class="n">GQuark</span> <span class="n">field_quark</span><span class="p">,</span>
+                                     <span class="p">...);</span>
+</code></pre></div></div>
+
+<p>示例</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">test_structure</span> <span class="o">=</span> <span class="n">gst_structure_new</span><span class="p">(</span><span class="s">"Family"</span><span class="p">,</span> 
+                                   <span class="s">"boy"</span><span class="p">,</span> <span class="n">G_TYPE_STRING</span><span class="p">,</span> <span class="s">"Li"</span><span class="p">,</span>
+                                   <span class="s">"age"</span><span class="p">,</span> <span class="n">G_TYPE_INT</span><span class="p">,</span> <span class="mi">24</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+
+<span class="n">guint64</span> <span class="n">latency</span> <span class="o">=</span> <span class="mi">100</span><span class="p">;</span>
+
+<span class="n">structure</span> <span class="o">=</span> <span class="n">gst_structure_new_id</span> <span class="p">(</span><span class="n">GST_QUARK</span> <span class="p">(</span><span class="n">EVENT_LATENCY</span><span class="p">),</span>
+                                  <span class="n">GST_QUARK</span> <span class="p">(</span><span class="n">LATENCY</span><span class="p">),</span> <span class="n">G_TYPE_UINT64</span><span class="p">,</span> <span class="n">latency</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>gst_structure_new_valist 测试程序在 <a href="/assets/GStreamerStudy/CoreObject/01_GstStrucure/gst_structure_new_valist.c">/assets/GStreamerStudy/CoreObject/01_GstStrucure/gst_structure_new_valist.c</a></p>
+
+<h4 id="313-gst_structure_from_string">3.1.3 gst_structure_from_string</h4>
+
+<p><code class="language-plaintext highlighter-rouge">gst_structure_from_string</code> 是从序列化字符串创建Gst结构体。两个函数的区别就是 <code class="language-plaintext highlighter-rouge">end</code> 参数，如果 <code class="language-plaintext highlighter-rouge">end</code>参数不为空，最后返回的<code class="language-plaintext highlighter-rouge">end</code>为序列化字符串被处理完的地址。只要序列化字符串被正常处理完，end = string + strlen (string)。</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">GstStructure</span> <span class="o">*</span>
+<span class="nf">gst_structure_from_string</span>  <span class="p">(</span><span class="k">const</span> <span class="n">gchar</span> <span class="o">*</span> <span class="n">string</span><span class="p">,</span>
+                            <span class="n">gchar</span>      <span class="o">**</span> <span class="n">end</span><span class="p">);</span>
+
+<span class="n">GstStructure</span> <span class="o">*</span>
+<span class="nf">gst_structure_new_from_string</span> <span class="p">(</span><span class="k">const</span> <span class="n">gchar</span> <span class="o">*</span> <span class="n">string</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="k">return</span> <span class="n">gst_structure_from_string</span> <span class="p">(</span><span class="n">string</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="32-获得gststructure的名字">3.2 获得GstStructure的名字</h3>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/* 获得GstStructure的名字和名字id（GQuark） */</span>
+<span class="k">const</span> <span class="n">gchar</span> <span class="o">*</span>  <span class="nf">gst_structure_get_name</span>  <span class="p">(</span><span class="k">const</span> <span class="n">GstStructure</span>  <span class="o">*</span> <span class="n">structure</span><span class="p">);</span>
+<span class="n">GQuark</span>         <span class="nf">gst_structure_get_name_id</span>  <span class="p">(</span><span class="k">const</span> <span class="n">GstStructure</span>  <span class="o">*</span> <span class="n">structure</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h3 id="33-设置gststructure名字">3.3 设置GstStructure名字</h3>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/* 3.设置GstStructure名字*/</span>
+<span class="kt">void</span>   <span class="nf">gst_structure_set_name</span>  <span class="p">(</span><span class="n">GstStructure</span>        <span class="o">*</span> <span class="n">structure</span><span class="p">,</span>
+                                <span class="k">const</span> <span class="n">gchar</span>         <span class="o">*</span> <span class="n">name</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h3 id="34-gststructure添加键值对">3.4 GstStructure添加键值对</h3>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//(1)添加单个成员</span>
+<span class="kt">void</span>  <span class="nf">gst_structure_set_value</span>  <span class="p">(</span><span class="n">GstStructure</span>        <span class="o">*</span> <span class="n">structure</span><span class="p">,</span>
+                                <span class="k">const</span> <span class="n">gchar</span>         <span class="o">*</span> <span class="n">fieldname</span><span class="p">,</span>
+                                <span class="k">const</span> <span class="n">GValue</span>        <span class="o">*</span> <span class="n">value</span><span class="p">);</span>
+<span class="c1">//(2)添加多个成员</span>
+<span class="kt">void</span> <span class="nf">gst_structure_set</span>  <span class="p">(</span><span class="n">GstStructure</span>        <span class="o">*</span> <span class="n">structure</span><span class="p">,</span>
+                         <span class="k">const</span> <span class="n">gchar</span>         <span class="o">*</span> <span class="n">fieldname</span><span class="p">,</span>
+                                                          <span class="p">...);</span>
+<span class="c1">//e.g</span>
+<span class="n">gst_structure_set</span><span class="p">(</span><span class="n">test_structure</span><span class="p">,</span> <span class="s">"er"</span><span class="p">,</span> <span class="n">G_TYPE_STRING</span><span class="p">,</span> <span class="s">"Apple"</span><span class="p">,</span>
+                                  <span class="s">"yang"</span><span class="p">,</span> <span class="n">G_TYPE_STRING</span><span class="p">,</span> <span class="s">"1996"</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h3 id="35-gststructure获取单个成员信息">3.5 GstStructure获取单个成员信息</h3>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">const</span> <span class="n">GValue</span> <span class="o">*</span> <span class="nf">gst_structure_get_value</span> <span class="p">(</span><span class="k">const</span> <span class="n">GstStructure</span>  <span class="o">*</span> <span class="n">structure</span><span class="p">,</span>
+                                        <span class="k">const</span> <span class="n">gchar</span>         <span class="o">*</span> <span class="n">fieldname</span><span class="p">);</span>
+</code></pre></div></div>
+<h3 id="36-gststructure遍历结构体成员">3.6 GstStructure遍历结构体成员</h3>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">gboolean</span> <span class="nf">gst_structure_foreach</span> <span class="p">(</span><span class="k">const</span> <span class="n">GstStructure</span>  <span class="o">*</span> <span class="n">structure</span><span class="p">,</span>
+                                <span class="n">GstStructureForeachFunc</span>   <span class="n">func</span><span class="p">,</span>
+                                <span class="n">gpointer</span>              <span class="n">user_data</span><span class="p">);</span>
+<span class="n">e</span><span class="p">.</span><span class="n">g</span>
+<span class="n">gboolean</span>
+<span class="nf">print_value</span><span class="p">(</span><span class="n">GQuark</span>   <span class="n">field_id</span><span class="p">,</span>
+            <span class="k">const</span> <span class="n">GValue</span> <span class="o">*</span> <span class="n">value</span><span class="p">,</span>
+            <span class="n">gpointer</span> <span class="n">user_data</span><span class="p">){</span>
+  <span class="cm">/*一定返回TRUE，返回FALSE只会遍历第一个*/</span>
+  <span class="k">return</span> <span class="n">TRUE</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="37-序列化gststructure">3.7 序列化GstStructure</h3>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">gchar</span> <span class="o">*</span>
+<span class="n">gst_structure_to_string</span> <span class="p">(</span><span class="k">const</span> <span class="n">GstStructure</span> <span class="o">*</span> <span class="n">structure</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="38-释放gststructure">3.8 释放GstStructure</h3>
+
+<p>因为不是标准的 <code class="language-plaintext highlighter-rouge">GObject</code> 对象，所以不会自动调用free函数，所以必须手动调用 <code class="language-plaintext highlighter-rouge">gst_structure_free</code>。</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span>
+<span class="nf">gst_structure_free</span> <span class="p">(</span><span class="n">GstStructure</span> <span class="o">*</span> <span class="n">structure</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h2 id="参考">参考</h2>
+
+<p><a href="https://gstreamer.freedesktop.org/documentation/gstreamer/gststructure.html?gi-language=c#gst_structure_set">参考1：官方GstStructure</a></p>
+
+
+    </div>
+
+</article>
+<div class="post-nav"><a class="previous" href="/gobject%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/2023/11/20/13-GValue.html" title="十三、GValue学习笔记">十三、GValue学习笔记</a><a class="next" href="/gstreamer%E6%A0%B8%E5%BF%83%E5%AF%B9%E8%B1%A1/2023/11/20/2-GstMiniObject.html" title="二、GstMiniObject">二、GstMiniObject</a></div><!--<div class="post-related">
+      <div>Related Articles</div>
+      <ul>
+        <li><a class="post-link" href="/gobject%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0202109/2021/08/31/5-GObject%E5%AF%B9%E6%8E%A5%E5%8F%A3%E7%9A%84%E6%A8%A1%E6%8B%9F.html" title="二、GstMiniObject">五、GObject对接口的模拟</a></li><li><a class="post-link" href="/gstreamer%E6%A0%B8%E5%BF%83%E5%AF%B9%E8%B1%A1/2023/12/01/10-GstCapsFeatures.html" title="二、GstMiniObject">十、GstCapsFeatures</a></li><li><a class="post-link" href="/gstreamer%E6%A0%B8%E5%BF%83%E5%AF%B9%E8%B1%A1/2023/11/20/2-GstMiniObject.html" title="二、GstMiniObject">二、GstMiniObject</a></li><li><a class="post-link" href="/deepstream/2023/12/14/1-x86%E5%AE%89%E8%A3%85DeepStream.html" title="二、GstMiniObject">一、x86安装DeepStream</a></li></ul>
+    </div>--><div class="post-related">
+      <div>相关文章</div>
+      <ul><li><a class="post-link" href="/gstreamer%E6%A0%B8%E5%BF%83%E5%AF%B9%E8%B1%A1/2023/12/09/23-GstElement.html" title="二十三、GstElement">二十三、GstElement</a></li><li><a class="post-link" href="/gstreamer%E6%A0%B8%E5%BF%83%E5%AF%B9%E8%B1%A1/2023/12/06/20-GstEvent.html" title="二十、GstEvent">二十、GstEvent</a></li><li><a class="post-link" href="/gstreamer%E6%A0%B8%E5%BF%83%E5%AF%B9%E8%B1%A1/2023/12/06/21-GstPadTemplate.html" title="二十一、GstPadTemplate">二十一、GstPadTemplate</a></li><li><a class="post-link" href="/gstreamer%E6%A0%B8%E5%BF%83%E5%AF%B9%E8%B1%A1/2023/12/06/22-GstPad.html" title="二十二、GstPad">二十二、GstPad</a></li></ul>
+    </div><div class="post-comments"><div id="disqus_thread"></div>
+<script>
+    /**
+    *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+    *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
+    /*
+    var disqus_config = function () {
+    this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+    this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+    */
+    (function() { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+    s.src = 'https://pzhou-me.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div></section>
+</div>
+
+
+  </section>
+  <section class="sidebar" style="margin-left: 15px;">
+    <!-- Get sidebar items --><style type="text/css" media="screen">
+.post-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.post-menu ul li {
+  margin-bottom: 5px;  /* 增加每个列表项底部的间距 */
+}
+
+.post-menu ul li a {
+  font-size: 16px; /* 设置目录链接的字体大小 */
+}
+
+.post-menu-content {
+  max-height: 600px; /* 设置最大高度 */
+  min-width: 300px;
+  overflow: hidden; /* 默认隐藏滚动条 */
+  white-space: nowrap; /* 水平方向上的内容不换行 */
+}
+
+/* 自定义垂直滚动条的样式 */
+.post-menu-content::-webkit-scrollbar {
+  width: 8px; /* 垂直滚动条的宽度 */
+  height: 8px; /* 水平滚动条的高度 */
+}
+
+/* 自定义垂直滚动条轨道 */
+.post-menu-content::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* 自定义垂直滚动条滑块 */
+.post-menu-content::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* 当鼠标悬停在垂直滚动条滑块上时 */
+.post-menu-content::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* 一级标题样式 */
+.post-menu ul li.h-h2 {
+  margin-left: 0;
+  margin-bottom: 10px;
+}
+
+/* 二级标题样式 */
+.post-menu ul li.h-h3 {
+  margin-left: 20px;
+  margin-bottom: 10px;
+}
+
+/* 三级标题样式 */
+.post-menu ul li.h-h4 {
+  margin-left: 40px;
+  margin-bottom: 10px;
+}
+
+
+</style>
+
+
+
+<div class="post-menu">
+  <div class="post-menu-title">目录</div>
+  <div class="post-menu-content"></div>
+</div>
+
+<script>
+  function generateContent() {
+    var menu = document.querySelector(".post-menu");
+    var menuContent =  menu.querySelector(".post-menu-content");
+    var headings = document.querySelector(".post-content").querySelectorAll("h2, h3, h4, h5, h6");
+
+    // Hide menu when no headings
+    if (headings.length === 0) {
+      return menu.style.display = "none";
+    }
+
+    // Generate post menu
+    var menuHTML = '';
+    for (var i = 0; i < headings.length; i++) {
+      var h = headings[i];
+      menuHTML += (
+        '<li class="h-' + h.tagName.toLowerCase() + '">'
+        + '<a href="#h-' + h.getAttribute('id') + '">' + h.textContent + '</a></li>');
+    }
+
+    menuContent.innerHTML = '<ul>' + menuHTML + '</ul>';
+
+    // The header element
+    var header = document.querySelector('header.site-header');
+
+    function doMenuCollapse(index, over_items) {
+      var items = menuContent.firstChild.children;
+
+      if (over_items == undefined) {
+        over_items = 20;
+      }
+
+      if (items.length < over_items) {
+        return;
+      }
+
+      var activeItem = items[index];
+      var beginItem = activeItem
+      var endItem = activeItem
+      var beginIndex = index;
+      var endIndex = index + 1;
+      while (beginIndex >= 0
+        && !items[beginIndex].classList.contains('h-h2')) {
+        beginIndex -= 1;
+      }
+      while (endIndex < items.length
+        && !items[endIndex].classList.contains('h-h2')) {
+        endIndex += 1;
+      }
+      for (var i = 0; i < beginIndex; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+      for (var i = beginIndex + 1; i < endIndex; i++) {
+        item = items[i]
+        // if (!item.classList.contains('h-h2')) {
+          item.style.display = '';
+        // }
+      }
+      for (var i = endIndex; i < items.length; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+    }
+
+    // Init menu collapsed
+    doMenuCollapse(-1);
+
+    // Active the menu item
+    window.addEventListener('scroll', function (event) {
+      var lastActive = menuContent.querySelector('.active');
+      var changed = true;
+      var activeIndex = -1;
+      for (var i = headings.length - 1; i >= 0; i--) {
+        var h = headings[i];
+        var headingRect = h.getBoundingClientRect();
+        var headerRect = header.getBoundingClientRect();
+        var headerTop = Math.floor(headerRect.top);
+        var headerHeight = Math.floor(headerRect.height);
+        var headerHeight = headerTop + headerHeight + 20;
+        if (headingRect.top <= headerHeight) {
+          var id = 'h-' + h.getAttribute('id');
+          var a = menuContent.querySelector('a[href="#' + id  + '"]');
+          var curActive = a.parentNode;
+          if (curActive) {
+            curActive.classList.add('active');
+            activeIndex = i;
+          }
+          if (lastActive == curActive) {
+            changed = false;
+          }
+          break;
+        }
+      }
+      if (changed) {
+        if (lastActive) {
+          lastActive.classList.remove('active');
+        }
+        doMenuCollapse(activeIndex);
+      }
+      event.preventDefault();
+    });
+  }
+  generateContent();
+</script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const menuContent = document.querySelector('.post-menu-content');
+
+    // 鼠标进入事件
+    menuContent.addEventListener('mouseenter', function() {
+      menuContent.style.overflow = 'auto';
+    });
+
+    // 鼠标离开事件
+    menuContent.addEventListener('mouseleave', function() {
+      menuContent.style.overflow = 'hidden';
+    });
+  });
+</script>
+
+</section>
+</div>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+    <div class="site-footer-inner"><div>李尓阳工作室 <span class="copyleft">&copy;</span> 2018-2023 Lieryang</div>
+      <div class="footer-col gmail"> E-mail sxlisibo@gmail.com</div>
+      <div>Powered by <a title="Jekyll is a simple, blog-aware, static site
+      generator." href="https://jekyllrb.com/">Jekyll</a> &amp; <a title="Yat, yet
+      another theme." href="https://github.com/jeffreytse/jekyll-theme-yat">Yat Theme</a>.</div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

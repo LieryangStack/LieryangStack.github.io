@@ -1,0 +1,1363 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.3">Jekyll</generator><link href="https://lieryangstack.github.io//feed.xml" rel="self" type="application/atom+xml" /><link href="https://lieryangstack.github.io//" rel="alternate" type="text/html" /><updated>2023-12-15T06:14:35+00:00</updated><id>https://lieryangstack.github.io//feed.xml</id><title type="html">李尔阳主页</title><subtitle>李尓阳的个人主页，该主页主要用来记录学习笔记。</subtitle><author><name>LieryangStack</name></author><entry><title type="html">CPU架构</title><link href="https://lieryangstack.github.io//%E6%97%A5%E4%B9%8B%E6%BC%AB%E5%BD%95/2023/12/15/CPU%E6%9E%B6%E6%9E%84.html" rel="alternate" type="text/html" title="CPU架构" /><published>2023-12-15T00:00:00+00:00</published><updated>2023-12-15T00:00:00+00:00</updated><id>https://lieryangstack.github.io//%E6%97%A5%E4%B9%8B%E6%BC%AB%E5%BD%95/2023/12/15/CPU%E6%9E%B6%E6%9E%84</id><content type="html" xml:base="https://lieryangstack.github.io//%E6%97%A5%E4%B9%8B%E6%BC%AB%E5%BD%95/2023/12/15/CPU%E6%9E%B6%E6%9E%84.html"></content><author><name>LieryangStack</name></author><category term="日之漫录" /><category term="日之漫录" /><summary type="html"></summary></entry><entry><title type="html">一、CUDA官方文档介绍</title><link href="https://lieryangstack.github.io//cuda/2023/12/14/1-CUDA%E5%AE%98%E6%96%B9%E6%96%87%E6%A1%A3%E4%BB%8B%E7%BB%8D.html" rel="alternate" type="text/html" title="一、CUDA官方文档介绍" /><published>2023-12-14T00:00:00+00:00</published><updated>2023-12-14T00:00:00+00:00</updated><id>https://lieryangstack.github.io//cuda/2023/12/14/1-CUDA%E5%AE%98%E6%96%B9%E6%96%87%E6%A1%A3%E4%BB%8B%E7%BB%8D</id><content type="html" xml:base="https://lieryangstack.github.io//cuda/2023/12/14/1-CUDA%E5%AE%98%E6%96%B9%E6%96%87%E6%A1%A3%E4%BB%8B%E7%BB%8D.html">&lt;h2 id=&quot;1-cuda-编程手册系列第一章cuda-简介&quot;&gt;1 CUDA 编程手册系列第一章：CUDA 简介&lt;/h2&gt;
+
+&lt;h3 id=&quot;11-我们为什么要使用gpu&quot;&gt;1.1 我们为什么要使用GPU&lt;/h3&gt;
+
+&lt;p&gt;GPU（Graphics Processing Unit）在相同的价格和功率范围内，比CPU提供更高的指令吞吐量和内存带宽。许多应用程序利用这些更高的能力，在GPU上比在CPU上运行得更快。其他计算设备，如FPGA，也非常节能，但提供的编程灵活性要比GPU少得多。&lt;/p&gt;
+
+&lt;p&gt;GPU和CPU在功能上的差异是因为它们的设计目标不同。虽然 CPU 旨在以尽可能快的速度执行一系列称为线程的操作，并且可以并行执行数十个这样的线程。但GPU却能并行执行成千上万个(摊销较慢的单线程性能以实现更大的吞吐量)。&lt;/p&gt;
+
+&lt;p&gt;GPU 专门用于高度并行计算，因此设计时更多的晶体管用于数据处理，而不是数据缓存和流量控制。&lt;/p&gt;
+
+&lt;p&gt;下图显示了 CPU 与 GPU 的芯片资源分布示例。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/CUDA/01_Introduction/CPU与GPU的芯片资源分布.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;将更多晶体管用于数据处理，例如浮点计算，有利于高度并行计算。GPU可以通过计算隐藏内存访问延迟，而不是依靠大数据缓存和复杂的流控制来避免长时间的内存访问延迟，这两者在晶体管方面都是昂贵的。&lt;/p&gt;
+
+&lt;h3 id=&quot;12-cuda通用并行计算平台和编程模型&quot;&gt;1.2 CUDA®：通用并行计算平台和编程模型&lt;/h3&gt;
+
+&lt;p&gt;2006 年 11 月，NVIDIA® 推出了 CUDA（Compute Unified Device Architecture），这是一种通用并行计算平台和编程模型，它利用 NVIDIA GPU 中的并行计算引擎以比 CPU 更有效的方式解决许多复杂的计算问题。&lt;/p&gt;
+
+&lt;p&gt;CUDA 附带一个软件环境，允许开发人员使用 C++ 作为高级编程语言。 如下图所示，支持其他语言、应用程序编程接口或基于指令的方法，例如 FORTRAN、DirectCompute、OpenACC。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/CUDA/01_Introduction/CUDA支持的编程语言.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;13-可扩展的编程模型&quot;&gt;1.3 可扩展的编程模型&lt;/h3&gt;
+
+&lt;p&gt;多核 CPU 和众核 GPU 的出现意味着主流处理器芯片现在是并行系统。挑战在于开发能够透明地扩展可并行的应用软件，来利用不断增加的处理器内核数量。就像 3D 图形应用程序透明地将其并行性扩展到具有广泛不同内核数量的多核 GPU 一样。&lt;/p&gt;
+
+&lt;p&gt;CUDA 并行编程模型旨在克服这一挑战，同时为熟悉 C 等标准编程语言的程序员保持较低的学习曲线。&lt;/p&gt;
+
+&lt;p&gt;其核心是三个关键抽象——线程组的层次结构、共享内存和屏障同步——它们只是作为最小的语言扩展集向程序员公开。&lt;/p&gt;
+
+&lt;p&gt;这些抽象提供了细粒度的数据并行和线程并行，嵌套在粗粒度的数据并行和任务并行中。它们指导程序员将问题划分为可以由线程块并行独立解决的粗略子问题，并将每个子问题划分为可以由块内所有线程并行协作解决的更精细的部分。&lt;/p&gt;
+
+&lt;p&gt;这种分解通过允许线程在解决每个子问题时进行协作来保留语言表达能力，同时实现自动可扩展性。实际上，每个线程块都可以在 GPU 内的任何可用multiprocessor上以乱序、并发或顺序调度，以便编译的 CUDA 程序可以在任意数量的多处理器上执行，如下图所示，并且只有运行时系统需要知道物理multiprocessor个数。&lt;/p&gt;
+
+&lt;p&gt;这种可扩展的编程模型允许 GPU 架构通过简单地扩展multiprocessor和内存分区的数量来跨越广泛的市场范围：高性能发烧友 GeForce GPU ，专业的 Quadro 和 Tesla 计算产品。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/CUDA/01_Introduction/MultithreadedCUDAProgram.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;注意&lt;/strong&gt;：GPU 是围绕一系列流式多处理器 (SM: Streaming Multiprocessors) 构建的。多线程程序被划分为彼此独立执行的线程块，因此具有更多multiprocessor的GPU将比具有更少多处理器的GPU在更短的时间内完成程序执行。&lt;/p&gt;
+
+&lt;h2 id=&quot;2-cuda-编程手册系列第二章-cuda-编程模型概述&quot;&gt;2 CUDA 编程手册系列第二章: CUDA 编程模型概述&lt;/h2&gt;
+
+&lt;h3 id=&quot;21-内核&quot;&gt;2.1 内核&lt;/h3&gt;
+
+&lt;p&gt;CUDA C++ 通过允许程序员定义称为kernel的 C++ 函数来扩展 C++，当调用内核时，由 N 个不同的 CUDA 线程并行执行 N 次，而不是像常规 C++ 函数那样只执行一次。&lt;/p&gt;
+
+&lt;p&gt;使用 &lt;strong&gt;global&lt;/strong&gt; 声明说明符定义内核，并使用新的 «&amp;lt;…»&amp;gt; 执行配置语法指定内核调用的 CUDA 线程数。 每个执行内核的线程都有一个唯一的线程 ID，可以通过内置变量在内核中访问。&lt;/p&gt;
+
+&lt;p&gt;作为说明，以下示例代码使用内置变量 threadIdx 将两个大小为 N 的向量 A 和 B 相加，并将结果存储到向量 C 中：&lt;/p&gt;
+
+&lt;div class=&quot;language-c highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// Kernel definition&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;__global__&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;VecAdd&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;float&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;A&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;float&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;B&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;float&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;C&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;threadIdx&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;C&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;A&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;B&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;...&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// Kernel invocation with N threads&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;VecAdd&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;N&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;A&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;B&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;C&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;...&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;这里，执行 VecAdd() 的 N 个线程中的每一个线程都会执行一个加法。&lt;/p&gt;
+
+&lt;h3 id=&quot;22-线程层次&quot;&gt;2.2 线程层次&lt;/h3&gt;
+
+&lt;p&gt;为方便起见，threadIdx 是一个 3 分量向量，因此可以使用一维、二维或三维的线程索引来识别线程，形成一个一维、二维或三维的线程块，称为block。 这提供了一种跨域的元素（例如向量、矩阵或体积）调用计算的方法。&lt;/p&gt;
+
+&lt;p&gt;线程的索引和它的线程 ID 以一种直接的方式相互关联：对于一维块，它们是相同的； 对于大小为(Dx, Dy)的二维块，索引为(x, y)的线程的线程ID为&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;(x + y*Dx)&lt;/code&gt;； 对于大小为 (Dx, Dy, Dz) 的三维块，索引为 (x, y, z) 的线程的线程 ID 为 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;(x + y*Dx + z*Dx*Dy)&lt;/code&gt;。&lt;/p&gt;
+
+&lt;p&gt;例如，下面的代码将两个大小为NxN的矩阵A和B相加，并将结果存储到矩阵C中:&lt;/p&gt;
+
+&lt;div class=&quot;language-c highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// Kernel definition&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;__global__&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;MatAdd&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;float&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;A&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;N&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;N&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;float&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;B&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;N&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;N&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+                       &lt;span class=&quot;kt&quot;&gt;float&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;C&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;N&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;N&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;threadIdx&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;threadIdx&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;C&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;A&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;B&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;...&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// Kernel invocation with one block of N * N * 1 threads&lt;/span&gt;
+    &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;numBlocks&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;dim3&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;threadsPerBlock&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;N&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;N&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;MatAdd&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;numBlocks&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;threadsPerBlock&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;A&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;B&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;C&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;...&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;每个块的线程数量是有限制的，因为一个块的所有线程都应该驻留在同一个处理器核心上，并且必须共享该核心有限的内存资源。在当前的gpu上，一个线程块可能包含多达1024个线程。&lt;/p&gt;
+
+&lt;p&gt;但是，一个内核可以由多个形状相同的线程块执行，因此线程总数等于每个块的线程数乘以块数。&lt;/p&gt;
+
+&lt;p&gt;块被组织成一维、二维或三维的线程块网格(grid)，如下图所示。网格中的线程块数量通常由正在处理的数据的大小决定，通常超过系统中的处理器数量。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/CUDA/01_Introduction/线程块中的线程.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;&amp;lt;&amp;lt;...&amp;gt;&amp;gt;&amp;gt;&lt;/code&gt; 语法中指定的每个块的线程数和每个网格的块数可以是 int 或 dim3 类型。如上例所示，可以指定二维块或网格。&lt;/p&gt;
+
+&lt;p&gt;网格中的每个块都可以由一个一维、二维或三维的惟一索引标识，该索引可以通过内置的blockIdx变量在内核中访问。线程块的维度可以通过内置的blockDim变量在内核中访问。&lt;/p&gt;
+
+&lt;p&gt;扩展前面的MatAdd()示例来处理多个块，代码如下所示。&lt;/p&gt;
+
+&lt;div class=&quot;language-c highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// Kernel definition&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;__global__&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;MatAdd&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;float&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;A&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;N&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;N&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;float&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;B&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;N&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;N&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+&lt;span class=&quot;kt&quot;&gt;float&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;C&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;N&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;N&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;blockIdx&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;blockDim&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;threadIdx&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;blockIdx&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;y&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;blockDim&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;y&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;threadIdx&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;N&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;N&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;C&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;A&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;B&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;...&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// Kernel invocation&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;dim3&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;threadsPerBlock&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;16&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;16&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;dim3&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;numBlocks&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;N&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;threadsPerBlock&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;N&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;threadsPerBlock&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;MatAdd&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;numBlocks&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;threadsPerBlock&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;A&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;B&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;C&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;...&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;线程块大小为16×16(256个线程)，尽管在本例中是任意更改的，但这是一种常见的选择。网格是用足够的块创建的，这样每个矩阵元素就有一个线程来处理。为简单起见，本例假设每个维度中每个网格的线程数可以被该维度中每个块的线程数整除，尽管事实并非如此。&lt;/p&gt;
+
+&lt;p&gt;程块需要独立执行：必须可以以任何顺序执行它们，并行或串行。 这种独立性要求允许跨任意数量的内核以任意顺序调度线程块，如下图所示，使程序员能够编写随内核数量扩展的代码。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/CUDA/01_Introduction/任意数量的内核.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;块内的线程可以通过一些共享内存共享数据并通过同步它们的执行来协调内存访问来进行协作。 更准确地说，可以通过调用 __syncthreads() 内部函数来指定内核中的同步点； __syncthreads() 充当屏障，块中的所有线程必须等待，然后才能继续。 Shared Memory 给出了一个使用共享内存的例子。 除了 __syncthreads() 之外，Cooperative Groups API 还提供了一组丰富的线程同步示例。&lt;/p&gt;
+
+&lt;p&gt;为了高效协作，共享内存是每个处理器内核附近的低延迟内存（很像 L1 缓存），并且 __syncthreads() 是轻量级的。&lt;/p&gt;
+
+&lt;h3 id=&quot;23-存储单元层次&quot;&gt;2.3 存储单元层次&lt;/h3&gt;
+
+&lt;p&gt;CUDA 线程可以在执行期间从多个内存空间访问数据，如下图所示。每个线程都有私有的本地内存。 每个线程块都具有对该块的所有线程可见的共享内存，并且具有与该块相同的生命周期。 所有线程都可以访问相同的全局内存。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/CUDA/01_Introduction/内存.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;还有两个额外的只读内存空间可供所有线程访问：常量和纹理内存空间。 全局、常量和纹理内存空间针对不同的内存使用进行了优化（请参阅设备内存访问）。 纹理内存还为某些特定数据格式提供不同的寻址模式以及数据过滤（请参阅纹理和表面内存）。&lt;/p&gt;
+
+&lt;p&gt;全局、常量和纹理内存空间在同一应用程序的内核启动中是持久的。&lt;/p&gt;
+
+&lt;h3 id=&quot;24-异构编程&quot;&gt;2.4 异构编程&lt;/h3&gt;
+
+&lt;p&gt;如下图所示，CUDA 编程模型假定 CUDA 线程在物理独立的设备上执行，该设备作为运行 C++ 程序的主机的协处理器运行。例如，当内核在 GPU 上执行而 C++ 程序的其余部分在 CPU 上执行时，就是这种情况。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/CUDA/01_Introduction/异构编程.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;CUDA 编程模型还假设主机(host)和设备(device)都在 DRAM 中维护自己独立的内存空间，分别称为主机内存和设备内存。因此，程序通过调用 CUDA 运行时（在编程接口中描述）来管理内核可见的全局、常量和纹理内存空间。这包括设备内存分配和释放以及主机和设备内存之间的数据传输。&lt;/p&gt;
+
+&lt;p&gt;统一内存提供托管内存来桥接主机和设备内存空间。托管内存可从系统中的所有 CPU 和 GPU 访问，作为具有公共地址空间的单个连贯内存映像。此功能可实现设备内存的超额订阅，并且无需在主机和设备上显式镜像数据，从而大大简化了移植应用程序的任务。有关统一内存的介绍，请参阅统一内存编程。&lt;/p&gt;
+
+&lt;p&gt;注:串行代码在主机(host)上执行，并行代码在设备(device)上执行。&lt;/p&gt;
+
+&lt;h3 id=&quot;25-异步simt编程模型&quot;&gt;2.5 异步SIMT编程模型&lt;/h3&gt;
+
+&lt;p&gt;在 CUDA 编程模型中，线程是进行计算或内存操作的最低抽象级别。 从基于 NVIDIA Ampere GPU 架构的设备开始，CUDA 编程模型通过异步编程模型为内存操作提供加速。 异步编程模型定义了与 CUDA 线程相关的异步操作的行为。&lt;/p&gt;
+
+&lt;p&gt;异步编程模型为 CUDA 线程之间的同步定义了异步屏障的行为。 该模型还解释并定义了如何使用 cuda::memcpy_async 在 GPU计算时从全局内存中异步移动数据。&lt;/p&gt;
+
+&lt;h4 id=&quot;251-异步操作&quot;&gt;2.5.1 异步操作&lt;/h4&gt;
+
+&lt;p&gt;异步操作定义为由CUDA线程发起的操作，并且与其他线程一样异步执行。在结构良好的程序中，一个或多个CUDA线程与异步操作同步。发起异步操作的CUDA线程不需要在同步线程中.&lt;/p&gt;
+
+&lt;p&gt;这样的异步线程（as-if 线程）总是与发起异步操作的 CUDA 线程相关联。异步操作使用同步对象来同步操作的完成。这样的同步对象可以由用户显式管理（例如，cuda::memcpy_async）或在库中隐式管理（例如，cooperative_groups::memcpy_async）。&lt;/p&gt;
+
+&lt;p&gt;同步对象可以是 cuda::barrier 或 cuda::pipeline。这些对象在Asynchronous Barrier 和 Asynchronous Data Copies using cuda::pipeline.中进行了详细说明。这些同步对象可以在不同的线程范围内使用。作用域定义了一组线程，这些线程可以使用同步对象与异步操作进行同步。下表定义了CUDA c++中可用的线程作用域，以及可以与每个线程同步的线程。&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Thread Scope&lt;/th&gt;
+      &lt;th&gt;Description&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;cuda::thread_scope::thread_scope_thread&lt;/td&gt;
+      &lt;td&gt;Only the CUDA thread which initiated asynchronous operations synchronizes.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;cuda::thread_scope::thread_scope_block&lt;/td&gt;
+      &lt;td&gt;All or any CUDA threads within the same thread block as the initiating thread synchronizes.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;cuda::thread_scope::thread_scope_device&lt;/td&gt;
+      &lt;td&gt;All or any CUDA threads in the same GPU device as the initiating thread synchronizes.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;cuda::thread_scope::thread_scope_system&lt;/td&gt;
+      &lt;td&gt;All or any CUDA or CPU threads in the same system as the initiating thread synchronizes.&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;这些线程作用域是在CUDA标准c++库中作为标准c++的扩展实现的。&lt;/p&gt;
+
+&lt;h3 id=&quot;26-compute-capability&quot;&gt;2.6 Compute Capability&lt;/h3&gt;
+
+&lt;p&gt;设备的Compute Capability由版本号表示，有时也称其“SM版本”。该版本号标识GPU硬件支持的特性，并由应用程序在运行时使用，以确定当前GPU上可用的硬件特性和指令。&lt;/p&gt;
+
+&lt;p&gt;Compute Capability包括一个主要版本号X和一个次要版本号Y，用X.Y表示&lt;/p&gt;
+
+&lt;p&gt;主版本号相同的设备具有相同的核心架构。设备的主要修订号是8，为NVIDIA Ampere GPU的体系结构的基础上,7基于Volta设备架构,6设备基于Pascal架构,5设备基于Maxwell架构,3基于Kepler架构的设备,2设备基于Fermi架构,1是基于Tesla架构的设备。&lt;/p&gt;
+
+&lt;p&gt;次要修订号对应于对核心架构的增量改进，可能包括新特性。&lt;/p&gt;
+
+&lt;p&gt;Turing是计算能力7.5的设备架构，是基于Volta架构的增量更新。&lt;/p&gt;
+
+&lt;p&gt;CUDA-Enabled GPUs 列出了所有支持 CUDA 的设备及其计算能力。Compute Capabilities给出了每个计算能力的技术规格。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;注意&lt;/strong&gt;：特定GPU的计算能力版本不应与CUDA版本(如CUDA 7.5、CUDA 8、CUDA 9)混淆，CUDA版本指的是CUDA软件平台的版本。CUDA平台被应用开发人员用来创建运行在许多代GPU架构上的应用程序，包括未来尚未发明的GPU架构。尽管CUDA平台的新版本通常会通过支持新的GPU架构的计算能力版本来增加对该架构的本地支持，但CUDA平台的新版本通常也会包含软件功能。
+从CUDA 7.0和CUDA 9.0开始，不再支持Tesla和Fermi架构。&lt;/p&gt;
+
+&lt;h2 id=&quot;参考&quot;&gt;参考&lt;/h2&gt;
+
+&lt;h3 id=&quot;参考1官方参考手册&quot;&gt;参考1：官方参考手册&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&quot;https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#&quot;&gt;1. 官方手册&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://developer.nvidia.com/zh-cn/blog/cuda-intro-cn/&quot;&gt;2. CUDA 编程手册系列第一章：CUDA 简介&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://developer.nvidia.com/zh-cn/blog/cuda-model-intro-cn/&quot;&gt;3. CUDA 编程手册系列第二章: CUDA 编程模型概述&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://developer.nvidia.com/zh-cn/blog/cuda-programming-model-interface-cn/&quot;&gt;4. CUDA 编程手册系列第三章: CUDA 编程模型接口&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://developer.nvidia.com/zh-cn/blog/cuda-hardware-cn/&quot;&gt;5. CUDA 编程手册系列第四章: 硬件的实现&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://developer.nvidia.com/zh-cn/blog/cuda-performance-guide-cn/&quot;&gt;6. CUDA 编程手册系列第五章: 性能指南&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;参考2网络搜集教程&quot;&gt;参考2：网络搜集教程&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&quot;https://blog.csdn.net/qq_41854911/article/details/132526657&quot;&gt;1. CUDA编程入门极简教程&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://zhuanlan.zhihu.com/p/645330027&quot;&gt;2. CUDA（一）：CUDA 编程基础&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;参考3编写示例程序&quot;&gt;参考3：编写示例程序&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://blog.csdn.net/xiaoyezi_1834/article/details/52754043&quot;&gt;1. [CUDA实战] 第一个样例程序&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://blog.csdn.net/qq_43257640/article/details/117415021&quot;&gt;2. 【CUDA编程】一：从简单的实例入门&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;未学习参考&quot;&gt;未学习参考&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://blog.csdn.net/God_WeiYang/article/details/113156246?spm=1001.2101.3001.6650.2&amp;amp;utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-2-113156246-blog-132526657.235%5Ev39%5Epc_relevant_yljh&amp;amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-2-113156246-blog-132526657.235%5Ev39%5Epc_relevant_yljh&amp;amp;utm_relevant_index=3&quot;&gt;推荐几个不错的CUDA入门教程（非广告）&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://face2ai.com/program-blog/#GPU%E7%BC%96%E7%A8%8B&quot;&gt;谭升的博客 人工智能基础&lt;/a&gt;&lt;/p&gt;</content><author><name>LieryangStack</name></author><category term="CUDA" /><category term="CUDA" /><summary type="html">1 CUDA 编程手册系列第一章：CUDA 简介</summary></entry><entry><title type="html">一、x86安装DeepStream</title><link href="https://lieryangstack.github.io//deepstream/2023/12/14/1-x86%E5%AE%89%E8%A3%85DeepStream.html" rel="alternate" type="text/html" title="一、x86安装DeepStream" /><published>2023-12-14T00:00:00+00:00</published><updated>2023-12-14T00:00:00+00:00</updated><id>https://lieryangstack.github.io//deepstream/2023/12/14/1-x86%E5%AE%89%E8%A3%85DeepStream</id><content type="html" xml:base="https://lieryangstack.github.io//deepstream/2023/12/14/1-x86%E5%AE%89%E8%A3%85DeepStream.html">&lt;p&gt;本节介绍在安装DeepStream SDK之前，如何准备一个NVIDIA dGPU设备的Ubuntu x86_64系统。&lt;/p&gt;
+
+&lt;h2 id=&quot;参考&quot;&gt;参考&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://docs.nvidia.com/metropolis/deepstream/dev-guide/text/DS_Quickstart.html#dgpu-setup-for-ubuntu&quot;&gt;dGPU Setup for Ubuntu&lt;/a&gt;&lt;/p&gt;</content><author><name>LieryangStack</name></author><category term="DeepStream" /><category term="DeepStream" /><summary type="html">本节介绍在安装DeepStream SDK之前，如何准备一个NVIDIA dGPU设备的Ubuntu x86_64系统。</summary></entry><entry><title type="html">一、乐理</title><link href="https://lieryangstack.github.io//%E4%B9%90%E7%90%86/2023/12/10/1-%E4%B9%90%E7%90%86.html" rel="alternate" type="text/html" title="一、乐理" /><published>2023-12-10T00:00:00+00:00</published><updated>2023-12-10T00:00:00+00:00</updated><id>https://lieryangstack.github.io//%E4%B9%90%E7%90%86/2023/12/10/1-%E4%B9%90%E7%90%86</id><content type="html" xml:base="https://lieryangstack.github.io//%E4%B9%90%E7%90%86/2023/12/10/1-%E4%B9%90%E7%90%86.html">&lt;p&gt;&lt;a href=&quot;https://www.bilibili.com/video/BV12W411f7YF?p=1&amp;amp;vd_source=e6b01e2e688ed9241677df121e4b897a&quot;&gt;课程学习来自:【四川音乐学院作曲硕士】零基础自学音乐学乐理合集-第一季（精简版）/已完结&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;1-认识简谱的构造&quot;&gt;1 认识简谱的构造&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/Music/01/认识简谱.png&quot; alt=&quot;认识简谱&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;2-认识音名&quot;&gt;2 认识音名&lt;/h2&gt;
+
+&lt;p&gt;1234567也叫音符&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/Music/01/认识音名.jpeg&quot; alt=&quot;认识音名&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;3-初步理解1c-调号&quot;&gt;3 初步理解1=C (调号)&lt;/h2&gt;
+
+&lt;p&gt;钢琴一共有88个键，除了最左边三个键（两个白的一个黑的）和最右边的一个白键。可以分为7组按键（每组7个白键+5个黑键）。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/Music/01/piano-1.png&quot; alt=&quot;&quot; /&gt;
+&lt;img src=&quot;/assets/Music/01/piano-2.png&quot; alt=&quot;&quot; /&gt;
+&lt;img src=&quot;/assets/Music/01/piano-3.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;1=？，1就是从？键上出发，1的位置一旦确定，234567的位置也跟着确定。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/Music/01/piano-4.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/Music/01/piano-5.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/Music/01/piano-6.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/Music/01/piano-7.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/Music/01/piano-8.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/Music/01/piano-9.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/Music/01/piano-10.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;4-黑键怎么表示&quot;&gt;4 黑键怎么表示&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/Music/01/黑键如何表示-1.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/Music/01/黑键如何表示-2.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;5-半音全音&quot;&gt;5 半音&amp;amp;全音&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;半音：相邻的两个音，它们之间的距离就是一个半音。（C键和C#键，也就是相邻白键和黑键的距离就是一个半音）&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;全音：两个半音。&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;注意：E到F是一个半音（因为中间没有黑键），E到F#才是一个全音。&lt;/p&gt;
+
+&lt;h2 id=&quot;6-1234567的内在规则&quot;&gt;6 1234567的内在规则&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/Music/01/1234567的内在规则-1.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/Music/01/1234567的内在规则-2.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;7-调式中的自然大调&quot;&gt;7 调式中的（自然）大调&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;音程：两个音之间的高低关系，叫做音程。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;调式：调式(mode),若干高低不同的乐音,围绕某一有稳定感的中心音,按一定的音程关系组织在一起,成为一个有机的体系,称为调式。（一串音，按一定的规则排列起来）&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;这个自然是可以去掉的，一般直接称呼就是C大调（C自然大调）&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/Music/01/自然大调-1.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/Music/01/自然大调-2.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/Music/01/C大调.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/Music/01/D大调.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;8-构建自然大调中的音阶&quot;&gt;8 构建（自然）大调中的音阶&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;音阶：一个调式里面，它所使用的这些音，按照从低到高的顺序排序起来，由主音开始，主音结束。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;C大调的主音就是C，E大调的主音就是E。&lt;/p&gt;
+
+&lt;p&gt;F# 和 Gb是一个键，但是在D大调中，最好用F#表示，因为这样就可以让CDEFGAB都出现。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/Music/01/音阶-1.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/Music/01/音阶-2.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/Music/01/音阶-3.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;9-黑键开始的自然大调&quot;&gt;9 黑键开始的（自然）大调&lt;/h2&gt;
+
+&lt;p&gt;C# 和 Db 是等音调，是同一种音调，只是根据不同场合，称呼不同。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/Music/01/黑键开始的大调-1.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/Music/01/黑键开始的大调-2.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/Music/01/黑键开始的大调-3.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/Music/01/黑键开始的大调-4.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/Music/01/黑键开始的大调-5.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/Music/01/黑键开始的大调-6.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;10-1c到底是哪个c&quot;&gt;10 1=C到底是哪个C&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/Music/01/1=C到底是哪个C-1.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/Music/01/1=C到底是哪个C-2.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/Music/01/1=C到底是哪个C-3.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/Music/01/1=C到底是哪个C-4.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/Music/01/1=C到底是哪个C-5.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;</content><author><name>LieryangStack</name></author><category term="乐理" /><category term="GStreamer" /><summary type="html">课程学习来自:【四川音乐学院作曲硕士】零基础自学音乐学乐理合集-第一季（精简版）/已完结</summary></entry><entry><title type="html">二、乐理</title><link href="https://lieryangstack.github.io//%E4%B9%90%E7%90%86/2023/12/10/2-%E4%B9%90%E7%90%86.html" rel="alternate" type="text/html" title="二、乐理" /><published>2023-12-10T00:00:00+00:00</published><updated>2023-12-10T00:00:00+00:00</updated><id>https://lieryangstack.github.io//%E4%B9%90%E7%90%86/2023/12/10/2-%E4%B9%90%E7%90%86</id><content type="html" xml:base="https://lieryangstack.github.io//%E4%B9%90%E7%90%86/2023/12/10/2-%E4%B9%90%E7%90%86.html">&lt;h2 id=&quot;11-音符的名称小节&quot;&gt;11 音符的名称、小节&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/Music/02/音符的名称-1.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/Music/02/音符的名称-2.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/Music/02/音符的名称-3.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;中间的线就是小节线&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/Music/02/小节-1.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;上面的简谱是4分音符分一拍，一小节有两拍。举例：&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;一个四分音符＋两个八分音符是一小节。&lt;/li&gt;
+  &lt;li&gt;四个八分音符是一小节。&lt;/li&gt;
+  &lt;li&gt;八个十六分音符是一小节。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;12-附点休止符&quot;&gt;12 附点、休止符&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/Music/02/附点-1.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/Music/02/附点-2.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/Music/02/休止符-1.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/Music/02/休止符-2.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;13-常用的四拍子&quot;&gt;13 常用的四拍子&lt;/h2&gt;
+
+&lt;p&gt;全音符就是四拍，二分音符就是两拍，四分音符就是一拍，八分音符就是0.5拍或者半拍，十六分音符就是0.25拍或者四分之一拍。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/Music/02/常用的四拍子-1.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/Music/02/常用的四拍子-2.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/Music/02/常用的四拍子-3.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;14-常用的八拍子&quot;&gt;14 常用的八拍子&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/Music/02/常用的八拍子-1.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/Music/02/常用的八拍子-2.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;就是四分音符 + 八分音符&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;15-强弱关系单拍子复拍子&quot;&gt;15 强弱关系、单拍子、复拍子&lt;/h2&gt;
+
+&lt;p&gt;律动就是强弱关系。2/4就是动次、动次、动次、、、、&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/Music/02/强弱关系-1.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;3/4就是动次次、动次次、动次次、、、、&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/Music/02/强弱关系-2.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;4/4就是动次打次、动次打次、动次打次、、、、&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/Music/02/强弱关系-3.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/Music/02/强弱关系-4.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;6/8就是动次次打次次、动次次打次次、动次次打次次、、、、&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/Music/02/强弱关系-5.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/Music/02/单拍子复拍子-1.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/Music/02/单拍子复拍子-2.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;16-混合拍子&quot;&gt;16 混合拍子&lt;/h2&gt;
+
+&lt;p&gt;具体是3/4 + 2/4 还是 2/4 + 3/4，还是要在具体的音乐中才能知道。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/Music/02/混合拍子-1.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/Music/02/混合拍子-2.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;17-一拍子散拍子&quot;&gt;17 一拍子、散拍子&lt;/h2&gt;
+
+&lt;p&gt;一拍子一般都是比较欢快的音乐，散拍子即兴演奏&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/Music/02/一拍子-1.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/Music/02/一拍子-2.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/Music/02/散拍子.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;</content><author><name>LieryangStack</name></author><category term="乐理" /><category term="GStreamer" /><summary type="html">11 音符的名称、小节</summary></entry><entry><title type="html">三、乐理</title><link href="https://lieryangstack.github.io//%E4%B9%90%E7%90%86/2023/12/10/3-%E4%B9%90%E7%90%86.html" rel="alternate" type="text/html" title="三、乐理" /><published>2023-12-10T00:00:00+00:00</published><updated>2023-12-10T00:00:00+00:00</updated><id>https://lieryangstack.github.io//%E4%B9%90%E7%90%86/2023/12/10/3-%E4%B9%90%E7%90%86</id><content type="html" xml:base="https://lieryangstack.github.io//%E4%B9%90%E7%90%86/2023/12/10/3-%E4%B9%90%E7%90%86.html">&lt;p&gt;la so mi so la so， mi so la so mi
+re do la so re do， mi —  si —&lt;/p&gt;</content><author><name>LieryangStack</name></author><category term="乐理" /><category term="GStreamer" /><summary type="html">la so mi so la so， mi so la so mi re do la so re do， mi — si —</summary></entry><entry><title type="html">二十三、GstElement</title><link href="https://lieryangstack.github.io//gstreamer%E6%A0%B8%E5%BF%83%E5%AF%B9%E8%B1%A1/2023/12/09/23-GstElement.html" rel="alternate" type="text/html" title="二十三、GstElement" /><published>2023-12-09T00:00:00+00:00</published><updated>2023-12-09T00:00:00+00:00</updated><id>https://lieryangstack.github.io//gstreamer%E6%A0%B8%E5%BF%83%E5%AF%B9%E8%B1%A1/2023/12/09/23-GstElement</id><content type="html" xml:base="https://lieryangstack.github.io//gstreamer%E6%A0%B8%E5%BF%83%E5%AF%B9%E8%B1%A1/2023/12/09/23-GstElement.html">&lt;h2 id=&quot;1-gstelement基本概念&quot;&gt;1 GstElement基本概念&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;GstElement是构建可用于GStreamer管道的元素所需的&lt;span style=&quot;color:red;&quot;&gt;抽象基类（不可实例化）&lt;/span&gt;。有关创建GstElement子类的更多信息，请参阅插件编写指南。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;使用gst_element_get_name可以获取GstElement的名称，并使用gst_element_set_name进行设置。为了提高速度，在核心中使用GST_ELEMENT_NAME时，需要使用适当的锁。不要在插件或应用程序中使用此功能，以保留ABI兼容性。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;元素可以拥有GstPad类型的pad。这些pad链接到其他元素上的pad。GstBuffer在这些链接的pad之间流动。GstElement具有GstPad结构的GList，用于其所有输入（或sink）和输出（或source）pad。核心和插件编写者可以使用gst_element_add_pad和gst_element_remove_pad来添加和删除pad。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;可以使用gst_element_get_static_pad按名称检索元素的现有pad。可以使用gst_element_request_pad和GstPadTemplate创建一个新的动态pad。可以使用gst_element_iterate_pads获取所有pad的迭代器。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;通过它们的pad可以将元素链接在一起。如果链接很简单，可以使用gst_element_link方便函数链接两个元素，或使用gst_element_link_many链接多个元素。使用gst_element_link_filtered按指定的一组GstCaps约束链接两个元素。为了更精细地控制，可以使用gst_element_link_pads和gst_element_link_pads_filtered按名称指定每个元素上要链接的pad。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;每个元素都有一个状态（参见GstState）。可以使用gst_element_get_state和gst_element_set_state获取和设置元素的状态。设置状态会触发GstStateChange。要获取GstState的字符串表示形式，请使用gst_element_state_get_name。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;可以使用gst_element_get_clock和gst_element_set_clock在元素上获取和设置GstClock。如果设置了GST_ELEMENT_FLAG_PROVIDE_CLOCK标志，一些元素可以为管道提供时钟。可以使用gst_element_provide_clock方法检索由这种元素提供的时钟。并非所有元素都需要时钟才能正确运行。如果设置了GST_ELEMENT_FLAG_REQUIRE_CLOCK()标志，则应该使用gst_element_set_clock在元素上设置时钟。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;请注意，时钟的选择和分发通常由顶级的GstPipeline处理，因此时钟函数只能在非常特定的情况下使用。&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;2-gstelement类型结构&quot;&gt;2 GstElement类型结构&lt;/h2&gt;
+
+&lt;h3 id=&quot;21-gstelement类型注册宏定义&quot;&gt;2.1 GstElement类型注册宏定义&lt;/h3&gt;
+
+&lt;div class=&quot;language-c highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cm&quot;&gt;/* filename: gstelement.h */&lt;/span&gt;
+&lt;span class=&quot;cp&quot;&gt;#define GST_TYPE_ELEMENT                (gst_element_get_type ())
+&lt;/span&gt;
+&lt;span class=&quot;cm&quot;&gt;/* filename: gstelement.c */&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;gst_element_get_type&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;gsize&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;gst_element_type&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;g_once_init_enter&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gst_element_type&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;GType&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_type&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GTypeInfo&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;element_info&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;k&quot;&gt;sizeof&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;GstElementClass&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;gst_element_base_class_init&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;nb&quot;&gt;NULL&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;                     &lt;span class=&quot;cm&quot;&gt;/* base_class_finalize */&lt;/span&gt;
+      &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;GClassInitFunc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;gst_element_class_init&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;nb&quot;&gt;NULL&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;nb&quot;&gt;NULL&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;k&quot;&gt;sizeof&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;GstElement&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
+      &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;GInstanceInitFunc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;gst_element_init&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;nb&quot;&gt;NULL&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
+
+    &lt;span class=&quot;n&quot;&gt;_type&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;g_type_register_static&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;GST_TYPE_OBJECT&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;GstElement&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;element_info&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;G_TYPE_FLAG_ABSTRACT&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+    &lt;span class=&quot;n&quot;&gt;__gst_elementclass_factory&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;g_quark_from_static_string&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;GST_ELEMENTCLASS_FACTORY&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;__gst_elementclass_skip_doc&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;g_quark_from_static_string&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;GST_ELEMENTCLASS_SKIP_DOCUMENTATION&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;g_once_init_leave&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gst_element_type&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_type&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;gst_element_type&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;22-gstelement类型相关枚举&quot;&gt;2.2 GstElement类型相关枚举&lt;/h3&gt;
+
+&lt;h4 id=&quot;221-gststate&quot;&gt;2.2.1 GstState&lt;/h4&gt;
+
+&lt;div class=&quot;language-c highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cm&quot;&gt;/* gstelement.h */&lt;/span&gt;
+
+&lt;span class=&quot;cm&quot;&gt;/**
+ * 元素可能处于的状态。可以使用gst_element_set_state()更改状态，并使用gst_element_get_state()检查状态。
+ */&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;typedef&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;enum&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;GST_STATE_VOID_PENDING&lt;/span&gt;        &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;cm&quot;&gt;/* NULL状态或元素的初始状态。 */&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;GST_STATE_NULL&lt;/span&gt;                &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;cm&quot;&gt;/* 元素已经准备好进入暂停状态。 */&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;GST_STATE_READY&lt;/span&gt;               &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;cm&quot;&gt;/* 元素暂停时，它已准备好接受和处理数据。然而，Sink元素只接受一个缓冲区，然后阻塞。 */&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;GST_STATE_PAUSED&lt;/span&gt;              &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;cm&quot;&gt;/* 元素是PLAYING， #GstClock正在运行，数据正在流动。 */&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;GST_STATE_PLAYING&lt;/span&gt;             &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GstState&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;h4 id=&quot;222-gststatechangereturn&quot;&gt;2.2.2 GstStateChangeReturn&lt;/h4&gt;
+
+&lt;div class=&quot;language-c highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cm&quot;&gt;/* gstelement.h */&lt;/span&gt;
+
+&lt;span class=&quot;cm&quot;&gt;/**
+ * 状态更改函数(如gst_element_set_state())的可能返回值。只有@GST_STATE_CHANGE_FAILURE才是真正的失败。
+ */&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;typedef&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;enum&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;GST_STATE_CHANGE_FAILURE&lt;/span&gt;             &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;GST_STATE_CHANGE_SUCCESS&lt;/span&gt;             &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;cm&quot;&gt;/* 状态更改将异步发生 */&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;GST_STATE_CHANGE_ASYNC&lt;/span&gt;               &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;cm&quot;&gt;/* 状态更改成功，但元素无法产生%GST_STATE_PAUSED中的数据。这通常发生在实时资源上。 */&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;GST_STATE_CHANGE_NO_PREROLL&lt;/span&gt;          &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GstStateChangeReturn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;223-gststatechangereturn&quot;&gt;2.2.3 GstStateChangeReturn&lt;/h4&gt;
+
+&lt;div class=&quot;language-c highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cm&quot;&gt;/* gstelement.h */&lt;/span&gt;
+
+&lt;span class=&quot;cm&quot;&gt;/**
+ * GstStateChange:
+ * @GST_STATE_CHANGE_NULL_TO_READY    : 从NULL状态到READY状态的状态改变。
+ *   1. 元素必须检查所需的资源是否可用。设备的sink和source通常会尝试探测设备以限制它们的caps。
+ *   2. 元素打开设备（以便一些特性可以被probe）。
+ * @GST_STATE_CHANGE_READY_TO_PAUSED  : 从READY状态到PAUSED状态的状态改变。
+ *   1. 元素的pad被激活以准备接收数据。开始流线程。
+ *   2. 一些元素可能需要返回%GST_STATE_CHANGE_ASYNC，并在有足够信息时完成状态改变。对于sink来说，返回%GST_STATE_CHANGE_ASYNC
+ *     当它们收到第一个缓冲区或%GST_EVENT_EOS（预滚动）时，完成状态改变。
+ *     在PAUSED状态下，当收到第一个缓冲区或%GST_EVENT_EOS（预滚动）时，sink还会阻塞数据流。 
+ *   3. 管道将running_time重置为0。
+ *   4. 实时源返回%GST_STATE_CHANGE_NO_PREROLL并且不生成数据。
+ * @GST_STATE_CHANGE_PAUSED_TO_PLAYING: 从PAUSED状态到PLAYING状态的状态改变。
+ *   1. 大多数元素忽略此状态改变。
+ *   2. 管道选择一个#GstClock并在将其设置为PLAYING之前将其分发给所有子元素。这意味着只允许在PLAYING状态下对#GstClock进行同步。
+ *   3. 管道使用 #GstClock和 running_time来计算base_time。在执行状态改变时，将base_time分发给所有子元素。
+ *   4. Sink元素停止在预滚动prepoll缓冲区或事件上阻塞，并开始渲染数据。
+ *   5. The pipeline uses the #GstClock and the running_time to calculate the
+ *   6. Sink可以在PLAYING状态下发布%GST_MESSAGE_EOS。不允许在不是PLAYING状态时发布%GST_MESSAGE_EOS。
+ *   7. 在PAUSED或PLAYING状态中进行流式传输时，元素有时会创建和移除pad。
+ *   8. 实时源开始生成数据并返回%GST_STATE_CHANGE_SUCCESS。
+ * 
+ * @GST_STATE_CHANGE_PLAYING_TO_PAUSED: 从 PLAYING 到 PAUSED 的状态变化。
+ *   1. Sink 解除所有 #GstClock 的等待调用。
+ *   2. 当 Sink 没有待播放的缓冲区时，它会从此状态变化返回 #GST_STATE_CHANGE_ASYNC，并在接收到新的缓冲区或 %GST_EVENT_EOS 时完成状态变化。
+ *   3. 任何排队的 %GST_MESSAGE_EOS 都会被移除，因为它们将在返回 PLAYING 状态时重新发布。这些 EOS 消息被排在 #GstBin 容器中。
+ *   4. 实时源停止生成数据并返回 %GST_STATE_CHANGE_NO_PREROLL。
+ * @GST_STATE_CHANGE_PAUSED_TO_READY  : 从 PAUSED 到 READY 的状态变化。
+ *   1. Sink 解除 preroll 中的所有等待。
+ *   2. 元素解除设备上的所有等待。
+ *   3. Chain 或 get_range 函数返回 %GST_FLOW_FLUSHING。
+ *   4. 元素的 pads 被停用，因此无法进行流传输，并停止所有流传输线程。
+ *   5. Sink 忘记所有已协商的格式。
+ *   6. 元素移除所有 sometimes pads。
+ * @GST_STATE_CHANGE_READY_TO_NULL    : 从 READY 到 NULL 的状态变化。
+ *   1. 元素关闭设备。
+ *   2. 元素重置任何内部状态。
+ * 
+ * @GST_STATE_CHANGE_NULL_TO_NULL       : state change from NULL to NULL. (Since: 1.14)
+ * @GST_STATE_CHANGE_READY_TO_READY     : state change from READY to READY,
+ * This might happen when going to PAUSED asynchronously failed, in that case
+ * 这可能发生在异步转换到 PAUSED 失败的情况下，在这种情况下，元素应确保它们处于适当、一致的 READY 状态。 (自 1.14 版本开始)
+ * @GST_STATE_CHANGE_PAUSED_TO_PAUSED   : state change from PAUSED to PAUSED.
+ * 这可能发生在元素处于 PLAYING 状态但是 'lost state' 的情况下，它们应确保返回真正的 'PAUSED' 状态（例如，预滚动）。 (自 1.14 版本开始)
+ * @GST_STATE_CHANGE_PLAYING_TO_PLAYING : state change from PLAYING to PLAYING. (Since: 1.14)
+ *
+ * 这些是元素经历的不同状态变化。
+ * %GST_STATE_NULL ⇒ %GST_STATE_PLAYING 被称为上升状态变化，
+ * 而 %GST_STATE_PLAYING ⇒ %GST_STATE_NULL 则是下降状态变化。
+ */&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;typedef&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;enum&lt;/span&gt; &lt;span class=&quot;cm&quot;&gt;/*&amp;lt; flags=0 &amp;gt;*/&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;GST_STATE_CHANGE_NULL_TO_READY&lt;/span&gt;        &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;GST_STATE_NULL&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GST_STATE_READY&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;GST_STATE_CHANGE_READY_TO_PAUSED&lt;/span&gt;      &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;GST_STATE_READY&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GST_STATE_PAUSED&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;GST_STATE_CHANGE_PAUSED_TO_PLAYING&lt;/span&gt;    &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;GST_STATE_PAUSED&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GST_STATE_PLAYING&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+
+  &lt;span class=&quot;n&quot;&gt;GST_STATE_CHANGE_PLAYING_TO_PAUSED&lt;/span&gt;    &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;GST_STATE_PLAYING&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GST_STATE_PAUSED&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;GST_STATE_CHANGE_PAUSED_TO_READY&lt;/span&gt;      &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;GST_STATE_PAUSED&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GST_STATE_READY&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;GST_STATE_CHANGE_READY_TO_NULL&lt;/span&gt;        &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;GST_STATE_READY&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GST_STATE_NULL&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+
+  &lt;span class=&quot;n&quot;&gt;GST_STATE_CHANGE_NULL_TO_NULL&lt;/span&gt;         &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;GST_STATE_NULL&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GST_STATE_NULL&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;GST_STATE_CHANGE_READY_TO_READY&lt;/span&gt;       &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;GST_STATE_READY&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GST_STATE_READY&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;GST_STATE_CHANGE_PAUSED_TO_PAUSED&lt;/span&gt;     &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;GST_STATE_PAUSED&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GST_STATE_PAUSED&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;GST_STATE_CHANGE_PLAYING_TO_PLAYING&lt;/span&gt;   &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;GST_STATE_PLAYING&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GST_STATE_PLAYING&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GstStateChange&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;224-gststatechangereturn&quot;&gt;2.2.4 GstStateChangeReturn&lt;/h4&gt;
+
+&lt;div class=&quot;language-c highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cm&quot;&gt;/* gstelement.h */&lt;/span&gt;
+
+&lt;span class=&quot;cm&quot;&gt;/**
+ * GstElementFlags:
+ * @GST_ELEMENT_FLAG_LOCKED_STATE: ignore state changes from parent
+ * @GST_ELEMENT_FLAG_SINK: the element is a sink
+ * @GST_ELEMENT_FLAG_SOURCE: the element is a source.
+ * @GST_ELEMENT_FLAG_PROVIDE_CLOCK: the element can provide a clock
+ * @GST_ELEMENT_FLAG_REQUIRE_CLOCK: the element requires a clock
+ * @GST_ELEMENT_FLAG_INDEXABLE: the element can use an index
+ * @GST_ELEMENT_FLAG_LAST: offset to define more flags
+ *
+ * 元素可能具有的标准flags。
+ */&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;typedef&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;enum&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;GST_ELEMENT_FLAG_LOCKED_STATE&lt;/span&gt;   &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;GST_OBJECT_FLAG_LAST&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;GST_ELEMENT_FLAG_SINK&lt;/span&gt;           &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;GST_OBJECT_FLAG_LAST&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;GST_ELEMENT_FLAG_SOURCE&lt;/span&gt;         &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;GST_OBJECT_FLAG_LAST&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;GST_ELEMENT_FLAG_PROVIDE_CLOCK&lt;/span&gt;  &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;GST_OBJECT_FLAG_LAST&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;GST_ELEMENT_FLAG_REQUIRE_CLOCK&lt;/span&gt;  &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;GST_OBJECT_FLAG_LAST&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;GST_ELEMENT_FLAG_INDEXABLE&lt;/span&gt;      &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;GST_OBJECT_FLAG_LAST&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
+  &lt;span class=&quot;cm&quot;&gt;/* padding */&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;GST_ELEMENT_FLAG_LAST&lt;/span&gt;           &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;GST_OBJECT_FLAG_LAST&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GstElementFlags&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;23-gstelement相关结构体&quot;&gt;2.3 GstElement相关结构体&lt;/h3&gt;
+
+&lt;h4 id=&quot;231-gstelement&quot;&gt;2.3.1 GstElement&lt;/h4&gt;
+
+&lt;div class=&quot;language-c highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cm&quot;&gt;/**
+ * GstElement:
+ * @state_lock: 多线程执行  gst_element_set_state() 的锁
+ * @state_cond: 通知其它条件锁等待，状态改变完成
+ * @state_cookie: 用于检测 gst_element_set_state() 和 gst_element_get_state() 的并发执行
+ * @target_state: 应用程序设置的元素的目标状态
+ * @current_state: 元素当前的状态
+ * @next_state: 元素的下一个状态，如果元素正处于正确的状态，则可以是 #GST_STATE_VOID_PENDING
+ * @pending_state: 元素应该转换到的最终状态，如果元素处于正确的状态，则可以是 #GST_STATE_VOID_PENDING
+ * @last_return: 元素状态改变的最后返回值
+ * @bus: 元素的bus总线，这个总线由父元素或应用程序提供给元素。#GstPipeline 有自己的总线。
+ * @clock: 元素的时钟。通常由顶层 #GstPipeline 提供给元素。
+ * @base_time: 元素设置为 PLAYING 之前时钟的时间。在 PLAYING 状态下，从当前时钟时间减去 @base_time 将得到相对于时钟的 running_time。
+ * @start_time: 上一个 PAUSED 状态的 running_time
+ * @numpads: pads的数量，包括source pads和sink pads.
+ * @pads: (element-type Gst.Pad): 存储pads的列表
+ * @numsrcpads: source pads的数量
+ * @srcpads: (element-type Gst.Pad): source pads的数列表
+ * @numsinkpads: sink pads的数量
+ * @sinkpads: (element-type Gst.Pad): sink pads的列表
+ * @pads_cookie: 每当添加或移除一个 pad 时更新
+ * @contexts: (element-type Gst.Context): 上下文列表
+ *
+ * GStreamer element abstract base class.
+ */&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_GstElement&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;GstObject&lt;/span&gt;             &lt;span class=&quot;n&quot;&gt;object&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;cm&quot;&gt;/* 用于 */&lt;/span&gt;
+
+  &lt;span class=&quot;cm&quot;&gt;/*&amp;lt; public &amp;gt;*/&lt;/span&gt; &lt;span class=&quot;cm&quot;&gt;/* with LOCK */&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;GRecMutex&lt;/span&gt;             &lt;span class=&quot;n&quot;&gt;state_lock&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+  &lt;span class=&quot;cm&quot;&gt;/* element state */&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;GCond&lt;/span&gt;                 &lt;span class=&quot;n&quot;&gt;state_cond&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;guint32&lt;/span&gt;               &lt;span class=&quot;n&quot;&gt;state_cookie&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;cm&quot;&gt;/* 每次设定元素到新的状态，这个值就会加一（增量值，不会减少） */&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;GstState&lt;/span&gt;              &lt;span class=&quot;n&quot;&gt;target_state&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;cm&quot;&gt;/* 应用程序设定的元素目标状态，元素目标状态不应该和pengding_state相同吗？？ */&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;GstState&lt;/span&gt;              &lt;span class=&quot;n&quot;&gt;current_state&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;cm&quot;&gt;/* 元素当前状态 */&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;GstState&lt;/span&gt;              &lt;span class=&quot;n&quot;&gt;next_state&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;cm&quot;&gt;/* 元素的下一个状态，如果元素正处于正确的状态，则可以是 #GST_STATE_VOID_PENDING */&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;GstState&lt;/span&gt;              &lt;span class=&quot;n&quot;&gt;pending_state&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;cm&quot;&gt;/* 元素应该转换到的最终状态，如果元素处于正确的状态，则可以是 #GST_STATE_VOID_PENDING */&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;GstStateChangeReturn&lt;/span&gt;  &lt;span class=&quot;n&quot;&gt;last_return&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;cm&quot;&gt;/* 上一次状态改变后的返回值 */&lt;/span&gt;
+
+  &lt;span class=&quot;n&quot;&gt;GstBus&lt;/span&gt;               &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;bus&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+  &lt;span class=&quot;cm&quot;&gt;/* allocated clock */&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;GstClock&lt;/span&gt;             &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;clock&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;GstClockTimeDiff&lt;/span&gt;      &lt;span class=&quot;n&quot;&gt;base_time&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;cm&quot;&gt;/* NULL/READY: 0 - PAUSED: current time - PLAYING: difference to clock */&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;GstClockTime&lt;/span&gt;          &lt;span class=&quot;n&quot;&gt;start_time&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+  &lt;span class=&quot;cm&quot;&gt;/* element pads, these lists can only be iterated while holding
+   * the LOCK or checking the cookie after each LOCK. */&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;guint16&lt;/span&gt;               &lt;span class=&quot;n&quot;&gt;numpads&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;GList&lt;/span&gt;                &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pads&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;guint16&lt;/span&gt;               &lt;span class=&quot;n&quot;&gt;numsrcpads&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;GList&lt;/span&gt;                &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;srcpads&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;guint16&lt;/span&gt;               &lt;span class=&quot;n&quot;&gt;numsinkpads&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;GList&lt;/span&gt;                &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sinkpads&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;guint32&lt;/span&gt;               &lt;span class=&quot;n&quot;&gt;pads_cookie&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+  &lt;span class=&quot;cm&quot;&gt;/* with object LOCK */&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;GList&lt;/span&gt;                &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;contexts&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+  &lt;span class=&quot;cm&quot;&gt;/*&amp;lt; private &amp;gt;*/&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;gpointer&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_gst_reserved&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;GST_PADDING&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;232-gstelementclass&quot;&gt;2.3.2 GstElementClass&lt;/h3&gt;
+
+&lt;div class=&quot;language-c highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cm&quot;&gt;/**
+ * GstElementClass:
+ * @parent_class: the parent class structure
+ * @metadata: 此类元素的元数据
+ * @elementfactory: 创建这些元素的 #GstElementFactory
+ * @padtemplates:  #GstPadTemplate 的 #GList
+ * @numpadtemplates: padtemplates 的数量
+ * @pad_templ_cookie:  每当 padtemplates 更改时都会更改
+ * @request_new_pad: 请求新 pad 时调用
+ * @release_pad: 当请求 pad 要释放时调用
+ * @get_state: 获取元素的状态
+ * @set_state: 在元素上设置新状态
+ * @change_state: 被 @set_state 调用以执行增量状态更改
+ * @set_bus: 在元素上设置 #GstBus
+ * @provide_clock: 获取元素提供的 #GstClock
+ * @set_clock: 在元素上设置 #GstClock
+ * @send_event: 向元素发送 #GstEvent
+ * @query: 在元素上执行 #GstQuery
+ * @state_changed: 在设置新状态后立即调用。
+ * @post_message: 在元素上发布消息时调用。链接到父类的处理程序以将其发布到总线上。
+ * @set_context: 在元素上设置 #GstContext
+ *
+ * 重写以上虚函数以实现用户定义元素的功能
+ */&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_GstElementClass&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;GstObjectClass&lt;/span&gt;         &lt;span class=&quot;n&quot;&gt;parent_class&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+  &lt;span class=&quot;cm&quot;&gt;/*&amp;lt; public &amp;gt;*/&lt;/span&gt;
+  &lt;span class=&quot;cm&quot;&gt;/* the element metadata */&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;gpointer&lt;/span&gt;		 &lt;span class=&quot;n&quot;&gt;metadata&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+  &lt;span class=&quot;cm&quot;&gt;/* factory that the element was created from */&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;GstElementFactory&lt;/span&gt;     &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;elementfactory&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+  &lt;span class=&quot;cm&quot;&gt;/* templates for our pads */&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;GList&lt;/span&gt;                 &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;padtemplates&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;gint&lt;/span&gt;                   &lt;span class=&quot;n&quot;&gt;numpadtemplates&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;guint32&lt;/span&gt;                &lt;span class=&quot;n&quot;&gt;pad_templ_cookie&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+  &lt;span class=&quot;cm&quot;&gt;/*&amp;lt; private &amp;gt;*/&lt;/span&gt;
+  &lt;span class=&quot;cm&quot;&gt;/* signal callbacks */&lt;/span&gt;
+  &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pad_added&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;     &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;GstElement&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;element&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GstPad&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pad&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pad_removed&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;   &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;GstElement&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;element&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GstPad&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pad&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;no_more_pads&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;  &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;GstElement&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;element&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+  &lt;span class=&quot;cm&quot;&gt;/*&amp;lt; public &amp;gt;*/&lt;/span&gt;
+  &lt;span class=&quot;cm&quot;&gt;/* virtual methods for subclasses */&lt;/span&gt;
+
+  &lt;span class=&quot;cm&quot;&gt;/* request/release pads */&lt;/span&gt;
+  &lt;span class=&quot;cm&quot;&gt;/* FIXME 2.0 harmonize naming with gst_element_request_pad */&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;GstPad&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;               &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;request_new_pad&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;      &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;GstElement&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;element&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GstPadTemplate&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;templ&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                                                 &lt;span class=&quot;k&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;gchar&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GstCaps&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;caps&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+  &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt;                  &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;release_pad&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;          &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;GstElement&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;element&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GstPad&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pad&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+  &lt;span class=&quot;cm&quot;&gt;/* state changes */&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;GstStateChangeReturn&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;get_state&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;             &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;GstElement&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;element&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GstState&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;state&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                                                 &lt;span class=&quot;n&quot;&gt;GstState&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pending&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GstClockTime&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;timeout&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;GstStateChangeReturn&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;set_state&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;             &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;GstElement&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;element&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GstState&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;state&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;GstStateChangeReturn&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;change_state&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;          &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;GstElement&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;element&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GstStateChange&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;transition&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt;                 &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;state_changed&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;         &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;GstElement&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;element&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GstState&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;oldstate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                                                 &lt;span class=&quot;n&quot;&gt;GstState&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;newstate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GstState&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pending&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+  &lt;span class=&quot;cm&quot;&gt;/* bus */&lt;/span&gt;
+  &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt;                  &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;set_bus&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;              &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;GstElement&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;element&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GstBus&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;bus&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+  &lt;span class=&quot;cm&quot;&gt;/* set/get clocks */&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;GstClock&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;             &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;provide_clock&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;        &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;GstElement&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;element&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;gboolean&lt;/span&gt;              &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;set_clock&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;            &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;GstElement&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;element&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GstClock&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;clock&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+  &lt;span class=&quot;cm&quot;&gt;/* query functions */&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;gboolean&lt;/span&gt;              &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;send_event&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;           &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;GstElement&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;element&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GstEvent&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;event&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+  &lt;span class=&quot;n&quot;&gt;gboolean&lt;/span&gt;              &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;query&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;                &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;GstElement&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;element&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GstQuery&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;query&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+  &lt;span class=&quot;n&quot;&gt;gboolean&lt;/span&gt;              &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;post_message&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;         &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;GstElement&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;element&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GstMessage&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;message&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+  &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt;                  &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;set_context&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;          &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;GstElement&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;element&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GstContext&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;context&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+  &lt;span class=&quot;cm&quot;&gt;/*&amp;lt; private &amp;gt;*/&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;gpointer&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_gst_reserved&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;GST_PADDING_LARGE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;3-gstelement对象相关函数&quot;&gt;3 GstElement对象相关函数&lt;/h2&gt;</content><author><name>LieryangStack</name></author><category term="GStreamer核心对象" /><category term="GStreamer" /><summary type="html">1 GstElement基本概念</summary></entry><entry><title type="html">一、插件编写</title><link href="https://lieryangstack.github.io//gstreamer%E8%AE%BE%E8%AE%A1/2023/12/08/1-%E6%8F%92%E4%BB%B6%E7%BC%96%E5%86%99.html" rel="alternate" type="text/html" title="一、插件编写" /><published>2023-12-08T00:00:00+00:00</published><updated>2023-12-08T00:00:00+00:00</updated><id>https://lieryangstack.github.io//gstreamer%E8%AE%BE%E8%AE%A1/2023/12/08/1-%E6%8F%92%E4%BB%B6%E7%BC%96%E5%86%99</id><content type="html" xml:base="https://lieryangstack.github.io//gstreamer%E8%AE%BE%E8%AE%A1/2023/12/08/1-%E6%8F%92%E4%BB%B6%E7%BC%96%E5%86%99.html">&lt;h2 id=&quot;1-pad-deactivation&quot;&gt;1 Pad (de)activation&lt;/h2&gt;
+
+&lt;h3 id=&quot;11-激活&quot;&gt;1.1 激活&lt;/h3&gt;
+
+&lt;p&gt;改变状态时，一个 &lt;span style=&quot;color:red;&quot;&gt;bin 会按照从sink到source的顺序&lt;/span&gt;为其所有子元素设置状态。当元素经历 READY→PAUSED 过渡时，它们的Pad会被激活以准备数据流。一些Pad会启动任务以驱动数据流。&lt;/p&gt;
+
+&lt;p&gt;&lt;span style=&quot;color:red;&quot;&gt;一个元素会从sourcepads到sinkpads依次激活其Pad。&lt;/span&gt;这是为了确保当sinkpads被激活并准备接收数据时，sourcepads已经激活以向下游传递数据。&lt;/p&gt;
+
+&lt;p&gt;Pads可以在 PUSH 和 PULL 两种模式下激活。PUSH 模式是正常情况，其中链接中的source pad通过 gst_pad_push() 将数据发送到对端的sink pad。而 PULL 模式则是由source pad请求数据通过 gst_pad_pull_range()。&lt;/p&gt;
+
+&lt;p&gt;要激活一个Pad，核心会以 TRUE 参数调用 gst_pad_set_active()，表示该Pad应该处于激活状态。如果Pad已经处于激活状态，无论是在 PUSH 还是 PULL 模式下，gst_pad_set_active() 将不执行任何操作而直接返回。否则将调用Pad的激活函数。&lt;/p&gt;
+
+&lt;p&gt;因为核心不知道以那种模式激活一个端口（PUSH 还是 PULL），它将这个选择委托给了端口的 activate() 方法。一个端口的 activate() 函数应该选择在 PUSH 或 PULL 模式下操作。一旦做出选择，它应该使用所选的激活模式调用 activate_mode()。默认的 activate() 函数会使用 #GST_PAD_MODE_PUSH 调用 activate_mode()，因为这是数据流的默认机制。如果支持两种操作模式的sinkpad，在上游进行 SCHEDULING 查询包含 #GST_PAD_MODE_PULL 调度模式时，可能会调用 activate_mode(PULL)，否则调用 activate_mode(PUSH)。&lt;/p&gt;
+
+&lt;p&gt;考虑 fakesrc ! fakesink 的情况，其中 fakesink 配置为以 PULL 模式运行。pipeline中的状态变化将从 fakesink 开始，它是最下游的元素。核心将在 fakesink 的sinkpad上调用 activate()。为了让 fakesink 进入 PULL 模式，它需要实现一个自定义的 activate() 函数，该函数将在其sinkpad上调用 activate_mode(PULL)（因为默认情况下使用的是 PUSH 模式）。然后 activate_mode(PULL) 负责启动从 fakesrc:src 拉取数据的任务。显然，即使pipeline尚未改变 fakesrc 的状态，fakesrc 也需要被通知即将在其src pad上拉取数据。因此，GStreamer 将首先在 fakesink:sink 的对等Pad上调用 activate_mode(PULL)，然后才在 fakesink:sinks 上调用 activate_mode(PULL)。&lt;/p&gt;
+
+&lt;p&gt;简而言之，在 PULL 模式下运行的上游元素必须在 READY 中准备好产生数据，在其src pad上调用 activate_mode(PULL) 之后。此外，对 activate_mode(PULL) 的调用需要通过管道pipeline传播到每个 gst_pad_pull() 能到达的Pad。在 fakesrc ! identity ! fakesink 的情况下，对 identity 的src pad调用 activate_mode(PULL) 将需要激活其sink pad进入 PULL 模式，这应该传播到 fakesrc。&lt;/p&gt;
+
+&lt;p&gt;另一方面，如果 fakesrc ! fakesink 以 PUSH 模式运行，则激活顺序不同。首先，在 fakesink:sink 上调用 activate() 将在 fakesink:sink 上调用 activate_mode(PUSH)。然后激活 fakesrc 的端口：先src pad，然后是sink pad（fakesrc 没有sink pad）。然后调用 fakesrc:src 的激活函数。&lt;/p&gt;
+
+&lt;p&gt;请注意，设置源端口的激活函数是没有意义的。源端口的对等端口在下游，意味着它应该首先被激活。如果它以 PULL 模式激活，源端口应该已经对其进行了 activate_mode(PULL) 调用，因此不需要进一步激活。否则它应该处于 PUSH 模式，这是默认激活函数的选择。&lt;/p&gt;
+
+&lt;p&gt;所以，在 PUSH 模式下，默认激活函数选择 PUSH 模式，调用 activate_mode(PUSH)，然后开始在源端口上启动任务并开始推送。这样 PUSH 调度会更加简单，因为它遵循管线中状态变化的顺序。fakesink 在 fakesrc 开始推送数据时已经处于 PAUSED 状态，并具有活跃的sink pad。&lt;/p&gt;
+
+&lt;h3 id=&quot;12-取消激活停用&quot;&gt;1.2 取消激活（停用）&lt;/h3&gt;
+
+&lt;p&gt;端口的停用发生在其父级进入 READY 状态时，或者当应用程序或元素明确地停用端口时。调用 gst_pad_set_active() 并使用 FALSE 参数，然后根据端口的当前激活模式调用 activate_mode(PUSH) 或 activate_mode(PULL) 并使用 FALSE 参数。&lt;/p&gt;
+
+&lt;h3 id=&quot;13-参考&quot;&gt;1.3 参考&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://gstreamer.freedesktop.org/documentation/additional/design/activation.html?gi-language=c#pad-deactivation&quot;&gt;GStreamer design documents, Pad (de)activation&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;2-push-pull&quot;&gt;2 push-pull&lt;/h2&gt;
+
+&lt;p&gt;通常，源source元素会使用 gst_pad_push() 方法将数据推送到下游元素。下游对等pad（也就是sink pad）将在链式chain函数中接收缓冲区。在推送模式中，源元素是管道中的驱动力，因为它启动了数据传输。&lt;/p&gt;
+
+&lt;p&gt;元素也可以从上游元素那里拉取数据。下游元素通过在其一个sinkpad上调用 gst_pad_pull_range() 来实现这一点。在这种模式下，下游元素是管道中的驱动力，因为它启动了数据传输。&lt;/p&gt;
+
+&lt;p&gt;重要的是，元素要处于正确的状态以处理来自对等元素的 push() 或 pull_range()。对于基于 push() 的元素，这意味着所有下游元素应处于正确的状态；对于基于 pull_range() 的元素，这意味着所有上游元素应处于正确的状态。&lt;/p&gt;
+
+&lt;p&gt;大多数sinkpad实现了一个链式函数。这是最常见的情况。实现循环函数的sinkpad将是一个例外。同样，实现 getrange 函数的sourcepad也将是一个例外。&lt;/p&gt;
+
+&lt;h3 id=&quot;21-state-changes&quot;&gt;2.1 State changes&lt;/h3&gt;
+
+&lt;p&gt;GstBin设置所有sink元素的状态。这些元素是没有sourcepad的元素。&lt;/p&gt;
+
+&lt;p&gt;在一个元素上设置状态首先会激活所有的sourcepad，然后是sinkpad。对于每个sinkpad，都会执行 gst_pad_check_pull_range()。如果sinkpad支持循环函数，并且对等pad在 GstPadCheckPullRange 函数中返回 TRUE，那么对等pad会首先被激活，因为它必须处于正确的状态以处理 _pull_range()。注意，元素的状态变更尚未执行，只是在sourcepad上调用了激活函数。这意味着实现 getrange 函数的元素必须准备好在它们的状态变更函数之前调用它们的激活函数。&lt;/p&gt;
+
+&lt;p&gt;那些有多个sinkpad且需要所有这些pad以相同模式（推送/拉取）操作的元素，可以在它们所有的pad上使用 _check_pull_range()，然后如果其中一个pad不支持基于拉取的模式，可以移除循环函数。&lt;/p&gt;
+
+&lt;h3 id=&quot;22-参考&quot;&gt;2.2 参考&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://gstreamer.freedesktop.org/documentation/additional/design/push-pull.html?gi-language=c#pushpull&quot;&gt;GStreamer design documents, push-pull&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;3-scheduling&quot;&gt;3 Scheduling&lt;/h2&gt;
+
+&lt;p&gt;在GStreamer中，调度是基于pad主动推送（产生）数据或从其他pad拉取（消费）数据。&lt;/p&gt;
+
+&lt;h3 id=&quot;31-pushing&quot;&gt;3.1 Pushing&lt;/h3&gt;
+
+&lt;p&gt;一个pad可以产生数据并将其推送到下一个pad。以这种方式行为的pad暴露了一个循环函数，这个函数将被重复调用，直到它返回 false。这个循环函数可以在任何时候阻塞。但当pad被停用时，循环函数应该解除阻塞。&lt;/p&gt;
+
+&lt;p&gt;以推送模式运行的pad只能向暴露（有）链式函数的pad产生数据。这个链式函数将被调用，并传入由推送pad产生的缓冲区。&lt;/p&gt;
+
+&lt;p&gt;这种产生数据的方法被称为流媒体模式，因为生产者产生一个持续的数据流。&lt;/p&gt;
+
+&lt;h3 id=&quot;32-pulling&quot;&gt;3.2 Pulling&lt;/h3&gt;
+
+&lt;p&gt;以拉取模式运行的pad只能从暴露（有）了 pull_range() 函数的pad拉取数据。在这种情况下，sinkpad垫片暴露了（有）一个循环函数，这个函数将被重复调用，直到任务停止。&lt;/p&gt;
+
+&lt;p&gt;从对等pad拉取数据后，循环函数通常会调用推送函数，将结果从srcpad推送到对等的sinkpad。&lt;/p&gt;
+
+&lt;h3 id=&quot;33-deciding-the-scheduling-mode&quot;&gt;3.3 Deciding the scheduling mode&lt;/h3&gt;
+
+&lt;p&gt;当一个pad被激活时，会调用 _activate() 函数。然后，pad可以选择根据上游的能力以推送或拉取模式激活自己。&lt;/p&gt;
+
+&lt;p&gt;当pad没有激活函数时，GStreamer核心默认会以推送模式激活pad。&lt;/p&gt;
+
+&lt;h3 id=&quot;34-the-chain-function&quot;&gt;3.4 The chain function&lt;/h3&gt;
+
+&lt;p&gt;当上游元素在pad上执行 _push() 时，将调用链式函数。上游元素可以是另一个基于链式的元素或推送源。&lt;/p&gt;
+
+&lt;h3 id=&quot;35-the-getrange-function&quot;&gt;3.5 The getrange function&lt;/h3&gt;
+
+&lt;p&gt;当对等pad在pad上执行 _pull_range() 时，将调用 getrange 函数。这个下游pad可以是一个拉取元素或另一个基于 _pull_range() 的元素。&lt;/p&gt;
+
+&lt;h3 id=&quot;36-scheduling-query&quot;&gt;3.6 Scheduling Query&lt;/h3&gt;
+
+&lt;p&gt;一个sinkpad可以向上游的srcpad询问其调度属性。它是通过 SCHEDULING 查询来实现的。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;(out)modes&lt;/strong&gt;：G_TYPE_ARRAY（默认值为 NULL）：一个包含所有支持的调度模式的 GST_TYPE_PAD_MODE 枚举的数组。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;(out)flags&lt;/strong&gt;：GST_TYPE_SCHEDULING_FLAGS（默认值为 0）：&lt;/p&gt;
+
+    &lt;div class=&quot;language-c highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;k&quot;&gt;typedef&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;enum&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;GST_SCHEDULING_FLAG_SEEKABLE&lt;/span&gt;           &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;GST_SCHEDULING_FLAG_SEQUENTIAL&lt;/span&gt;         &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;GST_SCHEDULING_FLAG_BANDWIDTH_LIMITED&lt;/span&gt;  &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GstSchedulingFlags&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+
+    &lt;p&gt;-&lt;strong&gt;_SEEKABLE&lt;/strong&gt;：拉取操作的偏移量可以被指定，如果这个标志为假，偏移量应该是 -1。&lt;/p&gt;
+
+    &lt;p&gt;-&lt;strong&gt;_SEQUENTIAL&lt;/strong&gt;：建议按顺序访问数据。如果指定了 _SEEKABLE，允许进行搜索，但应避免。这对于网络流来说很常见。&lt;/p&gt;
+
+    &lt;p&gt;-&lt;strong&gt;_BANDWIDTH_LIMITED&lt;/strong&gt;：建议元素支持缓冲数据以帮助下游应对带宽限制。如果这个标志开启，下游元素可能会请求比正常播放需要更多的数据。这种用例对于磁盘上的缓冲场景来说很有趣。搜索操作可能也会很慢，因此下游元素应考虑到这一点。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;(out)minsize&lt;/strong&gt;: G_TYPE_INT (default 1): 建议的拉取请求的最小尺寸&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;(out)maxsize&lt;/strong&gt;: G_TYPE_INT (default -1, unlimited): 建议的拉取请求的最大尺寸&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;(out)align&lt;/strong&gt;: G_TYPE_INT (default 0): 建议的拉取请求的对齐方式&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;37-plugin-in-techniques&quot;&gt;3.7 Plugin-in techniques&lt;/h3&gt;
+
+&lt;h4 id=&quot;371-multi-sink-elements&quot;&gt;3.7.1 Multi-sink elements&lt;/h4&gt;
+
+&lt;p&gt;拥有多个sinkpad的元素可以在每个pad上暴露一个循环函数，以主动拉取数据（pull_range），或者可以在每个pad上暴露一个链式函数。&lt;/p&gt;
+
+&lt;p&gt;&lt;del&gt;实现链式函数通常比较简单，并且允许所有可能的调度方法。&lt;/del&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;38-pad-select&quot;&gt;3.8 Pad select&lt;/h3&gt;
+
+&lt;p&gt;如果基于链式的sink想等待其中一个pad接收到缓冲区，只需在链式函数中实现要执行的操作。请注意，该操作可能在不同的线程中执行，并且可能同时执行，因此需要获取 STREAM_LOCK。&lt;/p&gt;
+
+&lt;h3 id=&quot;39-collect-pads&quot;&gt;3.9 Collect pads&lt;/h3&gt;
+
+&lt;p&gt;如果基于链式的sink pads都需要一个缓冲区才能操作数据，那么在链式函数中收集所有的缓冲区，并在所有链式pad接收到缓冲区时执行操作。&lt;/p&gt;
+
+&lt;p&gt;在这种情况下，你可能也不想在已经排队缓冲区的pad上接受更多数据。这可以通过以下代码片段轻松实现：【接下来应该是代码片段，但原始请求中没有提供具体代码】。&lt;/p&gt;
+
+&lt;div class=&quot;language-c highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GstFlowReturn&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;_chain&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;GstPad&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pad&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GstBuffer&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;buffer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;LOCK&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;mylock&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pad&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;store&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;NULL&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;WAIT&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;mycond&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;mylock&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;pad&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;store&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;buffer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;SIGNAL&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;mycond&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;UNLOCK&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;mylock&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+  &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GST_FLOW_OK&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;_pull&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;GstPad&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pad&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GstBuffer&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;**&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;buffer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;LOCK&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;mylock&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pad&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;store&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;NULL&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;WAIT&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;mycond&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;mylock&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;**&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;buffer&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pad&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;store&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;pad&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;store&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;NULL&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;SIGNAL&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;mycond&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;UNLOCK&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;mylock&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;310-cases&quot;&gt;3.10 Cases&lt;/h3&gt;
+
+&lt;p&gt;pad内部的括号中说明了该pad支持的功能：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;l&lt;/strong&gt;：暴露（expose）一个loop函数，所以该pad可以作为驱动源（调用者）。&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;g&lt;/strong&gt;：暴露一个getrange函数&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;c&lt;/strong&gt;：暴露一个chain函数&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;根据Pad暴露的调度方法，做出以下调度决策：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;(g)-(l)：srcpad将从srcpad拉取数据。&lt;/li&gt;
+  &lt;li&gt;(l)-(c)：srcpad主动向sinkpad推送数据。&lt;/li&gt;
+  &lt;li&gt;()-(c)：-将向sinkpad推送数据。&lt;/li&gt;
+  &lt;li&gt;()-()：不可调度。&lt;/li&gt;
+  &lt;li&gt;()-(l)：不可调度。&lt;/li&gt;
+  &lt;li&gt;(g)-()：不可调度。&lt;/li&gt;
+  &lt;li&gt;(g)-(c)：不可调度。&lt;/li&gt;
+  &lt;li&gt;(l)-()：不可调度。&lt;/li&gt;
+  &lt;li&gt;(l)-(l)：不可调度。&lt;/li&gt;
+  &lt;li&gt;()-(g)：不可能。&lt;/li&gt;
+  &lt;li&gt;(g)-(g)：不可能。&lt;/li&gt;
+  &lt;li&gt;(l)-(g)：不可能。&lt;/li&gt;
+  &lt;li&gt;(c)-()：不可能。&lt;/li&gt;
+  &lt;li&gt;(c)-(g)：不可能。&lt;/li&gt;
+  &lt;li&gt;(c)-(l)：不可能。&lt;/li&gt;
+  &lt;li&gt;(c)-(c)：不可能。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;+---------+    +------------+    +-----------+
+| filesrc |    | mp3decoder |    | audiosink |
+|        src--sink         src--sink         |
++---------+    +------------+    +-----------+
+        &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;l-g&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;c&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;           &lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;   &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;c&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;激活pad时：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;audiosink 有一个链式函数，且对等pad没有循环函数，不进行调度。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;mp3decoder 和 filesrc 暴露了 (l) - (c) 连接，创建一个线程来调用srcpad的循环函数。&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;+---------+    +------------+    +----------+
+| filesrc |    | avidemuxer |    | fakesink |
+|        src--sink         src--sink        |
++---------+    +------------+    +----------+
+        &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;l-g&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;l&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;          &lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;   &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;c&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;fakesink 有一个链式函数，且对等pad没有循环函数，不进行调度。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;avidemuxer 和 filesrc 暴露了 (g) - (l) 连接，创建一个线程来调用接收pad的循环函数。&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;+---------+    +----------+    +------------+    +----------+
+| filesrc |    | identity |    | avidemuxer |    | fakesink |
+|        src--sink       src--sink         src--sink        |
++---------+    +----------+    +------------+    +----------+
+        &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;l-g&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;c&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;        &lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;   &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;l&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;          &lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;   &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;c&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;fakesink 有一个链式函数，且对等pad没有循环函数，不进行调度。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;avidemuxer 和 identity 没有可调度连接，因此这个管道不可调度。&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;+---------+    +----------+    +------------+    +----------+
+| filesrc |    | identity |    | avidemuxer |    | fakesink |
+|        src--sink       src--sink         src--sink        |
++---------+    +----------+    +------------+    +----------+
+        &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;l-g&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;c-l&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;      &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;g&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;  &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;l&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;          &lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;   &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;c&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;fakesink 有一个链式函数，且对等pad没有循环函数，不进行调度。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;avidemuxer 和 identity 暴露了 (g) - (l) 连接，创建一个线程来调用接收pad的循环函数。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;identity 知道源pad是基于 getrange 的，并使用来自 avidemux 的线程从 filesrc 获取数据。&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;+---------+    +----------+    +------------+    +----------+
+| filesrc |    | identity |    | oggdemuxer |    | fakesink |
+|        src--sink       src--sink         src--sink        |
++---------+    +----------+    +------------+    +----------+
+        &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;l-g&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;c&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;        &lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;   &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;l-c&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;        &lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;   &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;c&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;fakesink 有一个链式函数，且对等。没有循环函数，不进行调度。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;oggdemuxer 和 identity 暴露了 () - (l-c) 连接，oggdemux 必须以链式模式操作。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;identity 只能基于链式工作，因此 filesrc 创建一个线程来向它推送数据。&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</content><author><name>LieryangStack</name></author><category term="GStreamer设计" /><category term="GStreamer" /><summary type="html">1 Pad (de)activation</summary></entry><entry><title type="html">GStreamer设计-前言</title><link href="https://lieryangstack.github.io//gstreamer%E8%AE%BE%E8%AE%A1/2023/12/07/GStreamer%E8%AE%BE%E8%AE%A1-%E5%89%8D%E8%A8%80.html" rel="alternate" type="text/html" title="GStreamer设计-前言" /><published>2023-12-07T00:00:00+00:00</published><updated>2023-12-07T00:00:00+00:00</updated><id>https://lieryangstack.github.io//gstreamer%E8%AE%BE%E8%AE%A1/2023/12/07/GStreamer%E8%AE%BE%E8%AE%A1-%E5%89%8D%E8%A8%80</id><content type="html" xml:base="https://lieryangstack.github.io//gstreamer%E8%AE%BE%E8%AE%A1/2023/12/07/GStreamer%E8%AE%BE%E8%AE%A1-%E5%89%8D%E8%A8%80.html">&lt;p&gt;这部分内容来自：&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://gstreamer.freedesktop.org/documentation/additional/design/index.html?gi-language=c&quot;&gt;GStreamer design documents&lt;/a&gt;：里面讲述了各种GStreamer设计文档。这些文档是在开发或重构GStreamer设计部分时产生的技术文档，用来解决问题的设计解决方案。&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://gstreamer.freedesktop.org/documentation/gstreamer/gi-index.html?gi-language=c&quot;&gt;Core Library&lt;/a&gt;：里面讲述了GStreamer核心对象相关服务和功能，包括初始化、插件管理和类型，以及定义元素和bin的对象层次结构，以及一些更专门的元素。&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://gstreamer.freedesktop.org/documentation/plugin-development/introduction/index.html?gi-language=c&quot;&gt;GStreamer Writer’s Guide&lt;/a&gt;：本章节旨在帮助您了解GStreamer框架，以便您可以开发新的插件来扩展现有功能。本指南通过跟踪一个用c编写的示例插件(一个音频过滤器插件)的开发来解决大多数问题。然而，本指南的后面部分还介绍了编写其他类型插件所涉及的一些问题，本指南的末尾描述了一些用于GStreamer的Python绑定。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;我通过对以上章节内容的学习，把相关知识点进行详细总结。&lt;/p&gt;
+
+&lt;p&gt;NOTE：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;我的&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;GStreamer设计&lt;/code&gt;类别相关文章，写作顺序并未按照适合学习的逻辑顺序编写，如以后有时间，再按适合学习的逻辑顺序进行整理。&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>LieryangStack</name></author><category term="GStreamer设计" /><category term="GStreamer" /><summary type="html">这部分内容来自： GStreamer design documents：里面讲述了各种GStreamer设计文档。这些文档是在开发或重构GStreamer设计部分时产生的技术文档，用来解决问题的设计解决方案。 Core Library：里面讲述了GStreamer核心对象相关服务和功能，包括初始化、插件管理和类型，以及定义元素和bin的对象层次结构，以及一些更专门的元素。 GStreamer Writer’s Guide：本章节旨在帮助您了解GStreamer框架，以便您可以开发新的插件来扩展现有功能。本指南通过跟踪一个用c编写的示例插件(一个音频过滤器插件)的开发来解决大多数问题。然而，本指南的后面部分还介绍了编写其他类型插件所涉及的一些问题，本指南的末尾描述了一些用于GStreamer的Python绑定。</summary></entry><entry><title type="html">二十、GstEvent</title><link href="https://lieryangstack.github.io//gstreamer%E6%A0%B8%E5%BF%83%E5%AF%B9%E8%B1%A1/2023/12/06/20-GstEvent.html" rel="alternate" type="text/html" title="二十、GstEvent" /><published>2023-12-06T00:00:00+00:00</published><updated>2023-12-06T00:00:00+00:00</updated><id>https://lieryangstack.github.io//gstreamer%E6%A0%B8%E5%BF%83%E5%AF%B9%E8%B1%A1/2023/12/06/20-GstEvent</id><content type="html" xml:base="https://lieryangstack.github.io//gstreamer%E6%A0%B8%E5%BF%83%E5%AF%B9%E8%B1%A1/2023/12/06/20-GstEvent.html">&lt;h2 id=&quot;1-gstevent基本概念&quot;&gt;1 GstEvent基本概念&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;GstEvent事件类提供了构造发送事件和查询（解析）接收事件的相关函数。（只有创建事件和解析事件的功能，具体发送事件是GstElement的事情）&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;通常使用 gst_event_new_*() 创建事件，该函数将特定于事件类型的参数作为参数。要发送事件，应用程序通常会使用 gst_element_send_event，而元素将使用 gst_pad_send_event 或 gst_pad_push_event。如果事件尚未发送，则应使用 gst_event_unref 取消引用该事件。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;接收到的事件可以使用它们各自的 gst_event_parse_*() 函数进行解析。对于不需要的细节，传递 NULL 是有效的。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;事件在元素之间传递，与数据流并行进行。有些事件与缓冲区序列化，而其他事件则没有。有些事件只能向下游传递，而其他事件只能向上游传递。有些事件可以同时向上游和下游传递。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;事件用于在数据流中发出特殊条件的信号，例如 EOS（流结束）或开始新的流段。事件还用于清除管道中的任何挂起数据。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;大多数事件 API 在插件内部使用。应用程序通常只构造和使用寻址事件。为此，可以使用 gst_event_new_seek 来创建一个寻址事件，以指定寻址时间和模式。&lt;/p&gt;
+
+    &lt;div class=&quot;language-c highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;GstEvent&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;event&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+ &lt;span class=&quot;n&quot;&gt;gboolean&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+ &lt;span class=&quot;p&quot;&gt;...&lt;/span&gt;
+ &lt;span class=&quot;c1&quot;&gt;// construct a seek event to play the media from second 2 to 5, flush&lt;/span&gt;
+ &lt;span class=&quot;c1&quot;&gt;// the pipeline to decrease latency.&lt;/span&gt;
+ &lt;span class=&quot;n&quot;&gt;event&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;gst_event_new_seek&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;GST_FORMAT_TIME&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;GST_SEEK_FLAG_FLUSH&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;GST_SEEK_TYPE_SET&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GST_SECOND&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;GST_SEEK_TYPE_SET&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GST_SECOND&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+ &lt;span class=&quot;p&quot;&gt;...&lt;/span&gt;
+ &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;gst_element_send_event&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pipeline&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;event&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+ &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+   &lt;span class=&quot;n&quot;&gt;g_warning&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;seek failed&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+ &lt;span class=&quot;p&quot;&gt;...&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/GStreamerStudy/CoreObject/20_GstEvent/communication.png&quot; alt=&quot;Alt text&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;2-gstevent类型结构&quot;&gt;2 GstEvent类型结构&lt;/h2&gt;
+
+&lt;h3 id=&quot;21-gstevent类型注册宏定义&quot;&gt;2.1 GstEvent类型注册宏定义&lt;/h3&gt;
+
+&lt;div class=&quot;language-c highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cm&quot;&gt;/* filename: gstevent.h */&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;GST_API&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GType&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_gst_event_type&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;cp&quot;&gt;#define GST_TYPE_EVENT                  (_gst_event_type)
+&lt;/span&gt;&lt;span class=&quot;cm&quot;&gt;/* filename: gstevent.c */&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;GType&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_gst_event_type&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;GST_DEFINE_MINI_OBJECT_TYPE&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;GstEvent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;gst_event&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;22-gstevent类型相关枚举&quot;&gt;2.2 GstEvent类型相关枚举&lt;/h3&gt;
+
+&lt;h4 id=&quot;221-gsteventtypeflags&quot;&gt;2.2.1 GstEventTypeFlags&lt;/h4&gt;
+
+&lt;div class=&quot;language-c highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cm&quot;&gt;/* filename: gstevent.h */&lt;/span&gt;
+
+&lt;span class=&quot;cm&quot;&gt;/* #GstEventTypeFlags 表示不同 #GstEventType 值的各个方面。您可以使用 gst_event_type_get_flags() 函数获取 #GstEventType 的类型标志。 */&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;typedef&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;enum&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;cm&quot;&gt;/* 如果事件可以向上游传递，则设置。 */&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;GST_EVENT_TYPE_UPSTREAM&lt;/span&gt;       &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;cm&quot;&gt;/* 如果事件可以向下游传递，则设置。 */&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;GST_EVENT_TYPE_DOWNSTREAM&lt;/span&gt;     &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;cm&quot;&gt;/* 如果事件应该与数据流进行序列化，则设置。 */&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;GST_EVENT_TYPE_SERIALIZED&lt;/span&gt;     &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;cm&quot;&gt;/* 如果事件在 pad 上是sticky(黏性的)，则设置。 */&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;GST_EVENT_TYPE_STICKY&lt;/span&gt;         &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;cm&quot;&gt;/* 多个黏性事件可以存在于一个 pad 上，每个事件由事件名称标识。 */&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;GST_EVENT_TYPE_STICKY_MULTI&lt;/span&gt;   &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GstEventTypeFlags&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;222-gststreamflags&quot;&gt;2.2.2 GstStreamFlags&lt;/h4&gt;
+&lt;div class=&quot;language-c highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cm&quot;&gt;/* filename: gstevent.h */&lt;/span&gt;
+&lt;span class=&quot;cm&quot;&gt;/**
+ * GstStreamFlags:
+ * @GST_STREAM_FLAG_NONE: 此流没有特殊属性
+ * @GST_STREAM_FLAG_SPARSE: 此流是一个稀疏流（例如，字幕流），数据可能仅在不规则间隔内以较大间隔流动。
+ * @GST_STREAM_FLAG_SELECT: 此流应默认选择。此标志可供解复用器使用，以表示在播放场景中应默认选择该流。
+ * @GST_STREAM_FLAG_UNSELECT: 此流不应默认选择。此标志可供解复用器使用，以表示在播放场景中不应默认选择该流，但仅当用户显式选择时（例如，对于听障者的音频轨道或导演的解说音轨）。
+ *
+ * 自版本：1.2
+ */&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;typedef&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;enum&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;GST_STREAM_FLAG_NONE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;GST_STREAM_FLAG_SPARSE&lt;/span&gt;       &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;GST_STREAM_FLAG_SELECT&lt;/span&gt;       &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;GST_STREAM_FLAG_UNSELECT&lt;/span&gt;     &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GstStreamFlags&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;223-gsteventtype&quot;&gt;2.2.3 GstEventType&lt;/h4&gt;
+
+&lt;div class=&quot;language-c highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cm&quot;&gt;/**
+ * GstEventType:
+ * @GST_EVENT_UNKNOWN: 未知事件
+ * @GST_EVENT_FLUSH_START: 开始刷新操作。该事件清除管道中的所有数据并解除所有流线程的阻塞。
+ * @GST_EVENT_FLUSH_STOP: 停止刷新操作。此事件重置管道的运行时间。
+ * @GST_EVENT_SELECT_STREAMS: 请求选择一个或多个流（自 1.10 版开始）
+ * @GST_EVENT_STREAM_START: 标记新流的开始，在任何其他序列化事件之前发送，只在新流开始时发送，而不是在flushing seeks之后发送。
+ * @GST_EVENT_CAPS: #GstCaps event. 通知pad有新的媒体类型
+ * @GST_EVENT_SEGMENT: 数据流中紧随其后的新媒体段。段事件包含用于裁剪缓冲区和将缓冲区时间戳转换为运行时间和流时间的信息。
+ * @GST_EVENT_STREAM_COLLECTION: 有新的 #GstStreamCollection 可用（自 1.10 版开始）
+ * @GST_EVENT_TAG: 在流中发现了新的一组元数据标签。
+ * @GST_EVENT_BUFFERSIZE: 缓冲需求的通知。（目前尚未使用！！！）
+ * @GST_EVENT_SINK_MESSAGE: 将事件Event转换为消息Message的事件。用于发送应与呈现同步的消息。
+ * @GST_EVENT_STREAM_GROUP_DONE: 表示消息中流组 ID 没有更多数据data。在某些情况下在 EOS 之前发送，并且应基本上以相同方式处理（自 1.10 版开始）
+ * @GST_EVENT_EOS: 流结束。不会有更多数据跟随，除非有 STREAM_START 事件，或者 FLUSH_STOP 和 SEGMENT 事件。
+ * @GST_EVENT_SEGMENT_DONE: 标记段播放的结束。
+ * @GST_EVENT_GAP: 标记数据流中的间隙。
+ * @GST_EVENT_TOC: 一个事件，指示找到或更新了新的目录（table of contents）。
+ * @GST_EVENT_PROTECTION: 一个事件，指示在流中发现了新的或更新的加密信息。
+ * @GST_EVENT_QOS: 质量消息。用于指示上游元素应调整其处理速率。
+ * @GST_EVENT_SEEK: 请求新的播放位置和速率。
+ * @GST_EVENT_NAVIGATION: 导航事件通常用于向上游元素传达用户请求，例如鼠标或键盘移动。
+ * @GST_EVENT_LATENCY: 新延迟调整的通知。sinks将使用延迟信息来调整其同步。
+ * @GST_EVENT_STEP: 对媒体进行逐步操作的请求。sinks通常会执行step操作。
+ * @GST_EVENT_RECONFIGURE: 请求上游重新协商 caps 和重新配置。
+ * @GST_EVENT_TOC_SELECT: 基于 TOC 条目 UID 的新播放位置的请求。
+ * @GST_EVENT_INSTANT_RATE_CHANGE: 通知下游应尽快应用播放速率覆盖（自 1.18 版开始）
+ * @GST_EVENT_INSTANT_RATE_SYNC_TIME: 由管道发送，当rate multiplier应该被应用或者已经被应用时候，
+ *                                    通知元素处理关于运行时间的instant-rate-change事件。
+ * @GST_EVENT_CUSTOM_UPSTREAM: 上游自定义事件
+ * @GST_EVENT_CUSTOM_DOWNSTREAM: 下游传输的自定义事件，随数据流传递。
+ * @GST_EVENT_CUSTOM_DOWNSTREAM_OOB: 自定义out-of-band下游事件
+ * @GST_EVENT_CUSTOM_DOWNSTREAM_STICKY: 自定义sticky下游事件
+ * @GST_EVENT_CUSTOM_BOTH: 自定义的上游或下游事件。向下游传输时为In-band事件。
+ * @GST_EVENT_CUSTOM_BOTH_OOB: 自定义的上游或下游数据out-of-band事件。
+ */&lt;/span&gt;
+&lt;span class=&quot;cm&quot;&gt;/* #GstEventType 列出了可以在管道中发送的标准事件类型
+ * 自定义事件类型可用于元素之间的私有消息，这些消息无法使用正常的 GStreamer 缓冲传递语义来表达。
+ * 自定义事件携带任意的 #GstStructure。具体的自定义事件通过结构的名称来区分。
+ */&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;typedef&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;enum&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;cm&quot;&gt;/* 未知事件 */&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;GST_EVENT_UNKNOWN&lt;/span&gt;               &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GST_EVENT_MAKE_TYPE&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
+
+  &lt;span class=&quot;cm&quot;&gt;/* BOTH表示向上流和下游双向传递的事件 
+   * SERIALIZED表示该事件应该被数据流序列化
+   * STICKY粘性事件，表示附着在GstPad上的事件，当一个新的元素加入到管道时候，它会立即收到所有当前附着在其上游元素的粘性事件。
+   */&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;GST_EVENT_FLUSH_START&lt;/span&gt;           &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GST_EVENT_MAKE_TYPE&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_FLAG&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;BOTH&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)),&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;GST_EVENT_FLUSH_STOP&lt;/span&gt;            &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GST_EVENT_MAKE_TYPE&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;20&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_FLAG&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;BOTH&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_FLAG&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;SERIALIZED&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)),&lt;/span&gt;
+
+  &lt;span class=&quot;cm&quot;&gt;/* 粘性向下游传递的序列化事件 */&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;GST_EVENT_STREAM_START&lt;/span&gt;          &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GST_EVENT_MAKE_TYPE&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;40&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_FLAG&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;DOWNSTREAM&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_FLAG&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;SERIALIZED&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_FLAG&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;STICKY&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)),&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;GST_EVENT_CAPS&lt;/span&gt;                  &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GST_EVENT_MAKE_TYPE&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;50&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_FLAG&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;DOWNSTREAM&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_FLAG&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;SERIALIZED&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_FLAG&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;STICKY&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)),&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;GST_EVENT_SEGMENT&lt;/span&gt;               &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GST_EVENT_MAKE_TYPE&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;70&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_FLAG&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;DOWNSTREAM&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_FLAG&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;SERIALIZED&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_FLAG&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;STICKY&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)),&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;GST_EVENT_STREAM_COLLECTION&lt;/span&gt;     &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GST_EVENT_MAKE_TYPE&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;75&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_FLAG&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;DOWNSTREAM&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_FLAG&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;SERIALIZED&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_FLAG&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;STICKY&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_FLAG&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;STICKY_MULTI&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)),&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;GST_EVENT_TAG&lt;/span&gt;                   &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GST_EVENT_MAKE_TYPE&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;80&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_FLAG&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;DOWNSTREAM&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_FLAG&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;SERIALIZED&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_FLAG&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;STICKY&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_FLAG&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;STICKY_MULTI&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)),&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;GST_EVENT_BUFFERSIZE&lt;/span&gt;            &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GST_EVENT_MAKE_TYPE&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;90&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_FLAG&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;DOWNSTREAM&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_FLAG&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;SERIALIZED&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_FLAG&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;STICKY&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)),&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;GST_EVENT_SINK_MESSAGE&lt;/span&gt;          &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GST_EVENT_MAKE_TYPE&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_FLAG&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;DOWNSTREAM&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_FLAG&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;SERIALIZED&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_FLAG&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;STICKY&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_FLAG&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;STICKY_MULTI&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)),&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;GST_EVENT_STREAM_GROUP_DONE&lt;/span&gt;     &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GST_EVENT_MAKE_TYPE&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;105&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_FLAG&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;DOWNSTREAM&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_FLAG&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;SERIALIZED&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_FLAG&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;STICKY&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)),&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;GST_EVENT_EOS&lt;/span&gt;                   &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GST_EVENT_MAKE_TYPE&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;110&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_FLAG&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;DOWNSTREAM&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_FLAG&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;SERIALIZED&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_FLAG&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;STICKY&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)),&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;GST_EVENT_TOC&lt;/span&gt;                   &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GST_EVENT_MAKE_TYPE&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;120&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_FLAG&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;DOWNSTREAM&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_FLAG&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;SERIALIZED&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_FLAG&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;STICKY&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_FLAG&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;STICKY_MULTI&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)),&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;GST_EVENT_PROTECTION&lt;/span&gt;            &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GST_EVENT_MAKE_TYPE&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;130&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_FLAG&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;DOWNSTREAM&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_FLAG&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;SERIALIZED&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_FLAG&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;STICKY&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_FLAG&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;STICKY_MULTI&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)),&lt;/span&gt;
+
+  &lt;span class=&quot;cm&quot;&gt;/* 非粘性向下游传递序列化事件 */&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;GST_EVENT_SEGMENT_DONE&lt;/span&gt;          &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GST_EVENT_MAKE_TYPE&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;150&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_FLAG&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;DOWNSTREAM&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_FLAG&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;SERIALIZED&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)),&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;GST_EVENT_GAP&lt;/span&gt;                   &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GST_EVENT_MAKE_TYPE&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;160&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_FLAG&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;DOWNSTREAM&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_FLAG&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;SERIALIZED&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)),&lt;/span&gt;
+
+  &lt;span class=&quot;cm&quot;&gt;/* sticky downstream non-serialized */&lt;/span&gt;
+  &lt;span class=&quot;cm&quot;&gt;/* FIXME 2.0: change to value 72 and move after the GST_EVENT_SEGMENT event */&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;GST_EVENT_INSTANT_RATE_CHANGE&lt;/span&gt;   &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GST_EVENT_MAKE_TYPE&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;180&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_FLAG&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;DOWNSTREAM&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_FLAG&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;STICKY&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)),&lt;/span&gt;
+
+  &lt;span class=&quot;cm&quot;&gt;/* 向上游元素传递的事件 */&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;GST_EVENT_QOS&lt;/span&gt;                    &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GST_EVENT_MAKE_TYPE&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;190&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_FLAG&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;UPSTREAM&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)),&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;GST_EVENT_SEEK&lt;/span&gt;                   &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GST_EVENT_MAKE_TYPE&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;200&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_FLAG&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;UPSTREAM&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)),&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;GST_EVENT_NAVIGATION&lt;/span&gt;             &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GST_EVENT_MAKE_TYPE&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;210&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_FLAG&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;UPSTREAM&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)),&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;GST_EVENT_LATENCY&lt;/span&gt;                &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GST_EVENT_MAKE_TYPE&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;220&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_FLAG&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;UPSTREAM&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)),&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;GST_EVENT_STEP&lt;/span&gt;                   &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GST_EVENT_MAKE_TYPE&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;230&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_FLAG&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;UPSTREAM&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)),&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;GST_EVENT_RECONFIGURE&lt;/span&gt;            &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GST_EVENT_MAKE_TYPE&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;240&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_FLAG&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;UPSTREAM&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)),&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;GST_EVENT_TOC_SELECT&lt;/span&gt;             &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GST_EVENT_MAKE_TYPE&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;250&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_FLAG&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;UPSTREAM&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)),&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;GST_EVENT_SELECT_STREAMS&lt;/span&gt;         &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GST_EVENT_MAKE_TYPE&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;260&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_FLAG&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;UPSTREAM&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)),&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;GST_EVENT_INSTANT_RATE_SYNC_TIME&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GST_EVENT_MAKE_TYPE&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;261&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_FLAG&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;UPSTREAM&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)),&lt;/span&gt;
+
+  &lt;span class=&quot;cm&quot;&gt;/* 自定义事件*/&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;GST_EVENT_CUSTOM_UPSTREAM&lt;/span&gt;          &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GST_EVENT_MAKE_TYPE&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;270&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_FLAG&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;UPSTREAM&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)),&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;GST_EVENT_CUSTOM_DOWNSTREAM&lt;/span&gt;        &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GST_EVENT_MAKE_TYPE&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;280&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_FLAG&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;DOWNSTREAM&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_FLAG&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;SERIALIZED&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)),&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;GST_EVENT_CUSTOM_DOWNSTREAM_OOB&lt;/span&gt;    &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GST_EVENT_MAKE_TYPE&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;290&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_FLAG&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;DOWNSTREAM&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)),&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;GST_EVENT_CUSTOM_DOWNSTREAM_STICKY&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GST_EVENT_MAKE_TYPE&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;300&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_FLAG&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;DOWNSTREAM&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_FLAG&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;SERIALIZED&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_FLAG&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;STICKY&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_FLAG&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;STICKY_MULTI&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)),&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;GST_EVENT_CUSTOM_BOTH&lt;/span&gt;              &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GST_EVENT_MAKE_TYPE&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;310&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_FLAG&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;BOTH&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_FLAG&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;SERIALIZED&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)),&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;GST_EVENT_CUSTOM_BOTH_OOB&lt;/span&gt;          &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GST_EVENT_MAKE_TYPE&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;320&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_FLAG&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;BOTH&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GstEventType&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;23-gstevent相关结构体&quot;&gt;2.3 GstEvent相关结构体&lt;/h3&gt;
+
+&lt;h4 id=&quot;231-gstevent&quot;&gt;2.3.1 GstEvent&lt;/h4&gt;
+
+&lt;div class=&quot;language-c highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cm&quot;&gt;/* filename: gstevent.h */&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_GstEvent&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;GstMiniObject&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;mini_object&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+  &lt;span class=&quot;cm&quot;&gt;/*&amp;lt; public &amp;gt;*/&lt;/span&gt; &lt;span class=&quot;cm&quot;&gt;/* with COW */&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;GstEventType&lt;/span&gt;  &lt;span class=&quot;n&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;cm&quot;&gt;/* 事件的类型 */&lt;/span&gt;
+  &lt;span class=&quot;cm&quot;&gt;/* FIXME 2.0: Remove the GstEvent::timestamp field */&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;guint64&lt;/span&gt;       &lt;span class=&quot;n&quot;&gt;timestamp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;guint32&lt;/span&gt;       &lt;span class=&quot;n&quot;&gt;seqnum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;cm&quot;&gt;/* 事件的序列号 */&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;232-gsteventquarks&quot;&gt;2.3.2 GstEventQuarks&lt;/h4&gt;
+
+&lt;div class=&quot;language-c highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cm&quot;&gt;/* filename: gstevent.c */&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;typedef&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;struct&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;gint&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;cm&quot;&gt;/* 事件类型GstEventType */&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;gchar&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;cm&quot;&gt;/* 事件类型的name名称 */&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;GQuark&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;quark&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;cm&quot;&gt;/* 事件类型名称quark表示 */&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GstEventQuarks&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;233-gsteventimpl&quot;&gt;2.3.3 GstEventImpl&lt;/h4&gt;
+
+&lt;div class=&quot;language-c highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cm&quot;&gt;/* filename: gstevent.c */&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;typedef&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;struct&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;GstEvent&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;event&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+  &lt;span class=&quot;n&quot;&gt;GstStructure&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;structure&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;gint64&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;running_time_offset&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GstEventImpl&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;3-gstevent对象相关函数&quot;&gt;3 GstEvent对象相关函数&lt;/h2&gt;</content><author><name>LieryangStack</name></author><category term="GStreamer核心对象" /><category term="GStreamer" /><summary type="html">1 GstEvent基本概念</summary></entry></feed>

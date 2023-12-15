@@ -1,0 +1,2 @@
+/usr/bin/ar qc libinterface.a  CMakeFiles/interface.dir/interface.cpp.o CMakeFiles/interface.dir/WzSerialPort.cpp.o
+/usr/bin/ranlib libinterface.a

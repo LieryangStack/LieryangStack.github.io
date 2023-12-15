@@ -1,0 +1,1409 @@
+<!DOCTYPE html>
+<html><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>四、信号 | 李尔阳主页</title>
+<meta name="generator" content="Jekyll v3.9.3" />
+<meta property="og:title" content="四、信号" />
+<meta name="author" content="LieryangStack" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="1 信号   信号提供了对象之间的通信手段。当某些事情发生或完成时，就会发出信号。" />
+<meta property="og:description" content="1 信号   信号提供了对象之间的通信手段。当某些事情发生或完成时，就会发出信号。" />
+<link rel="canonical" href="https://lieryangstack.github.io//gobject%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/2023/11/17/4-%E4%BF%A1%E5%8F%B7.html" />
+<meta property="og:url" content="https://lieryangstack.github.io//gobject%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/2023/11/17/4-%E4%BF%A1%E5%8F%B7.html" />
+<meta property="og:site_name" content="李尔阳主页" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2023-11-17T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="四、信号" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"LieryangStack"},"dateModified":"2023-11-17T00:00:00+00:00","datePublished":"2023-11-17T00:00:00+00:00","description":"1 信号   信号提供了对象之间的通信手段。当某些事情发生或完成时，就会发出信号。","headline":"四、信号","mainEntityOfPage":{"@type":"WebPage","@id":"https://lieryangstack.github.io//gobject%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/2023/11/17/4-%E4%BF%A1%E5%8F%B7.html"},"url":"https://lieryangstack.github.io//gobject%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/2023/11/17/4-%E4%BF%A1%E5%8F%B7.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="shortcut icon" type="image/x-icon" href="/lieryang.ico">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-noto-sans@0.0.72/index.min.css">
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <script src="/assets/js/main.js"></script><link type="application/atom+xml" rel="alternate" href="https://lieryangstack.github.io//feed.xml" title="李尔阳主页" /><link rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
+
+<!-- and it's easy to individually load additional languages -->
+<script charset="UTF-8"
+        src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/go.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+// Init highlight js
+document.addEventListener('DOMContentLoaded', function(event) {
+  var els = document.querySelectorAll('pre code')
+
+  function addLangData(block) {
+    var outer = block.parentElement.parentElement.parentElement;
+    var lang = block.getAttribute('data-lang');
+    for (var i = 0; i < outer.classList.length; i++) {
+      var cls = outer.classList[i];
+      if (cls.startsWith('language-')) {
+        lang = cls;
+        break;
+      }
+    }
+    if (!lang) {
+      cls = block.getAttribute('class');
+      lang = cls ? cls.replace('hljs ', '') : '';
+    }
+    if (lang.startsWith('language-')) {
+      lang = lang.substr(9);
+    }
+    block.setAttribute('class', 'hljs ' + lang);
+    block.parentNode.setAttribute('data-lang', lang);
+  }
+
+  function addBadge(block) {
+    var enabled = ('true' || 'true').toLowerCase();
+    if (enabled == 'true') {
+      var pre = block.parentElement;
+      pre.classList.add('badge');
+    }
+  }
+
+  function handle(block) {
+    addLangData(block);
+    addBadge(block)
+    hljs.highlightBlock(block);
+  }
+
+  for (var i = 0; i < els.length; i++) {
+    var el = els[i];
+    handle(el);
+  }
+});
+</script>
+
+<style>
+  /* code language badge */
+  pre.badge::before {
+    content: attr(data-lang);
+    color: #fff;
+    background-color: #ff4e00;
+    padding: 0 .5em;
+    border-radius: 0 2px;
+    text-transform: uppercase;
+    text-align: center;
+    min-width: 32px;
+    display: inline-block;
+    position: absolute;
+    right: 0;
+  }
+
+  /* fix wrong badge display for firefox browser */
+  code > table pre::before {
+    display: none;
+  }
+</style>
+<link href='https://lieryangstack.github.io//assets/css/syntax.css' rel='stylesheet' type='text/css' />
+</head>
+<body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<header class="site-header " role="banner">
+
+  <div class="wrapper">
+    <div class="site-header-inner"><span class="site-brand"><a class="site-brand-inner" rel="author" href="/">
+  <img class="site-favicon" title="李尔阳主页" src="" onerror="this.style.display='none'">
+  李尔阳主页
+</a>
+</span><nav class="site-nav">
+          <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+          <label for="nav-trigger">
+            <span class="menu-icon">
+              <svg viewBox="0 0 18 15" width="18px" height="15px">
+                <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+              </svg>
+            </span>
+          </label>
+
+          <!-- <div class="trigger"><a class="page-link" href="/about.html">关于</a><a class="page-link" href="/archives.html">归档</a><a class="page-link" href="/categories.html">分类</a><a class="page-link" href="/">主页</a><a class="page-link" href="/tags.html">标签</a>
+
+
+
+
+
+
+
+
+
+</div> -->
+
+          <div class="trigger">
+             <a class="page-link" href="/about.html">关于</a>
+            <a class="page-link" href="/categories.html">分类</a>
+            <a class="page-link" href="/archives.html">归档</a>
+            <a class="page-link" href="/tags.html">标签</a>
+            <a class="page-link" href="/assets/index.html">下载</a>
+            <!-- 在这里添加更多的导航项 -->
+          </div>
+          
+
+        </nav></div>
+  </div>
+</header>
+
+<script>
+  function initHeader() {
+    var lastScrollY = getScrollPos().y;
+    var documentElement = document.documentElement;
+
+    function storeScrollData() {
+      var y = getScrollPos().y;var scrollStatus = "";
+
+      if (y <= 0) {
+        scrollStatus = "top";
+      } else if ((window.innerHeight + y) >= document.body.offsetHeight) {
+        scrollStatus = "bottom";
+      } else {
+        var isScrollDown = (y - lastScrollY > 0) ? true : false;
+        scrollStatus = isScrollDown ? "down" : "up";
+      }
+
+      lastScrollY = y;
+      documentElement.setAttribute("data-scroll-status", scrollStatus);
+    }
+
+    window.addEventListener('scroll', function(e) {
+      storeScrollData();
+    });
+
+    storeScrollData();
+  }
+  document.addEventListener('DOMContentLoaded', initHeader);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  function hashLocate(hashValue) {
+    hashValue = hashValue.replace(/^.*#h-/, '');
+    hashValue = decodeURIComponent(hashValue);
+    var element = document.getElementById(hashValue);
+
+    if (!element) {
+      return;
+    }
+
+    var header = document.querySelector('header.site-header');
+    var headerRect = header.getBoundingClientRect();
+    var headerTop = Math.floor(headerRect.top);
+    var headerHeight = Math.floor(headerRect.height);
+    var scrollPos = getScrollPos();
+    var offsetY = element.offsetTop - (headerTop + headerHeight + 20);
+
+    if (offsetY == scrollPos.y) {
+      return;
+    }
+
+    if (headerTop == 0  && offsetY > scrollPos.y) {
+      offsetY += headerHeight + 2;
+    } else if (headerTop < 0  && offsetY < scrollPos.y) {
+      offsetY -= headerHeight - 2;
+    }
+
+    smoothScrollTo(offsetY);
+  }
+
+  // The first event occurred
+  window.addEventListener('load', function(event) {
+    if (window.location.hash) {
+      hashLocate(window.location.hash);
+    }
+  });
+
+  // The first event occurred
+  window.addEventListener('click', function(event) {
+    if (event.target.tagName.toLowerCase() == 'a') {
+      hashLocate(event.target.getAttribute('href'));
+    }
+  });
+</script>
+<div class="theme-toggle">
+  <input type="checkbox" id="theme-switch">
+  <label for="theme-switch">
+    <div class="toggle"></div>
+    <div class="names">
+      <p class="light">Light</p>
+      <p class="dark">Dark</p>
+    </div>
+  </label>
+</div>
+
+
+
+
+<script>
+  (function() {
+    var sw = document.getElementById('theme-switch');
+    var html = document.getElementsByTagName('html')[0];
+    var nightModeOption = ('auto' || 'auto').toLowerCase();
+    var storage = nightModeOption === 'manual'
+        ? localStorage
+        : sessionStorage;
+    var themeData = loadThemeData();
+
+    function saveThemeData(data) {
+      storage.setItem('theme', JSON.stringify(data));
+    }
+
+    function loadThemeData() {
+      var data = storage.getItem('theme');
+      try {
+        data = JSON.parse(data ? data : '');
+      } catch(e) {
+        data = { nightShift: undefined, autoToggleAt: 0 };
+        saveThemeData(data);
+      }
+      return data;
+    }
+
+    function handleThemeToggle(nightShift) {
+      themeData.nightShift = nightShift;
+      saveThemeData(themeData);
+      html.dataset.theme = nightShift ? 'dark' : 'light';
+      setTimeout(function() {
+        sw.checked = nightShift ? true : false;
+      }, 50);
+    }
+
+    function autoThemeToggle() {
+      // Next time point of theme toggle
+      var now = new Date();
+      var toggleAt = new Date();
+      var hours = now.getHours();
+      var nightShift = hours >= 19 || hours <=7;
+
+      if (nightShift) {
+        if (hours > 7) {
+          toggleAt.setDate(toggleAt.getDate() + 1);
+        }
+        toggleAt.setHours(7);
+      } else {
+        toggleAt.setHours(19);
+      }
+
+      toggleAt.setMinutes(0);
+      toggleAt.setSeconds(0);
+      toggleAt.setMilliseconds(0)
+
+      var delay = toggleAt.getTime() - now.getTime();
+
+      // auto toggle theme mode
+      setTimeout(function() {
+        handleThemeToggle(!nightShift);
+      }, delay);
+
+      return {
+        nightShift: nightShift,
+        toggleAt: toggleAt.getTime()
+      };
+    }
+
+    // Listen the theme toggle event
+    sw.addEventListener('change', function(event) {
+      handleThemeToggle(event.target.checked);
+    });
+
+    if (nightModeOption == 'auto') {
+      var data = autoThemeToggle();
+
+      // Toggle theme by local setting
+      if (data.toggleAt > themeData.autoToggleAt) {
+        themeData.autoToggleAt = data.toggleAt;
+        handleThemeToggle(data.nightShift);
+      } else {
+        handleThemeToggle(themeData.nightShift);
+      }
+    } else if (nightModeOption == 'manual') {
+      handleThemeToggle(themeData.nightShift);
+    } else {
+      var nightShift = themeData.nightShift;
+      if (nightShift === undefined) {
+        nightShift = nightModeOption === 'on';
+      }
+      handleThemeToggle(nightShift);
+    }
+  })();
+</script>
+<div id="click-to-top" class="click-to-top">
+  <i class="fa fa-arrow-up"></i>
+</div>
+<script>
+  (function () {
+    const clickToTop = document.getElementById('click-to-top');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 100) {
+        clickToTop.classList.add('show')
+      }else {
+        clickToTop.classList.remove('show')
+      }
+    });
+    clickToTop.addEventListener('click', () => {
+      window.smoothScrollTo(0);
+    });
+  })();
+</script>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <div class="framework">
+  <section class="main">
+
+     <div class="post">
+  <section>
+
+
+
+
+
+
+
+
+
+<header class="post-header">
+  <h1 class="post-title p-name" itemprop="name headline">四、信号</h1>
+  <h2 class="post-subtitle"></h2>
+
+  <p class="post-meta">
+    <time class="dt-published" datetime="2023-11-17T00:00:00+00:00" itemprop="datePublished"><i class="fa fa-calendar"></i> Nov 17, 2023
+    </time>
+
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 17 mins</span>
+  </p><div class="post-tags"><a class="post-tag" href="/tags.html#GObject">#GObject</a></div></header>
+<article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+    <div class="post-content e-content" itemprop="articleBody">
+
+      <h2 id="1-信号">1 信号</h2>
+<p>  信号提供了对象之间的通信手段。当某些事情发生或完成时，就会发出信号。</p>
+
+<p>编写信号的步骤如下所示：</p>
+
+<ol>
+  <li>注册一个信号。信号属于对象，所以注册是在对象的类初始化函数中完成的。</li>
+  <li>编写一个信号处理程序。信号处理程序是在信号发出时调用的函数。</li>
+  <li>连接信号和处理程序。信号连接到g_connect_signal或其族函数的处理程序。</li>
+  <li>发出信号。</li>
+</ol>
+
+<p>第一步和第四步是在信号所属的对象上完成的。第三步通常在对象之外完成。</p>
+
+<p>信号的处理过程是复杂的，要解释所有的特征需要很长的时间。本节的内容仅限于编写简单信号的最基本内容，不一定准确。如果您需要准确的信息，请参阅GObject API参考。描述信号有四个部分。</p>
+
+<h2 id="2-信号注册">2 信号注册</h2>
+
+<p>  本节中的一个例子是在发生除零时发出的信号。首先，我们需要确定信号的名称。信号名称由英文字母、数字、“-”和“_”组成。名称的第一个字符必须是字母。因此，字符串“div-by- zero”适合作为信号名称。</p>
+
+<p>有四个函数来注册一个信号。我们将使用g_signal_new表示“div-by- zero”信号。</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">guint</span>
+<span class="nf">g_signal_new</span> <span class="p">(</span><span class="k">const</span> <span class="n">gchar</span> <span class="o">*</span><span class="n">signal_name</span><span class="p">,</span>
+              <span class="n">GType</span> <span class="n">itype</span><span class="p">,</span>
+              <span class="n">GSignalFlags</span> <span class="n">signal_flags</span><span class="p">,</span>
+              <span class="n">guint</span> <span class="n">class_offset</span><span class="p">,</span>
+              <span class="n">GSignalAccumulator</span> <span class="n">accumulator</span><span class="p">,</span>
+              <span class="n">gpointer</span> <span class="n">accu_data</span><span class="p">,</span>
+              <span class="n">GSignalCMarshaller</span> <span class="n">c_marshaller</span><span class="p">,</span>
+              <span class="n">GType</span> <span class="n">return_type</span><span class="p">,</span>
+              <span class="n">guint</span> <span class="n">n_params</span><span class="p">,</span>
+              <span class="p">...);</span>
+</code></pre></div></div>
+<p>每个参数都需要解释很多。目前，我只向您展示从tdouble.c提取的g_signal_new函数调用。</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">t_double_signal</span> <span class="o">=</span>
+<span class="n">g_signal_new</span> <span class="p">(</span><span class="s">"div-by-zero"</span><span class="p">,</span>
+              <span class="n">G_TYPE_FROM_CLASS</span> <span class="p">(</span><span class="n">class</span><span class="p">),</span>
+              <span class="n">G_SIGNAL_RUN_LAST</span> <span class="o">|</span> <span class="n">G_SIGNAL_NO_RECURSE</span> <span class="o">|</span> <span class="n">G_SIGNAL_NO_HOOKS</span><span class="p">,</span>
+              <span class="mi">0</span> <span class="cm">/* class offset.Subclass cannot override the class handler (default handler). */</span><span class="p">,</span>
+              <span class="nb">NULL</span> <span class="cm">/* accumulator */</span><span class="p">,</span>
+              <span class="nb">NULL</span> <span class="cm">/* accumulator data */</span><span class="p">,</span>
+              <span class="nb">NULL</span> <span class="cm">/* C marshaller. g_cclosure_marshal_generic() will be used */</span><span class="p">,</span>
+              <span class="n">G_TYPE_NONE</span> <span class="cm">/* return_type */</span><span class="p">,</span>
+              <span class="mi">0</span>     <span class="cm">/* n_params */</span>
+              <span class="p">);</span>
+</code></pre></div></div>
+<ul>
+  <li>t_double_signal是一个静态guint变量。guint类型与unsigned int相同。t_double_signal是信号id。</li>
+  <li>第二个参数是信号所属对象的类型(GType)。G_TYPE_FROM_CLASS (class)返回与类对应的类型(class是指向对象的类的指针)。</li>
+  <li>第三个参数是一个信号标志。解释该标志需要很多页。现在我想把它们去掉。上面的参数可以在很多情况下使用。该定义在GObject API引用——SignalFlags中描述。</li>
+  <li>返回类型是G_TYPE_NONE，这意味着信号处理程序没有返回值。</li>
+  <li>n_params是一组参数。这个信号没有参数，所以它是零。</li>
+</ul>
+
+<p>这个函数位于类初始化函数(t_double_class_init)中。</p>
+
+<p>可以使用其他函数，如g_signal_newv。详情参见GObject API参考。</p>
+
+<h2 id="3-信号处理程序signal-handler">3 信号处理程序（Signal handler）</h2>
+
+<p>信号处理程序是在信号发出时调用的函数。处理程序有两个参数。</p>
+
+<ul>
+  <li>那个实例发出的信号</li>
+  <li>指向用户数据的指针，在信号连接中给出。</li>
+</ul>
+
+<p>“div by zero”信号不需要用户数据。</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">div_by_zero_cb</span> <span class="p">(</span><span class="n">TDouble</span> <span class="o">*</span><span class="n">d</span><span class="p">,</span> <span class="n">gpointer</span> <span class="n">user_data</span><span class="p">)</span> <span class="p">{...</span> <span class="p">...</span> <span class="p">...}</span>
+</code></pre></div></div>
+
+<p>或者，你可以省略第二个参数。</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">div_by_zero_cb</span> <span class="p">(</span><span class="n">TDouble</span> <span class="o">*</span><span class="n">d</span><span class="p">)</span> <span class="p">{...</span> <span class="p">...</span> <span class="p">...}</span>
+</code></pre></div></div>
+
+<p>如果信号有参数，则参数一定是实例和用户数据。例如，GtkDialog的“response”信号的处理程序是:</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">user_function</span> <span class="p">(</span><span class="n">GtkDialog</span> <span class="o">*</span><span class="n">dialog</span><span class="p">,</span> <span class="kt">int</span> <span class="n">response_id</span><span class="p">,</span> <span class="n">gpointer</span> <span class="n">user_data</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>resoponse_id是信号的参数。当用户单击“OK”或“Cancel”按钮时，就会触发“response”信号。response_id的参数是一个值，表示单击了哪个按钮。</p>
+
+<p>“div-by-zero”信号的处理程序只显示一条错误消息。</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">static</span> <span class="kt">void</span>
+<span class="nf">div_by_zero_cb</span> <span class="p">(</span><span class="n">TDouble</span> <span class="o">*</span><span class="n">d</span><span class="p">,</span> <span class="n">gpointer</span> <span class="n">user_data</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">g_print</span> <span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">Error: division by zero.</span><span class="se">\n\n</span><span class="s">"</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<h2 id="4-信号连接">4 信号连接</h2>
+
+<p>信号和处理程序通过函数g_signal_connect连接。</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">g_signal_connect</span> <span class="p">(</span><span class="n">d1</span><span class="err">，</span> <span class="s">" div_by_zero "</span><span class="err">，</span> <span class="n">G_CALLBACK</span> <span class="p">(</span><span class="n">div_by_zero_cb</span><span class="p">)</span><span class="err">，</span> <span class="nb">NULL</span><span class="p">);</span>
+</code></pre></div></div>
+
+<ul>
+  <li>d1是信号所属的实例。</li>
+  <li>第二个参数是信号名称。</li>
+  <li>第三个参数是信号处理程序。它必须由G_CALLBACK强制转换。</li>
+  <li>最后一个参数是用户数据。信号不需要用户数据，因此被赋值为NULL。</li>
+</ul>
+
+<h2 id="5-信号发射">5 信号发射</h2>
+
+<p>信号被发射。下面是tdouble.c的一部分。</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">TDouble</span> <span class="o">*</span>
+<span class="nf">t_double_div</span> <span class="p">(</span><span class="n">TDouble</span> <span class="o">*</span><span class="n">self</span><span class="p">,</span> <span class="n">TDouble</span> <span class="o">*</span><span class="n">other</span><span class="p">)</span> <span class="p">{</span>
+<span class="p">...</span> <span class="p">...</span> <span class="p">...</span>
+  <span class="k">if</span> <span class="p">((</span><span class="o">!</span> <span class="n">t_double_get_value</span> <span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">value</span><span class="p">)))</span>
+    <span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span>
+  <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">value</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">g_signal_emit</span> <span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">t_double_signal</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="n">t_double_new</span> <span class="p">(</span><span class="n">self</span><span class="o">-&gt;</span><span class="n">value</span> <span class="o">/</span> <span class="n">value</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>如果除数为零，则发出信号。G_signal_emit有三个参数。</p>
+
+<ul>
+  <li>第一个参数是发出信号的实例。</li>
+  <li>第二个参数是信号id。信号id是函数g_signal_new返回的值。</li>
+  <li>第三个参数是详细信息。”div-by- 0 “信号没有细节，所以参数为0。本节不会详细解释，但通常你可以把0作为第三个参数。如果你想了解细节，请参考GObject API Reference—Signal Detail。</li>
+</ul>
+
+<p>如果一个信号有参数，它们是第四个和后面的参数。</p>
+
+<h2 id="6-示例">6 示例</h2>
+
+<p>示例程序在<a href="/assets/GObjectStudy/202311/04_GObject/tdouble3/">/assets/GObjectStudy/202311/04_GObject/tdouble3/</a>中。</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/* filename: tdouble.c */</span>
+  <span class="mi">1</span> <span class="err">#</span><span class="n">include</span> <span class="s">"tdouble.h"</span>
+  <span class="mi">2</span> 
+  <span class="mi">3</span> <span class="k">static</span> <span class="n">guint</span> <span class="n">t_double_signal</span><span class="p">;</span>
+  <span class="mi">4</span> 
+  <span class="mi">5</span> <span class="k">struct</span> <span class="n">_TDouble</span> <span class="p">{</span>
+  <span class="mi">6</span>   <span class="n">GObject</span> <span class="n">parent</span><span class="p">;</span>
+  <span class="mi">7</span>   <span class="kt">double</span> <span class="n">value</span><span class="p">;</span>
+  <span class="mi">8</span> <span class="p">};</span>
+  <span class="mi">9</span> 
+ <span class="mi">10</span> <span class="nf">G_DEFINE_TYPE</span> <span class="p">(</span><span class="n">TDouble</span><span class="p">,</span> <span class="n">t_double</span><span class="p">,</span> <span class="n">G_TYPE_OBJECT</span><span class="p">)</span>
+ <span class="mi">11</span> 
+ <span class="mi">12</span> <span class="k">static</span> <span class="kt">void</span>
+ <span class="mi">13</span> <span class="n">t_double_class_init</span> <span class="p">(</span><span class="n">TDoubleClass</span> <span class="o">*</span><span class="n">class</span><span class="p">)</span> <span class="p">{</span>
+ <span class="mi">14</span>   <span class="n">t_double_signal</span> <span class="o">=</span> <span class="n">g_signal_new</span> <span class="p">(</span><span class="s">"div-by-zero"</span><span class="p">,</span>
+ <span class="mi">15</span>                                  <span class="n">G_TYPE_FROM_CLASS</span> <span class="p">(</span><span class="n">class</span><span class="p">),</span>
+ <span class="mi">16</span>                                  <span class="n">G_SIGNAL_RUN_LAST</span> <span class="o">|</span> <span class="n">G_SIGNAL_NO_RECURSE</span> <span class="o">|</span> <span class="n">G_SIGNAL_NO_HOOKS</span><span class="p">,</span>
+ <span class="mi">17</span>                                  <span class="mi">0</span> <span class="cm">/* class offset.Subclass cannot override the class handler (default handler). */</span><span class="p">,</span>
+ <span class="mi">18</span>                                  <span class="nb">NULL</span> <span class="cm">/* accumulator */</span><span class="p">,</span>
+ <span class="mi">19</span>                                  <span class="nb">NULL</span> <span class="cm">/* accumulator data */</span><span class="p">,</span>
+ <span class="mi">20</span>                                  <span class="nb">NULL</span> <span class="cm">/* C marshaller. g_cclosure_marshal_generic() will be used */</span><span class="p">,</span>
+ <span class="mi">21</span>                                  <span class="n">G_TYPE_NONE</span> <span class="cm">/* return_type */</span><span class="p">,</span>
+ <span class="mi">22</span>                                  <span class="mi">0</span>     <span class="cm">/* n_params */</span>
+ <span class="mi">23</span>                                  <span class="p">);</span>
+ <span class="mi">24</span> <span class="p">}</span>
+ <span class="mi">25</span> 
+ <span class="mi">26</span> <span class="k">static</span> <span class="kt">void</span>
+ <span class="mi">27</span> <span class="nf">t_double_init</span> <span class="p">(</span><span class="n">TDouble</span> <span class="o">*</span><span class="n">d</span><span class="p">)</span> <span class="p">{</span>
+ <span class="mi">28</span> <span class="p">}</span>
+ <span class="mi">29</span> 
+ <span class="mi">30</span> <span class="cm">/* getter and setter */</span>
+ <span class="mi">31</span> <span class="n">gboolean</span>
+ <span class="mi">32</span> <span class="nf">t_double_get_value</span> <span class="p">(</span><span class="n">TDouble</span> <span class="o">*</span><span class="n">d</span><span class="p">,</span> <span class="kt">double</span> <span class="o">*</span><span class="n">value</span><span class="p">)</span> <span class="p">{</span>
+ <span class="mi">33</span>   <span class="n">g_return_val_if_fail</span> <span class="p">(</span><span class="n">T_IS_DOUBLE</span> <span class="p">(</span><span class="n">d</span><span class="p">),</span> <span class="n">FALSE</span><span class="p">);</span>
+ <span class="mi">34</span> 
+ <span class="mi">35</span>   <span class="o">*</span><span class="n">value</span> <span class="o">=</span> <span class="n">d</span><span class="o">-&gt;</span><span class="n">value</span><span class="p">;</span>
+ <span class="mi">36</span>   <span class="k">return</span> <span class="n">TRUE</span><span class="p">;</span>
+ <span class="mi">37</span> <span class="p">}</span>
+ <span class="mi">38</span> 
+ <span class="mi">39</span> <span class="kt">void</span>
+ <span class="mi">40</span> <span class="nf">t_double_set_value</span> <span class="p">(</span><span class="n">TDouble</span> <span class="o">*</span><span class="n">d</span><span class="p">,</span> <span class="kt">double</span> <span class="n">value</span><span class="p">)</span> <span class="p">{</span>
+ <span class="mi">41</span>   <span class="n">g_return_if_fail</span> <span class="p">(</span><span class="n">T_IS_DOUBLE</span> <span class="p">(</span><span class="n">d</span><span class="p">));</span>
+ <span class="mi">42</span> 
+ <span class="mi">43</span>   <span class="n">d</span><span class="o">-&gt;</span><span class="n">value</span> <span class="o">=</span> <span class="n">value</span><span class="p">;</span>
+ <span class="mi">44</span> <span class="p">}</span>
+ <span class="mi">45</span> 
+ <span class="mi">46</span> <span class="cm">/* arithmetic operator */</span>
+ <span class="mi">47</span> <span class="cm">/* These operators create a new instance and return a pointer to it. */</span>
+ <span class="mi">48</span> <span class="err">#</span><span class="n">define</span> <span class="n">t_double_binary_op</span><span class="p">(</span><span class="n">op</span><span class="p">)</span> \
+ <span class="mi">49</span>   <span class="k">if</span> <span class="p">(</span><span class="o">!</span> <span class="n">t_double_get_value</span> <span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">value</span><span class="p">))</span> \
+ <span class="mi">50</span>     <span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span> \
+ <span class="mi">51</span>   <span class="k">return</span> <span class="nf">t_double_new</span> <span class="p">(</span><span class="n">self</span><span class="o">-&gt;</span><span class="n">value</span> <span class="n">op</span> <span class="n">value</span><span class="p">);</span>
+ <span class="mi">52</span> 
+ <span class="mi">53</span> <span class="n">TDouble</span> <span class="o">*</span>
+ <span class="mi">54</span> <span class="nf">t_double_add</span> <span class="p">(</span><span class="n">TDouble</span> <span class="o">*</span><span class="n">self</span><span class="p">,</span> <span class="n">TDouble</span> <span class="o">*</span><span class="n">other</span><span class="p">)</span> <span class="p">{</span>
+ <span class="mi">55</span>   <span class="n">g_return_val_if_fail</span> <span class="p">(</span><span class="n">T_IS_DOUBLE</span> <span class="p">(</span><span class="n">self</span><span class="p">),</span> <span class="nb">NULL</span><span class="p">);</span>
+ <span class="mi">56</span>   <span class="n">g_return_val_if_fail</span> <span class="p">(</span><span class="n">T_IS_DOUBLE</span> <span class="p">(</span><span class="n">other</span><span class="p">),</span> <span class="nb">NULL</span><span class="p">);</span>
+ <span class="mi">57</span>   <span class="kt">double</span> <span class="n">value</span><span class="p">;</span>
+ <span class="mi">58</span> 
+ <span class="mi">59</span>   <span class="n">t_double_binary_op</span> <span class="p">(</span><span class="o">+</span><span class="p">)</span>
+ <span class="mi">60</span> <span class="p">}</span>
+ <span class="mi">61</span> 
+ <span class="mi">62</span> <span class="n">TDouble</span> <span class="o">*</span>
+ <span class="mi">63</span> <span class="nf">t_double_sub</span> <span class="p">(</span><span class="n">TDouble</span> <span class="o">*</span><span class="n">self</span><span class="p">,</span> <span class="n">TDouble</span> <span class="o">*</span><span class="n">other</span><span class="p">)</span> <span class="p">{</span>
+ <span class="mi">64</span>   <span class="n">g_return_val_if_fail</span> <span class="p">(</span><span class="n">T_IS_DOUBLE</span> <span class="p">(</span><span class="n">self</span><span class="p">),</span> <span class="nb">NULL</span><span class="p">);</span>
+ <span class="mi">65</span>   <span class="n">g_return_val_if_fail</span> <span class="p">(</span><span class="n">T_IS_DOUBLE</span> <span class="p">(</span><span class="n">other</span><span class="p">),</span> <span class="nb">NULL</span><span class="p">);</span>
+ <span class="mi">66</span>   <span class="kt">double</span> <span class="n">value</span><span class="p">;</span>
+ <span class="mi">67</span> 
+ <span class="mi">68</span>   <span class="n">t_double_binary_op</span> <span class="p">(</span><span class="o">-</span><span class="p">)</span>
+ <span class="mi">69</span> <span class="p">}</span>
+ <span class="mi">70</span> 
+ <span class="mi">71</span> <span class="n">TDouble</span> <span class="o">*</span>
+ <span class="mi">72</span> <span class="nf">t_double_mul</span> <span class="p">(</span><span class="n">TDouble</span> <span class="o">*</span><span class="n">self</span><span class="p">,</span> <span class="n">TDouble</span> <span class="o">*</span><span class="n">other</span><span class="p">)</span> <span class="p">{</span>
+ <span class="mi">73</span>   <span class="n">g_return_val_if_fail</span> <span class="p">(</span><span class="n">T_IS_DOUBLE</span> <span class="p">(</span><span class="n">self</span><span class="p">),</span> <span class="nb">NULL</span><span class="p">);</span>
+ <span class="mi">74</span>   <span class="n">g_return_val_if_fail</span> <span class="p">(</span><span class="n">T_IS_DOUBLE</span> <span class="p">(</span><span class="n">other</span><span class="p">),</span> <span class="nb">NULL</span><span class="p">);</span>
+ <span class="mi">75</span>   <span class="kt">double</span> <span class="n">value</span><span class="p">;</span>
+ <span class="mi">76</span> 
+ <span class="mi">77</span>   <span class="n">t_double_binary_op</span> <span class="p">(</span><span class="o">*</span><span class="p">)</span>
+ <span class="mi">78</span> <span class="p">}</span>
+ <span class="mi">79</span> 
+ <span class="mi">80</span> <span class="n">TDouble</span> <span class="o">*</span>
+ <span class="mi">81</span> <span class="nf">t_double_div</span> <span class="p">(</span><span class="n">TDouble</span> <span class="o">*</span><span class="n">self</span><span class="p">,</span> <span class="n">TDouble</span> <span class="o">*</span><span class="n">other</span><span class="p">)</span> <span class="p">{</span>
+ <span class="mi">82</span>   <span class="n">g_return_val_if_fail</span> <span class="p">(</span><span class="n">T_IS_DOUBLE</span> <span class="p">(</span><span class="n">self</span><span class="p">),</span> <span class="nb">NULL</span><span class="p">);</span>
+ <span class="mi">83</span>   <span class="n">g_return_val_if_fail</span> <span class="p">(</span><span class="n">T_IS_DOUBLE</span> <span class="p">(</span><span class="n">other</span><span class="p">),</span> <span class="nb">NULL</span><span class="p">);</span>
+ <span class="mi">84</span>   <span class="kt">double</span> <span class="n">value</span><span class="p">;</span>
+ <span class="mi">85</span> 
+ <span class="mi">86</span>   <span class="k">if</span> <span class="p">((</span><span class="o">!</span> <span class="n">t_double_get_value</span> <span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">value</span><span class="p">)))</span>
+ <span class="mi">87</span>     <span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span>
+ <span class="mi">88</span>   <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">value</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+ <span class="mi">89</span>     <span class="n">g_signal_emit</span> <span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">t_double_signal</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+ <span class="mi">90</span>     <span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span>
+ <span class="mi">91</span>   <span class="p">}</span>
+ <span class="mi">92</span>   <span class="k">return</span> <span class="n">t_double_new</span> <span class="p">(</span><span class="n">self</span><span class="o">-&gt;</span><span class="n">value</span> <span class="o">/</span> <span class="n">value</span><span class="p">);</span>
+ <span class="mi">93</span> <span class="p">}</span>
+ <span class="mi">94</span> <span class="n">TDouble</span> <span class="o">*</span>
+ <span class="mi">95</span> <span class="nf">t_double_uminus</span> <span class="p">(</span><span class="n">TDouble</span> <span class="o">*</span><span class="n">self</span><span class="p">)</span> <span class="p">{</span>
+ <span class="mi">96</span>   <span class="n">g_return_val_if_fail</span> <span class="p">(</span><span class="n">T_IS_DOUBLE</span> <span class="p">(</span><span class="n">self</span><span class="p">),</span> <span class="nb">NULL</span><span class="p">);</span>
+ <span class="mi">97</span> 
+ <span class="mi">98</span>   <span class="k">return</span> <span class="n">t_double_new</span> <span class="p">(</span><span class="o">-</span><span class="n">self</span><span class="o">-&gt;</span><span class="n">value</span><span class="p">);</span>
+ <span class="mi">99</span> <span class="p">}</span>
+<span class="mi">100</span> 
+<span class="mi">101</span> <span class="n">TDouble</span> <span class="o">*</span>
+<span class="mi">102</span> <span class="nf">t_double_new</span> <span class="p">(</span><span class="kt">double</span> <span class="n">value</span><span class="p">)</span> <span class="p">{</span>
+<span class="mi">103</span>   <span class="n">TDouble</span> <span class="o">*</span><span class="n">d</span><span class="p">;</span>
+<span class="mi">104</span> 
+<span class="mi">105</span>   <span class="n">d</span> <span class="o">=</span> <span class="n">g_object_new</span> <span class="p">(</span><span class="n">T_TYPE_DOUBLE</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+<span class="mi">106</span>   <span class="n">d</span><span class="o">-&gt;</span><span class="n">value</span> <span class="o">=</span> <span class="n">value</span><span class="p">;</span>
+<span class="mi">107</span>   <span class="k">return</span> <span class="n">d</span><span class="p">;</span>
+<span class="mi">108</span> <span class="p">}</span>
+<span class="mi">109</span> 
+</code></pre></div></div>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/* filename:main.c */</span>
+ <span class="mi">1</span> <span class="err">#</span><span class="n">include</span> <span class="o">&lt;</span><span class="n">glib</span><span class="o">-</span><span class="n">object</span><span class="p">.</span><span class="n">h</span><span class="o">&gt;</span>
+ <span class="mi">2</span> <span class="err">#</span><span class="n">include</span> <span class="s">"tdouble.h"</span>
+ <span class="mi">3</span> 
+ <span class="mi">4</span> <span class="k">static</span> <span class="kt">void</span>
+ <span class="mi">5</span> <span class="nf">div_by_zero_cb</span> <span class="p">(</span><span class="n">TDouble</span> <span class="o">*</span><span class="n">d</span><span class="p">,</span> <span class="n">gpointer</span> <span class="n">user_data</span><span class="p">)</span> <span class="p">{</span>
+ <span class="mi">6</span>   <span class="n">g_printerr</span> <span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">Error: division by zero.</span><span class="se">\n\n</span><span class="s">"</span><span class="p">);</span>
+ <span class="mi">7</span> <span class="p">}</span>
+ <span class="mi">8</span> 
+ <span class="mi">9</span> <span class="k">static</span> <span class="kt">void</span>
+<span class="mi">10</span> <span class="nf">t_print</span> <span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="n">op</span><span class="p">,</span> <span class="n">TDouble</span> <span class="o">*</span><span class="n">d1</span><span class="p">,</span> <span class="n">TDouble</span> <span class="o">*</span><span class="n">d2</span><span class="p">,</span> <span class="n">TDouble</span> <span class="o">*</span><span class="n">d3</span><span class="p">)</span> <span class="p">{</span>
+<span class="mi">11</span>   <span class="kt">double</span> <span class="n">v1</span><span class="p">,</span> <span class="n">v2</span><span class="p">,</span> <span class="n">v3</span><span class="p">;</span>
+<span class="mi">12</span> 
+<span class="mi">13</span>   <span class="k">if</span> <span class="p">(</span><span class="o">!</span> <span class="n">t_double_get_value</span> <span class="p">(</span><span class="n">d1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">v1</span><span class="p">))</span>
+<span class="mi">14</span>     <span class="k">return</span><span class="p">;</span>
+<span class="mi">15</span>   <span class="k">if</span> <span class="p">(</span><span class="o">!</span> <span class="n">t_double_get_value</span> <span class="p">(</span><span class="n">d2</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">v2</span><span class="p">))</span>
+<span class="mi">16</span>     <span class="k">return</span><span class="p">;</span>
+<span class="mi">17</span>   <span class="k">if</span> <span class="p">(</span><span class="o">!</span> <span class="n">t_double_get_value</span> <span class="p">(</span><span class="n">d3</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">v3</span><span class="p">))</span>
+<span class="mi">18</span>     <span class="k">return</span><span class="p">;</span>
+<span class="mi">19</span> 
+<span class="mi">20</span>   <span class="n">g_print</span> <span class="p">(</span><span class="s">"%lf %s %lf = %lf</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">v1</span><span class="p">,</span> <span class="n">op</span><span class="p">,</span> <span class="n">v2</span><span class="p">,</span> <span class="n">v3</span><span class="p">);</span>
+<span class="mi">21</span> <span class="p">}</span>
+<span class="mi">22</span> 
+<span class="mi">23</span> <span class="kt">int</span>
+<span class="mi">24</span> <span class="nf">main</span> <span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">**</span><span class="n">argv</span><span class="p">)</span> <span class="p">{</span>
+<span class="mi">25</span>   <span class="n">TDouble</span> <span class="o">*</span><span class="n">d1</span><span class="p">,</span> <span class="o">*</span><span class="n">d2</span><span class="p">,</span> <span class="o">*</span><span class="n">d3</span><span class="p">;</span>
+<span class="mi">26</span>   <span class="kt">double</span> <span class="n">v1</span><span class="p">,</span> <span class="n">v3</span><span class="p">;</span>
+<span class="mi">27</span> 
+<span class="mi">28</span>   <span class="n">d1</span> <span class="o">=</span> <span class="n">t_double_new</span> <span class="p">(</span><span class="mi">10</span><span class="p">.</span><span class="mi">0</span><span class="p">);</span>
+<span class="mi">29</span>   <span class="n">d2</span> <span class="o">=</span> <span class="n">t_double_new</span> <span class="p">(</span><span class="mi">20</span><span class="p">.</span><span class="mi">0</span><span class="p">);</span>
+<span class="mi">30</span>   <span class="k">if</span> <span class="p">((</span><span class="n">d3</span> <span class="o">=</span> <span class="n">t_double_add</span> <span class="p">(</span><span class="n">d1</span><span class="p">,</span> <span class="n">d2</span><span class="p">))</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
+<span class="mi">31</span>     <span class="n">t_print</span> <span class="p">(</span><span class="s">"+"</span><span class="p">,</span> <span class="n">d1</span><span class="p">,</span> <span class="n">d2</span><span class="p">,</span> <span class="n">d3</span><span class="p">);</span>
+<span class="mi">32</span>     <span class="n">g_object_unref</span> <span class="p">(</span><span class="n">d3</span><span class="p">);</span>
+<span class="mi">33</span>   <span class="p">}</span>
+<span class="mi">34</span> 
+<span class="mi">35</span>   <span class="k">if</span> <span class="p">((</span><span class="n">d3</span> <span class="o">=</span> <span class="n">t_double_sub</span> <span class="p">(</span><span class="n">d1</span><span class="p">,</span> <span class="n">d2</span><span class="p">))</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
+<span class="mi">36</span>     <span class="n">t_print</span> <span class="p">(</span><span class="s">"-"</span><span class="p">,</span> <span class="n">d1</span><span class="p">,</span> <span class="n">d2</span><span class="p">,</span> <span class="n">d3</span><span class="p">);</span>
+<span class="mi">37</span>     <span class="n">g_object_unref</span> <span class="p">(</span><span class="n">d3</span><span class="p">);</span>
+<span class="mi">38</span>   <span class="p">}</span>
+<span class="mi">39</span> 
+<span class="mi">40</span>   <span class="k">if</span> <span class="p">((</span><span class="n">d3</span> <span class="o">=</span> <span class="n">t_double_mul</span> <span class="p">(</span><span class="n">d1</span><span class="p">,</span> <span class="n">d2</span><span class="p">))</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
+<span class="mi">41</span>     <span class="n">t_print</span> <span class="p">(</span><span class="s">"*"</span><span class="p">,</span> <span class="n">d1</span><span class="p">,</span> <span class="n">d2</span><span class="p">,</span> <span class="n">d3</span><span class="p">);</span>
+<span class="mi">42</span>     <span class="n">g_object_unref</span> <span class="p">(</span><span class="n">d3</span><span class="p">);</span>
+<span class="mi">43</span>   <span class="p">}</span>
+<span class="mi">44</span> 
+<span class="mi">45</span>   <span class="k">if</span> <span class="p">((</span><span class="n">d3</span> <span class="o">=</span> <span class="n">t_double_div</span> <span class="p">(</span><span class="n">d1</span><span class="p">,</span> <span class="n">d2</span><span class="p">))</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
+<span class="mi">46</span>     <span class="n">t_print</span> <span class="p">(</span><span class="s">"/"</span><span class="p">,</span> <span class="n">d1</span><span class="p">,</span> <span class="n">d2</span><span class="p">,</span> <span class="n">d3</span><span class="p">);</span>
+<span class="mi">47</span>     <span class="n">g_object_unref</span> <span class="p">(</span><span class="n">d3</span><span class="p">);</span>
+<span class="mi">48</span>   <span class="p">}</span>
+<span class="mi">49</span> 
+<span class="mi">50</span>   <span class="n">g_signal_connect</span> <span class="p">(</span><span class="n">d1</span><span class="p">,</span> <span class="s">"div-by-zero"</span><span class="p">,</span> <span class="n">G_CALLBACK</span> <span class="p">(</span><span class="n">div_by_zero_cb</span><span class="p">),</span> <span class="nb">NULL</span><span class="p">);</span>
+<span class="mi">51</span>   <span class="n">t_double_set_value</span> <span class="p">(</span><span class="n">d2</span><span class="p">,</span> <span class="mi">0</span><span class="p">.</span><span class="mi">0</span><span class="p">);</span>
+<span class="mi">52</span>   <span class="k">if</span> <span class="p">((</span><span class="n">d3</span> <span class="o">=</span> <span class="n">t_double_div</span> <span class="p">(</span><span class="n">d1</span><span class="p">,</span> <span class="n">d2</span><span class="p">))</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
+<span class="mi">53</span>     <span class="n">t_print</span> <span class="p">(</span><span class="s">"/"</span><span class="p">,</span> <span class="n">d1</span><span class="p">,</span> <span class="n">d2</span><span class="p">,</span> <span class="n">d3</span><span class="p">);</span>
+<span class="mi">54</span>     <span class="n">g_object_unref</span> <span class="p">(</span><span class="n">d3</span><span class="p">);</span>
+<span class="mi">55</span>   <span class="p">}</span>
+<span class="mi">56</span> 
+<span class="mi">57</span>   <span class="k">if</span> <span class="p">((</span><span class="n">d3</span> <span class="o">=</span> <span class="n">t_double_uminus</span> <span class="p">(</span><span class="n">d1</span><span class="p">))</span> <span class="o">!=</span> <span class="nb">NULL</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">t_double_get_value</span> <span class="p">(</span><span class="n">d1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">v1</span><span class="p">))</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">t_double_get_value</span> <span class="p">(</span><span class="n">d3</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">v3</span><span class="p">)))</span> <span class="p">{</span>
+<span class="mi">58</span>     <span class="n">g_print</span> <span class="p">(</span><span class="s">"-%lf = %lf</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">v1</span><span class="p">,</span> <span class="n">v3</span><span class="p">);</span>
+<span class="mi">59</span>     <span class="n">g_object_unref</span> <span class="p">(</span><span class="n">d3</span><span class="p">);</span>
+<span class="mi">60</span>   <span class="p">}</span>
+<span class="mi">61</span> 
+<span class="mi">62</span>   <span class="n">g_object_unref</span> <span class="p">(</span><span class="n">d1</span><span class="p">);</span>
+<span class="mi">63</span>   <span class="n">g_object_unref</span> <span class="p">(</span><span class="n">d2</span><span class="p">);</span>
+<span class="mi">64</span> 
+<span class="mi">65</span>   <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="mi">66</span> <span class="p">}</span>
+<span class="mi">67</span> 
+</code></pre></div></div>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cd </span>tdouble3<span class="p">;</span> _build/tdouble 2&gt;&amp;1
+10.000000 + 20.000000 <span class="o">=</span> 30.000000
+10.000000 - 20.000000 <span class="o">=</span> <span class="nt">-10</span>.000000
+10.000000 <span class="k">*</span> 20.000000 <span class="o">=</span> 200.000000
+10.000000 / 20.000000 <span class="o">=</span> 0.500000
+
+Error: division by zero.
+
+<span class="nt">-10</span>.000000 <span class="o">=</span> <span class="nt">-10</span>.000000
+</code></pre></div></div>
+
+<h2 id="7-默认信号处理程序">7 默认信号处理程序</h2>
+
+<p>您可能认为在main.c中设置错误消息很奇怪。事实上，错误发生在tdouble.c中，因此消息应该由tdouble.c本身管理。GObject系统有一个默认的信号处理程序，在对象本身中设置。默认信号处理程序也称为“默认处理程序”或“对象方法处理程序”。</p>
+
+<p>您可以使用 <code class="language-plaintext highlighter-rouge">g_signal_new_class_handler</code> 设置默认处理程序。</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">guint</span>
+<span class="nf">g_signal_new_class_handler</span> <span class="p">(</span><span class="k">const</span> <span class="n">gchar</span> <span class="o">*</span><span class="n">signal_name</span><span class="p">,</span>
+                            <span class="n">GType</span> <span class="n">itype</span><span class="p">,</span>
+                            <span class="n">GSignalFlags</span> <span class="n">signal_flags</span><span class="p">,</span>
+                            <span class="n">GCallback</span> <span class="n">class_handler</span><span class="p">,</span> <span class="cm">/*default signal handler */</span>
+                            <span class="n">GSignalAccumulator</span> <span class="n">accumulator</span><span class="p">,</span>
+                            <span class="n">gpointer</span> <span class="n">accu_data</span><span class="p">,</span>
+                            <span class="n">GSignalCMarshaller</span> <span class="n">c_marshaller</span><span class="p">,</span>
+                            <span class="n">GType</span> <span class="n">return_type</span><span class="p">,</span>
+                            <span class="n">guint</span> <span class="n">n_params</span><span class="p">,</span>
+                            <span class="p">...);</span>
+</code></pre></div></div>
+<p>与 <code class="language-plaintext highlighter-rouge">g_signal_new</code> 不同的是第四个参数。G_signal_new用类结构中函数指针的偏移量设置一个默认处理程序。如果一个对象是可派生的，它有自己的类区域，所以你可以用g_signal_new设置一个默认的处理程序。但是final类型对象没有自己的类区域，所以不可能用g_signal_new设置默认处理程序。这就是我们使用g_signal_new_class_handler的原因。</p>
+
+<p>tdouble.c被修改。添加div_by_zero_default_cb函数，g_signal_new_class_handler替换g_signal_new。默认的信号处理程序没有user_data参数。在用户提供的信号处理程序连接到信号时，用g_signal_connect族函数设置一个user_data参数。因为默认信号处理程序没有连接到g_signal_connect族函数，所以没有提供用户数据作为参数。</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="mi">1</span> <span class="k">static</span> <span class="kt">void</span>
+ <span class="mi">2</span> <span class="nf">div_by_zero_default_cb</span> <span class="p">(</span><span class="n">TDouble</span> <span class="o">*</span><span class="n">d</span><span class="p">)</span> <span class="p">{</span>
+ <span class="mi">3</span>   <span class="n">g_printerr</span> <span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">Error: division by zero.</span><span class="se">\n\n</span><span class="s">"</span><span class="p">);</span>
+ <span class="mi">4</span> <span class="p">}</span>
+ <span class="mi">5</span> 
+ <span class="mi">6</span> <span class="k">static</span> <span class="kt">void</span>
+ <span class="mi">7</span> <span class="nf">t_double_class_init</span> <span class="p">(</span><span class="n">TDoubleClass</span> <span class="o">*</span><span class="n">class</span><span class="p">)</span> <span class="p">{</span>
+ <span class="mi">8</span>   <span class="n">t_double_signal</span> <span class="o">=</span>
+ <span class="mi">9</span>   <span class="n">g_signal_new_class_handler</span> <span class="p">(</span><span class="s">"div-by-zero"</span><span class="p">,</span>
+<span class="mi">10</span>                               <span class="n">G_TYPE_FROM_CLASS</span> <span class="p">(</span><span class="n">class</span><span class="p">),</span>
+<span class="mi">11</span>                               <span class="n">G_SIGNAL_RUN_LAST</span> <span class="o">|</span> <span class="n">G_SIGNAL_NO_RECURSE</span> <span class="o">|</span> <span class="n">G_SIGNAL_NO_HOOKS</span><span class="p">,</span>
+<span class="mi">12</span>                               <span class="n">G_CALLBACK</span> <span class="p">(</span><span class="n">div_by_zero_default_cb</span><span class="p">),</span>
+<span class="mi">13</span>                               <span class="nb">NULL</span> <span class="cm">/* accumulator */</span><span class="p">,</span>
+<span class="mi">14</span>                               <span class="nb">NULL</span> <span class="cm">/* accumulator data */</span><span class="p">,</span>
+<span class="mi">15</span>                               <span class="nb">NULL</span> <span class="cm">/* C marshaller */</span><span class="p">,</span>
+<span class="mi">16</span>                               <span class="n">G_TYPE_NONE</span> <span class="cm">/* return_type */</span><span class="p">,</span>
+<span class="mi">17</span>                               <span class="mi">0</span>     <span class="cm">/* n_params */</span>
+<span class="mi">18</span>                               <span class="p">);</span>
+<span class="mi">19</span> <span class="p">}</span>
+</code></pre></div></div>
+<p>g_signal_connect和div_by_zero_cb从main.c中移除。</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cd </span>tdouble4<span class="p">;</span> _build/tdouble 2&gt;&amp;1
+10.000000 + 20.000000 <span class="o">=</span> 30.000000
+10.000000 - 20.000000 <span class="o">=</span> <span class="nt">-10</span>.000000
+10.000000 <span class="k">*</span> 20.000000 <span class="o">=</span> 200.000000
+10.000000 / 20.000000 <span class="o">=</span> 0.500000
+Error: division by zero.
+<span class="nt">-10</span>.000000 <span class="o">=</span> <span class="nt">-10</span>.000000
+</code></pre></div></div>
+
+<p>源文件位于目录示例程序在<a href="/assets/GObjectStudy/202311/04_GObject/tdouble4/">/assets/GObjectStudy/202311/04_GObject/tdouble4/</a>中。</p>
+
+<p>如果想将处理程序(用户提供的处理程序)连接到信号，仍然可以使用g_signal_connect。在main.c中添加以下代码。</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">static</span> <span class="kt">void</span>
+<span class="nf">div_by_zero_cb</span> <span class="p">(</span><span class="n">TDouble</span> <span class="o">*</span><span class="n">d</span><span class="p">,</span> <span class="n">gpointer</span> <span class="n">user_data</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">g_print</span> <span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">Error happens in main.c.</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">int</span>
+<span class="nf">main</span> <span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">**</span><span class="n">argv</span><span class="p">)</span> <span class="p">{</span>
+<span class="p">...</span> <span class="p">...</span> <span class="p">...</span>
+  <span class="n">g_signal_connect</span> <span class="p">(</span><span class="n">d1</span><span class="p">,</span> <span class="s">"div-by-zero"</span><span class="p">,</span> <span class="n">G_CALLBACK</span> <span class="p">(</span><span class="n">div_by_zero_cb</span><span class="p">),</span> <span class="nb">NULL</span><span class="p">);</span>
+<span class="p">...</span> <span class="p">...</span> <span class="p">...</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>然后，在发出信号时，用户提供的处理程序和默认处理程序都会被调用。编译并执行它，然后在显示器上显示以下内容。</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>10.000000 + 20.000000 <span class="o">=</span> 30.000000
+10.000000 - 20.000000 <span class="o">=</span> <span class="nt">-10</span>.000000
+10.000000 <span class="k">*</span> 20.000000 <span class="o">=</span> 200.000000
+10.000000 / 20.000000 <span class="o">=</span> 0.500000
+Error happens <span class="k">in </span>main.c.
+Error: division by zero.
+<span class="nt">-10</span>.000000 <span class="o">=</span> <span class="nt">-10</span>.000000
+</code></pre></div></div>
+
+<p>这告诉我们，首先调用用户提供的处理程序，然后调用默认的处理程序。如果希望在默认处理程序之后调用处理程序，则可以使用g_signal_connect_after。再次将下面的行添加到main.c中。</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">static</span> <span class="kt">void</span>
+<span class="nf">div_by_zero_after_cb</span> <span class="p">(</span><span class="n">TDouble</span> <span class="o">*</span><span class="n">d</span><span class="p">,</span> <span class="n">gpointer</span> <span class="n">user_data</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">g_print</span> <span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">Error has happened in main.c and an error message has been displayed.</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">int</span>
+<span class="nf">main</span> <span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">**</span><span class="n">argv</span><span class="p">)</span> <span class="p">{</span>
+<span class="p">...</span> <span class="p">...</span> <span class="p">...</span>
+  <span class="n">g_signal_connect_after</span> <span class="p">(</span><span class="n">d1</span><span class="p">,</span> <span class="s">"div-by-zero"</span><span class="p">,</span> <span class="n">G_CALLBACK</span> <span class="p">(</span><span class="n">div_by_zero_after_cb</span><span class="p">),</span> <span class="nb">NULL</span><span class="p">);</span>
+<span class="p">...</span> <span class="p">...</span> <span class="p">...</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>编译并执行它，然后:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>10.000000 + 20.000000 <span class="o">=</span> 30.000000
+10.000000 - 20.000000 <span class="o">=</span> <span class="nt">-10</span>.000000
+10.000000 <span class="k">*</span> 20.000000 <span class="o">=</span> 200.000000
+10.000000 / 20.000000 <span class="o">=</span> 0.500000
+Error happens <span class="k">in </span>main.c.
+Error: division by zero.
+Error has happened <span class="k">in </span>main.c and an error message has been displayed.
+<span class="nt">-10</span>.000000 <span class="o">=</span> <span class="nt">-10</span>.000000
+</code></pre></div></div>
+
+<p>源文件位于目录示例程序在<a href="/assets/GObjectStudy/202311/04_GObject/tdouble5/">/assets/GObjectStudy/202311/04_GObject/tdouble5/</a>中。</p>
+
+<h2 id="8-信号flag">8 信号flag</h2>
+
+<p>调用处理程序的顺序在GObject API参考—信号发射中描述。
+顺序取决于在g_signal_new或g_signal_new_class_handler中设置的信号标志。有三个标志与处理程序调用的顺序有关。</p>
+
+<ul>
+  <li>
+    <p>G_SIGNAL_RUN_FIRST:默认处理程序在任何用户提供的处理程序之前被调用。</p>
+  </li>
+  <li>
+    <p>G_SIGNAL_RUN_LAST:默认处理程序在普通用户提供的处理程序之后调用(不与g_signal_connect_after连接)</p>
+  </li>
+  <li>
+    <p>G_SIGNAL_RUN_CLEANUP:默认处理程序在用户提供的任何处理程序之后调用。</p>
+  </li>
+</ul>
+
+<p>G_SIGNAL_RUN_LAST在许多情况下是最合适的。</p>
+
+<p>其他信号标志在GObject API Rreference中描述。</p>
+
+<h2 id="参考">参考</h2>
+
+<p><a href="https://github.com/ToshioCP/Gobject-tutorial/blob/main/gfm/sec4.md">翻译来自：GObject tutorial</a></p>
+
+
+    </div>
+
+</article>
+<div class="post-nav"><a class="previous" href="/gobject%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/2023/11/15/3-%E7%B1%BB%E5%9E%8B%E7%B3%BB%E7%BB%9F%E5%92%8C%E6%B3%A8%E5%86%8C%E6%B5%81%E7%A8%8B.html" title="三、类型系统和注册流程">三、类型系统和注册流程</a><a class="next" href="/gobject%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/2023/11/17/5-%E5%B1%9E%E6%80%A7.html" title="五、属性">五、属性</a></div><!--<div class="post-related">
+      <div>Related Articles</div>
+      <ul>
+        <li><a class="post-link" href="/%E6%97%A5%E4%B9%8B%E6%BC%AB%E5%BD%95/2023/11/10/NVIDIA%E6%98%BE%E5%8D%A1%E5%AE%89%E8%A3%85.html" title="五、属性">NVIDIA显卡安装</a></li><li><a class="post-link" href="/gobject%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0202109/2021/08/31/5-GObject%E5%AF%B9%E6%8E%A5%E5%8F%A3%E7%9A%84%E6%A8%A1%E6%8B%9F.html" title="五、属性">五、GObject对接口的模拟</a></li><li><a class="post-link" href="/gobject%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/2023/11/20/13-GValue.html" title="五、属性">十三、GValue学习笔记</a></li><li><a class="post-link" href="/%E6%97%A5%E4%B9%8B%E6%BC%AB%E5%BD%95/2023/12/15/CPU%E6%9E%B6%E6%9E%84.html" title="五、属性">CPU架构</a></li></ul>
+    </div>--><div class="post-related">
+      <div>相关文章</div>
+      <ul><li><a class="post-link" href="/gobject%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/2023/11/23/14-GInitiallyUnowned.html" title="十四、GInitiallyUnowned类型">十四、GInitiallyUnowned类型</a></li><li><a class="post-link" href="/gobject%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/2023/11/20/11-%E6%8E%A5%E5%8F%A3%E8%A1%A5%E5%85%85.html" title="十一、接口补充">十一、接口补充</a></li><li><a class="post-link" href="/gobject%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/2023/11/20/12-GBoxed%E7%B1%BB%E5%9E%8B.html" title="十二、GBoxed类型">十二、GBoxed类型</a></li><li><a class="post-link" href="/gobject%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/2023/11/20/13-GValue.html" title="十三、GValue学习笔记">十三、GValue学习笔记</a></li></ul>
+    </div><div class="post-comments"><div id="disqus_thread"></div>
+<script>
+    /**
+    *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+    *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
+    /*
+    var disqus_config = function () {
+    this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+    this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+    */
+    (function() { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+    s.src = 'https://pzhou-me.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div></section>
+</div>
+
+
+  </section>
+  <section class="sidebar" style="margin-left: 15px;">
+    <!-- Get sidebar items --><style type="text/css" media="screen">
+.post-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.post-menu ul li {
+  margin-bottom: 5px;  /* 增加每个列表项底部的间距 */
+}
+
+.post-menu ul li a {
+  font-size: 16px; /* 设置目录链接的字体大小 */
+}
+
+.post-menu-content {
+  max-height: 600px; /* 设置最大高度 */
+  min-width: 300px;
+  overflow: hidden; /* 默认隐藏滚动条 */
+  white-space: nowrap; /* 水平方向上的内容不换行 */
+}
+
+/* 自定义垂直滚动条的样式 */
+.post-menu-content::-webkit-scrollbar {
+  width: 8px; /* 垂直滚动条的宽度 */
+  height: 8px; /* 水平滚动条的高度 */
+}
+
+/* 自定义垂直滚动条轨道 */
+.post-menu-content::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* 自定义垂直滚动条滑块 */
+.post-menu-content::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* 当鼠标悬停在垂直滚动条滑块上时 */
+.post-menu-content::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* 一级标题样式 */
+.post-menu ul li.h-h2 {
+  margin-left: 0;
+  margin-bottom: 10px;
+}
+
+/* 二级标题样式 */
+.post-menu ul li.h-h3 {
+  margin-left: 20px;
+  margin-bottom: 10px;
+}
+
+/* 三级标题样式 */
+.post-menu ul li.h-h4 {
+  margin-left: 40px;
+  margin-bottom: 10px;
+}
+
+
+</style>
+
+
+
+<div class="post-menu">
+  <div class="post-menu-title">目录</div>
+  <div class="post-menu-content"></div>
+</div>
+
+<script>
+  function generateContent() {
+    var menu = document.querySelector(".post-menu");
+    var menuContent =  menu.querySelector(".post-menu-content");
+    var headings = document.querySelector(".post-content").querySelectorAll("h2, h3, h4, h5, h6");
+
+    // Hide menu when no headings
+    if (headings.length === 0) {
+      return menu.style.display = "none";
+    }
+
+    // Generate post menu
+    var menuHTML = '';
+    for (var i = 0; i < headings.length; i++) {
+      var h = headings[i];
+      menuHTML += (
+        '<li class="h-' + h.tagName.toLowerCase() + '">'
+        + '<a href="#h-' + h.getAttribute('id') + '">' + h.textContent + '</a></li>');
+    }
+
+    menuContent.innerHTML = '<ul>' + menuHTML + '</ul>';
+
+    // The header element
+    var header = document.querySelector('header.site-header');
+
+    function doMenuCollapse(index, over_items) {
+      var items = menuContent.firstChild.children;
+
+      if (over_items == undefined) {
+        over_items = 20;
+      }
+
+      if (items.length < over_items) {
+        return;
+      }
+
+      var activeItem = items[index];
+      var beginItem = activeItem
+      var endItem = activeItem
+      var beginIndex = index;
+      var endIndex = index + 1;
+      while (beginIndex >= 0
+        && !items[beginIndex].classList.contains('h-h2')) {
+        beginIndex -= 1;
+      }
+      while (endIndex < items.length
+        && !items[endIndex].classList.contains('h-h2')) {
+        endIndex += 1;
+      }
+      for (var i = 0; i < beginIndex; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+      for (var i = beginIndex + 1; i < endIndex; i++) {
+        item = items[i]
+        // if (!item.classList.contains('h-h2')) {
+          item.style.display = '';
+        // }
+      }
+      for (var i = endIndex; i < items.length; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+    }
+
+    // Init menu collapsed
+    doMenuCollapse(-1);
+
+    // Active the menu item
+    window.addEventListener('scroll', function (event) {
+      var lastActive = menuContent.querySelector('.active');
+      var changed = true;
+      var activeIndex = -1;
+      for (var i = headings.length - 1; i >= 0; i--) {
+        var h = headings[i];
+        var headingRect = h.getBoundingClientRect();
+        var headerRect = header.getBoundingClientRect();
+        var headerTop = Math.floor(headerRect.top);
+        var headerHeight = Math.floor(headerRect.height);
+        var headerHeight = headerTop + headerHeight + 20;
+        if (headingRect.top <= headerHeight) {
+          var id = 'h-' + h.getAttribute('id');
+          var a = menuContent.querySelector('a[href="#' + id  + '"]');
+          var curActive = a.parentNode;
+          if (curActive) {
+            curActive.classList.add('active');
+            activeIndex = i;
+          }
+          if (lastActive == curActive) {
+            changed = false;
+          }
+          break;
+        }
+      }
+      if (changed) {
+        if (lastActive) {
+          lastActive.classList.remove('active');
+        }
+        doMenuCollapse(activeIndex);
+      }
+      event.preventDefault();
+    });
+  }
+  generateContent();
+</script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const menuContent = document.querySelector('.post-menu-content');
+
+    // 鼠标进入事件
+    menuContent.addEventListener('mouseenter', function() {
+      menuContent.style.overflow = 'auto';
+    });
+
+    // 鼠标离开事件
+    menuContent.addEventListener('mouseleave', function() {
+      menuContent.style.overflow = 'hidden';
+    });
+  });
+</script>
+
+</section>
+</div>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+    <div class="site-footer-inner"><div>李尓阳工作室 <span class="copyleft">&copy;</span> 2018-2023 Lieryang</div>
+      <div class="footer-col gmail"> E-mail sxlisibo@gmail.com</div>
+      <div>Powered by <a title="Jekyll is a simple, blog-aware, static site
+      generator." href="https://jekyllrb.com/">Jekyll</a> &amp; <a title="Yat, yet
+      another theme." href="https://github.com/jeffreytse/jekyll-theme-yat">Yat Theme</a>.</div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

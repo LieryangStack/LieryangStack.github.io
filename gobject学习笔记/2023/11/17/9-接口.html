@@ -1,0 +1,1955 @@
+<!DOCTYPE html>
+<html><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>九、接口 | 李尔阳主页</title>
+<meta name="generator" content="Jekyll v3.9.3" />
+<meta property="og:title" content="九、接口" />
+<meta name="author" content="LieryangStack" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="接口类似于抽象类。接口定义了虚拟函数，这些函数预期会被另一个可实例化对象中的函数覆盖。" />
+<meta property="og:description" content="接口类似于抽象类。接口定义了虚拟函数，这些函数预期会被另一个可实例化对象中的函数覆盖。" />
+<link rel="canonical" href="https://lieryangstack.github.io//gobject%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/2023/11/17/9-%E6%8E%A5%E5%8F%A3.html" />
+<meta property="og:url" content="https://lieryangstack.github.io//gobject%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/2023/11/17/9-%E6%8E%A5%E5%8F%A3.html" />
+<meta property="og:site_name" content="李尔阳主页" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2023-11-17T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="九、接口" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"LieryangStack"},"dateModified":"2023-11-17T00:00:00+00:00","datePublished":"2023-11-17T00:00:00+00:00","description":"接口类似于抽象类。接口定义了虚拟函数，这些函数预期会被另一个可实例化对象中的函数覆盖。","headline":"九、接口","mainEntityOfPage":{"@type":"WebPage","@id":"https://lieryangstack.github.io//gobject%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/2023/11/17/9-%E6%8E%A5%E5%8F%A3.html"},"url":"https://lieryangstack.github.io//gobject%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/2023/11/17/9-%E6%8E%A5%E5%8F%A3.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="shortcut icon" type="image/x-icon" href="/lieryang.ico">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-noto-sans@0.0.72/index.min.css">
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <script src="/assets/js/main.js"></script><link type="application/atom+xml" rel="alternate" href="https://lieryangstack.github.io//feed.xml" title="李尔阳主页" /><link rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
+
+<!-- and it's easy to individually load additional languages -->
+<script charset="UTF-8"
+        src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/go.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+// Init highlight js
+document.addEventListener('DOMContentLoaded', function(event) {
+  var els = document.querySelectorAll('pre code')
+
+  function addLangData(block) {
+    var outer = block.parentElement.parentElement.parentElement;
+    var lang = block.getAttribute('data-lang');
+    for (var i = 0; i < outer.classList.length; i++) {
+      var cls = outer.classList[i];
+      if (cls.startsWith('language-')) {
+        lang = cls;
+        break;
+      }
+    }
+    if (!lang) {
+      cls = block.getAttribute('class');
+      lang = cls ? cls.replace('hljs ', '') : '';
+    }
+    if (lang.startsWith('language-')) {
+      lang = lang.substr(9);
+    }
+    block.setAttribute('class', 'hljs ' + lang);
+    block.parentNode.setAttribute('data-lang', lang);
+  }
+
+  function addBadge(block) {
+    var enabled = ('true' || 'true').toLowerCase();
+    if (enabled == 'true') {
+      var pre = block.parentElement;
+      pre.classList.add('badge');
+    }
+  }
+
+  function handle(block) {
+    addLangData(block);
+    addBadge(block)
+    hljs.highlightBlock(block);
+  }
+
+  for (var i = 0; i < els.length; i++) {
+    var el = els[i];
+    handle(el);
+  }
+});
+</script>
+
+<style>
+  /* code language badge */
+  pre.badge::before {
+    content: attr(data-lang);
+    color: #fff;
+    background-color: #ff4e00;
+    padding: 0 .5em;
+    border-radius: 0 2px;
+    text-transform: uppercase;
+    text-align: center;
+    min-width: 32px;
+    display: inline-block;
+    position: absolute;
+    right: 0;
+  }
+
+  /* fix wrong badge display for firefox browser */
+  code > table pre::before {
+    display: none;
+  }
+</style>
+<link href='https://lieryangstack.github.io//assets/css/syntax.css' rel='stylesheet' type='text/css' />
+</head>
+<body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<header class="site-header " role="banner">
+
+  <div class="wrapper">
+    <div class="site-header-inner"><span class="site-brand"><a class="site-brand-inner" rel="author" href="/">
+  <img class="site-favicon" title="李尔阳主页" src="" onerror="this.style.display='none'">
+  李尔阳主页
+</a>
+</span><nav class="site-nav">
+          <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+          <label for="nav-trigger">
+            <span class="menu-icon">
+              <svg viewBox="0 0 18 15" width="18px" height="15px">
+                <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+              </svg>
+            </span>
+          </label>
+
+          <!-- <div class="trigger"><a class="page-link" href="/about.html">关于</a><a class="page-link" href="/archives.html">归档</a><a class="page-link" href="/categories.html">分类</a><a class="page-link" href="/">主页</a><a class="page-link" href="/tags.html">标签</a>
+
+
+
+
+
+
+
+
+
+</div> -->
+
+          <div class="trigger">
+             <a class="page-link" href="/about.html">关于</a>
+            <a class="page-link" href="/categories.html">分类</a>
+            <a class="page-link" href="/archives.html">归档</a>
+            <a class="page-link" href="/tags.html">标签</a>
+            <a class="page-link" href="/assets/index.html">下载</a>
+            <!-- 在这里添加更多的导航项 -->
+          </div>
+          
+
+        </nav></div>
+  </div>
+</header>
+
+<script>
+  function initHeader() {
+    var lastScrollY = getScrollPos().y;
+    var documentElement = document.documentElement;
+
+    function storeScrollData() {
+      var y = getScrollPos().y;var scrollStatus = "";
+
+      if (y <= 0) {
+        scrollStatus = "top";
+      } else if ((window.innerHeight + y) >= document.body.offsetHeight) {
+        scrollStatus = "bottom";
+      } else {
+        var isScrollDown = (y - lastScrollY > 0) ? true : false;
+        scrollStatus = isScrollDown ? "down" : "up";
+      }
+
+      lastScrollY = y;
+      documentElement.setAttribute("data-scroll-status", scrollStatus);
+    }
+
+    window.addEventListener('scroll', function(e) {
+      storeScrollData();
+    });
+
+    storeScrollData();
+  }
+  document.addEventListener('DOMContentLoaded', initHeader);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  function hashLocate(hashValue) {
+    hashValue = hashValue.replace(/^.*#h-/, '');
+    hashValue = decodeURIComponent(hashValue);
+    var element = document.getElementById(hashValue);
+
+    if (!element) {
+      return;
+    }
+
+    var header = document.querySelector('header.site-header');
+    var headerRect = header.getBoundingClientRect();
+    var headerTop = Math.floor(headerRect.top);
+    var headerHeight = Math.floor(headerRect.height);
+    var scrollPos = getScrollPos();
+    var offsetY = element.offsetTop - (headerTop + headerHeight + 20);
+
+    if (offsetY == scrollPos.y) {
+      return;
+    }
+
+    if (headerTop == 0  && offsetY > scrollPos.y) {
+      offsetY += headerHeight + 2;
+    } else if (headerTop < 0  && offsetY < scrollPos.y) {
+      offsetY -= headerHeight - 2;
+    }
+
+    smoothScrollTo(offsetY);
+  }
+
+  // The first event occurred
+  window.addEventListener('load', function(event) {
+    if (window.location.hash) {
+      hashLocate(window.location.hash);
+    }
+  });
+
+  // The first event occurred
+  window.addEventListener('click', function(event) {
+    if (event.target.tagName.toLowerCase() == 'a') {
+      hashLocate(event.target.getAttribute('href'));
+    }
+  });
+</script>
+<div class="theme-toggle">
+  <input type="checkbox" id="theme-switch">
+  <label for="theme-switch">
+    <div class="toggle"></div>
+    <div class="names">
+      <p class="light">Light</p>
+      <p class="dark">Dark</p>
+    </div>
+  </label>
+</div>
+
+
+
+
+<script>
+  (function() {
+    var sw = document.getElementById('theme-switch');
+    var html = document.getElementsByTagName('html')[0];
+    var nightModeOption = ('auto' || 'auto').toLowerCase();
+    var storage = nightModeOption === 'manual'
+        ? localStorage
+        : sessionStorage;
+    var themeData = loadThemeData();
+
+    function saveThemeData(data) {
+      storage.setItem('theme', JSON.stringify(data));
+    }
+
+    function loadThemeData() {
+      var data = storage.getItem('theme');
+      try {
+        data = JSON.parse(data ? data : '');
+      } catch(e) {
+        data = { nightShift: undefined, autoToggleAt: 0 };
+        saveThemeData(data);
+      }
+      return data;
+    }
+
+    function handleThemeToggle(nightShift) {
+      themeData.nightShift = nightShift;
+      saveThemeData(themeData);
+      html.dataset.theme = nightShift ? 'dark' : 'light';
+      setTimeout(function() {
+        sw.checked = nightShift ? true : false;
+      }, 50);
+    }
+
+    function autoThemeToggle() {
+      // Next time point of theme toggle
+      var now = new Date();
+      var toggleAt = new Date();
+      var hours = now.getHours();
+      var nightShift = hours >= 19 || hours <=7;
+
+      if (nightShift) {
+        if (hours > 7) {
+          toggleAt.setDate(toggleAt.getDate() + 1);
+        }
+        toggleAt.setHours(7);
+      } else {
+        toggleAt.setHours(19);
+      }
+
+      toggleAt.setMinutes(0);
+      toggleAt.setSeconds(0);
+      toggleAt.setMilliseconds(0)
+
+      var delay = toggleAt.getTime() - now.getTime();
+
+      // auto toggle theme mode
+      setTimeout(function() {
+        handleThemeToggle(!nightShift);
+      }, delay);
+
+      return {
+        nightShift: nightShift,
+        toggleAt: toggleAt.getTime()
+      };
+    }
+
+    // Listen the theme toggle event
+    sw.addEventListener('change', function(event) {
+      handleThemeToggle(event.target.checked);
+    });
+
+    if (nightModeOption == 'auto') {
+      var data = autoThemeToggle();
+
+      // Toggle theme by local setting
+      if (data.toggleAt > themeData.autoToggleAt) {
+        themeData.autoToggleAt = data.toggleAt;
+        handleThemeToggle(data.nightShift);
+      } else {
+        handleThemeToggle(themeData.nightShift);
+      }
+    } else if (nightModeOption == 'manual') {
+      handleThemeToggle(themeData.nightShift);
+    } else {
+      var nightShift = themeData.nightShift;
+      if (nightShift === undefined) {
+        nightShift = nightModeOption === 'on';
+      }
+      handleThemeToggle(nightShift);
+    }
+  })();
+</script>
+<div id="click-to-top" class="click-to-top">
+  <i class="fa fa-arrow-up"></i>
+</div>
+<script>
+  (function () {
+    const clickToTop = document.getElementById('click-to-top');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 100) {
+        clickToTop.classList.add('show')
+      }else {
+        clickToTop.classList.remove('show')
+      }
+    });
+    clickToTop.addEventListener('click', () => {
+      window.smoothScrollTo(0);
+    });
+  })();
+</script>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <div class="framework">
+  <section class="main">
+
+     <div class="post">
+  <section>
+
+
+
+
+
+
+
+
+
+<header class="post-header">
+  <h1 class="post-title p-name" itemprop="name headline">九、接口</h1>
+  <h2 class="post-subtitle"></h2>
+
+  <p class="post-meta">
+    <time class="dt-published" datetime="2023-11-17T00:00:00+00:00" itemprop="datePublished"><i class="fa fa-calendar"></i> Nov 17, 2023
+    </time>
+
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 44 mins</span>
+  </p><div class="post-tags"><a class="post-tag" href="/tags.html#GObject">#GObject</a></div></header>
+<article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+    <div class="post-content e-content" itemprop="articleBody">
+
+      <p>接口类似于抽象类。接口定义了虚拟函数，这些函数预期会被另一个可实例化对象中的函数覆盖。</p>
+
+<p>本节提供了一个简单的例子，TComparable。TComparable 是一个接口。它定义了比较的函数，这些函数包括：</p>
+
+<ul>
+  <li>
+    <p>t_comparable_cmp(self, other)：它比较 self 和 other。第一个参数 self 是运行 t_comparable_cmp 的实例。第二个参数 other 是另一个实例。这个函数需要在实现了该接口的对象中被覆盖。</p>
+
+    <ul>
+      <li>
+        <p>如果 self 等于 other，t_comparable_cmp 返回 0。</p>
+      </li>
+      <li>
+        <p>如果 self 大于 other，t_comparable_cmp 返回 1。</p>
+      </li>
+      <li>
+        <p>如果 self 小于 other，t_comparable_cmp 返回 -1。</p>
+      </li>
+      <li>
+        <p>如果发生错误，t_comparable_cmp 返回 -2。</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>t_comparable_eq(self, other)：如果 self 等于 other，则返回 TRUE。否则返回 FALSE。需要注意的是，即使发生错误也会返回 FALSE。</p>
+  </li>
+  <li>
+    <p>t_comparable_gt(self, other)：如果 self 大于 other，则返回 TRUE。否则返回 FALSE。</p>
+  </li>
+  <li>
+    <p>t_comparable_lt(self, other)：如果 self 小于 other，则返回 TRUE。否则返回 FALSE。</p>
+  </li>
+  <li>
+    <p>t_comparable_ge(self, other)：如果 self 大于或等于 other，则返回 TRUE。否则返回 FALSE。</p>
+  </li>
+  <li>
+    <p>t_comparable_le(self, other)：如果 self 小于或等于 other，则返回 TRUE。否则返回 FALSE。</p>
+  </li>
+</ul>
+
+<p>数字和字符串是可比较的。TInt、TDouble 和 TStr 实现了 TComparable 接口，因此它们可以使用上述函数。此外，TNumStr 也可以使用这些函数，因为它是 TStr 的子类。</p>
+
+<p>例如，</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">TInt</span> <span class="o">*</span><span class="n">i1</span> <span class="o">=</span> <span class="n">t_int_new_with_value</span> <span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+<span class="n">TInt</span> <span class="o">*</span><span class="n">i2</span> <span class="o">=</span> <span class="n">t_int_new_with_value</span> <span class="p">(</span><span class="mi">20</span><span class="p">);</span>
+<span class="n">t_comparable_eq</span> <span class="p">(</span><span class="n">T_COMPARABLE</span> <span class="p">(</span><span class="n">i1</span><span class="p">),</span> <span class="n">T_COMPARABLE</span> <span class="p">(</span><span class="n">i2</span><span class="p">));</span> <span class="cm">/* =&gt; FALSE */</span>
+<span class="n">t_comparable_lt</span> <span class="p">(</span><span class="n">T_COMPARABLE</span> <span class="p">(</span><span class="n">i1</span><span class="p">),</span> <span class="n">T_COMPARABLE</span> <span class="p">(</span><span class="n">i2</span><span class="p">));</span> <span class="cm">/* =&gt; TRUE */</span>
+</code></pre></div></div>
+<p>接口和抽象类之间的区别是什么？在抽象类中的虚拟函数由其后代类中的函数覆盖。在接口中的虚拟函数可以由任何类中的函数覆盖。比较一下 TNumber 和 TComparable。</p>
+
+<ul>
+  <li>
+    <p>函数 t_number_add 在 TIntClass 和 TDoubleClass 中被覆盖。它不能在 TStrClass 中被覆盖，因为 TStr 不是 TNumber 的后代。</p>
+  </li>
+  <li>
+    <p>函数 t_comparable_cmp 在 TIntClass、TDoubleClass 和 TStrClass 中被覆盖。</p>
+  </li>
+</ul>
+
+<h2 id="1-tcomparable-接口">1 TComparable 接口</h2>
+
+<p>定义接口与定义对象类似。</p>
+
+<ul>
+  <li>
+    <p>使用 G_DECLARE_INTERFACE 代替 G_DECLARE_FINAL_TYPE。</p>
+  </li>
+  <li>
+    <p>使用 G_DEFINE_INTERFACE 代替 G_DEFINE_TYPE。</p>
+  </li>
+</ul>
+
+<h3 id="11-头文件-tcomparableh">1.1 头文件 tcomparable.h</h3>
+
+<p>现在让我们看看头文件。</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="mi">1</span> <span class="err">#</span><span class="n">pragma</span> <span class="n">once</span>
+ <span class="mi">2</span> 
+ <span class="mi">3</span> <span class="err">#</span><span class="n">include</span> <span class="o">&lt;</span><span class="n">glib</span><span class="o">-</span><span class="n">object</span><span class="p">.</span><span class="n">h</span><span class="o">&gt;</span>
+ <span class="mi">4</span> 
+ <span class="mi">5</span> <span class="err">#</span><span class="n">define</span> <span class="n">T_TYPE_COMPARABLE</span>  <span class="p">(</span><span class="n">t_comparable_get_type</span> <span class="p">())</span>
+ <span class="mi">6</span> <span class="n">G_DECLARE_INTERFACE</span> <span class="p">(</span><span class="n">TComparable</span><span class="p">,</span> <span class="n">t_comparable</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">COMPARABLE</span><span class="p">,</span> <span class="n">GObject</span><span class="p">)</span>
+ <span class="mi">7</span> <span class="cm">/* 这其实是一个类结构体，接口没有实例结构体（压根就没有实例结构体的定义） */</span>
+ <span class="mi">8</span> <span class="k">struct</span> <span class="n">_TComparableInterface</span> <span class="p">{</span>
+ <span class="mi">9</span>   <span class="n">GTypeInterface</span> <span class="n">parent</span><span class="p">;</span> <span class="cm">/* 注意：第一个成员是 GTypeInterface parent */</span>
+<span class="mi">10</span>   <span class="cm">/* 信号 */</span>
+<span class="mi">11</span>   <span class="kt">void</span> <span class="p">(</span><span class="o">*</span><span class="n">arg_error</span><span class="p">)</span> <span class="p">(</span><span class="n">TComparable</span> <span class="o">*</span><span class="n">self</span><span class="p">);</span>
+<span class="mi">12</span>   <span class="cm">/* 虚函数 */</span>
+<span class="mi">13</span>   <span class="kt">int</span> <span class="p">(</span><span class="o">*</span><span class="n">cmp</span><span class="p">)</span> <span class="p">(</span><span class="n">TComparable</span> <span class="o">*</span><span class="n">self</span><span class="p">,</span> <span class="n">TComparable</span> <span class="o">*</span><span class="n">other</span><span class="p">);</span>
+<span class="mi">14</span> <span class="p">};</span>
+<span class="mi">15</span> 
+<span class="mi">16</span> <span class="cm">/* t_comparable_cmp */</span>
+<span class="mi">17</span> <span class="cm">/* if self &gt; other, then returns 1 */</span>
+<span class="mi">18</span> <span class="cm">/* if self = other, then returns 0 */</span>
+<span class="mi">19</span> <span class="cm">/* if self &lt; other, then returns -1 */</span>
+<span class="mi">20</span> <span class="cm">/* if error happens, then returns -2 */</span>
+<span class="mi">21</span> 
+<span class="mi">22</span> <span class="kt">int</span>
+<span class="mi">23</span> <span class="nf">t_comparable_cmp</span> <span class="p">(</span><span class="n">TComparable</span> <span class="o">*</span><span class="n">self</span><span class="p">,</span> <span class="n">TComparable</span> <span class="o">*</span><span class="n">other</span><span class="p">);</span>
+<span class="mi">24</span> 
+<span class="mi">25</span> <span class="n">gboolean</span>
+<span class="mi">26</span> <span class="nf">t_comparable_eq</span> <span class="p">(</span><span class="n">TComparable</span> <span class="o">*</span><span class="n">self</span><span class="p">,</span> <span class="n">TComparable</span> <span class="o">*</span><span class="n">other</span><span class="p">);</span>
+<span class="mi">27</span> 
+<span class="mi">28</span> <span class="n">gboolean</span>
+<span class="mi">29</span> <span class="nf">t_comparable_gt</span> <span class="p">(</span><span class="n">TComparable</span> <span class="o">*</span><span class="n">self</span><span class="p">,</span> <span class="n">TComparable</span> <span class="o">*</span><span class="n">other</span><span class="p">);</span>
+<span class="mi">30</span> 
+<span class="mi">31</span> <span class="n">gboolean</span>
+<span class="mi">32</span> <span class="nf">t_comparable_lt</span> <span class="p">(</span><span class="n">TComparable</span> <span class="o">*</span><span class="n">self</span><span class="p">,</span> <span class="n">TComparable</span> <span class="o">*</span><span class="n">other</span><span class="p">);</span>
+<span class="mi">33</span> 
+<span class="mi">34</span> <span class="n">gboolean</span>
+<span class="mi">35</span> <span class="nf">t_comparable_ge</span> <span class="p">(</span><span class="n">TComparable</span> <span class="o">*</span><span class="n">self</span><span class="p">,</span> <span class="n">TComparable</span> <span class="o">*</span><span class="n">other</span><span class="p">);</span>
+<span class="mi">36</span> 
+<span class="mi">37</span> <span class="n">gboolean</span>
+<span class="mi">38</span> <span class="nf">t_comparable_le</span> <span class="p">(</span><span class="n">TComparable</span> <span class="o">*</span><span class="n">self</span><span class="p">,</span> <span class="n">TComparable</span> <span class="o">*</span><span class="n">other</span><span class="p">);</span>
+</code></pre></div></div>
+
+<ul>
+  <li>
+    <p>6: G_DECLARE_INTERFACE宏。最后一个参数是接口的先决条件。TComparable的先决条件是GObject。因此，除了GObject的派生类之外，例如GVariant，不能实现TComparable。先决条件是接口或类的GType。此宏扩展为：</p>
+
+    <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/************************************G_DECLARE_INTERFACE宏展开*********************START**********************/</span>
+
+<span class="n">GType</span> <span class="nf">t_comparable_get_type</span> <span class="p">(</span><span class="kt">void</span><span class="p">);</span>
+
+<span class="cp"># 4 "/home/lieryang/Desktop/gobject-study/section-two/sec9/interface.c"
+#pragma GCC diagnostic push
+# 4 "/home/lieryang/Desktop/gobject-study/section-two/sec9/interface.c"
+</span>
+<span class="cp"># 4 "/home/lieryang/Desktop/gobject-study/section-two/sec9/interface.c"
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+# 4 "/home/lieryang/Desktop/gobject-study/section-two/sec9/interface.c"
+</span>
+<span class="k">typedef</span> <span class="k">struct</span> <span class="n">_TComparable</span> <span class="n">TComparable</span><span class="p">;</span> 
+<span class="k">typedef</span> <span class="k">struct</span> <span class="n">_TComparableInterface</span> <span class="n">TComparableInterface</span><span class="p">;</span> 
+<span class="k">typedef</span> <span class="n">TComparable</span> <span class="o">*</span><span class="n">TComparable_autoptr</span><span class="p">;</span> 
+<span class="k">typedef</span> <span class="n">GList</span> <span class="o">*</span><span class="n">TComparable_listautoptr</span><span class="p">;</span> 
+<span class="k">typedef</span> <span class="n">GSList</span> <span class="o">*</span><span class="n">TComparable_slistautoptr</span><span class="p">;</span> 
+<span class="k">typedef</span> <span class="n">GQueue</span> <span class="o">*</span><span class="n">TComparable_queueautoptr</span><span class="p">;</span>
+
+<span class="cp"># 4 "/home/lieryang/Desktop/gobject-study/section-two/sec9/interface.c"
+#pragma GCC diagnostic push
+# 4 "/home/lieryang/Desktop/gobject-study/section-two/sec9/interface.c"
+</span>
+<span class="cp"># 4 "/home/lieryang/Desktop/gobject-study/section-two/sec9/interface.c"
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+# 4 "/home/lieryang/Desktop/gobject-study/section-two/sec9/interface.c"
+</span>
+<span class="k">static</span> <span class="nf">__attribute__</span> <span class="p">((</span><span class="n">__unused__</span><span class="p">))</span> <span class="kr">inline</span> <span class="kt">void</span> 
+<span class="n">glib_autoptr_clear_TComparable</span> <span class="p">(</span><span class="n">TComparable</span> <span class="o">*</span><span class="n">_ptr</span><span class="p">)</span> <span class="p">{</span> 
+  <span class="k">if</span> <span class="p">(</span><span class="n">_ptr</span><span class="p">)</span> <span class="p">(</span><span class="n">glib_autoptr_clear_GObject</span><span class="p">)</span> <span class="p">((</span><span class="n">GObject</span> <span class="o">*</span><span class="p">)</span> <span class="n">_ptr</span><span class="p">);</span> 
+<span class="p">}</span> 
+
+<span class="k">static</span> <span class="nf">__attribute__</span> <span class="p">((</span><span class="n">__unused__</span><span class="p">))</span> <span class="kr">inline</span> <span class="kt">void</span> 
+<span class="n">glib_autoptr_cleanup_TComparable</span> <span class="p">(</span><span class="n">TComparable</span> <span class="o">**</span><span class="n">_ptr</span><span class="p">)</span> <span class="p">{</span> 
+  <span class="n">glib_autoptr_clear_TComparable</span> <span class="p">(</span><span class="o">*</span><span class="n">_ptr</span><span class="p">);</span> 
+<span class="p">}</span> 
+
+<span class="k">static</span> <span class="nf">__attribute__</span> <span class="p">((</span><span class="n">__unused__</span><span class="p">))</span> <span class="kr">inline</span> <span class="kt">void</span> 
+<span class="n">glib_listautoptr_cleanup_TComparable</span> <span class="p">(</span><span class="n">GList</span> <span class="o">**</span><span class="n">_l</span><span class="p">)</span> <span class="p">{</span> 
+  <span class="n">g_list_free_full</span> <span class="p">(</span><span class="o">*</span><span class="n">_l</span><span class="p">,</span> <span class="p">(</span><span class="n">GDestroyNotify</span><span class="p">)</span> <span class="p">(</span><span class="kt">void</span><span class="p">(</span><span class="o">*</span><span class="p">)(</span><span class="kt">void</span><span class="p">))</span> <span class="n">glib_autoptr_clear_GObject</span><span class="p">);</span> 
+<span class="p">}</span> 
+
+<span class="k">static</span> <span class="nf">__attribute__</span> <span class="p">((</span><span class="n">__unused__</span><span class="p">))</span> <span class="kr">inline</span> <span class="kt">void</span> 
+<span class="n">glib_slistautoptr_cleanup_TComparable</span> <span class="p">(</span><span class="n">GSList</span> <span class="o">**</span><span class="n">_l</span><span class="p">)</span> <span class="p">{</span> 
+  <span class="n">g_slist_free_full</span> <span class="p">(</span><span class="o">*</span><span class="n">_l</span><span class="p">,</span> <span class="p">(</span><span class="n">GDestroyNotify</span><span class="p">)</span> <span class="p">(</span><span class="kt">void</span><span class="p">(</span><span class="o">*</span><span class="p">)(</span><span class="kt">void</span><span class="p">))</span> <span class="n">glib_autoptr_clear_GObject</span><span class="p">);</span> 
+<span class="p">}</span> 
+<span class="k">static</span> <span class="nf">__attribute__</span> <span class="p">((</span><span class="n">__unused__</span><span class="p">))</span> <span class="kr">inline</span> <span class="kt">void</span> 
+<span class="n">glib_queueautoptr_cleanup_TComparable</span> <span class="p">(</span><span class="n">GQueue</span> <span class="o">**</span><span class="n">_q</span><span class="p">)</span> <span class="p">{</span> 
+  <span class="k">if</span> <span class="p">(</span><span class="o">*</span><span class="n">_q</span><span class="p">)</span> <span class="n">g_queue_free_full</span> <span class="p">(</span><span class="o">*</span><span class="n">_q</span><span class="p">,</span> <span class="p">(</span><span class="n">GDestroyNotify</span><span class="p">)</span> <span class="p">(</span><span class="kt">void</span><span class="p">(</span><span class="o">*</span><span class="p">)(</span><span class="kt">void</span><span class="p">))</span> <span class="n">glib_autoptr_clear_GObject</span><span class="p">);</span> 
+<span class="p">}</span>
+
+<span class="cp"># 4 "/home/lieryang/Desktop/gobject-study/section-two/sec9/interface.c"
+#pragma GCC diagnostic pop
+# 4 "/home/lieryang/Desktop/gobject-study/section-two/sec9/interface.c"
+</span><span class="n">__attribute__</span> <span class="p">((</span><span class="n">__unused__</span><span class="p">))</span> <span class="k">static</span> <span class="kr">inline</span> <span class="n">TComparable</span> <span class="o">*</span> 
+<span class="nf">T_COMPARABLE</span> <span class="p">(</span><span class="n">gpointer</span> <span class="n">ptr</span><span class="p">)</span> <span class="p">{</span> 
+  <span class="k">return</span> <span class="p">(((</span><span class="n">TComparable</span><span class="o">*</span><span class="p">)</span> <span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="p">)</span> <span class="n">g_type_check_instance_cast</span> <span class="p">((</span><span class="n">GTypeInstance</span><span class="o">*</span><span class="p">)</span> <span class="p">(</span><span class="n">ptr</span><span class="p">),</span> <span class="p">(</span><span class="n">t_comparable_get_type</span> <span class="p">()))));</span> 
+<span class="p">}</span> 
+
+<span class="n">__attribute__</span> <span class="p">((</span><span class="n">__unused__</span><span class="p">))</span> <span class="k">static</span> <span class="kr">inline</span> <span class="n">gboolean</span> 
+<span class="nf">T_IS_COMPARABLE</span> <span class="p">(</span><span class="n">gpointer</span> <span class="n">ptr</span><span class="p">)</span> <span class="p">{</span> 
+  <span class="k">return</span> <span class="p">((</span><span class="n">__extension__</span> <span class="p">({</span> <span class="n">GTypeInstance</span> <span class="o">*</span><span class="n">__inst</span> <span class="o">=</span> <span class="p">(</span><span class="n">GTypeInstance</span><span class="o">*</span><span class="p">)</span> <span class="p">(</span><span class="n">ptr</span><span class="p">);</span> 
+                            <span class="n">GType</span> <span class="n">__t</span> <span class="o">=</span> <span class="p">(</span><span class="n">t_comparable_get_type</span> <span class="p">());</span> 
+                            <span class="n">gboolean</span> <span class="n">__r</span><span class="p">;</span> 
+                            <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">__inst</span><span class="p">)</span> <span class="n">__r</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">);</span> 
+                            <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">__inst</span><span class="o">-&gt;</span><span class="n">g_class</span> <span class="o">&amp;&amp;</span> <span class="n">__inst</span><span class="o">-&gt;</span><span class="n">g_class</span><span class="o">-&gt;</span><span class="n">g_type</span> <span class="o">==</span> <span class="n">__t</span><span class="p">)</span> <span class="n">__r</span> <span class="o">=</span> <span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="mi">0</span><span class="p">));</span> 
+                            <span class="k">else</span> <span class="n">__r</span> <span class="o">=</span> <span class="n">g_type_check_instance_is_a</span> <span class="p">(</span><span class="n">__inst</span><span class="p">,</span> <span class="n">__t</span><span class="p">);</span> <span class="n">__r</span><span class="p">;</span> <span class="p">})));</span> 
+<span class="p">}</span> 
+
+<span class="n">__attribute__</span> <span class="p">((</span><span class="n">__unused__</span><span class="p">))</span> <span class="k">static</span> <span class="kr">inline</span> <span class="n">TComparableInterface</span> <span class="o">*</span> 
+<span class="nf">T_COMPARABLE_GET_IFACE</span> <span class="p">(</span><span class="n">gpointer</span> <span class="n">ptr</span><span class="p">)</span> <span class="p">{</span> 
+  <span class="k">return</span> <span class="p">(((</span><span class="n">TComparableInterface</span><span class="o">*</span><span class="p">)</span> <span class="n">g_type_interface_peek</span> <span class="p">(((</span><span class="n">GTypeInstance</span><span class="o">*</span><span class="p">)</span> <span class="p">(</span><span class="n">ptr</span><span class="p">))</span><span class="o">-&gt;</span><span class="n">g_class</span><span class="p">,</span> <span class="p">(</span><span class="n">t_comparable_get_type</span> <span class="p">()))));</span> 
+<span class="p">}</span>
+
+<span class="cp"># 4 "/home/lieryang/Desktop/gobject-study/section-two/sec9/interface.c"
+#pragma GCC diagnostic pop
+# 4 "/home/lieryang/Desktop/gobject-study/section-two/sec9/interface.c"
+</span>
+
+<span class="cm">/************************************G_DECLARE_INTERFACE宏展开*********************END**********************/</span>
+</code></pre></div>    </div>
+
+    <ul>
+      <li>
+        <p><strong>声明</strong> GType t_comparable_get_type (void);</p>
+      </li>
+      <li>
+        <p><strong>定义</strong> typedef struct _TComparableInterface TComparableInterface</p>
+      </li>
+      <li>
+        <p><strong>定义</strong> T_COMPARABLE()宏。它将一个实例转换为TComparable类型。</p>
+      </li>
+      <li>
+        <p><strong>定义</strong> T_IS_COMPARABLE()宏。它检查实例的类型是否为T_TYPE_COMPARABLE。</p>
+      </li>
+      <li>
+        <p><strong>定义</strong> T_COMPARABLE_GET_IFACE()宏。它获取给定作为参数的实例的接口。</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>8-14: TComparableInterface结构。这类似于类结构。<span style="color: red;">第一个成员是父接口</span>
+。TComparableInterface的父接口是GTypeInterface。GTypeInterface是所有接口类型的基类。它类似于是GTypeClass，它是所有类类型的基类。GTypeClass是结构GObjectClass的第一个成员。 请参阅gobject.h。请注意，GObjectClass与struct _GObjectClass相同)。</p>
+
+    <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/* GTypeInterface有两个成员，一个是接口类型id，另一个是实例 */</span>
+<span class="k">struct</span> <span class="n">_GTypeInterface</span>
+<span class="p">{</span>
+  <span class="cm">/*&lt; private &gt;*/</span>
+  <span class="n">GType</span> <span class="n">g_type</span><span class="p">;</span>         <span class="cm">/* iface type */</span>
+  <span class="n">GType</span> <span class="n">g_instance_type</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></div>    </div>
+
+    <p>下一个成员是指向“arg-error”信号的默认信号处理程序arg_error的指针。 当比较函数的第二个参数不合适时，将触发此信号。例如，如果self是TInt，other是TStr，它们都是Comparable实例。但它们不能进行比较。这是因为other不是TNumber。最后一个成员cmp是指向比较方法的指针。这是一个虚函数，预计将由实现接口的对象中的函数覆盖。</p>
+  </li>
+  <li>
+    <p>22-38: 公共函数。</p>
+  </li>
+</ul>
+
+<h3 id="12-源文件-tcomparablec">1.2 源文件 tcomparable.c</h3>
+
+<p>C文件tcomparable.c如下所示：</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="mi">1</span> <span class="err">#</span><span class="n">include</span> <span class="s">"tcomparable.h"</span>
+ <span class="mi">2</span> 
+ <span class="mi">3</span> <span class="k">static</span> <span class="n">guint</span> <span class="n">t_comparable_signal</span><span class="p">;</span>
+ <span class="mi">4</span> 
+ <span class="mi">5</span> <span class="nf">G_DEFINE_INTERFACE</span> <span class="p">(</span><span class="n">TComparable</span><span class="p">,</span> <span class="n">t_comparable</span><span class="p">,</span> <span class="n">G_TYPE_OBJECT</span><span class="p">)</span>
+ <span class="mi">6</span> 
+ <span class="mi">7</span> <span class="k">static</span> <span class="kt">void</span>
+ <span class="mi">8</span> <span class="n">arg_error_default_cb</span> <span class="p">(</span><span class="n">TComparable</span> <span class="o">*</span><span class="n">self</span><span class="p">)</span> <span class="p">{</span>
+ <span class="mi">9</span>   <span class="n">g_printerr</span> <span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">TComparable: argument error.</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+<span class="mi">10</span> <span class="p">}</span>
+<span class="mi">11</span> 
+<span class="mi">12</span> <span class="k">static</span> <span class="kt">void</span>
+<span class="mi">13</span> <span class="nf">t_comparable_default_init</span> <span class="p">(</span><span class="n">TComparableInterface</span> <span class="o">*</span><span class="n">iface</span><span class="p">)</span> <span class="p">{</span>
+<span class="mi">14</span>   <span class="cm">/* virtual function */</span>
+<span class="mi">15</span>   <span class="n">iface</span><span class="o">-&gt;</span><span class="n">cmp</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+<span class="mi">16</span>   <span class="cm">/* argument error signal */</span>
+<span class="mi">17</span>   <span class="n">iface</span><span class="o">-&gt;</span><span class="n">arg_error</span> <span class="o">=</span> <span class="n">arg_error_default_cb</span><span class="p">;</span>
+<span class="mi">18</span>   <span class="n">t_comparable_signal</span> <span class="o">=</span>
+<span class="mi">19</span>   <span class="n">g_signal_new</span> <span class="p">(</span><span class="s">"arg-error"</span><span class="p">,</span>
+<span class="mi">20</span>                 <span class="n">T_TYPE_COMPARABLE</span><span class="p">,</span>
+<span class="mi">21</span>                 <span class="n">G_SIGNAL_RUN_LAST</span> <span class="o">|</span> <span class="n">G_SIGNAL_NO_RECURSE</span> <span class="o">|</span> <span class="n">G_SIGNAL_NO_HOOKS</span><span class="p">,</span>
+<span class="mi">22</span>                 <span class="n">G_STRUCT_OFFSET</span> <span class="p">(</span><span class="n">TComparableInterface</span><span class="p">,</span> <span class="n">arg_error</span><span class="p">),</span>
+<span class="mi">23</span>                 <span class="nb">NULL</span> <span class="cm">/* accumulator */</span><span class="p">,</span>
+<span class="mi">24</span>                 <span class="nb">NULL</span> <span class="cm">/* accumulator data */</span><span class="p">,</span>
+<span class="mi">25</span>                 <span class="nb">NULL</span> <span class="cm">/* C marshaller */</span><span class="p">,</span>
+<span class="mi">26</span>                 <span class="n">G_TYPE_NONE</span> <span class="cm">/* return_type */</span><span class="p">,</span>
+<span class="mi">27</span>                 <span class="mi">0</span>     <span class="cm">/* n_params */</span>
+<span class="mi">28</span>                 <span class="p">);</span>
+<span class="mi">29</span> <span class="p">}</span>
+<span class="mi">30</span> 
+<span class="mi">31</span> <span class="kt">int</span>
+<span class="mi">32</span> <span class="nf">t_comparable_cmp</span> <span class="p">(</span><span class="n">TComparable</span> <span class="o">*</span><span class="n">self</span><span class="p">,</span> <span class="n">TComparable</span> <span class="o">*</span><span class="n">other</span><span class="p">)</span> <span class="p">{</span>
+<span class="mi">33</span>   <span class="n">g_return_val_if_fail</span> <span class="p">(</span><span class="n">T_IS_COMPARABLE</span> <span class="p">(</span><span class="n">self</span><span class="p">),</span> <span class="o">-</span><span class="mi">2</span><span class="p">);</span>
+<span class="mi">34</span> 
+<span class="mi">35</span>   <span class="n">TComparableInterface</span> <span class="o">*</span><span class="n">iface</span> <span class="o">=</span> <span class="n">T_COMPARABLE_GET_IFACE</span> <span class="p">(</span><span class="n">self</span><span class="p">);</span>
+<span class="mi">36</span>   
+<span class="mi">37</span>   <span class="k">return</span> <span class="p">(</span><span class="n">iface</span><span class="o">-&gt;</span><span class="n">cmp</span> <span class="o">==</span> <span class="nb">NULL</span> <span class="o">?</span> <span class="o">-</span><span class="mi">2</span> <span class="o">:</span> <span class="n">iface</span><span class="o">-&gt;</span><span class="n">cmp</span> <span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">other</span><span class="p">));</span>
+<span class="mi">38</span> <span class="p">}</span>
+<span class="mi">39</span> 
+<span class="mi">40</span> <span class="n">gboolean</span>
+<span class="mi">41</span> <span class="nf">t_comparable_eq</span> <span class="p">(</span><span class="n">TComparable</span> <span class="o">*</span><span class="n">self</span><span class="p">,</span> <span class="n">TComparable</span> <span class="o">*</span><span class="n">other</span><span class="p">)</span> <span class="p">{</span>
+<span class="mi">42</span>   <span class="k">return</span> <span class="p">(</span><span class="n">t_comparable_cmp</span> <span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">other</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">);</span>
+<span class="mi">43</span> <span class="p">}</span>
+<span class="mi">44</span> 
+<span class="mi">45</span> <span class="n">gboolean</span>
+<span class="mi">46</span> <span class="nf">t_comparable_gt</span> <span class="p">(</span><span class="n">TComparable</span> <span class="o">*</span><span class="n">self</span><span class="p">,</span> <span class="n">TComparable</span> <span class="o">*</span><span class="n">other</span><span class="p">)</span> <span class="p">{</span>
+<span class="mi">47</span>   <span class="k">return</span> <span class="p">(</span><span class="n">t_comparable_cmp</span> <span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">other</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">);</span>
+<span class="mi">48</span> <span class="p">}</span>
+<span class="mi">49</span> 
+<span class="mi">50</span> <span class="n">gboolean</span>
+<span class="mi">51</span> <span class="nf">t_comparable_lt</span> <span class="p">(</span><span class="n">TComparable</span> <span class="o">*</span><span class="n">self</span><span class="p">,</span> <span class="n">TComparable</span> <span class="o">*</span><span class="n">other</span><span class="p">)</span> <span class="p">{</span>
+<span class="mi">52</span>   <span class="k">return</span> <span class="p">(</span><span class="n">t_comparable_cmp</span> <span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">other</span><span class="p">)</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+<span class="mi">53</span> <span class="p">}</span>
+<span class="mi">54</span> 
+<span class="mi">55</span> <span class="n">gboolean</span>
+<span class="mi">56</span> <span class="nf">t_comparable_ge</span> <span class="p">(</span><span class="n">TComparable</span> <span class="o">*</span><span class="n">self</span><span class="p">,</span> <span class="n">TComparable</span> <span class="o">*</span><span class="n">other</span><span class="p">)</span> <span class="p">{</span>
+<span class="mi">57</span>   <span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="n">t_comparable_cmp</span> <span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">other</span><span class="p">);</span>
+<span class="mi">58</span>   <span class="k">return</span> <span class="p">(</span><span class="n">result</span> <span class="o">==</span> <span class="mi">1</span> <span class="o">||</span> <span class="n">result</span> <span class="o">==</span> <span class="mi">0</span><span class="p">);</span>
+<span class="mi">59</span> <span class="p">}</span>
+<span class="mi">60</span> 
+<span class="mi">61</span> <span class="n">gboolean</span>
+<span class="mi">62</span> <span class="nf">t_comparable_le</span> <span class="p">(</span><span class="n">TComparable</span> <span class="o">*</span><span class="n">self</span><span class="p">,</span> <span class="n">TComparable</span> <span class="o">*</span><span class="n">other</span><span class="p">)</span> <span class="p">{</span>
+<span class="mi">63</span>   <span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="n">t_comparable_cmp</span> <span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">other</span><span class="p">);</span>
+<span class="mi">64</span>   <span class="k">return</span> <span class="p">(</span><span class="n">result</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span> <span class="o">||</span> <span class="n">result</span> <span class="o">==</span> <span class="mi">0</span><span class="p">);</span>
+<span class="mi">65</span> <span class="p">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>5： G_DEFINE_INTERFACE宏。第三个参数是前提条件的类型。此宏扩展为：
+    <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/************************************G_DEFINE_INTERFACE宏展开*********************START**********************/</span>
+<span class="k">static</span> <span class="kt">void</span> <span class="nf">t_comparable_default_init</span> <span class="p">(</span><span class="n">TComparableInterface</span> <span class="o">*</span><span class="n">klass</span><span class="p">);</span>
+<span class="n">GType</span> <span class="nf">t_comparable_get_type</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span> 
+  <span class="k">static</span> <span class="n">gsize</span> <span class="n">static_g_define_type_id</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> 
+  <span class="k">if</span> <span class="p">((</span><span class="n">__extension__</span> <span class="p">({</span> <span class="k">_Static_assert</span> <span class="p">(</span><span class="k">sizeof</span> <span class="o">*</span><span class="p">(</span><span class="o">&amp;</span><span class="n">static_g_define_type_id</span><span class="p">)</span> <span class="o">==</span> <span class="k">sizeof</span> <span class="p">(</span><span class="n">gpointer</span><span class="p">),</span> <span class="s">"Expression evaluates to false"</span><span class="p">);</span> 
+    <span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">(</span><span class="mi">0</span> <span class="o">?</span> <span class="p">(</span><span class="n">gpointer</span><span class="p">)</span> <span class="o">*</span><span class="p">(</span><span class="o">&amp;</span><span class="n">static_g_define_type_id</span><span class="p">)</span> <span class="o">:</span> <span class="p">((</span><span class="kt">void</span> <span class="o">*</span><span class="p">)</span><span class="mi">0</span><span class="p">));</span> 
+    <span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="n">__extension__</span> <span class="p">({</span> <span class="k">_Static_assert</span> <span class="p">(</span><span class="k">sizeof</span> <span class="o">*</span><span class="p">(</span><span class="o">&amp;</span><span class="n">static_g_define_type_id</span><span class="p">)</span> <span class="o">==</span> <span class="k">sizeof</span> <span class="p">(</span><span class="n">gpointer</span><span class="p">),</span> <span class="s">"Expression evaluates to false"</span><span class="p">);</span> 
+    <span class="n">__typeof__</span> <span class="p">(</span><span class="o">*</span><span class="p">(</span><span class="o">&amp;</span><span class="n">static_g_define_type_id</span><span class="p">))</span> <span class="n">gapg_temp_newval</span><span class="p">;</span> 
+    <span class="n">__typeof__</span> <span class="p">((</span><span class="o">&amp;</span><span class="n">static_g_define_type_id</span><span class="p">))</span> <span class="n">gapg_temp_atomic</span> <span class="o">=</span> <span class="p">(</span><span class="o">&amp;</span><span class="n">static_g_define_type_id</span><span class="p">);</span> 
+    <span class="n">__atomic_load</span> <span class="p">(</span><span class="n">gapg_temp_atomic</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">gapg_temp_newval</span><span class="p">,</span> <span class="mi">5</span><span class="p">);</span> 
+    <span class="n">gapg_temp_newval</span><span class="p">;</span> 
+    <span class="p">}))</span> <span class="o">&amp;&amp;</span> <span class="n">g_once_init_enter</span> <span class="p">(</span><span class="o">&amp;</span><span class="n">static_g_define_type_id</span><span class="p">));</span> 
+  <span class="p">})))</span> <span class="p">{</span>
+    
+    <span class="n">GType</span> <span class="n">g_define_type_id</span> <span class="o">=</span> <span class="n">g_type_register_static_simple</span> <span class="p">(((</span><span class="n">GType</span><span class="p">)</span> <span class="p">((</span><span class="mi">2</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="mi">2</span><span class="p">))),</span> 
+                                                            <span class="n">g_intern_static_string</span> <span class="p">(</span><span class="s">"TComparable"</span><span class="p">),</span> 
+                                                            <span class="k">sizeof</span> <span class="p">(</span><span class="n">TComparableInterface</span><span class="p">),</span> 
+                                                            <span class="p">(</span><span class="n">GClassInitFunc</span><span class="p">)(</span><span class="kt">void</span> <span class="p">(</span><span class="o">*</span><span class="p">)(</span><span class="kt">void</span><span class="p">))</span> <span class="n">t_comparable_default_init</span><span class="p">,</span> 
+                                                            <span class="mi">0</span><span class="p">,</span> 
+                                                            <span class="p">(</span><span class="n">GInstanceInitFunc</span><span class="p">)</span> <span class="p">((</span><span class="kt">void</span> <span class="o">*</span><span class="p">)</span><span class="mi">0</span><span class="p">),</span> 
+                                                            <span class="p">(</span><span class="n">GTypeFlags</span><span class="p">)</span> <span class="mi">0</span><span class="p">);</span> 
+      
+    <span class="k">if</span> <span class="p">(((</span><span class="n">GType</span><span class="p">)</span> <span class="p">((</span><span class="mi">20</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="mi">2</span><span class="p">)))</span> <span class="o">!=</span> <span class="p">((</span><span class="n">GType</span><span class="p">)</span> <span class="p">((</span><span class="mi">0</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="mi">2</span><span class="p">))))</span> 
+      <span class="n">g_type_interface_add_prerequisite</span> <span class="p">(</span><span class="n">g_define_type_id</span><span class="p">,</span> <span class="p">((</span><span class="n">GType</span><span class="p">)</span> <span class="p">((</span><span class="mi">20</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="mi">2</span><span class="p">))));</span> 
+        
+      <span class="p">{</span> <span class="p">{;;}</span> <span class="p">}</span> 
+        
+      <span class="p">(</span><span class="n">__extension__</span> <span class="p">({</span> 
+        <span class="k">_Static_assert</span> <span class="p">(</span><span class="k">sizeof</span> <span class="o">*</span><span class="p">(</span><span class="o">&amp;</span><span class="n">static_g_define_type_id</span><span class="p">)</span> <span class="o">==</span> <span class="k">sizeof</span> <span class="p">(</span><span class="n">gpointer</span><span class="p">),</span> <span class="s">"Expression evaluates to false"</span><span class="p">);</span> 
+        <span class="mi">0</span> <span class="o">?</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">(</span><span class="o">*</span><span class="p">(</span><span class="o">&amp;</span><span class="n">static_g_define_type_id</span><span class="p">)</span> <span class="o">=</span> <span class="p">(</span><span class="n">g_define_type_id</span><span class="p">))</span> <span class="o">:</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="mi">0</span><span class="p">;</span> <span class="n">g_once_init_leave</span> <span class="p">((</span><span class="o">&amp;</span><span class="n">static_g_define_type_id</span><span class="p">),</span> <span class="p">(</span><span class="n">gsize</span><span class="p">)</span> <span class="p">(</span><span class="n">g_define_type_id</span><span class="p">));</span> 
+      <span class="p">}));</span> 
+  <span class="p">}</span> 
+  <span class="k">return</span> <span class="n">static_g_define_type_id</span><span class="p">;</span> 
+<span class="p">}</span>
+<span class="cm">/************************************G_DEFINE_INTERFACE宏展开*********************END**********************/</span>
+</code></pre></div>    </div>
+
+    <ul>
+      <li>
+        <p><strong>声明</strong> t_comparable_default_init()。</p>
+      </li>
+      <li>
+        <p><strong>定义</strong> t_comparable_get_type()。</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>7-10: arg_error_default_cb是”arg-error”信号的默认信号处理程序。</p>
+  </li>
+  <li>
+    <p>12-29: t_comparable_default_init函数。此函数类似于类初始化函数。它初始化TComparableInterface结构。</p>
+  </li>
+  <li>
+    <p>15: 将cmp赋值为NULL。因此，在实现类覆盖它之前，比较方法不起作用。</p>
+  </li>
+  <li>
+    <p>17: 设置”arg-error”信号的默认信号处理程序。</p>
+  </li>
+  <li>
+    <p>18-28: 创建”arg-error”信号。</p>
+  </li>
+  <li>
+    <p>31-38: 函数t_comparable_cmp。它首先检查self的类型。如果它不可比较，它会记录错误消息并返回-2（错误）。如果iface-&gt;cmp为NULL（这意味着类方法还没有被覆盖），则返回-2。否则，它调用类方法并返回类方法返回的值。</p>
+  </li>
+  <li>40-65: 公共函数。这五个函数都基于 <code class="language-plaintext highlighter-rouge">t_comparable_cmp</code> 。因此，它们不需要被覆盖。例如，t_comparable_eq只是调用t_comparable_cmp。如果t_comparable_cmp返回零，它返回TRUE。否则，它返回FALSE。</li>
+</ul>
+
+<p>这个程序使用信号向用户提供参数类型错误信息。这种错误通常是程序错误，而不是运行时错误。使用信号报告程序错误并不是一个好方法。最好的方法是使用g_return_if_fail。我之所以使用这个信号，只是想演示如何在接口中实现信号。</p>
+
+<h2 id="2-implementing-interface">2 Implementing interface</h2>
+
+<p>TInt、TDouble 和 TStr 实现了 TComparable。首先看一下 TInt。头文件与之前相同。实现是在 C 文件中编写的。</p>
+
+<h3 id="21-源文件-tintc">2.1 源文件 tint.c</h3>
+
+<p><code class="language-plaintext highlighter-rouge">tint.c</code> 如下：</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="mi">1</span> <span class="err">#</span><span class="n">include</span> <span class="s">"../tnumber/tnumber.h"</span>
+  <span class="mi">2</span> <span class="err">#</span><span class="n">include</span> <span class="s">"../tnumber/tint.h"</span>
+  <span class="mi">3</span> <span class="err">#</span><span class="n">include</span> <span class="s">"../tnumber/tdouble.h"</span>
+  <span class="mi">4</span> <span class="err">#</span><span class="n">include</span> <span class="s">"tcomparable.h"</span>
+  <span class="mi">5</span> 
+  <span class="mi">6</span> <span class="k">enum</span> <span class="p">{</span>
+  <span class="mi">7</span>   <span class="n">PROP_0</span><span class="p">,</span>
+  <span class="mi">8</span>   <span class="n">PROP_INT</span><span class="p">,</span>
+  <span class="mi">9</span>   <span class="n">N_PROPERTIES</span>
+ <span class="mi">10</span> <span class="p">};</span>
+ <span class="mi">11</span> 
+ <span class="mi">12</span> <span class="k">static</span> <span class="n">GParamSpec</span> <span class="o">*</span><span class="n">int_properties</span><span class="p">[</span><span class="n">N_PROPERTIES</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="nb">NULL</span><span class="p">,</span> <span class="p">};</span>
+ <span class="mi">13</span> 
+ <span class="mi">14</span> <span class="k">struct</span> <span class="n">_TInt</span> <span class="p">{</span>
+ <span class="mi">15</span>   <span class="n">TNumber</span> <span class="n">parent</span><span class="p">;</span>
+ <span class="mi">16</span>   <span class="kt">int</span> <span class="n">value</span><span class="p">;</span>
+ <span class="mi">17</span> <span class="p">};</span>
+ <span class="mi">18</span> 
+ <span class="mi">19</span> <span class="k">static</span> <span class="kt">void</span> <span class="nf">t_comparable_interface_init</span> <span class="p">(</span><span class="n">TComparableInterface</span> <span class="o">*</span><span class="n">iface</span><span class="p">);</span>
+ <span class="mi">20</span> 
+ <span class="mi">21</span> <span class="nf">G_DEFINE_TYPE_WITH_CODE</span> <span class="p">(</span><span class="n">TInt</span><span class="p">,</span> <span class="n">t_int</span><span class="p">,</span> <span class="n">T_TYPE_NUMBER</span><span class="p">,</span>
+ <span class="mi">22</span>                          <span class="n">G_IMPLEMENT_INTERFACE</span> <span class="p">(</span><span class="n">T_TYPE_COMPARABLE</span><span class="p">,</span> <span class="n">t_comparable_interface_init</span><span class="p">))</span>
+ <span class="mi">23</span> 
+ <span class="mi">24</span> <span class="k">static</span> <span class="kt">int</span>
+ <span class="mi">25</span> <span class="n">t_int_comparable_cmp</span> <span class="p">(</span><span class="n">TComparable</span> <span class="o">*</span><span class="n">self</span><span class="p">,</span> <span class="n">TComparable</span> <span class="o">*</span><span class="n">other</span><span class="p">)</span> <span class="p">{</span>
+ <span class="mi">26</span>   <span class="k">if</span> <span class="p">(</span><span class="o">!</span> <span class="n">T_IS_NUMBER</span> <span class="p">(</span><span class="n">other</span><span class="p">))</span> <span class="p">{</span>
+ <span class="mi">27</span>     <span class="n">g_signal_emit_by_name</span> <span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="s">"arg-error"</span><span class="p">);</span>
+ <span class="mi">28</span>     <span class="k">return</span> <span class="o">-</span><span class="mi">2</span><span class="p">;</span>
+ <span class="mi">29</span>   <span class="p">}</span>
+ <span class="mi">30</span> 
+ <span class="mi">31</span>   <span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
+ <span class="mi">32</span>   <span class="kt">double</span> <span class="n">s</span><span class="p">,</span> <span class="n">o</span><span class="p">;</span>
+ <span class="mi">33</span> 
+ <span class="mi">34</span>   <span class="n">s</span> <span class="o">=</span> <span class="p">(</span><span class="kt">double</span><span class="p">)</span> <span class="n">T_INT</span> <span class="p">(</span><span class="n">self</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">value</span><span class="p">;</span>
+ <span class="mi">35</span>   <span class="k">if</span> <span class="p">(</span><span class="n">T_IS_INT</span> <span class="p">(</span><span class="n">other</span><span class="p">))</span> <span class="p">{</span>
+ <span class="mi">36</span>     <span class="n">g_object_get</span> <span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="s">"value"</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">i</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+ <span class="mi">37</span>     <span class="n">o</span> <span class="o">=</span> <span class="p">(</span><span class="kt">double</span><span class="p">)</span> <span class="n">i</span><span class="p">;</span>
+ <span class="mi">38</span>   <span class="p">}</span> <span class="k">else</span>
+ <span class="mi">39</span>     <span class="n">g_object_get</span> <span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="s">"value"</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">o</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+ <span class="mi">40</span>   <span class="k">if</span> <span class="p">(</span><span class="n">s</span> <span class="o">&gt;</span> <span class="n">o</span><span class="p">)</span>
+ <span class="mi">41</span>     <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+ <span class="mi">42</span>   <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">s</span> <span class="o">==</span> <span class="n">o</span><span class="p">)</span>
+ <span class="mi">43</span>     <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+ <span class="mi">44</span>   <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">s</span> <span class="o">&lt;</span> <span class="n">o</span><span class="p">)</span>
+ <span class="mi">45</span>     <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+ <span class="mi">46</span>   <span class="k">else</span> <span class="cm">/* This can't happen. */</span>
+ <span class="mi">47</span>     <span class="k">return</span> <span class="o">-</span><span class="mi">2</span><span class="p">;</span>
+ <span class="mi">48</span> <span class="p">}</span>
+ <span class="mi">49</span> 
+ <span class="mi">50</span> <span class="k">static</span> <span class="kt">void</span>
+ <span class="mi">51</span> <span class="nf">t_comparable_interface_init</span> <span class="p">(</span><span class="n">TComparableInterface</span> <span class="o">*</span><span class="n">iface</span><span class="p">)</span> <span class="p">{</span>
+ <span class="mi">52</span>   <span class="n">iface</span><span class="o">-&gt;</span><span class="n">cmp</span> <span class="o">=</span> <span class="n">t_int_comparable_cmp</span><span class="p">;</span>
+ <span class="mi">53</span> <span class="p">}</span>
+ <span class="mi">54</span> 
+ <span class="mi">55</span> <span class="k">static</span> <span class="kt">void</span>
+ <span class="mi">56</span> <span class="nf">t_int_set_property</span> <span class="p">(</span><span class="n">GObject</span> <span class="o">*</span><span class="n">object</span><span class="p">,</span> <span class="n">guint</span> <span class="n">property_id</span><span class="p">,</span> <span class="k">const</span> <span class="n">GValue</span> <span class="o">*</span><span class="n">value</span><span class="p">,</span> <span class="n">GParamSpec</span> <span class="o">*</span><span class="n">pspec</span><span class="p">)</span> <span class="p">{</span>
+ <span class="mi">57</span>   <span class="n">TInt</span> <span class="o">*</span><span class="n">self</span> <span class="o">=</span> <span class="n">T_INT</span> <span class="p">(</span><span class="n">object</span><span class="p">);</span>
+ <span class="mi">58</span> 
+ <span class="mi">59</span>   <span class="k">if</span> <span class="p">(</span><span class="n">property_id</span> <span class="o">==</span> <span class="n">PROP_INT</span><span class="p">)</span>
+ <span class="mi">60</span>     <span class="n">self</span><span class="o">-&gt;</span><span class="n">value</span> <span class="o">=</span> <span class="n">g_value_get_int</span> <span class="p">(</span><span class="n">value</span><span class="p">);</span>
+ <span class="mi">61</span>   <span class="k">else</span>
+ <span class="mi">62</span>     <span class="n">G_OBJECT_WARN_INVALID_PROPERTY_ID</span> <span class="p">(</span><span class="n">object</span><span class="p">,</span> <span class="n">property_id</span><span class="p">,</span> <span class="n">pspec</span><span class="p">);</span>
+ <span class="mi">63</span> <span class="p">}</span>
+ <span class="mi">64</span> 
+ <span class="mi">65</span> <span class="k">static</span> <span class="kt">void</span>
+ <span class="mi">66</span> <span class="nf">t_int_get_property</span> <span class="p">(</span><span class="n">GObject</span> <span class="o">*</span><span class="n">object</span><span class="p">,</span> <span class="n">guint</span> <span class="n">property_id</span><span class="p">,</span> <span class="n">GValue</span> <span class="o">*</span><span class="n">value</span><span class="p">,</span> <span class="n">GParamSpec</span> <span class="o">*</span><span class="n">pspec</span><span class="p">)</span> <span class="p">{</span>
+ <span class="mi">67</span>   <span class="n">TInt</span> <span class="o">*</span><span class="n">self</span> <span class="o">=</span> <span class="n">T_INT</span> <span class="p">(</span><span class="n">object</span><span class="p">);</span>
+ <span class="mi">68</span> 
+ <span class="mi">69</span>   <span class="k">if</span> <span class="p">(</span><span class="n">property_id</span> <span class="o">==</span> <span class="n">PROP_INT</span><span class="p">)</span>
+ <span class="mi">70</span>     <span class="n">g_value_set_int</span> <span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">self</span><span class="o">-&gt;</span><span class="n">value</span><span class="p">);</span>
+ <span class="mi">71</span>   <span class="k">else</span>
+ <span class="mi">72</span>     <span class="n">G_OBJECT_WARN_INVALID_PROPERTY_ID</span> <span class="p">(</span><span class="n">object</span><span class="p">,</span> <span class="n">property_id</span><span class="p">,</span> <span class="n">pspec</span><span class="p">);</span>
+ <span class="mi">73</span> <span class="p">}</span>
+ <span class="mi">74</span> 
+ <span class="mi">75</span> <span class="k">static</span> <span class="kt">void</span>
+ <span class="mi">76</span> <span class="nf">t_int_init</span> <span class="p">(</span><span class="n">TInt</span> <span class="o">*</span><span class="n">self</span><span class="p">)</span> <span class="p">{</span>
+ <span class="mi">77</span> <span class="p">}</span>
+ <span class="mi">78</span> 
+ <span class="mi">79</span> <span class="cm">/* arithmetic operator */</span>
+ <span class="mi">80</span> <span class="cm">/* These operators create a new instance and return a pointer to it. */</span>
+ <span class="mi">81</span> <span class="err">#</span><span class="n">define</span> <span class="n">t_int_binary_op</span><span class="p">(</span><span class="n">op</span><span class="p">)</span> \
+ <span class="mi">82</span>   <span class="kt">int</span> <span class="n">i</span><span class="p">;</span> \
+ <span class="mi">83</span>   <span class="kt">double</span> <span class="n">d</span><span class="p">;</span> \
+ <span class="mi">84</span>   <span class="nf">if</span> <span class="p">(</span><span class="n">T_IS_INT</span> <span class="p">(</span><span class="n">other</span><span class="p">))</span> <span class="p">{</span> \
+ <span class="mi">85</span>     <span class="n">g_object_get</span> <span class="p">(</span><span class="n">T_INT</span> <span class="p">(</span><span class="n">other</span><span class="p">),</span> <span class="s">"value"</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">i</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span> \
+ <span class="mi">86</span>     <span class="k">return</span>  <span class="n">T_NUMBER</span> <span class="p">(</span><span class="n">t_int_new_with_value</span> <span class="p">(</span><span class="n">T_INT</span><span class="p">(</span><span class="n">self</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">value</span> <span class="n">op</span> <span class="n">i</span><span class="p">));</span> \
+ <span class="mi">87</span>   <span class="p">}</span> <span class="k">else</span> <span class="p">{</span> \
+ <span class="mi">88</span>     <span class="n">g_object_get</span> <span class="p">(</span><span class="n">T_DOUBLE</span> <span class="p">(</span><span class="n">other</span><span class="p">),</span> <span class="s">"value"</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">d</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span> \
+ <span class="mi">89</span>     <span class="k">return</span>  <span class="n">T_NUMBER</span> <span class="p">(</span><span class="n">t_int_new_with_value</span> <span class="p">(</span><span class="n">T_INT</span><span class="p">(</span><span class="n">self</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">value</span> <span class="n">op</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span> <span class="n">d</span><span class="p">));</span> \
+ <span class="mi">90</span>   <span class="p">}</span>
+ <span class="mi">91</span> 
+ <span class="mi">92</span> <span class="k">static</span> <span class="n">TNumber</span> <span class="o">*</span>
+ <span class="mi">93</span> <span class="nf">t_int_add</span> <span class="p">(</span><span class="n">TNumber</span> <span class="o">*</span><span class="n">self</span><span class="p">,</span> <span class="n">TNumber</span> <span class="o">*</span><span class="n">other</span><span class="p">)</span> <span class="p">{</span>
+ <span class="mi">94</span>   <span class="n">g_return_val_if_fail</span> <span class="p">(</span><span class="n">T_IS_INT</span> <span class="p">(</span><span class="n">self</span><span class="p">),</span> <span class="nb">NULL</span><span class="p">);</span>
+ <span class="mi">95</span> 
+ <span class="mi">96</span>   <span class="n">t_int_binary_op</span> <span class="p">(</span><span class="o">+</span><span class="p">)</span>
+ <span class="mi">97</span> <span class="p">}</span>
+ <span class="mi">98</span> 
+ <span class="mi">99</span> <span class="k">static</span> <span class="n">TNumber</span> <span class="o">*</span>
+<span class="mi">100</span> <span class="nf">t_int_sub</span> <span class="p">(</span><span class="n">TNumber</span> <span class="o">*</span><span class="n">self</span><span class="p">,</span> <span class="n">TNumber</span> <span class="o">*</span><span class="n">other</span><span class="p">)</span> <span class="p">{</span>
+<span class="mi">101</span>   <span class="n">g_return_val_if_fail</span> <span class="p">(</span><span class="n">T_IS_INT</span> <span class="p">(</span><span class="n">self</span><span class="p">),</span> <span class="nb">NULL</span><span class="p">);</span>
+<span class="mi">102</span> 
+<span class="mi">103</span>   <span class="n">t_int_binary_op</span> <span class="p">(</span><span class="o">-</span><span class="p">)</span>
+<span class="mi">104</span> <span class="p">}</span>
+<span class="mi">105</span> 
+<span class="mi">106</span> <span class="k">static</span> <span class="n">TNumber</span> <span class="o">*</span>
+<span class="mi">107</span> <span class="nf">t_int_mul</span> <span class="p">(</span><span class="n">TNumber</span> <span class="o">*</span><span class="n">self</span><span class="p">,</span> <span class="n">TNumber</span> <span class="o">*</span><span class="n">other</span><span class="p">)</span> <span class="p">{</span>
+<span class="mi">108</span>   <span class="n">g_return_val_if_fail</span> <span class="p">(</span><span class="n">T_IS_INT</span> <span class="p">(</span><span class="n">self</span><span class="p">),</span> <span class="nb">NULL</span><span class="p">);</span>
+<span class="mi">109</span> 
+<span class="mi">110</span>   <span class="n">t_int_binary_op</span> <span class="p">(</span><span class="o">*</span><span class="p">)</span>
+<span class="mi">111</span> <span class="p">}</span>
+<span class="mi">112</span> 
+<span class="mi">113</span> <span class="k">static</span> <span class="n">TNumber</span> <span class="o">*</span>
+<span class="mi">114</span> <span class="nf">t_int_div</span> <span class="p">(</span><span class="n">TNumber</span> <span class="o">*</span><span class="n">self</span><span class="p">,</span> <span class="n">TNumber</span> <span class="o">*</span><span class="n">other</span><span class="p">)</span> <span class="p">{</span>
+<span class="mi">115</span>   <span class="n">g_return_val_if_fail</span> <span class="p">(</span><span class="n">T_IS_INT</span> <span class="p">(</span><span class="n">self</span><span class="p">),</span> <span class="nb">NULL</span><span class="p">);</span>
+<span class="mi">116</span> 
+<span class="mi">117</span>   <span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
+<span class="mi">118</span>   <span class="kt">double</span> <span class="n">d</span><span class="p">;</span>
+<span class="mi">119</span> 
+<span class="mi">120</span>   <span class="k">if</span> <span class="p">(</span><span class="n">T_IS_INT</span> <span class="p">(</span><span class="n">other</span><span class="p">))</span> <span class="p">{</span>
+<span class="mi">121</span>     <span class="n">g_object_get</span> <span class="p">(</span><span class="n">T_INT</span> <span class="p">(</span><span class="n">other</span><span class="p">),</span> <span class="s">"value"</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">i</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+<span class="mi">122</span>     <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+<span class="mi">123</span>       <span class="n">g_signal_emit_by_name</span> <span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="s">"div-by-zero"</span><span class="p">);</span>
+<span class="mi">124</span>       <span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span>
+<span class="mi">125</span>     <span class="p">}</span> <span class="k">else</span>
+<span class="mi">126</span>       <span class="k">return</span>  <span class="n">T_NUMBER</span> <span class="p">(</span><span class="n">t_int_new_with_value</span> <span class="p">(</span><span class="n">T_INT</span><span class="p">(</span><span class="n">self</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">value</span> <span class="o">/</span> <span class="n">i</span><span class="p">));</span>
+<span class="mi">127</span>   <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+<span class="mi">128</span>     <span class="n">g_object_get</span> <span class="p">(</span><span class="n">T_DOUBLE</span> <span class="p">(</span><span class="n">other</span><span class="p">),</span> <span class="s">"value"</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">d</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+<span class="mi">129</span>     <span class="k">if</span> <span class="p">(</span><span class="n">d</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+<span class="mi">130</span>       <span class="n">g_signal_emit_by_name</span> <span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="s">"div-by-zero"</span><span class="p">);</span>
+<span class="mi">131</span>       <span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span>
+<span class="mi">132</span>     <span class="p">}</span> <span class="k">else</span>
+<span class="mi">133</span>       <span class="k">return</span>  <span class="n">T_NUMBER</span> <span class="p">(</span><span class="n">t_int_new_with_value</span> <span class="p">(</span><span class="n">T_INT</span><span class="p">(</span><span class="n">self</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">value</span> <span class="o">/</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span>  <span class="n">d</span><span class="p">));</span>
+<span class="mi">134</span>   <span class="p">}</span>
+<span class="mi">135</span> <span class="p">}</span>
+<span class="mi">136</span> 
+<span class="mi">137</span> <span class="k">static</span> <span class="n">TNumber</span> <span class="o">*</span>
+<span class="mi">138</span> <span class="nf">t_int_uminus</span> <span class="p">(</span><span class="n">TNumber</span> <span class="o">*</span><span class="n">self</span><span class="p">)</span> <span class="p">{</span>
+<span class="mi">139</span>   <span class="n">g_return_val_if_fail</span> <span class="p">(</span><span class="n">T_IS_INT</span> <span class="p">(</span><span class="n">self</span><span class="p">),</span> <span class="nb">NULL</span><span class="p">);</span>
+<span class="mi">140</span> 
+<span class="mi">141</span>   <span class="k">return</span> <span class="n">T_NUMBER</span> <span class="p">(</span><span class="n">t_int_new_with_value</span> <span class="p">(</span><span class="o">-</span> <span class="n">T_INT</span><span class="p">(</span><span class="n">self</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">value</span><span class="p">));</span>
+<span class="mi">142</span> <span class="p">}</span>
+<span class="mi">143</span> 
+<span class="mi">144</span> <span class="k">static</span> <span class="kt">char</span> <span class="o">*</span>
+<span class="mi">145</span> <span class="nf">t_int_to_s</span> <span class="p">(</span><span class="n">TNumber</span> <span class="o">*</span><span class="n">self</span><span class="p">)</span> <span class="p">{</span>
+<span class="mi">146</span>   <span class="n">g_return_val_if_fail</span> <span class="p">(</span><span class="n">T_IS_INT</span> <span class="p">(</span><span class="n">self</span><span class="p">),</span> <span class="nb">NULL</span><span class="p">);</span>
+<span class="mi">147</span> 
+<span class="mi">148</span>   <span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
+<span class="mi">149</span> 
+<span class="mi">150</span>   <span class="n">g_object_get</span> <span class="p">(</span><span class="n">T_INT</span> <span class="p">(</span><span class="n">self</span><span class="p">),</span> <span class="s">"value"</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">i</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span> 
+<span class="mi">151</span>   <span class="k">return</span> <span class="n">g_strdup_printf</span> <span class="p">(</span><span class="s">"%d"</span><span class="p">,</span> <span class="n">i</span><span class="p">);</span>
+<span class="mi">152</span> <span class="p">}</span>
+<span class="mi">153</span> 
+<span class="mi">154</span> <span class="k">static</span> <span class="kt">void</span>
+<span class="mi">155</span> <span class="nf">t_int_class_init</span> <span class="p">(</span><span class="n">TIntClass</span> <span class="o">*</span><span class="n">class</span><span class="p">)</span> <span class="p">{</span>
+<span class="mi">156</span>   <span class="n">TNumberClass</span> <span class="o">*</span><span class="n">tnumber_class</span> <span class="o">=</span> <span class="n">T_NUMBER_CLASS</span> <span class="p">(</span><span class="n">class</span><span class="p">);</span>
+<span class="mi">157</span>   <span class="n">GObjectClass</span> <span class="o">*</span><span class="n">gobject_class</span> <span class="o">=</span> <span class="n">G_OBJECT_CLASS</span> <span class="p">(</span><span class="n">class</span><span class="p">);</span>
+<span class="mi">158</span> 
+<span class="mi">159</span>   <span class="cm">/* override virtual functions */</span>
+<span class="mi">160</span>   <span class="n">tnumber_class</span><span class="o">-&gt;</span><span class="n">add</span> <span class="o">=</span> <span class="n">t_int_add</span><span class="p">;</span>
+<span class="mi">161</span>   <span class="n">tnumber_class</span><span class="o">-&gt;</span><span class="n">sub</span> <span class="o">=</span> <span class="n">t_int_sub</span><span class="p">;</span>
+<span class="mi">162</span>   <span class="n">tnumber_class</span><span class="o">-&gt;</span><span class="n">mul</span> <span class="o">=</span> <span class="n">t_int_mul</span><span class="p">;</span>
+<span class="mi">163</span>   <span class="n">tnumber_class</span><span class="o">-&gt;</span><span class="n">div</span> <span class="o">=</span> <span class="n">t_int_div</span><span class="p">;</span>
+<span class="mi">164</span>   <span class="n">tnumber_class</span><span class="o">-&gt;</span><span class="n">uminus</span> <span class="o">=</span> <span class="n">t_int_uminus</span><span class="p">;</span>
+<span class="mi">165</span>   <span class="n">tnumber_class</span><span class="o">-&gt;</span><span class="n">to_s</span> <span class="o">=</span> <span class="n">t_int_to_s</span><span class="p">;</span>
+<span class="mi">166</span> 
+<span class="mi">167</span>   <span class="n">gobject_class</span><span class="o">-&gt;</span><span class="n">set_property</span> <span class="o">=</span> <span class="n">t_int_set_property</span><span class="p">;</span>
+<span class="mi">168</span>   <span class="n">gobject_class</span><span class="o">-&gt;</span><span class="n">get_property</span> <span class="o">=</span> <span class="n">t_int_get_property</span><span class="p">;</span>
+<span class="mi">169</span>   <span class="n">int_properties</span><span class="p">[</span><span class="n">PROP_INT</span><span class="p">]</span> <span class="o">=</span> <span class="n">g_param_spec_int</span> <span class="p">(</span><span class="s">"value"</span><span class="p">,</span> <span class="s">"val"</span><span class="p">,</span> <span class="s">"Integer value"</span><span class="p">,</span> <span class="n">G_MININT</span><span class="p">,</span> <span class="n">G_MAXINT</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">G_PARAM_READWRITE</span><span class="p">);</span>
+<span class="mi">170</span>   <span class="n">g_object_class_install_properties</span> <span class="p">(</span><span class="n">gobject_class</span><span class="p">,</span> <span class="n">N_PROPERTIES</span><span class="p">,</span> <span class="n">int_properties</span><span class="p">);</span>
+<span class="mi">171</span> <span class="p">}</span>
+<span class="mi">172</span> 
+<span class="mi">173</span> <span class="n">TInt</span> <span class="o">*</span>
+<span class="mi">174</span> <span class="nf">t_int_new_with_value</span> <span class="p">(</span><span class="kt">int</span> <span class="n">value</span><span class="p">)</span> <span class="p">{</span>
+<span class="mi">175</span>   <span class="n">TInt</span> <span class="o">*</span><span class="n">i</span><span class="p">;</span>
+<span class="mi">176</span> 
+<span class="mi">177</span>   <span class="n">i</span> <span class="o">=</span> <span class="n">g_object_new</span> <span class="p">(</span><span class="n">T_TYPE_INT</span><span class="p">,</span> <span class="s">"value"</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+<span class="mi">178</span>   <span class="k">return</span> <span class="n">i</span><span class="p">;</span>
+<span class="mi">179</span> <span class="p">}</span>
+<span class="mi">180</span> 
+<span class="mi">181</span> <span class="n">TInt</span> <span class="o">*</span>
+<span class="mi">182</span> <span class="nf">t_int_new</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
+<span class="mi">183</span>   <span class="n">TInt</span> <span class="o">*</span><span class="n">i</span><span class="p">;</span>
+<span class="mi">184</span> 
+<span class="mi">185</span>   <span class="n">i</span> <span class="o">=</span> <span class="n">g_object_new</span> <span class="p">(</span><span class="n">T_TYPE_INT</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+<span class="mi">186</span>   <span class="k">return</span> <span class="n">i</span><span class="p">;</span>
+<span class="mi">187</span> <span class="p">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>
+    <p>4：需要包含 TComparable 的头文件。</p>
+  </li>
+  <li>
+    <p>19：声明 t_comparable_interface_init() 函数。这个声明必须在 G_DEFINE_TYPE_WITH_CODE 宏之前完成。</p>
+  </li>
+  <li>
+    <p>21-22：G_DEFINE_TYPE_WITH_CODE 宏。最后一个参数是 G_IMPLEMENT_INTERFACE 宏。G_IMPLEMENT_INTERFACE 的第二个参数是 t_comparable_interface_init。这两个宏展开为：</p>
+
+    <ul>
+      <li>
+        <p>声明 t_int_class_init()。</p>
+      </li>
+      <li>
+        <p>声明 t_int_init()。</p>
+      </li>
+      <li>
+        <p>定义静态变量 t_int_parent_class，它指向父类的类结构。</p>
+      </li>
+      <li>
+        <p>定义 t_int_get_type()。此函数包含 g_type_register_static_simple() 和 g_type_add_interface_static()。g_type_register_static_simple() 是 g_type_register_static() 的便捷版本，它将 TInt 类型注册到类型系统中。<code class="language-plaintext highlighter-rouge">g_type_add_interface_static()</code> 将接口类型添加到实例类型中。在 GObject 参考手册的 Interfaces 一节中有一个很好的例子。如果你想知道如何不使用宏来编写代码，请参见 tint_without_macro.c。</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>24-48：t_int_comparable_cmp 是一个比较 TInt 实例和 TNumber 实例的函数。</p>
+  </li>
+  <li>
+    <p>26-29：检查 other 的类型。如果参数类型不是 TNumber，则使用 g_signal_emit_by_name 发出 “arg-error” 信号。</p>
+  </li>
+  <li>
+    <p>34：将 self 转换为 double 类型。</p>
+  </li>
+  <li>
+    <p>35-39：获取 other 的值，如果它是 TInt，则将值转换为 double。</p>
+  </li>
+  <li>
+    <p>40-47：比较 s 和 o，返回 1、0、-1 和 -2。</p>
+  </li>
+  <li>
+    <p>50-53：t_comparable_interface_init。这个函数在 TInt 的初始化过程中被调用。函数 t_int_comparable_cmp 被分配给 iface-&gt;cmp。</p>
+  </li>
+</ul>
+
+<p>tdouble.c 与 tint.c 几乎相同。这两个对象可以比较，因为在比较前 int 被转换为 double。</p>
+
+<h3 id="22-源文件-tstrc">2.2 源文件 tstr.c</h3>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="mi">1</span> <span class="err">#</span><span class="n">include</span> <span class="s">"../tstr/tstr.h"</span>
+  <span class="mi">2</span> <span class="err">#</span><span class="n">include</span> <span class="s">"tcomparable.h"</span>
+  <span class="mi">3</span> 
+  <span class="mi">4</span> <span class="k">enum</span> <span class="p">{</span>
+  <span class="mi">5</span>   <span class="n">PROP_0</span><span class="p">,</span>
+  <span class="mi">6</span>   <span class="n">PROP_STRING</span><span class="p">,</span>
+  <span class="mi">7</span>   <span class="n">N_PROPERTIES</span>
+  <span class="mi">8</span> <span class="p">};</span>
+  <span class="mi">9</span> 
+ <span class="mi">10</span> <span class="k">static</span> <span class="n">GParamSpec</span> <span class="o">*</span><span class="n">str_properties</span><span class="p">[</span><span class="n">N_PROPERTIES</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="nb">NULL</span><span class="p">,</span> <span class="p">};</span>
+ <span class="mi">11</span> 
+ <span class="mi">12</span> <span class="k">typedef</span> <span class="k">struct</span> <span class="p">{</span>
+ <span class="mi">13</span>   <span class="kt">char</span> <span class="o">*</span><span class="n">string</span><span class="p">;</span>
+ <span class="mi">14</span> <span class="p">}</span> <span class="n">TStrPrivate</span><span class="p">;</span>
+ <span class="mi">15</span> 
+ <span class="mi">16</span> <span class="k">static</span> <span class="kt">void</span> <span class="nf">t_comparable_interface_init</span> <span class="p">(</span><span class="n">TComparableInterface</span> <span class="o">*</span><span class="n">iface</span><span class="p">);</span>
+ <span class="mi">17</span> 
+ <span class="mi">18</span> <span class="nf">G_DEFINE_TYPE_WITH_CODE</span> <span class="p">(</span><span class="n">TStr</span><span class="p">,</span> <span class="n">t_str</span><span class="p">,</span> <span class="n">G_TYPE_OBJECT</span><span class="p">,</span>
+ <span class="mi">19</span>                          <span class="n">G_ADD_PRIVATE</span> <span class="p">(</span><span class="n">TStr</span><span class="p">)</span>
+ <span class="mi">20</span>                          <span class="n">G_IMPLEMENT_INTERFACE</span> <span class="p">(</span><span class="n">T_TYPE_COMPARABLE</span><span class="p">,</span> <span class="n">t_comparable_interface_init</span><span class="p">))</span>
+ <span class="mi">21</span> 
+ <span class="mi">22</span> <span class="k">static</span> <span class="kt">void</span>
+ <span class="mi">23</span> <span class="n">t_str_set_property</span> <span class="p">(</span><span class="n">GObject</span> <span class="o">*</span><span class="n">object</span><span class="p">,</span> <span class="n">guint</span> <span class="n">property_id</span><span class="p">,</span> <span class="k">const</span> <span class="n">GValue</span> <span class="o">*</span><span class="n">value</span><span class="p">,</span> <span class="n">GParamSpec</span> <span class="o">*</span><span class="n">pspec</span><span class="p">)</span> <span class="p">{</span>
+ <span class="mi">24</span>   <span class="n">TStr</span> <span class="o">*</span><span class="n">self</span> <span class="o">=</span> <span class="n">T_STR</span> <span class="p">(</span><span class="n">object</span><span class="p">);</span>
+ <span class="mi">25</span> 
+ <span class="mi">26</span> <span class="cm">/* The returned value of the function g_value_get_string can be NULL. */</span>
+ <span class="mi">27</span> <span class="cm">/* The function t_str_set_string calls a class method, */</span>
+ <span class="mi">28</span> <span class="cm">/* which is expected to rewrite in the descendant object. */</span>
+ <span class="mi">29</span>   <span class="k">if</span> <span class="p">(</span><span class="n">property_id</span> <span class="o">==</span> <span class="n">PROP_STRING</span><span class="p">)</span>
+ <span class="mi">30</span>     <span class="n">t_str_set_string</span> <span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">g_value_get_string</span> <span class="p">(</span><span class="n">value</span><span class="p">));</span>
+ <span class="mi">31</span>   <span class="k">else</span>
+ <span class="mi">32</span>     <span class="n">G_OBJECT_WARN_INVALID_PROPERTY_ID</span> <span class="p">(</span><span class="n">object</span><span class="p">,</span> <span class="n">property_id</span><span class="p">,</span> <span class="n">pspec</span><span class="p">);</span>
+ <span class="mi">33</span> <span class="p">}</span>
+ <span class="mi">34</span> 
+ <span class="mi">35</span> <span class="k">static</span> <span class="kt">void</span>
+ <span class="mi">36</span> <span class="nf">t_str_get_property</span> <span class="p">(</span><span class="n">GObject</span> <span class="o">*</span><span class="n">object</span><span class="p">,</span> <span class="n">guint</span> <span class="n">property_id</span><span class="p">,</span> <span class="n">GValue</span> <span class="o">*</span><span class="n">value</span><span class="p">,</span> <span class="n">GParamSpec</span> <span class="o">*</span><span class="n">pspec</span><span class="p">)</span> <span class="p">{</span>
+ <span class="mi">37</span>   <span class="n">TStr</span> <span class="o">*</span><span class="n">self</span> <span class="o">=</span> <span class="n">T_STR</span> <span class="p">(</span><span class="n">object</span><span class="p">);</span>
+ <span class="mi">38</span>   <span class="n">TStrPrivate</span> <span class="o">*</span><span class="n">priv</span> <span class="o">=</span> <span class="n">t_str_get_instance_private</span> <span class="p">(</span><span class="n">self</span><span class="p">);</span>
+ <span class="mi">39</span> 
+ <span class="mi">40</span> <span class="cm">/* The second argument of the function g_value_set_string can be NULL. */</span>
+ <span class="mi">41</span>   <span class="k">if</span> <span class="p">(</span><span class="n">property_id</span> <span class="o">==</span> <span class="n">PROP_STRING</span><span class="p">)</span>
+ <span class="mi">42</span>     <span class="n">g_value_set_string</span> <span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">priv</span><span class="o">-&gt;</span><span class="n">string</span><span class="p">);</span>
+ <span class="mi">43</span>   <span class="k">else</span>
+ <span class="mi">44</span>     <span class="n">G_OBJECT_WARN_INVALID_PROPERTY_ID</span> <span class="p">(</span><span class="n">object</span><span class="p">,</span> <span class="n">property_id</span><span class="p">,</span> <span class="n">pspec</span><span class="p">);</span>
+ <span class="mi">45</span> <span class="p">}</span>
+ <span class="mi">46</span> 
+ <span class="mi">47</span> <span class="cm">/* This function just set the string. */</span>
+ <span class="mi">48</span> <span class="cm">/* So, no notify signal is emitted. */</span>
+ <span class="mi">49</span> <span class="k">static</span> <span class="kt">void</span>
+ <span class="mi">50</span> <span class="nf">t_str_real_set_string</span> <span class="p">(</span><span class="n">TStr</span> <span class="o">*</span><span class="n">self</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">s</span><span class="p">)</span> <span class="p">{</span>
+ <span class="mi">51</span>   <span class="n">TStrPrivate</span> <span class="o">*</span><span class="n">priv</span> <span class="o">=</span> <span class="n">t_str_get_instance_private</span> <span class="p">(</span><span class="n">self</span><span class="p">);</span>
+ <span class="mi">52</span> 
+ <span class="mi">53</span>   <span class="k">if</span> <span class="p">(</span><span class="n">priv</span><span class="o">-&gt;</span><span class="n">string</span><span class="p">)</span>
+ <span class="mi">54</span>     <span class="n">g_free</span> <span class="p">(</span><span class="n">priv</span><span class="o">-&gt;</span><span class="n">string</span><span class="p">);</span>
+ <span class="mi">55</span>   <span class="n">priv</span><span class="o">-&gt;</span><span class="n">string</span> <span class="o">=</span> <span class="n">g_strdup</span> <span class="p">(</span><span class="n">s</span><span class="p">);</span>
+ <span class="mi">56</span> <span class="p">}</span>
+ <span class="mi">57</span> 
+ <span class="mi">58</span> <span class="k">static</span> <span class="kt">void</span>
+ <span class="mi">59</span> <span class="nf">t_str_finalize</span> <span class="p">(</span><span class="n">GObject</span> <span class="o">*</span><span class="n">object</span><span class="p">)</span> <span class="p">{</span>
+ <span class="mi">60</span>   <span class="n">TStr</span> <span class="o">*</span><span class="n">self</span> <span class="o">=</span> <span class="n">T_STR</span> <span class="p">(</span><span class="n">object</span><span class="p">);</span>
+ <span class="mi">61</span>   <span class="n">TStrPrivate</span> <span class="o">*</span><span class="n">priv</span> <span class="o">=</span> <span class="n">t_str_get_instance_private</span> <span class="p">(</span><span class="n">self</span><span class="p">);</span>
+ <span class="mi">62</span> 
+ <span class="mi">63</span>   <span class="k">if</span> <span class="p">(</span><span class="n">priv</span><span class="o">-&gt;</span><span class="n">string</span><span class="p">)</span>
+ <span class="mi">64</span>     <span class="n">g_free</span> <span class="p">(</span><span class="n">priv</span><span class="o">-&gt;</span><span class="n">string</span><span class="p">);</span>
+ <span class="mi">65</span>   <span class="n">G_OBJECT_CLASS</span> <span class="p">(</span><span class="n">t_str_parent_class</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">finalize</span> <span class="p">(</span><span class="n">object</span><span class="p">);</span>
+ <span class="mi">66</span> <span class="p">}</span>
+ <span class="mi">67</span> 
+ <span class="mi">68</span> <span class="k">static</span> <span class="kt">int</span>
+ <span class="mi">69</span> <span class="nf">t_str_comparable_cmp</span> <span class="p">(</span><span class="n">TComparable</span> <span class="o">*</span><span class="n">self</span><span class="p">,</span> <span class="n">TComparable</span> <span class="o">*</span><span class="n">other</span><span class="p">)</span> <span class="p">{</span>
+ <span class="mi">70</span>   <span class="k">if</span> <span class="p">(</span><span class="o">!</span> <span class="n">T_IS_STR</span> <span class="p">(</span><span class="n">other</span><span class="p">))</span> <span class="p">{</span>
+ <span class="mi">71</span>     <span class="n">g_signal_emit_by_name</span> <span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="s">"arg-error"</span><span class="p">);</span>
+ <span class="mi">72</span>     <span class="k">return</span> <span class="o">-</span><span class="mi">2</span><span class="p">;</span>
+ <span class="mi">73</span>   <span class="p">}</span>
+ <span class="mi">74</span> 
+ <span class="mi">75</span>   <span class="kt">char</span> <span class="o">*</span><span class="n">s</span><span class="p">,</span> <span class="o">*</span><span class="n">o</span><span class="p">;</span>
+ <span class="mi">76</span>   <span class="kt">int</span> <span class="n">result</span><span class="p">;</span>
+ <span class="mi">77</span> 
+ <span class="mi">78</span>   <span class="n">s</span> <span class="o">=</span> <span class="n">t_str_get_string</span> <span class="p">(</span><span class="n">T_STR</span> <span class="p">(</span><span class="n">self</span><span class="p">));</span>
+ <span class="mi">79</span>   <span class="n">o</span> <span class="o">=</span> <span class="n">t_str_get_string</span> <span class="p">(</span><span class="n">T_STR</span> <span class="p">(</span><span class="n">other</span><span class="p">));</span>
+ <span class="mi">80</span> 
+ <span class="mi">81</span>   <span class="k">if</span> <span class="p">(</span><span class="n">strcmp</span> <span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">o</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+ <span class="mi">82</span>     <span class="n">result</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+ <span class="mi">83</span>   <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">strcmp</span> <span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">o</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+ <span class="mi">84</span>     <span class="n">result</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+ <span class="mi">85</span>   <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">strcmp</span> <span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">o</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>
+ <span class="mi">86</span>     <span class="n">result</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+ <span class="mi">87</span>   <span class="k">else</span> <span class="cm">/* This can't happen. */</span>
+ <span class="mi">88</span>     <span class="n">result</span> <span class="o">=</span> <span class="o">-</span><span class="mi">2</span><span class="p">;</span>
+ <span class="mi">89</span>   <span class="n">g_free</span> <span class="p">(</span><span class="n">s</span><span class="p">);</span>
+ <span class="mi">90</span>   <span class="n">g_free</span> <span class="p">(</span><span class="n">o</span><span class="p">);</span>
+ <span class="mi">91</span>   <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+ <span class="mi">92</span> <span class="p">}</span>
+ <span class="mi">93</span> 
+ <span class="mi">94</span> <span class="k">static</span> <span class="kt">void</span>
+ <span class="mi">95</span> <span class="nf">t_comparable_interface_init</span> <span class="p">(</span><span class="n">TComparableInterface</span> <span class="o">*</span><span class="n">iface</span><span class="p">)</span> <span class="p">{</span>
+ <span class="mi">96</span>   <span class="n">iface</span><span class="o">-&gt;</span><span class="n">cmp</span> <span class="o">=</span> <span class="n">t_str_comparable_cmp</span><span class="p">;</span>
+ <span class="mi">97</span> <span class="p">}</span>
+ <span class="mi">98</span> 
+ <span class="mi">99</span> <span class="k">static</span> <span class="kt">void</span>
+<span class="mi">100</span> <span class="nf">t_str_init</span> <span class="p">(</span><span class="n">TStr</span> <span class="o">*</span><span class="n">self</span><span class="p">)</span> <span class="p">{</span>
+<span class="mi">101</span>   <span class="n">TStrPrivate</span> <span class="o">*</span><span class="n">priv</span> <span class="o">=</span> <span class="n">t_str_get_instance_private</span> <span class="p">(</span><span class="n">self</span><span class="p">);</span>
+<span class="mi">102</span> 
+<span class="mi">103</span>   <span class="n">priv</span><span class="o">-&gt;</span><span class="n">string</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+<span class="mi">104</span> <span class="p">}</span>
+<span class="mi">105</span> 
+<span class="mi">106</span> <span class="k">static</span> <span class="kt">void</span>
+<span class="mi">107</span> <span class="nf">t_str_class_init</span> <span class="p">(</span><span class="n">TStrClass</span> <span class="o">*</span><span class="n">class</span><span class="p">)</span> <span class="p">{</span>
+<span class="mi">108</span>   <span class="n">GObjectClass</span> <span class="o">*</span><span class="n">gobject_class</span> <span class="o">=</span> <span class="n">G_OBJECT_CLASS</span> <span class="p">(</span><span class="n">class</span><span class="p">);</span>
+<span class="mi">109</span> 
+<span class="mi">110</span>   <span class="n">gobject_class</span><span class="o">-&gt;</span><span class="n">finalize</span> <span class="o">=</span> <span class="n">t_str_finalize</span><span class="p">;</span>
+<span class="mi">111</span>   <span class="n">gobject_class</span><span class="o">-&gt;</span><span class="n">set_property</span> <span class="o">=</span> <span class="n">t_str_set_property</span><span class="p">;</span>
+<span class="mi">112</span>   <span class="n">gobject_class</span><span class="o">-&gt;</span><span class="n">get_property</span> <span class="o">=</span> <span class="n">t_str_get_property</span><span class="p">;</span>
+<span class="mi">113</span>   <span class="n">str_properties</span><span class="p">[</span><span class="n">PROP_STRING</span><span class="p">]</span> <span class="o">=</span> <span class="n">g_param_spec_string</span> <span class="p">(</span><span class="s">"string"</span><span class="p">,</span> <span class="s">"str"</span><span class="p">,</span> <span class="s">"string"</span><span class="p">,</span> <span class="s">""</span><span class="p">,</span> <span class="n">G_PARAM_READWRITE</span><span class="p">);</span>
+<span class="mi">114</span>   <span class="n">g_object_class_install_properties</span> <span class="p">(</span><span class="n">gobject_class</span><span class="p">,</span> <span class="n">N_PROPERTIES</span><span class="p">,</span> <span class="n">str_properties</span><span class="p">);</span>
+<span class="mi">115</span> 
+<span class="mi">116</span>   <span class="n">class</span><span class="o">-&gt;</span><span class="n">set_string</span> <span class="o">=</span> <span class="n">t_str_real_set_string</span><span class="p">;</span>
+<span class="mi">117</span> <span class="p">}</span>
+<span class="mi">118</span> 
+<span class="mi">119</span> <span class="cm">/* setter and getter */</span>
+<span class="mi">120</span> <span class="kt">void</span>
+<span class="mi">121</span> <span class="nf">t_str_set_string</span> <span class="p">(</span><span class="n">TStr</span> <span class="o">*</span><span class="n">self</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">s</span><span class="p">)</span> <span class="p">{</span>
+<span class="mi">122</span>   <span class="n">g_return_if_fail</span> <span class="p">(</span><span class="n">T_IS_STR</span> <span class="p">(</span><span class="n">self</span><span class="p">));</span>
+<span class="mi">123</span>   <span class="n">TStrClass</span> <span class="o">*</span><span class="n">class</span> <span class="o">=</span> <span class="n">T_STR_GET_CLASS</span> <span class="p">(</span><span class="n">self</span><span class="p">);</span>
+<span class="mi">124</span> 
+<span class="mi">125</span> <span class="cm">/* The setter calls the class method 'set_string', */</span>
+<span class="mi">126</span> <span class="cm">/* which is expected to be overridden by the descendant TNumStr. */</span>
+<span class="mi">127</span> <span class="cm">/* Therefore, the behavior of the setter is different between TStr and TNumStr. */</span>
+<span class="mi">128</span>   <span class="n">class</span><span class="o">-&gt;</span><span class="n">set_string</span> <span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">s</span><span class="p">);</span>
+<span class="mi">129</span> <span class="p">}</span>
+<span class="mi">130</span> 
+<span class="mi">131</span> <span class="kt">char</span> <span class="o">*</span>
+<span class="mi">132</span> <span class="nf">t_str_get_string</span> <span class="p">(</span><span class="n">TStr</span> <span class="o">*</span><span class="n">self</span><span class="p">)</span> <span class="p">{</span>
+<span class="mi">133</span>   <span class="n">g_return_val_if_fail</span> <span class="p">(</span><span class="n">T_IS_STR</span> <span class="p">(</span><span class="n">self</span><span class="p">),</span> <span class="nb">NULL</span><span class="p">);</span>
+<span class="mi">134</span>   <span class="n">TStrPrivate</span> <span class="o">*</span><span class="n">priv</span> <span class="o">=</span> <span class="n">t_str_get_instance_private</span> <span class="p">(</span><span class="n">self</span><span class="p">);</span>
+<span class="mi">135</span> 
+<span class="mi">136</span>   <span class="k">return</span> <span class="n">g_strdup</span> <span class="p">(</span><span class="n">priv</span><span class="o">-&gt;</span><span class="n">string</span><span class="p">);</span>
+<span class="mi">137</span> <span class="p">}</span>
+<span class="mi">138</span> 
+<span class="mi">139</span> <span class="n">TStr</span> <span class="o">*</span>
+<span class="mi">140</span> <span class="nf">t_str_concat</span> <span class="p">(</span><span class="n">TStr</span> <span class="o">*</span><span class="n">self</span><span class="p">,</span> <span class="n">TStr</span> <span class="o">*</span><span class="n">other</span><span class="p">)</span> <span class="p">{</span>
+<span class="mi">141</span>   <span class="n">g_return_val_if_fail</span> <span class="p">(</span><span class="n">T_IS_STR</span> <span class="p">(</span><span class="n">self</span><span class="p">),</span> <span class="nb">NULL</span><span class="p">);</span>
+<span class="mi">142</span>   <span class="n">g_return_val_if_fail</span> <span class="p">(</span><span class="n">T_IS_STR</span> <span class="p">(</span><span class="n">other</span><span class="p">),</span> <span class="nb">NULL</span><span class="p">);</span>
+<span class="mi">143</span> 
+<span class="mi">144</span>   <span class="kt">char</span> <span class="o">*</span><span class="n">s1</span><span class="p">,</span> <span class="o">*</span><span class="n">s2</span><span class="p">,</span> <span class="o">*</span><span class="n">s3</span><span class="p">;</span>
+<span class="mi">145</span>   <span class="n">TStr</span> <span class="o">*</span><span class="n">str</span><span class="p">;</span>
+<span class="mi">146</span> 
+<span class="mi">147</span>   <span class="n">s1</span> <span class="o">=</span> <span class="n">t_str_get_string</span> <span class="p">(</span><span class="n">self</span><span class="p">);</span>
+<span class="mi">148</span>   <span class="n">s2</span> <span class="o">=</span> <span class="n">t_str_get_string</span> <span class="p">(</span><span class="n">other</span><span class="p">);</span>
+<span class="mi">149</span>   <span class="k">if</span> <span class="p">(</span><span class="n">s1</span> <span class="o">&amp;&amp;</span> <span class="n">s2</span><span class="p">)</span>
+<span class="mi">150</span>     <span class="n">s3</span> <span class="o">=</span> <span class="n">g_strconcat</span> <span class="p">(</span><span class="n">s1</span><span class="p">,</span> <span class="n">s2</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+<span class="mi">151</span>   <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">s1</span><span class="p">)</span>
+<span class="mi">152</span>     <span class="n">s3</span> <span class="o">=</span> <span class="n">g_strdup</span> <span class="p">(</span><span class="n">s1</span><span class="p">);</span>
+<span class="mi">153</span>   <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">s2</span><span class="p">)</span>
+<span class="mi">154</span>     <span class="n">s3</span> <span class="o">=</span> <span class="n">g_strdup</span> <span class="p">(</span><span class="n">s2</span><span class="p">);</span>
+<span class="mi">155</span>   <span class="k">else</span>
+<span class="mi">156</span>     <span class="n">s3</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+<span class="mi">157</span>   <span class="n">str</span> <span class="o">=</span> <span class="n">t_str_new_with_string</span> <span class="p">(</span><span class="n">s3</span><span class="p">);</span>
+<span class="mi">158</span>   <span class="k">if</span> <span class="p">(</span><span class="n">s1</span><span class="p">)</span> <span class="n">g_free</span> <span class="p">(</span><span class="n">s1</span><span class="p">);</span>
+<span class="mi">159</span>   <span class="k">if</span> <span class="p">(</span><span class="n">s2</span><span class="p">)</span> <span class="n">g_free</span> <span class="p">(</span><span class="n">s2</span><span class="p">);</span>
+<span class="mi">160</span>   <span class="k">if</span> <span class="p">(</span><span class="n">s3</span><span class="p">)</span> <span class="n">g_free</span> <span class="p">(</span><span class="n">s3</span><span class="p">);</span>
+<span class="mi">161</span>   <span class="k">return</span> <span class="n">str</span><span class="p">;</span>
+<span class="mi">162</span> <span class="p">}</span>
+<span class="mi">163</span> 
+<span class="mi">164</span> <span class="cm">/* create a new TStr instance */</span>
+<span class="mi">165</span> <span class="n">TStr</span> <span class="o">*</span>
+<span class="mi">166</span> <span class="nf">t_str_new_with_string</span> <span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">s</span><span class="p">)</span> <span class="p">{</span>
+<span class="mi">167</span>   <span class="k">return</span> <span class="n">T_STR</span> <span class="p">(</span><span class="n">g_object_new</span> <span class="p">(</span><span class="n">T_TYPE_STR</span><span class="p">,</span> <span class="s">"string"</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">));</span>
+<span class="mi">168</span> <span class="p">}</span>
+<span class="mi">169</span> 
+<span class="mi">170</span> <span class="n">TStr</span> <span class="o">*</span>
+<span class="mi">171</span> <span class="nf">t_str_new</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
+<span class="mi">172</span>   <span class="k">return</span> <span class="n">T_STR</span> <span class="p">(</span><span class="n">g_object_new</span> <span class="p">(</span><span class="n">T_TYPE_STR</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">));</span>
+<span class="mi">173</span> <span class="p">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>
+    <p>16：声明了 t_comparable_interface_init 函数。在 G_DEFINE_TYPE_WITH_CODE 宏之前需要声明该函数。</p>
+  </li>
+  <li>
+    <p>18-20：G_DEFINE_TYPE_WITH_CODE 宏。因为 TStr 是可派生类型，所以需要其私有区域（TStrPrivate）。G_ADD_PRIVATE 宏创建了私有区域。注意 G_ADD_PRIVATE 宏后面没有逗号。</p>
+  </li>
+  <li>
+    <p>68-92：t_str_comparable_cmp 函数。</p>
+  </li>
+  <li>
+    <p>70-73：检查 other 的类型。如果它不是 TStr，则发出 “arg-error” 信号。</p>
+  </li>
+  <li>
+    <p>78-79：从 TStr 对象 self 和 other 中获取字符串 s 和 o。</p>
+  </li>
+  <li>
+    <p>81-88：使用 C 标准函数 strcmp 比较 s 和 o。</p>
+  </li>
+  <li>
+    <p>89-90：释放 s 和 o。</p>
+  </li>
+  <li>
+    <p>91：返回结果。</p>
+  </li>
+  <li>
+    <p>94-97：t_comparable_interface_init 函数。它用 t_str_comparable_cmp 覆盖了 iface-&gt;comp。</p>
+  </li>
+</ul>
+
+<p>TStr 可以与 TStr 比较，但不能与 TInt 或 TDouble 比较。通常，比较只在两个同类型实例之间可用。</p>
+
+<p>TNumStr 本身没有实现 TComparable。但它是 TStr 的子类，所以它是可比较的。比较基于字母顺序。所以，”a” 大于 “b”，”three” 大于 “two”。</p>
+
+<h2 id="3-test-program">3 Test program</h2>
+
+<p>main.c 是一个测试程序</p>
+
+<h3 id="31-mainc">3.1 main.c</h3>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="mi">1</span> <span class="err">#</span><span class="n">include</span> <span class="o">&lt;</span><span class="n">glib</span><span class="o">-</span><span class="n">object</span><span class="p">.</span><span class="n">h</span><span class="o">&gt;</span>
+ <span class="mi">2</span> <span class="err">#</span><span class="n">include</span> <span class="s">"tcomparable.h"</span>
+ <span class="mi">3</span> <span class="err">#</span><span class="n">include</span> <span class="s">"../tnumber/tnumber.h"</span>
+ <span class="mi">4</span> <span class="err">#</span><span class="n">include</span> <span class="s">"../tnumber/tint.h"</span>
+ <span class="mi">5</span> <span class="err">#</span><span class="n">include</span> <span class="s">"../tnumber/tdouble.h"</span>
+ <span class="mi">6</span> <span class="err">#</span><span class="n">include</span> <span class="s">"../tstr/tstr.h"</span>
+ <span class="mi">7</span> 
+ <span class="mi">8</span> <span class="k">static</span> <span class="kt">void</span>
+ <span class="mi">9</span> <span class="nf">t_print</span> <span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">cmp</span><span class="p">,</span> <span class="n">TComparable</span> <span class="o">*</span><span class="n">c1</span><span class="p">,</span> <span class="n">TComparable</span> <span class="o">*</span><span class="n">c2</span><span class="p">)</span> <span class="p">{</span>
+<span class="mi">10</span>   <span class="kt">char</span> <span class="o">*</span><span class="n">s1</span><span class="p">,</span> <span class="o">*</span><span class="n">s2</span><span class="p">;</span>
+<span class="mi">11</span>   <span class="n">TStr</span> <span class="o">*</span><span class="n">ts1</span><span class="p">,</span> <span class="o">*</span><span class="n">ts2</span><span class="p">,</span> <span class="o">*</span><span class="n">ts3</span><span class="p">;</span>
+<span class="mi">12</span> 
+<span class="mi">13</span>   <span class="n">ts1</span> <span class="o">=</span> <span class="n">t_str_new_with_string</span><span class="p">(</span><span class="s">"</span><span class="se">\"</span><span class="s">"</span><span class="p">);</span>
+<span class="mi">14</span>   <span class="k">if</span> <span class="p">(</span><span class="n">T_IS_NUMBER</span> <span class="p">(</span><span class="n">c1</span><span class="p">))</span>
+<span class="mi">15</span>     <span class="n">s1</span> <span class="o">=</span> <span class="n">t_number_to_s</span> <span class="p">(</span><span class="n">T_NUMBER</span> <span class="p">(</span><span class="n">c1</span><span class="p">));</span>
+<span class="mi">16</span>   <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">T_IS_STR</span> <span class="p">(</span><span class="n">c1</span><span class="p">))</span> <span class="p">{</span>
+<span class="mi">17</span>     <span class="n">ts2</span> <span class="o">=</span> <span class="n">t_str_concat</span> <span class="p">(</span><span class="n">ts1</span><span class="p">,</span> <span class="n">T_STR</span> <span class="p">(</span><span class="n">c1</span><span class="p">));</span>
+<span class="mi">18</span>     <span class="n">ts3</span> <span class="o">=</span> <span class="n">t_str_concat</span> <span class="p">(</span><span class="n">ts2</span><span class="p">,</span> <span class="n">ts1</span><span class="p">);</span>
+<span class="mi">19</span>     <span class="n">s1</span> <span class="o">=</span> <span class="n">t_str_get_string</span> <span class="p">(</span><span class="n">T_STR</span> <span class="p">(</span><span class="n">ts3</span><span class="p">));</span>
+<span class="mi">20</span>     <span class="n">g_object_unref</span> <span class="p">(</span><span class="n">ts2</span><span class="p">);</span>
+<span class="mi">21</span>     <span class="n">g_object_unref</span> <span class="p">(</span><span class="n">ts3</span><span class="p">);</span>
+<span class="mi">22</span>   <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+<span class="mi">23</span>     <span class="n">g_print</span> <span class="p">(</span><span class="s">"c1 isn't TInt, TDouble nor TStr.</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+<span class="mi">24</span>     <span class="k">return</span><span class="p">;</span>
+<span class="mi">25</span>   <span class="p">}</span>
+<span class="mi">26</span>   <span class="k">if</span> <span class="p">(</span><span class="n">T_IS_NUMBER</span> <span class="p">(</span><span class="n">c2</span><span class="p">))</span>
+<span class="mi">27</span>     <span class="n">s2</span> <span class="o">=</span> <span class="n">t_number_to_s</span> <span class="p">(</span><span class="n">T_NUMBER</span> <span class="p">(</span><span class="n">c2</span><span class="p">));</span>
+<span class="mi">28</span>   <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">T_IS_STR</span> <span class="p">(</span><span class="n">c2</span><span class="p">))</span> <span class="p">{</span>
+<span class="mi">29</span>     <span class="n">ts2</span> <span class="o">=</span> <span class="n">t_str_concat</span> <span class="p">(</span><span class="n">ts1</span><span class="p">,</span> <span class="n">T_STR</span> <span class="p">(</span><span class="n">c2</span><span class="p">));</span>
+<span class="mi">30</span>     <span class="n">ts3</span> <span class="o">=</span> <span class="n">t_str_concat</span> <span class="p">(</span><span class="n">ts2</span><span class="p">,</span> <span class="n">ts1</span><span class="p">);</span>
+<span class="mi">31</span>     <span class="n">s2</span> <span class="o">=</span> <span class="n">t_str_get_string</span> <span class="p">(</span><span class="n">T_STR</span> <span class="p">(</span><span class="n">ts3</span><span class="p">));</span>
+<span class="mi">32</span>     <span class="n">g_object_unref</span> <span class="p">(</span><span class="n">ts2</span><span class="p">);</span>
+<span class="mi">33</span>     <span class="n">g_object_unref</span> <span class="p">(</span><span class="n">ts3</span><span class="p">);</span>
+<span class="mi">34</span>   <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+<span class="mi">35</span>     <span class="n">g_print</span> <span class="p">(</span><span class="s">"c2 isn't TInt, TDouble nor TStr.</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+<span class="mi">36</span>     <span class="k">return</span><span class="p">;</span>
+<span class="mi">37</span>   <span class="p">}</span>
+<span class="mi">38</span>   <span class="n">g_print</span> <span class="p">(</span><span class="s">"%s %s %s.</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">s1</span><span class="p">,</span> <span class="n">cmp</span><span class="p">,</span> <span class="n">s2</span><span class="p">);</span>
+<span class="mi">39</span>   <span class="n">g_object_unref</span> <span class="p">(</span><span class="n">ts1</span><span class="p">);</span>
+<span class="mi">40</span>   <span class="n">g_free</span> <span class="p">(</span><span class="n">s1</span><span class="p">);</span>
+<span class="mi">41</span>   <span class="n">g_free</span> <span class="p">(</span><span class="n">s2</span><span class="p">);</span>
+<span class="mi">42</span> <span class="p">}</span>    
+<span class="mi">43</span> 
+<span class="mi">44</span> <span class="k">static</span> <span class="kt">void</span>
+<span class="mi">45</span> <span class="nf">compare</span> <span class="p">(</span><span class="n">TComparable</span> <span class="o">*</span><span class="n">c1</span><span class="p">,</span> <span class="n">TComparable</span> <span class="o">*</span><span class="n">c2</span><span class="p">)</span> <span class="p">{</span>
+<span class="mi">46</span>   <span class="k">if</span> <span class="p">(</span><span class="n">t_comparable_eq</span> <span class="p">(</span><span class="n">c1</span><span class="p">,</span> <span class="n">c2</span><span class="p">))</span>
+<span class="mi">47</span>     <span class="n">t_print</span> <span class="p">(</span><span class="s">"equals"</span><span class="p">,</span> <span class="n">c1</span><span class="p">,</span> <span class="n">c2</span><span class="p">);</span>
+<span class="mi">48</span>   <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">t_comparable_gt</span> <span class="p">(</span><span class="n">c1</span><span class="p">,</span> <span class="n">c2</span><span class="p">))</span>
+<span class="mi">49</span>     <span class="n">t_print</span> <span class="p">(</span><span class="s">"is greater than"</span><span class="p">,</span> <span class="n">c1</span><span class="p">,</span> <span class="n">c2</span><span class="p">);</span>
+<span class="mi">50</span>   <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">t_comparable_lt</span> <span class="p">(</span><span class="n">c1</span><span class="p">,</span> <span class="n">c2</span><span class="p">))</span>
+<span class="mi">51</span>     <span class="n">t_print</span> <span class="p">(</span><span class="s">"is less than"</span><span class="p">,</span> <span class="n">c1</span><span class="p">,</span> <span class="n">c2</span><span class="p">);</span>
+<span class="mi">52</span>   <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">t_comparable_ge</span> <span class="p">(</span><span class="n">c1</span><span class="p">,</span> <span class="n">c2</span><span class="p">))</span>
+<span class="mi">53</span>     <span class="n">t_print</span> <span class="p">(</span><span class="s">"is greater than or equal to"</span><span class="p">,</span> <span class="n">c1</span><span class="p">,</span> <span class="n">c2</span><span class="p">);</span>
+<span class="mi">54</span>   <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">t_comparable_le</span> <span class="p">(</span><span class="n">c1</span><span class="p">,</span> <span class="n">c2</span><span class="p">))</span>
+<span class="mi">55</span>     <span class="n">t_print</span> <span class="p">(</span><span class="s">"is less than or equal to"</span><span class="p">,</span> <span class="n">c1</span><span class="p">,</span> <span class="n">c2</span><span class="p">);</span>
+<span class="mi">56</span>   <span class="k">else</span>
+<span class="mi">57</span>     <span class="n">t_print</span> <span class="p">(</span><span class="s">"can't compare to"</span><span class="p">,</span> <span class="n">c1</span><span class="p">,</span> <span class="n">c2</span><span class="p">);</span>
+<span class="mi">58</span> <span class="p">}</span>
+<span class="mi">59</span> 
+<span class="mi">60</span> <span class="kt">int</span>
+<span class="mi">61</span> <span class="nf">main</span> <span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">**</span><span class="n">argv</span><span class="p">)</span> <span class="p">{</span>
+<span class="mi">62</span>   <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">one</span> <span class="o">=</span> <span class="s">"one"</span><span class="p">;</span>
+<span class="mi">63</span>   <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">two</span> <span class="o">=</span> <span class="s">"two"</span><span class="p">;</span>
+<span class="mi">64</span>   <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">three</span> <span class="o">=</span> <span class="s">"three"</span><span class="p">;</span>
+<span class="mi">65</span>   <span class="n">TInt</span> <span class="o">*</span><span class="n">i</span><span class="p">;</span>
+<span class="mi">66</span>   <span class="n">TDouble</span> <span class="o">*</span><span class="n">d</span><span class="p">;</span>
+<span class="mi">67</span>   <span class="n">TStr</span> <span class="o">*</span><span class="n">str1</span><span class="p">,</span> <span class="o">*</span><span class="n">str2</span><span class="p">,</span> <span class="o">*</span><span class="n">str3</span><span class="p">;</span>
+<span class="mi">68</span> 
+<span class="mi">69</span>   <span class="n">i</span> <span class="o">=</span> <span class="n">t_int_new_with_value</span> <span class="p">(</span><span class="mi">124</span><span class="p">);</span>
+<span class="mi">70</span>   <span class="n">d</span> <span class="o">=</span> <span class="n">t_double_new_with_value</span> <span class="p">(</span><span class="mi">123</span><span class="p">.</span><span class="mi">45</span><span class="p">);</span>
+<span class="mi">71</span>   <span class="n">str1</span> <span class="o">=</span> <span class="n">t_str_new_with_string</span> <span class="p">(</span><span class="n">one</span><span class="p">);</span>
+<span class="mi">72</span>   <span class="n">str2</span> <span class="o">=</span> <span class="n">t_str_new_with_string</span> <span class="p">(</span><span class="n">two</span><span class="p">);</span>
+<span class="mi">73</span>   <span class="n">str3</span> <span class="o">=</span> <span class="n">t_str_new_with_string</span> <span class="p">(</span><span class="n">three</span><span class="p">);</span>
+<span class="mi">74</span> 
+<span class="mi">75</span>   <span class="n">compare</span> <span class="p">(</span><span class="n">T_COMPARABLE</span> <span class="p">(</span><span class="n">i</span><span class="p">),</span> <span class="n">T_COMPARABLE</span> <span class="p">(</span><span class="n">d</span><span class="p">));</span>
+<span class="mi">76</span>   <span class="n">compare</span> <span class="p">(</span><span class="n">T_COMPARABLE</span> <span class="p">(</span><span class="n">str1</span><span class="p">),</span> <span class="n">T_COMPARABLE</span> <span class="p">(</span><span class="n">str2</span><span class="p">));</span>
+<span class="mi">77</span>   <span class="n">compare</span> <span class="p">(</span><span class="n">T_COMPARABLE</span> <span class="p">(</span><span class="n">str2</span><span class="p">),</span> <span class="n">T_COMPARABLE</span> <span class="p">(</span><span class="n">str3</span><span class="p">));</span>
+<span class="mi">78</span>   <span class="n">compare</span> <span class="p">(</span><span class="n">T_COMPARABLE</span> <span class="p">(</span><span class="n">i</span><span class="p">),</span> <span class="n">T_COMPARABLE</span> <span class="p">(</span><span class="n">str1</span><span class="p">));</span>
+<span class="mi">79</span> 
+<span class="mi">80</span>   <span class="n">g_object_unref</span> <span class="p">(</span><span class="n">i</span><span class="p">);</span>
+<span class="mi">81</span>   <span class="n">g_object_unref</span> <span class="p">(</span><span class="n">d</span><span class="p">);</span>
+<span class="mi">82</span>   <span class="n">g_object_unref</span> <span class="p">(</span><span class="n">str1</span><span class="p">);</span>
+<span class="mi">83</span>   <span class="n">g_object_unref</span> <span class="p">(</span><span class="n">str2</span><span class="p">);</span>
+<span class="mi">84</span>   <span class="n">g_object_unref</span> <span class="p">(</span><span class="n">str3</span><span class="p">);</span>
+<span class="mi">85</span> 
+<span class="mi">86</span>   <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="mi">87</span> <span class="p">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>
+    <p>8-42：函数 t_print 有三个参数，并构建一个输出字符串，然后将其显示在显示器上。在构建输出时，字符串被双引号包围。</p>
+  </li>
+  <li>
+    <p>44-58：函数 compare 比较两个 TComparable 对象，并调用 t_print 来显示结果。</p>
+  </li>
+  <li>
+    <p>60-87：main 函数。</p>
+  </li>
+  <li>
+    <p>69-73：创建 TInt、TDouble 和三个 TStr 实例。它们被赋予了值。</p>
+  </li>
+  <li>
+    <p>75：比较 TInt 和 TDouble。</p>
+  </li>
+  <li>
+    <p>76-77：比较两个 TStr。</p>
+  </li>
+  <li>
+    <p>78：将 TInt 与 TStr 比较。这会产生一个 “arg-error”。</p>
+  </li>
+  <li>
+    <p>80-84：释放对象。</p>
+  </li>
+</ul>
+
+<h2 id="4-compilation-and-execution">4 Compilation and execution</h2>
+
+<p>改变目录到 <a href="/assets/GObjectStudy/202311/09_GObject/tcomparable/">/assets/GObjectStudy/202311/09_GObject/tcomparable/</a></p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cd</span> ./assets/GObjectStudy/202311/09_GObject/tcomparable/
+<span class="nv">$ </span>meson setup _build
+<span class="nv">$ </span>ninja <span class="nt">-C</span> _build
+</code></pre></div></div>
+
+<p>执行</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>_build/tcomparable
+124 is greater than 123.450000.
+<span class="s2">"one"</span> is less than <span class="s2">"two"</span><span class="nb">.</span>
+<span class="s2">"two"</span> is greater than <span class="s2">"three"</span><span class="nb">.</span>
+
+TComparable: argument error.
+
+TComparable: argument error.
+
+TComparable: argument error.
+
+TComparable: argument error.
+
+TComparable: argument error.
+124 can<span class="s1">'t compare to "one".
+</span></code></pre></div></div>
+
+<h2 id="5-build-an-interface-without-macros">5 Build an interface without macros</h2>
+
+<p>我们使用了如 <code class="language-plaintext highlighter-rouge">G_DECLARE_INTERFACE</code>、<code class="language-plaintext highlighter-rouge">G_DEFINE_INTERFACE</code> 等宏来构建接口。并使用 <code class="language-plaintext highlighter-rouge">G_DEFINE_TYPE_WITH_CODE</code> 来实现接口。我们也可以不使用宏来构建它。在 tcomparable 目录中有三个文件。</p>
+
+<ul>
+  <li>
+    <p>tcomparable_without_macro.h</p>
+  </li>
+  <li>
+    <p>tcomparable_without_macro.c</p>
+  </li>
+  <li>
+    <p>tint_without_macro.c</p>
+  </li>
+</ul>
+
+<p>它们不使用宏。相反，它们直接将接口或接口的实现注册到类型系统中。如果你想了解这方面的内容，可以查看 <a href="/assets/GObjectStudy/202311/09_GObject/tcomparable/">/assets/GObjectStudy/202311/09_GObject/tcomparable/</a> 中的源文件。</p>
+
+<h2 id="参考">参考</h2>
+
+<p><a href="https://github.com/ToshioCP/Gobject-tutorial/blob/main/gfm/sec9.md">Interface：https://github.com/ToshioCP/Gobject-tutorial/blob/main/gfm/sec9.md</a></p>
+
+
+    </div>
+
+</article>
+<div class="post-nav"><a class="previous" href="/gobject%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/2023/11/17/8-%E5%AD%90%E7%B1%BB%E6%89%A9%E5%B1%95%E7%88%B6%E7%B1%BB%E7%9A%84%E5%8A%9F%E8%83%BD.html" title="八、子类扩展父类的功能">八、子类扩展父类的功能</a><a class="next" href="/gobject%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/2023/11/18/10-%E5%A3%B0%E6%98%8E%E5%92%8C%E5%AE%9A%E4%B9%89%E5%AE%8F%E6%80%BB%E7%BB%93.html" title="十、声明和定义类型宏总结">十、声明和定义类型宏总结</a></div><!--<div class="post-related">
+      <div>Related Articles</div>
+      <ul>
+        <li><a class="post-link" href="/gstreamer%E6%A0%B8%E5%BF%83%E5%AF%B9%E8%B1%A1/2023/12/01/13-GstTagList.html" title="十、声明和定义类型宏总结">十三、GstTagList</a></li><li><a class="post-link" href="/gstreamer%E6%A0%B8%E5%BF%83%E5%AF%B9%E8%B1%A1/2023/12/09/23-GstElement.html" title="十、声明和定义类型宏总结">二十三、GstElement</a></li><li><a class="post-link" href="/%E6%97%A5%E4%B9%8B%E6%BC%AB%E5%BD%95/2023/11/10/Ubuntu%E7%BE%8E%E5%8C%96.html" title="十、声明和定义类型宏总结">Ubuntu美化</a></li><li><a class="post-link" href="/gstreamer%E6%A0%B8%E5%BF%83%E5%AF%B9%E8%B1%A1/2023/12/05/17-GstStreams.html" title="十、声明和定义类型宏总结">十七、GstStreams</a></li></ul>
+    </div>--><div class="post-related">
+      <div>相关文章</div>
+      <ul><li><a class="post-link" href="/gobject%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/2023/11/23/14-GInitiallyUnowned.html" title="十四、GInitiallyUnowned类型">十四、GInitiallyUnowned类型</a></li><li><a class="post-link" href="/gobject%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/2023/11/20/11-%E6%8E%A5%E5%8F%A3%E8%A1%A5%E5%85%85.html" title="十一、接口补充">十一、接口补充</a></li><li><a class="post-link" href="/gobject%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/2023/11/20/12-GBoxed%E7%B1%BB%E5%9E%8B.html" title="十二、GBoxed类型">十二、GBoxed类型</a></li><li><a class="post-link" href="/gobject%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/2023/11/20/13-GValue.html" title="十三、GValue学习笔记">十三、GValue学习笔记</a></li></ul>
+    </div><div class="post-comments"><div id="disqus_thread"></div>
+<script>
+    /**
+    *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+    *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
+    /*
+    var disqus_config = function () {
+    this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+    this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+    */
+    (function() { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+    s.src = 'https://pzhou-me.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div></section>
+</div>
+
+
+  </section>
+  <section class="sidebar" style="margin-left: 15px;">
+    <!-- Get sidebar items --><style type="text/css" media="screen">
+.post-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.post-menu ul li {
+  margin-bottom: 5px;  /* 增加每个列表项底部的间距 */
+}
+
+.post-menu ul li a {
+  font-size: 16px; /* 设置目录链接的字体大小 */
+}
+
+.post-menu-content {
+  max-height: 600px; /* 设置最大高度 */
+  min-width: 300px;
+  overflow: hidden; /* 默认隐藏滚动条 */
+  white-space: nowrap; /* 水平方向上的内容不换行 */
+}
+
+/* 自定义垂直滚动条的样式 */
+.post-menu-content::-webkit-scrollbar {
+  width: 8px; /* 垂直滚动条的宽度 */
+  height: 8px; /* 水平滚动条的高度 */
+}
+
+/* 自定义垂直滚动条轨道 */
+.post-menu-content::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* 自定义垂直滚动条滑块 */
+.post-menu-content::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* 当鼠标悬停在垂直滚动条滑块上时 */
+.post-menu-content::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* 一级标题样式 */
+.post-menu ul li.h-h2 {
+  margin-left: 0;
+  margin-bottom: 10px;
+}
+
+/* 二级标题样式 */
+.post-menu ul li.h-h3 {
+  margin-left: 20px;
+  margin-bottom: 10px;
+}
+
+/* 三级标题样式 */
+.post-menu ul li.h-h4 {
+  margin-left: 40px;
+  margin-bottom: 10px;
+}
+
+
+</style>
+
+
+
+<div class="post-menu">
+  <div class="post-menu-title">目录</div>
+  <div class="post-menu-content"></div>
+</div>
+
+<script>
+  function generateContent() {
+    var menu = document.querySelector(".post-menu");
+    var menuContent =  menu.querySelector(".post-menu-content");
+    var headings = document.querySelector(".post-content").querySelectorAll("h2, h3, h4, h5, h6");
+
+    // Hide menu when no headings
+    if (headings.length === 0) {
+      return menu.style.display = "none";
+    }
+
+    // Generate post menu
+    var menuHTML = '';
+    for (var i = 0; i < headings.length; i++) {
+      var h = headings[i];
+      menuHTML += (
+        '<li class="h-' + h.tagName.toLowerCase() + '">'
+        + '<a href="#h-' + h.getAttribute('id') + '">' + h.textContent + '</a></li>');
+    }
+
+    menuContent.innerHTML = '<ul>' + menuHTML + '</ul>';
+
+    // The header element
+    var header = document.querySelector('header.site-header');
+
+    function doMenuCollapse(index, over_items) {
+      var items = menuContent.firstChild.children;
+
+      if (over_items == undefined) {
+        over_items = 20;
+      }
+
+      if (items.length < over_items) {
+        return;
+      }
+
+      var activeItem = items[index];
+      var beginItem = activeItem
+      var endItem = activeItem
+      var beginIndex = index;
+      var endIndex = index + 1;
+      while (beginIndex >= 0
+        && !items[beginIndex].classList.contains('h-h2')) {
+        beginIndex -= 1;
+      }
+      while (endIndex < items.length
+        && !items[endIndex].classList.contains('h-h2')) {
+        endIndex += 1;
+      }
+      for (var i = 0; i < beginIndex; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+      for (var i = beginIndex + 1; i < endIndex; i++) {
+        item = items[i]
+        // if (!item.classList.contains('h-h2')) {
+          item.style.display = '';
+        // }
+      }
+      for (var i = endIndex; i < items.length; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+    }
+
+    // Init menu collapsed
+    doMenuCollapse(-1);
+
+    // Active the menu item
+    window.addEventListener('scroll', function (event) {
+      var lastActive = menuContent.querySelector('.active');
+      var changed = true;
+      var activeIndex = -1;
+      for (var i = headings.length - 1; i >= 0; i--) {
+        var h = headings[i];
+        var headingRect = h.getBoundingClientRect();
+        var headerRect = header.getBoundingClientRect();
+        var headerTop = Math.floor(headerRect.top);
+        var headerHeight = Math.floor(headerRect.height);
+        var headerHeight = headerTop + headerHeight + 20;
+        if (headingRect.top <= headerHeight) {
+          var id = 'h-' + h.getAttribute('id');
+          var a = menuContent.querySelector('a[href="#' + id  + '"]');
+          var curActive = a.parentNode;
+          if (curActive) {
+            curActive.classList.add('active');
+            activeIndex = i;
+          }
+          if (lastActive == curActive) {
+            changed = false;
+          }
+          break;
+        }
+      }
+      if (changed) {
+        if (lastActive) {
+          lastActive.classList.remove('active');
+        }
+        doMenuCollapse(activeIndex);
+      }
+      event.preventDefault();
+    });
+  }
+  generateContent();
+</script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const menuContent = document.querySelector('.post-menu-content');
+
+    // 鼠标进入事件
+    menuContent.addEventListener('mouseenter', function() {
+      menuContent.style.overflow = 'auto';
+    });
+
+    // 鼠标离开事件
+    menuContent.addEventListener('mouseleave', function() {
+      menuContent.style.overflow = 'hidden';
+    });
+  });
+</script>
+
+</section>
+</div>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+    <div class="site-footer-inner"><div>李尓阳工作室 <span class="copyleft">&copy;</span> 2018-2023 Lieryang</div>
+      <div class="footer-col gmail"> E-mail sxlisibo@gmail.com</div>
+      <div>Powered by <a title="Jekyll is a simple, blog-aware, static site
+      generator." href="https://jekyllrb.com/">Jekyll</a> &amp; <a title="Yat, yet
+      another theme." href="https://github.com/jeffreytse/jekyll-theme-yat">Yat Theme</a>.</div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

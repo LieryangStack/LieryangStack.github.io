@@ -1,0 +1,1884 @@
+<!DOCTYPE html>
+<html><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>二、GstMiniObject | 李尔阳主页</title>
+<meta name="generator" content="Jekyll v3.9.3" />
+<meta property="og:title" content="二、GstMiniObject" />
+<meta name="author" content="LieryangStack" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="1 GstMiniObject基本概念" />
+<meta property="og:description" content="1 GstMiniObject基本概念" />
+<link rel="canonical" href="https://lieryangstack.github.io//gstreamer%E6%A0%B8%E5%BF%83%E5%AF%B9%E8%B1%A1/2023/11/20/2-GstMiniObject.html" />
+<meta property="og:url" content="https://lieryangstack.github.io//gstreamer%E6%A0%B8%E5%BF%83%E5%AF%B9%E8%B1%A1/2023/11/20/2-GstMiniObject.html" />
+<meta property="og:site_name" content="李尔阳主页" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2023-11-20T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="二、GstMiniObject" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"LieryangStack"},"dateModified":"2023-11-20T00:00:00+00:00","datePublished":"2023-11-20T00:00:00+00:00","description":"1 GstMiniObject基本概念","headline":"二、GstMiniObject","mainEntityOfPage":{"@type":"WebPage","@id":"https://lieryangstack.github.io//gstreamer%E6%A0%B8%E5%BF%83%E5%AF%B9%E8%B1%A1/2023/11/20/2-GstMiniObject.html"},"url":"https://lieryangstack.github.io//gstreamer%E6%A0%B8%E5%BF%83%E5%AF%B9%E8%B1%A1/2023/11/20/2-GstMiniObject.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="shortcut icon" type="image/x-icon" href="/lieryang.ico">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-noto-sans@0.0.72/index.min.css">
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <script src="/assets/js/main.js"></script><link type="application/atom+xml" rel="alternate" href="https://lieryangstack.github.io//feed.xml" title="李尔阳主页" /><link rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
+
+<!-- and it's easy to individually load additional languages -->
+<script charset="UTF-8"
+        src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/go.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+// Init highlight js
+document.addEventListener('DOMContentLoaded', function(event) {
+  var els = document.querySelectorAll('pre code')
+
+  function addLangData(block) {
+    var outer = block.parentElement.parentElement.parentElement;
+    var lang = block.getAttribute('data-lang');
+    for (var i = 0; i < outer.classList.length; i++) {
+      var cls = outer.classList[i];
+      if (cls.startsWith('language-')) {
+        lang = cls;
+        break;
+      }
+    }
+    if (!lang) {
+      cls = block.getAttribute('class');
+      lang = cls ? cls.replace('hljs ', '') : '';
+    }
+    if (lang.startsWith('language-')) {
+      lang = lang.substr(9);
+    }
+    block.setAttribute('class', 'hljs ' + lang);
+    block.parentNode.setAttribute('data-lang', lang);
+  }
+
+  function addBadge(block) {
+    var enabled = ('true' || 'true').toLowerCase();
+    if (enabled == 'true') {
+      var pre = block.parentElement;
+      pre.classList.add('badge');
+    }
+  }
+
+  function handle(block) {
+    addLangData(block);
+    addBadge(block)
+    hljs.highlightBlock(block);
+  }
+
+  for (var i = 0; i < els.length; i++) {
+    var el = els[i];
+    handle(el);
+  }
+});
+</script>
+
+<style>
+  /* code language badge */
+  pre.badge::before {
+    content: attr(data-lang);
+    color: #fff;
+    background-color: #ff4e00;
+    padding: 0 .5em;
+    border-radius: 0 2px;
+    text-transform: uppercase;
+    text-align: center;
+    min-width: 32px;
+    display: inline-block;
+    position: absolute;
+    right: 0;
+  }
+
+  /* fix wrong badge display for firefox browser */
+  code > table pre::before {
+    display: none;
+  }
+</style>
+<link href='https://lieryangstack.github.io//assets/css/syntax.css' rel='stylesheet' type='text/css' />
+</head>
+<body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<header class="site-header " role="banner">
+
+  <div class="wrapper">
+    <div class="site-header-inner"><span class="site-brand"><a class="site-brand-inner" rel="author" href="/">
+  <img class="site-favicon" title="李尔阳主页" src="" onerror="this.style.display='none'">
+  李尔阳主页
+</a>
+</span><nav class="site-nav">
+          <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+          <label for="nav-trigger">
+            <span class="menu-icon">
+              <svg viewBox="0 0 18 15" width="18px" height="15px">
+                <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+              </svg>
+            </span>
+          </label>
+
+          <!-- <div class="trigger"><a class="page-link" href="/about.html">关于</a><a class="page-link" href="/archives.html">归档</a><a class="page-link" href="/categories.html">分类</a><a class="page-link" href="/">主页</a><a class="page-link" href="/tags.html">标签</a>
+
+
+
+
+
+
+
+
+
+</div> -->
+
+          <div class="trigger">
+             <a class="page-link" href="/about.html">关于</a>
+            <a class="page-link" href="/categories.html">分类</a>
+            <a class="page-link" href="/archives.html">归档</a>
+            <a class="page-link" href="/tags.html">标签</a>
+            <a class="page-link" href="/assets/index.html">下载</a>
+            <!-- 在这里添加更多的导航项 -->
+          </div>
+          
+
+        </nav></div>
+  </div>
+</header>
+
+<script>
+  function initHeader() {
+    var lastScrollY = getScrollPos().y;
+    var documentElement = document.documentElement;
+
+    function storeScrollData() {
+      var y = getScrollPos().y;var scrollStatus = "";
+
+      if (y <= 0) {
+        scrollStatus = "top";
+      } else if ((window.innerHeight + y) >= document.body.offsetHeight) {
+        scrollStatus = "bottom";
+      } else {
+        var isScrollDown = (y - lastScrollY > 0) ? true : false;
+        scrollStatus = isScrollDown ? "down" : "up";
+      }
+
+      lastScrollY = y;
+      documentElement.setAttribute("data-scroll-status", scrollStatus);
+    }
+
+    window.addEventListener('scroll', function(e) {
+      storeScrollData();
+    });
+
+    storeScrollData();
+  }
+  document.addEventListener('DOMContentLoaded', initHeader);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  function hashLocate(hashValue) {
+    hashValue = hashValue.replace(/^.*#h-/, '');
+    hashValue = decodeURIComponent(hashValue);
+    var element = document.getElementById(hashValue);
+
+    if (!element) {
+      return;
+    }
+
+    var header = document.querySelector('header.site-header');
+    var headerRect = header.getBoundingClientRect();
+    var headerTop = Math.floor(headerRect.top);
+    var headerHeight = Math.floor(headerRect.height);
+    var scrollPos = getScrollPos();
+    var offsetY = element.offsetTop - (headerTop + headerHeight + 20);
+
+    if (offsetY == scrollPos.y) {
+      return;
+    }
+
+    if (headerTop == 0  && offsetY > scrollPos.y) {
+      offsetY += headerHeight + 2;
+    } else if (headerTop < 0  && offsetY < scrollPos.y) {
+      offsetY -= headerHeight - 2;
+    }
+
+    smoothScrollTo(offsetY);
+  }
+
+  // The first event occurred
+  window.addEventListener('load', function(event) {
+    if (window.location.hash) {
+      hashLocate(window.location.hash);
+    }
+  });
+
+  // The first event occurred
+  window.addEventListener('click', function(event) {
+    if (event.target.tagName.toLowerCase() == 'a') {
+      hashLocate(event.target.getAttribute('href'));
+    }
+  });
+</script>
+<div class="theme-toggle">
+  <input type="checkbox" id="theme-switch">
+  <label for="theme-switch">
+    <div class="toggle"></div>
+    <div class="names">
+      <p class="light">Light</p>
+      <p class="dark">Dark</p>
+    </div>
+  </label>
+</div>
+
+
+
+
+<script>
+  (function() {
+    var sw = document.getElementById('theme-switch');
+    var html = document.getElementsByTagName('html')[0];
+    var nightModeOption = ('auto' || 'auto').toLowerCase();
+    var storage = nightModeOption === 'manual'
+        ? localStorage
+        : sessionStorage;
+    var themeData = loadThemeData();
+
+    function saveThemeData(data) {
+      storage.setItem('theme', JSON.stringify(data));
+    }
+
+    function loadThemeData() {
+      var data = storage.getItem('theme');
+      try {
+        data = JSON.parse(data ? data : '');
+      } catch(e) {
+        data = { nightShift: undefined, autoToggleAt: 0 };
+        saveThemeData(data);
+      }
+      return data;
+    }
+
+    function handleThemeToggle(nightShift) {
+      themeData.nightShift = nightShift;
+      saveThemeData(themeData);
+      html.dataset.theme = nightShift ? 'dark' : 'light';
+      setTimeout(function() {
+        sw.checked = nightShift ? true : false;
+      }, 50);
+    }
+
+    function autoThemeToggle() {
+      // Next time point of theme toggle
+      var now = new Date();
+      var toggleAt = new Date();
+      var hours = now.getHours();
+      var nightShift = hours >= 19 || hours <=7;
+
+      if (nightShift) {
+        if (hours > 7) {
+          toggleAt.setDate(toggleAt.getDate() + 1);
+        }
+        toggleAt.setHours(7);
+      } else {
+        toggleAt.setHours(19);
+      }
+
+      toggleAt.setMinutes(0);
+      toggleAt.setSeconds(0);
+      toggleAt.setMilliseconds(0)
+
+      var delay = toggleAt.getTime() - now.getTime();
+
+      // auto toggle theme mode
+      setTimeout(function() {
+        handleThemeToggle(!nightShift);
+      }, delay);
+
+      return {
+        nightShift: nightShift,
+        toggleAt: toggleAt.getTime()
+      };
+    }
+
+    // Listen the theme toggle event
+    sw.addEventListener('change', function(event) {
+      handleThemeToggle(event.target.checked);
+    });
+
+    if (nightModeOption == 'auto') {
+      var data = autoThemeToggle();
+
+      // Toggle theme by local setting
+      if (data.toggleAt > themeData.autoToggleAt) {
+        themeData.autoToggleAt = data.toggleAt;
+        handleThemeToggle(data.nightShift);
+      } else {
+        handleThemeToggle(themeData.nightShift);
+      }
+    } else if (nightModeOption == 'manual') {
+      handleThemeToggle(themeData.nightShift);
+    } else {
+      var nightShift = themeData.nightShift;
+      if (nightShift === undefined) {
+        nightShift = nightModeOption === 'on';
+      }
+      handleThemeToggle(nightShift);
+    }
+  })();
+</script>
+<div id="click-to-top" class="click-to-top">
+  <i class="fa fa-arrow-up"></i>
+</div>
+<script>
+  (function () {
+    const clickToTop = document.getElementById('click-to-top');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 100) {
+        clickToTop.classList.add('show')
+      }else {
+        clickToTop.classList.remove('show')
+      }
+    });
+    clickToTop.addEventListener('click', () => {
+      window.smoothScrollTo(0);
+    });
+  })();
+</script>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <div class="framework">
+  <section class="main">
+
+     <div class="post">
+  <section>
+
+
+
+
+
+
+
+
+
+<header class="post-header">
+  <h1 class="post-title p-name" itemprop="name headline">二、GstMiniObject</h1>
+  <h2 class="post-subtitle"></h2>
+
+  <p class="post-meta">
+    <time class="dt-published" datetime="2023-11-20T00:00:00+00:00" itemprop="datePublished"><i class="fa fa-calendar"></i> Nov 20, 2023
+    </time>
+
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 27 mins</span>
+  </p><div class="post-tags"><a class="post-tag" href="/tags.html#GStreamer">#GStreamer</a></div></header>
+<article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+    <div class="post-content e-content" itemprop="articleBody">
+
+      <h2 id="1-gstminiobject基本概念">1 GstMiniObject基本概念</h2>
+
+<p>“GstMiniObject” 是一个简单的结构体，可用于实现引用计数类型。</p>
+
+<ul>
+  <li>
+    <p>GstMiniObject使用的是 <code class="language-plaintext highlighter-rouge">G_DEFINE_BOXED_TYPE</code> 进行的定义。（也就是结构体对象，并没有普通对象的信号，属性等功能），GstMiniObject内部实现了引用计数功能。</p>
+  </li>
+  <li>
+    <p>具体G_DEFINE_BOXED_TYPE可以参考GObject学习笔记</p>
+  </li>
+  <li>
+    <p>因为不是GObject对象，所以不能使用GObject的相关函数，比如常用的 g_object_new, g_object_unref等函数。仅仅是注册一个GType类型。</p>
+  </li>
+</ul>
+
+<p>子类将在其结构体中首先包含 “GstMiniObject”，然后调用 gst_mini_object_init 来初始化 “GstMiniObject” 字段。</p>
+
+<p>gst_mini_object_ref 和 gst_mini_object_unref 分别用于增加和减少引用计数。mini-object 的引用计数达到 0 时，首先调用 dispose 函数，如果此函数返回 TRUE，则调用mini-object的 free 函数。（具体可参考<code class="language-plaintext highlighter-rouge">gst_mini_object_unref</code>函数定义）</p>
+
+<p>可以使用 gst_mini_object_copy 来复制mini-object。</p>
+
+<p>当对象的引用计数恰好为 1 且没有父对象或只有一个父对象且该父对象本身是可写的时，gst_mini_object_is_writable 将返回 TRUE，这意味着当前调用者拥有该对象的唯一引用。gst_mini_object_make_writable 将返回对象的可写版本，如果引用计数不为 1，则可能是一个新的副本。</p>
+
+<p>可以使用 gst_mini_object_set_qdata 和 gst_mini_object_get_qdata 将不透明数据与 GstMiniObject 关联。这些数据意在特定于特定对象，并且不会自动随着 gst_mini_object_copy 或类似方法一起复制。</p>
+
+<p>可以分别使用 gst_mini_object_weak_ref 和 gst_mini_object_weak_unref 来添加和移除弱引用。</p>
+
+<h3 id="11-继承于gstminiobject类的轻量级对象">1.1 继承于GstMiniObject类的轻量级对象</h3>
+
+<ul>
+  <li>
+    <p><strong>GstBuffer</strong>: 表示流水线中单个媒体数据块。用于传输原始数据（如音频样本或视频帧）。</p>
+  </li>
+  <li>
+    <p><strong>GstBufferList</strong>: 管理 <code class="language-plaintext highlighter-rouge">GstBuffer</code> 对象的集合，适用于需要批量处理或优化传输的情况。</p>
+  </li>
+  <li>
+    <p><strong>GstMessage</strong>: 在 GStreamer 应用程序和元素之间传递异步消息，包括错误、状态变更、流结束通知等。</p>
+  </li>
+  <li>
+    <p><strong>GstMemory</strong>: 表示 <code class="language-plaintext highlighter-rouge">GstBuffer</code> 数据的内存块，抽象了数据可以存储在的不同类型的内存。</p>
+  </li>
+  <li>
+    <p><strong>GstCaps</strong>: 描述媒体数据的格式和属性，指定流水线元素可以处理或产生的媒体类型。</p>
+  </li>
+  <li>
+    <p><strong>GstEvent</strong>: 在流水线元素之间传递控制事件，如流开始、配置更改、跳到新的时间点等。</p>
+  </li>
+  <li>
+    <p><strong>GstContext</strong>: 在元素之间共享高层次信息，如设备句柄或平台特定数据。</p>
+  </li>
+  <li>
+    <p><strong>GstSample</strong>: 包含 <code class="language-plaintext highlighter-rouge">GstBuffer</code>、<code class="language-plaintext highlighter-rouge">GstCaps</code> 和时间戳，通常用于表示处理后的单个数据样本。</p>
+  </li>
+  <li>
+    <p><strong>GstQuery</strong>: 查询流水线或其元素的状态，如持续时间、位置、格式、带宽等。</p>
+  </li>
+  <li>
+    <p><strong>GstDateTime</strong>: 表示和处理日期和时间数据，用于处理时间相关的元数据或时间戳。</p>
+  </li>
+</ul>
+
+<h2 id="2-gstminiobject类型结构">2 GstMiniObject类型结构</h2>
+
+<p><code class="language-plaintext highlighter-rouge">GstMiniObject</code> 是一个GBoxed类型，类型注册函数由 <code class="language-plaintext highlighter-rouge">gst_init</code> 调用。</p>
+
+<p><strong>NOTE</strong>：</p>
+
+<p>GStreamer中所有的GBoxed类型对象，得到类型函数和类型值是分离的。并不是：</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#define GST_TYPE_MINI_OBJECT gst_mini_object_get_type()
+</span></code></pre></div></div>
+
+<p>而是：</p>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/* filename:gstminiobject.h */</span>
+<span class="k">extern</span> <span class="kt">unsigned</span> <span class="kt">long</span> <span class="n">_gst_mini_object_type</span><span class="p">;</span>
+<span class="cp">#define GST_TYPE_MINI_OBJECT (_gst_mini_object_type)
+</span>
+<span class="cm">/* filename:gstminiobject.c */</span>
+<span class="kt">unsigned</span> <span class="kt">long</span> <span class="n">_gst_mini_object_type</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="n">_gst_mini_object_type</span> <span class="o">=</span> <span class="n">gst_mini_object_get_type</span> <span class="p">();</span>
+</code></pre></div></div>
+<h3 id="21-gstminiobject类型注册宏定义">2.1 GstMiniObject类型注册宏定义</h3>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/* filename:gstminiobject.h */</span>
+
+<span class="cm">/* _gst_mini_object_type 是在类型系统中注册的类型值，该值由源文件定义，gst_init进行注册 */</span>
+<span class="k">extern</span> <span class="kt">unsigned</span> <span class="kt">long</span> <span class="n">_gst_mini_object_type</span><span class="p">;</span>
+<span class="cp">#define GST_TYPE_MINI_OBJECT (_gst_mini_object_type)
+</span>
+<span class="cp">#define GST_DEFINE_MINI_OBJECT_TYPE(TypeName,type_name) \
+   G_DEFINE_BOXED_TYPE(TypeName,type_name,              \
+       (GBoxedCopyFunc) gst_mini_object_ref,            \
+       (GBoxedFreeFunc) gst_mini_object_unref)
+</span>
+<span class="cm">/* 注册该类型调用的函数 */</span>
+<span class="k">extern</span>           <span class="nf">gst_mini_object_get_type</span>   <span class="p">(</span><span class="kt">void</span><span class="p">);</span>
+
+<span class="cm">/* filename: gstminiobject.c */</span>
+
+<span class="cm">/* GstMiniObject类型值定义 */</span>
+<span class="kt">unsigned</span> <span class="kt">long</span> <span class="n">_gst_mini_object_type</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+<span class="cm">/* gst_mini_object_get_type函数定义 
+ * G_DEFINE_BOXED_TYPE 拷贝和释放使用的ref和unref函数指针
+ */</span>
+<span class="n">GST_DEFINE_MINI_OBJECT_TYPE</span> <span class="p">(</span><span class="n">GstMiniObject</span><span class="p">,</span> <span class="n">gst_mini_object</span><span class="p">);</span>
+
+<span class="cm">/* 注册GstMiniObject类型，该函数由gst_init调用 */</span>
+<span class="kt">void</span>
+<span class="nf">_priv_gst_mini_object_initialize</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="n">_gst_mini_object_type</span> <span class="o">=</span> <span class="n">gst_mini_object_get_type</span> <span class="p">();</span>
+  <span class="n">weak_ref_quark</span> <span class="o">=</span> <span class="n">g_quark_from_static_string</span> <span class="p">(</span><span class="s">"GstMiniObjectWeakRefQuark"</span><span class="p">);</span>
+<span class="p">}</span>
+
+</code></pre></div></div>
+
+<h3 id="22-gstminiobject类型相关枚举定义">2.2 GstMiniObject类型相关枚举定义</h3>
+
+<h4 id="221-gstminiobjectflags">2.2.1 GstMiniObjectFlags</h4>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/* filename: gstminiobject.h  */</span>
+<span class="cm">/**
+ * GstMiniObjectFlags:
+ * @GST_MINI_OBJECT_FLAG_LOCKABLE: 对象可以通过 gst_mini_object_lock() 和
+ * gst_mini_object_unlock() 进行锁定和解锁。
+ * @GST_MINI_OBJECT_FLAG_LOCK_READONLY: 对象被永久性地锁定在只读模式下。
+ * 只能对该对象执行读取锁定。
+ * @GST_MINI_OBJECT_FLAG_MAY_BE_LEAKED: 预期该对象即使在调用 gst_deinit() 之后
+ * 也会保持存活，因此应该被内存泄漏检测工具忽略。（自版本 1.10 起可用）
+ * @GST_MINI_OBJECT_FLAG_LAST: 子类可以使用的第一个标志。(可以被用来计算那个flag标记了)
+ *
+ */</span>
+<span class="k">typedef</span> <span class="k">enum</span>
+<span class="p">{</span>
+  <span class="n">GST_MINI_OBJECT_FLAG_LOCKABLE</span>      <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">0</span><span class="p">),</span>
+  <span class="n">GST_MINI_OBJECT_FLAG_LOCK_READONLY</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">1</span><span class="p">),</span>
+  <span class="n">GST_MINI_OBJECT_FLAG_MAY_BE_LEAKED</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">2</span><span class="p">),</span>
+  <span class="cm">/* padding */</span>
+  <span class="n">GST_MINI_OBJECT_FLAG_LAST</span>          <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">4</span><span class="p">)</span>
+<span class="p">}</span> <span class="n">GstMiniObjectFlags</span><span class="p">;</span>
+
+</code></pre></div></div>
+
+<p>该枚举类型是初始化函数中使用，标记该对象是只能还是读写模式。</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span>
+<span class="nf">gst_mini_object_init</span> <span class="p">(</span><span class="n">GstMiniObject</span> <span class="o">*</span> <span class="n">mini_object</span><span class="p">,</span> <span class="n">guint</span> <span class="n">flags</span><span class="p">,</span> <span class="n">GType</span> <span class="n">type</span><span class="p">,</span>
+    <span class="n">GstMiniObjectCopyFunction</span> <span class="n">copy_func</span><span class="p">,</span>
+    <span class="n">GstMiniObjectDisposeFunction</span> <span class="n">dispose_func</span><span class="p">,</span>
+    <span class="n">GstMiniObjectFreeFunction</span> <span class="n">free_func</span><span class="p">)</span> <span class="p">{</span>
+
+  <span class="err">···</span>
+  <span class="n">mini_object</span><span class="o">-&gt;</span><span class="n">flags</span> <span class="o">=</span> <span class="n">flags</span><span class="p">;</span>
+  <span class="err">···</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h4 id="222-gstlockflags">2.2.2 GstLockFlags</h4>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/* filename: gstminiobject.h  */</span>
+<span class="cm">/**
+ * GstLockFlags:
+ * @GST_LOCK_FLAG_READ: 用于读取访问的锁定
+ * @GST_LOCK_FLAG_WRITE: 用于写入访问的锁定
+ * @GST_LOCK_FLAG_EXCLUSIVE: 用于独占访问的锁定
+ * @GST_LOCK_FLAG_LAST: 一般用来占位，Mask等用途
+ *
+ */</span>
+<span class="k">typedef</span> <span class="k">enum</span> <span class="p">{</span>
+  <span class="n">GST_LOCK_FLAG_READ</span>      <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">0</span><span class="p">),</span>
+  <span class="n">GST_LOCK_FLAG_WRITE</span>     <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">1</span><span class="p">),</span>
+  <span class="n">GST_LOCK_FLAG_EXCLUSIVE</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">2</span><span class="p">),</span>
+
+  <span class="n">GST_LOCK_FLAG_LAST</span>      <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">8</span><span class="p">)</span>
+<span class="p">}</span> <span class="n">GstLockFlags</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>该枚举类型在 <code class="language-plaintext highlighter-rouge">gst_mini_object_lock</code> 和 <code class="language-plaintext highlighter-rouge">gst_mini_object_unlock</code> 函数中使用。结构体<code class="language-plaintext highlighter-rouge">_GstMiniObject</code> 的 <code class="language-plaintext highlighter-rouge">gint lockstate</code>成员有关。</p>
+
+<h4 id="223-priv_pointer锁枚举类型">2.2.3 priv_pointer锁枚举类型</h4>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="cm">/* filename: gstminiobject.c */</span>
+
+<span class="cm">/**
+ * GST_TYPE_MINI_OBJECT:
+ *
+ * 与 #GstMiniObject 相关联的 #GType。
+ *
+ * 自版本 1.20 起可用。
+ */</span>
+
+<span class="cm">/* 出于向后兼容的原因，我们在 GstMiniObject 结构中
+ * 使用 guint 和 gpointer，以一种相当复杂的方式来存储父对象和 qdata。
+ * 最初，它们仅仅是 qdata 的数量和 qdata 本身。
+ *
+ * guint 被用作一个原子状态整数，具有以下状态：
+ * - Locked：0，基本上是一个自旋锁
+ * - No parent，无 qdata：1（指针为 NULL）
+ * - 一个父对象：2（指针包含父对象）
+ * - 多个父对象或 qdata：3（指针包含一个 PrivData 结构体）
+ *
+ * 除非我们处于状态 3，否则我们总是必须原子性地移动到锁定状态，
+ * 并在稍后再将其释放回目标状态，以便在访问指针时使用。
+ * 当我们处于状态 3 时，我们将不再转移到更低的状态
+ *
+ * FIXME 2.0：我们应该直接在结构体内部存储这些信息，
+ * 可能直接为几个父对象保留空间
+ */</span>
+
+<span class="cm">/* 私有数据的三种状态 */</span>
+<span class="k">enum</span> <span class="p">{</span>
+  <span class="n">PRIV_DATA_STATE_LOCKED</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="n">PRIV_DATA_STATE_NO_PARENT</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="n">PRIV_DATA_STATE_ONE_PARENT</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
+  <span class="n">PRIV_DATA_STATE_PARENTS_OR_QDATA</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span>
+<span class="p">};</span>
+</code></pre></div></div>
+<p>该枚举类型在 <code class="language-plaintext highlighter-rouge">lock_priv_pointer</code> 函数中使用。用于锁定<code class="language-plaintext highlighter-rouge">priv_pointer</code>，结构体<code class="language-plaintext highlighter-rouge">_GstMiniObject</code> 的 <code class="language-plaintext highlighter-rouge">guint priv_uint</code>成员有关。</p>
+
+<h3 id="23-gstminiobject类型相关结构体定义">2.3 GstMiniObject类型相关结构体定义</h3>
+
+<p><code class="language-plaintext highlighter-rouge">GstMiniObject</code>是主要结构体</p>
+
+<ul>
+  <li><strong>priv_pointer</strong>：有时候存储的就是结构体<code class="language-plaintext highlighter-rouge">PrivData</code>。</li>
+  <li><strong>lockstate</strong>：该变量是gint类型，一共有4个字节。
+    <ul>
+      <li>第一个字节：存储读或者写状态，也就是0x01或者0x02。</li>
+      <li>第二个字节：比如说，有三个用户进行读，第二个字节就是存储有多少个用户进行读或者写。0x301表示三个用户就行读。</li>
+      <li>第三个字节：独有锁，有几个用户上独有锁，这个变量存储在第三个字节。0x20000。</li>
+    </ul>
+  </li>
+  <li><strong>flags</strong>：使用的是枚举<code class="language-plaintext highlighter-rouge">GstMiniObjectFlags</code>，子类会在该枚举的最后一个后面继续添加子类的flag。
+比如`GstMemory：
+    <ul>
+      <li>第一个字节：<code class="language-plaintext highlighter-rouge">GstMiniObjectFlags</code>。</li>
+      <li>第二个字节：<code class="language-plaintext highlighter-rouge">GstMemoryFlags</code>。</li>
+    </ul>
+  </li>
+</ul>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/* filename: gstminiobject.h */</span>
+<span class="k">struct</span> <span class="n">_GstMiniObject</span> <span class="p">{</span>
+  <span class="n">GType</span>   <span class="n">type</span><span class="p">;</span> <span class="cm">/* 对象注册的GType类型 */</span>
+
+  <span class="cm">/*&lt; public &gt;*/</span> <span class="cm">/* with COW */</span>
+  <span class="n">gint</span>    <span class="n">refcount</span><span class="p">;</span> <span class="cm">/* 引用计数 */</span>
+  <span class="n">gint</span>    <span class="n">lockstate</span><span class="p">;</span> <span class="cm">/* 该对象锁状态，GstLockFlags */</span>
+  <span class="n">guint</span>   <span class="n">flags</span><span class="p">;</span> <span class="cm">/* 该对象flag，GstMiniObjectFlags */</span>
+
+  <span class="n">GstMiniObjectCopyFunction</span> <span class="n">copy</span><span class="p">;</span>
+  <span class="n">GstMiniObjectDisposeFunction</span> <span class="n">dispose</span><span class="p">;</span>
+  <span class="n">GstMiniObjectFreeFunction</span> <span class="n">free</span><span class="p">;</span>
+
+  <span class="cm">/* &lt; private &gt; */</span>
+  <span class="cm">/* Used to keep track of parents, weak ref notifies and qdata */</span>
+  <span class="n">guint</span> <span class="n">priv_uint</span><span class="p">;</span> <span class="cm">/* priv状态 这和私有Data状态有关，具体flag如 PRIV_DATA_STATE_LOCKED*/</span>
+  <span class="n">gpointer</span> <span class="n">priv_pointer</span><span class="p">;</span>  <span class="cm">/* 指向 */</span>
+<span class="p">};</span>
+
+<span class="cm">/* filename: gstminiobject.c */</span>
+<span class="k">typedef</span> <span class="k">struct</span> <span class="p">{</span>
+  <span class="n">GQuark</span> <span class="n">quark</span><span class="p">;</span>
+  <span class="n">GstMiniObjectNotify</span> <span class="n">notify</span><span class="p">;</span>
+  <span class="n">gpointer</span> <span class="n">data</span><span class="p">;</span>
+  <span class="n">GDestroyNotify</span> <span class="n">destroy</span><span class="p">;</span>
+<span class="p">}</span> <span class="n">GstQData</span><span class="p">;</span>
+
+<span class="k">typedef</span> <span class="k">struct</span> <span class="p">{</span>
+  <span class="cm">/* Atomic spinlock: 1 if locked, 0 otherwise */</span>
+  <span class="n">gint</span> <span class="n">parent_lock</span><span class="p">;</span>
+  <span class="n">guint</span> <span class="n">n_parents</span><span class="p">,</span> <span class="n">n_parents_len</span><span class="p">;</span>
+  <span class="n">GstMiniObject</span> <span class="o">**</span><span class="n">parents</span><span class="p">;</span>
+
+  <span class="n">guint</span> <span class="n">n_qdata</span><span class="p">,</span> <span class="n">n_qdata_len</span><span class="p">;</span>
+  <span class="n">GstQData</span> <span class="o">*</span><span class="n">qdata</span><span class="p">;</span>
+<span class="p">}</span> <span class="n">PrivData</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h2 id="3-gstminiobject对象相关函数总结">3 GstMiniObject对象相关函数总结</h2>
+
+<h3 id="31-初始化函数">3.1 初始化函数</h3>
+
+<p>该初始化函数仅仅就是把输入参数赋值给GstMiniObject结构体</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/**
+ * gst_mini_object_init: (skip)
+ * @brief: 用所需要的 copy、dispose、free 函数初始化一个GstMiniObject对象
+ * @mini_object: a #GstMiniObject
+ * @flags: initial #GstMiniObjectFlags
+ * @type: the #GType of the mini-object to create
+ * @copy_func: (allow-none): the copy function, or %NULL
+ * @dispose_func: (allow-none): the dispose function, or %NULL
+ * @free_func: (allow-none): the free function or %NULL
+ */</span>
+<span class="kt">void</span>
+<span class="nf">gst_mini_object_init</span> <span class="p">(</span><span class="n">GstMiniObject</span> <span class="o">*</span> <span class="n">mini_object</span><span class="p">,</span> <span class="n">guint</span> <span class="n">flags</span><span class="p">,</span> <span class="n">GType</span> <span class="n">type</span><span class="p">,</span>
+    <span class="n">GstMiniObjectCopyFunction</span> <span class="n">copy_func</span><span class="p">,</span>
+    <span class="n">GstMiniObjectDisposeFunction</span> <span class="n">dispose_func</span><span class="p">,</span>
+    <span class="n">GstMiniObjectFreeFunction</span> <span class="n">free_func</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="n">mini_object</span><span class="o">-&gt;</span><span class="n">type</span> <span class="o">=</span> <span class="n">type</span><span class="p">;</span>
+  <span class="n">mini_object</span><span class="o">-&gt;</span><span class="n">refcount</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="n">mini_object</span><span class="o">-&gt;</span><span class="n">lockstate</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="n">mini_object</span><span class="o">-&gt;</span><span class="n">flags</span> <span class="o">=</span> <span class="n">flags</span><span class="p">;</span>
+
+  <span class="n">mini_object</span><span class="o">-&gt;</span><span class="n">copy</span> <span class="o">=</span> <span class="n">copy_func</span><span class="p">;</span>
+  <span class="n">mini_object</span><span class="o">-&gt;</span><span class="n">dispose</span> <span class="o">=</span> <span class="n">dispose_func</span><span class="p">;</span>
+  <span class="n">mini_object</span><span class="o">-&gt;</span><span class="n">free</span> <span class="o">=</span> <span class="n">free_func</span><span class="p">;</span>
+
+  <span class="cm">/* 默认设定为没有父对象状态 */</span>
+  <span class="n">g_atomic_int_set</span> <span class="p">((</span><span class="n">gint</span> <span class="o">*</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">mini_object</span><span class="o">-&gt;</span><span class="n">priv_uint</span><span class="p">,</span>
+      <span class="n">PRIV_DATA_STATE_NO_PARENT</span><span class="p">);</span>
+  <span class="n">mini_object</span><span class="o">-&gt;</span><span class="n">priv_pointer</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+
+  <span class="n">GST_TRACER_MINI_OBJECT_CREATED</span> <span class="p">(</span><span class="n">mini_object</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="32-gstminiobject对象锁函数">3.2 GstMiniObject对象锁函数</h3>
+
+<p>根据GstLockFlags枚举类型，我们可以发现，一共有三种Flag，读、写和独有锁。</p>
+
+<p>操作的GstMiniObject成员的<code class="language-plaintext highlighter-rouge">lockstate</code>变量，该变量是gint类型，一共有4个字节。</p>
+
+<ul>
+  <li>
+    <p>第一个字节：存储读或者写状态，也就是0x01或者0x02。</p>
+  </li>
+  <li>
+    <p>第二个字节：比如说，有三个用户进行读，第二个字节就是存储有多少个用户进行读或者写。0x301表示三个用户就行读。</p>
+  </li>
+  <li>
+    <p>第三个字节：独有锁，有几个用户上独有锁，这个变量存储在第三个字节。0x20000。</p>
+  </li>
+</ul>
+
+<p>根据下面代码发现，如果处于写锁状态，还可以再上成功写锁状态。最好写锁和独有锁一起上。可以避免同时多个写锁上成功。</p>
+
+<h4 id="321-gst_mini_object_lock">3.2.1 gst_mini_object_lock</h4>
+
+<p>循环处理，最后 <code class="language-plaintext highlighter-rouge">g_atomic_int_compare_and_exchange</code> 是巧妙的多线程方式。</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/**
+ * @brief: 用指定的GstLockFlags锁定GstMiniObject对象的访问状态
+ * @note: lockstate是一个gint变量，该变量具有4个字节
+ *        第一个字节：标记读写状态 0x01是读，0x02是
+ *        第二个字节是：上了几个锁 LOCK_ONE （有几个对象上了锁） 0x100
+ *        第三个字节是：GST_LOCK_FLAG_EXCLUSIVE有几个 0x10000
+ * @return: 如果被锁成功，返回TRUE
+*/</span>
+<span class="n">gboolean</span>
+<span class="nf">gst_mini_object_lock</span> <span class="p">(</span><span class="n">GstMiniObject</span> <span class="o">*</span> <span class="n">object</span><span class="p">,</span> <span class="n">GstLockFlags</span> <span class="n">flags</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="n">guint</span> <span class="n">access_mode</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">newstate</span><span class="p">;</span>
+
+  <span class="cm">/* 检测object指针是否为NULL */</span>
+  <span class="n">g_return_val_if_fail</span> <span class="p">(</span><span class="n">object</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">FALSE</span><span class="p">);</span>
+  <span class="cm">/* 检查object对象可否能够进行上锁 */</span>
+  <span class="n">g_return_val_if_fail</span> <span class="p">(</span><span class="n">GST_MINI_OBJECT_IS_LOCKABLE</span> <span class="p">(</span><span class="n">object</span><span class="p">),</span> <span class="n">FALSE</span><span class="p">);</span>
+
+  <span class="cm">/* 如果该对象初始化flag就是只读，现在又要进行写锁，则返回FALSE */</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">G_UNLIKELY</span> <span class="p">(</span><span class="n">object</span><span class="o">-&gt;</span><span class="n">flags</span> <span class="o">&amp;</span> <span class="n">GST_MINI_OBJECT_FLAG_LOCK_READONLY</span> <span class="o">&amp;&amp;</span>
+          <span class="n">flags</span> <span class="o">&amp;</span> <span class="n">GST_LOCK_FLAG_WRITE</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">FALSE</span><span class="p">;</span>
+
+  <span class="k">do</span> <span class="p">{</span>
+    <span class="cm">/* 获取进行锁的模式, FLAG_MASK就是0xFF */</span>
+    <span class="n">access_mode</span> <span class="o">=</span> <span class="n">flags</span> <span class="o">&amp;</span> <span class="n">FLAG_MASK</span><span class="p">;</span>
+    <span class="cm">/* 获取该对象目前锁的状态，初始化的时候 lockstate = 0;  */</span>
+    <span class="n">newstate</span> <span class="o">=</span> <span class="n">state</span> <span class="o">=</span> <span class="p">(</span><span class="n">guint</span><span class="p">)</span> <span class="n">g_atomic_int_get</span> <span class="p">(</span><span class="o">&amp;</span><span class="n">object</span><span class="o">-&gt;</span><span class="n">lockstate</span><span class="p">);</span>
+
+    <span class="n">GST_CAT_TRACE</span> <span class="p">(</span><span class="n">GST_CAT_LOCKING</span><span class="p">,</span> <span class="s">"lock %p: state %08x, access_mode %u"</span><span class="p">,</span>
+        <span class="n">object</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">access_mode</span><span class="p">);</span>
+
+    <span class="cm">/* 如果传入参数独有锁，则执行 */</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">access_mode</span> <span class="o">&amp;</span> <span class="n">GST_LOCK_FLAG_EXCLUSIVE</span><span class="p">)</span> <span class="p">{</span>
+      <span class="cm">/* shared ref，读写独有锁占用的是Flag的前八位，共享引用计数占用的是16位以后 */</span>  
+      <span class="n">newstate</span> <span class="o">+=</span> <span class="n">SHARE_ONE</span><span class="p">;</span> <span class="cm">/* newstate = newstate + 0x10000*/</span>
+      <span class="n">access_mode</span> <span class="o">&amp;=</span> <span class="o">~</span><span class="n">GST_LOCK_FLAG_EXCLUSIVE</span><span class="p">;</span> <span class="cm">/* access_mode 已经获取了独有锁flag，去掉独有锁，查看还剩下什么flag */</span>
+    <span class="p">}</span>
+
+    <span class="cm">/**
+     * 如果对象已经处于写锁状态或者请求写锁，而且
+     * shared 计数 &gt;= 2 ，上锁失败
+    */</span>
+    <span class="k">if</span> <span class="p">(((</span><span class="n">state</span> <span class="o">&amp;</span> <span class="n">GST_LOCK_FLAG_WRITE</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span>
+            <span class="o">||</span> <span class="p">(</span><span class="n">access_mode</span> <span class="o">&amp;</span> <span class="n">GST_LOCK_FLAG_WRITE</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="o">&amp;&amp;</span> <span class="n">IS_SHARED</span> <span class="p">(</span><span class="n">newstate</span><span class="p">))</span>
+      <span class="k">goto</span> <span class="n">lock_failed</span><span class="p">;</span>
+    
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">access_mode</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">((</span><span class="n">state</span> <span class="o">&amp;</span> <span class="n">LOCK_FLAG_MASK</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* 该对象没有处于任何锁状态，也就是 state = 0 */</span>
+        <span class="cm">/* nothing mapped, set access_mode */</span>
+        <span class="n">newstate</span> <span class="o">|=</span> <span class="n">access_mode</span><span class="p">;</span> <span class="cm">/* 把请求上的锁，赋值给 newstate */</span>
+      <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="cm">/* access_mode must match */</span>
+        <span class="k">if</span> <span class="p">((</span><span class="n">state</span> <span class="o">&amp;</span> <span class="n">access_mode</span><span class="p">)</span> <span class="o">!=</span> <span class="n">access_mode</span><span class="p">)</span> <span class="cm">/* 具有写锁的时候不能上读锁，具有读锁的时候不能上写锁*/</span>
+          <span class="k">goto</span> <span class="n">lock_failed</span><span class="p">;</span>
+      <span class="p">}</span>
+      <span class="cm">/* increase refcount */</span>
+      <span class="n">newstate</span> <span class="o">+=</span> <span class="n">LOCK_ONE</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">}</span> <span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="n">g_atomic_int_compare_and_exchange</span> <span class="p">(</span><span class="o">&amp;</span><span class="n">object</span><span class="o">-&gt;</span><span class="n">lockstate</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span>
+          <span class="n">newstate</span><span class="p">));</span>
+
+  <span class="k">return</span> <span class="n">TRUE</span><span class="p">;</span>
+
+<span class="nl">lock_failed:</span>
+  <span class="p">{</span>
+    <span class="n">GST_CAT_DEBUG</span> <span class="p">(</span><span class="n">GST_CAT_LOCKING</span><span class="p">,</span>
+        <span class="s">"lock failed %p: state %08x, access_mode %u"</span><span class="p">,</span> <span class="n">object</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span>
+        <span class="n">access_mode</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">FALSE</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h4 id="322-gst_mini_object_unlock">3.2.2 gst_mini_object_unlock</h4>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="cm">/**
+ * @brief: 用指定的GstLockFlags解除GstMiniObject对象的访问状态
+*/</span>
+<span class="kt">void</span>
+<span class="nf">gst_mini_object_unlock</span> <span class="p">(</span><span class="n">GstMiniObject</span> <span class="o">*</span> <span class="n">object</span><span class="p">,</span> <span class="n">GstLockFlags</span> <span class="n">flags</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="n">guint</span> <span class="n">access_mode</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">newstate</span><span class="p">;</span>
+
+  <span class="n">g_return_if_fail</span> <span class="p">(</span><span class="n">object</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">);</span>
+  <span class="n">g_return_if_fail</span> <span class="p">(</span><span class="n">GST_MINI_OBJECT_IS_LOCKABLE</span> <span class="p">(</span><span class="n">object</span><span class="p">));</span>
+
+  <span class="k">do</span> <span class="p">{</span>
+    <span class="n">access_mode</span> <span class="o">=</span> <span class="n">flags</span> <span class="o">&amp;</span> <span class="n">FLAG_MASK</span><span class="p">;</span>
+    <span class="n">newstate</span> <span class="o">=</span> <span class="n">state</span> <span class="o">=</span> <span class="p">(</span><span class="n">guint</span><span class="p">)</span> <span class="n">g_atomic_int_get</span> <span class="p">(</span><span class="o">&amp;</span><span class="n">object</span><span class="o">-&gt;</span><span class="n">lockstate</span><span class="p">);</span>
+
+    <span class="n">GST_CAT_TRACE</span> <span class="p">(</span><span class="n">GST_CAT_LOCKING</span><span class="p">,</span> <span class="s">"unlock %p: state %08x, access_mode %u"</span><span class="p">,</span>
+        <span class="n">object</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">access_mode</span><span class="p">);</span>
+    
+    <span class="cm">/* 先去除独有锁的标记 */</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">access_mode</span> <span class="o">&amp;</span> <span class="n">GST_LOCK_FLAG_EXCLUSIVE</span><span class="p">)</span> <span class="p">{</span>
+      <span class="cm">/* shared counter */</span>
+      <span class="n">g_return_if_fail</span> <span class="p">(</span><span class="n">state</span> <span class="o">&gt;=</span> <span class="n">SHARE_ONE</span><span class="p">);</span>
+      <span class="n">newstate</span> <span class="o">-=</span> <span class="n">SHARE_ONE</span><span class="p">;</span>
+      <span class="n">access_mode</span> <span class="o">&amp;=</span> <span class="o">~</span><span class="n">GST_LOCK_FLAG_EXCLUSIVE</span><span class="p">;</span> <span class="cm">/* 去除传入参数中的独有锁 */</span>
+    <span class="p">}</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">access_mode</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">g_return_if_fail</span> <span class="p">((</span><span class="n">state</span> <span class="o">&amp;</span> <span class="n">access_mode</span><span class="p">)</span> <span class="o">==</span> <span class="n">access_mode</span><span class="p">);</span>
+      <span class="cm">/* decrease the refcount */</span>
+      <span class="n">newstate</span> <span class="o">-=</span> <span class="n">LOCK_ONE</span><span class="p">;</span>
+      <span class="cm">/* last refcount, unset access_mode */</span>
+      <span class="k">if</span> <span class="p">((</span><span class="n">newstate</span> <span class="o">&amp;</span> <span class="n">LOCK_FLAG_MASK</span><span class="p">)</span> <span class="o">==</span> <span class="n">access_mode</span><span class="p">)</span> <span class="cm">/* 如果是最后一个锁引用，把第一第二个字节置零 */</span>
+        <span class="n">newstate</span> <span class="o">&amp;=</span> <span class="o">~</span><span class="n">LOCK_FLAG_MASK</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">}</span> <span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="n">g_atomic_int_compare_and_exchange</span> <span class="p">(</span><span class="o">&amp;</span><span class="n">object</span><span class="o">-&gt;</span><span class="n">lockstate</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span>
+          <span class="n">newstate</span><span class="p">));</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="33-gstminiobject是否可写">3.3 GstMiniObject是否可写</h3>
+
+<ul>
+  <li>
+    <p>不可写状态：</p>
+
+    <p>1.这是一个能够上锁的GstMiniObject对象
+    如果被上两次独有锁，也就是处于两次共享状态，直接返回不可写</p>
+
+    <p>2.这是一个只读的GstMiniObject对象，引用计数不等于1，直接返回不可写</p>
+  </li>
+  <li>
+    <p>可写状况： 对象可锁，只有一个用户上独有锁或者对象只读，引用计数等于 1 的时候</p>
+
+    <ol>
+      <li>
+        <p>只有一个用户上独有锁，只有一个父对象且父对象本身是可写的，返回可写</p>
+      </li>
+      <li>
+        <p>只有一个用户上独有锁，没有父对象，返回可写。</p>
+      </li>
+    </ol>
+  </li>
+</ul>
+
+<h4 id="331-gst_mini_object_is_writable">3.3.1 gst_mini_object_is_writable</h4>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/**
+ * gst_mini_object_is_writable:
+ * @mini_object: 要检查的小型对象
+ *
+ * 如果 @mini_object 设置了 LOCKABLE 标志，检查当前对 @object 的独占锁定是否是唯一的，
+ * 这意味着对对象的更改不会对其他任何对象可见。
+ *
+ * 如果没有设置 LOCKABLE 标志，检查 @mini_object 的引用计数是否正好为 1，
+ * 这意味着没有其他对该对象的引用，因此该对象是可写的。
+ *
+ * 修改小型对象应该只在确认它是可写的之后进行。
+ *
+ * 返回：如果对象是可写的，则为 %TRUE。
+ */</span>
+
+<span class="n">gboolean</span>
+<span class="nf">gst_mini_object_is_writable</span> <span class="p">(</span><span class="k">const</span> <span class="n">GstMiniObject</span> <span class="o">*</span> <span class="n">mini_object</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="n">gboolean</span> <span class="n">result</span><span class="p">;</span>
+  <span class="n">gint</span> <span class="n">priv_state</span><span class="p">;</span>
+
+  <span class="n">g_return_val_if_fail</span> <span class="p">(</span><span class="n">mini_object</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">FALSE</span><span class="p">);</span>
+
+  <span class="cm">/* 检查 GstMiniObject 对象创建的时候，是否标记了能够锁的Flag */</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">GST_MINI_OBJECT_IS_LOCKABLE</span> <span class="p">(</span><span class="n">mini_object</span><span class="p">))</span> <span class="p">{</span> <span class="cm">/* 创建的时候是：GST_MINI_OBJECT_FLAG_LOCKABLE */</span>
+    <span class="cm">/* 是否处于被共享状态 */</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="o">!</span><span class="n">IS_SHARED</span> <span class="p">(</span><span class="n">g_atomic_int_get</span> <span class="p">(</span><span class="o">&amp;</span><span class="n">mini_object</span><span class="o">-&gt;</span><span class="n">lockstate</span><span class="p">));</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span> <span class="cm">/* 创建的时候是其他Flag */</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="p">(</span><span class="n">GST_MINI_OBJECT_REFCOUNT_VALUE</span> <span class="p">(</span><span class="n">mini_object</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="cm">/**
+   * SHARED只跟独有锁有关，如果该对象被两个用户独有，就不能被写。
+  */</span>
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">result</span><span class="p">)</span> <span class="cm">/* 如果处于共享状态，那就一定是可写的，直接返回 FALSE */</span>
+    <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+  
+  <span class="cm">/* 如果不是 PRIV_DATA_STATE_PARENTS_OR_QDATA，堵塞等待可切换到 PRIV_DATA_STATE_LOCKED状态， 返回的 priv_state 是锁之前的状态*/</span>
+  <span class="n">priv_state</span> <span class="o">=</span> <span class="n">lock_priv_pointer</span> <span class="p">(</span><span class="n">GST_MINI_OBJECT_CAST</span> <span class="p">(</span><span class="n">mini_object</span><span class="p">));</span>
+
+    <span class="cm">/* 现在我们要么需要检查完整的结构体以及其中的所有父对象，
+     * 要么如果确实只有一个父对象，我们可以检查那一个 */</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">priv_state</span> <span class="o">==</span> <span class="n">PRIV_DATA_STATE_PARENTS_OR_QDATA</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">PrivData</span> <span class="o">*</span><span class="n">priv_data</span> <span class="o">=</span> <span class="n">mini_object</span><span class="o">-&gt;</span><span class="n">priv_pointer</span><span class="p">;</span>
+
+    <span class="cm">/* Lock parents（ parent_lock 对应 1 是 锁， 0 不是锁 ） */</span>
+    <span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="n">g_atomic_int_compare_and_exchange</span> <span class="p">(</span><span class="o">&amp;</span><span class="n">priv_data</span><span class="o">-&gt;</span><span class="n">parent_lock</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">));</span>
+    
+    <span class="cm">/**
+     * @note: 如果我们有一个父对象，我们只有在那个父对象是可写的情况下才是可写的。
+     *        我们没有父对象，我们就是可写的
+     *        否则，如果我们有多个父对象，我们就不是可写的
+    */</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">priv_data</span><span class="o">-&gt;</span><span class="n">n_parents</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
+      <span class="n">result</span> <span class="o">=</span> <span class="n">gst_mini_object_is_writable</span> <span class="p">(</span><span class="n">priv_data</span><span class="o">-&gt;</span><span class="n">parents</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span> <span class="cm">/* 对应基本概念中的：只有一个父对象且该父对象本身是可写的时，对象可写*/</span>
+    <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">priv_data</span><span class="o">-&gt;</span><span class="n">n_parents</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+      <span class="n">result</span> <span class="o">=</span> <span class="n">TRUE</span><span class="p">;</span>
+    <span class="k">else</span>
+      <span class="n">result</span> <span class="o">=</span> <span class="n">FALSE</span><span class="p">;</span>
+
+    <span class="cm">/* Unlock again（恢复到锁之前的状态） */</span>
+    <span class="n">g_atomic_int_set</span> <span class="p">(</span><span class="o">&amp;</span><span class="n">priv_data</span><span class="o">-&gt;</span><span class="n">parent_lock</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">priv_state</span> <span class="o">==</span> <span class="n">PRIV_DATA_STATE_ONE_PARENT</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">result</span> <span class="o">=</span> <span class="n">gst_mini_object_is_writable</span> <span class="p">(</span><span class="n">mini_object</span><span class="o">-&gt;</span><span class="n">priv_pointer</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="n">g_assert</span> <span class="p">(</span><span class="n">priv_state</span> <span class="o">==</span> <span class="n">PRIV_DATA_STATE_NO_PARENT</span><span class="p">);</span>
+      <span class="n">result</span> <span class="o">=</span> <span class="n">TRUE</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="cm">/* Unlock again （恢复到锁之前的状态） */</span>
+    <span class="n">g_atomic_int_set</span> <span class="p">((</span><span class="n">gint</span> <span class="o">*</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">mini_object</span><span class="o">-&gt;</span><span class="n">priv_uint</span><span class="p">,</span> <span class="n">priv_state</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h4 id="332-gst_mini_object_make_writable">3.3.2 gst_mini_object_make_writable</h4>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/**
+ * gst_mini_object_make_writable: (跳过)
+ * @mini_object: (完全转移): 要使其可写的GstMiniObject对象
+ *
+ * 检查一个对象是否可写。如果不可写，将创建并返回一个可写的副本。
+ * 这会放弃对原始GstMiniObject对象的引用，并返回对新对象的引用。
+ *
+ * 多线程安全
+ *
+ * 返回：(完全转移) (可空)：一个可写的GstMiniObject对象（可能与 @mini_object 相同，也可能不同）
+ *     或者如果需要复制但不可能时返回 %NULL。
+ */</span>
+
+<span class="n">GstMiniObject</span> <span class="o">*</span>
+<span class="nf">gst_mini_object_make_writable</span> <span class="p">(</span><span class="n">GstMiniObject</span> <span class="o">*</span> <span class="n">mini_object</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="n">GstMiniObject</span> <span class="o">*</span><span class="n">ret</span><span class="p">;</span>
+
+  <span class="n">g_return_val_if_fail</span> <span class="p">(</span><span class="n">mini_object</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="n">gst_mini_object_is_writable</span> <span class="p">(</span><span class="n">mini_object</span><span class="p">))</span> <span class="p">{</span>
+    <span class="n">ret</span> <span class="o">=</span> <span class="n">mini_object</span><span class="p">;</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="n">ret</span> <span class="o">=</span> <span class="n">gst_mini_object_copy</span> <span class="p">(</span><span class="n">mini_object</span><span class="p">);</span>
+    <span class="n">GST_CAT_DEBUG</span> <span class="p">(</span><span class="n">GST_CAT_PERFORMANCE</span><span class="p">,</span> <span class="s">"copy %s miniobject %p -&gt; %p"</span><span class="p">,</span>
+        <span class="n">g_type_name</span> <span class="p">(</span><span class="n">GST_MINI_OBJECT_TYPE</span> <span class="p">(</span><span class="n">mini_object</span><span class="p">)),</span> <span class="n">mini_object</span><span class="p">,</span> <span class="n">ret</span><span class="p">);</span>
+    <span class="n">gst_mini_object_unref</span> <span class="p">(</span><span class="n">mini_object</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="k">return</span> <span class="n">ret</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="34-gstminiobject父对象">3.4 GstMiniObject父对象</h3>
+
+<p>这里其实没有什么好讲的，具体函数可以看源代码。</p>
+
+<p><strong>注意</strong>：</p>
+<ul>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">gst_mini_object_add_parent</code> 函数将 @parent 添加为 @object 的一个父对象。</p>
+  </li>
+  <li>
+    <p>拥有一个或多个父对象会影响 GstMiniObject 的可写性：如果一个 @parent 不可写，那么 @GstMiniObject 也不可写，无论其引用计数是多少。@GstMiniObject 只有在所有父对象都是可写的，并且其自身的引用计数正好为1时，才是可写的。</p>
+  </li>
+  <li>
+    <p>注意：这个函数不会获取 @parent 的所有权，也不会增加额外的引用计数。</p>
+  </li>
+  <li>
+    <p>调用者有责任在之后的某个时间点移除父对象。</p>
+  </li>
+</ul>
+
+<h4 id="341-gst_mini_object_add_parent">3.4.1 gst_mini_object_add_parent</h4>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/**
+ * gst_mini_object_add_parent:
+ * @object: 一个 #GstMiniObject
+ * @parent: 一个父 #GstMiniObject
+ *
+ * 这个函数将 @parent 添加为 @object 的一个父对象。拥有一个或多个父对象会影响
+ * @object 的可写性：如果一个 @parent 不可写，那么 @object 也不可写，
+ * 无论其引用计数是多少。@object 只有在所有父对象都是可写的，并且其自身的引用计数
+ * 正好为1时，才是可写的。
+ *
+ * 注意：这个函数不会获取 @parent 的所有权，也不会增加额外的引用计数。
+ * 调用者有责任在之后的某个时间点移除父对象。
+ *
+ * 自版本 1.16 起可用
+ */</span>
+
+<span class="kt">void</span>
+<span class="nf">gst_mini_object_add_parent</span> <span class="p">(</span><span class="n">GstMiniObject</span> <span class="o">*</span> <span class="n">object</span><span class="p">,</span> <span class="n">GstMiniObject</span> <span class="o">*</span> <span class="n">parent</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="n">gint</span> <span class="n">priv_state</span><span class="p">;</span>
+
+  <span class="n">g_return_if_fail</span> <span class="p">(</span><span class="n">object</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">);</span>
+
+  <span class="n">GST_CAT_TRACE</span> <span class="p">(</span><span class="n">GST_CAT_REFCOUNTING</span><span class="p">,</span> <span class="s">"adding parent %p to object %p"</span><span class="p">,</span> <span class="n">parent</span><span class="p">,</span>
+      <span class="n">object</span><span class="p">);</span>
+
+  <span class="n">priv_state</span> <span class="o">=</span> <span class="n">lock_priv_pointer</span> <span class="p">(</span><span class="n">object</span><span class="p">);</span>
+  
+  <span class="cm">/*如果已经有一个父对象，现在需要分配整个（完整）结构体*/</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">priv_state</span> <span class="o">==</span> <span class="n">PRIV_DATA_STATE_ONE_PARENT</span><span class="p">)</span> <span class="p">{</span>
+    <span class="cm">/* Unlock again */</span>
+    <span class="n">g_atomic_int_set</span> <span class="p">((</span><span class="n">gint</span> <span class="o">*</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">object</span><span class="o">-&gt;</span><span class="n">priv_uint</span><span class="p">,</span> <span class="n">priv_state</span><span class="p">);</span>
+
+    <span class="n">ensure_priv_data</span> <span class="p">(</span><span class="n">object</span><span class="p">);</span>
+    <span class="n">priv_state</span> <span class="o">=</span> <span class="n">PRIV_DATA_STATE_PARENTS_OR_QDATA</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="cm">/* 现在我们要么需要将新的父对象添加到完整的结构体中，要么将我们唯一的一个父对象添加到指针字段中 */</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">priv_state</span> <span class="o">==</span> <span class="n">PRIV_DATA_STATE_PARENTS_OR_QDATA</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">PrivData</span> <span class="o">*</span><span class="n">priv_data</span> <span class="o">=</span> <span class="n">object</span><span class="o">-&gt;</span><span class="n">priv_pointer</span><span class="p">;</span>
+
+    <span class="cm">/* Lock parents */</span>
+    <span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="n">g_atomic_int_compare_and_exchange</span> <span class="p">(</span><span class="o">&amp;</span><span class="n">priv_data</span><span class="o">-&gt;</span><span class="n">parent_lock</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">));</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">priv_data</span><span class="o">-&gt;</span><span class="n">n_parents</span> <span class="o">&gt;=</span> <span class="n">priv_data</span><span class="o">-&gt;</span><span class="n">n_parents_len</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">priv_data</span><span class="o">-&gt;</span><span class="n">n_parents_len</span> <span class="o">*=</span> <span class="mi">2</span><span class="p">;</span>
+      <span class="k">if</span> <span class="p">(</span><span class="n">priv_data</span><span class="o">-&gt;</span><span class="n">n_parents_len</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">priv_data</span><span class="o">-&gt;</span><span class="n">n_parents_len</span> <span class="o">=</span> <span class="mi">16</span><span class="p">;</span>
+
+      <span class="n">priv_data</span><span class="o">-&gt;</span><span class="n">parents</span> <span class="o">=</span>
+          <span class="n">g_realloc</span> <span class="p">(</span><span class="n">priv_data</span><span class="o">-&gt;</span><span class="n">parents</span><span class="p">,</span>
+          <span class="n">priv_data</span><span class="o">-&gt;</span><span class="n">n_parents_len</span> <span class="o">*</span> <span class="k">sizeof</span> <span class="p">(</span><span class="n">GstMiniObject</span> <span class="o">*</span><span class="p">));</span>
+    <span class="p">}</span>
+    <span class="n">priv_data</span><span class="o">-&gt;</span><span class="n">parents</span><span class="p">[</span><span class="n">priv_data</span><span class="o">-&gt;</span><span class="n">n_parents</span><span class="p">]</span> <span class="o">=</span> <span class="n">parent</span><span class="p">;</span>
+    <span class="n">priv_data</span><span class="o">-&gt;</span><span class="n">n_parents</span><span class="o">++</span><span class="p">;</span>
+
+    <span class="cm">/* Unlock again */</span>
+    <span class="n">g_atomic_int_set</span> <span class="p">(</span><span class="o">&amp;</span><span class="n">priv_data</span><span class="o">-&gt;</span><span class="n">parent_lock</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">priv_state</span> <span class="o">==</span> <span class="n">PRIV_DATA_STATE_NO_PARENT</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">object</span><span class="o">-&gt;</span><span class="n">priv_pointer</span> <span class="o">=</span> <span class="n">parent</span><span class="p">;</span>
+
+    <span class="cm">/* Unlock again */</span>
+    <span class="n">g_atomic_int_set</span> <span class="p">((</span><span class="n">gint</span> <span class="o">*</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">object</span><span class="o">-&gt;</span><span class="n">priv_uint</span><span class="p">,</span> <span class="n">PRIV_DATA_STATE_ONE_PARENT</span><span class="p">);</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="n">g_assert_not_reached</span> <span class="p">();</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h4 id="342-gst_mini_object_remove_parent">3.4.2 gst_mini_object_remove_parent</h4>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/**
+ * gst_mini_object_remove_parent:
+ * @object: a #GstMiniObject
+ * @parent: a parent #GstMiniObject
+ *
+ * This removes @parent as a parent for @object. See
+ * gst_mini_object_add_parent().
+ *
+ * Since: 1.16
+ */</span>
+<span class="kt">void</span>
+<span class="nf">gst_mini_object_remove_parent</span> <span class="p">(</span><span class="n">GstMiniObject</span> <span class="o">*</span> <span class="n">object</span><span class="p">,</span> <span class="n">GstMiniObject</span> <span class="o">*</span> <span class="n">parent</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="n">gint</span> <span class="n">priv_state</span><span class="p">;</span>
+
+  <span class="n">g_return_if_fail</span> <span class="p">(</span><span class="n">object</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">);</span>
+
+  <span class="n">GST_CAT_TRACE</span> <span class="p">(</span><span class="n">GST_CAT_REFCOUNTING</span><span class="p">,</span> <span class="s">"removing parent %p from object %p"</span><span class="p">,</span>
+      <span class="n">parent</span><span class="p">,</span> <span class="n">object</span><span class="p">);</span>
+
+  <span class="n">priv_state</span> <span class="o">=</span> <span class="n">lock_priv_pointer</span> <span class="p">(</span><span class="n">object</span><span class="p">);</span>
+
+  <span class="cm">/* 现在我们必须将新的父元素添加到完整的结构中，或者将我们唯一的父元素添加到指针字段中 */</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">priv_state</span> <span class="o">==</span> <span class="n">PRIV_DATA_STATE_PARENTS_OR_QDATA</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">PrivData</span> <span class="o">*</span><span class="n">priv_data</span> <span class="o">=</span> <span class="n">object</span><span class="o">-&gt;</span><span class="n">priv_pointer</span><span class="p">;</span>
+    <span class="n">guint</span> <span class="n">i</span><span class="p">;</span>
+
+    <span class="cm">/* Lock parents */</span>
+    <span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="n">g_atomic_int_compare_and_exchange</span> <span class="p">(</span><span class="o">&amp;</span><span class="n">priv_data</span><span class="o">-&gt;</span><span class="n">parent_lock</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">));</span>
+
+    <span class="cm">/* 在parent数组里面找到要要删除的那个parent */</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">priv_data</span><span class="o">-&gt;</span><span class="n">n_parents</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+      <span class="k">if</span> <span class="p">(</span><span class="n">parent</span> <span class="o">==</span> <span class="n">priv_data</span><span class="o">-&gt;</span><span class="n">parents</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+        <span class="k">break</span><span class="p">;</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">!=</span> <span class="n">priv_data</span><span class="o">-&gt;</span><span class="n">n_parents</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">priv_data</span><span class="o">-&gt;</span><span class="n">n_parents</span><span class="o">--</span><span class="p">;</span>
+      <span class="k">if</span> <span class="p">(</span><span class="n">priv_data</span><span class="o">-&gt;</span><span class="n">n_parents</span> <span class="o">!=</span> <span class="n">i</span><span class="p">)</span>
+        <span class="n">priv_data</span><span class="o">-&gt;</span><span class="n">parents</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">priv_data</span><span class="o">-&gt;</span><span class="n">parents</span><span class="p">[</span><span class="n">priv_data</span><span class="o">-&gt;</span><span class="n">n_parents</span><span class="p">];</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="n">g_warning</span> <span class="p">(</span><span class="s">"%s: couldn't find parent %p (object:%p)"</span><span class="p">,</span> <span class="n">G_STRFUNC</span><span class="p">,</span>
+          <span class="n">object</span><span class="p">,</span> <span class="n">parent</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="cm">/* Unlock again */</span>
+    <span class="n">g_atomic_int_set</span> <span class="p">(</span><span class="o">&amp;</span><span class="n">priv_data</span><span class="o">-&gt;</span><span class="n">parent_lock</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">priv_state</span> <span class="o">==</span> <span class="n">PRIV_DATA_STATE_ONE_PARENT</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">object</span><span class="o">-&gt;</span><span class="n">priv_pointer</span> <span class="o">!=</span> <span class="n">parent</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">g_warning</span> <span class="p">(</span><span class="s">"%s: couldn't find parent %p (object:%p)"</span><span class="p">,</span> <span class="n">G_STRFUNC</span><span class="p">,</span>
+          <span class="n">object</span><span class="p">,</span> <span class="n">parent</span><span class="p">);</span>
+      <span class="cm">/* Unlock again */</span>
+      <span class="n">g_atomic_int_set</span> <span class="p">((</span><span class="n">gint</span> <span class="o">*</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">object</span><span class="o">-&gt;</span><span class="n">priv_uint</span><span class="p">,</span> <span class="n">priv_state</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="n">object</span><span class="o">-&gt;</span><span class="n">priv_pointer</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+      <span class="cm">/* Unlock again */</span>
+      <span class="n">g_atomic_int_set</span> <span class="p">((</span><span class="n">gint</span> <span class="o">*</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">object</span><span class="o">-&gt;</span><span class="n">priv_uint</span><span class="p">,</span>
+          <span class="n">PRIV_DATA_STATE_NO_PARENT</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="cm">/* Unlock again */</span>
+    <span class="n">g_atomic_int_set</span> <span class="p">((</span><span class="n">gint</span> <span class="o">*</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">object</span><span class="o">-&gt;</span><span class="n">priv_uint</span><span class="p">,</span> <span class="n">PRIV_DATA_STATE_NO_PARENT</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="35-gstminiobject对的gstqdata">3.5 GstMiniObject对的GstQData</h3>
+
+<h4 id="351-gst_mini_object_set_qdata">3.5.1 gst_mini_object_set_qdata</h4>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/**
+ * gst_mini_object_set_qdata:
+ * @object: 一个 #GstMiniObject
+ * @quark: 一个 #GQuark，用于命名用户数据指针
+ * @data: 一个不透明的用户数据指针
+ * @destroy: 当 @data 需要被释放时调用的函数，以 @data 作为参数
+ *
+ * 这个函数在一个GstMiniObject上设置一个不透明的、命名的指针。
+ * 名称通过一个 #GQuark 来指定（可以通过 g_quark_from_static_string() 等方式获取），
+ * 而指针可以通过 gst_mini_object_get_qdata() 从 @object 中获取，直到 @object 被销毁。
+ * 如果设置了之前已经设置的用户数据指针，它会覆盖（释放）旧的指针设置，使用 %NULL 作为指针
+ * 实际上会移除存储的数据。
+ *
+ * 当 @object 被销毁，或者数据被通过具有相同 @quark 的 gst_mini_object_set_qdata() 调用覆盖时，
+ * 可以指定 @destroy，它会以 @data 作为参数调用。
+ */</span>
+
+<span class="kt">void</span>
+<span class="nf">gst_mini_object_set_qdata</span> <span class="p">(</span><span class="n">GstMiniObject</span> <span class="o">*</span> <span class="n">object</span><span class="p">,</span> <span class="n">GQuark</span> <span class="n">quark</span><span class="p">,</span>
+    <span class="n">gpointer</span> <span class="n">data</span><span class="p">,</span> <span class="n">GDestroyNotify</span> <span class="n">destroy</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="n">gint</span> <span class="n">i</span><span class="p">;</span>
+  <span class="n">gpointer</span> <span class="n">old_data</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+  <span class="n">GDestroyNotify</span> <span class="n">old_notify</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+
+  <span class="n">g_return_if_fail</span> <span class="p">(</span><span class="n">object</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">);</span>
+  <span class="n">g_return_if_fail</span> <span class="p">(</span><span class="n">quark</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">);</span>
+
+  <span class="n">G_LOCK</span> <span class="p">(</span><span class="n">qdata_mutex</span><span class="p">);</span>
+  <span class="k">if</span> <span class="p">((</span><span class="n">i</span> <span class="o">=</span> <span class="n">find_notify</span> <span class="p">(</span><span class="n">object</span><span class="p">,</span> <span class="n">quark</span><span class="p">,</span> <span class="n">FALSE</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">))</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">PrivData</span> <span class="o">*</span><span class="n">priv_data</span> <span class="o">=</span> <span class="n">object</span><span class="o">-&gt;</span><span class="n">priv_pointer</span><span class="p">;</span>
+
+    <span class="n">old_data</span> <span class="o">=</span> <span class="n">QDATA_DATA</span> <span class="p">(</span><span class="n">priv_data</span><span class="p">,</span> <span class="n">i</span><span class="p">);</span>
+    <span class="n">old_notify</span> <span class="o">=</span> <span class="n">QDATA_DESTROY</span> <span class="p">(</span><span class="n">priv_data</span><span class="p">,</span> <span class="n">i</span><span class="p">);</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">data</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span>
+      <span class="n">remove_notify</span> <span class="p">(</span><span class="n">object</span><span class="p">,</span> <span class="n">i</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">data</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span>
+    <span class="n">set_notify</span> <span class="p">(</span><span class="n">object</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">quark</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">destroy</span><span class="p">);</span>
+  <span class="n">G_UNLOCK</span> <span class="p">(</span><span class="n">qdata_mutex</span><span class="p">);</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="n">old_notify</span><span class="p">)</span>
+    <span class="n">old_notify</span> <span class="p">(</span><span class="n">old_data</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h4 id="352-gst_mini_object_get_qdata">3.5.2 gst_mini_object_get_qdata</h4>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/**
+ * gst_mini_object_get_qdata:
+ * @object: 用于从中获取存储的用户数据指针的 GstMiniObject
+ * @quark: 一个 #GQuark，用于命名用户数据指针
+ *
+ * 这个函数用于获取通过 gst_mini_object_set_qdata() 存储的用户数据指针。
+ *
+ * 返回值：(transfer none) (nullable)：设置的用户数据指针，或者 %NULL
+ */</span>
+<span class="n">gpointer</span>
+<span class="nf">gst_mini_object_get_qdata</span> <span class="p">(</span><span class="n">GstMiniObject</span> <span class="o">*</span> <span class="n">object</span><span class="p">,</span> <span class="n">GQuark</span> <span class="n">quark</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="n">guint</span> <span class="n">i</span><span class="p">;</span>
+  <span class="n">gpointer</span> <span class="n">result</span><span class="p">;</span>
+
+  <span class="n">g_return_val_if_fail</span> <span class="p">(</span><span class="n">object</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+  <span class="n">g_return_val_if_fail</span> <span class="p">(</span><span class="n">quark</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+
+  <span class="n">G_LOCK</span> <span class="p">(</span><span class="n">qdata_mutex</span><span class="p">);</span>
+  <span class="k">if</span> <span class="p">((</span><span class="n">i</span> <span class="o">=</span> <span class="n">find_notify</span> <span class="p">(</span><span class="n">object</span><span class="p">,</span> <span class="n">quark</span><span class="p">,</span> <span class="n">FALSE</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">))</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">PrivData</span> <span class="o">*</span><span class="n">priv_data</span> <span class="o">=</span> <span class="n">object</span><span class="o">-&gt;</span><span class="n">priv_pointer</span><span class="p">;</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">QDATA_DATA</span> <span class="p">(</span><span class="n">priv_data</span><span class="p">,</span> <span class="n">i</span><span class="p">);</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="n">G_UNLOCK</span> <span class="p">(</span><span class="n">qdata_mutex</span><span class="p">);</span>
+
+  <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h4 id="353-gst_mini_object_steal_qdata">3.5.3 gst_mini_object_steal_qdata</h4>
+
+<p><strong>注意</strong>： 从<code class="language-plaintext highlighter-rouge">GstQData *qdata</code>移除匹配的qdata，并且不触发调用<code class="language-plaintext highlighter-rouge">destroy</code>函数</p>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/**
+ * gst_mini_object_steal_qdata:
+ * @object: 用于从中获取存储的用户数据指针的 GstMiniObject
+ * @quark: 一个 #GQuark，用于命名用户数据指针
+ *
+ * 这个函数用于获取通过 gst_mini_object_set_qdata() 存储的用户数据指针，
+ * 并从 @object 中移除这些数据，同时不调用其 `destroy()` 函数（如果设置了的话）。
+ *
+ * 返回值：(transfer full) (nullable)：设置的用户数据指针，或者 %NULL
+ */</span>
+<span class="n">gpointer</span>
+<span class="nf">gst_mini_object_steal_qdata</span> <span class="p">(</span><span class="n">GstMiniObject</span> <span class="o">*</span> <span class="n">object</span><span class="p">,</span> <span class="n">GQuark</span> <span class="n">quark</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="n">guint</span> <span class="n">i</span><span class="p">;</span>
+  <span class="n">gpointer</span> <span class="n">result</span><span class="p">;</span>
+
+  <span class="n">g_return_val_if_fail</span> <span class="p">(</span><span class="n">object</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+  <span class="n">g_return_val_if_fail</span> <span class="p">(</span><span class="n">quark</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+
+  <span class="n">G_LOCK</span> <span class="p">(</span><span class="n">qdata_mutex</span><span class="p">);</span>
+  <span class="k">if</span> <span class="p">((</span><span class="n">i</span> <span class="o">=</span> <span class="n">find_notify</span> <span class="p">(</span><span class="n">object</span><span class="p">,</span> <span class="n">quark</span><span class="p">,</span> <span class="n">FALSE</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">))</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">PrivData</span> <span class="o">*</span><span class="n">priv_data</span> <span class="o">=</span> <span class="n">object</span><span class="o">-&gt;</span><span class="n">priv_pointer</span><span class="p">;</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">QDATA_DATA</span> <span class="p">(</span><span class="n">priv_data</span><span class="p">,</span> <span class="n">i</span><span class="p">);</span>
+    <span class="n">remove_notify</span> <span class="p">(</span><span class="n">object</span><span class="p">,</span> <span class="n">i</span><span class="p">);</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="n">G_UNLOCK</span> <span class="p">(</span><span class="n">qdata_mutex</span><span class="p">);</span>
+
+  <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="36-gstminiobject对象的虚引用">3.6 GstMiniObject对象的虚引用</h3>
+
+<h4 id="361-gst_mini_object_weak_ref">3.6.1 gst_mini_object_weak_ref</h4>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/**
+ * gst_mini_object_weak_ref: (skip)
+ * @object: 要弱引用的 #GstMiniObject
+ * @notify: 在GstMiniObject被释放之前调用的回调函数
+ * @data: 传递给回调函数的额外数据
+ *
+ * 在一个GstMiniObject对象上添加一个弱引用回调函数。弱引用用于在GstMiniObject对象被销毁时进行通知。
+ * 它们被称为 "弱引用"，因为它们允许您安全地持有对GstMiniObject对象的指针，
+ * 而不需要调用 gst_mini_object_ref()（gst_mini_object_ref() 添加强引用，
+ * 即强制对象保持活动状态）。
+ */</span>
+<span class="kt">void</span>
+<span class="nf">gst_mini_object_weak_ref</span> <span class="p">(</span><span class="n">GstMiniObject</span> <span class="o">*</span> <span class="n">object</span><span class="p">,</span>
+    <span class="n">GstMiniObjectNotify</span> <span class="n">notify</span><span class="p">,</span> <span class="n">gpointer</span> <span class="n">data</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="n">g_return_if_fail</span> <span class="p">(</span><span class="n">object</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">);</span>
+  <span class="n">g_return_if_fail</span> <span class="p">(</span><span class="n">notify</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">);</span>
+  <span class="n">g_return_if_fail</span> <span class="p">(</span><span class="n">GST_MINI_OBJECT_REFCOUNT_VALUE</span> <span class="p">(</span><span class="n">object</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">1</span><span class="p">);</span>
+
+  <span class="n">G_LOCK</span> <span class="p">(</span><span class="n">qdata_mutex</span><span class="p">);</span>
+  <span class="n">set_notify</span> <span class="p">(</span><span class="n">object</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">weak_ref_quark</span><span class="p">,</span> <span class="n">notify</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+  <span class="n">G_UNLOCK</span> <span class="p">(</span><span class="n">qdata_mutex</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<h4 id="362-gst_mini_object_weak_unref">3.6.2 gst_mini_object_weak_unref</h4>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/**
+ * gst_mini_object_weak_unref: (skip)
+ * @object: 用于移除弱引用的 #GstMiniObject
+ * @notify: 要搜索的回调函数
+ * @data: 要搜索的数据
+ *
+ * 从GstMiniObject对象中移除一个弱引用回调。
+ */</span>
+<span class="kt">void</span>
+<span class="nf">gst_mini_object_weak_unref</span> <span class="p">(</span><span class="n">GstMiniObject</span> <span class="o">*</span> <span class="n">object</span><span class="p">,</span>
+    <span class="n">GstMiniObjectNotify</span> <span class="n">notify</span><span class="p">,</span> <span class="n">gpointer</span> <span class="n">data</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="n">gint</span> <span class="n">i</span><span class="p">;</span>
+
+  <span class="n">g_return_if_fail</span> <span class="p">(</span><span class="n">object</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">);</span>
+  <span class="n">g_return_if_fail</span> <span class="p">(</span><span class="n">notify</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">);</span>
+
+  <span class="n">G_LOCK</span> <span class="p">(</span><span class="n">qdata_mutex</span><span class="p">);</span>
+  <span class="k">if</span> <span class="p">((</span><span class="n">i</span> <span class="o">=</span> <span class="n">find_notify</span> <span class="p">(</span><span class="n">object</span><span class="p">,</span> <span class="n">weak_ref_quark</span><span class="p">,</span> <span class="n">TRUE</span><span class="p">,</span> <span class="n">notify</span><span class="p">,</span> <span class="n">data</span><span class="p">))</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">remove_notify</span> <span class="p">(</span><span class="n">object</span><span class="p">,</span> <span class="n">i</span><span class="p">);</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="n">g_warning</span> <span class="p">(</span><span class="s">"%s: couldn't find weak ref %p (object:%p data:%p)"</span><span class="p">,</span> <span class="n">G_STRFUNC</span><span class="p">,</span>
+        <span class="n">notify</span><span class="p">,</span> <span class="n">object</span><span class="p">,</span> <span class="n">data</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="n">G_UNLOCK</span> <span class="p">(</span><span class="n">qdata_mutex</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+
+    </div>
+
+</article>
+<div class="post-nav"><a class="previous" href="/gstreamer%E6%A0%B8%E5%BF%83%E5%AF%B9%E8%B1%A1/2023/11/20/1-GstStructure.html" title="一、GstStructure">一、GstStructure</a><a class="next" href="/c%E8%AF%AD%E8%A8%80/2023/11/22/1-valist%E9%98%9F%E5%8F%AF%E5%8F%98%E5%8F%82%E6%95%B0%E7%9A%84%E5%A4%84%E7%90%86.html" title="一、valist的使用方法（队可变参数的处理）">一、valist的使用方法（队可变参数的处理）</a></div><!--<div class="post-related">
+      <div>Related Articles</div>
+      <ul>
+        <li><a class="post-link" href="/gstreamer%E6%A0%B8%E5%BF%83%E5%AF%B9%E8%B1%A1/2023/12/06/20-GstEvent.html" title="一、valist的使用方法（队可变参数的处理）">二十、GstEvent</a></li><li><a class="post-link" href="/%E6%97%A5%E4%B9%8B%E6%BC%AB%E5%BD%95/2023/06/01/C%E8%AF%AD%E8%A8%80%E7%BC%96%E7%A8%8B%E6%B3%A8%E9%87%8A%E8%A7%84%E8%8C%83.html" title="一、valist的使用方法（队可变参数的处理）">C语言编程注释规范</a></li><li><a class="post-link" href="/%E4%B9%90%E7%90%86/2023/12/10/2-%E4%B9%90%E7%90%86.html" title="一、valist的使用方法（队可变参数的处理）">二、乐理</a></li><li><a class="post-link" href="/%E6%97%A5%E4%B9%8B%E6%BC%AB%E5%BD%95/2023/12/15/CPU%E6%9E%B6%E6%9E%84.html" title="一、valist的使用方法（队可变参数的处理）">CPU架构</a></li></ul>
+    </div>--><div class="post-related">
+      <div>相关文章</div>
+      <ul><li><a class="post-link" href="/gstreamer%E6%A0%B8%E5%BF%83%E5%AF%B9%E8%B1%A1/2023/12/09/23-GstElement.html" title="二十三、GstElement">二十三、GstElement</a></li><li><a class="post-link" href="/gstreamer%E6%A0%B8%E5%BF%83%E5%AF%B9%E8%B1%A1/2023/12/06/20-GstEvent.html" title="二十、GstEvent">二十、GstEvent</a></li><li><a class="post-link" href="/gstreamer%E6%A0%B8%E5%BF%83%E5%AF%B9%E8%B1%A1/2023/12/06/21-GstPadTemplate.html" title="二十一、GstPadTemplate">二十一、GstPadTemplate</a></li><li><a class="post-link" href="/gstreamer%E6%A0%B8%E5%BF%83%E5%AF%B9%E8%B1%A1/2023/12/06/22-GstPad.html" title="二十二、GstPad">二十二、GstPad</a></li></ul>
+    </div><div class="post-comments"><div id="disqus_thread"></div>
+<script>
+    /**
+    *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+    *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
+    /*
+    var disqus_config = function () {
+    this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+    this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+    */
+    (function() { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+    s.src = 'https://pzhou-me.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div></section>
+</div>
+
+
+  </section>
+  <section class="sidebar" style="margin-left: 15px;">
+    <!-- Get sidebar items --><style type="text/css" media="screen">
+.post-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.post-menu ul li {
+  margin-bottom: 5px;  /* 增加每个列表项底部的间距 */
+}
+
+.post-menu ul li a {
+  font-size: 16px; /* 设置目录链接的字体大小 */
+}
+
+.post-menu-content {
+  max-height: 600px; /* 设置最大高度 */
+  min-width: 300px;
+  overflow: hidden; /* 默认隐藏滚动条 */
+  white-space: nowrap; /* 水平方向上的内容不换行 */
+}
+
+/* 自定义垂直滚动条的样式 */
+.post-menu-content::-webkit-scrollbar {
+  width: 8px; /* 垂直滚动条的宽度 */
+  height: 8px; /* 水平滚动条的高度 */
+}
+
+/* 自定义垂直滚动条轨道 */
+.post-menu-content::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* 自定义垂直滚动条滑块 */
+.post-menu-content::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* 当鼠标悬停在垂直滚动条滑块上时 */
+.post-menu-content::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* 一级标题样式 */
+.post-menu ul li.h-h2 {
+  margin-left: 0;
+  margin-bottom: 10px;
+}
+
+/* 二级标题样式 */
+.post-menu ul li.h-h3 {
+  margin-left: 20px;
+  margin-bottom: 10px;
+}
+
+/* 三级标题样式 */
+.post-menu ul li.h-h4 {
+  margin-left: 40px;
+  margin-bottom: 10px;
+}
+
+
+</style>
+
+
+
+<div class="post-menu">
+  <div class="post-menu-title">目录</div>
+  <div class="post-menu-content"></div>
+</div>
+
+<script>
+  function generateContent() {
+    var menu = document.querySelector(".post-menu");
+    var menuContent =  menu.querySelector(".post-menu-content");
+    var headings = document.querySelector(".post-content").querySelectorAll("h2, h3, h4, h5, h6");
+
+    // Hide menu when no headings
+    if (headings.length === 0) {
+      return menu.style.display = "none";
+    }
+
+    // Generate post menu
+    var menuHTML = '';
+    for (var i = 0; i < headings.length; i++) {
+      var h = headings[i];
+      menuHTML += (
+        '<li class="h-' + h.tagName.toLowerCase() + '">'
+        + '<a href="#h-' + h.getAttribute('id') + '">' + h.textContent + '</a></li>');
+    }
+
+    menuContent.innerHTML = '<ul>' + menuHTML + '</ul>';
+
+    // The header element
+    var header = document.querySelector('header.site-header');
+
+    function doMenuCollapse(index, over_items) {
+      var items = menuContent.firstChild.children;
+
+      if (over_items == undefined) {
+        over_items = 20;
+      }
+
+      if (items.length < over_items) {
+        return;
+      }
+
+      var activeItem = items[index];
+      var beginItem = activeItem
+      var endItem = activeItem
+      var beginIndex = index;
+      var endIndex = index + 1;
+      while (beginIndex >= 0
+        && !items[beginIndex].classList.contains('h-h2')) {
+        beginIndex -= 1;
+      }
+      while (endIndex < items.length
+        && !items[endIndex].classList.contains('h-h2')) {
+        endIndex += 1;
+      }
+      for (var i = 0; i < beginIndex; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+      for (var i = beginIndex + 1; i < endIndex; i++) {
+        item = items[i]
+        // if (!item.classList.contains('h-h2')) {
+          item.style.display = '';
+        // }
+      }
+      for (var i = endIndex; i < items.length; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+    }
+
+    // Init menu collapsed
+    doMenuCollapse(-1);
+
+    // Active the menu item
+    window.addEventListener('scroll', function (event) {
+      var lastActive = menuContent.querySelector('.active');
+      var changed = true;
+      var activeIndex = -1;
+      for (var i = headings.length - 1; i >= 0; i--) {
+        var h = headings[i];
+        var headingRect = h.getBoundingClientRect();
+        var headerRect = header.getBoundingClientRect();
+        var headerTop = Math.floor(headerRect.top);
+        var headerHeight = Math.floor(headerRect.height);
+        var headerHeight = headerTop + headerHeight + 20;
+        if (headingRect.top <= headerHeight) {
+          var id = 'h-' + h.getAttribute('id');
+          var a = menuContent.querySelector('a[href="#' + id  + '"]');
+          var curActive = a.parentNode;
+          if (curActive) {
+            curActive.classList.add('active');
+            activeIndex = i;
+          }
+          if (lastActive == curActive) {
+            changed = false;
+          }
+          break;
+        }
+      }
+      if (changed) {
+        if (lastActive) {
+          lastActive.classList.remove('active');
+        }
+        doMenuCollapse(activeIndex);
+      }
+      event.preventDefault();
+    });
+  }
+  generateContent();
+</script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const menuContent = document.querySelector('.post-menu-content');
+
+    // 鼠标进入事件
+    menuContent.addEventListener('mouseenter', function() {
+      menuContent.style.overflow = 'auto';
+    });
+
+    // 鼠标离开事件
+    menuContent.addEventListener('mouseleave', function() {
+      menuContent.style.overflow = 'hidden';
+    });
+  });
+</script>
+
+</section>
+</div>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+    <div class="site-footer-inner"><div>李尓阳工作室 <span class="copyleft">&copy;</span> 2018-2023 Lieryang</div>
+      <div class="footer-col gmail"> E-mail sxlisibo@gmail.com</div>
+      <div>Powered by <a title="Jekyll is a simple, blog-aware, static site
+      generator." href="https://jekyllrb.com/">Jekyll</a> &amp; <a title="Yat, yet
+      another theme." href="https://github.com/jeffreytse/jekyll-theme-yat">Yat Theme</a>.</div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

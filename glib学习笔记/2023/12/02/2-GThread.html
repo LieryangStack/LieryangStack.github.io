@@ -1,0 +1,1198 @@
+<!DOCTYPE html>
+<html><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>二、GThread | 李尔阳主页</title>
+<meta name="generator" content="Jekyll v3.9.3" />
+<meta property="og:title" content="二、GThread" />
+<meta name="author" content="LieryangStack" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="1 GThread基本概念" />
+<meta property="og:description" content="1 GThread基本概念" />
+<link rel="canonical" href="https://lieryangstack.github.io//glib%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/2023/12/02/2-GThread.html" />
+<meta property="og:url" content="https://lieryangstack.github.io//glib%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/2023/12/02/2-GThread.html" />
+<meta property="og:site_name" content="李尔阳主页" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2023-12-02T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="二、GThread" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"LieryangStack"},"dateModified":"2023-12-02T00:00:00+00:00","datePublished":"2023-12-02T00:00:00+00:00","description":"1 GThread基本概念","headline":"二、GThread","mainEntityOfPage":{"@type":"WebPage","@id":"https://lieryangstack.github.io//glib%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/2023/12/02/2-GThread.html"},"url":"https://lieryangstack.github.io//glib%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/2023/12/02/2-GThread.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="shortcut icon" type="image/x-icon" href="/lieryang.ico">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-noto-sans@0.0.72/index.min.css">
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <script src="/assets/js/main.js"></script><link type="application/atom+xml" rel="alternate" href="https://lieryangstack.github.io//feed.xml" title="李尔阳主页" /><link rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
+
+<!-- and it's easy to individually load additional languages -->
+<script charset="UTF-8"
+        src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/go.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+// Init highlight js
+document.addEventListener('DOMContentLoaded', function(event) {
+  var els = document.querySelectorAll('pre code')
+
+  function addLangData(block) {
+    var outer = block.parentElement.parentElement.parentElement;
+    var lang = block.getAttribute('data-lang');
+    for (var i = 0; i < outer.classList.length; i++) {
+      var cls = outer.classList[i];
+      if (cls.startsWith('language-')) {
+        lang = cls;
+        break;
+      }
+    }
+    if (!lang) {
+      cls = block.getAttribute('class');
+      lang = cls ? cls.replace('hljs ', '') : '';
+    }
+    if (lang.startsWith('language-')) {
+      lang = lang.substr(9);
+    }
+    block.setAttribute('class', 'hljs ' + lang);
+    block.parentNode.setAttribute('data-lang', lang);
+  }
+
+  function addBadge(block) {
+    var enabled = ('true' || 'true').toLowerCase();
+    if (enabled == 'true') {
+      var pre = block.parentElement;
+      pre.classList.add('badge');
+    }
+  }
+
+  function handle(block) {
+    addLangData(block);
+    addBadge(block)
+    hljs.highlightBlock(block);
+  }
+
+  for (var i = 0; i < els.length; i++) {
+    var el = els[i];
+    handle(el);
+  }
+});
+</script>
+
+<style>
+  /* code language badge */
+  pre.badge::before {
+    content: attr(data-lang);
+    color: #fff;
+    background-color: #ff4e00;
+    padding: 0 .5em;
+    border-radius: 0 2px;
+    text-transform: uppercase;
+    text-align: center;
+    min-width: 32px;
+    display: inline-block;
+    position: absolute;
+    right: 0;
+  }
+
+  /* fix wrong badge display for firefox browser */
+  code > table pre::before {
+    display: none;
+  }
+</style>
+<link href='https://lieryangstack.github.io//assets/css/syntax.css' rel='stylesheet' type='text/css' />
+</head>
+<body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<header class="site-header " role="banner">
+
+  <div class="wrapper">
+    <div class="site-header-inner"><span class="site-brand"><a class="site-brand-inner" rel="author" href="/">
+  <img class="site-favicon" title="李尔阳主页" src="" onerror="this.style.display='none'">
+  李尔阳主页
+</a>
+</span><nav class="site-nav">
+          <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+          <label for="nav-trigger">
+            <span class="menu-icon">
+              <svg viewBox="0 0 18 15" width="18px" height="15px">
+                <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+              </svg>
+            </span>
+          </label>
+
+          <!-- <div class="trigger"><a class="page-link" href="/about.html">关于</a><a class="page-link" href="/archives.html">归档</a><a class="page-link" href="/categories.html">分类</a><a class="page-link" href="/">主页</a><a class="page-link" href="/tags.html">标签</a>
+
+
+
+
+
+
+
+
+
+</div> -->
+
+          <div class="trigger">
+             <a class="page-link" href="/about.html">关于</a>
+            <a class="page-link" href="/categories.html">分类</a>
+            <a class="page-link" href="/archives.html">归档</a>
+            <a class="page-link" href="/tags.html">标签</a>
+            <a class="page-link" href="/assets/index.html">下载</a>
+            <!-- 在这里添加更多的导航项 -->
+          </div>
+          
+
+        </nav></div>
+  </div>
+</header>
+
+<script>
+  function initHeader() {
+    var lastScrollY = getScrollPos().y;
+    var documentElement = document.documentElement;
+
+    function storeScrollData() {
+      var y = getScrollPos().y;var scrollStatus = "";
+
+      if (y <= 0) {
+        scrollStatus = "top";
+      } else if ((window.innerHeight + y) >= document.body.offsetHeight) {
+        scrollStatus = "bottom";
+      } else {
+        var isScrollDown = (y - lastScrollY > 0) ? true : false;
+        scrollStatus = isScrollDown ? "down" : "up";
+      }
+
+      lastScrollY = y;
+      documentElement.setAttribute("data-scroll-status", scrollStatus);
+    }
+
+    window.addEventListener('scroll', function(e) {
+      storeScrollData();
+    });
+
+    storeScrollData();
+  }
+  document.addEventListener('DOMContentLoaded', initHeader);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  function hashLocate(hashValue) {
+    hashValue = hashValue.replace(/^.*#h-/, '');
+    hashValue = decodeURIComponent(hashValue);
+    var element = document.getElementById(hashValue);
+
+    if (!element) {
+      return;
+    }
+
+    var header = document.querySelector('header.site-header');
+    var headerRect = header.getBoundingClientRect();
+    var headerTop = Math.floor(headerRect.top);
+    var headerHeight = Math.floor(headerRect.height);
+    var scrollPos = getScrollPos();
+    var offsetY = element.offsetTop - (headerTop + headerHeight + 20);
+
+    if (offsetY == scrollPos.y) {
+      return;
+    }
+
+    if (headerTop == 0  && offsetY > scrollPos.y) {
+      offsetY += headerHeight + 2;
+    } else if (headerTop < 0  && offsetY < scrollPos.y) {
+      offsetY -= headerHeight - 2;
+    }
+
+    smoothScrollTo(offsetY);
+  }
+
+  // The first event occurred
+  window.addEventListener('load', function(event) {
+    if (window.location.hash) {
+      hashLocate(window.location.hash);
+    }
+  });
+
+  // The first event occurred
+  window.addEventListener('click', function(event) {
+    if (event.target.tagName.toLowerCase() == 'a') {
+      hashLocate(event.target.getAttribute('href'));
+    }
+  });
+</script>
+<div class="theme-toggle">
+  <input type="checkbox" id="theme-switch">
+  <label for="theme-switch">
+    <div class="toggle"></div>
+    <div class="names">
+      <p class="light">Light</p>
+      <p class="dark">Dark</p>
+    </div>
+  </label>
+</div>
+
+
+
+
+<script>
+  (function() {
+    var sw = document.getElementById('theme-switch');
+    var html = document.getElementsByTagName('html')[0];
+    var nightModeOption = ('auto' || 'auto').toLowerCase();
+    var storage = nightModeOption === 'manual'
+        ? localStorage
+        : sessionStorage;
+    var themeData = loadThemeData();
+
+    function saveThemeData(data) {
+      storage.setItem('theme', JSON.stringify(data));
+    }
+
+    function loadThemeData() {
+      var data = storage.getItem('theme');
+      try {
+        data = JSON.parse(data ? data : '');
+      } catch(e) {
+        data = { nightShift: undefined, autoToggleAt: 0 };
+        saveThemeData(data);
+      }
+      return data;
+    }
+
+    function handleThemeToggle(nightShift) {
+      themeData.nightShift = nightShift;
+      saveThemeData(themeData);
+      html.dataset.theme = nightShift ? 'dark' : 'light';
+      setTimeout(function() {
+        sw.checked = nightShift ? true : false;
+      }, 50);
+    }
+
+    function autoThemeToggle() {
+      // Next time point of theme toggle
+      var now = new Date();
+      var toggleAt = new Date();
+      var hours = now.getHours();
+      var nightShift = hours >= 19 || hours <=7;
+
+      if (nightShift) {
+        if (hours > 7) {
+          toggleAt.setDate(toggleAt.getDate() + 1);
+        }
+        toggleAt.setHours(7);
+      } else {
+        toggleAt.setHours(19);
+      }
+
+      toggleAt.setMinutes(0);
+      toggleAt.setSeconds(0);
+      toggleAt.setMilliseconds(0)
+
+      var delay = toggleAt.getTime() - now.getTime();
+
+      // auto toggle theme mode
+      setTimeout(function() {
+        handleThemeToggle(!nightShift);
+      }, delay);
+
+      return {
+        nightShift: nightShift,
+        toggleAt: toggleAt.getTime()
+      };
+    }
+
+    // Listen the theme toggle event
+    sw.addEventListener('change', function(event) {
+      handleThemeToggle(event.target.checked);
+    });
+
+    if (nightModeOption == 'auto') {
+      var data = autoThemeToggle();
+
+      // Toggle theme by local setting
+      if (data.toggleAt > themeData.autoToggleAt) {
+        themeData.autoToggleAt = data.toggleAt;
+        handleThemeToggle(data.nightShift);
+      } else {
+        handleThemeToggle(themeData.nightShift);
+      }
+    } else if (nightModeOption == 'manual') {
+      handleThemeToggle(themeData.nightShift);
+    } else {
+      var nightShift = themeData.nightShift;
+      if (nightShift === undefined) {
+        nightShift = nightModeOption === 'on';
+      }
+      handleThemeToggle(nightShift);
+    }
+  })();
+</script>
+<div id="click-to-top" class="click-to-top">
+  <i class="fa fa-arrow-up"></i>
+</div>
+<script>
+  (function () {
+    const clickToTop = document.getElementById('click-to-top');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 100) {
+        clickToTop.classList.add('show')
+      }else {
+        clickToTop.classList.remove('show')
+      }
+    });
+    clickToTop.addEventListener('click', () => {
+      window.smoothScrollTo(0);
+    });
+  })();
+</script>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <div class="framework">
+  <section class="main">
+
+     <div class="post">
+  <section>
+
+
+
+
+
+
+
+
+
+<header class="post-header">
+  <h1 class="post-title p-name" itemprop="name headline">二、GThread</h1>
+  <h2 class="post-subtitle"></h2>
+
+  <p class="post-meta">
+    <time class="dt-published" datetime="2023-12-02T00:00:00+00:00" itemprop="datePublished"><i class="fa fa-calendar"></i> Dec 02, 2023
+    </time>
+
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 5 mins</span>
+  </p><div class="post-tags"><a class="post-tag" href="/tags.html#GLib">#GLib</a></div></header>
+<article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+    <div class="post-content e-content" itemprop="articleBody">
+
+      <h2 id="1-gthread基本概念">1 GThread基本概念</h2>
+
+<p>线程几乎像进程一样运行，但与进程不同的是，一个进程的所有线程共享相同的内存。这是好的，因为它通过共享内存提供了线程之间的轻松通信，但也有不好的地方，因为如果程序没有谨慎设计，可能会发生奇怪的事情（所谓的“Heisenbugs”）。线程的并发性质意味着不能假设不同线程中运行的代码的执行顺序，除非程序员通过同步原语primitive明确强制执行顺序。</p>
+
+<p>GLib中与线程相关的函数的目标是提供一种可移植的方式来编写多线程软件。有用于保护内存部分访问的互斥锁的原语（#GMutex、#GRecMutex和#GRWLock）；有使用单个位进行锁定的设施（g_bit_lock()）；有用于线程同步的条件变量的原语（#GCond）；有线程专用数据的原语 - 每个线程都有一个私有实例（#GPrivate）；有一次性初始化的功能（#GOnce、g_once_init_enter()）；最后，有创建和管理线程的原语（#GThread）。</p>
+
+<p>GLib的线程系统曾经需要使用g_thread_init()进行初始化，但自2.32版本以来，GLib的线程系统会在程序启动时自动初始化，所有与线程创建函数和同步原语相关的函数也会立即可用。</p>
+
+<p>请注意，不能安全地假设您的程序没有线程，即使您不自己调用g_thread_new()。GLib和GIO在某些情况下会为其自身的目的创建线程，例如在使用g_unix_signal_source_new()或使用GDBus时。</p>
+
+<p>最初，UNIX没有线程，因此一些传统的UNIX API在多线程程序中存在问题。一些显著的例子包括：</p>
+
+<ul>
+  <li>
+    <p>返回数据的C库函数使用静态分配的缓冲区，例如strtok()或strerror()。对于这些函数，通常有带有_r后缀的线程安全变体，或者您可以查看对应的GLib API（如g_strsplit()或g_strerror()）。</p>
+  </li>
+  <li>
+    <p>setenv()和unsetenv()函数以不线程安全的方式操纵进程环境，并可能干扰其他线程中的getenv()调用。请注意，getenv()调用可能隐藏在其他API之后。例如，GNU gettext()在幕后调用getenv()。通常最好将环境视为只读。如果确实必须修改环境，请在没有其他线程存在的情况下在main()中早早地进行修改。</p>
+  </li>
+  <li>
+    <p>setlocale()函数更改整个进程的区域设置，影响所有线程。通常会临时更改区域设置以更改字符串扫描或格式化函数的行为，如scanf()或printf()。GLib提供了许多字符串API（如g_ascii_formatd()或g_ascii_strtod()），通常可用作替代方法。或者，您可以使用uselocale()函数仅为当前线程更改区域设置。</p>
+  </li>
+  <li>
+    <p>fork()函数仅将调用线程引入子进程的进程映像的一部分。如果其他线程正在关键部分执行，它们可能已经将互斥锁锁定，这可能很容易导致新子进程中的死锁。
+因此，应在子进程中尽快调用exit()或exec()，并仅在此之前进行信号安全的库调用。</p>
+  </li>
+  <li>
+    <p>daemon()函数以与上述描述相反的方式使用fork()。不应在GLib程序中使用它。</p>
+  </li>
+</ul>
+
+<p>GLib本身在内部完全线程安全（所有全局数据都会自动锁定），但出于性能原因，不会自动锁定各个数据结构实例。
+例如，您必须协调从多个线程访问同一个#GHashTable的访问。从这个规则中的两个显著例外是#GMainLoop和#GAsyncQueue，
+它们是线程安全的，不需要进一步的应用级锁定即可从多个线程访问。大多数引用计数函数，如g_object_ref()，也是线程安全的。</p>
+
+<p>#GThread的常见用法之一是从主线程中把长时间阻塞的线程移除出去，移动到一个工作线程。对于GLib函数（例如单个GIO操作），这是不必要的，并且会使代码复杂化。
+相反，应该从主线程中使用函数的…_async()版本，从而消除了在多个线程之间的锁定和同步的需要。如果确实需要将操作移动到工作线程，
+请考虑使用g_task_run_in_thread()或#GThreadPool。与#GThread相比，#GThreadPool通常是更好的选择，因为它处理线程重用和任务排队；#GTask在内部使用这个功能。</p>
+
+<p>但是，如果需要顺序执行多个阻塞操作，并且不能使用#GTask进行操作，将它们移到工作线程中可以使代码更清晰。</p>
+
+<p>函数 <code class="language-plaintext highlighter-rouge">g_thread_create</code> 已经不赞成使用了，使用 <code class="language-plaintext highlighter-rouge">g_thread_new</code> 替换。</p>
+
+<h2 id="2-互斥锁">2 互斥锁</h2>
+
+<p>以下是GMutex对象的定义，使用了联合体。非静态变量都需要使用<code class="language-plaintext highlighter-rouge">g_mutex_init</code>函数进行初始化，将 #GMutex 的 <code class="language-plaintext highlighter-rouge">i[0]</code> 内存设定为0。静态变量不需要设定，是因为未被初始化的静态变量会被程序自动初始化为0。</p>
+
+<p>注意GMutex是联合体，其余递归锁，读写锁，条件都是结构体。</p>
+
+<p>示例程序参考：<a href="/assets/GLibStudy/02_GThread/mutex.c">/assets/GLibStudy/02_GThread/mutex.c</a></p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/* filename: gthread.h */</span>
+<span class="k">union</span> <span class="n">_GMutex</span>
+<span class="p">{</span>
+  <span class="cm">/*&lt; private &gt;*/</span>
+  <span class="n">gpointer</span> <span class="n">p</span><span class="p">;</span>
+  <span class="n">guint</span> <span class="n">i</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
+<span class="p">};</span>
+
+<span class="cm">/* ghread-posix.c */</span>
+<span class="kt">void</span>
+<span class="nf">g_mutex_init</span> <span class="p">(</span><span class="n">GMutex</span> <span class="o">*</span><span class="n">mutex</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="n">mutex</span><span class="o">-&gt;</span><span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">G_MUTEX_STATE_EMPTY</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="21-g_lock宏使用">2.1 G_LOCK宏使用</h3>
+
+<p>NOTE：</p>
+
+<p><span style="color:red;">不是全局变量（包括静态全局变量和非静态全局变量）和静态局部变量定义的GMutex对象，需要使用<code class="language-plaintext highlighter-rouge">g_mutex_init</code>进行初始化。</span></p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/* filename: gthread.h */</span>
+<span class="cp">#define G_LOCK_NAME(name)             g__ ## name ## _lock    </span><span class="cm">/* G_LOCK_NAME(current_number) 实际是 g__current_number_lock*/</span><span class="cp">
+#define G_LOCK_DEFINE_STATIC(name)    static G_LOCK_DEFINE (name)
+#define G_LOCK_DEFINE(name)           GMutex G_LOCK_NAME (name)
+</span>
+<span class="cm">/* 只不过是对g_mutex_lock的封装 */</span>
+<span class="cp">#define G_LOCK(name) g_mutex_lock       (&amp;G_LOCK_NAME (name))
+</span>
+<span class="cp">#define G_UNLOCK(name) g_mutex_unlock   (&amp;G_LOCK_NAME (name))
+</span></code></pre></div></div>
+
+<h3 id="22-gmutex使用">2.2 GMutex使用</h3>
+
+<p><code class="language-plaintext highlighter-rouge">g_mutex_new</code> 自从版本2.32开始，已经不赞成使用了。</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/* 初始化 #GMutex */</span>
+<span class="kt">void</span> <span class="nf">g_mutex_init</span>  <span class="p">(</span><span class="n">GMutex</span>         <span class="o">*</span><span class="n">mutex</span><span class="p">);</span>
+
+<span class="cm">/* 因为GMutex不是标准的GObject对象，没有引用计数，这个函数本身也没什么用 */</span>
+<span class="kt">void</span> <span class="nf">g_mutex_clear</span> <span class="p">(</span><span class="n">GMutex</span>         <span class="o">*</span><span class="n">mutex</span><span class="p">);</span>
+
+<span class="kt">void</span> <span class="nf">g_mutex_lock</span> <span class="p">(</span><span class="n">GMutex</span>         <span class="o">*</span><span class="n">mutex</span><span class="p">);</span>
+
+<span class="cm">/* g_mutex_lock() 尝试对互斥锁进行加锁。如果互斥锁已经被另一个线程锁定，它会立即返回 FALSE。否则，它会锁定互斥锁并返回 TRUE。 
+ *
+ * 需要注意的是，GMutex 既不保证是可递归的，也不保证是非递归的。因此，如果在同一线程已经锁定了某个 GMutex，
+ * 再次调用 g_mutex_lock() 会导致未定义的行为（可能包括但不限于死锁或返回任意值）。
+ * 因此可以使用 g_mutex_trylock ()
+ */</span>
+<span class="n">gboolean</span> <span class="nf">g_mutex_trylock</span> <span class="p">(</span><span class="n">GMutex</span>         <span class="o">*</span><span class="n">mutex</span><span class="p">);</span>
+
+<span class="kt">void</span> <span class="nf">g_mutex_unlock</span> <span class="p">(</span><span class="n">GMutex</span>         <span class="o">*</span><span class="n">mutex</span><span class="p">);</span>
+
+<span class="cm">/* gthread-posix.c */</span>
+<span class="kt">void</span>
+<span class="nf">g_mutex_clear</span> <span class="p">(</span><span class="n">GMutex</span> <span class="o">*</span><span class="n">mutex</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="k">if</span> <span class="n">G_UNLIKELY</span> <span class="p">(</span><span class="n">mutex</span><span class="o">-&gt;</span><span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="n">G_MUTEX_STATE_EMPTY</span><span class="p">)</span>   <span class="cm">/* 只有在被锁的时候或者内存区域没有赋值为0的时候才执行 */</span>
+    <span class="p">{</span>
+      <span class="n">fprintf</span> <span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">"g_mutex_clear() called on uninitialised or locked mutex</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+      <span class="n">g_abort</span> <span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="23-grecmutex递归互斥锁">2.3 GRecMutex（递归互斥锁）</h3>
+
+<p>GRecMutex结构体是一个不透明的数据结构，用于表示递归互斥锁。它类似于#GMutex，但不同之处在于在同一线程中可以多次锁定GRecMutex而不会发生死锁。在这样做时，必须小心确保解锁递归互斥锁的次数与锁定的次数相同。</p>
+
+<p>如果在静态存储中分配了GRecMutex，那么它可以在不进行初始化的情况下使用。否则，您应该在使用后调用g_rec_mutex_init()进行初始化，并在完成后调用g_rec_mutex_clear()进行清理。</p>
+
+<p>NOTE：</p>
+
+<p><span style="color:red;">不是全局变量（包括静态全局变量和非静态全局变量）和静态局部变量定义的GMutex对象，需要使用<code class="language-plaintext highlighter-rouge">g_rec_mutex_init</code>进行初始化，最后一定要使用 <code class="language-plaintext highlighter-rouge">g_rec_mutex_clear</code> 释放初始化过程申请内存。</span></p>
+
+<p><strong>GRecMutex与GMutex的不同</strong>：
+GMutex使用的是成员<code class="language-plaintext highlighter-rouge">guint i[2]</code>，而GRecMutex使用的是指针变量<code class="language-plaintext highlighter-rouge">gpointer p</code>。</p>
+
+<p><strong>关于局部非静态变量释放问题</strong>：
+因为局部函数被频繁的调用，如果没有使用初始化函数，上锁的时候也会给pthread_mutex_t申请内存空间，然后赋值给rec_mutex-&gt;p。如果每次不释放，就会造成内存泄漏。对于静态变量和全局变量，程序运行一次就只会分配一次，所以不需要释放也没问题。但是对于程序规范来说，最后也应该释放。</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/* 初始化函数是申请一个pthread_mutex_t所需的内存，然后赋值给rec_mutex-&gt;p */</span>
+<span class="kt">void</span> <span class="nf">g_rec_mutex_init</span>  <span class="p">(</span><span class="n">GRecMutex</span>      <span class="o">*</span><span class="n">rec_mutex</span><span class="p">);</span>
+<span class="cm">/* 释放初始化过程中申请的内存空间 */</span>
+<span class="kt">void</span> <span class="nf">g_rec_mutex_clear</span> <span class="p">(</span><span class="n">GRecMutex</span>      <span class="o">*</span><span class="n">rec_mutex</span><span class="p">);</span>
+<span class="cm">/* 如果没有使用初始化函数，上锁的时候也会检查是否rec_mutex为NULL，如果是NULL，会给pthread_mutex_t申请内存空间 */</span>
+<span class="kt">void</span> <span class="nf">g_rec_mutex_lock</span>  <span class="p">(</span><span class="n">GRecMutex</span>      <span class="o">*</span><span class="n">rec_mutex</span><span class="p">);</span>
+
+<span class="n">gboolean</span> <span class="nf">g_rec_mutex_trylock</span> <span class="p">(</span><span class="n">GRecMutex</span>      <span class="o">*</span><span class="n">rec_mutex</span><span class="p">);</span>
+
+<span class="kt">void</span> <span class="nf">g_rec_mutex_unlock</span> <span class="p">(</span><span class="n">GRecMutex</span>      <span class="o">*</span><span class="n">rec_mutex</span><span class="p">);</span>
+
+<span class="cm">/* gthread.h */</span>
+<span class="k">struct</span> <span class="n">_GRecMutex</span>
+<span class="p">{</span>
+  <span class="cm">/*&lt; private &gt;*/</span>
+  <span class="n">gpointer</span> <span class="n">p</span><span class="p">;</span>
+  <span class="n">guint</span> <span class="n">i</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h3 id="24-grwlock读写锁">2.4 GRWLock（读写锁）</h3>
+
+<p>GRWLock结构体是一个不透明的数据结构，用于表示读写锁。它类似于#GMutex，允许多个线程协调对共享资源的访问。</p>
+
+<p>与互斥锁不同的是，读写锁区分只读（’reader’）和完全（’writer’）访问。虽然一次只允许一个线程进行写访问（通过持有’writer’锁，使用g_rw_lock_writer_lock()），但多个线程可以同时获得只读访问（通过持有’reader’锁，使用g_rw_lock_reader_lock()）。当一个读者已经持有锁并且一个写者排队等待获取锁时，不确定读者或写者在获取锁时的优先级。</p>
+
+<p><span style="color:red;">GRWLock跟GRecMutex初始化类似。</span></p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/* 初始化函数是申请一个pthread_rwlock_t所需的内存，然后赋值给rw_lock-&gt;p */</span>
+<span class="kt">void</span>   <span class="nf">g_rw_lock_init</span>  <span class="p">(</span><span class="n">GRWLock</span>        <span class="o">*</span><span class="n">rw_lock</span><span class="p">);</span>
+<span class="cm">/* 释放初始化过程中申请的内存空间 */</span>
+<span class="kt">void</span>   <span class="nf">g_rw_lock_clear</span>  <span class="p">(</span><span class="n">GRWLock</span>        <span class="o">*</span><span class="n">rw_lock</span><span class="p">);</span>
+
+<span class="kt">void</span>   <span class="nf">g_rw_lock_writer_lock</span>  <span class="p">(</span><span class="n">GRWLock</span>        <span class="o">*</span><span class="n">rw_lock</span><span class="p">);</span>
+
+<span class="n">gboolean</span>   <span class="nf">g_rw_lock_writer_trylock</span> <span class="p">(</span><span class="n">GRWLock</span>        <span class="o">*</span><span class="n">rw_lock</span><span class="p">);</span>
+
+<span class="kt">void</span>   <span class="nf">g_rw_lock_writer_unlock</span> <span class="p">(</span><span class="n">GRWLock</span>        <span class="o">*</span><span class="n">rw_lock</span><span class="p">);</span>
+
+<span class="kt">void</span>   <span class="nf">g_rw_lock_reader_lock</span>  <span class="p">(</span><span class="n">GRWLock</span>        <span class="o">*</span><span class="n">rw_lock</span><span class="p">);</span>
+
+<span class="n">gboolean</span>   <span class="nf">g_rw_lock_reader_trylock</span>  <span class="p">(</span><span class="n">GRWLock</span>        <span class="o">*</span><span class="n">rw_lock</span><span class="p">);</span>
+
+<span class="kt">void</span>   <span class="nf">g_rw_lock_reader_unlock</span> <span class="p">(</span><span class="n">GRWLock</span>        <span class="o">*</span><span class="n">rw_lock</span><span class="p">);</span>
+
+<span class="cm">/* gthread.h */</span>
+<span class="k">struct</span> <span class="n">_GRWLock</span>
+<span class="p">{</span>
+  <span class="cm">/*&lt; private &gt;*/</span>
+  <span class="n">gpointer</span> <span class="n">p</span><span class="p">;</span>
+  <span class="n">guint</span> <span class="n">i</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h2 id="3-gcond">3 GCond</h2>
+
+<p>GCond结构体是一个不透明的数据结构，用于表示条件变量。如果线程发现某个条件为假，它们可以在GCond上阻塞。如果其他线程更改此条件的状态，它们会发出GCond信号，导致等待的线程被唤醒。</p>
+
+<p>考虑以下共享变量的示例。一个或多个线程可以等待数据发布到变量上，当另一个线程发布数据时，它可以向其中一个等待的线程发出信号，以唤醒它们以收集数据。</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/* 该初始化是 cond-&gt;i[0] = 0; */</span>
+<span class="kt">void</span>  <span class="nf">g_cond_init</span>  <span class="p">(</span><span class="n">GCond</span> <span class="o">*</span><span class="n">cond</span><span class="p">);</span>
+<span class="cm">/* 这是个空函数，什么都没有做 */</span>
+<span class="kt">void</span>  <span class="nf">g_cond_clear</span> <span class="p">(</span><span class="n">GCond</span> <span class="o">*</span><span class="n">cond</span><span class="p">);</span>
+<span class="cm">/**
+ * 进入阻塞等待线程条件
+ * 该函数以下操作：
+ * 1.先解锁@mutex
+ * 2.调用syscall函数等待线程条件，当条件被发出时候，退出等待
+ * 3.上锁@mutex
+*/</span>
+<span class="kt">void</span>  <span class="nf">g_cond_wait</span>  <span class="p">(</span><span class="n">GCond</span> <span class="o">*</span><span class="n">cond</span><span class="p">,</span> <span class="n">GMutex</span> <span class="o">*</span><span class="n">mutex</span><span class="p">);</span>
+<span class="cm">/* 唤醒所有等待线程中的某一个线程 
+ * 建议：这个函数使用前后要上锁
+ */</span>
+<span class="kt">void</span>  <span class="nf">g_cond_signal</span>  <span class="p">(</span><span class="n">GCond</span>  <span class="o">*</span><span class="n">cond</span><span class="p">);</span>
+<span class="cm">/* 唤醒所有等待线程 
+ * 建议：这个函数使用前后要上锁
+ */</span>
+<span class="kt">void</span>  <span class="nf">g_cond_broadcast</span> <span class="p">(</span><span class="n">GCond</span> <span class="o">*</span><span class="n">cond</span><span class="p">);</span>
+<span class="cm">/* @cond唤醒或者是超时@end_time唤醒 */</span>
+<span class="n">gboolean</span> <span class="nf">g_cond_wait_until</span> <span class="p">(</span><span class="n">GCond</span> <span class="o">*</span><span class="n">cond</span><span class="p">,</span> <span class="n">GMutex</span>  <span class="o">*</span><span class="n">mutex</span><span class="p">,</span> <span class="n">gint64</span> <span class="n">end_time</span><span class="p">);</span>
+
+<span class="k">struct</span> <span class="n">_GCond</span>
+<span class="p">{</span>
+  <span class="cm">/*&lt; private &gt;*/</span>
+  <span class="n">gpointer</span> <span class="n">p</span><span class="p">;</span>
+  <span class="n">guint</span> <span class="n">i</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h2 id="4-gthread">4 GThread</h2>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="n">GThread</span> <span class="o">*</span>       <span class="nf">g_thread_ref</span>                    <span class="p">(</span><span class="n">GThread</span>        <span class="o">*</span><span class="kr">thread</span><span class="p">);</span>
+
+<span class="kt">void</span>            <span class="nf">g_thread_unref</span>                  <span class="p">(</span><span class="n">GThread</span>        <span class="o">*</span><span class="kr">thread</span><span class="p">);</span>
+
+<span class="n">GThread</span> <span class="o">*</span>       <span class="nf">g_thread_new</span>                    <span class="p">(</span><span class="k">const</span> <span class="n">gchar</span>    <span class="o">*</span><span class="n">name</span><span class="p">,</span>
+                                                 <span class="n">GThreadFunc</span>     <span class="n">func</span><span class="p">,</span>
+                                                 <span class="n">gpointer</span>        <span class="n">data</span><span class="p">);</span>
+
+<span class="n">GThread</span> <span class="o">*</span>       <span class="nf">g_thread_try_new</span>                <span class="p">(</span><span class="k">const</span> <span class="n">gchar</span>    <span class="o">*</span><span class="n">name</span><span class="p">,</span>
+                                                 <span class="n">GThreadFunc</span>     <span class="n">func</span><span class="p">,</span>
+                                                 <span class="n">gpointer</span>        <span class="n">data</span><span class="p">,</span>
+                                                 <span class="n">GError</span>        <span class="o">**</span><span class="n">error</span><span class="p">);</span>
+<span class="cm">/* 得到当前线程的 #GThread对象 */</span>
+<span class="n">GThread</span> <span class="o">*</span>       <span class="nf">g_thread_self</span>                   <span class="p">(</span><span class="kt">void</span><span class="p">);</span>
+<span class="cm">/* 退出当前线程，@retval是线程返回值 */</span>
+<span class="kt">void</span>            <span class="nf">g_thread_exit</span>                   <span class="p">(</span><span class="n">gpointer</span>        <span class="n">retval</span><span class="p">);</span>
+<span class="cm">/* 阻塞等待@thread线程结束，@return是线程的返回值 */</span>
+<span class="n">gpointer</span>        <span class="nf">g_thread_join</span>                   <span class="p">(</span><span class="n">GThread</span>        <span class="o">*</span><span class="kr">thread</span><span class="p">);</span>
+<span class="cm">/* 使调用线程自愿放弃CPU，以便其他线程可以运行 */</span>
+<span class="kt">void</span>            <span class="nf">g_thread_yield</span>                  <span class="p">(</span><span class="kt">void</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h2 id="参考">参考</h2>
+<p><a href="https://developer-old.gnome.org/glib/stable/glib-Threads.html#GThread">参考1：GNome Developer,Threads</a></p>
+
+
+    </div>
+
+</article>
+<div class="post-nav"><a class="previous" href="/%E5%8D%95%E8%AF%8D/2023/12/01/12%E6%9C%88%E7%AC%AC%E4%B8%80%E5%91%A8.html" title="12月第一周">12月第一周</a><a class="next" href="/glib%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/2023/12/04/3-GThreadPool.html" title="三、GThreadPool">三、GThreadPool</a></div><!--<div class="post-related">
+      <div>Related Articles</div>
+      <ul>
+        <li><a class="post-link" href="/gstreamer%E6%A0%B8%E5%BF%83%E5%AF%B9%E8%B1%A1/2023/11/22/3-GstObject.html" title="三、GThreadPool">三、GstObject</a></li><li><a class="post-link" href="/gstreamer%E6%A0%B8%E5%BF%83%E5%AF%B9%E8%B1%A1/2023/12/01/15-GstTask.html" title="三、GThreadPool">十五、GstTask</a></li><li><a class="post-link" href="/gobject%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0202109/2021/09/02/9-GObject%E4%BF%A1%E5%8F%B7%E6%9C%BA%E5%88%B6-%E4%BF%A1%E5%8F%B7Accumulator.html" title="三、GThreadPool">九、GObject信号机制--信号Accumulator</a></li><li><a class="post-link" href="/gstreamer%E6%A0%B8%E5%BF%83%E5%AF%B9%E8%B1%A1/2023/12/06/21-GstPadTemplate.html" title="三、GThreadPool">二十一、GstPadTemplate</a></li></ul>
+    </div>--><div class="post-related">
+      <div>相关文章</div>
+      <ul><li><a class="post-link" href="/glib%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/2023/12/04/3-GThreadPool.html" title="三、GThreadPool">三、GThreadPool</a></li><li><a class="post-link" href="/glib%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/2023/11/20/1-GQuark.html" title="一、GQuark">一、GQuark</a></li></ul>
+    </div><div class="post-comments"><div id="disqus_thread"></div>
+<script>
+    /**
+    *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+    *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
+    /*
+    var disqus_config = function () {
+    this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+    this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+    */
+    (function() { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+    s.src = 'https://pzhou-me.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div></section>
+</div>
+
+
+  </section>
+  <section class="sidebar" style="margin-left: 15px;">
+    <!-- Get sidebar items --><style type="text/css" media="screen">
+.post-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.post-menu ul li {
+  margin-bottom: 5px;  /* 增加每个列表项底部的间距 */
+}
+
+.post-menu ul li a {
+  font-size: 16px; /* 设置目录链接的字体大小 */
+}
+
+.post-menu-content {
+  max-height: 600px; /* 设置最大高度 */
+  min-width: 300px;
+  overflow: hidden; /* 默认隐藏滚动条 */
+  white-space: nowrap; /* 水平方向上的内容不换行 */
+}
+
+/* 自定义垂直滚动条的样式 */
+.post-menu-content::-webkit-scrollbar {
+  width: 8px; /* 垂直滚动条的宽度 */
+  height: 8px; /* 水平滚动条的高度 */
+}
+
+/* 自定义垂直滚动条轨道 */
+.post-menu-content::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* 自定义垂直滚动条滑块 */
+.post-menu-content::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* 当鼠标悬停在垂直滚动条滑块上时 */
+.post-menu-content::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* 一级标题样式 */
+.post-menu ul li.h-h2 {
+  margin-left: 0;
+  margin-bottom: 10px;
+}
+
+/* 二级标题样式 */
+.post-menu ul li.h-h3 {
+  margin-left: 20px;
+  margin-bottom: 10px;
+}
+
+/* 三级标题样式 */
+.post-menu ul li.h-h4 {
+  margin-left: 40px;
+  margin-bottom: 10px;
+}
+
+
+</style>
+
+
+
+<div class="post-menu">
+  <div class="post-menu-title">目录</div>
+  <div class="post-menu-content"></div>
+</div>
+
+<script>
+  function generateContent() {
+    var menu = document.querySelector(".post-menu");
+    var menuContent =  menu.querySelector(".post-menu-content");
+    var headings = document.querySelector(".post-content").querySelectorAll("h2, h3, h4, h5, h6");
+
+    // Hide menu when no headings
+    if (headings.length === 0) {
+      return menu.style.display = "none";
+    }
+
+    // Generate post menu
+    var menuHTML = '';
+    for (var i = 0; i < headings.length; i++) {
+      var h = headings[i];
+      menuHTML += (
+        '<li class="h-' + h.tagName.toLowerCase() + '">'
+        + '<a href="#h-' + h.getAttribute('id') + '">' + h.textContent + '</a></li>');
+    }
+
+    menuContent.innerHTML = '<ul>' + menuHTML + '</ul>';
+
+    // The header element
+    var header = document.querySelector('header.site-header');
+
+    function doMenuCollapse(index, over_items) {
+      var items = menuContent.firstChild.children;
+
+      if (over_items == undefined) {
+        over_items = 20;
+      }
+
+      if (items.length < over_items) {
+        return;
+      }
+
+      var activeItem = items[index];
+      var beginItem = activeItem
+      var endItem = activeItem
+      var beginIndex = index;
+      var endIndex = index + 1;
+      while (beginIndex >= 0
+        && !items[beginIndex].classList.contains('h-h2')) {
+        beginIndex -= 1;
+      }
+      while (endIndex < items.length
+        && !items[endIndex].classList.contains('h-h2')) {
+        endIndex += 1;
+      }
+      for (var i = 0; i < beginIndex; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+      for (var i = beginIndex + 1; i < endIndex; i++) {
+        item = items[i]
+        // if (!item.classList.contains('h-h2')) {
+          item.style.display = '';
+        // }
+      }
+      for (var i = endIndex; i < items.length; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+    }
+
+    // Init menu collapsed
+    doMenuCollapse(-1);
+
+    // Active the menu item
+    window.addEventListener('scroll', function (event) {
+      var lastActive = menuContent.querySelector('.active');
+      var changed = true;
+      var activeIndex = -1;
+      for (var i = headings.length - 1; i >= 0; i--) {
+        var h = headings[i];
+        var headingRect = h.getBoundingClientRect();
+        var headerRect = header.getBoundingClientRect();
+        var headerTop = Math.floor(headerRect.top);
+        var headerHeight = Math.floor(headerRect.height);
+        var headerHeight = headerTop + headerHeight + 20;
+        if (headingRect.top <= headerHeight) {
+          var id = 'h-' + h.getAttribute('id');
+          var a = menuContent.querySelector('a[href="#' + id  + '"]');
+          var curActive = a.parentNode;
+          if (curActive) {
+            curActive.classList.add('active');
+            activeIndex = i;
+          }
+          if (lastActive == curActive) {
+            changed = false;
+          }
+          break;
+        }
+      }
+      if (changed) {
+        if (lastActive) {
+          lastActive.classList.remove('active');
+        }
+        doMenuCollapse(activeIndex);
+      }
+      event.preventDefault();
+    });
+  }
+  generateContent();
+</script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const menuContent = document.querySelector('.post-menu-content');
+
+    // 鼠标进入事件
+    menuContent.addEventListener('mouseenter', function() {
+      menuContent.style.overflow = 'auto';
+    });
+
+    // 鼠标离开事件
+    menuContent.addEventListener('mouseleave', function() {
+      menuContent.style.overflow = 'hidden';
+    });
+  });
+</script>
+
+</section>
+</div>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+    <div class="site-footer-inner"><div>李尓阳工作室 <span class="copyleft">&copy;</span> 2018-2023 Lieryang</div>
+      <div class="footer-col gmail"> E-mail sxlisibo@gmail.com</div>
+      <div>Powered by <a title="Jekyll is a simple, blog-aware, static site
+      generator." href="https://jekyllrb.com/">Jekyll</a> &amp; <a title="Yat, yet
+      another theme." href="https://github.com/jeffreytse/jekyll-theme-yat">Yat Theme</a>.</div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

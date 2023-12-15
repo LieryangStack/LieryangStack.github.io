@@ -1,0 +1,1221 @@
+<!DOCTYPE html>
+<html><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>C语言编程注释规范 | 李尔阳主页</title>
+<meta name="generator" content="Jekyll v3.9.3" />
+<meta property="og:title" content="C语言编程注释规范" />
+<meta name="author" content="LieryangStack" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="1 说明性文件头部应进行注释" />
+<meta property="og:description" content="1 说明性文件头部应进行注释" />
+<link rel="canonical" href="https://lieryangstack.github.io//%E6%97%A5%E4%B9%8B%E6%BC%AB%E5%BD%95/2023/06/01/C%E8%AF%AD%E8%A8%80%E7%BC%96%E7%A8%8B%E6%B3%A8%E9%87%8A%E8%A7%84%E8%8C%83.html" />
+<meta property="og:url" content="https://lieryangstack.github.io//%E6%97%A5%E4%B9%8B%E6%BC%AB%E5%BD%95/2023/06/01/C%E8%AF%AD%E8%A8%80%E7%BC%96%E7%A8%8B%E6%B3%A8%E9%87%8A%E8%A7%84%E8%8C%83.html" />
+<meta property="og:site_name" content="李尔阳主页" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2023-06-01T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="C语言编程注释规范" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"LieryangStack"},"dateModified":"2023-06-01T00:00:00+00:00","datePublished":"2023-06-01T00:00:00+00:00","description":"1 说明性文件头部应进行注释","headline":"C语言编程注释规范","mainEntityOfPage":{"@type":"WebPage","@id":"https://lieryangstack.github.io//%E6%97%A5%E4%B9%8B%E6%BC%AB%E5%BD%95/2023/06/01/C%E8%AF%AD%E8%A8%80%E7%BC%96%E7%A8%8B%E6%B3%A8%E9%87%8A%E8%A7%84%E8%8C%83.html"},"url":"https://lieryangstack.github.io//%E6%97%A5%E4%B9%8B%E6%BC%AB%E5%BD%95/2023/06/01/C%E8%AF%AD%E8%A8%80%E7%BC%96%E7%A8%8B%E6%B3%A8%E9%87%8A%E8%A7%84%E8%8C%83.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="shortcut icon" type="image/x-icon" href="/lieryang.ico">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-noto-sans@0.0.72/index.min.css">
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <script src="/assets/js/main.js"></script><link type="application/atom+xml" rel="alternate" href="https://lieryangstack.github.io//feed.xml" title="李尔阳主页" /><link rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
+
+<!-- and it's easy to individually load additional languages -->
+<script charset="UTF-8"
+        src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/go.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+// Init highlight js
+document.addEventListener('DOMContentLoaded', function(event) {
+  var els = document.querySelectorAll('pre code')
+
+  function addLangData(block) {
+    var outer = block.parentElement.parentElement.parentElement;
+    var lang = block.getAttribute('data-lang');
+    for (var i = 0; i < outer.classList.length; i++) {
+      var cls = outer.classList[i];
+      if (cls.startsWith('language-')) {
+        lang = cls;
+        break;
+      }
+    }
+    if (!lang) {
+      cls = block.getAttribute('class');
+      lang = cls ? cls.replace('hljs ', '') : '';
+    }
+    if (lang.startsWith('language-')) {
+      lang = lang.substr(9);
+    }
+    block.setAttribute('class', 'hljs ' + lang);
+    block.parentNode.setAttribute('data-lang', lang);
+  }
+
+  function addBadge(block) {
+    var enabled = ('true' || 'true').toLowerCase();
+    if (enabled == 'true') {
+      var pre = block.parentElement;
+      pre.classList.add('badge');
+    }
+  }
+
+  function handle(block) {
+    addLangData(block);
+    addBadge(block)
+    hljs.highlightBlock(block);
+  }
+
+  for (var i = 0; i < els.length; i++) {
+    var el = els[i];
+    handle(el);
+  }
+});
+</script>
+
+<style>
+  /* code language badge */
+  pre.badge::before {
+    content: attr(data-lang);
+    color: #fff;
+    background-color: #ff4e00;
+    padding: 0 .5em;
+    border-radius: 0 2px;
+    text-transform: uppercase;
+    text-align: center;
+    min-width: 32px;
+    display: inline-block;
+    position: absolute;
+    right: 0;
+  }
+
+  /* fix wrong badge display for firefox browser */
+  code > table pre::before {
+    display: none;
+  }
+</style>
+<link href='https://lieryangstack.github.io//assets/css/syntax.css' rel='stylesheet' type='text/css' />
+</head>
+<body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<header class="site-header " role="banner">
+
+  <div class="wrapper">
+    <div class="site-header-inner"><span class="site-brand"><a class="site-brand-inner" rel="author" href="/">
+  <img class="site-favicon" title="李尔阳主页" src="" onerror="this.style.display='none'">
+  李尔阳主页
+</a>
+</span><nav class="site-nav">
+          <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+          <label for="nav-trigger">
+            <span class="menu-icon">
+              <svg viewBox="0 0 18 15" width="18px" height="15px">
+                <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+              </svg>
+            </span>
+          </label>
+
+          <!-- <div class="trigger"><a class="page-link" href="/about.html">关于</a><a class="page-link" href="/archives.html">归档</a><a class="page-link" href="/categories.html">分类</a><a class="page-link" href="/">主页</a><a class="page-link" href="/tags.html">标签</a>
+
+
+
+
+
+
+
+
+
+</div> -->
+
+          <div class="trigger">
+             <a class="page-link" href="/about.html">关于</a>
+            <a class="page-link" href="/categories.html">分类</a>
+            <a class="page-link" href="/archives.html">归档</a>
+            <a class="page-link" href="/tags.html">标签</a>
+            <a class="page-link" href="/assets/index.html">下载</a>
+            <!-- 在这里添加更多的导航项 -->
+          </div>
+          
+
+        </nav></div>
+  </div>
+</header>
+
+<script>
+  function initHeader() {
+    var lastScrollY = getScrollPos().y;
+    var documentElement = document.documentElement;
+
+    function storeScrollData() {
+      var y = getScrollPos().y;var scrollStatus = "";
+
+      if (y <= 0) {
+        scrollStatus = "top";
+      } else if ((window.innerHeight + y) >= document.body.offsetHeight) {
+        scrollStatus = "bottom";
+      } else {
+        var isScrollDown = (y - lastScrollY > 0) ? true : false;
+        scrollStatus = isScrollDown ? "down" : "up";
+      }
+
+      lastScrollY = y;
+      documentElement.setAttribute("data-scroll-status", scrollStatus);
+    }
+
+    window.addEventListener('scroll', function(e) {
+      storeScrollData();
+    });
+
+    storeScrollData();
+  }
+  document.addEventListener('DOMContentLoaded', initHeader);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  function hashLocate(hashValue) {
+    hashValue = hashValue.replace(/^.*#h-/, '');
+    hashValue = decodeURIComponent(hashValue);
+    var element = document.getElementById(hashValue);
+
+    if (!element) {
+      return;
+    }
+
+    var header = document.querySelector('header.site-header');
+    var headerRect = header.getBoundingClientRect();
+    var headerTop = Math.floor(headerRect.top);
+    var headerHeight = Math.floor(headerRect.height);
+    var scrollPos = getScrollPos();
+    var offsetY = element.offsetTop - (headerTop + headerHeight + 20);
+
+    if (offsetY == scrollPos.y) {
+      return;
+    }
+
+    if (headerTop == 0  && offsetY > scrollPos.y) {
+      offsetY += headerHeight + 2;
+    } else if (headerTop < 0  && offsetY < scrollPos.y) {
+      offsetY -= headerHeight - 2;
+    }
+
+    smoothScrollTo(offsetY);
+  }
+
+  // The first event occurred
+  window.addEventListener('load', function(event) {
+    if (window.location.hash) {
+      hashLocate(window.location.hash);
+    }
+  });
+
+  // The first event occurred
+  window.addEventListener('click', function(event) {
+    if (event.target.tagName.toLowerCase() == 'a') {
+      hashLocate(event.target.getAttribute('href'));
+    }
+  });
+</script>
+<div class="theme-toggle">
+  <input type="checkbox" id="theme-switch">
+  <label for="theme-switch">
+    <div class="toggle"></div>
+    <div class="names">
+      <p class="light">Light</p>
+      <p class="dark">Dark</p>
+    </div>
+  </label>
+</div>
+
+
+
+
+<script>
+  (function() {
+    var sw = document.getElementById('theme-switch');
+    var html = document.getElementsByTagName('html')[0];
+    var nightModeOption = ('auto' || 'auto').toLowerCase();
+    var storage = nightModeOption === 'manual'
+        ? localStorage
+        : sessionStorage;
+    var themeData = loadThemeData();
+
+    function saveThemeData(data) {
+      storage.setItem('theme', JSON.stringify(data));
+    }
+
+    function loadThemeData() {
+      var data = storage.getItem('theme');
+      try {
+        data = JSON.parse(data ? data : '');
+      } catch(e) {
+        data = { nightShift: undefined, autoToggleAt: 0 };
+        saveThemeData(data);
+      }
+      return data;
+    }
+
+    function handleThemeToggle(nightShift) {
+      themeData.nightShift = nightShift;
+      saveThemeData(themeData);
+      html.dataset.theme = nightShift ? 'dark' : 'light';
+      setTimeout(function() {
+        sw.checked = nightShift ? true : false;
+      }, 50);
+    }
+
+    function autoThemeToggle() {
+      // Next time point of theme toggle
+      var now = new Date();
+      var toggleAt = new Date();
+      var hours = now.getHours();
+      var nightShift = hours >= 19 || hours <=7;
+
+      if (nightShift) {
+        if (hours > 7) {
+          toggleAt.setDate(toggleAt.getDate() + 1);
+        }
+        toggleAt.setHours(7);
+      } else {
+        toggleAt.setHours(19);
+      }
+
+      toggleAt.setMinutes(0);
+      toggleAt.setSeconds(0);
+      toggleAt.setMilliseconds(0)
+
+      var delay = toggleAt.getTime() - now.getTime();
+
+      // auto toggle theme mode
+      setTimeout(function() {
+        handleThemeToggle(!nightShift);
+      }, delay);
+
+      return {
+        nightShift: nightShift,
+        toggleAt: toggleAt.getTime()
+      };
+    }
+
+    // Listen the theme toggle event
+    sw.addEventListener('change', function(event) {
+      handleThemeToggle(event.target.checked);
+    });
+
+    if (nightModeOption == 'auto') {
+      var data = autoThemeToggle();
+
+      // Toggle theme by local setting
+      if (data.toggleAt > themeData.autoToggleAt) {
+        themeData.autoToggleAt = data.toggleAt;
+        handleThemeToggle(data.nightShift);
+      } else {
+        handleThemeToggle(themeData.nightShift);
+      }
+    } else if (nightModeOption == 'manual') {
+      handleThemeToggle(themeData.nightShift);
+    } else {
+      var nightShift = themeData.nightShift;
+      if (nightShift === undefined) {
+        nightShift = nightModeOption === 'on';
+      }
+      handleThemeToggle(nightShift);
+    }
+  })();
+</script>
+<div id="click-to-top" class="click-to-top">
+  <i class="fa fa-arrow-up"></i>
+</div>
+<script>
+  (function () {
+    const clickToTop = document.getElementById('click-to-top');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 100) {
+        clickToTop.classList.add('show')
+      }else {
+        clickToTop.classList.remove('show')
+      }
+    });
+    clickToTop.addEventListener('click', () => {
+      window.smoothScrollTo(0);
+    });
+  })();
+</script>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <div class="framework">
+  <section class="main">
+
+     <div class="post">
+  <section>
+
+
+
+
+
+
+
+
+
+<header class="post-header">
+  <h1 class="post-title p-name" itemprop="name headline">C语言编程注释规范</h1>
+  <h2 class="post-subtitle"></h2>
+
+  <p class="post-meta">
+    <time class="dt-published" datetime="2023-06-01T00:00:00+00:00" itemprop="datePublished"><i class="fa fa-calendar"></i> Jun 01, 2023
+    </time>
+
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 3 mins</span>
+  </p><div class="post-tags"><a class="post-tag" href="/tags.html#日之漫录">#日之漫录</a></div></header>
+<article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+    <div class="post-content e-content" itemprop="articleBody">
+
+      <h2 id="1-说明性文件头部应进行注释">1 说明性文件头部应进行注释</h2>
+
+<p>说明性文件(如头文件.h 文件、.inc 文件、.def 文件、编译说明文件.cfg 等)头部应进行注释，注释必须列出：版权说明、版本号、生成日期、作者、内容、功能、与其它文件的关系、修改日志等，头文件的注释中还应有函数功能简要说明。</p>
+
+<p>示例：下面这段头文件的头注释比较标准，当然，并不局限于此格式，但上述信息建议要包含在内。</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="cm">/**
+
+ * Copyright (C), 2020-2099, Lieryng Tech. Co., Ltd.
+
+ * File name:      // 文件名
+
+ * Author:       Version:        Date: // 作者、版本及完成日期
+
+ * Description:    // 用于详细说明此程序文件完成的主要功能，与其他模块
+
+                  // 或函数的接口，输出值、取值范围、含义及参数间的控
+
+                  // 制、顺序、独立或依赖等关系
+
+ * Others:         // 其它内容的说明
+
+ * Function List:  // 主要函数列表，每条记录应包括函数名及功能简要说明
+
+    1. ....
+
+ * History:        // 修改历史记录列表，每条修改记录应包括修改日期、修改
+
+                  // 者及修改内容简述
+
+    1. Date:
+
+       Author:
+
+       Modification:
+
+   2. ...
+
+ */</span>
+
+
+</code></pre></div></div>
+
+<h2 id="2-源文件头部应进行注释">2 源文件头部应进行注释</h2>
+
+<p>源文件头部应进行注释，列出：版权说明、版本号、生成日期、作者、模块目的/功能、主要函数及其功能、修改日志等。</p>
+
+<p>示例：下面这段源文件的头注释比较标准，当然，并不局限于此格式，但上述信息建议要包含在内。</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/**
+
+ * Copyright (C), 2020-2099, Lieryng Tech. Co., Ltd.
+
+ * FileName: test.cpp
+
+ * Author:        Version :          Date:
+
+ * Description:     // 模块描述
+
+ * Version:         // 版本信息
+
+ * Function List:   // 主要函数及其功能
+
+    1. -------
+
+ * History:         // 历史修改记录
+
+      &lt;author&gt;  &lt;time&gt;   &lt;version &gt;   &lt;desc&gt;
+
+      David    96/10/12     1.0     build this moudle
+
+ */</span>
+
+
+</code></pre></div></div>
+
+<p>说明：Description一项描述本文件的内容、功能、内部各部分之间的关系及本文件与其它文件关系等。History是修改历史记录列表，每条修改记录应包括修改日期、修改者及修改内容简述。</p>
+
+<h2 id="3-函数头部应进行注释">3 函数头部应进行注释</h2>
+
+<p>函数头部应进行注释，列出：函数的目的/ 功能、输入参数、输出参数、返回值、调用关系(函数、表)等。</p>
+
+<p>示例1：下面这段函数的注释比较标准，当然，并不局限于此格式，但上述信息建议要包含在内。</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/**
+
+ * Function:       // 函数名称
+
+ * Description:    // 函数功能、性能等的描述
+
+ * Calls:          // 被本函数调用的函数清单
+
+ * Called By:      // 调用本函数的函数清单
+
+ * Table Accessed: // 被访问的表(此项仅对于牵扯到数据库操作的程序)
+
+ * Table Updated:  // 被修改的表(此项仅对于牵扯到数据库操作的程序)
+
+ * Input:          // 输入参数说明，包括每个参数的作
+
+                  // 用、取值说明及参数间关系。
+
+ * Output:         // 对输出参数的说明。
+
+ * Return:         // 函数返回值的说明
+
+ * Others:         // 其它说明
+
+ */</span>
+
+
+</code></pre></div></div>
+
+<p>对于某些函数，其部分参数为传入值，而部分参数为传出值，所以对参数要详细说明该参数是入口参数，还是出口参数，对于某些意义不明确的参数还要做详细说明(例如：以角度作为参数时，要说明该角度参数是以弧度(PI),还是以度为单位),对既是入口又是出口的变量应该在入口和出口处同时标明。等等。</p>
+
+<p>在注释中详细注明函数的适当调用方法，对于返回值的处理方法等。在注释中要强调调用时的危险方面，可能出错的地方。</p>
+
+<h2 id="4-对于所有有物理含义的变量常量如果其命名不是充分自注释的在声明时都必须加以注释说明其物理含义变量常量宏的注释应放在其上方相邻位置或右方">4 对于所有有物理含义的变量、常量，如果其命名不是充分自注释的，在声明时都必须加以注释，说明其物理含义。变量、常量、宏的注释应放在其上方相邻位置或右方。</h2>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/* active statistic task number */</span>
+
+<span class="cp">#define MAX_ACT_TASK_NUMBER 1000
+</span>
+<span class="cp">#define MAX_ACT_TASK_NUMBER 1000 </span><span class="cm">/* active statistic task number */</span><span class="cp">
+</span>
+</code></pre></div></div>
+
+<h2 id="5-数据结构声明包括数组结构类枚举等如果命名不是充分自注释的必须加以注释对数据结构的注释应放在其上方相邻位置不可放在下面对结构中的每个域的注释放在此域的右方">5 数据结构声明（包括数组、结构、类、枚举等），如果命名不是充分自注释的，必须加以注释。对数据结构的注释应放在其上方相邻位置，不可放在下面；对结构中的每个域的注释放在此域的右方。</h2>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/* sccp interface with sccp user primitive message name */</span>
+
+<span class="k">enum</span>  <span class="n">SCCP_USER_PRIMITIVE</span>
+
+<span class="p">{</span>
+
+    <span class="n">N_UNITDATA_IND</span><span class="p">,</span> <span class="cm">/* sccp notify sccp user unit data come */</span>
+
+    <span class="n">N_NOTICE_IND</span><span class="p">,</span>   <span class="cm">/* sccp notify user the No.7 network can not */</span>
+
+                    <span class="cm">/* transmission this message */</span>
+
+    <span class="n">N_UNITDATA_REQ</span><span class="p">,</span> <span class="cm">/* sccp user's unit data transmission request*/</span>
+
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h2 id="6-全局变量要有较详细的注释包括对其功能取值范围哪些函数或过程存取它以及存取时注意事项等的说明">6 全局变量要有较详细的注释，包括对其功能、取值范围、哪些函数或过程存取它以及存取时注意事项等的说明</h2>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/* The ErrorCode when SCCP translate */</span>
+
+<span class="cm">/* Global Title failure, as follows */</span>      <span class="c1">// 变量作用、含义</span>
+
+<span class="cm">/* 0 － SUCCESS   1 － GT Table error */</span>
+
+<span class="cm">/* 2 － GT error  Others － no use  */</span>       <span class="c1">// 变量取值范围</span>
+
+<span class="cm">/* only  function  SCCPTranslate() in */</span>
+
+<span class="cm">/* this modual can modify it,  and  other */</span>
+
+<span class="cm">/* module can visit it through call */</span>
+
+<span class="cm">/* the  function GetGTTransErrorCode() */</span>    <span class="c1">// 使用方法</span>
+
+<span class="n">BYTE</span> <span class="n">g_GTTranErrorCode</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h2 id="7-注释与所描述内容进行同样的缩排让程序排版整齐并方便注释的阅读与理解">7 注释与所描述内容进行同样的缩排，让程序排版整齐，并方便注释的阅读与理解</h2>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//示例：如下例子，排版不整齐，阅读稍感不方便。</span>
+
+<span class="kt">void</span> <span class="nf">example_fun</span><span class="p">(</span> <span class="kt">void</span> <span class="p">)</span>
+
+<span class="p">{</span>
+
+<span class="cm">/* code one comments */</span>
+
+    <span class="n">CodeBlock</span> <span class="n">One</span>
+
+ 
+
+        <span class="cm">/* code two comments */</span>
+
+    <span class="n">CodeBlock</span> <span class="n">Two</span>
+
+<span class="p">}</span>
+
+<span class="c1">//应改为如下布局。</span>
+
+<span class="kt">void</span> <span class="nf">example_fun</span><span class="p">(</span> <span class="kt">void</span> <span class="p">)</span>
+
+<span class="p">{</span>
+
+    <span class="cm">/* code one comments */</span>
+
+    <span class="n">CodeBlock</span> <span class="n">One</span>
+
+ 
+
+    <span class="cm">/* code two comments */</span>
+
+    <span class="n">CodeBlock</span> <span class="n">Two</span>
+
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="8-对变量的定义和分支语句条件分支循环语句等必须编写注释这些语句往往是程序实现某一特定功能的关键对于维护人员来说良好的注释帮助更好的理解程序有时甚至优于看设计文档">8 对变量的定义和分支语句（条件分支、循环语句等）必须编写注释。这些语句往往是程序实现某一特定功能的关键，对于维护人员来说，良好的注释帮助更好的理解程序，有时甚至优于看设计文档。</h2>
+
+<h2 id="9-对于switch-语句下的case-语句如果因为特殊情况需要处理完一个case-后进入下一个case-处理即上一个case后无break必须在该case-语句处理完下一个case-语句前加上明确的注释以清楚表达程序编写者的意图有效防止无故遗漏break语句可避免后期维护人员对此感到迷惑原程序员是遗漏了break语句还是本来就不应该有">9 对于switch 语句下的case 语句，如果因为特殊情况需要处理完一个case 后进入下一个case 处理(即上一个case后无break)，必须在该case 语句处理完、下一个case 语句前加上明确的注释，以清楚表达程序编写者的意图，有效防止无故遗漏break语句(可避免后期维护人员对此感到迷惑：原程序员是遗漏了break语句还是本来就不应该有)。</h2>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">case</span> <span class="n">CMD_DOWN</span><span class="p">:</span>
+
+    <span class="n">ProcessDown</span><span class="p">();</span>
+
+    <span class="k">break</span><span class="p">;</span>
+
+<span class="k">case</span> <span class="n">CMD_FWD</span><span class="p">:</span>
+
+    <span class="n">ProcessFwd</span><span class="p">();</span>
+
+    <span class="k">if</span> <span class="p">(...)</span>
+
+    <span class="p">{</span>
+
+        <span class="p">...</span>
+
+        <span class="k">break</span><span class="p">;</span>
+
+    <span class="p">}</span> <span class="k">else</span>
+
+    <span class="p">{</span>
+
+        <span class="n">ProcessCFW_B</span><span class="p">();</span>   <span class="c1">// now jump into case CMD_A</span>
+
+    <span class="p">}</span>
+
+<span class="k">case</span> <span class="n">CMD_A</span><span class="p">:</span>
+
+    <span class="n">ProcessA</span><span class="p">();</span>
+
+    <span class="k">break</span><span class="p">;</span>
+
+<span class="p">...</span>
+
+
+</code></pre></div></div>
+
+<h2 id="10-在程序块的结束行右方加注释标记以表明某程序块的结束当代码段较长特别是多重嵌套时这样做可以使代码更清晰更便于阅读">10 在程序块的结束行右方加注释标记，以表明某程序块的结束。当代码段较长，特别是多重嵌套时，这样做可以使代码更清晰，更便于阅读</h2>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="p">(...)</span>
+
+<span class="p">{</span>
+
+    <span class="n">program</span> <span class="n">code</span>
+
+    <span class="k">while</span> <span class="p">(</span><span class="n">index</span> <span class="o">&lt;</span> <span class="n">MAX_INDEX</span><span class="p">)</span>
+
+    <span class="p">{</span>
+
+        <span class="n">program</span> <span class="n">code</span>
+
+    <span class="p">}</span> <span class="cm">/* end of while (index &lt; MAX_INDEX) */</span> <span class="c1">// 指明该条while语句结束</span>
+
+<span class="p">}</span> <span class="cm">/* end of  if (...)*/</span> <span class="c1">// 指明是哪条if语句结束</span>
+</code></pre></div></div>
+
+<h2 id="11-在顺序执行的程序中每隔35行语句应当加一个注释注明这一段语句所组成的小模块的作用对于自己的一些比较独特的思想要求在注释中标明">11 在顺序执行的程序中，每隔3—5行语句，应当加一个注释，注明这一段语句所组成的小模块的作用。对于自己的一些比较独特的思想要求在注释中标明</h2>
+
+<h2 id="12-注释格式尽量统一建议使用--">12 注释格式尽量统一，建议使用“/* …… */”</h2>
+
+<h2 id="13-注释应考虑程序易读及外观排版的因素使用的语言若是中英兼有的建议多使用中文除非能用非常流利准确的英文表达注释语言不统一影响程序易读性和外观排版出于对维护人员的考虑建议使用中文">13 注释应考虑程序易读及外观排版的因素，使用的语言若是中、英兼有的，建议多使用中文，除非能用非常流利准确的英文表达——注释语言不统一，影响程序易读性和外观排版，出于对维护人员的考虑，建议使用中文</h2>
+
+<h2 id="参考">参考</h2>
+<p><a href="https://www.cnblogs.com/mrsandstorm/p/5663456.html">1.C语言编程规范——–2 注释</a></p>
+
+
+
+    </div>
+
+</article>
+<div class="post-nav"><a class="previous" href="/gobject%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0202109/2021/09/02/9-GObject%E4%BF%A1%E5%8F%B7%E6%9C%BA%E5%88%B6-%E4%BF%A1%E5%8F%B7Accumulator.html" title="九、GObject信号机制--信号Accumulator">九、GObject信号机制--信号Accumulator</a><a class="next" href="/%E6%97%A5%E4%B9%8B%E6%BC%AB%E5%BD%95/2023/08/16/Arm%E6%9E%B6%E6%9E%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5.html" title="Arm架构基本概念">Arm架构基本概念</a></div><!--<div class="post-related">
+      <div>Related Articles</div>
+      <ul>
+        <li><a class="post-link" href="/%E6%97%A5%E4%B9%8B%E6%BC%AB%E5%BD%95/2023/12/15/CPU%E6%9E%B6%E6%9E%84.html" title="Arm架构基本概念">CPU架构</a></li><li><a class="post-link" href="/gstreamer%E6%A0%B8%E5%BF%83%E5%AF%B9%E8%B1%A1/2023/12/05/19-GstMessage.html" title="Arm架构基本概念">十九、GstMessage</a></li><li><a class="post-link" href="/%E6%97%A5%E4%B9%8B%E6%BC%AB%E5%BD%95/2023/11/09/github%E4%B8%AA%E4%BA%BA%E4%B8%BB%E9%A1%B5.html" title="Arm架构基本概念">Github个人主页</a></li><li><a class="post-link" href="/gobject%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/2023/11/17/7-%E5%8F%AF%E6%B4%BE%E7%94%9F%E5%92%8C%E9%9D%9E%E6%8A%BD%E8%B1%A1%E7%B1%BB%E5%9E%8B.html" title="Arm架构基本概念">七、可派生和非抽象类型</a></li></ul>
+    </div>--><div class="post-related">
+      <div>相关文章</div>
+      <ul><li><a class="post-link" href="/%E6%97%A5%E4%B9%8B%E6%BC%AB%E5%BD%95/2023/12/15/CPU%E6%9E%B6%E6%9E%84.html" title="CPU架构">CPU架构</a></li><li><a class="post-link" href="/%E6%97%A5%E4%B9%8B%E6%BC%AB%E5%BD%95/2023/11/10/NVIDIA%E6%98%BE%E5%8D%A1%E5%AE%89%E8%A3%85.html" title="NVIDIA显卡安装">NVIDIA显卡安装</a></li><li><a class="post-link" href="/%E6%97%A5%E4%B9%8B%E6%BC%AB%E5%BD%95/2023/11/10/Ubuntu%E7%BE%8E%E5%8C%96.html" title="Ubuntu美化">Ubuntu美化</a></li><li><a class="post-link" href="/%E6%97%A5%E4%B9%8B%E6%BC%AB%E5%BD%95/2023/11/10/%E6%90%9C%E7%8B%97%E8%BE%93%E5%85%A5%E6%B3%95%E5%AE%89%E8%A3%85.html" title="搜狗输入法安装">搜狗输入法安装</a></li></ul>
+    </div><div class="post-comments"><div id="disqus_thread"></div>
+<script>
+    /**
+    *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+    *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
+    /*
+    var disqus_config = function () {
+    this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+    this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+    */
+    (function() { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+    s.src = 'https://pzhou-me.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div></section>
+</div>
+
+
+  </section>
+  <section class="sidebar" style="margin-left: 15px;">
+    <!-- Get sidebar items --><style type="text/css" media="screen">
+.post-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.post-menu ul li {
+  margin-bottom: 5px;  /* 增加每个列表项底部的间距 */
+}
+
+.post-menu ul li a {
+  font-size: 16px; /* 设置目录链接的字体大小 */
+}
+
+.post-menu-content {
+  max-height: 600px; /* 设置最大高度 */
+  min-width: 300px;
+  overflow: hidden; /* 默认隐藏滚动条 */
+  white-space: nowrap; /* 水平方向上的内容不换行 */
+}
+
+/* 自定义垂直滚动条的样式 */
+.post-menu-content::-webkit-scrollbar {
+  width: 8px; /* 垂直滚动条的宽度 */
+  height: 8px; /* 水平滚动条的高度 */
+}
+
+/* 自定义垂直滚动条轨道 */
+.post-menu-content::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* 自定义垂直滚动条滑块 */
+.post-menu-content::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* 当鼠标悬停在垂直滚动条滑块上时 */
+.post-menu-content::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* 一级标题样式 */
+.post-menu ul li.h-h2 {
+  margin-left: 0;
+  margin-bottom: 10px;
+}
+
+/* 二级标题样式 */
+.post-menu ul li.h-h3 {
+  margin-left: 20px;
+  margin-bottom: 10px;
+}
+
+/* 三级标题样式 */
+.post-menu ul li.h-h4 {
+  margin-left: 40px;
+  margin-bottom: 10px;
+}
+
+
+</style>
+
+
+
+<div class="post-menu">
+  <div class="post-menu-title">目录</div>
+  <div class="post-menu-content"></div>
+</div>
+
+<script>
+  function generateContent() {
+    var menu = document.querySelector(".post-menu");
+    var menuContent =  menu.querySelector(".post-menu-content");
+    var headings = document.querySelector(".post-content").querySelectorAll("h2, h3, h4, h5, h6");
+
+    // Hide menu when no headings
+    if (headings.length === 0) {
+      return menu.style.display = "none";
+    }
+
+    // Generate post menu
+    var menuHTML = '';
+    for (var i = 0; i < headings.length; i++) {
+      var h = headings[i];
+      menuHTML += (
+        '<li class="h-' + h.tagName.toLowerCase() + '">'
+        + '<a href="#h-' + h.getAttribute('id') + '">' + h.textContent + '</a></li>');
+    }
+
+    menuContent.innerHTML = '<ul>' + menuHTML + '</ul>';
+
+    // The header element
+    var header = document.querySelector('header.site-header');
+
+    function doMenuCollapse(index, over_items) {
+      var items = menuContent.firstChild.children;
+
+      if (over_items == undefined) {
+        over_items = 20;
+      }
+
+      if (items.length < over_items) {
+        return;
+      }
+
+      var activeItem = items[index];
+      var beginItem = activeItem
+      var endItem = activeItem
+      var beginIndex = index;
+      var endIndex = index + 1;
+      while (beginIndex >= 0
+        && !items[beginIndex].classList.contains('h-h2')) {
+        beginIndex -= 1;
+      }
+      while (endIndex < items.length
+        && !items[endIndex].classList.contains('h-h2')) {
+        endIndex += 1;
+      }
+      for (var i = 0; i < beginIndex; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+      for (var i = beginIndex + 1; i < endIndex; i++) {
+        item = items[i]
+        // if (!item.classList.contains('h-h2')) {
+          item.style.display = '';
+        // }
+      }
+      for (var i = endIndex; i < items.length; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+    }
+
+    // Init menu collapsed
+    doMenuCollapse(-1);
+
+    // Active the menu item
+    window.addEventListener('scroll', function (event) {
+      var lastActive = menuContent.querySelector('.active');
+      var changed = true;
+      var activeIndex = -1;
+      for (var i = headings.length - 1; i >= 0; i--) {
+        var h = headings[i];
+        var headingRect = h.getBoundingClientRect();
+        var headerRect = header.getBoundingClientRect();
+        var headerTop = Math.floor(headerRect.top);
+        var headerHeight = Math.floor(headerRect.height);
+        var headerHeight = headerTop + headerHeight + 20;
+        if (headingRect.top <= headerHeight) {
+          var id = 'h-' + h.getAttribute('id');
+          var a = menuContent.querySelector('a[href="#' + id  + '"]');
+          var curActive = a.parentNode;
+          if (curActive) {
+            curActive.classList.add('active');
+            activeIndex = i;
+          }
+          if (lastActive == curActive) {
+            changed = false;
+          }
+          break;
+        }
+      }
+      if (changed) {
+        if (lastActive) {
+          lastActive.classList.remove('active');
+        }
+        doMenuCollapse(activeIndex);
+      }
+      event.preventDefault();
+    });
+  }
+  generateContent();
+</script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const menuContent = document.querySelector('.post-menu-content');
+
+    // 鼠标进入事件
+    menuContent.addEventListener('mouseenter', function() {
+      menuContent.style.overflow = 'auto';
+    });
+
+    // 鼠标离开事件
+    menuContent.addEventListener('mouseleave', function() {
+      menuContent.style.overflow = 'hidden';
+    });
+  });
+</script>
+
+</section>
+</div>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+    <div class="site-footer-inner"><div>李尓阳工作室 <span class="copyleft">&copy;</span> 2018-2023 Lieryang</div>
+      <div class="footer-col gmail"> E-mail sxlisibo@gmail.com</div>
+      <div>Powered by <a title="Jekyll is a simple, blog-aware, static site
+      generator." href="https://jekyllrb.com/">Jekyll</a> &amp; <a title="Yat, yet
+      another theme." href="https://github.com/jeffreytse/jekyll-theme-yat">Yat Theme</a>.</div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

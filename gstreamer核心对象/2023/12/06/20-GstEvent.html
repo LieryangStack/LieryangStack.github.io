@@ -1,0 +1,1177 @@
+<!DOCTYPE html>
+<html><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>二十、GstEvent | 李尔阳主页</title>
+<meta name="generator" content="Jekyll v3.9.3" />
+<meta property="og:title" content="二十、GstEvent" />
+<meta name="author" content="LieryangStack" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="1 GstEvent基本概念" />
+<meta property="og:description" content="1 GstEvent基本概念" />
+<link rel="canonical" href="https://lieryangstack.github.io//gstreamer%E6%A0%B8%E5%BF%83%E5%AF%B9%E8%B1%A1/2023/12/06/20-GstEvent.html" />
+<meta property="og:url" content="https://lieryangstack.github.io//gstreamer%E6%A0%B8%E5%BF%83%E5%AF%B9%E8%B1%A1/2023/12/06/20-GstEvent.html" />
+<meta property="og:site_name" content="李尔阳主页" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2023-12-06T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="二十、GstEvent" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"LieryangStack"},"dateModified":"2023-12-06T00:00:00+00:00","datePublished":"2023-12-06T00:00:00+00:00","description":"1 GstEvent基本概念","headline":"二十、GstEvent","mainEntityOfPage":{"@type":"WebPage","@id":"https://lieryangstack.github.io//gstreamer%E6%A0%B8%E5%BF%83%E5%AF%B9%E8%B1%A1/2023/12/06/20-GstEvent.html"},"url":"https://lieryangstack.github.io//gstreamer%E6%A0%B8%E5%BF%83%E5%AF%B9%E8%B1%A1/2023/12/06/20-GstEvent.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="shortcut icon" type="image/x-icon" href="/lieryang.ico">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-noto-sans@0.0.72/index.min.css">
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <script src="/assets/js/main.js"></script><link type="application/atom+xml" rel="alternate" href="https://lieryangstack.github.io//feed.xml" title="李尔阳主页" /><link rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
+
+<!-- and it's easy to individually load additional languages -->
+<script charset="UTF-8"
+        src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/go.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+// Init highlight js
+document.addEventListener('DOMContentLoaded', function(event) {
+  var els = document.querySelectorAll('pre code')
+
+  function addLangData(block) {
+    var outer = block.parentElement.parentElement.parentElement;
+    var lang = block.getAttribute('data-lang');
+    for (var i = 0; i < outer.classList.length; i++) {
+      var cls = outer.classList[i];
+      if (cls.startsWith('language-')) {
+        lang = cls;
+        break;
+      }
+    }
+    if (!lang) {
+      cls = block.getAttribute('class');
+      lang = cls ? cls.replace('hljs ', '') : '';
+    }
+    if (lang.startsWith('language-')) {
+      lang = lang.substr(9);
+    }
+    block.setAttribute('class', 'hljs ' + lang);
+    block.parentNode.setAttribute('data-lang', lang);
+  }
+
+  function addBadge(block) {
+    var enabled = ('true' || 'true').toLowerCase();
+    if (enabled == 'true') {
+      var pre = block.parentElement;
+      pre.classList.add('badge');
+    }
+  }
+
+  function handle(block) {
+    addLangData(block);
+    addBadge(block)
+    hljs.highlightBlock(block);
+  }
+
+  for (var i = 0; i < els.length; i++) {
+    var el = els[i];
+    handle(el);
+  }
+});
+</script>
+
+<style>
+  /* code language badge */
+  pre.badge::before {
+    content: attr(data-lang);
+    color: #fff;
+    background-color: #ff4e00;
+    padding: 0 .5em;
+    border-radius: 0 2px;
+    text-transform: uppercase;
+    text-align: center;
+    min-width: 32px;
+    display: inline-block;
+    position: absolute;
+    right: 0;
+  }
+
+  /* fix wrong badge display for firefox browser */
+  code > table pre::before {
+    display: none;
+  }
+</style>
+<link href='https://lieryangstack.github.io//assets/css/syntax.css' rel='stylesheet' type='text/css' />
+</head>
+<body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<header class="site-header " role="banner">
+
+  <div class="wrapper">
+    <div class="site-header-inner"><span class="site-brand"><a class="site-brand-inner" rel="author" href="/">
+  <img class="site-favicon" title="李尔阳主页" src="" onerror="this.style.display='none'">
+  李尔阳主页
+</a>
+</span><nav class="site-nav">
+          <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+          <label for="nav-trigger">
+            <span class="menu-icon">
+              <svg viewBox="0 0 18 15" width="18px" height="15px">
+                <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+              </svg>
+            </span>
+          </label>
+
+          <!-- <div class="trigger"><a class="page-link" href="/about.html">关于</a><a class="page-link" href="/archives.html">归档</a><a class="page-link" href="/categories.html">分类</a><a class="page-link" href="/">主页</a><a class="page-link" href="/tags.html">标签</a>
+
+
+
+
+
+
+
+
+
+</div> -->
+
+          <div class="trigger">
+             <a class="page-link" href="/about.html">关于</a>
+            <a class="page-link" href="/categories.html">分类</a>
+            <a class="page-link" href="/archives.html">归档</a>
+            <a class="page-link" href="/tags.html">标签</a>
+            <a class="page-link" href="/assets/index.html">下载</a>
+            <!-- 在这里添加更多的导航项 -->
+          </div>
+          
+
+        </nav></div>
+  </div>
+</header>
+
+<script>
+  function initHeader() {
+    var lastScrollY = getScrollPos().y;
+    var documentElement = document.documentElement;
+
+    function storeScrollData() {
+      var y = getScrollPos().y;var scrollStatus = "";
+
+      if (y <= 0) {
+        scrollStatus = "top";
+      } else if ((window.innerHeight + y) >= document.body.offsetHeight) {
+        scrollStatus = "bottom";
+      } else {
+        var isScrollDown = (y - lastScrollY > 0) ? true : false;
+        scrollStatus = isScrollDown ? "down" : "up";
+      }
+
+      lastScrollY = y;
+      documentElement.setAttribute("data-scroll-status", scrollStatus);
+    }
+
+    window.addEventListener('scroll', function(e) {
+      storeScrollData();
+    });
+
+    storeScrollData();
+  }
+  document.addEventListener('DOMContentLoaded', initHeader);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  function hashLocate(hashValue) {
+    hashValue = hashValue.replace(/^.*#h-/, '');
+    hashValue = decodeURIComponent(hashValue);
+    var element = document.getElementById(hashValue);
+
+    if (!element) {
+      return;
+    }
+
+    var header = document.querySelector('header.site-header');
+    var headerRect = header.getBoundingClientRect();
+    var headerTop = Math.floor(headerRect.top);
+    var headerHeight = Math.floor(headerRect.height);
+    var scrollPos = getScrollPos();
+    var offsetY = element.offsetTop - (headerTop + headerHeight + 20);
+
+    if (offsetY == scrollPos.y) {
+      return;
+    }
+
+    if (headerTop == 0  && offsetY > scrollPos.y) {
+      offsetY += headerHeight + 2;
+    } else if (headerTop < 0  && offsetY < scrollPos.y) {
+      offsetY -= headerHeight - 2;
+    }
+
+    smoothScrollTo(offsetY);
+  }
+
+  // The first event occurred
+  window.addEventListener('load', function(event) {
+    if (window.location.hash) {
+      hashLocate(window.location.hash);
+    }
+  });
+
+  // The first event occurred
+  window.addEventListener('click', function(event) {
+    if (event.target.tagName.toLowerCase() == 'a') {
+      hashLocate(event.target.getAttribute('href'));
+    }
+  });
+</script>
+<div class="theme-toggle">
+  <input type="checkbox" id="theme-switch">
+  <label for="theme-switch">
+    <div class="toggle"></div>
+    <div class="names">
+      <p class="light">Light</p>
+      <p class="dark">Dark</p>
+    </div>
+  </label>
+</div>
+
+
+
+
+<script>
+  (function() {
+    var sw = document.getElementById('theme-switch');
+    var html = document.getElementsByTagName('html')[0];
+    var nightModeOption = ('auto' || 'auto').toLowerCase();
+    var storage = nightModeOption === 'manual'
+        ? localStorage
+        : sessionStorage;
+    var themeData = loadThemeData();
+
+    function saveThemeData(data) {
+      storage.setItem('theme', JSON.stringify(data));
+    }
+
+    function loadThemeData() {
+      var data = storage.getItem('theme');
+      try {
+        data = JSON.parse(data ? data : '');
+      } catch(e) {
+        data = { nightShift: undefined, autoToggleAt: 0 };
+        saveThemeData(data);
+      }
+      return data;
+    }
+
+    function handleThemeToggle(nightShift) {
+      themeData.nightShift = nightShift;
+      saveThemeData(themeData);
+      html.dataset.theme = nightShift ? 'dark' : 'light';
+      setTimeout(function() {
+        sw.checked = nightShift ? true : false;
+      }, 50);
+    }
+
+    function autoThemeToggle() {
+      // Next time point of theme toggle
+      var now = new Date();
+      var toggleAt = new Date();
+      var hours = now.getHours();
+      var nightShift = hours >= 19 || hours <=7;
+
+      if (nightShift) {
+        if (hours > 7) {
+          toggleAt.setDate(toggleAt.getDate() + 1);
+        }
+        toggleAt.setHours(7);
+      } else {
+        toggleAt.setHours(19);
+      }
+
+      toggleAt.setMinutes(0);
+      toggleAt.setSeconds(0);
+      toggleAt.setMilliseconds(0)
+
+      var delay = toggleAt.getTime() - now.getTime();
+
+      // auto toggle theme mode
+      setTimeout(function() {
+        handleThemeToggle(!nightShift);
+      }, delay);
+
+      return {
+        nightShift: nightShift,
+        toggleAt: toggleAt.getTime()
+      };
+    }
+
+    // Listen the theme toggle event
+    sw.addEventListener('change', function(event) {
+      handleThemeToggle(event.target.checked);
+    });
+
+    if (nightModeOption == 'auto') {
+      var data = autoThemeToggle();
+
+      // Toggle theme by local setting
+      if (data.toggleAt > themeData.autoToggleAt) {
+        themeData.autoToggleAt = data.toggleAt;
+        handleThemeToggle(data.nightShift);
+      } else {
+        handleThemeToggle(themeData.nightShift);
+      }
+    } else if (nightModeOption == 'manual') {
+      handleThemeToggle(themeData.nightShift);
+    } else {
+      var nightShift = themeData.nightShift;
+      if (nightShift === undefined) {
+        nightShift = nightModeOption === 'on';
+      }
+      handleThemeToggle(nightShift);
+    }
+  })();
+</script>
+<div id="click-to-top" class="click-to-top">
+  <i class="fa fa-arrow-up"></i>
+</div>
+<script>
+  (function () {
+    const clickToTop = document.getElementById('click-to-top');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 100) {
+        clickToTop.classList.add('show')
+      }else {
+        clickToTop.classList.remove('show')
+      }
+    });
+    clickToTop.addEventListener('click', () => {
+      window.smoothScrollTo(0);
+    });
+  })();
+</script>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <div class="framework">
+  <section class="main">
+
+     <div class="post">
+  <section>
+
+
+
+
+
+
+
+
+
+<header class="post-header">
+  <h1 class="post-title p-name" itemprop="name headline">二十、GstEvent</h1>
+  <h2 class="post-subtitle"></h2>
+
+  <p class="post-meta">
+    <time class="dt-published" datetime="2023-12-06T00:00:00+00:00" itemprop="datePublished"><i class="fa fa-calendar"></i> Dec 06, 2023
+    </time>
+
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 9 mins</span>
+  </p><div class="post-tags"><a class="post-tag" href="/tags.html#GStreamer">#GStreamer</a></div></header>
+<article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+    <div class="post-content e-content" itemprop="articleBody">
+
+      <h2 id="1-gstevent基本概念">1 GstEvent基本概念</h2>
+
+<ul>
+  <li>
+    <p>GstEvent事件类提供了构造发送事件和查询（解析）接收事件的相关函数。（只有创建事件和解析事件的功能，具体发送事件是GstElement的事情）</p>
+  </li>
+  <li>
+    <p>通常使用 gst_event_new_*() 创建事件，该函数将特定于事件类型的参数作为参数。要发送事件，应用程序通常会使用 gst_element_send_event，而元素将使用 gst_pad_send_event 或 gst_pad_push_event。如果事件尚未发送，则应使用 gst_event_unref 取消引用该事件。</p>
+  </li>
+  <li>
+    <p>接收到的事件可以使用它们各自的 gst_event_parse_*() 函数进行解析。对于不需要的细节，传递 NULL 是有效的。</p>
+  </li>
+  <li>
+    <p>事件在元素之间传递，与数据流并行进行。有些事件与缓冲区序列化，而其他事件则没有。有些事件只能向下游传递，而其他事件只能向上游传递。有些事件可以同时向上游和下游传递。</p>
+  </li>
+  <li>
+    <p>事件用于在数据流中发出特殊条件的信号，例如 EOS（流结束）或开始新的流段。事件还用于清除管道中的任何挂起数据。</p>
+  </li>
+  <li>
+    <p>大多数事件 API 在插件内部使用。应用程序通常只构造和使用寻址事件。为此，可以使用 gst_event_new_seek 来创建一个寻址事件，以指定寻址时间和模式。</p>
+
+    <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">GstEvent</span> <span class="o">*</span><span class="n">event</span><span class="p">;</span>
+ <span class="n">gboolean</span> <span class="n">result</span><span class="p">;</span>
+ <span class="p">...</span>
+ <span class="c1">// construct a seek event to play the media from second 2 to 5, flush</span>
+ <span class="c1">// the pipeline to decrease latency.</span>
+ <span class="n">event</span> <span class="o">=</span> <span class="n">gst_event_new_seek</span> <span class="p">(</span><span class="mi">1</span><span class="p">.</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">GST_FORMAT_TIME</span><span class="p">,</span>
+    <span class="n">GST_SEEK_FLAG_FLUSH</span><span class="p">,</span>
+    <span class="n">GST_SEEK_TYPE_SET</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">GST_SECOND</span><span class="p">,</span>
+    <span class="n">GST_SEEK_TYPE_SET</span><span class="p">,</span> <span class="mi">5</span> <span class="o">*</span> <span class="n">GST_SECOND</span><span class="p">);</span>
+ <span class="p">...</span>
+ <span class="n">result</span> <span class="o">=</span> <span class="n">gst_element_send_event</span> <span class="p">(</span><span class="n">pipeline</span><span class="p">,</span> <span class="n">event</span><span class="p">);</span>
+ <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">result</span><span class="p">)</span>
+   <span class="n">g_warning</span> <span class="p">(</span><span class="s">"seek failed"</span><span class="p">);</span>
+ <span class="p">...</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p> </p>
+
+<p><img src="/assets/GStreamerStudy/CoreObject/20_GstEvent/communication.png" alt="Alt text" /></p>
+
+<h2 id="2-gstevent类型结构">2 GstEvent类型结构</h2>
+
+<h3 id="21-gstevent类型注册宏定义">2.1 GstEvent类型注册宏定义</h3>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/* filename: gstevent.h */</span>
+<span class="n">GST_API</span> <span class="n">GType</span> <span class="n">_gst_event_type</span><span class="p">;</span>
+<span class="cp">#define GST_TYPE_EVENT                  (_gst_event_type)
+</span><span class="cm">/* filename: gstevent.c */</span>
+<span class="n">GType</span> <span class="n">_gst_event_type</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="n">GST_DEFINE_MINI_OBJECT_TYPE</span> <span class="p">(</span><span class="n">GstEvent</span><span class="p">,</span> <span class="n">gst_event</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h3 id="22-gstevent类型相关枚举">2.2 GstEvent类型相关枚举</h3>
+
+<h4 id="221-gsteventtypeflags">2.2.1 GstEventTypeFlags</h4>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/* filename: gstevent.h */</span>
+
+<span class="cm">/* #GstEventTypeFlags 表示不同 #GstEventType 值的各个方面。您可以使用 gst_event_type_get_flags() 函数获取 #GstEventType 的类型标志。 */</span>
+<span class="k">typedef</span> <span class="k">enum</span> <span class="p">{</span>
+  <span class="cm">/* 如果事件可以向上游传递，则设置。 */</span>
+  <span class="n">GST_EVENT_TYPE_UPSTREAM</span>       <span class="o">=</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="cm">/* 如果事件可以向下游传递，则设置。 */</span>
+  <span class="n">GST_EVENT_TYPE_DOWNSTREAM</span>     <span class="o">=</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="cm">/* 如果事件应该与数据流进行序列化，则设置。 */</span>
+  <span class="n">GST_EVENT_TYPE_SERIALIZED</span>     <span class="o">=</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">2</span><span class="p">,</span>
+  <span class="cm">/* 如果事件在 pad 上是sticky(黏性的)，则设置。 */</span>
+  <span class="n">GST_EVENT_TYPE_STICKY</span>         <span class="o">=</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">3</span><span class="p">,</span>
+  <span class="cm">/* 多个黏性事件可以存在于一个 pad 上，每个事件由事件名称标识。 */</span>
+  <span class="n">GST_EVENT_TYPE_STICKY_MULTI</span>   <span class="o">=</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">4</span>
+<span class="p">}</span> <span class="n">GstEventTypeFlags</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h4 id="222-gststreamflags">2.2.2 GstStreamFlags</h4>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/* filename: gstevent.h */</span>
+<span class="cm">/**
+ * GstStreamFlags:
+ * @GST_STREAM_FLAG_NONE: 此流没有特殊属性
+ * @GST_STREAM_FLAG_SPARSE: 此流是一个稀疏流（例如，字幕流），数据可能仅在不规则间隔内以较大间隔流动。
+ * @GST_STREAM_FLAG_SELECT: 此流应默认选择。此标志可供解复用器使用，以表示在播放场景中应默认选择该流。
+ * @GST_STREAM_FLAG_UNSELECT: 此流不应默认选择。此标志可供解复用器使用，以表示在播放场景中不应默认选择该流，但仅当用户显式选择时（例如，对于听障者的音频轨道或导演的解说音轨）。
+ *
+ * 自版本：1.2
+ */</span>
+<span class="k">typedef</span> <span class="k">enum</span> <span class="p">{</span>
+  <span class="n">GST_STREAM_FLAG_NONE</span><span class="p">,</span>
+  <span class="n">GST_STREAM_FLAG_SPARSE</span>       <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">0</span><span class="p">),</span>
+  <span class="n">GST_STREAM_FLAG_SELECT</span>       <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">1</span><span class="p">),</span>
+  <span class="n">GST_STREAM_FLAG_UNSELECT</span>     <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">2</span><span class="p">)</span>
+<span class="p">}</span> <span class="n">GstStreamFlags</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h4 id="223-gsteventtype">2.2.3 GstEventType</h4>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/**
+ * GstEventType:
+ * @GST_EVENT_UNKNOWN: 未知事件
+ * @GST_EVENT_FLUSH_START: 开始刷新操作。该事件清除管道中的所有数据并解除所有流线程的阻塞。
+ * @GST_EVENT_FLUSH_STOP: 停止刷新操作。此事件重置管道的运行时间。
+ * @GST_EVENT_SELECT_STREAMS: 请求选择一个或多个流（自 1.10 版开始）
+ * @GST_EVENT_STREAM_START: 标记新流的开始，在任何其他序列化事件之前发送，只在新流开始时发送，而不是在flushing seeks之后发送。
+ * @GST_EVENT_CAPS: #GstCaps event. 通知pad有新的媒体类型
+ * @GST_EVENT_SEGMENT: 数据流中紧随其后的新媒体段。段事件包含用于裁剪缓冲区和将缓冲区时间戳转换为运行时间和流时间的信息。
+ * @GST_EVENT_STREAM_COLLECTION: 有新的 #GstStreamCollection 可用（自 1.10 版开始）
+ * @GST_EVENT_TAG: 在流中发现了新的一组元数据标签。
+ * @GST_EVENT_BUFFERSIZE: 缓冲需求的通知。（目前尚未使用！！！）
+ * @GST_EVENT_SINK_MESSAGE: 将事件Event转换为消息Message的事件。用于发送应与呈现同步的消息。
+ * @GST_EVENT_STREAM_GROUP_DONE: 表示消息中流组 ID 没有更多数据data。在某些情况下在 EOS 之前发送，并且应基本上以相同方式处理（自 1.10 版开始）
+ * @GST_EVENT_EOS: 流结束。不会有更多数据跟随，除非有 STREAM_START 事件，或者 FLUSH_STOP 和 SEGMENT 事件。
+ * @GST_EVENT_SEGMENT_DONE: 标记段播放的结束。
+ * @GST_EVENT_GAP: 标记数据流中的间隙。
+ * @GST_EVENT_TOC: 一个事件，指示找到或更新了新的目录（table of contents）。
+ * @GST_EVENT_PROTECTION: 一个事件，指示在流中发现了新的或更新的加密信息。
+ * @GST_EVENT_QOS: 质量消息。用于指示上游元素应调整其处理速率。
+ * @GST_EVENT_SEEK: 请求新的播放位置和速率。
+ * @GST_EVENT_NAVIGATION: 导航事件通常用于向上游元素传达用户请求，例如鼠标或键盘移动。
+ * @GST_EVENT_LATENCY: 新延迟调整的通知。sinks将使用延迟信息来调整其同步。
+ * @GST_EVENT_STEP: 对媒体进行逐步操作的请求。sinks通常会执行step操作。
+ * @GST_EVENT_RECONFIGURE: 请求上游重新协商 caps 和重新配置。
+ * @GST_EVENT_TOC_SELECT: 基于 TOC 条目 UID 的新播放位置的请求。
+ * @GST_EVENT_INSTANT_RATE_CHANGE: 通知下游应尽快应用播放速率覆盖（自 1.18 版开始）
+ * @GST_EVENT_INSTANT_RATE_SYNC_TIME: 由管道发送，当rate multiplier应该被应用或者已经被应用时候，
+ *                                    通知元素处理关于运行时间的instant-rate-change事件。
+ * @GST_EVENT_CUSTOM_UPSTREAM: 上游自定义事件
+ * @GST_EVENT_CUSTOM_DOWNSTREAM: 下游传输的自定义事件，随数据流传递。
+ * @GST_EVENT_CUSTOM_DOWNSTREAM_OOB: 自定义out-of-band下游事件
+ * @GST_EVENT_CUSTOM_DOWNSTREAM_STICKY: 自定义sticky下游事件
+ * @GST_EVENT_CUSTOM_BOTH: 自定义的上游或下游事件。向下游传输时为In-band事件。
+ * @GST_EVENT_CUSTOM_BOTH_OOB: 自定义的上游或下游数据out-of-band事件。
+ */</span>
+<span class="cm">/* #GstEventType 列出了可以在管道中发送的标准事件类型
+ * 自定义事件类型可用于元素之间的私有消息，这些消息无法使用正常的 GStreamer 缓冲传递语义来表达。
+ * 自定义事件携带任意的 #GstStructure。具体的自定义事件通过结构的名称来区分。
+ */</span>
+<span class="k">typedef</span> <span class="k">enum</span> <span class="p">{</span>
+  <span class="cm">/* 未知事件 */</span>
+  <span class="n">GST_EVENT_UNKNOWN</span>               <span class="o">=</span> <span class="n">GST_EVENT_MAKE_TYPE</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+
+  <span class="cm">/* BOTH表示向上流和下游双向传递的事件 
+   * SERIALIZED表示该事件应该被数据流序列化
+   * STICKY粘性事件，表示附着在GstPad上的事件，当一个新的元素加入到管道时候，它会立即收到所有当前附着在其上游元素的粘性事件。
+   */</span>
+  <span class="n">GST_EVENT_FLUSH_START</span>           <span class="o">=</span> <span class="n">GST_EVENT_MAKE_TYPE</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">_FLAG</span><span class="p">(</span><span class="n">BOTH</span><span class="p">)),</span>
+  <span class="n">GST_EVENT_FLUSH_STOP</span>            <span class="o">=</span> <span class="n">GST_EVENT_MAKE_TYPE</span> <span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="n">_FLAG</span><span class="p">(</span><span class="n">BOTH</span><span class="p">)</span> <span class="o">|</span> <span class="n">_FLAG</span><span class="p">(</span><span class="n">SERIALIZED</span><span class="p">)),</span>
+
+  <span class="cm">/* 粘性向下游传递的序列化事件 */</span>
+  <span class="n">GST_EVENT_STREAM_START</span>          <span class="o">=</span> <span class="n">GST_EVENT_MAKE_TYPE</span> <span class="p">(</span><span class="mi">40</span><span class="p">,</span> <span class="n">_FLAG</span><span class="p">(</span><span class="n">DOWNSTREAM</span><span class="p">)</span> <span class="o">|</span> <span class="n">_FLAG</span><span class="p">(</span><span class="n">SERIALIZED</span><span class="p">)</span> <span class="o">|</span> <span class="n">_FLAG</span><span class="p">(</span><span class="n">STICKY</span><span class="p">)),</span>
+  <span class="n">GST_EVENT_CAPS</span>                  <span class="o">=</span> <span class="n">GST_EVENT_MAKE_TYPE</span> <span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="n">_FLAG</span><span class="p">(</span><span class="n">DOWNSTREAM</span><span class="p">)</span> <span class="o">|</span> <span class="n">_FLAG</span><span class="p">(</span><span class="n">SERIALIZED</span><span class="p">)</span> <span class="o">|</span> <span class="n">_FLAG</span><span class="p">(</span><span class="n">STICKY</span><span class="p">)),</span>
+  <span class="n">GST_EVENT_SEGMENT</span>               <span class="o">=</span> <span class="n">GST_EVENT_MAKE_TYPE</span> <span class="p">(</span><span class="mi">70</span><span class="p">,</span> <span class="n">_FLAG</span><span class="p">(</span><span class="n">DOWNSTREAM</span><span class="p">)</span> <span class="o">|</span> <span class="n">_FLAG</span><span class="p">(</span><span class="n">SERIALIZED</span><span class="p">)</span> <span class="o">|</span> <span class="n">_FLAG</span><span class="p">(</span><span class="n">STICKY</span><span class="p">)),</span>
+  <span class="n">GST_EVENT_STREAM_COLLECTION</span>     <span class="o">=</span> <span class="n">GST_EVENT_MAKE_TYPE</span> <span class="p">(</span><span class="mi">75</span><span class="p">,</span> <span class="n">_FLAG</span><span class="p">(</span><span class="n">DOWNSTREAM</span><span class="p">)</span> <span class="o">|</span> <span class="n">_FLAG</span><span class="p">(</span><span class="n">SERIALIZED</span><span class="p">)</span> <span class="o">|</span> <span class="n">_FLAG</span><span class="p">(</span><span class="n">STICKY</span><span class="p">)</span> <span class="o">|</span> <span class="n">_FLAG</span><span class="p">(</span><span class="n">STICKY_MULTI</span><span class="p">)),</span>
+  <span class="n">GST_EVENT_TAG</span>                   <span class="o">=</span> <span class="n">GST_EVENT_MAKE_TYPE</span> <span class="p">(</span><span class="mi">80</span><span class="p">,</span> <span class="n">_FLAG</span><span class="p">(</span><span class="n">DOWNSTREAM</span><span class="p">)</span> <span class="o">|</span> <span class="n">_FLAG</span><span class="p">(</span><span class="n">SERIALIZED</span><span class="p">)</span> <span class="o">|</span> <span class="n">_FLAG</span><span class="p">(</span><span class="n">STICKY</span><span class="p">)</span> <span class="o">|</span> <span class="n">_FLAG</span><span class="p">(</span><span class="n">STICKY_MULTI</span><span class="p">)),</span>
+  <span class="n">GST_EVENT_BUFFERSIZE</span>            <span class="o">=</span> <span class="n">GST_EVENT_MAKE_TYPE</span> <span class="p">(</span><span class="mi">90</span><span class="p">,</span> <span class="n">_FLAG</span><span class="p">(</span><span class="n">DOWNSTREAM</span><span class="p">)</span> <span class="o">|</span> <span class="n">_FLAG</span><span class="p">(</span><span class="n">SERIALIZED</span><span class="p">)</span> <span class="o">|</span> <span class="n">_FLAG</span><span class="p">(</span><span class="n">STICKY</span><span class="p">)),</span>
+  <span class="n">GST_EVENT_SINK_MESSAGE</span>          <span class="o">=</span> <span class="n">GST_EVENT_MAKE_TYPE</span> <span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="n">_FLAG</span><span class="p">(</span><span class="n">DOWNSTREAM</span><span class="p">)</span> <span class="o">|</span> <span class="n">_FLAG</span><span class="p">(</span><span class="n">SERIALIZED</span><span class="p">)</span> <span class="o">|</span> <span class="n">_FLAG</span><span class="p">(</span><span class="n">STICKY</span><span class="p">)</span> <span class="o">|</span> <span class="n">_FLAG</span><span class="p">(</span><span class="n">STICKY_MULTI</span><span class="p">)),</span>
+  <span class="n">GST_EVENT_STREAM_GROUP_DONE</span>     <span class="o">=</span> <span class="n">GST_EVENT_MAKE_TYPE</span> <span class="p">(</span><span class="mi">105</span><span class="p">,</span> <span class="n">_FLAG</span><span class="p">(</span><span class="n">DOWNSTREAM</span><span class="p">)</span> <span class="o">|</span> <span class="n">_FLAG</span><span class="p">(</span><span class="n">SERIALIZED</span><span class="p">)</span> <span class="o">|</span> <span class="n">_FLAG</span><span class="p">(</span><span class="n">STICKY</span><span class="p">)),</span>
+  <span class="n">GST_EVENT_EOS</span>                   <span class="o">=</span> <span class="n">GST_EVENT_MAKE_TYPE</span> <span class="p">(</span><span class="mi">110</span><span class="p">,</span> <span class="n">_FLAG</span><span class="p">(</span><span class="n">DOWNSTREAM</span><span class="p">)</span> <span class="o">|</span> <span class="n">_FLAG</span><span class="p">(</span><span class="n">SERIALIZED</span><span class="p">)</span> <span class="o">|</span> <span class="n">_FLAG</span><span class="p">(</span><span class="n">STICKY</span><span class="p">)),</span>
+  <span class="n">GST_EVENT_TOC</span>                   <span class="o">=</span> <span class="n">GST_EVENT_MAKE_TYPE</span> <span class="p">(</span><span class="mi">120</span><span class="p">,</span> <span class="n">_FLAG</span><span class="p">(</span><span class="n">DOWNSTREAM</span><span class="p">)</span> <span class="o">|</span> <span class="n">_FLAG</span><span class="p">(</span><span class="n">SERIALIZED</span><span class="p">)</span> <span class="o">|</span> <span class="n">_FLAG</span><span class="p">(</span><span class="n">STICKY</span><span class="p">)</span> <span class="o">|</span> <span class="n">_FLAG</span><span class="p">(</span><span class="n">STICKY_MULTI</span><span class="p">)),</span>
+  <span class="n">GST_EVENT_PROTECTION</span>            <span class="o">=</span> <span class="n">GST_EVENT_MAKE_TYPE</span> <span class="p">(</span><span class="mi">130</span><span class="p">,</span> <span class="n">_FLAG</span> <span class="p">(</span><span class="n">DOWNSTREAM</span><span class="p">)</span> <span class="o">|</span> <span class="n">_FLAG</span> <span class="p">(</span><span class="n">SERIALIZED</span><span class="p">)</span> <span class="o">|</span> <span class="n">_FLAG</span> <span class="p">(</span><span class="n">STICKY</span><span class="p">)</span> <span class="o">|</span> <span class="n">_FLAG</span> <span class="p">(</span><span class="n">STICKY_MULTI</span><span class="p">)),</span>
+
+  <span class="cm">/* 非粘性向下游传递序列化事件 */</span>
+  <span class="n">GST_EVENT_SEGMENT_DONE</span>          <span class="o">=</span> <span class="n">GST_EVENT_MAKE_TYPE</span> <span class="p">(</span><span class="mi">150</span><span class="p">,</span> <span class="n">_FLAG</span><span class="p">(</span><span class="n">DOWNSTREAM</span><span class="p">)</span> <span class="o">|</span> <span class="n">_FLAG</span><span class="p">(</span><span class="n">SERIALIZED</span><span class="p">)),</span>
+  <span class="n">GST_EVENT_GAP</span>                   <span class="o">=</span> <span class="n">GST_EVENT_MAKE_TYPE</span> <span class="p">(</span><span class="mi">160</span><span class="p">,</span> <span class="n">_FLAG</span><span class="p">(</span><span class="n">DOWNSTREAM</span><span class="p">)</span> <span class="o">|</span> <span class="n">_FLAG</span><span class="p">(</span><span class="n">SERIALIZED</span><span class="p">)),</span>
+
+  <span class="cm">/* sticky downstream non-serialized */</span>
+  <span class="cm">/* FIXME 2.0: change to value 72 and move after the GST_EVENT_SEGMENT event */</span>
+  <span class="n">GST_EVENT_INSTANT_RATE_CHANGE</span>   <span class="o">=</span> <span class="n">GST_EVENT_MAKE_TYPE</span> <span class="p">(</span><span class="mi">180</span><span class="p">,</span> <span class="n">_FLAG</span><span class="p">(</span><span class="n">DOWNSTREAM</span><span class="p">)</span> <span class="o">|</span> <span class="n">_FLAG</span><span class="p">(</span><span class="n">STICKY</span><span class="p">)),</span>
+
+  <span class="cm">/* 向上游元素传递的事件 */</span>
+  <span class="n">GST_EVENT_QOS</span>                    <span class="o">=</span> <span class="n">GST_EVENT_MAKE_TYPE</span> <span class="p">(</span><span class="mi">190</span><span class="p">,</span> <span class="n">_FLAG</span><span class="p">(</span><span class="n">UPSTREAM</span><span class="p">)),</span>
+  <span class="n">GST_EVENT_SEEK</span>                   <span class="o">=</span> <span class="n">GST_EVENT_MAKE_TYPE</span> <span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="n">_FLAG</span><span class="p">(</span><span class="n">UPSTREAM</span><span class="p">)),</span>
+  <span class="n">GST_EVENT_NAVIGATION</span>             <span class="o">=</span> <span class="n">GST_EVENT_MAKE_TYPE</span> <span class="p">(</span><span class="mi">210</span><span class="p">,</span> <span class="n">_FLAG</span><span class="p">(</span><span class="n">UPSTREAM</span><span class="p">)),</span>
+  <span class="n">GST_EVENT_LATENCY</span>                <span class="o">=</span> <span class="n">GST_EVENT_MAKE_TYPE</span> <span class="p">(</span><span class="mi">220</span><span class="p">,</span> <span class="n">_FLAG</span><span class="p">(</span><span class="n">UPSTREAM</span><span class="p">)),</span>
+  <span class="n">GST_EVENT_STEP</span>                   <span class="o">=</span> <span class="n">GST_EVENT_MAKE_TYPE</span> <span class="p">(</span><span class="mi">230</span><span class="p">,</span> <span class="n">_FLAG</span><span class="p">(</span><span class="n">UPSTREAM</span><span class="p">)),</span>
+  <span class="n">GST_EVENT_RECONFIGURE</span>            <span class="o">=</span> <span class="n">GST_EVENT_MAKE_TYPE</span> <span class="p">(</span><span class="mi">240</span><span class="p">,</span> <span class="n">_FLAG</span><span class="p">(</span><span class="n">UPSTREAM</span><span class="p">)),</span>
+  <span class="n">GST_EVENT_TOC_SELECT</span>             <span class="o">=</span> <span class="n">GST_EVENT_MAKE_TYPE</span> <span class="p">(</span><span class="mi">250</span><span class="p">,</span> <span class="n">_FLAG</span><span class="p">(</span><span class="n">UPSTREAM</span><span class="p">)),</span>
+  <span class="n">GST_EVENT_SELECT_STREAMS</span>         <span class="o">=</span> <span class="n">GST_EVENT_MAKE_TYPE</span> <span class="p">(</span><span class="mi">260</span><span class="p">,</span> <span class="n">_FLAG</span><span class="p">(</span><span class="n">UPSTREAM</span><span class="p">)),</span>
+  <span class="n">GST_EVENT_INSTANT_RATE_SYNC_TIME</span> <span class="o">=</span> <span class="n">GST_EVENT_MAKE_TYPE</span> <span class="p">(</span><span class="mi">261</span><span class="p">,</span> <span class="n">_FLAG</span><span class="p">(</span><span class="n">UPSTREAM</span><span class="p">)),</span>
+
+  <span class="cm">/* 自定义事件*/</span>
+  <span class="n">GST_EVENT_CUSTOM_UPSTREAM</span>          <span class="o">=</span> <span class="n">GST_EVENT_MAKE_TYPE</span> <span class="p">(</span><span class="mi">270</span><span class="p">,</span> <span class="n">_FLAG</span><span class="p">(</span><span class="n">UPSTREAM</span><span class="p">)),</span>
+  <span class="n">GST_EVENT_CUSTOM_DOWNSTREAM</span>        <span class="o">=</span> <span class="n">GST_EVENT_MAKE_TYPE</span> <span class="p">(</span><span class="mi">280</span><span class="p">,</span> <span class="n">_FLAG</span><span class="p">(</span><span class="n">DOWNSTREAM</span><span class="p">)</span> <span class="o">|</span> <span class="n">_FLAG</span><span class="p">(</span><span class="n">SERIALIZED</span><span class="p">)),</span>
+  <span class="n">GST_EVENT_CUSTOM_DOWNSTREAM_OOB</span>    <span class="o">=</span> <span class="n">GST_EVENT_MAKE_TYPE</span> <span class="p">(</span><span class="mi">290</span><span class="p">,</span> <span class="n">_FLAG</span><span class="p">(</span><span class="n">DOWNSTREAM</span><span class="p">)),</span>
+  <span class="n">GST_EVENT_CUSTOM_DOWNSTREAM_STICKY</span> <span class="o">=</span> <span class="n">GST_EVENT_MAKE_TYPE</span> <span class="p">(</span><span class="mi">300</span><span class="p">,</span> <span class="n">_FLAG</span><span class="p">(</span><span class="n">DOWNSTREAM</span><span class="p">)</span> <span class="o">|</span> <span class="n">_FLAG</span><span class="p">(</span><span class="n">SERIALIZED</span><span class="p">)</span> <span class="o">|</span> <span class="n">_FLAG</span><span class="p">(</span><span class="n">STICKY</span><span class="p">)</span> <span class="o">|</span> <span class="n">_FLAG</span><span class="p">(</span><span class="n">STICKY_MULTI</span><span class="p">)),</span>
+  <span class="n">GST_EVENT_CUSTOM_BOTH</span>              <span class="o">=</span> <span class="n">GST_EVENT_MAKE_TYPE</span> <span class="p">(</span><span class="mi">310</span><span class="p">,</span> <span class="n">_FLAG</span><span class="p">(</span><span class="n">BOTH</span><span class="p">)</span> <span class="o">|</span> <span class="n">_FLAG</span><span class="p">(</span><span class="n">SERIALIZED</span><span class="p">)),</span>
+  <span class="n">GST_EVENT_CUSTOM_BOTH_OOB</span>          <span class="o">=</span> <span class="n">GST_EVENT_MAKE_TYPE</span> <span class="p">(</span><span class="mi">320</span><span class="p">,</span> <span class="n">_FLAG</span><span class="p">(</span><span class="n">BOTH</span><span class="p">))</span>
+<span class="p">}</span> <span class="n">GstEventType</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h3 id="23-gstevent相关结构体">2.3 GstEvent相关结构体</h3>
+
+<h4 id="231-gstevent">2.3.1 GstEvent</h4>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/* filename: gstevent.h */</span>
+<span class="k">struct</span> <span class="n">_GstEvent</span> <span class="p">{</span>
+  <span class="n">GstMiniObject</span> <span class="n">mini_object</span><span class="p">;</span>
+
+  <span class="cm">/*&lt; public &gt;*/</span> <span class="cm">/* with COW */</span>
+  <span class="n">GstEventType</span>  <span class="n">type</span><span class="p">;</span> <span class="cm">/* 事件的类型 */</span>
+  <span class="cm">/* FIXME 2.0: Remove the GstEvent::timestamp field */</span>
+  <span class="n">guint64</span>       <span class="n">timestamp</span><span class="p">;</span>
+  <span class="n">guint32</span>       <span class="n">seqnum</span><span class="p">;</span> <span class="cm">/* 事件的序列号 */</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h4 id="232-gsteventquarks">2.3.2 GstEventQuarks</h4>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/* filename: gstevent.c */</span>
+<span class="k">typedef</span> <span class="k">struct</span>
+<span class="p">{</span>
+  <span class="k">const</span> <span class="n">gint</span> <span class="n">type</span><span class="p">;</span> <span class="cm">/* 事件类型GstEventType */</span>
+  <span class="k">const</span> <span class="n">gchar</span> <span class="o">*</span><span class="n">name</span><span class="p">;</span> <span class="cm">/* 事件类型的name名称 */</span>
+  <span class="n">GQuark</span> <span class="n">quark</span><span class="p">;</span> <span class="cm">/* 事件类型名称quark表示 */</span>
+<span class="p">}</span> <span class="n">GstEventQuarks</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h4 id="233-gsteventimpl">2.3.3 GstEventImpl</h4>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/* filename: gstevent.c */</span>
+<span class="k">typedef</span> <span class="k">struct</span>
+<span class="p">{</span>
+  <span class="n">GstEvent</span> <span class="n">event</span><span class="p">;</span>
+
+  <span class="n">GstStructure</span> <span class="o">*</span><span class="n">structure</span><span class="p">;</span>
+  <span class="n">gint64</span> <span class="n">running_time_offset</span><span class="p">;</span>
+<span class="p">}</span> <span class="n">GstEventImpl</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h2 id="3-gstevent对象相关函数">3 GstEvent对象相关函数</h2>
+
+
+    </div>
+
+</article>
+<div class="post-nav"><a class="previous" href="/gstreamer%E6%A0%B8%E5%BF%83%E5%AF%B9%E8%B1%A1/2023/12/05/19-GstMessage.html" title="十九、GstMessage">十九、GstMessage</a><a class="next" href="/gstreamer%E6%A0%B8%E5%BF%83%E5%AF%B9%E8%B1%A1/2023/12/06/21-GstPadTemplate.html" title="二十一、GstPadTemplate">二十一、GstPadTemplate</a></div><!--<div class="post-related">
+      <div>Related Articles</div>
+      <ul>
+        <li><a class="post-link" href="/gstreamer%E6%A0%B8%E5%BF%83%E5%AF%B9%E8%B1%A1/2023/12/01/13-GstTagList.html" title="二十一、GstPadTemplate">十三、GstTagList</a></li><li><a class="post-link" href="/%E5%8D%95%E8%AF%8D/2023/11/28/11%E6%9C%88%E5%8D%95%E8%AF%8D.html" title="二十一、GstPadTemplate">11月单词</a></li><li><a class="post-link" href="/gobject%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0202109/2021/08/31/4-GObject%E5%AD%90%E7%B1%BB%E7%9A%84%E7%BB%A7%E6%89%BF.html" title="二十一、GstPadTemplate">四、GObject子类的继承</a></li><li><a class="post-link" href="/gstreamer%E6%A0%B8%E5%BF%83%E5%AF%B9%E8%B1%A1/2023/11/30/9-GstPoll.html" title="二十一、GstPadTemplate">九、GstPoll</a></li></ul>
+    </div>--><div class="post-related">
+      <div>相关文章</div>
+      <ul><li><a class="post-link" href="/gstreamer%E6%A0%B8%E5%BF%83%E5%AF%B9%E8%B1%A1/2023/12/09/23-GstElement.html" title="二十三、GstElement">二十三、GstElement</a></li><li><a class="post-link" href="/gstreamer%E6%A0%B8%E5%BF%83%E5%AF%B9%E8%B1%A1/2023/12/06/21-GstPadTemplate.html" title="二十一、GstPadTemplate">二十一、GstPadTemplate</a></li><li><a class="post-link" href="/gstreamer%E6%A0%B8%E5%BF%83%E5%AF%B9%E8%B1%A1/2023/12/06/22-GstPad.html" title="二十二、GstPad">二十二、GstPad</a></li><li><a class="post-link" href="/gstreamer%E6%A0%B8%E5%BF%83%E5%AF%B9%E8%B1%A1/2023/12/05/17-GstStreams.html" title="十七、GstStreams">十七、GstStreams</a></li></ul>
+    </div><div class="post-comments"><div id="disqus_thread"></div>
+<script>
+    /**
+    *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+    *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
+    /*
+    var disqus_config = function () {
+    this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+    this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+    */
+    (function() { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+    s.src = 'https://pzhou-me.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div></section>
+</div>
+
+
+  </section>
+  <section class="sidebar" style="margin-left: 15px;">
+    <!-- Get sidebar items --><style type="text/css" media="screen">
+.post-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.post-menu ul li {
+  margin-bottom: 5px;  /* 增加每个列表项底部的间距 */
+}
+
+.post-menu ul li a {
+  font-size: 16px; /* 设置目录链接的字体大小 */
+}
+
+.post-menu-content {
+  max-height: 600px; /* 设置最大高度 */
+  min-width: 300px;
+  overflow: hidden; /* 默认隐藏滚动条 */
+  white-space: nowrap; /* 水平方向上的内容不换行 */
+}
+
+/* 自定义垂直滚动条的样式 */
+.post-menu-content::-webkit-scrollbar {
+  width: 8px; /* 垂直滚动条的宽度 */
+  height: 8px; /* 水平滚动条的高度 */
+}
+
+/* 自定义垂直滚动条轨道 */
+.post-menu-content::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* 自定义垂直滚动条滑块 */
+.post-menu-content::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* 当鼠标悬停在垂直滚动条滑块上时 */
+.post-menu-content::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* 一级标题样式 */
+.post-menu ul li.h-h2 {
+  margin-left: 0;
+  margin-bottom: 10px;
+}
+
+/* 二级标题样式 */
+.post-menu ul li.h-h3 {
+  margin-left: 20px;
+  margin-bottom: 10px;
+}
+
+/* 三级标题样式 */
+.post-menu ul li.h-h4 {
+  margin-left: 40px;
+  margin-bottom: 10px;
+}
+
+
+</style>
+
+
+
+<div class="post-menu">
+  <div class="post-menu-title">目录</div>
+  <div class="post-menu-content"></div>
+</div>
+
+<script>
+  function generateContent() {
+    var menu = document.querySelector(".post-menu");
+    var menuContent =  menu.querySelector(".post-menu-content");
+    var headings = document.querySelector(".post-content").querySelectorAll("h2, h3, h4, h5, h6");
+
+    // Hide menu when no headings
+    if (headings.length === 0) {
+      return menu.style.display = "none";
+    }
+
+    // Generate post menu
+    var menuHTML = '';
+    for (var i = 0; i < headings.length; i++) {
+      var h = headings[i];
+      menuHTML += (
+        '<li class="h-' + h.tagName.toLowerCase() + '">'
+        + '<a href="#h-' + h.getAttribute('id') + '">' + h.textContent + '</a></li>');
+    }
+
+    menuContent.innerHTML = '<ul>' + menuHTML + '</ul>';
+
+    // The header element
+    var header = document.querySelector('header.site-header');
+
+    function doMenuCollapse(index, over_items) {
+      var items = menuContent.firstChild.children;
+
+      if (over_items == undefined) {
+        over_items = 20;
+      }
+
+      if (items.length < over_items) {
+        return;
+      }
+
+      var activeItem = items[index];
+      var beginItem = activeItem
+      var endItem = activeItem
+      var beginIndex = index;
+      var endIndex = index + 1;
+      while (beginIndex >= 0
+        && !items[beginIndex].classList.contains('h-h2')) {
+        beginIndex -= 1;
+      }
+      while (endIndex < items.length
+        && !items[endIndex].classList.contains('h-h2')) {
+        endIndex += 1;
+      }
+      for (var i = 0; i < beginIndex; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+      for (var i = beginIndex + 1; i < endIndex; i++) {
+        item = items[i]
+        // if (!item.classList.contains('h-h2')) {
+          item.style.display = '';
+        // }
+      }
+      for (var i = endIndex; i < items.length; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+    }
+
+    // Init menu collapsed
+    doMenuCollapse(-1);
+
+    // Active the menu item
+    window.addEventListener('scroll', function (event) {
+      var lastActive = menuContent.querySelector('.active');
+      var changed = true;
+      var activeIndex = -1;
+      for (var i = headings.length - 1; i >= 0; i--) {
+        var h = headings[i];
+        var headingRect = h.getBoundingClientRect();
+        var headerRect = header.getBoundingClientRect();
+        var headerTop = Math.floor(headerRect.top);
+        var headerHeight = Math.floor(headerRect.height);
+        var headerHeight = headerTop + headerHeight + 20;
+        if (headingRect.top <= headerHeight) {
+          var id = 'h-' + h.getAttribute('id');
+          var a = menuContent.querySelector('a[href="#' + id  + '"]');
+          var curActive = a.parentNode;
+          if (curActive) {
+            curActive.classList.add('active');
+            activeIndex = i;
+          }
+          if (lastActive == curActive) {
+            changed = false;
+          }
+          break;
+        }
+      }
+      if (changed) {
+        if (lastActive) {
+          lastActive.classList.remove('active');
+        }
+        doMenuCollapse(activeIndex);
+      }
+      event.preventDefault();
+    });
+  }
+  generateContent();
+</script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const menuContent = document.querySelector('.post-menu-content');
+
+    // 鼠标进入事件
+    menuContent.addEventListener('mouseenter', function() {
+      menuContent.style.overflow = 'auto';
+    });
+
+    // 鼠标离开事件
+    menuContent.addEventListener('mouseleave', function() {
+      menuContent.style.overflow = 'hidden';
+    });
+  });
+</script>
+
+</section>
+</div>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+    <div class="site-footer-inner"><div>李尓阳工作室 <span class="copyleft">&copy;</span> 2018-2023 Lieryang</div>
+      <div class="footer-col gmail"> E-mail sxlisibo@gmail.com</div>
+      <div>Powered by <a title="Jekyll is a simple, blog-aware, static site
+      generator." href="https://jekyllrb.com/">Jekyll</a> &amp; <a title="Yat, yet
+      another theme." href="https://github.com/jeffreytse/jekyll-theme-yat">Yat Theme</a>.</div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

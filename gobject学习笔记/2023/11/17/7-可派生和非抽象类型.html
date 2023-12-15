@@ -1,0 +1,1383 @@
+<!DOCTYPE html>
+<html><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>七、可派生和非抽象类型 | 李尔阳主页</title>
+<meta name="generator" content="Jekyll v3.9.3" />
+<meta property="og:title" content="七、可派生和非抽象类型" />
+<meta name="author" content="LieryangStack" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="  创建非抽象可派生类型比创建抽象类型更常见。本节介绍如何创建非抽象可派生类型对象。派生类型的例子是string的对象。它是TStr。它的子对象是一个数字字符串对象。数字字符串是表示数字的字符串。例如“0”、“-100”、“123.45”。子对象(数字字符串)将在下一节中解释。" />
+<meta property="og:description" content="  创建非抽象可派生类型比创建抽象类型更常见。本节介绍如何创建非抽象可派生类型对象。派生类型的例子是string的对象。它是TStr。它的子对象是一个数字字符串对象。数字字符串是表示数字的字符串。例如“0”、“-100”、“123.45”。子对象(数字字符串)将在下一节中解释。" />
+<link rel="canonical" href="https://lieryangstack.github.io//gobject%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/2023/11/17/7-%E5%8F%AF%E6%B4%BE%E7%94%9F%E5%92%8C%E9%9D%9E%E6%8A%BD%E8%B1%A1%E7%B1%BB%E5%9E%8B.html" />
+<meta property="og:url" content="https://lieryangstack.github.io//gobject%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/2023/11/17/7-%E5%8F%AF%E6%B4%BE%E7%94%9F%E5%92%8C%E9%9D%9E%E6%8A%BD%E8%B1%A1%E7%B1%BB%E5%9E%8B.html" />
+<meta property="og:site_name" content="李尔阳主页" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2023-11-17T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="七、可派生和非抽象类型" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"LieryangStack"},"dateModified":"2023-11-17T00:00:00+00:00","datePublished":"2023-11-17T00:00:00+00:00","description":"  创建非抽象可派生类型比创建抽象类型更常见。本节介绍如何创建非抽象可派生类型对象。派生类型的例子是string的对象。它是TStr。它的子对象是一个数字字符串对象。数字字符串是表示数字的字符串。例如“0”、“-100”、“123.45”。子对象(数字字符串)将在下一节中解释。","headline":"七、可派生和非抽象类型","mainEntityOfPage":{"@type":"WebPage","@id":"https://lieryangstack.github.io//gobject%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/2023/11/17/7-%E5%8F%AF%E6%B4%BE%E7%94%9F%E5%92%8C%E9%9D%9E%E6%8A%BD%E8%B1%A1%E7%B1%BB%E5%9E%8B.html"},"url":"https://lieryangstack.github.io//gobject%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/2023/11/17/7-%E5%8F%AF%E6%B4%BE%E7%94%9F%E5%92%8C%E9%9D%9E%E6%8A%BD%E8%B1%A1%E7%B1%BB%E5%9E%8B.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="shortcut icon" type="image/x-icon" href="/lieryang.ico">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-noto-sans@0.0.72/index.min.css">
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <script src="/assets/js/main.js"></script><link type="application/atom+xml" rel="alternate" href="https://lieryangstack.github.io//feed.xml" title="李尔阳主页" /><link rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
+
+<!-- and it's easy to individually load additional languages -->
+<script charset="UTF-8"
+        src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/go.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+// Init highlight js
+document.addEventListener('DOMContentLoaded', function(event) {
+  var els = document.querySelectorAll('pre code')
+
+  function addLangData(block) {
+    var outer = block.parentElement.parentElement.parentElement;
+    var lang = block.getAttribute('data-lang');
+    for (var i = 0; i < outer.classList.length; i++) {
+      var cls = outer.classList[i];
+      if (cls.startsWith('language-')) {
+        lang = cls;
+        break;
+      }
+    }
+    if (!lang) {
+      cls = block.getAttribute('class');
+      lang = cls ? cls.replace('hljs ', '') : '';
+    }
+    if (lang.startsWith('language-')) {
+      lang = lang.substr(9);
+    }
+    block.setAttribute('class', 'hljs ' + lang);
+    block.parentNode.setAttribute('data-lang', lang);
+  }
+
+  function addBadge(block) {
+    var enabled = ('true' || 'true').toLowerCase();
+    if (enabled == 'true') {
+      var pre = block.parentElement;
+      pre.classList.add('badge');
+    }
+  }
+
+  function handle(block) {
+    addLangData(block);
+    addBadge(block)
+    hljs.highlightBlock(block);
+  }
+
+  for (var i = 0; i < els.length; i++) {
+    var el = els[i];
+    handle(el);
+  }
+});
+</script>
+
+<style>
+  /* code language badge */
+  pre.badge::before {
+    content: attr(data-lang);
+    color: #fff;
+    background-color: #ff4e00;
+    padding: 0 .5em;
+    border-radius: 0 2px;
+    text-transform: uppercase;
+    text-align: center;
+    min-width: 32px;
+    display: inline-block;
+    position: absolute;
+    right: 0;
+  }
+
+  /* fix wrong badge display for firefox browser */
+  code > table pre::before {
+    display: none;
+  }
+</style>
+<link href='https://lieryangstack.github.io//assets/css/syntax.css' rel='stylesheet' type='text/css' />
+</head>
+<body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<header class="site-header " role="banner">
+
+  <div class="wrapper">
+    <div class="site-header-inner"><span class="site-brand"><a class="site-brand-inner" rel="author" href="/">
+  <img class="site-favicon" title="李尔阳主页" src="" onerror="this.style.display='none'">
+  李尔阳主页
+</a>
+</span><nav class="site-nav">
+          <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+          <label for="nav-trigger">
+            <span class="menu-icon">
+              <svg viewBox="0 0 18 15" width="18px" height="15px">
+                <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+              </svg>
+            </span>
+          </label>
+
+          <!-- <div class="trigger"><a class="page-link" href="/about.html">关于</a><a class="page-link" href="/archives.html">归档</a><a class="page-link" href="/categories.html">分类</a><a class="page-link" href="/">主页</a><a class="page-link" href="/tags.html">标签</a>
+
+
+
+
+
+
+
+
+
+</div> -->
+
+          <div class="trigger">
+             <a class="page-link" href="/about.html">关于</a>
+            <a class="page-link" href="/categories.html">分类</a>
+            <a class="page-link" href="/archives.html">归档</a>
+            <a class="page-link" href="/tags.html">标签</a>
+            <a class="page-link" href="/assets/index.html">下载</a>
+            <!-- 在这里添加更多的导航项 -->
+          </div>
+          
+
+        </nav></div>
+  </div>
+</header>
+
+<script>
+  function initHeader() {
+    var lastScrollY = getScrollPos().y;
+    var documentElement = document.documentElement;
+
+    function storeScrollData() {
+      var y = getScrollPos().y;var scrollStatus = "";
+
+      if (y <= 0) {
+        scrollStatus = "top";
+      } else if ((window.innerHeight + y) >= document.body.offsetHeight) {
+        scrollStatus = "bottom";
+      } else {
+        var isScrollDown = (y - lastScrollY > 0) ? true : false;
+        scrollStatus = isScrollDown ? "down" : "up";
+      }
+
+      lastScrollY = y;
+      documentElement.setAttribute("data-scroll-status", scrollStatus);
+    }
+
+    window.addEventListener('scroll', function(e) {
+      storeScrollData();
+    });
+
+    storeScrollData();
+  }
+  document.addEventListener('DOMContentLoaded', initHeader);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  function hashLocate(hashValue) {
+    hashValue = hashValue.replace(/^.*#h-/, '');
+    hashValue = decodeURIComponent(hashValue);
+    var element = document.getElementById(hashValue);
+
+    if (!element) {
+      return;
+    }
+
+    var header = document.querySelector('header.site-header');
+    var headerRect = header.getBoundingClientRect();
+    var headerTop = Math.floor(headerRect.top);
+    var headerHeight = Math.floor(headerRect.height);
+    var scrollPos = getScrollPos();
+    var offsetY = element.offsetTop - (headerTop + headerHeight + 20);
+
+    if (offsetY == scrollPos.y) {
+      return;
+    }
+
+    if (headerTop == 0  && offsetY > scrollPos.y) {
+      offsetY += headerHeight + 2;
+    } else if (headerTop < 0  && offsetY < scrollPos.y) {
+      offsetY -= headerHeight - 2;
+    }
+
+    smoothScrollTo(offsetY);
+  }
+
+  // The first event occurred
+  window.addEventListener('load', function(event) {
+    if (window.location.hash) {
+      hashLocate(window.location.hash);
+    }
+  });
+
+  // The first event occurred
+  window.addEventListener('click', function(event) {
+    if (event.target.tagName.toLowerCase() == 'a') {
+      hashLocate(event.target.getAttribute('href'));
+    }
+  });
+</script>
+<div class="theme-toggle">
+  <input type="checkbox" id="theme-switch">
+  <label for="theme-switch">
+    <div class="toggle"></div>
+    <div class="names">
+      <p class="light">Light</p>
+      <p class="dark">Dark</p>
+    </div>
+  </label>
+</div>
+
+
+
+
+<script>
+  (function() {
+    var sw = document.getElementById('theme-switch');
+    var html = document.getElementsByTagName('html')[0];
+    var nightModeOption = ('auto' || 'auto').toLowerCase();
+    var storage = nightModeOption === 'manual'
+        ? localStorage
+        : sessionStorage;
+    var themeData = loadThemeData();
+
+    function saveThemeData(data) {
+      storage.setItem('theme', JSON.stringify(data));
+    }
+
+    function loadThemeData() {
+      var data = storage.getItem('theme');
+      try {
+        data = JSON.parse(data ? data : '');
+      } catch(e) {
+        data = { nightShift: undefined, autoToggleAt: 0 };
+        saveThemeData(data);
+      }
+      return data;
+    }
+
+    function handleThemeToggle(nightShift) {
+      themeData.nightShift = nightShift;
+      saveThemeData(themeData);
+      html.dataset.theme = nightShift ? 'dark' : 'light';
+      setTimeout(function() {
+        sw.checked = nightShift ? true : false;
+      }, 50);
+    }
+
+    function autoThemeToggle() {
+      // Next time point of theme toggle
+      var now = new Date();
+      var toggleAt = new Date();
+      var hours = now.getHours();
+      var nightShift = hours >= 19 || hours <=7;
+
+      if (nightShift) {
+        if (hours > 7) {
+          toggleAt.setDate(toggleAt.getDate() + 1);
+        }
+        toggleAt.setHours(7);
+      } else {
+        toggleAt.setHours(19);
+      }
+
+      toggleAt.setMinutes(0);
+      toggleAt.setSeconds(0);
+      toggleAt.setMilliseconds(0)
+
+      var delay = toggleAt.getTime() - now.getTime();
+
+      // auto toggle theme mode
+      setTimeout(function() {
+        handleThemeToggle(!nightShift);
+      }, delay);
+
+      return {
+        nightShift: nightShift,
+        toggleAt: toggleAt.getTime()
+      };
+    }
+
+    // Listen the theme toggle event
+    sw.addEventListener('change', function(event) {
+      handleThemeToggle(event.target.checked);
+    });
+
+    if (nightModeOption == 'auto') {
+      var data = autoThemeToggle();
+
+      // Toggle theme by local setting
+      if (data.toggleAt > themeData.autoToggleAt) {
+        themeData.autoToggleAt = data.toggleAt;
+        handleThemeToggle(data.nightShift);
+      } else {
+        handleThemeToggle(themeData.nightShift);
+      }
+    } else if (nightModeOption == 'manual') {
+      handleThemeToggle(themeData.nightShift);
+    } else {
+      var nightShift = themeData.nightShift;
+      if (nightShift === undefined) {
+        nightShift = nightModeOption === 'on';
+      }
+      handleThemeToggle(nightShift);
+    }
+  })();
+</script>
+<div id="click-to-top" class="click-to-top">
+  <i class="fa fa-arrow-up"></i>
+</div>
+<script>
+  (function () {
+    const clickToTop = document.getElementById('click-to-top');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 100) {
+        clickToTop.classList.add('show')
+      }else {
+        clickToTop.classList.remove('show')
+      }
+    });
+    clickToTop.addEventListener('click', () => {
+      window.smoothScrollTo(0);
+    });
+  })();
+</script>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <div class="framework">
+  <section class="main">
+
+     <div class="post">
+  <section>
+
+
+
+
+
+
+
+
+
+<header class="post-header">
+  <h1 class="post-title p-name" itemprop="name headline">七、可派生和非抽象类型</h1>
+  <h2 class="post-subtitle"></h2>
+
+  <p class="post-meta">
+    <time class="dt-published" datetime="2023-11-17T00:00:00+00:00" itemprop="datePublished"><i class="fa fa-calendar"></i> Nov 17, 2023
+    </time>
+
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 13 mins</span>
+  </p><div class="post-tags"><a class="post-tag" href="/tags.html#GObject">#GObject</a></div></header>
+<article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+    <div class="post-content e-content" itemprop="articleBody">
+
+      <p>  创建非抽象可派生类型比创建抽象类型更常见。本节介绍如何创建非抽象可派生类型对象。派生类型的例子是string的对象。它是TStr。它的子对象是一个数字字符串对象。数字字符串是表示数字的字符串。例如“0”、“-100”、“123.45”。子对象(数字字符串)将在下一节中解释。</p>
+
+<p>我想先写字符串，再写可派生对象。因为TStr是字符串的对象，我们需要小心使用字符串编写程序。</p>
+
+<h2 id="1-字符串和内存管理">1 字符串和内存管理</h2>
+
+<p>  TStr有一个字符串类型的值。它类似于TInt或TDouble，但string比int和double更复杂。在编写TStr程序时，需要注意内存管理，这对于TInt和TDouble来说是不必要的。</p>
+
+<h3 id="11-字符串和内存">1.1 字符串和内存</h3>
+
+<p>  String是一个字符数组，以’\0’结束。String不是C类型，如char, int, float或double。但是指向字符数组的指针的行为与其他语言的字符串类型类似。我们通常称指针为字符串。</p>
+
+<p>  如果指针为NULL，则它不指向任何东西。指针不是字符串。如果不小心使用空指针，带有字符串的程序将包含错误。</p>
+
+<p>  另一个恼人的问题是内存分配。因为字符串是一个字符数组，所以需要分配内存来创建一个新的字符串。我们没有忘记分配内存，但经常忘记释放内存。它会导致内存泄漏。</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">char</span> <span class="o">*</span><span class="n">s</span><span class="p">;</span>
+<span class="n">s</span> <span class="o">=</span> <span class="n">g_strdup</span> <span class="p">(</span><span class="s">"Hello."</span><span class="p">);</span>
+<span class="p">...</span> <span class="p">...</span> <span class="p">...</span> <span class="k">do</span> <span class="n">something</span> <span class="n">with</span> <span class="n">s</span>
+<span class="nf">g_free</span> <span class="p">(</span><span class="n">s</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>g_strdup复制一个字符串。它:</p>
+
+<ul>
+  <li>
+    <p>计算字符串的大小。”Hello.”的大小是7，因为字符串是以零结尾的。字符串是一个数组‘H’,‘e’,‘l’,‘l’,‘o’、‘。’和零(‘\0’)。</p>
+  </li>
+  <li>
+    <p>请求系统分配7个字节的内存。</p>
+  </li>
+  <li>
+    <p>将字符串复制到内存中。</p>
+  </li>
+  <li>
+    <p>返回指向新分配内存的指针。</p>
+  </li>
+  <li>
+    <p>如果参数为NULL，则g_strdup返回NULL。</p>
+  </li>
+</ul>
+
+<p>如果字符串<code class="language-plaintext highlighter-rouge">s</code>不再使用，则必须释放<code class="language-plaintext highlighter-rouge">s</code>，这意味着必须将分配的7个字节返回给系统。<code class="language-plaintext highlighter-rouge">g_free</code>释放内存。</p>
+
+<p>由双引号(如“Hello.”)限定的字符串是字符串常量。它是一个字符数组，但是数组的内容不允许更改。它不能被释放。如果将字符写入字符串字面量或释放字符串字面量，则结果为未定义。可能会发生不好的事情，例如，段错误。</p>
+
+<p>当你用字符串文字初始化数组和指针时，它们之间是有区别的。如果数组是用字符串字面值初始化的，则数组可以被更改。</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">char</span> <span class="n">a</span><span class="p">[]</span><span class="o">=</span><span class="s">"Hello!"</span><span class="p">;</span>
+<span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">=</span><span class="sc">'a'</span><span class="p">;</span>
+<span class="n">g_print</span> <span class="p">(</span><span class="s">"%s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">a</span><span class="p">);</span> <span class="cm">/* Hallo will appear in your display. */</span>
+</code></pre></div></div>
+<p>第一行是数组a初始化，初始化并不简单。首先，编译器计算“Hello!”的长度。它是7，因为字符串文字的末尾有’\0’。然后在静态内存或堆栈内存中分配7个字节的内存。它取决于数组的类，是静态的还是自动的。用“Hello!”初始化内存。数组中的字符串可以被改变。该程序成功显示“Hallo!”</p>
+
+<p>上面程序的第一行如下所示。</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">char</span> <span class="n">a</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="sc">'H'</span><span class="p">,</span> <span class="sc">'e'</span><span class="p">,</span> <span class="sc">'l'</span><span class="p">,</span> <span class="sc">'l'</span><span class="p">,</span> <span class="sc">'o'</span><span class="p">,</span> <span class="sc">'!'</span><span class="p">,</span> <span class="sc">'\0'</span><span class="p">};</span>
+</code></pre></div></div>
+<p>如果你用字符串常量定义指针，你不能改变指针指向的字符串内容。</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">char</span> <span class="o">*</span><span class="n">a</span> <span class="o">=</span> <span class="s">"Hello"</span><span class="p">;</span>
+<span class="o">*</span><span class="p">(</span><span class="n">a</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">=</span> <span class="sc">'a'</span><span class="p">;</span> <span class="cm">/* This is illegal. */</span>
+<span class="n">g_print</span> <span class="p">(</span><span class="s">"%s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">a</span><span class="p">);</span>
+</code></pre></div></div>
+<p>第一行只是将字符串字面值的地址赋给变量a。字符串常量是一个字符数组，但它是只读的。它可能在程序代码区域或其他一些不可写的区域。这取决于编译器的实现。因此，第二行尝试将字符’a’写入只读内存，结果是未定义的，例如，发生了分段错误。不管怎样，不要写这样的程序。</p>
+
+<p>总之，字符串是一个字符数组，它被放置在以下类型之一。</p>
+
+<ul>
+  <li>
+    <p>只读内存。字符串常量是只读的。</p>
+  </li>
+  <li>
+    <p>栈。如果一个数组的类是auto，那么该数组将被放置在栈中。stack是可写的。如果数组是在函数中定义的，它的默认类是auto。当函数返回给调用者时，栈区域将消失。</p>
+  </li>
+  <li>
+    <p>静态区域。如果数组的类是静态的，则该数组被放置在静态区域中。它保持其值，并在程序的生命周期内保持不变。这个区域是可写的。</p>
+  </li>
+  <li>
+    <p>堆。您可以为字符串分配和释放内存。对于分配，使用g_new或g_new0。对于释放，使用g_free。</p>
+  </li>
+</ul>
+
+<h3 id="12-拷贝字符串">1.2 拷贝字符串</h3>
+
+<p>复制字符串有两种方法。第一种方法是复制指针。</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">char</span> <span class="o">*</span><span class="n">s</span> <span class="o">=</span> <span class="s">"Hello"</span><span class="p">;</span>
+<span class="kt">char</span> <span class="o">*</span><span class="n">t</span> <span class="o">=</span> <span class="n">s</span><span class="p">;</span>
+</code></pre></div></div>
+<p>两个指针<code class="language-plaintext highlighter-rouge">s</code>和<code class="language-plaintext highlighter-rouge">t</code>指向同一个地址。因此，您不能修改t，因为t指向一个只读的字符串字面值。</p>
+
+<p>第二种方法是创建内存并将字符串复制到内存中。</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">char</span> <span class="o">*</span><span class="n">s</span> <span class="o">=</span> <span class="s">"Hello"</span><span class="p">;</span>
+<span class="kt">char</span> <span class="o">*</span><span class="n">t</span> <span class="o">=</span> <span class="n">g_strdup</span> <span class="p">(</span><span class="n">s</span><span class="p">);</span>
+</code></pre></div></div>
+<p><code class="language-plaintext highlighter-rouge">g_strdup</code>分配内存并使用”Hello”初始化它，然后返回指向内存的指针。函数g_strdup几乎与下面的string_dup函数相同。</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;glib-object.h&gt;
+#include &lt;string.h&gt;
+</span>
+<span class="kt">char</span> <span class="o">*</span>
+<span class="nf">string_dup</span> <span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="n">s</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kt">int</span> <span class="n">length</span><span class="p">;</span>
+  <span class="kt">char</span> <span class="o">*</span><span class="n">t</span><span class="p">;</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="n">s</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span>
+  <span class="n">length</span> <span class="o">=</span> <span class="n">strlen</span> <span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="n">t</span> <span class="o">=</span> <span class="n">g_new</span> <span class="p">(</span><span class="kt">char</span><span class="p">,</span> <span class="n">length</span><span class="p">);</span>
+  <span class="n">strcpy</span> <span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">s</span><span class="p">);</span>
+  <span class="k">return</span> <span class="n">t</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>如果使用g_strdup，则两个指针s和t指向不同的内存。您可以修改t，因为它位于从堆区域分配的内存中。</p>
+
+<p>知道赋值指针和复制字符串之间的区别很重要。</p>
+
+<h3 id="13-常量限定符">1.3 常量限定符</h3>
+
+<p>限定符const创建的变量不会改变其值。它也可以应用于数组。这样，数组的元素就不会被改变。</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">const</span> <span class="kt">double</span> <span class="n">PI</span> <span class="o">=</span> <span class="mi">3</span><span class="p">.</span><span class="mi">1415926536</span><span class="p">;</span>
+<span class="k">const</span> <span class="kt">char</span> <span class="n">a</span><span class="p">[]</span> <span class="o">=</span> <span class="s">"只读字符串"</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>函数中的数组形参可以用const限定，以指示该函数不改变数组。同样，函数的返回值(指向数组或字符串的指针)可以用const限定。调用者不能修改或释放返回的数组或字符串内容。</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">char</span> <span class="o">*</span>
+<span class="nf">string_dup</span> <span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">s</span><span class="p">)</span> <span class="p">{</span>
+<span class="err">……</span>
+<span class="err">｝</span>
+
+<span class="k">const</span> <span class="kt">char</span> <span class="o">*</span>
+<span class="n">g_value_get_string</span> <span class="p">(</span><span class="k">const</span> <span class="n">GValue</span> <span class="o">*</span><span class="n">value</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>限定符const表示在对象函数中使用该字符串时，谁是该字符串的所有者。“Owner”是一个对象或函数的调用者，它有权修改或释放字符串。</p>
+
+<p>例如，g_value_get_string被赋予const GValue *value作为参数。由value指向的GValue归调用者所有，函数不会改变或释放它。该函数返回一个带有const限定的字符串。返回的字符串归对象所有，调用者不能改变或释放字符串。字符串可能稍后会被对象更改或释放。</p>
+
+<h2 id="2-头文件-tstrh">2 头文件 tstr.h</h2>
+
+<p>本节的其余部分是关于TStr的。TStr是GObject的子对象，它包含一个字符串。字符串是一个指针和一个字符数组。指针指向数组。指针可以是NULL。如果为NULL，则TStr没有数组。TStr有一个字符串类型属性。</p>
+
+<p>头文件<code class="language-plaintext highlighter-rouge">tstr.h</code>如下所示。</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="mi">1</span> <span class="err">#</span><span class="n">ifndef</span> <span class="n">__T_STR_H__</span>
+ <span class="mi">2</span> <span class="err">#</span><span class="n">define</span> <span class="n">__T_STR_H__</span>
+ <span class="mi">3</span> 
+ <span class="mi">4</span> <span class="err">#</span><span class="n">include</span> <span class="o">&lt;</span><span class="n">glib</span><span class="o">-</span><span class="n">object</span><span class="p">.</span><span class="n">h</span><span class="o">&gt;</span>
+ <span class="mi">5</span> 
+ <span class="mi">6</span> <span class="err">#</span><span class="n">define</span> <span class="n">T_TYPE_STR</span>  <span class="p">(</span><span class="n">t_str_get_type</span> <span class="p">())</span>
+ <span class="mi">7</span> <span class="n">G_DECLARE_DERIVABLE_TYPE</span> <span class="p">(</span><span class="n">TStr</span><span class="p">,</span> <span class="n">t_str</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">STR</span><span class="p">,</span> <span class="n">GObject</span><span class="p">)</span>
+ <span class="mi">8</span> 
+ <span class="mi">9</span> <span class="k">struct</span> <span class="n">_TStrClass</span> <span class="p">{</span>
+<span class="mi">10</span>   <span class="n">GObjectClass</span> <span class="n">parent_class</span><span class="p">;</span>
+<span class="mi">11</span>   <span class="cm">/* expect that descendants will override the setter */</span>
+<span class="mi">12</span>   <span class="kt">void</span> <span class="p">(</span><span class="o">*</span><span class="n">set_string</span><span class="p">)</span>  <span class="p">(</span><span class="n">TStr</span> <span class="o">*</span><span class="n">self</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">s</span><span class="p">);</span>
+<span class="mi">13</span> <span class="p">};</span>
+<span class="mi">14</span> <span class="cm">/* 合并字符串 */</span>
+<span class="mi">15</span> <span class="n">TStr</span> <span class="o">*</span>
+<span class="mi">16</span> <span class="nf">t_str_concat</span> <span class="p">(</span><span class="n">TStr</span> <span class="o">*</span><span class="n">self</span><span class="p">,</span> <span class="n">TStr</span> <span class="o">*</span><span class="n">other</span><span class="p">);</span>
+<span class="mi">17</span> 
+<span class="mi">18</span> <span class="cm">/* setter and getter */</span>
+<span class="mi">19</span> <span class="kt">void</span>
+<span class="mi">20</span> <span class="nf">t_str_set_string</span> <span class="p">(</span><span class="n">TStr</span> <span class="o">*</span><span class="n">self</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">s</span><span class="p">);</span>
+<span class="mi">21</span> 
+<span class="mi">22</span> <span class="kt">char</span> <span class="o">*</span>
+<span class="mi">23</span> <span class="nf">t_str_get_string</span> <span class="p">(</span><span class="n">TStr</span> <span class="o">*</span><span class="n">self</span><span class="p">);</span>
+<span class="mi">24</span> 
+<span class="mi">25</span> <span class="cm">/* create a new TStr instance */</span>
+<span class="mi">26</span> <span class="n">TStr</span> <span class="o">*</span>
+<span class="mi">27</span> <span class="nf">t_str_new_with_string</span> <span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">s</span><span class="p">);</span>
+<span class="mi">28</span> 
+<span class="mi">29</span> <span class="n">TStr</span> <span class="o">*</span>
+<span class="mi">30</span> <span class="nf">t_str_new</span> <span class="p">(</span><span class="kt">void</span><span class="p">);</span>
+<span class="mi">31</span> <span class="err">#</span><span class="n">endif</span> <span class="cm">/* __T_STR_H__ */</span>
+<span class="mi">32</span> 
+</code></pre></div></div>
+<ul>
+  <li>
+    <p>7:使用<code class="language-plaintext highlighter-rouge">G_DECLARE_DERIVABLE_TYPE</code>，类似于前一节中的例子。</p>
+  </li>
+  <li>
+    <p>9-13: TStrClass有一个类方法。它是set_string。这将被子类TNumStr覆盖。类方法由公共函数t_str_set_string调用。它有一个字符串形参，并使用string(参数)设置实例字符串。TNumStr类保存类似TStr的字符串，但它也保存字符串的类型。类方法set_string将被重写，它不仅将设置字符串，还将设置子类中的类型。详细的解释将在本节的后面部分和下一节中。</p>
+  </li>
+  <li>
+    <p>15-16: t_str_concat连接两个TStr实例字符串并返回一个新的TStr实例。</p>
+  </li>
+  <li>
+    <p>19-23: Setter和getter。</p>
+  </li>
+  <li>
+    <p>26-30:创建TStr对象的函数。</p>
+  </li>
+</ul>
+
+<h2 id="3-源文件-tstrc">3 源文件 tstr.c</h2>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="mi">1</span> <span class="err">#</span><span class="n">include</span> <span class="s">"tstr.h"</span>
+  <span class="mi">2</span> 
+  <span class="mi">3</span> <span class="k">enum</span> <span class="p">{</span>
+  <span class="mi">4</span>   <span class="n">PROP_0</span><span class="p">,</span>
+  <span class="mi">5</span>   <span class="n">PROP_STRING</span><span class="p">,</span>
+  <span class="mi">6</span>   <span class="n">N_PROPERTIES</span>
+  <span class="mi">7</span> <span class="p">};</span>
+  <span class="mi">8</span> 
+  <span class="mi">9</span> <span class="k">static</span> <span class="n">GParamSpec</span> <span class="o">*</span><span class="n">str_properties</span><span class="p">[</span><span class="n">N_PROPERTIES</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="nb">NULL</span><span class="p">,</span> <span class="p">};</span>
+ <span class="mi">10</span> 
+ <span class="mi">11</span> <span class="k">typedef</span> <span class="k">struct</span> <span class="p">{</span>
+ <span class="mi">12</span>   <span class="kt">char</span> <span class="o">*</span><span class="n">string</span><span class="p">;</span>
+ <span class="mi">13</span> <span class="p">}</span> <span class="n">TStrPrivate</span><span class="p">;</span>
+ <span class="mi">14</span> 
+ <span class="mi">15</span> <span class="nf">G_DEFINE_TYPE_WITH_PRIVATE</span><span class="p">(</span><span class="n">TStr</span><span class="p">,</span> <span class="n">t_str</span><span class="p">,</span> <span class="n">G_TYPE_OBJECT</span><span class="p">)</span>
+ <span class="mi">16</span> 
+ <span class="mi">17</span> <span class="k">static</span> <span class="kt">void</span>
+ <span class="mi">18</span> <span class="n">t_str_set_property</span> <span class="p">(</span><span class="n">GObject</span> <span class="o">*</span><span class="n">object</span><span class="p">,</span> <span class="n">guint</span> <span class="n">property_id</span><span class="p">,</span> <span class="k">const</span> <span class="n">GValue</span> <span class="o">*</span><span class="n">value</span><span class="p">,</span> <span class="n">GParamSpec</span> <span class="o">*</span><span class="n">pspec</span><span class="p">)</span> <span class="p">{</span>
+ <span class="mi">19</span>   <span class="n">TStr</span> <span class="o">*</span><span class="n">self</span> <span class="o">=</span> <span class="n">T_STR</span> <span class="p">(</span><span class="n">object</span><span class="p">);</span>
+ <span class="mi">20</span> 
+ <span class="mi">21</span>   <span class="k">if</span> <span class="p">(</span><span class="n">property_id</span> <span class="o">==</span> <span class="n">PROP_STRING</span><span class="p">)</span> <span class="p">{</span>
+ <span class="mi">22</span>     <span class="n">t_str_set_string</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">g_value_get_string</span> <span class="p">(</span><span class="n">value</span><span class="p">));</span>
+ <span class="mi">23</span>   <span class="p">}</span> <span class="k">else</span>
+ <span class="mi">24</span>     <span class="n">G_OBJECT_WARN_INVALID_PROPERTY_ID</span> <span class="p">(</span><span class="n">object</span><span class="p">,</span> <span class="n">property_id</span><span class="p">,</span> <span class="n">pspec</span><span class="p">);</span>
+ <span class="mi">25</span> <span class="p">}</span>
+ <span class="mi">26</span> 
+ <span class="mi">27</span> <span class="k">static</span> <span class="kt">void</span>
+ <span class="mi">28</span> <span class="nf">t_str_get_property</span> <span class="p">(</span><span class="n">GObject</span> <span class="o">*</span><span class="n">object</span><span class="p">,</span> <span class="n">guint</span> <span class="n">property_id</span><span class="p">,</span> <span class="n">GValue</span> <span class="o">*</span><span class="n">value</span><span class="p">,</span> <span class="n">GParamSpec</span> <span class="o">*</span><span class="n">pspec</span><span class="p">)</span> <span class="p">{</span>
+ <span class="mi">29</span>   <span class="n">TStr</span> <span class="o">*</span><span class="n">self</span> <span class="o">=</span> <span class="n">T_STR</span> <span class="p">(</span><span class="n">object</span><span class="p">);</span>
+ <span class="mi">30</span> 
+ <span class="mi">31</span>   <span class="k">if</span> <span class="p">(</span><span class="n">property_id</span> <span class="o">==</span> <span class="n">PROP_STRING</span><span class="p">)</span>
+ <span class="mi">32</span>     <span class="n">g_value_set_string</span> <span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">t_str_get_string</span><span class="p">(</span><span class="n">self</span><span class="p">));</span>
+ <span class="mi">33</span>   <span class="k">else</span>
+ <span class="mi">34</span>     <span class="n">G_OBJECT_WARN_INVALID_PROPERTY_ID</span> <span class="p">(</span><span class="n">object</span><span class="p">,</span> <span class="n">property_id</span><span class="p">,</span> <span class="n">pspec</span><span class="p">);</span>
+ <span class="mi">35</span> <span class="p">}</span>
+ <span class="mi">36</span> 
+ <span class="mi">37</span> <span class="k">static</span> <span class="kt">void</span>
+ <span class="mi">38</span> <span class="nf">t_str_real_set_string</span> <span class="p">(</span><span class="n">TStr</span> <span class="o">*</span><span class="n">self</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">s</span><span class="p">)</span> <span class="p">{</span>
+ <span class="mi">39</span>   <span class="n">TStrPrivate</span> <span class="o">*</span><span class="n">priv</span> <span class="o">=</span> <span class="n">t_str_get_instance_private</span> <span class="p">(</span><span class="n">self</span><span class="p">);</span>
+ <span class="mi">40</span> 
+ <span class="mi">41</span>   <span class="k">if</span> <span class="p">(</span><span class="n">priv</span><span class="o">-&gt;</span><span class="n">string</span><span class="p">)</span>
+ <span class="mi">42</span>     <span class="n">g_free</span> <span class="p">(</span><span class="n">priv</span><span class="o">-&gt;</span><span class="n">string</span><span class="p">);</span>
+ <span class="mi">43</span>   <span class="n">priv</span><span class="o">-&gt;</span><span class="n">string</span> <span class="o">=</span> <span class="n">g_strdup</span> <span class="p">(</span><span class="n">s</span><span class="p">);</span>
+ <span class="mi">44</span> <span class="p">}</span>
+ <span class="mi">45</span> 
+ <span class="mi">46</span> <span class="k">static</span> <span class="kt">void</span>
+ <span class="mi">47</span> <span class="nf">t_str_finalize</span> <span class="p">(</span><span class="n">GObject</span> <span class="o">*</span><span class="n">object</span><span class="p">)</span> <span class="p">{</span>
+ <span class="mi">48</span>   <span class="n">TStr</span> <span class="o">*</span><span class="n">self</span> <span class="o">=</span> <span class="n">T_STR</span> <span class="p">(</span><span class="n">object</span><span class="p">);</span>
+ <span class="mi">49</span>   <span class="n">TStrPrivate</span> <span class="o">*</span><span class="n">priv</span> <span class="o">=</span> <span class="n">t_str_get_instance_private</span> <span class="p">(</span><span class="n">self</span><span class="p">);</span>
+ <span class="mi">50</span> 
+ <span class="mi">51</span>   <span class="k">if</span> <span class="p">(</span><span class="n">priv</span><span class="o">-&gt;</span><span class="n">string</span><span class="p">)</span>
+ <span class="mi">52</span>     <span class="n">g_free</span> <span class="p">(</span><span class="n">priv</span><span class="o">-&gt;</span><span class="n">string</span><span class="p">);</span>
+ <span class="mi">53</span>   <span class="n">G_OBJECT_CLASS</span> <span class="p">(</span><span class="n">t_str_parent_class</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">finalize</span> <span class="p">(</span><span class="n">object</span><span class="p">);</span>
+ <span class="mi">54</span> <span class="p">}</span>
+ <span class="mi">55</span> 
+ <span class="mi">56</span> <span class="k">static</span> <span class="kt">void</span>
+ <span class="mi">57</span> <span class="nf">t_str_init</span> <span class="p">(</span><span class="n">TStr</span> <span class="o">*</span><span class="n">self</span><span class="p">)</span> <span class="p">{</span>
+ <span class="mi">58</span>   <span class="n">TStrPrivate</span> <span class="o">*</span><span class="n">priv</span> <span class="o">=</span> <span class="n">t_str_get_instance_private</span> <span class="p">(</span><span class="n">self</span><span class="p">);</span>
+ <span class="mi">59</span> 
+ <span class="mi">60</span>   <span class="n">priv</span><span class="o">-&gt;</span><span class="n">string</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+ <span class="mi">61</span> <span class="p">}</span>
+ <span class="mi">62</span> 
+ <span class="mi">63</span> <span class="k">static</span> <span class="kt">void</span>
+ <span class="mi">64</span> <span class="nf">t_str_class_init</span> <span class="p">(</span><span class="n">TStrClass</span> <span class="o">*</span><span class="n">class</span><span class="p">)</span> <span class="p">{</span>
+ <span class="mi">65</span>   <span class="n">GObjectClass</span> <span class="o">*</span><span class="n">gobject_class</span> <span class="o">=</span> <span class="n">G_OBJECT_CLASS</span> <span class="p">(</span><span class="n">class</span><span class="p">);</span>
+ <span class="mi">66</span> 
+ <span class="mi">67</span>   <span class="n">gobject_class</span><span class="o">-&gt;</span><span class="n">finalize</span> <span class="o">=</span> <span class="n">t_str_finalize</span><span class="p">;</span>
+ <span class="mi">68</span>   <span class="n">gobject_class</span><span class="o">-&gt;</span><span class="n">set_property</span> <span class="o">=</span> <span class="n">t_str_set_property</span><span class="p">;</span>
+ <span class="mi">69</span>   <span class="n">gobject_class</span><span class="o">-&gt;</span><span class="n">get_property</span> <span class="o">=</span> <span class="n">t_str_get_property</span><span class="p">;</span>
+ <span class="mi">70</span>   <span class="n">str_properties</span><span class="p">[</span><span class="n">PROP_STRING</span><span class="p">]</span> <span class="o">=</span> <span class="n">g_param_spec_string</span> <span class="p">(</span><span class="s">"string"</span><span class="p">,</span> <span class="s">"str"</span><span class="p">,</span> <span class="s">"string"</span><span class="p">,</span> <span class="s">""</span><span class="p">,</span> <span class="n">G_PARAM_READWRITE</span><span class="p">);</span>
+ <span class="mi">71</span>   <span class="n">g_object_class_install_properties</span> <span class="p">(</span><span class="n">gobject_class</span><span class="p">,</span> <span class="n">N_PROPERTIES</span><span class="p">,</span> <span class="n">str_properties</span><span class="p">);</span>
+ <span class="mi">72</span> 
+ <span class="mi">73</span>   <span class="n">class</span><span class="o">-&gt;</span><span class="n">set_string</span> <span class="o">=</span> <span class="n">t_str_real_set_string</span><span class="p">;</span>
+ <span class="mi">74</span> <span class="p">}</span>
+ <span class="mi">75</span> 
+ <span class="mi">76</span> <span class="cm">/* setter and getter */</span>
+ <span class="mi">77</span> <span class="kt">void</span>
+ <span class="mi">78</span> <span class="nf">t_str_set_string</span> <span class="p">(</span><span class="n">TStr</span> <span class="o">*</span><span class="n">self</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">s</span><span class="p">)</span> <span class="p">{</span>
+ <span class="mi">79</span>   <span class="n">g_return_if_fail</span> <span class="p">(</span><span class="n">T_IS_STR</span> <span class="p">(</span><span class="n">self</span><span class="p">));</span>
+ <span class="mi">80</span>   <span class="n">TStrClass</span> <span class="o">*</span><span class="n">class</span> <span class="o">=</span> <span class="n">T_STR_GET_CLASS</span> <span class="p">(</span><span class="n">self</span><span class="p">);</span>
+ <span class="mi">81</span> 
+ <span class="mi">82</span>   <span class="n">class</span><span class="o">-&gt;</span><span class="n">set_string</span> <span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">s</span><span class="p">);</span>
+ <span class="mi">83</span> <span class="p">}</span>
+ <span class="mi">84</span> 
+ <span class="mi">85</span> <span class="kt">char</span> <span class="o">*</span>
+ <span class="mi">86</span> <span class="nf">t_str_get_string</span> <span class="p">(</span><span class="n">TStr</span> <span class="o">*</span><span class="n">self</span><span class="p">)</span> <span class="p">{</span>
+ <span class="mi">87</span>   <span class="n">g_return_val_if_fail</span> <span class="p">(</span><span class="n">T_IS_STR</span> <span class="p">(</span><span class="n">self</span><span class="p">),</span> <span class="nb">NULL</span><span class="p">);</span>
+ <span class="mi">88</span>   <span class="n">TStrPrivate</span> <span class="o">*</span><span class="n">priv</span> <span class="o">=</span> <span class="n">t_str_get_instance_private</span> <span class="p">(</span><span class="n">self</span><span class="p">);</span>
+ <span class="mi">89</span> 
+ <span class="mi">90</span>   <span class="k">return</span> <span class="n">g_strdup</span> <span class="p">(</span><span class="n">priv</span><span class="o">-&gt;</span><span class="n">string</span><span class="p">);</span>
+ <span class="mi">91</span> <span class="p">}</span>
+ <span class="mi">92</span> 
+ <span class="mi">93</span> <span class="n">TStr</span> <span class="o">*</span>
+ <span class="mi">94</span> <span class="nf">t_str_concat</span> <span class="p">(</span><span class="n">TStr</span> <span class="o">*</span><span class="n">self</span><span class="p">,</span> <span class="n">TStr</span> <span class="o">*</span><span class="n">other</span><span class="p">)</span> <span class="p">{</span>
+ <span class="mi">95</span>   <span class="n">g_return_val_if_fail</span> <span class="p">(</span><span class="n">T_IS_STR</span> <span class="p">(</span><span class="n">self</span><span class="p">),</span> <span class="nb">NULL</span><span class="p">);</span>
+ <span class="mi">96</span>   <span class="n">g_return_val_if_fail</span> <span class="p">(</span><span class="n">T_IS_STR</span> <span class="p">(</span><span class="n">other</span><span class="p">),</span> <span class="nb">NULL</span><span class="p">);</span>
+ <span class="mi">97</span> 
+ <span class="mi">98</span>   <span class="kt">char</span> <span class="o">*</span><span class="n">s1</span><span class="p">,</span> <span class="o">*</span><span class="n">s2</span><span class="p">,</span> <span class="o">*</span><span class="n">s3</span><span class="p">;</span>
+ <span class="mi">99</span>   <span class="n">TStr</span> <span class="o">*</span><span class="n">str</span><span class="p">;</span>
+<span class="mi">100</span> 
+<span class="mi">101</span>   <span class="n">s1</span> <span class="o">=</span> <span class="n">t_str_get_string</span> <span class="p">(</span><span class="n">self</span><span class="p">);</span>
+<span class="mi">102</span>   <span class="n">s2</span> <span class="o">=</span> <span class="n">t_str_get_string</span> <span class="p">(</span><span class="n">other</span><span class="p">);</span>
+<span class="mi">103</span>   <span class="k">if</span> <span class="p">(</span><span class="n">s1</span> <span class="o">&amp;&amp;</span> <span class="n">s2</span><span class="p">)</span>
+<span class="mi">104</span>     <span class="n">s3</span> <span class="o">=</span> <span class="n">g_strconcat</span> <span class="p">(</span><span class="n">s1</span><span class="p">,</span> <span class="n">s2</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+<span class="mi">105</span>   <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">s1</span><span class="p">)</span>
+<span class="mi">106</span>     <span class="n">s3</span> <span class="o">=</span> <span class="n">g_strdup</span> <span class="p">(</span><span class="n">s1</span><span class="p">);</span>
+<span class="mi">107</span>   <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">s2</span><span class="p">)</span>
+<span class="mi">108</span>     <span class="n">s3</span> <span class="o">=</span> <span class="n">g_strdup</span> <span class="p">(</span><span class="n">s2</span><span class="p">);</span>
+<span class="mi">109</span>   <span class="k">else</span>
+<span class="mi">110</span>     <span class="n">s3</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+<span class="mi">111</span>   <span class="n">str</span> <span class="o">=</span> <span class="n">t_str_new_with_string</span> <span class="p">(</span><span class="n">s3</span><span class="p">);</span>
+<span class="mi">112</span>   <span class="k">if</span> <span class="p">(</span><span class="n">s1</span><span class="p">)</span> <span class="n">g_free</span> <span class="p">(</span><span class="n">s1</span><span class="p">);</span>
+<span class="mi">113</span>   <span class="k">if</span> <span class="p">(</span><span class="n">s2</span><span class="p">)</span> <span class="n">g_free</span> <span class="p">(</span><span class="n">s2</span><span class="p">);</span>
+<span class="mi">114</span>   <span class="k">if</span> <span class="p">(</span><span class="n">s3</span><span class="p">)</span> <span class="n">g_free</span> <span class="p">(</span><span class="n">s3</span><span class="p">);</span>
+<span class="mi">115</span>   <span class="k">return</span> <span class="n">str</span><span class="p">;</span>
+<span class="mi">116</span> <span class="p">}</span>
+<span class="mi">117</span> 
+<span class="mi">118</span> <span class="cm">/* create a new TStr instance */</span>
+<span class="mi">119</span> <span class="n">TStr</span> <span class="o">*</span>
+<span class="mi">120</span> <span class="nf">t_str_new_with_string</span> <span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">s</span><span class="p">)</span> <span class="p">{</span>
+<span class="mi">121</span>   <span class="k">return</span> <span class="n">T_STR</span> <span class="p">(</span><span class="n">g_object_new</span> <span class="p">(</span><span class="n">T_TYPE_STR</span><span class="p">,</span> <span class="s">"string"</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">));</span>
+<span class="mi">122</span> <span class="p">}</span>
+<span class="mi">123</span> 
+<span class="mi">124</span> <span class="n">TStr</span> <span class="o">*</span>
+<span class="mi">125</span> <span class="nf">t_str_new</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
+<span class="mi">126</span>   <span class="k">return</span> <span class="n">T_STR</span> <span class="p">(</span><span class="n">g_object_new</span> <span class="p">(</span><span class="n">T_TYPE_STR</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">));</span>
+<span class="mi">127</span> <span class="p">}</span>
+<span class="mi">128</span> 
+</code></pre></div></div>
+
+<ul>
+  <li>
+    <p>3-9: enum定义属性id。PROP_STRING是“string”属性的id。这里只定义了一个属性，所以可以在没有enum的情况下定义它。但是，enum可以用于定义两个或多个属性。所以，更推荐这种方式。以同样的方式，使用数组str_properties。它为GParamSpec存储一个静态指针。</p>
+  </li>
+  <li>
+    <p>11-13: TStrPrivate是一个C结构体。它是TStr的私有数据区域。如果TStr是最终类型，则不存在后代，TStr实例可以看作是私有数据区域。但是TStr是可派生的，所以你不能在对后代开放的TStr实例中存储这样的私有数据。这个结构的名称是“<code class="language-plaintext highlighter-rouge">&lt;object name&gt;Private</code>”，例如TStrPrivate。该结构必须在G_DEFINE_TYPE_WITH_PRIVATE之前定义。</p>
+  </li>
+  <li>
+    <p>15: <code class="language-plaintext highlighter-rouge">G_DEFINE_TYPE_WITH_PRIVATE</code> 宏。这个宏展开为:</p>
+
+    <ol>
+      <li>
+        <p>声明t_str_class_init是一个类初始化函数。</p>
+      </li>
+      <li>
+        <p>声明实例初始化函数t_str_init。</p>
+      </li>
+      <li>
+        <p>定义t_str_parent_class静态变量。它指向TStr的父类。</p>
+      </li>
+      <li>
+        <p>将私有实例数据添加到类型中。它是一个C结构，它的名字是TStrPrivate。(见上图)。</p>
+      </li>
+      <li>
+        <p>定义t_str_get_type()函数。该函数在第一次调用时注册该类型。</p>
+      </li>
+      <li>
+        <p>定义一个私有实例getter t_str_get_instance_private()。这个函数有一个参数，它是指向实例的指针。</p>
+      </li>
+    </ol>
+  </li>
+  <li>
+    <p>17-25: t_str_set_property。这类似于t_int_set_property，但是属性值存储在<code class="language-plaintext highlighter-rouge">私有区域</code>中。</p>
+  </li>
+  <li>
+    <p>22:使用t_str_set_string函数用GValue中的字符串设置私有数据区域。这很重要，因为t_str_set_string调用类方法set_string，该方法将被子类覆盖。因此，t_str_set_property函数将在子类中设置字符串及其类型。函数g_value_get_string返回GValue拥有的字符串的指针。你不能拥有字符串。这意味着你不能改变或释放字符串。因此，有必要在存储字符串之前复制字符串。复制在函数t_str_set_string中完成。</p>
+  </li>
+  <li>
+    <p>27-35: t_str_get_property。它使用t_str_get_string函数。字符串复制在函数中完成。</p>
+  </li>
+  <li>
+    <p>37-44 t_str_real_set_string函数。这是类中的set_string所指向的。所以，它是类方法的主体。首先，它使用t_str_get_instance_private函数获取私有区域的指针。如果实例拥有一个字符串，在使用新字符串设置它之前释放它。它复制字符串并将其放入priv-&gt;字符串。</p>
+  </li>
+  <li>
+    <p>46-54:当TStr实例被销毁时调用t_str_finalize。这个函数释放字符串priv-&gt;。之后，它调用父类的finalize方法。这被称为“chain up to its parent”，这将在本节后面解释。</p>
+  </li>
+  <li>
+    <p>56-61: t_str_init初始化priv-&gt;字符串。</p>
+  </li>
+  <li>
+    <p>63-74: t_str_class_init函数初始化TStr对象的类。</p>
+  </li>
+  <li>
+    <p>67:覆盖finalize方法。在销毁过程中调用此方法。</p>
+  </li>
+  <li>
+    <p>68-69:覆盖set_property和get_property方法。</p>
+  </li>
+  <li>
+    <p>70-71:创建GParamSpec。然后安装该属性。</p>
+  </li>
+  <li>
+    <p>73:类方法set_string指向t_str_real_set_string。这个方法预计将在子类中被替换。</p>
+  </li>
+  <li>
+    <p>77-91: Setter和getter。它们被属性设置/获取函数t_str_set_property和t_str_get_property使用。setter t_str_set_string只调用类方法。所以它的行为会在子类中改变。</p>
+  </li>
+  <li>
+    <p>93-116: t_str_concat函数。它连接了self和other的字符串，并创建了一个新的TStr。</p>
+  </li>
+  <li>
+    <p>119-127: t_str_new_with_string和t_str_new创建一个新的TStr实例。</p>
+  </li>
+</ul>
+
+<h2 id="4-链接到它的父节点">4 链接到它的父节点</h2>
+
+<p>“链到其父类”流程如下图所示。</p>
+
+<p><img src="/assets/GObjectStudy/202311/07_GObject/image/af3be610d4584e85896c90edc226bd75.png" alt="在这里插入图片描述" /></p>
+
+<p>有两个类，GObjectCLass和TStrClass。每个类都有它们的finalize方法(函数)，由类结构中的指针指向。TStrClass的finalize方法会终结TStr实例中自己的部分。在函数的末尾，它会调用父函数的finalize方法。它是GObjectClass的finalize方法。它调用自己的finalize函数，完成GObject私有数据的处理。</p>
+
+<p>如果GObjectClass有两个或多个子类，则finalize函数的数量可能与后代类的数量相同。它们通过“链式连接”的方式连接在一起。
+<img src="/assets/GObjectStudy/202311/07_GObject/image/0e7de6c6f2fe43ac9263ba1d47682733.png" alt="在这里插入图片描述" /></p>
+
+<h2 id="5-如何编写可派生类型">5 如何编写可派生类型</h2>
+
+<ul>
+  <li>
+    <p>在头文件中使用<code class="language-plaintext highlighter-rouge">G_DECLARE_DERIVABLE_TYPE</code>宏。你需要在<code class="language-plaintext highlighter-rouge">G_DECLARE_DERIVABLE_TYPE</code>之前写一个#define T_TYPE_STR (t_str_get_type())这样的宏。</p>
+  </li>
+  <li>
+    <p>在头文件中声明类结构。类的内容对后代开放。大多数成员是类方法。</p>
+  </li>
+  <li>
+    <p>在C文件中使用 <code class="language-plaintext highlighter-rouge">G_DEFINE_TYPE_WITH_PRIVATE</code> 。需要在 <code class="language-plaintext highlighter-rouge">G_DEFINE_TYPE_WITH_PRIVATE</code> 之前定义私有区域。它是一个C结构，名称为“<code class="language-plaintext highlighter-rouge">&lt;object name&gt;Private</code>”，类似于“TStrPrivate”。</p>
+  </li>
+  <li>
+    <p>定义类和实例初始化函数。</p>
+  </li>
+</ul>
+
+<h2 id="参考">参考</h2>
+
+<p><a href="https://github.com/ToshioCP/Gobject-tutorial/blob/main/gfm/sec7.md">翻译自：Gobject-tutorial</a></p>
+
+
+    </div>
+
+</article>
+<div class="post-nav"><a class="previous" href="/gobject%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/2023/11/17/6-%E5%8F%AF%E6%B4%BE%E7%94%9F%E5%92%8C%E6%8A%BD%E8%B1%A1%E7%B1%BB%E5%9E%8B.html" title="六、可派生和抽象类型">六、可派生和抽象类型</a><a class="next" href="/gobject%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/2023/11/17/8-%E5%AD%90%E7%B1%BB%E6%89%A9%E5%B1%95%E7%88%B6%E7%B1%BB%E7%9A%84%E5%8A%9F%E8%83%BD.html" title="八、子类扩展父类的功能">八、子类扩展父类的功能</a></div><!--<div class="post-related">
+      <div>Related Articles</div>
+      <ul>
+        <li><a class="post-link" href="/gobject%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/2023/11/20/13-GValue.html" title="八、子类扩展父类的功能">十三、GValue学习笔记</a></li><li><a class="post-link" href="/gobject%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/2023/11/17/7-%E5%8F%AF%E6%B4%BE%E7%94%9F%E5%92%8C%E9%9D%9E%E6%8A%BD%E8%B1%A1%E7%B1%BB%E5%9E%8B.html" title="八、子类扩展父类的功能">七、可派生和非抽象类型</a></li><li><a class="post-link" href="/gobject%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0202109/2021/08/26/2-GObject%E5%AD%90%E7%B1%BB%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%A7%81%E6%9C%89%E5%B1%9E%E6%80%A7%E6%A8%A1%E6%8B%9F.html" title="八、子类扩展父类的功能">二、GObject子类对象的私有属性模拟</a></li><li><a class="post-link" href="/%E5%8D%95%E8%AF%8D/2023/12/01/12%E6%9C%88%E7%AC%AC%E4%B8%80%E5%91%A8.html" title="八、子类扩展父类的功能">12月第一周</a></li></ul>
+    </div>--><div class="post-related">
+      <div>相关文章</div>
+      <ul><li><a class="post-link" href="/gobject%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/2023/11/23/14-GInitiallyUnowned.html" title="十四、GInitiallyUnowned类型">十四、GInitiallyUnowned类型</a></li><li><a class="post-link" href="/gobject%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/2023/11/20/11-%E6%8E%A5%E5%8F%A3%E8%A1%A5%E5%85%85.html" title="十一、接口补充">十一、接口补充</a></li><li><a class="post-link" href="/gobject%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/2023/11/20/12-GBoxed%E7%B1%BB%E5%9E%8B.html" title="十二、GBoxed类型">十二、GBoxed类型</a></li><li><a class="post-link" href="/gobject%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/2023/11/20/13-GValue.html" title="十三、GValue学习笔记">十三、GValue学习笔记</a></li></ul>
+    </div><div class="post-comments"><div id="disqus_thread"></div>
+<script>
+    /**
+    *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+    *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
+    /*
+    var disqus_config = function () {
+    this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+    this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+    */
+    (function() { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+    s.src = 'https://pzhou-me.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div></section>
+</div>
+
+
+  </section>
+  <section class="sidebar" style="margin-left: 15px;">
+    <!-- Get sidebar items --><style type="text/css" media="screen">
+.post-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.post-menu ul li {
+  margin-bottom: 5px;  /* 增加每个列表项底部的间距 */
+}
+
+.post-menu ul li a {
+  font-size: 16px; /* 设置目录链接的字体大小 */
+}
+
+.post-menu-content {
+  max-height: 600px; /* 设置最大高度 */
+  min-width: 300px;
+  overflow: hidden; /* 默认隐藏滚动条 */
+  white-space: nowrap; /* 水平方向上的内容不换行 */
+}
+
+/* 自定义垂直滚动条的样式 */
+.post-menu-content::-webkit-scrollbar {
+  width: 8px; /* 垂直滚动条的宽度 */
+  height: 8px; /* 水平滚动条的高度 */
+}
+
+/* 自定义垂直滚动条轨道 */
+.post-menu-content::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* 自定义垂直滚动条滑块 */
+.post-menu-content::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* 当鼠标悬停在垂直滚动条滑块上时 */
+.post-menu-content::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* 一级标题样式 */
+.post-menu ul li.h-h2 {
+  margin-left: 0;
+  margin-bottom: 10px;
+}
+
+/* 二级标题样式 */
+.post-menu ul li.h-h3 {
+  margin-left: 20px;
+  margin-bottom: 10px;
+}
+
+/* 三级标题样式 */
+.post-menu ul li.h-h4 {
+  margin-left: 40px;
+  margin-bottom: 10px;
+}
+
+
+</style>
+
+
+
+<div class="post-menu">
+  <div class="post-menu-title">目录</div>
+  <div class="post-menu-content"></div>
+</div>
+
+<script>
+  function generateContent() {
+    var menu = document.querySelector(".post-menu");
+    var menuContent =  menu.querySelector(".post-menu-content");
+    var headings = document.querySelector(".post-content").querySelectorAll("h2, h3, h4, h5, h6");
+
+    // Hide menu when no headings
+    if (headings.length === 0) {
+      return menu.style.display = "none";
+    }
+
+    // Generate post menu
+    var menuHTML = '';
+    for (var i = 0; i < headings.length; i++) {
+      var h = headings[i];
+      menuHTML += (
+        '<li class="h-' + h.tagName.toLowerCase() + '">'
+        + '<a href="#h-' + h.getAttribute('id') + '">' + h.textContent + '</a></li>');
+    }
+
+    menuContent.innerHTML = '<ul>' + menuHTML + '</ul>';
+
+    // The header element
+    var header = document.querySelector('header.site-header');
+
+    function doMenuCollapse(index, over_items) {
+      var items = menuContent.firstChild.children;
+
+      if (over_items == undefined) {
+        over_items = 20;
+      }
+
+      if (items.length < over_items) {
+        return;
+      }
+
+      var activeItem = items[index];
+      var beginItem = activeItem
+      var endItem = activeItem
+      var beginIndex = index;
+      var endIndex = index + 1;
+      while (beginIndex >= 0
+        && !items[beginIndex].classList.contains('h-h2')) {
+        beginIndex -= 1;
+      }
+      while (endIndex < items.length
+        && !items[endIndex].classList.contains('h-h2')) {
+        endIndex += 1;
+      }
+      for (var i = 0; i < beginIndex; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+      for (var i = beginIndex + 1; i < endIndex; i++) {
+        item = items[i]
+        // if (!item.classList.contains('h-h2')) {
+          item.style.display = '';
+        // }
+      }
+      for (var i = endIndex; i < items.length; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+    }
+
+    // Init menu collapsed
+    doMenuCollapse(-1);
+
+    // Active the menu item
+    window.addEventListener('scroll', function (event) {
+      var lastActive = menuContent.querySelector('.active');
+      var changed = true;
+      var activeIndex = -1;
+      for (var i = headings.length - 1; i >= 0; i--) {
+        var h = headings[i];
+        var headingRect = h.getBoundingClientRect();
+        var headerRect = header.getBoundingClientRect();
+        var headerTop = Math.floor(headerRect.top);
+        var headerHeight = Math.floor(headerRect.height);
+        var headerHeight = headerTop + headerHeight + 20;
+        if (headingRect.top <= headerHeight) {
+          var id = 'h-' + h.getAttribute('id');
+          var a = menuContent.querySelector('a[href="#' + id  + '"]');
+          var curActive = a.parentNode;
+          if (curActive) {
+            curActive.classList.add('active');
+            activeIndex = i;
+          }
+          if (lastActive == curActive) {
+            changed = false;
+          }
+          break;
+        }
+      }
+      if (changed) {
+        if (lastActive) {
+          lastActive.classList.remove('active');
+        }
+        doMenuCollapse(activeIndex);
+      }
+      event.preventDefault();
+    });
+  }
+  generateContent();
+</script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const menuContent = document.querySelector('.post-menu-content');
+
+    // 鼠标进入事件
+    menuContent.addEventListener('mouseenter', function() {
+      menuContent.style.overflow = 'auto';
+    });
+
+    // 鼠标离开事件
+    menuContent.addEventListener('mouseleave', function() {
+      menuContent.style.overflow = 'hidden';
+    });
+  });
+</script>
+
+</section>
+</div>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+    <div class="site-footer-inner"><div>李尓阳工作室 <span class="copyleft">&copy;</span> 2018-2023 Lieryang</div>
+      <div class="footer-col gmail"> E-mail sxlisibo@gmail.com</div>
+      <div>Powered by <a title="Jekyll is a simple, blog-aware, static site
+      generator." href="https://jekyllrb.com/">Jekyll</a> &amp; <a title="Yat, yet
+      another theme." href="https://github.com/jeffreytse/jekyll-theme-yat">Yat Theme</a>.</div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

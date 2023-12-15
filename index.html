@@ -1,0 +1,8374 @@
+<!DOCTYPE html>
+<html><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>主页 | 李尔阳主页</title>
+<meta name="generator" content="Jekyll v3.9.3" />
+<meta property="og:title" content="主页" />
+<meta name="author" content="LieryangStack" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="李尓阳的个人主页，该主页主要用来记录学习笔记。" />
+<meta property="og:description" content="李尓阳的个人主页，该主页主要用来记录学习笔记。" />
+<link rel="canonical" href="https://lieryangstack.github.io//" />
+<meta property="og:url" content="https://lieryangstack.github.io//" />
+<meta property="og:site_name" content="李尔阳主页" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="主页" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebSite","author":{"@type":"Person","name":"LieryangStack"},"description":"李尓阳的个人主页，该主页主要用来记录学习笔记。","headline":"主页","name":"李尔阳主页","url":"https://lieryangstack.github.io//"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="shortcut icon" type="image/x-icon" href="/lieryang.ico">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-noto-sans@0.0.72/index.min.css">
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <script src="/assets/js/main.js"></script><link type="application/atom+xml" rel="alternate" href="https://lieryangstack.github.io//feed.xml" title="李尔阳主页" /><link rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
+
+<!-- and it's easy to individually load additional languages -->
+<script charset="UTF-8"
+        src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/go.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+// Init highlight js
+document.addEventListener('DOMContentLoaded', function(event) {
+  var els = document.querySelectorAll('pre code')
+
+  function addLangData(block) {
+    var outer = block.parentElement.parentElement.parentElement;
+    var lang = block.getAttribute('data-lang');
+    for (var i = 0; i < outer.classList.length; i++) {
+      var cls = outer.classList[i];
+      if (cls.startsWith('language-')) {
+        lang = cls;
+        break;
+      }
+    }
+    if (!lang) {
+      cls = block.getAttribute('class');
+      lang = cls ? cls.replace('hljs ', '') : '';
+    }
+    if (lang.startsWith('language-')) {
+      lang = lang.substr(9);
+    }
+    block.setAttribute('class', 'hljs ' + lang);
+    block.parentNode.setAttribute('data-lang', lang);
+  }
+
+  function addBadge(block) {
+    var enabled = ('true' || 'true').toLowerCase();
+    if (enabled == 'true') {
+      var pre = block.parentElement;
+      pre.classList.add('badge');
+    }
+  }
+
+  function handle(block) {
+    addLangData(block);
+    addBadge(block)
+    hljs.highlightBlock(block);
+  }
+
+  for (var i = 0; i < els.length; i++) {
+    var el = els[i];
+    handle(el);
+  }
+});
+</script>
+
+<style>
+  /* code language badge */
+  pre.badge::before {
+    content: attr(data-lang);
+    color: #fff;
+    background-color: #ff4e00;
+    padding: 0 .5em;
+    border-radius: 0 2px;
+    text-transform: uppercase;
+    text-align: center;
+    min-width: 32px;
+    display: inline-block;
+    position: absolute;
+    right: 0;
+  }
+
+  /* fix wrong badge display for firefox browser */
+  code > table pre::before {
+    display: none;
+  }
+</style>
+<link href='https://lieryangstack.github.io//assets/css/syntax.css' rel='stylesheet' type='text/css' />
+</head>
+<body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<header class="site-header site-header-transparent" role="banner">
+
+  <div class="wrapper">
+    <div class="site-header-inner"><span class="site-brand"><a class="site-brand-inner" rel="author" href="/">
+  <img class="site-favicon" title="李尔阳主页" src="" onerror="this.style.display='none'">
+  李尔阳主页
+</a>
+</span><nav class="site-nav">
+          <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+          <label for="nav-trigger">
+            <span class="menu-icon">
+              <svg viewBox="0 0 18 15" width="18px" height="15px">
+                <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+              </svg>
+            </span>
+          </label>
+
+          <!-- <div class="trigger"><a class="page-link" href="/about.html">关于</a><a class="page-link" href="/archives.html">归档</a><a class="page-link" href="/categories.html">分类</a><a class="page-link" href="/">主页</a><a class="page-link" href="/tags.html">标签</a>
+
+
+
+
+
+
+
+
+
+</div> -->
+
+          <div class="trigger">
+             <a class="page-link" href="/about.html">关于</a>
+            <a class="page-link" href="/categories.html">分类</a>
+            <a class="page-link" href="/archives.html">归档</a>
+            <a class="page-link" href="/tags.html">标签</a>
+            <a class="page-link" href="/assets/index.html">下载</a>
+            <!-- 在这里添加更多的导航项 -->
+          </div>
+          
+
+        </nav></div>
+  </div>
+</header>
+
+<script>
+  function initHeader() {
+    var lastScrollY = getScrollPos().y;
+    var documentElement = document.documentElement;
+
+    function storeScrollData() {
+      var y = getScrollPos().y;documentElement.setAttribute("data-header-transparent", "");var scrollStatus = "";
+
+      if (y <= 0) {
+        scrollStatus = "top";
+      } else if ((window.innerHeight + y) >= document.body.offsetHeight) {
+        scrollStatus = "bottom";
+      } else {
+        var isScrollDown = (y - lastScrollY > 0) ? true : false;
+        scrollStatus = isScrollDown ? "down" : "up";
+      }
+
+      lastScrollY = y;
+      documentElement.setAttribute("data-scroll-status", scrollStatus);
+    }
+
+    window.addEventListener('scroll', function(e) {
+      storeScrollData();
+    });
+
+    storeScrollData();
+  }
+  document.addEventListener('DOMContentLoaded', initHeader);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="page-banner">
+    <div class="page-banner-img"><div style="background-image: url(/assets/images/banners/lieryang-home.jpg)"></div>
+        <img class="img-placeholder" src="/assets/images/banners/lieryang-home.jpg"></div>
+    <div class="wrapper">
+      <div class="page-banner-inner"><div class="page-banner-default">
+            <h1 class="page-banner-heading">
+              欢迎来到李尓阳的博客
+            </h1>
+            <h2 class="page-banner-subheading">
+              别改天 别下次 别以后 就这次
+            </h2>
+          </div></div>
+    </div>
+  </section><script>
+  function hashLocate(hashValue) {
+    hashValue = hashValue.replace(/^.*#h-/, '');
+    hashValue = decodeURIComponent(hashValue);
+    var element = document.getElementById(hashValue);
+
+    if (!element) {
+      return;
+    }
+
+    var header = document.querySelector('header.site-header');
+    var headerRect = header.getBoundingClientRect();
+    var headerTop = Math.floor(headerRect.top);
+    var headerHeight = Math.floor(headerRect.height);
+    var scrollPos = getScrollPos();
+    var offsetY = element.offsetTop - (headerTop + headerHeight + 20);
+
+    if (offsetY == scrollPos.y) {
+      return;
+    }
+
+    if (headerTop == 0  && offsetY > scrollPos.y) {
+      offsetY += headerHeight + 2;
+    } else if (headerTop < 0  && offsetY < scrollPos.y) {
+      offsetY -= headerHeight - 2;
+    }
+
+    smoothScrollTo(offsetY);
+  }
+
+  // The first event occurred
+  window.addEventListener('load', function(event) {
+    if (window.location.hash) {
+      hashLocate(window.location.hash);
+    }
+  });
+
+  // The first event occurred
+  window.addEventListener('click', function(event) {
+    if (event.target.tagName.toLowerCase() == 'a') {
+      hashLocate(event.target.getAttribute('href'));
+    }
+  });
+</script>
+<div class="theme-toggle">
+  <input type="checkbox" id="theme-switch">
+  <label for="theme-switch">
+    <div class="toggle"></div>
+    <div class="names">
+      <p class="light">Light</p>
+      <p class="dark">Dark</p>
+    </div>
+  </label>
+</div>
+
+
+
+
+<script>
+  (function() {
+    var sw = document.getElementById('theme-switch');
+    var html = document.getElementsByTagName('html')[0];
+    var nightModeOption = ('auto' || 'auto').toLowerCase();
+    var storage = nightModeOption === 'manual'
+        ? localStorage
+        : sessionStorage;
+    var themeData = loadThemeData();
+
+    function saveThemeData(data) {
+      storage.setItem('theme', JSON.stringify(data));
+    }
+
+    function loadThemeData() {
+      var data = storage.getItem('theme');
+      try {
+        data = JSON.parse(data ? data : '');
+      } catch(e) {
+        data = { nightShift: undefined, autoToggleAt: 0 };
+        saveThemeData(data);
+      }
+      return data;
+    }
+
+    function handleThemeToggle(nightShift) {
+      themeData.nightShift = nightShift;
+      saveThemeData(themeData);
+      html.dataset.theme = nightShift ? 'dark' : 'light';
+      setTimeout(function() {
+        sw.checked = nightShift ? true : false;
+      }, 50);
+    }
+
+    function autoThemeToggle() {
+      // Next time point of theme toggle
+      var now = new Date();
+      var toggleAt = new Date();
+      var hours = now.getHours();
+      var nightShift = hours >= 19 || hours <=7;
+
+      if (nightShift) {
+        if (hours > 7) {
+          toggleAt.setDate(toggleAt.getDate() + 1);
+        }
+        toggleAt.setHours(7);
+      } else {
+        toggleAt.setHours(19);
+      }
+
+      toggleAt.setMinutes(0);
+      toggleAt.setSeconds(0);
+      toggleAt.setMilliseconds(0)
+
+      var delay = toggleAt.getTime() - now.getTime();
+
+      // auto toggle theme mode
+      setTimeout(function() {
+        handleThemeToggle(!nightShift);
+      }, delay);
+
+      return {
+        nightShift: nightShift,
+        toggleAt: toggleAt.getTime()
+      };
+    }
+
+    // Listen the theme toggle event
+    sw.addEventListener('change', function(event) {
+      handleThemeToggle(event.target.checked);
+    });
+
+    if (nightModeOption == 'auto') {
+      var data = autoThemeToggle();
+
+      // Toggle theme by local setting
+      if (data.toggleAt > themeData.autoToggleAt) {
+        themeData.autoToggleAt = data.toggleAt;
+        handleThemeToggle(data.nightShift);
+      } else {
+        handleThemeToggle(themeData.nightShift);
+      }
+    } else if (nightModeOption == 'manual') {
+      handleThemeToggle(themeData.nightShift);
+    } else {
+      var nightShift = themeData.nightShift;
+      if (nightShift === undefined) {
+        nightShift = nightModeOption === 'on';
+      }
+      handleThemeToggle(nightShift);
+    }
+  })();
+</script>
+<div id="click-to-top" class="click-to-top">
+  <i class="fa fa-arrow-up"></i>
+</div>
+<script>
+  (function () {
+    const clickToTop = document.getElementById('click-to-top');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 100) {
+        clickToTop.classList.add('show')
+      }else {
+        clickToTop.classList.remove('show')
+      }
+    });
+    clickToTop.addEventListener('click', () => {
+      window.smoothScrollTo(0);
+    });
+  })();
+</script>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <div class="framework">
+  <section class="main">
+
+     <div class="articles">
+  
+
+  
+
+
+  <div class="pagination">
+  <!-- Post list links -->
+  <ul class="post-list"><li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/%E6%97%A5%E4%B9%8B%E6%BC%AB%E5%BD%95/2023/12/15/CPU%E6%9E%B6%E6%9E%84.html">
+          CPU架构
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Dec 15, 2023</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 1 min</span>
+      </div>
+      <a class="post-excerpt" href="/%E6%97%A5%E4%B9%8B%E6%BC%AB%E5%BD%95/2023/12/15/CPU%E6%9E%B6%E6%9E%84.html">
+        <p>
+        
+ <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags"><a class="post-tag" href="/tags.html#日之漫录">#日之漫录</a></div>
+    </li><li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/deepstream/2023/12/14/1-x86%E5%AE%89%E8%A3%85DeepStream.html">
+          一、x86安装DeepStream
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Dec 14, 2023</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 1 min</span>
+      </div>
+      <a class="post-excerpt" href="/deepstream/2023/12/14/1-x86%E5%AE%89%E8%A3%85DeepStream.html">
+        <p>
+        本节介绍在安装DeepStream SDK之前，如何准备一个NVIDIA dGPU设备的Ubuntu x86_64系统。
+
+参考
+
+dGPU Setup for Ubuntu
+ <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags"><a class="post-tag" href="/tags.html#DeepStream">#DeepStream</a></div>
+    </li><li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/cuda/2023/12/14/1-CUDA%E5%AE%98%E6%96%B9%E6%96%87%E6%A1%A3%E4%BB%8B%E7%BB%8D.html">
+          一、CUDA官方文档介绍
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Dec 14, 2023</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 5 mins</span>
+      </div>
+      <a class="post-excerpt" href="/cuda/2023/12/14/1-CUDA%E5%AE%98%E6%96%B9%E6%96%87%E6%A1%A3%E4%BB%8B%E7%BB%8D.html">
+        <p>
+        1 CUDA 编程手册系列第一章：CUDA 简介
+
+1.1 我们为什么要使用GPU
+
+GPU（Graphics Processing Unit）在相同的价格和功率范围内，比CPU提供更高的指令吞吐量和内存带宽。许多应用程序利用这些更高的能力，在GPU上比在CPU上运行得更快。其他计算设备，如FPGA，也非常节能，但提供的编程灵活性要比GPU少得多。
+
+GPU和CPU在功能上的差异是因为它们的设计目标不同。虽然 CPU 旨在以尽可能快的速度执行一系列称为线程的操作，并且可以并行执行数十个这样的线程。但GPU却能并行执行成千上万个(摊销较慢的单线程性能以实现更大的吞吐量)。
+
+GPU 专门用于高度并行计算，因此设计时更多的晶体管用于数据处理，而不是数据缓存和流量控制。
+
+下图显示了 CPU... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags"><a class="post-tag" href="/tags.html#CUDA">#CUDA</a></div>
+    </li><li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/%E4%B9%90%E7%90%86/2023/12/10/3-%E4%B9%90%E7%90%86.html">
+          三、乐理
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Dec 10, 2023</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 1 min</span>
+      </div>
+      <a class="post-excerpt" href="/%E4%B9%90%E7%90%86/2023/12/10/3-%E4%B9%90%E7%90%86.html">
+        <p>
+        la so mi so la so， mi so la so mi
+re do la so re do， mi —  si —
+ <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags"><a class="post-tag" href="/tags.html#GStreamer">#GStreamer</a></div>
+    </li><li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/%E4%B9%90%E7%90%86/2023/12/10/2-%E4%B9%90%E7%90%86.html">
+          二、乐理
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Dec 10, 2023</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 1 min</span>
+      </div>
+      <a class="post-excerpt" href="/%E4%B9%90%E7%90%86/2023/12/10/2-%E4%B9%90%E7%90%86.html">
+        <p>
+        11 音符的名称、小节
+
+
+
+
+
+
+
+中间的线就是小节线
+
+
+
+上面的简谱是4分音符分一拍，一小节有两拍。举例：
+
+  一个四分音符＋两个八分音符是一小节。
+  四个八分音符是一小节。
+  八个十六分音符是一小节。
+
+
+12 附点、休止符
+
+
+
+
+
+
+
+
+
+13 常用的四拍子
+
+全音符就是四拍，二分音符就是两拍，四分音符就是一拍，八分音符就是0.5拍或者半拍，十六分音符就是0.25拍或者四分之一拍。
+
+
+
+
+
+
+
+14 常用的八拍子
+
+
+
+
+
+
+  就是四分音符 + 八分音符
+
+
+15 强弱关系、单拍子、复拍子
+
+律动就是强弱关系。2/4就是动次、动次、动次、、、、
+
+
+
+3/4就是动次次、动次次、动次次、、、、
+
+
+
+4/4就是动次打次、动次打次、动次打次、、、、
+
+
+
+
+
+6/8就... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags"><a class="post-tag" href="/tags.html#GStreamer">#GStreamer</a></div>
+    </li><li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/%E4%B9%90%E7%90%86/2023/12/10/1-%E4%B9%90%E7%90%86.html">
+          一、乐理
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Dec 10, 2023</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 1 min</span>
+      </div>
+      <a class="post-excerpt" href="/%E4%B9%90%E7%90%86/2023/12/10/1-%E4%B9%90%E7%90%86.html">
+        <p>
+        课程学习来自:【四川音乐学院作曲硕士】零基础自学音乐学乐理合集-第一季（精简版）/已完结
+
+1 认识简谱的构造
+
+
+
+2 认识音名
+
+1234567也叫音符
+
+
+
+3 初步理解1=C (调号)
+
+钢琴一共有88个键，除了最左边三个键（两个白的一个黑的）和最右边的一个白键。可以分为7组按键（每组7个白键+5个黑键）。
+
+
+
+
+
+1=？，1就是从？键上出发，1的位置一旦确定，234567的位置也跟着确定。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+4 黑键怎么表示
+
+
+
+
+
+5 半音&amp;全音
+
+
+  
+    半音：相邻的两个音，它们之间的距离就是一个半音。（C键和C#键，也就是相邻白键和黑键的距离就是一个半音）
+  
+  
+    全音：两个半音。
+  
+
+
+注意：E到F是一个半音（因为中间没... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags"><a class="post-tag" href="/tags.html#GStreamer">#GStreamer</a></div>
+    </li><li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/gstreamer%E6%A0%B8%E5%BF%83%E5%AF%B9%E8%B1%A1/2023/12/09/23-GstElement.html">
+          二十三、GstElement
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Dec 09, 2023</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 11 mins</span>
+      </div>
+      <a class="post-excerpt" href="/gstreamer%E6%A0%B8%E5%BF%83%E5%AF%B9%E8%B1%A1/2023/12/09/23-GstElement.html">
+        <p>
+        1 GstElement基本概念
+
+
+  
+    GstElement是构建可用于GStreamer管道的元素所需的抽象基类（不可实例化）。有关创建GstElement子类的更多信息，请参阅插件编写指南。
+  
+  
+    使用gst_element_get_name可以获取GstElement的名称，并使用gst_element_set_name进行设置。为了提高速度，在核心中使用GST_ELEMENT_NAME时，需要使用适当的锁。不要在插件或应用程序中使用此功能，以保留ABI兼容性。
+  
+  
+    元素可以拥有GstPad类型的pad。这些pad链接到其他元素上的pad。GstBuffer在这些链接的pad之间流动。GstElement具有GstPad结构的GList，... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags"><a class="post-tag" href="/tags.html#GStreamer">#GStreamer</a></div>
+    </li><li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/gstreamer%E8%AE%BE%E8%AE%A1/2023/12/08/1-%E6%8F%92%E4%BB%B6%E7%BC%96%E5%86%99.html">
+          一、插件编写
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Dec 08, 2023</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 5 mins</span>
+      </div>
+      <a class="post-excerpt" href="/gstreamer%E8%AE%BE%E8%AE%A1/2023/12/08/1-%E6%8F%92%E4%BB%B6%E7%BC%96%E5%86%99.html">
+        <p>
+        1 Pad (de)activation
+
+1.1 激活
+
+改变状态时，一个 bin 会按照从sink到source的顺序为其所有子元素设置状态。当元素经历 READY→PAUSED 过渡时，它们的Pad会被激活以准备数据流。一些Pad会启动任务以驱动数据流。
+
+一个元素会从sourcepads到sinkpads依次激活其Pad。这是为了确保当sinkpads被激活并准备接收数据时，sourcepads已经激活以向下游传递数据。
+
+Pads可以在 PUSH 和 PULL 两种模式下激活。PUSH 模式是正常情况，其中链接中的source pad通过 gst_pad_push() 将数据发送到对端的sink pad。而 PULL 模式则是由source pad请求数据通过 gst_pad... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags"><a class="post-tag" href="/tags.html#GStreamer">#GStreamer</a></div>
+    </li><li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/gstreamer%E8%AE%BE%E8%AE%A1/2023/12/07/GStreamer%E8%AE%BE%E8%AE%A1-%E5%89%8D%E8%A8%80.html">
+          GStreamer设计-前言
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Dec 07, 2023</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 1 min</span>
+      </div>
+      <a class="post-excerpt" href="/gstreamer%E8%AE%BE%E8%AE%A1/2023/12/07/GStreamer%E8%AE%BE%E8%AE%A1-%E5%89%8D%E8%A8%80.html">
+        <p>
+        这部分内容来自：
+
+  GStreamer design documents：里面讲述了各种GStreamer设计文档。这些文档是在开发或重构GStreamer设计部分时产生的技术文档，用来解决问题的设计解决方案。
+  Core Library：里面讲述了GStreamer核心对象相关服务和功能，包括初始化、插件管理和类型，以及定义元素和bin的对象层次结构，以及一些更专门的元素。
+  GStreamer Writer’s Guide：本章节旨在帮助您了解GStreamer框架，以便您可以开发新的插件来扩展现有功能。本指南通过跟踪一个用c编写的示例插件(一个音频过滤器插件)的开发来解决大多数问题。然而，本指南的后面部分还介绍了编写其他类型插件所涉及的一些问题，本指南的末尾描述了一些用于... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags"><a class="post-tag" href="/tags.html#GStreamer">#GStreamer</a></div>
+    </li><li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/gstreamer%E6%A0%B8%E5%BF%83%E5%AF%B9%E8%B1%A1/2023/12/06/22-GstPad.html">
+          二十二、GstPad
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Dec 06, 2023</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 26 mins</span>
+      </div>
+      <a class="post-excerpt" href="/gstreamer%E6%A0%B8%E5%BF%83%E5%AF%B9%E8%B1%A1/2023/12/06/22-GstPad.html">
+        <p>
+        1 GstPad基本概念
+
+
+  
+    GstElement通过“pads”与其他元素连接，这些 pads 是极其轻量级的通用连接点。
+  
+  
+    Pads具有GstPadDirection，source pads 产生数据，sink pads 消耗数据。Pads通常是从GstPadTemplate创建的，可以使用 gst_pad_new_from_template 创建，然后添加到GstElement中。这通常发生在元素创建时，但也可以根据元素处理的数据或应用程序请求的 pads 动态发生。没有 pad 模板的 pads 可以使用 gst_pad_new 创建，它接受方向和名称作为参数。如果名称为NULL，则会分配一个确保唯一的名称。
+  
+  
+    创建 pad 的... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags"><a class="post-tag" href="/tags.html#GStreamer">#GStreamer</a></div>
+    </li><li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/gstreamer%E6%A0%B8%E5%BF%83%E5%AF%B9%E8%B1%A1/2023/12/06/21-GstPadTemplate.html">
+          二十一、GstPadTemplate
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Dec 06, 2023</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 3 mins</span>
+      </div>
+      <a class="post-excerpt" href="/gstreamer%E6%A0%B8%E5%BF%83%E5%AF%B9%E8%B1%A1/2023/12/06/21-GstPadTemplate.html">
+        <p>
+        1 GstPadTemplate基本概念
+
+
+  
+    Padtemplates描述了一个pad或element factory可以处理的可能媒体类型media types。这使得在加载元素插件Element plugin之前可以检查处理的类型，以及识别尚未创建（请求Request或有时的Sometimes）元素上的pads成为可能。
+  
+  
+    Pad和PadTemplates附加了GstCaps来描述它们能够处理的媒体类型。使用gst_pad_template_get_caps或GST_PAD_TEMPLATE_CAPS可以获取padtemplate的caps。创建后不可能修改padtemplate的caps。
+  
+  
+    PadTemplates有一个GstP... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags"><a class="post-tag" href="/tags.html#GStreamer">#GStreamer</a></div>
+    </li><li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/gstreamer%E6%A0%B8%E5%BF%83%E5%AF%B9%E8%B1%A1/2023/12/06/20-GstEvent.html">
+          二十、GstEvent
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Dec 06, 2023</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 9 mins</span>
+      </div>
+      <a class="post-excerpt" href="/gstreamer%E6%A0%B8%E5%BF%83%E5%AF%B9%E8%B1%A1/2023/12/06/20-GstEvent.html">
+        <p>
+        1 GstEvent基本概念
+
+
+  
+    GstEvent事件类提供了构造发送事件和查询（解析）接收事件的相关函数。（只有创建事件和解析事件的功能，具体发送事件是GstElement的事情）
+  
+  
+    通常使用 gst_event_new_*() 创建事件，该函数将特定于事件类型的参数作为参数。要发送事件，应用程序通常会使用 gst_element_send_event，而元素将使用 gst_pad_send_event 或 gst_pad_push_event。如果事件尚未发送，则应使用 gst_event_unref 取消引用该事件。
+  
+  
+    接收到的事件可以使用它们各自的 gst_event_parse_*() 函数进行解析。对于不需要的细节，传递 N... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags"><a class="post-tag" href="/tags.html#GStreamer">#GStreamer</a></div>
+    </li><li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/gstreamer%E6%A0%B8%E5%BF%83%E5%AF%B9%E8%B1%A1/2023/12/05/19-GstMessage.html">
+          十九、GstMessage
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Dec 05, 2023</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 8 mins</span>
+      </div>
+      <a class="post-excerpt" href="/gstreamer%E6%A0%B8%E5%BF%83%E5%AF%B9%E8%B1%A1/2023/12/05/19-GstMessage.html">
+        <p>
+        1 GstMessage基本概念
+
+
+  
+    消息是继承于 GstMiniObject 的子类，其内容是一个通用的 GstStructure。这样做可以编写自定义消息而无需进行 API 更改，同时允许各种不同类型的消息。
+  
+  
+    消息由管道中的对象发布，并通过 GstBus 传递给应用程序。
+  
+  在 GstBus 上发布消息的基本使用模式如下：
+    gst_bus_post (bus, gst_message_new_eos());
+    
+  
+  通常，GstElement 使用 gst_element_post_message 在其父容器提供的总线上发布消息。
+
+
+ 
+
+
+
+2 GstMessage类型结构
+
+2.1 GstMessage类型注册宏定... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags"><a class="post-tag" href="/tags.html#GStreamer">#GStreamer</a></div>
+    </li><li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/gstreamer%E6%A0%B8%E5%BF%83%E5%AF%B9%E8%B1%A1/2023/12/05/18-GstStreamCollection.html">
+          十八、GstStreamCollection
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Dec 05, 2023</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 1 min</span>
+      </div>
+      <a class="post-excerpt" href="/gstreamer%E6%A0%B8%E5%BF%83%E5%AF%B9%E8%B1%A1/2023/12/05/18-GstStreamCollection.html">
+        <p>
+        1 GstStreamCollection基本概念
+
+
+  
+    可获得GstStream的集合。
+  
+  
+    GstStreamCollection将由可以提供这些流的元素提供。应用程序可以使用集合来向用户展示可用的流，使用 gst_stream_collection_get_stream()。
+  
+  
+    一旦发布，GstStreamCollection就是不可变的。更新是通过发送新的GstStreamCollection消息来完成的，这个新消息可能会或可能不会与它替换的集合共享一些GstStream对象。接收者可以检查流集合消息的发送者，以了解哪个集合已过时。
+  
+  
+    管道中的多个元素可以提供GstStreamCollection。
+  
+  
+ ... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags"><a class="post-tag" href="/tags.html#GStreamer">#GStreamer</a></div>
+    </li><li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/gstreamer%E6%A0%B8%E5%BF%83%E5%AF%B9%E8%B1%A1/2023/12/05/17-GstStreams.html">
+          十七、GstStreams
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Dec 05, 2023</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 2 mins</span>
+      </div>
+      <a class="post-excerpt" href="/gstreamer%E6%A0%B8%E5%BF%83%E5%AF%B9%E8%B1%A1/2023/12/05/17-GstStreams.html">
+        <p>
+        1 GstStream基本概念
+
+
+  
+    GstStream对象是一个高级对象，定义了一个数据流，在GstPipeline中存在或可以存在。
+  
+  
+    它由一个唯一标识符“Stream ID”定义。一个GstStream并不自动意味着该流在管道或元素中存在。
+  
+  
+    能够在管道中引入新流的任何元素都应该创建适当的GstStream对象，并可以通过GST_EVENT_STREAM_START事件和/或GstStreamCollection传递该对象。
+  
+  
+    不修改流的性质的元素可以为其添加额外信息（例如丰富GstCaps或GstTagList）。这通常是由解析元素完成的。
+  
+
+
+1.1 GstStreams继承关系
+
+GObject
+   ... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags"><a class="post-tag" href="/tags.html#GStreamer">#GStreamer</a></div>
+    </li><li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/glib%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/2023/12/04/3-GThreadPool.html">
+          三、GThreadPool
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Dec 04, 2023</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 1 min</span>
+      </div>
+      <a class="post-excerpt" href="/glib%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/2023/12/04/3-GThreadPool.html">
+        <p>
+        1 GThreadPool基本概念
+
+
+  
+    有时你希望异步地派发工作的执行，然后继续在自己的线程中工作。如果这种情况经常发生，每次启动和销毁线程的开销可能会太高。在这种情况下，重用已经启动的线程似乎是个不错的主意。确实如此，但是实现这一点可能很繁琐且容易出错。因此，GLib提供了线程池以方便你使用。另一个优势是，当不同的子系统使用GLib时，线程可以在它们之间共享。
+  
+  
+    要创建一个新的线程池，你可以使用g_thread_pool_new()。它可以通过g_thread_pool_free()来销毁。
+  
+  
+    如果你想在线程池中执行某个特定任务，可以调用g_thread_pool_push()。
+  
+  
+    要获取当前正在运行的线程数，可以调... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags"><a class="post-tag" href="/tags.html#GLib">#GLib</a></div>
+    </li><li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/glib%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/2023/12/02/2-GThread.html">
+          二、GThread
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Dec 02, 2023</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 5 mins</span>
+      </div>
+      <a class="post-excerpt" href="/glib%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/2023/12/02/2-GThread.html">
+        <p>
+        1 GThread基本概念
+
+线程几乎像进程一样运行，但与进程不同的是，一个进程的所有线程共享相同的内存。这是好的，因为它通过共享内存提供了线程之间的轻松通信，但也有不好的地方，因为如果程序没有谨慎设计，可能会发生奇怪的事情（所谓的“Heisenbugs”）。线程的并发性质意味着不能假设不同线程中运行的代码的执行顺序，除非程序员通过同步原语primitive明确强制执行顺序。
+
+GLib中与线程相关的函数的目标是提供一种可移植的方式来编写多线程软件。有用于保护内存部分访问的互斥锁的原语（#GMutex、#GRecMutex和#GRWLock）；有使用单个位进行锁定的设施（g_bit_lock()）；有用于线程同步的条件变量的原语（#GCond）；有线程专用数据的原语 - 每个线程都有一... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags"><a class="post-tag" href="/tags.html#GLib">#GLib</a></div>
+    </li><li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/%E5%8D%95%E8%AF%8D/2023/12/01/12%E6%9C%88%E7%AC%AC%E4%B8%80%E5%91%A8.html">
+          12月第一周
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Dec 01, 2023</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 5 mins</span>
+      </div>
+      <a class="post-excerpt" href="/%E5%8D%95%E8%AF%8D/2023/12/01/12%E6%9C%88%E7%AC%AC%E4%B8%80%E5%91%A8.html">
+        <p>
+        给以下markdown表格音标列添加音标，要求是英国音标，只要第一列是有单词的时候，才添加音标。每一个行每一列的空格平均分配。最后以markdown可复制表格形式输出：
+
+Dec-1
+
+
+  
+    
+      单词
+      音标
+      词性与释义
+      附加信息
+    
+    
+      leave
+       
+      v.离开；离去；留下
+      leave left left
+    
+    
+      left
+       
+      adj.左边的；剩余的
+       
+    
+    
+       
+       
+      v. leave 的过去式和过去分词
+       
+    
+    
+      lease... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags"><a class="post-tag" href="/tags.html#单词">#单词</a></div>
+    </li><li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/gstreamer%E6%A0%B8%E5%BF%83%E5%AF%B9%E8%B1%A1/2023/12/01/16-GstTaskPool.html">
+          十六、GstTaskPool
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Dec 01, 2023</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 1 min</span>
+      </div>
+      <a class="post-excerpt" href="/gstreamer%E6%A0%B8%E5%BF%83%E5%AF%B9%E8%B1%A1/2023/12/01/16-GstTaskPool.html">
+        <p>
+        1 GstTaskPool基本概念
+
+
+  
+    此对象提供了创建线程的抽象。默认实现使用常规的 GThreadPool 来启动任务。
+  
+  
+    子类可以创建自定义线程。
+  
+
+
+2 GstTaskPool类型结构
+
+2.1 GstTaskPool类型注册宏定义
+
+/* filename: gsttaskpool.h */
+#define GST_TYPE_TASK_POOL             (gst_task_pool_get_type ())
+
+/* filename: gsttaskpool.c */
+G_DEFINE_TYPE_WITH_CODE (GstTaskPool, gst_task_pool, GST_TYPE_OBJECT, _do_init... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags"><a class="post-tag" href="/tags.html#GStreamer">#GStreamer</a></div>
+    </li><li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/gstreamer%E6%A0%B8%E5%BF%83%E5%AF%B9%E8%B1%A1/2023/12/01/15-GstTask.html">
+          十五、GstTask
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Dec 01, 2023</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 2 mins</span>
+      </div>
+      <a class="post-excerpt" href="/gstreamer%E6%A0%B8%E5%BF%83%E5%AF%B9%E8%B1%A1/2023/12/01/15-GstTask.html">
+        <p>
+        1 GstTask基本概念
+
+
+  
+    GstTask是由GstElement和GstPad用于提供在GstPipeline中进行数据传递的线程的工具。
+  
+  
+    通常情况下，GstPad会启动一个GstTask来将数据推送到到对等GstPad中，或者从对等GstPad中获取数据。大多数source元素会启动一个GstTask来推送push数据。在某些情况下，分离器demuxer元素可以启动一个GstTask来从对等元素中拉取数据。这通常在分离器demuxer可以对上游对等元素执行随机访问以提高性能时执行。
+  
+  
+    尽管GstPad上存在用于启动start/暂停pause/停止stop任务tasks的便捷函数，但如果与GstPad无关，有时可能需要手动创建G... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags"><a class="post-tag" href="/tags.html#GStreamer">#GStreamer</a></div>
+    </li><li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/gstreamer%E6%A0%B8%E5%BF%83%E5%AF%B9%E8%B1%A1/2023/12/01/14-GstContext.html">
+          十四、GstContext
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Dec 01, 2023</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 1 min</span>
+      </div>
+      <a class="post-excerpt" href="/gstreamer%E6%A0%B8%E5%BF%83%E5%AF%B9%E8%B1%A1/2023/12/01/14-GstContext.html">
+        <p>
+        1 GstContext基本概念
+
+
+  
+    GstContext 是一个容器对象，用于存储诸如设备上下文、显示服务器连接以及应在多个元素之间共享的类似概念。
+  
+  
+    应用程序可以通过使用 gst_element_set_context 在整个管道上设置上下文，然后该上下文将被传播到所有子元素。元素可以在 set_context 中处理这些上下文，并将它们与已有的上下文信息合并。
+  
+  
+    当一个元素需要一个上下文时，它将按以下顺序执行以下操作，直到其中一个步骤成功：
+
+    
+      检查元素是否已经有一个上下文。
+      使用 GST_QUERY_CONTEXT 向下游查询上下文。
+      使用 GST_QUERY_CONTEXT 向上游查... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags"><a class="post-tag" href="/tags.html#GStreamer">#GStreamer</a></div>
+    </li><li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/gstreamer%E6%A0%B8%E5%BF%83%E5%AF%B9%E8%B1%A1/2023/12/01/13-GstTagList.html">
+          十三、GstTagList
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Dec 01, 2023</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 3 mins</span>
+      </div>
+      <a class="post-excerpt" href="/gstreamer%E6%A0%B8%E5%BF%83%E5%AF%B9%E8%B1%A1/2023/12/01/13-GstTagList.html">
+        <p>
+        1 GstTagList基本概念
+
+
+  
+    用于描述媒体metadata元数据的标签tag和值value的列表。
+  
+  
+    结构中的字符串必须是ASCII或UTF-8编码。不允许使用其他编码。字符串不得为空或为%NULL。
+  
+
+
+2 GstTagList类型结构
+
+2.1 GstTagList类型注册宏定义
+
+/* filename:  gsttaglist.h   */
+GST_API GType _gst_tag_list_type;
+#define GST_TYPE_TAG_LIST     (_gst_tag_list_type)
+
+/* filename:  gsttaglist.c   */
+GType _gst_tag_list_type = 0;
+... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags"><a class="post-tag" href="/tags.html#GStreamer">#GStreamer</a></div>
+    </li><li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/gstreamer%E6%A0%B8%E5%BF%83%E5%AF%B9%E8%B1%A1/2023/12/01/12-GstBufferList.html">
+          十二、GstBufferList
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Dec 01, 2023</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 1 min</span>
+      </div>
+      <a class="post-excerpt" href="/gstreamer%E6%A0%B8%E5%BF%83%E5%AF%B9%E8%B1%A1/2023/12/01/12-GstBufferList.html">
+        <p>
+        1 GstBufferList基本概念
+
+
+  
+    缓冲列表（Buffer lists）是包含一系列缓冲（buffers）的对象。
+  
+  
+    缓冲列表可以通过 gst_buffer_list_new 创建，并使用 gst_buffer_list_insert 填充数据。
+  
+  
+    当需要一次性推送多个缓冲时，可以使用 gst_pad_push_list 将缓冲列表推送到源端口（srcpad）。这在需要推送多个缓冲时非常有用，因为它可以减少逐个推送每个缓冲时的开销。
+  
+  
+    GstBufferList中的buffer需要用户自己申请内存空间，然后使用 gst_buffer_list_insert 插入到列表中
+  
+
+
+2 GstBufferList... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags"><a class="post-tag" href="/tags.html#GStreamer">#GStreamer</a></div>
+    </li><li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/gstreamer%E6%A0%B8%E5%BF%83%E5%AF%B9%E8%B1%A1/2023/12/01/11-GstCpas.html">
+          十一、GstCpas
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Dec 01, 2023</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 4 mins</span>
+      </div>
+      <a class="post-excerpt" href="/gstreamer%E6%A0%B8%E5%BF%83%E5%AF%B9%E8%B1%A1/2023/12/01/11-GstCpas.html">
+        <p>
+        1 GstCpas基本概念
+
+
+  
+    Caps（capabilities）是描述媒体类型的轻量级引用计数对象。它们由一系列 GstStructure 组成。
+  
+  
+    Caps 在 GstPadTemplate 上公开，用于描述给定 pad 可以处理的所有可能类型。它们也存储在 GstRegistry 中，连同 GstElement 的描述一起。
+  
+  
+    Caps 通过element pads 上的 gst_pad_query_caps 函数公开。这个函数描述了 pad 在运行时可以处理或产生的可能类型。
+
+    可以使用以下代码片段构建 GstCaps：
+
+    GstCaps *caps = gst_caps_new_simple ("video/... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags"><a class="post-tag" href="/tags.html#GStreamer">#GStreamer</a></div>
+    </li><li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/gstreamer%E6%A0%B8%E5%BF%83%E5%AF%B9%E8%B1%A1/2023/12/01/10-GstCapsFeatures.html">
+          十、GstCapsFeatures
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Dec 01, 2023</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 1 min</span>
+      </div>
+      <a class="post-excerpt" href="/gstreamer%E6%A0%B8%E5%BF%83%E5%AF%B9%E8%B1%A1/2023/12/01/10-GstCapsFeatures.html">
+        <p>
+        1 GstCapsFeatures基本概念
+
+
+  
+    GstCapsFeatures 可以选择性地设置在 GstCaps 上，以添加对特定 GstStructure 的额外特性要求。具有相同名称但带有非等值特性集的 Caps 结构不兼容。如果一个 pad 支持多组特性，它必须添加多个相同的结构，但具有不同的特性集到 caps 中。
+  
+  
+    空的 GstCapsFeatures 等同于仅包含 GST_CAPS_FEATURE_MEMORY_SYSTEM_MEMORY 的 GstCapsFeatures。任何由 gst_caps_features_new_any 创建的 ANY GstCapsFeatures 与其他任何 GstCapsFeatures 相等，并可用于指... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags"><a class="post-tag" href="/tags.html#GStreamer">#GStreamer</a></div>
+    </li><li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/gstreamer%E6%A0%B8%E5%BF%83%E5%AF%B9%E8%B1%A1/2023/11/30/9-GstPoll.html">
+          九、GstPoll
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Nov 30, 2023</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 1 min</span>
+      </div>
+      <a class="post-excerpt" href="/gstreamer%E6%A0%B8%E5%BF%83%E5%AF%B9%E8%B1%A1/2023/11/30/9-GstPoll.html">
+        <p>
+        1  GstPoll基本概念
+
+
+  
+    GstPoll 类似于 fd_set（与 select() 一起使用）或 struct pollfd 数组（与 poll() 一起使用），用于跟踪文件描述符。一旦通过 gst_poll_new 创建，这个集合就可以用来等待文件描述符变为可读和/或可写。通过在创建集合时（或稍后调用 gst_poll_set_controllable）为 controllable 标志指定 TRUE，可以使这种等待受控。
+  
+  
+    新的文件描述符通过 gst_poll_add_fd 添加到集合中，并通过 gst_poll_remove_fd 移除。控制哪些文件描述符应该等待变为可读和/或可写是通过使用 gst_poll_fd_ctl_read、gs... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags"><a class="post-tag" href="/tags.html#GStreamer">#GStreamer</a></div>
+    </li><li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/gstreamer%E6%A0%B8%E5%BF%83%E5%AF%B9%E8%B1%A1/2023/11/30/8-GstBufferPool.html">
+          八、GstBufferPool
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Nov 30, 2023</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 5 mins</span>
+      </div>
+      <a class="post-excerpt" href="/gstreamer%E6%A0%B8%E5%BF%83%E5%AF%B9%E8%B1%A1/2023/11/30/8-GstBufferPool.html">
+        <p>
+        1 GstBufferPool基本概念
+
+
+  
+    GstBufferPool 是一个用于re-allocate（预分配p）和recycle（回收再利用）具有相同大小和属性的buffer的对象。
+  
+  
+    通过 gst_buffer_pool_new 创建 GstBufferPool。创建后，需要进行配置。使用 gst_buffer_pool_get_config 获取池的当前配置结构。通过 gst_buffer_pool_config_set_params 和 gst_buffer_pool_config_set_allocator 可以配置bufferpool的参数和分配器。根据bufferpool的实现，还可以配置其他属性。
+  
+  
+    缓冲池buffer... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags"><a class="post-tag" href="/tags.html#GStreamer">#GStreamer</a></div>
+    </li><li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/%E5%8D%95%E8%AF%8D/2023/11/28/11%E6%9C%88%E5%8D%95%E8%AF%8D.html">
+          11月单词
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Nov 28, 2023</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 8 mins</span>
+      </div>
+      <a class="post-excerpt" href="/%E5%8D%95%E8%AF%8D/2023/11/28/11%E6%9C%88%E5%8D%95%E8%AF%8D.html">
+        <p>
+        给以下markdown表格音标列添加音标，要求是英国音标，只要第一列是有单词的时候，才添加音标。每一个行每一列的空格平均分配。最后以markdown可复制表格形式输出：
+
+Nov-28
+
+
+  
+    
+      单词
+      音标
+      词性与释义
+      附加信息
+    
+  
+  
+    
+      experience
+      /ɪkˈspɪərɪəns/
+      v. 经历；体验
+       
+    
+    
+       
+       
+      n.经验；阅历
+       
+    
+    
+      experienced
+      /ɪkˈspɪərɪənst/
+      adj.有经验的
+      v. “exp... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags"><a class="post-tag" href="/tags.html#单词">#单词</a></div>
+    </li><li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/gstreamer%E6%A0%B8%E5%BF%83%E5%AF%B9%E8%B1%A1/2023/11/27/7-GstBuffer.html">
+          七、GstBuffer
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Nov 27, 2023</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 6 mins</span>
+      </div>
+      <a class="post-excerpt" href="/gstreamer%E6%A0%B8%E5%BF%83%E5%AF%B9%E8%B1%A1/2023/11/27/7-GstBuffer.html">
+        <p>
+        1 GstBuffer基本概念
+
+
+  
+    缓冲区（Buffers）是 GStreamer 中数据传输的基本单元。Buffers包含事件timing、偏移量offset、GstMemory和GstMemory块相关联的其他任意元数据metadata。
+  
+  
+    通常使用 gst_buffer_new 创建缓冲区。创建缓冲区后，通常会为其分配内存并将其添加到缓冲区中。以下示例创建了一个可以容纳给定宽度、高度和每像素位数的视频帧的缓冲区。
+
+      GstBuffer *buffer;
+  GstMemory *memory;
+  gint size, width, height, bpp;
+  ...
+  size = width * height * bpp;
+  ... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags"><a class="post-tag" href="/tags.html#GStreamer">#GStreamer</a></div>
+    </li><li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/gstreamer%E6%A0%B8%E5%BF%83%E5%AF%B9%E8%B1%A1/2023/11/27/6-GstMeta.html">
+          六、GstMeta
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Nov 27, 2023</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 3 mins</span>
+      </div>
+      <a class="post-excerpt" href="/gstreamer%E6%A0%B8%E5%BF%83%E5%AF%B9%E8%B1%A1/2023/11/27/6-GstMeta.html">
+        <p>
+        1 GstMeta基本概念
+
+GstMeta 结构应作为 GstBuffer 元数据结构的第一个成员被包含。该结构定义了元数据的 API，并且应该对所有使用该元数据的元素可访问。
+
+元数据 API 通过 gst_meta_api_type_register 注册，该函数接受元数据 API 的名称和一些与元数据相关联的标签。通过 gst_meta_api_type_has_tag，可以检查某个元数据 API 是否包含给定的标签。
+
+可以注册多个元数据 API 的实现。要实现一个元数据 API，应该使用 gst_meta_register。这个函数接受创建、释放和转换元数据所需的所有参数，以及元数据的大小。该函数返回一个 GstMetaInfo 结构，其中包含实现 API 的信息。
+
+特定... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags"><a class="post-tag" href="/tags.html#GStreamer">#GStreamer</a></div>
+    </li><li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/gstreamer%E6%A0%B8%E5%BF%83%E5%AF%B9%E8%B1%A1/2023/11/26/5-GstMomery.html">
+          五、GstMemory
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Nov 26, 2023</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 9 mins</span>
+      </div>
+      <a class="post-excerpt" href="/gstreamer%E6%A0%B8%E5%BF%83%E5%AF%B9%E8%B1%A1/2023/11/26/5-GstMomery.html">
+        <p>
+        1 GstMemory基本概念
+
+
+  GstMemory 是一个轻量级的引用计数对象（继承于GstMiniObject），用于包装内存区域。
+  GstBuffer 的就是由多个 GstMemory 构成。一个 GstMemory 对象有一个分配的内存区域，最大大小为 maxsize。在内存对象的生命周期内，最大大小不会改变。内存还有一个偏移量和大小属性，用于指定分配区域内有效的内存范围。
+  GstMemory 通常由分配器通过 gst_allocator_alloc 方法调用创建。当使用 NULL 作为分配器时，将使用默认分配器。可以通过 gst_allocator_register 注册新的分配器。分配器通过名称标识，并可以通过 gst_allocator_find 检索。可以... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags"><a class="post-tag" href="/tags.html#GStreamer">#GStreamer</a></div>
+    </li><li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/c%E8%AF%AD%E8%A8%80/2023/11/26/2-%E5%86%85%E5%AD%98%E5%AF%B9%E9%BD%90.html">
+          二、内存对齐
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Nov 26, 2023</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 1 min</span>
+      </div>
+      <a class="post-excerpt" href="/c%E8%AF%AD%E8%A8%80/2023/11/26/2-%E5%86%85%E5%AD%98%E5%AF%B9%E9%BD%90.html">
+        <p>
+        1 为什么要内存对齐
+
+现在的操作系统一般都是32位或者64位，一次性内存访问可以读取4个字节或者8个字节。
+
+比如我们使用64位操作系统，地址从0开始，我们把8字节double放到了0x4位置。系统读取内存的时候，就需要两次读取再合并数据。先从0x0读取8字节，再从0x08读取8字节。
+
+2 内存对齐规则
+
+
+  
+    第一个成员在与结构体变量偏移量为0的地址处。
+  
+  
+    其他变量要对齐到某个数字（对齐数）的整数倍的地址处（一般对齐数都等于成员本身占用内存字节数）
+  
+  
+    结构体总大小为最大对齐数（每个成员变量都有对齐数）的整数倍
+  
+
+
+3 举例
+
+示例程序目录/assets/CProgrammingLanguage/02_MemoryAlignmen... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags"><a class="post-tag" href="/tags.html#C">#C</a></div>
+    </li><li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/gstreamer%E6%A0%B8%E5%BF%83%E5%AF%B9%E8%B1%A1/2023/11/23/4-GstAllocator.html">
+          四、GstAllocator
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Nov 23, 2023</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 5 mins</span>
+      </div>
+      <a class="post-excerpt" href="/gstreamer%E6%A0%B8%E5%BF%83%E5%AF%B9%E8%B1%A1/2023/11/23/4-GstAllocator.html">
+        <p>
+        1 GstAllocator基本概念
+
+GstAllocator 是用来创建内存 GstMemory。
+
+内存（GstMemory）通常是通过分配器使用 gst_allocator_alloc 方法调用创建的。当使用 NULL 作为分配器时，将使用默认的分配器。
+
+可以通过 gst_allocator_register 注册新的分配器。分配器通过名称来识别，并且可以通过 gst_allocator_find 检索。可以使用 gst_allocator_set_default 来更改默认分配器。
+
+可以使用 gst_memory_new_wrapped 创建新的内存，该方法包装在其他地方分配的内存。
+
+注意：
+
+
+  
+    GstAllocator是一个抽象对象，意味着它只能被继承，... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags"><a class="post-tag" href="/tags.html#GStreamer">#GStreamer</a></div>
+    </li><li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/gobject%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/2023/11/23/14-GInitiallyUnowned.html">
+          十四、GInitiallyUnowned类型
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Nov 23, 2023</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 3 mins</span>
+      </div>
+      <a class="post-excerpt" href="/gobject%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/2023/11/23/14-GInitiallyUnowned.html">
+        <p>
+        1 GInitiallyUnowned基本概念
+
+一个用于具有初始浮动引用的对象的类型。该对象继承于GObject，除了实例初始化的时候把该对象初始位浮点引用外，其余都和GObject对象一样。
+
+
+  
+    我们在GTK库或者其他库的时候，使用继承 GInitiallyUnowned 的GTK对象，处于浮点状态的时候，可能不能直接解引用。但是 GInitiallyUnowned 对象可以。其他库可能会包装 GInitiallyUnowned 对象。
+  
+  
+    浮点引用状态调用 g_object_ref_sink ，浮点引用状态变成正常引用状态，引用数不变。
+  
+  
+    正常引用状态调用 g_object_ref_sink ，引用数 +1。
+  
+
+
+2 GIni... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags"><a class="post-tag" href="/tags.html#GObject">#GObject</a></div>
+    </li><li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/gstreamer%E6%A0%B8%E5%BF%83%E5%AF%B9%E8%B1%A1/2023/11/22/3-GstObject.html">
+          三、GstObject
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Nov 22, 2023</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 2 mins</span>
+      </div>
+      <a class="post-excerpt" href="/gstreamer%E6%A0%B8%E5%BF%83%E5%AF%B9%E8%B1%A1/2023/11/22/3-GstObject.html">
+        <p>
+        1 GstObject基本概念
+
+GstObject为由GStreamer库填充的对象层次树提供了一个root。它目前是GInitiallyUnowned之上的一个简单封装。它是一个抽象类，不能单独使用（不能被实例化）。
+
+GstObject提供了基本的引用计数、父对象功能和锁定。大多数函数只是针对特殊的GStreamer需求进行了扩展，并且可以在其基类GObject中找到相同的名称（例如，g_object_ref变为gst_object_ref）。
+
+由于GstObject派生自GInitiallyUnowned，它还继承了浮动引用。请注意，诸如gst_bin_add和gst_element_add_pad之类的函数会获取浮动引用的所有权。
+
+与GObject实例相比，GstObje... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags"><a class="post-tag" href="/tags.html#GStreamer">#GStreamer</a></div>
+    </li><li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/c%E8%AF%AD%E8%A8%80/2023/11/22/1-valist%E9%98%9F%E5%8F%AF%E5%8F%98%E5%8F%82%E6%95%B0%E7%9A%84%E5%A4%84%E7%90%86.html">
+          一、valist的使用方法（队可变参数的处理）
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Nov 22, 2023</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 1 min</span>
+      </div>
+      <a class="post-excerpt" href="/c%E8%AF%AD%E8%A8%80/2023/11/22/1-valist%E9%98%9F%E5%8F%AF%E5%8F%98%E5%8F%82%E6%95%B0%E7%9A%84%E5%A4%84%E7%90%86.html">
+        <p>
+        va_list是C语言中解决可变阐述的一组宏，很多不确定输入参数个数的函数，会在函数定义的时候调用##__VA_ARGS__宏变量来表示“…”可变参数，在函数中需要处理这一组可变参数，需要用到va_list相关的宏操作组函数，具体函数介绍如下：
+
+
+  
+    val_list:宏定义了一个指针类型，这个指针类型指向参数列表中的参数
+  
+  
+    void va_start(va_list ap,last_arg):修改了用va_list申明的指针，比如ap，使这个指针指向了不定长阐述列表省略号中的第一个参数
+  
+  
+    type va_arg(va_list ap,type):获取参数列表的下一个参数，并以type类型返回
+  
+  
+    void va_end(... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags"><a class="post-tag" href="/tags.html#C">#C</a></div>
+    </li><li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/gstreamer%E6%A0%B8%E5%BF%83%E5%AF%B9%E8%B1%A1/2023/11/20/2-GstMiniObject.html">
+          二、GstMiniObject
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Nov 20, 2023</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 27 mins</span>
+      </div>
+      <a class="post-excerpt" href="/gstreamer%E6%A0%B8%E5%BF%83%E5%AF%B9%E8%B1%A1/2023/11/20/2-GstMiniObject.html">
+        <p>
+        1 GstMiniObject基本概念
+
+“GstMiniObject” 是一个简单的结构体，可用于实现引用计数类型。
+
+
+  
+    GstMiniObject使用的是 G_DEFINE_BOXED_TYPE 进行的定义。（也就是结构体对象，并没有普通对象的信号，属性等功能），GstMiniObject内部实现了引用计数功能。
+  
+  
+    具体G_DEFINE_BOXED_TYPE可以参考GObject学习笔记
+  
+  
+    因为不是GObject对象，所以不能使用GObject的相关函数，比如常用的 g_object_new, g_object_unref等函数。仅仅是注册一个GType类型。
+  
+
+
+子类将在其结构体中首先包含 “GstMiniObject”，然... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags"><a class="post-tag" href="/tags.html#GStreamer">#GStreamer</a></div>
+    </li><li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/gstreamer%E6%A0%B8%E5%BF%83%E5%AF%B9%E8%B1%A1/2023/11/20/1-GstStructure.html">
+          一、GstStructure
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Nov 20, 2023</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 7 mins</span>
+      </div>
+      <a class="post-excerpt" href="/gstreamer%E6%A0%B8%E5%BF%83%E5%AF%B9%E8%B1%A1/2023/11/20/1-GstStructure.html">
+        <p>
+        1 GstStructure 基本概念
+
+GstStructure 是一组键/值对的集合。键用 GQuarks 表示（GQuarks其实就是字符串，但是字符串和数字一一映射起来，为了字符串使用起来便利），而值可以是任何 GType 类型。
+
+除了键/值对，GstStructure 还有一个名称。名称以字母开头，可以由字母、数字以及”/-_.:”中的任何字符组成。
+
+GstStructure 被用于各种 GStreamer 子系统中，以一种灵活且可扩展的方式存储信息。
+
+GstStructure 没有引用计数，因为它通常是更高级对象的一部分，例如 GstCaps、GstMessage、GstEvent、GstQuery。它提供了一种通过父级的引用计数来实施可变性的方法，可以使用 gst_... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags"><a class="post-tag" href="/tags.html#GStreamer">#GStreamer</a></div>
+    </li><li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/gobject%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/2023/11/20/13-GValue.html">
+          十三、GValue学习笔记
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Nov 20, 2023</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 9 mins</span>
+      </div>
+      <a class="post-excerpt" href="/gobject%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/2023/11/20/13-GValue.html">
+        <p>
+        我第一次学习GValue应该是二零二一年九月九日，那是一段最美的时光。漫山遍野你的脸庞，唯有遗忘是最漫长。那时候刚接触GLib库，我在CSDN中，给这一概念放到了GLib分类中记录，其实是错误的。
+
+GValue 是 GObject 系统中用于通用值存储的结构体。它被设计用来存储各种不同类型的值，包括基本数据类型、对象类型等。也就是说，所有GType类型系统注册的类型，都可以被GValue存储。
+
+GValue 可以看作是一个变量容器，由类型标识符（GType）和类型的特定值组成。
+
+要创建一个未定义的 GValue 结构体，并使用，有以下步骤注意：
+
+
+  
+    只需创建一个零填充的 GValue 结构体即可。(因为该结构体里面有联合体，需要把所有空间置零)
+  
+  
+    ... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags"><a class="post-tag" href="/tags.html#GObject">#GObject</a></div>
+    </li><li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/gobject%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/2023/11/20/12-GBoxed%E7%B1%BB%E5%9E%8B.html">
+          十二、GBoxed类型
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Nov 20, 2023</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 5 mins</span>
+      </div>
+      <a class="post-excerpt" href="/gobject%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/2023/11/20/12-GBoxed%E7%B1%BB%E5%9E%8B.html">
+        <p>
+        学习GStreamer过程中，有很多基本对象是通过 G_TYPE_BOXED 宏进行定义的。所以我们在GObject库学习过程中，很有必要对此做一下总结。
+
+1 结构体封装对象特点
+
+G_DEFINE_BOXED_TYPE` 在 GObject 系统中是一个宏，用于定义新的 “boxed type” 。GObject 的 boxed types 用于处理纯旧数据（POD）结构，这些数据类型如结构体或联合体，并使其与 GObject 类型系统兼容。
+
+定义了 boxed type 后，你可以在 GObject 系统中，例如在 GValue 或信号中，使用这些类型。
+
+
+  
+    这类型对象没有信号，属性，引用计数等GObject具有的特性。
+  
+  
+    GBoxed不区分实例... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags"><a class="post-tag" href="/tags.html#GObject">#GObject</a></div>
+    </li><li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/gobject%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/2023/11/20/11-%E6%8E%A5%E5%8F%A3%E8%A1%A5%E5%85%85.html">
+          十一、接口补充
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Nov 20, 2023</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 8 mins</span>
+      </div>
+      <a class="post-excerpt" href="/gobject%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/2023/11/20/11-%E6%8E%A5%E5%8F%A3%E8%A1%A5%E5%85%85.html">
+        <p>
+        九、接口 已经讲了接口的一些知识，我在这里对接口进行补充一下。
+
+接口的总结不放到第十节讲的原因是，这已经不是一个标准对象的相关声明与定义宏。我这里讲的标准对象是具有类结构体和实例结构体，而且具备引用计数等特性。而接口具有以下特点。
+
+1 接口结构体定义
+
+只有接口结构体定义（结构结构体可以理解成前几章讲的类结构），没有实例结构体，也就是实例结构体就不定义和注册。
+
+/* 接口结构体定义 */
+struct _TComparableInterface {
+    GTypeInterface parent;
+    /* signal */
+    void (*arg_error) (TComparable *self);
+    /* virtual function */
+   ... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags"><a class="post-tag" href="/tags.html#GObject">#GObject</a></div>
+    </li><li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/glib%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/2023/11/20/1-GQuark.html">
+          一、GQuark
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Nov 20, 2023</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 1 min</span>
+      </div>
+      <a class="post-excerpt" href="/glib%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/2023/11/20/1-GQuark.html">
+        <p>
+        1 GQuark概念
+
+Quark 是字符串和整数标识符之间的关联。给定字符串或 GQuark 标识符，可以检索到另一个。
+
+Quark 被用于数据集和键控数据列表。
+
+要从字符串创建一个新的 quark，请使用 g_quark_from_string() 或 g_quark_from_static_string()。
+
+要找到与给定 GQuark 对应的字符串，请使用 g_quark_to_string()。
+
+要找到与给定字符串对应的 GQuark，请使用 g_quark_try_string()。
+
+用于 quark 函数的字符串池的另一个用途是字符串规范化，使用 g_intern_string() 或 g_intern_static_string()。规范化的字符串是字符串的规... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags"><a class="post-tag" href="/tags.html#GLib">#GLib</a></div>
+    </li><li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/gstreamer%E6%A0%B8%E5%BF%83%E5%AF%B9%E8%B1%A1/2023/11/19/GStreamer%E6%A0%B8%E5%BF%83%E5%AF%B9%E8%B1%A1-%E5%89%8D%E8%A8%80.html">
+          GStreamer核心对象-前言
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Nov 19, 2023</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 1 min</span>
+      </div>
+      <a class="post-excerpt" href="/gstreamer%E6%A0%B8%E5%BF%83%E5%AF%B9%E8%B1%A1/2023/11/19/GStreamer%E6%A0%B8%E5%BF%83%E5%AF%B9%E8%B1%A1-%E5%89%8D%E8%A8%80.html">
+        <p>
+        1 GStreamer核心对象如何学习
+
+每一章都是如何布置结构，如何去学习
+
+
+  
+    核心对象基本概念，基本概念基本都来自GStreamer官网开头的前几段。
+  
+  
+    核心对象基本结构。
+
+    
+      
+        核心对象类型注册定义，例如：G_DEFINE_TYPE、G_DEFINE_BOXED_TYPE等等。
+      
+      
+        这一节要包含结构体定义（头文件里面的结构体和源文件里面的结构体），特别要注意非标准GObject对象，可能会通过头文件是对象Public成员，源文件是对象Private成员。标准GObject对象可能会有私有结构体。
+      
+      
+        源文件和头文件中的枚举类型，每种枚... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags"><a class="post-tag" href="/tags.html#GStreamer">#GStreamer</a></div>
+    </li><li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/gobject%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/2023/11/18/10-%E5%A3%B0%E6%98%8E%E5%92%8C%E5%AE%9A%E4%B9%89%E5%AE%8F%E6%80%BB%E7%BB%93.html">
+          十、声明和定义类型宏总结
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Nov 18, 2023</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 7 mins</span>
+      </div>
+      <a class="post-excerpt" href="/gobject%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/2023/11/18/10-%E5%A3%B0%E6%98%8E%E5%92%8C%E5%AE%9A%E4%B9%89%E5%AE%8F%E6%80%BB%E7%BB%93.html">
+        <p>
+        1 G_DEFINE_XX_TYPE
+
+学习GStreamer过程中，代码中用到了一些其他的G_DEFINE_G_DEFINE_XX_TYPE，我在这里补充总结一下。
+
+
+  
+    普通对象 G_DEFINE_TYPE：普通的GObject继承对象。
+  
+  
+    抽象对象 G_DEFINE_ABSTRACT_TYPE：抽象对象不能创建实例。它只能被继承。
+  
+  
+    最终对象 G_DEFINE_FINAL_TYPE：最终对象，没有自己的类结构体成员。
+  
+  
+    接口对象 G_DEFINE_INTERFACE：接口对象可以当做一个抽象类来看待（注册该类型的时候也就仅仅注册了类，并没有注册实例结构体），但是与抽象类不同的是，虚函数可以由任意对象实现。
+  
+ ... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags"><a class="post-tag" href="/tags.html#GObject">#GObject</a></div>
+    </li><li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/gobject%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/2023/11/17/9-%E6%8E%A5%E5%8F%A3.html">
+          九、接口
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Nov 17, 2023</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 44 mins</span>
+      </div>
+      <a class="post-excerpt" href="/gobject%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/2023/11/17/9-%E6%8E%A5%E5%8F%A3.html">
+        <p>
+        接口类似于抽象类。接口定义了虚拟函数，这些函数预期会被另一个可实例化对象中的函数覆盖。
+
+本节提供了一个简单的例子，TComparable。TComparable 是一个接口。它定义了比较的函数，这些函数包括：
+
+
+  
+    t_comparable_cmp(self, other)：它比较 self 和 other。第一个参数 self 是运行 t_comparable_cmp 的实例。第二个参数 other 是另一个实例。这个函数需要在实现了该接口的对象中被覆盖。
+
+    
+      
+        如果 self 等于 other，t_comparable_cmp 返回 0。
+      
+      
+        如果 self 大于 other，t_compar... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags"><a class="post-tag" href="/tags.html#GObject">#GObject</a></div>
+    </li><li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/gobject%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/2023/11/17/8-%E5%AD%90%E7%B1%BB%E6%89%A9%E5%B1%95%E7%88%B6%E7%B1%BB%E7%9A%84%E5%8A%9F%E8%83%BD.html">
+          八、子类扩展父类的功能
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Nov 17, 2023</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 15 mins</span>
+      </div>
+      <a class="post-excerpt" href="/gobject%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/2023/11/17/8-%E5%AD%90%E7%B1%BB%E6%89%A9%E5%B1%95%E7%88%B6%E7%B1%BB%E7%9A%84%E5%8A%9F%E8%83%BD.html">
+        <p>
+        本节的示例是 TNumStr 对象。TNumStr 是 TStr 对象的子类。TNumStr 包含一个字符串及其类型，类型为 t_int、t_double 或 t_none。
+
+
+  
+    t_int：字符串表示一个整数
+  
+  
+    t_double：字符串表示一个双精度（浮点）数
+  
+  
+    t_none：字符串不表示上述两种数字
+  
+
+
+t_int 或 t_double 类型的字符串被称为数字字符串。这不是一个通用术语，仅在本教程中使用。简而言之，数字字符串是表示数字的字符串。例如，”0”、”-100” 和 “123.456” 都是数字字符串。它们是字符串，同时表示数字。
+
+
+  
+    “0” 是一个字符串。它是一个字符数组，其元素是 ‘0’ 和 ‘\0’... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags"><a class="post-tag" href="/tags.html#GObject">#GObject</a></div>
+    </li><li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/gobject%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/2023/11/17/7-%E5%8F%AF%E6%B4%BE%E7%94%9F%E5%92%8C%E9%9D%9E%E6%8A%BD%E8%B1%A1%E7%B1%BB%E5%9E%8B.html">
+          七、可派生和非抽象类型
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Nov 17, 2023</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 13 mins</span>
+      </div>
+      <a class="post-excerpt" href="/gobject%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/2023/11/17/7-%E5%8F%AF%E6%B4%BE%E7%94%9F%E5%92%8C%E9%9D%9E%E6%8A%BD%E8%B1%A1%E7%B1%BB%E5%9E%8B.html">
+        <p>
+          创建非抽象可派生类型比创建抽象类型更常见。本节介绍如何创建非抽象可派生类型对象。派生类型的例子是string的对象。它是TStr。它的子对象是一个数字字符串对象。数字字符串是表示数字的字符串。例如“0”、“-100”、“123.45”。子对象(数字字符串)将在下一节中解释。
+
+我想先写字符串，再写可派生对象。因为TStr是字符串的对象，我们需要小心使用字符串编写程序。
+
+1 字符串和内存管理
+
+  TStr有一个字符串类型的值。它类似于TInt或TDouble，但string比int和double更复杂。在编写TStr程序时，需要注意内存管理，这对于TInt和TDouble来说是不必要的。
+
+1.1 字符串和内存
+
+  String是一个字符数组，以’\0’结束。String不是C... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags"><a class="post-tag" href="/tags.html#GObject">#GObject</a></div>
+    </li><li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/gobject%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/2023/11/17/6-%E5%8F%AF%E6%B4%BE%E7%94%9F%E5%92%8C%E6%8A%BD%E8%B1%A1%E7%B1%BB%E5%9E%8B.html">
+          六、可派生和抽象类型
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Nov 17, 2023</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 34 mins</span>
+      </div>
+      <a class="post-excerpt" href="/gobject%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/2023/11/17/6-%E5%8F%AF%E6%B4%BE%E7%94%9F%E5%92%8C%E6%8A%BD%E8%B1%A1%E7%B1%BB%E5%9E%8B.html">
+        <p>
+        1 可派生类型
+
+这个可派生是声明型宏 G_DECLARE_DERIVABLE_TYPE 声明了一下特性，告诉我们这个对象是可派生，也就是可继承的。声明型宏还有 G_DECLARE_FINAL_TYPE。
+
+有两种类型，final类型和derivable类型。final类型没有任何子对象。derivable有子对象。
+
+这两个对象之间的主要区别是它们的类。final类型对象没有自己的类区域。类的唯一成员是它的父类。
+
+派生对象在类中有自己的区域。该类对其子类开放。
+
+G_DECLARE_DERIVABLE_TYPE 用于声明可派生类型。它像这样写在头文件中:
+
+#define T_TYPE_NUMBER             (t_number_get_type ())
+G_DECL... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags"><a class="post-tag" href="/tags.html#GObject">#GObject</a></div>
+    </li><li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/gobject%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/2023/11/17/5-%E5%B1%9E%E6%80%A7.html">
+          五、属性
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Nov 17, 2023</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 6 mins</span>
+      </div>
+      <a class="post-excerpt" href="/gobject%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/2023/11/17/5-%E5%B1%9E%E6%80%A7.html">
+        <p>
+        1 属性
+
+GObject系统提供属性。属性是由实例保存的值，实例是GObject的后代，它们对其他实例开放。可以通过他们的名字访问他们。
+
+例如，GtkWindow具有”title”、”default-width”、”default-height”等属性。字符串”title”是属性的名称。属性的名称是一个字符串，以字母开头，然后是字母、数字、破折号(‘-‘)或下划线(‘_’)。破折号和下划线用作分隔符，但它们不能混合使用。使用dash比使用underscore更高效。例如，”value”、”double”和”double-value”是正确的属性名。“_value”或“-value”不正确。
+
+属性的值有各种类型。”title”属性的类型是string。”default-width”... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags"><a class="post-tag" href="/tags.html#GObject">#GObject</a></div>
+    </li><li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/gobject%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/2023/11/17/4-%E4%BF%A1%E5%8F%B7.html">
+          四、信号
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Nov 17, 2023</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 17 mins</span>
+      </div>
+      <a class="post-excerpt" href="/gobject%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/2023/11/17/4-%E4%BF%A1%E5%8F%B7.html">
+        <p>
+        1 信号
+  信号提供了对象之间的通信手段。当某些事情发生或完成时，就会发出信号。
+
+编写信号的步骤如下所示：
+
+
+  注册一个信号。信号属于对象，所以注册是在对象的类初始化函数中完成的。
+  编写一个信号处理程序。信号处理程序是在信号发出时调用的函数。
+  连接信号和处理程序。信号连接到g_connect_signal或其族函数的处理程序。
+  发出信号。
+
+
+第一步和第四步是在信号所属的对象上完成的。第三步通常在对象之外完成。
+
+信号的处理过程是复杂的，要解释所有的特征需要很长的时间。本节的内容仅限于编写简单信号的最基本内容，不一定准确。如果您需要准确的信息，请参阅GObject API参考。描述信号有四个部分。
+
+2 信号注册
+
+  本节中的一个例子是在发生除零时发出的信号。首先... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags"><a class="post-tag" href="/tags.html#GObject">#GObject</a></div>
+    </li><li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/gobject%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/2023/11/15/3-%E7%B1%BB%E5%9E%8B%E7%B3%BB%E7%BB%9F%E5%92%8C%E6%B3%A8%E5%86%8C%E6%B5%81%E7%A8%8B.html">
+          三、类型系统和注册流程
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Nov 15, 2023</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 26 mins</span>
+      </div>
+      <a class="post-excerpt" href="/gobject%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/2023/11/15/3-%E7%B1%BB%E5%9E%8B%E7%B3%BB%E7%BB%9F%E5%92%8C%E6%B3%A8%E5%86%8C%E6%B5%81%E7%A8%8B.html">
+        <p>
+        1 类型系统和注册流程
+
+  GObject是一个基类。我们通常不使用GObject本身。因为GObject非常简单，在大多数情况下不足以单独使用。相反，我们使用GObject的子类对象，例如各种GtkWidget。可以说，这种可继承是GObject最重要的特性。本节介绍如何定义GObject的子对象。
+
+2 命令惯例
+
+  本节的一个例子是一个对象表示一个实数。它不是很有用，因为我们已经在C语言中使用了双类型来表示实数。但是，我认为这个例子对于了解定义子对象的技术来说并不是那么糟糕。
+
+  首先，您需要了解命名约定。对象名称由名称空间和名称组成。例如，“GObject”由名称空间“G”和名称“Object”组成。“GtkWidget”由名称空间“Gtk”和名称“Widget”组成。设... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags"><a class="post-tag" href="/tags.html#GObject">#GObject</a></div>
+    </li><li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/gobject%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/2023/11/15/2-GObject.html">
+          二、GObject
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Nov 15, 2023</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 6 mins</span>
+      </div>
+      <a class="post-excerpt" href="/gobject%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/2023/11/15/2-GObject.html">
+        <p>
+        1 类和实例
+
+GObject实例用函数g_object_new创建。GObject不仅仅有实例，也有类。
+
+
+  一个GObject类在第一次访问g_object_new时候创建，只有有一个GObject类存在。
+  GObject实例在任何时候访问g_object_new都会被创建，所以就会创建更多GObject实例。
+
+
+从广义上讲，GObject意味着对象，这个对象包括它的类和实例。在狭义上将，GObject是一个C结构体的定义。
+
+typedef struct _GObject GObject;
+struct _GObject{
+	GTypeInstance g_type_instance;
+	/*&lt; private &gt;*/
+	guint ref_count; /... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags"><a class="post-tag" href="/tags.html#GObject">#GObject</a></div>
+    </li><li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/gobject%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/2023/11/15/1-GObject%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E5%89%8D%E8%A8%80.html">
+          一、GObject学习笔记-前言
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Nov 15, 2023</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 2 mins</span>
+      </div>
+      <a class="post-excerpt" href="/gobject%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/2023/11/15/1-GObject%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E5%89%8D%E8%A8%80.html">
+        <p>
+        1 GObject学习经历
+
+我的GObject系统性学习可以分为两次
+
+
+  
+    第一次是学习参考的是 http://garfileo.is-programmer.com/categories/6934/posts，这部分学习笔记分类名称是GObject学习笔记202109，相关文件在 /assets/GObjectStudy/202109/。该参考文章编写于2012年，现在许多Glib库已经更新了许多内容，而且以链表为例，不便于学习。
+  
+  
+    第二次学习参考的是 https://github.com/ToshioCP/Gobject-tutorial/tree/main，这部分笔记的分类名称是GObject学习笔记，这是目前主要的GObject学习笔记分类，相关文... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags"><a class="post-tag" href="/tags.html#GObject">#GObject</a></div>
+    </li><li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/%E6%97%A5%E4%B9%8B%E6%BC%AB%E5%BD%95/2023/11/10/%E6%90%9C%E7%8B%97%E8%BE%93%E5%85%A5%E6%B3%95%E5%AE%89%E8%A3%85.html">
+          搜狗输入法安装
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Nov 10, 2023</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 1 min</span>
+      </div>
+      <a class="post-excerpt" href="/%E6%97%A5%E4%B9%8B%E6%BC%AB%E5%BD%95/2023/11/10/%E6%90%9C%E7%8B%97%E8%BE%93%E5%85%A5%E6%B3%95%E5%AE%89%E8%A3%85.html">
+        <p>
+        1 安装依赖
+sudo apt install fcitx libqt5qml5 libqt5quick5 libqt5quickwidgets5 qml-module-qtquick2 libgsettings-qt1 -y
+
+
+2 官网下载搜狗输入法
+
+https://shurufa.sogou.com/linux
+
+ <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags"><a class="post-tag" href="/tags.html#日之漫录">#日之漫录</a></div>
+    </li><li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/%E6%97%A5%E4%B9%8B%E6%BC%AB%E5%BD%95/2023/11/10/Ubuntu%E7%BE%8E%E5%8C%96.html">
+          Ubuntu美化
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Nov 10, 2023</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 1 min</span>
+      </div>
+      <a class="post-excerpt" href="/%E6%97%A5%E4%B9%8B%E6%BC%AB%E5%BD%95/2023/11/10/Ubuntu%E7%BE%8E%E5%8C%96.html">
+        <p>
+        1 安装美化工具
+sudo apt-get install gnome-tweaks  // tweak
+sudo apt-get install gnome-shell-extensions  // 扩展
+
+
+22.04 以前版本
+
+sudo apt-get install gnome-tweak-tool  // 优化工具、22.04版本中已被取消
+
+
+22.04 版本
+
+sudo apt install gnome-shell-extension-manager -y
+
+
+如果在网页gnome extension无法设置扩展软件，可以打开gnome-shell-extension-manager设置
+
+2 安装扩展工具
+
+Dash to Dock插件：https://extens... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags"><a class="post-tag" href="/tags.html#日之漫录">#日之漫录</a></div>
+    </li><li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/%E6%97%A5%E4%B9%8B%E6%BC%AB%E5%BD%95/2023/11/10/NVIDIA%E6%98%BE%E5%8D%A1%E5%AE%89%E8%A3%85.html">
+          NVIDIA显卡安装
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Nov 10, 2023</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 1 min</span>
+      </div>
+      <a class="post-excerpt" href="/%E6%97%A5%E4%B9%8B%E6%BC%AB%E5%BD%95/2023/11/10/NVIDIA%E6%98%BE%E5%8D%A1%E5%AE%89%E8%A3%85.html">
+        <p>
+        1 禁用nouveau(nouveau是通用的驱动程序)（必须）
+
+
+  
+    lsmod | grep nouveau 命令查看是否有输出
+  
+  
+    如果有输出， sudo gedit /etc/modprobe.d/blacklist.conf末尾输入：
+
+     blacklist nouveau
+
+ options nouveau modeset=0
+    
+    3.重启后，重新查看lsmod | grep nouveau是否有输出
+  
+
+
+2 安装依赖
+
+sudo apt-get update   #更新软件列表
+ 
+sudo apt-get install g++ gcc make pkg-config libglvnd-dev -y
+
+
+3 安装驱... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags"><a class="post-tag" href="/tags.html#日之漫录">#日之漫录</a></div>
+    </li><li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/%E6%97%A5%E4%B9%8B%E6%BC%AB%E5%BD%95/2023/11/09/github%E4%B8%AA%E4%BA%BA%E4%B8%BB%E9%A1%B5.html">
+          Github个人主页
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Nov 09, 2023</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 3 mins</span>
+      </div>
+      <a class="post-excerpt" href="/%E6%97%A5%E4%B9%8B%E6%BC%AB%E5%BD%95/2023/11/09/github%E4%B8%AA%E4%BA%BA%E4%B8%BB%E9%A1%B5.html">
+        <p>
+        Jekyll是一个简单的，博客感知的静态站点生成器。
+
+你将内容创建为文本文件（Markdown），并将其放到到文件夹中。然后，使用Liquid-enhanced HTML模板构建网站。Jekyll自动将内容和模板联系在一起，生成完全由静态资源组成的网站，它适合上传到任何服务器。
+
+Jekyll恰好是GitHub Pages的引擎，因此你可以在GitHub的服务器上免费托管项目的Jekyll页面/博客/网站。
+
+
+  
+    Ruby：
+Ruby 是一种高级、解释型的编程语言，以其面向对象、灵活和易于使用的特性而闻名。它被广泛用于 Web 开发、自动化脚本、数据处理等领域。
+  
+  
+    Gems：
+在 Ruby 世界中，一个 “gem” 是一个库或应用程序的包装，它包含了代码... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags"><a class="post-tag" href="/tags.html#日之漫录">#日之漫录</a></div>
+    </li><li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/%E6%97%A5%E4%B9%8B%E6%BC%AB%E5%BD%95/2023/11/08/Ubuntu%E6%9B%B4%E6%96%B0%E6%97%B6%E9%97%B4.html">
+          Ubuntu更新时间
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Nov 08, 2023</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 1 min</span>
+      </div>
+      <a class="post-excerpt" href="/%E6%97%A5%E4%B9%8B%E6%BC%AB%E5%BD%95/2023/11/08/Ubuntu%E6%9B%B4%E6%96%B0%E6%97%B6%E9%97%B4.html">
+        <p>
+        sudo apt-get install ntpdate  -y
+
+# 在ubuntu下更新本地时间
+sudo ntpdate time.windows.com
+
+# 将本地时间更新到硬件上
+sudo hwclock --localtime --systohc 
+
+ <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags"><a class="post-tag" href="/tags.html#日之漫录">#日之漫录</a></div>
+    </li><li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/%E6%97%A5%E4%B9%8B%E6%BC%AB%E5%BD%95/2023/11/07/grep_ps_top%E5%91%BD%E4%BB%A4.html">
+          grep、ps、top命令
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Nov 07, 2023</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 4 mins</span>
+      </div>
+      <a class="post-excerpt" href="/%E6%97%A5%E4%B9%8B%E6%BC%AB%E5%BD%95/2023/11/07/grep_ps_top%E5%91%BD%E4%BB%A4.html">
+        <p>
+        1 grep 命令
+
+grep 命令是一个强大的文本搜索工具，它使用正则表达式来搜索文件，并输出匹配的行。它的名字来源于全局正则表达式打印（global regular expression print）的缩写。在 UNIX 和类 UNIX 系统中，grep 被广泛用于各种场景，从简单的文件搜索到管道命令中复杂的数据分析。
+
+1.1 基本语法
+
+grep [选项] [模式] [文件...]
+
+
+
+  
+    [选项]：grep 的行为可以通过选项进行控制，例如 -i（忽略大小写），-v（反转匹配），-r（递归搜索）等。
+  
+  
+    [模式]：这是你想要搜索的文本模式，可以是字符串或正则表达式。
+  
+  
+    [文件…]：这是你想要搜索的一个或多个文件名。如果没有指定文件... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags"><a class="post-tag" href="/tags.html#日之漫录">#日之漫录</a></div>
+    </li><li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/gstreamer%E6%A0%B8%E5%BF%83%E5%AF%B9%E8%B1%A1/2023/11/01/0-Template.html">
+          GStreamer核心对象-Template
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Nov 01, 2023</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 1 min</span>
+      </div>
+      <a class="post-excerpt" href="/gstreamer%E6%A0%B8%E5%BF%83%E5%AF%B9%E8%B1%A1/2023/11/01/0-Template.html">
+        <p>
+        1 GstBuffer基本概念
+
+2 GstBuffer类型结构
+
+2.1 GstBuffer类型注册宏定义
+
+2.2 GstBuffer类型相关枚举
+
+2.3 GstBuffer相关结构体
+
+3 GstBuffer对象相关函数
+ <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags"><a class="post-tag" href="/tags.html#GStreamer">#GStreamer</a></div>
+    </li><li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/%E6%97%A5%E4%B9%8B%E6%BC%AB%E5%BD%95/2023/10/30/Linux%E4%B8%B2%E5%8F%A3%E5%BC%80%E5%8F%91.html">
+          Linux串口开发
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Oct 30, 2023</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 1 min</span>
+      </div>
+      <a class="post-excerpt" href="/%E6%97%A5%E4%B9%8B%E6%BC%AB%E5%BD%95/2023/10/30/Linux%E4%B8%B2%E5%8F%A3%E5%BC%80%E5%8F%91.html">
+        <p>
+        1 Linux串口测试工具
+
+1.1 Linux下命令行串口工具minicom
+
+1.1.1 安装 minicom
+
+sudo apt-get install minicom -s
+
+
+1.1.2 运行 minicom
+
+# -s 参数表示进入配置界面 -c 表示开启彩色显式参数
+sudo minicom -s
+# sudo minicom -s -c on 
+
+
+
+
+
+  
+    Serial port setup： 界面可以配置波特率、数据位停止位等。
+  
+  
+    Screen and keyboard： 可以配置Hex显式
+  
+  
+    Save setup as dfl： 保存配置到dfl文件
+  
+
+
+1.1.3 退出 minicom
+
+运行过程中按下 Ctr... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags"><a class="post-tag" href="/tags.html#日之漫录">#日之漫录</a></div>
+    </li><li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/%E6%97%A5%E4%B9%8B%E6%BC%AB%E5%BD%95/2023/10/30/C%E8%B0%83%E7%94%A8c_plus_plus.html">
+          C调用C++
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Oct 30, 2023</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 1 min</span>
+      </div>
+      <a class="post-excerpt" href="/%E6%97%A5%E4%B9%8B%E6%BC%AB%E5%BD%95/2023/10/30/C%E8%B0%83%E7%94%A8c_plus_plus.html">
+        <p>
+        项目待完成
+
+项目目录 /assets/post/daily/20231030/
+ <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags"><a class="post-tag" href="/tags.html#日之漫录">#日之漫录</a></div>
+    </li><li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/%E6%97%A5%E4%B9%8B%E6%BC%AB%E5%BD%95/2023/10/27/%E8%B0%83%E8%AF%95%E5%B7%A5%E5%85%B7%E5%AD%A6%E4%B9%A0.html">
+          调试工具学习
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Oct 27, 2023</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 1 min</span>
+      </div>
+      <a class="post-excerpt" href="/%E6%97%A5%E4%B9%8B%E6%BC%AB%E5%BD%95/2023/10/27/%E8%B0%83%E8%AF%95%E5%B7%A5%E5%85%B7%E5%AD%A6%E4%B9%A0.html">
+        <p>
+        一般常用的调试工具gdb。
+
+glib库支持DTrace和systemtap追踪，为了更好的开发稳定应用程序，所以学习DTrace和SystemTap。
+
+1 systemtap
+
+SystemTap是一个Linux非常有用的调试（跟踪/探测）工具，常用于Linux内核或者应用程序的信息采集。
+
+比如：获取一个函数里面运行时的变量、调用堆栈，甚至于直接修改变量的值，对诊断性能或功能问题非常有帮助。SystemTap提供非常简单的命令行接口和很简洁的脚本语言，以及非常丰富的tapset和例子。
+
+1.1 用途
+
+
+  
+    定位（内核）函数位置
+  
+  
+    查看函数被调用时的调用堆栈、局部变量、参数
+  
+  
+    查看函数指针变量实际指的是哪个函数
+  
+  
+    ... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags"><a class="post-tag" href="/tags.html#日之漫录">#日之漫录</a></div>
+    </li><li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/%E6%97%A5%E4%B9%8B%E6%BC%AB%E5%BD%95/2023/10/19/meson%E6%9E%84%E5%BB%BA%E7%B3%BB%E7%BB%9F.html">
+          meson构建系统
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Oct 19, 2023</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 1 min</span>
+      </div>
+      <a class="post-excerpt" href="/%E6%97%A5%E4%B9%8B%E6%BC%AB%E5%BD%95/2023/10/19/meson%E6%9E%84%E5%BB%BA%E7%B3%BB%E7%BB%9F.html">
+        <p>
+        由于很多开源软件的构建系统使用的都是meson构建系统，开发者也会要求依赖库的版本。所以有必要详细学习一下meson构建系统，为了自定义依赖库路径。
+
+##
+ <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags"><a class="post-tag" href="/tags.html#日之漫录">#日之漫录</a></div>
+    </li><li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/%E6%97%A5%E4%B9%8B%E6%BC%AB%E5%BD%95/2023/10/19/Linux%E4%B8%ADpkg-config%E7%9A%84%E4%BD%BF%E7%94%A8.html">
+          Linux中pkg-config的使用
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Oct 19, 2023</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 1 min</span>
+      </div>
+      <a class="post-excerpt" href="/%E6%97%A5%E4%B9%8B%E6%BC%AB%E5%BD%95/2023/10/19/Linux%E4%B8%ADpkg-config%E7%9A%84%E4%BD%BF%E7%94%A8.html">
+        <p>
+        meson中的dependency命令使用的是pkg-config命令，学习meson之前，先学习pkg-config。
+
+1 pkg-config简单介绍
+pkg-config在编译应用程序和库的时候作为一个工具来使用。例如你在命令行通过如下命令编译程序时：
+gcc -o test test.c `pkg-config --libs --cflags glib-2.0`
+
+
+pkg-config可以帮助你插入正确的编译选项，而不需要你通过硬编码的方式来找到glib(或其他库）。
+
+--cflags一般用于指定头文件，--libs一般用于指定库文件。
+
+大家应该都知道一般用第三方库的时候，就少不了要使用到第三方的头文件和库文件。我们在编译、链接的时候，必须要指定这些头文件和库文件的位置... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags"><a class="post-tag" href="/tags.html#日之漫录">#日之漫录</a></div>
+    </li><li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/%E6%97%A5%E4%B9%8B%E6%BC%AB%E5%BD%95/2023/10/17/Linux%E5%8A%A8%E6%80%81%E5%BA%93%E8%B7%AF%E5%BE%84.html">
+          Linux动态库路径
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Oct 17, 2023</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 1 min</span>
+      </div>
+      <a class="post-excerpt" href="/%E6%97%A5%E4%B9%8B%E6%BC%AB%E5%BD%95/2023/10/17/Linux%E5%8A%A8%E6%80%81%E5%BA%93%E8%B7%AF%E5%BE%84.html">
+        <p>
+        1 基础知识
+
+变量是计算机系统用于保存可变值的数据类型，我们可以直接通过变量名称来提取到对应的变量值。
+
+在Linux系统中，环境变量是用来定义系统运行环境的一些参数，比如每个用户不同的家目录（HOME）等。
+
+
+  值得一提的是，Linux 系统中环境变量的名称一般都是大写的，这是一种约定俗成的规范。
+
+
+1.1 Linux环境变量详解
+
+查看系统所有环境变量
+
+env
+
+
+查看单个环境变量值
+
+echo $ENVNAME
+# 例如，查看HOME
+echo $HOME
+
+
+设置环境变量的值
+
+ENVNAME=value
+
+
+使用 env 命令，我们可以查看当前系统所有的环境变量，使用 echo 命令，可以查看单个环境变量的值，直接使用 “环境变量名=值” 的形式即可以设置环境变量的... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags"><a class="post-tag" href="/tags.html#日之漫录">#日之漫录</a></div>
+    </li><li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/%E6%97%A5%E4%B9%8B%E6%BC%AB%E5%BD%95/2023/10/10/3.GRUB%E5%90%AF%E5%8A%A8%E5%8A%A0%E8%BD%BD%E5%99%A8%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93.html">
+          三、GRUB 启动加载器问题总结
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Oct 10, 2023</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 1 min</span>
+      </div>
+      <a class="post-excerpt" href="/%E6%97%A5%E4%B9%8B%E6%BC%AB%E5%BD%95/2023/10/10/3.GRUB%E5%90%AF%E5%8A%A8%E5%8A%A0%E8%BD%BD%E5%99%A8%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93.html">
+        <p>
+        GRUB（Grand Unified Bootloader）是一个多操作系统启动程序，它允许用户在计算机启动时从多个不同的操作系统中进行选择。GRUB 是开源项目，是许多基于 Linux 的操作系统，如 Ubuntu、Fedora 和 Debian 等的标准启动加载器。
+
+主要特点
+
+
+  多操作系统支持：
+    
+      允许在单个物理计算机上安装的多个操作系统之间进行选择。
+      例如，如果你的电脑上同时安装了 Windows 和 Linux，GRUB 会在启动时让你选择要启动哪个系统。
+    
+  
+  配置灵活性：
+    
+      提供广泛的配置选项，可通过修改其配置文件（通常是 /boot/grub/grub.cfg）实现。
+      包括改变启动菜单的... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags"><a class="post-tag" href="/tags.html#日之漫录">#日之漫录</a></div>
+    </li><li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/%E6%97%A5%E4%B9%8B%E6%BC%AB%E5%BD%95/2023/10/10/2.%E5%85%B3%E4%BA%8E%E7%94%B5%E8%84%91%E5%AE%89%E8%A3%85%E5%A4%9A%E7%B3%BB%E7%BB%9F.html">
+          二、关于电脑安装多系统
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Oct 10, 2023</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 1 min</span>
+      </div>
+      <a class="post-excerpt" href="/%E6%97%A5%E4%B9%8B%E6%BC%AB%E5%BD%95/2023/10/10/2.%E5%85%B3%E4%BA%8E%E7%94%B5%E8%84%91%E5%AE%89%E8%A3%85%E5%A4%9A%E7%B3%BB%E7%BB%9F.html">
+        <p>
+        1 基础知识
+1.1 分区表
+
+上一节学习了文件系统的相关基本知识,其实就是每个分区的文件系统格式。像适用于windows的NTFS,用于Mac系统的Hfs+,还有用于通用格式的exfat等等。这些我们只需要使用磁盘工具简单的格式化成相应的分区就可以了。它的作用就像是一个盛水的容器。
+
+但如果是在一个大容量硬盘里分了2个区，或者是在硬盘里安装了操作系统，那么就来到了这一节的话题。分区表。
+
+分区表顾名思义，就是记录着硬盘里所有分区信息的文件，它的作用就是告知启动系统，需要加载硬盘的哪块部分。到哪里去找文件。分区表的作用，就像是一个指引你要去拿正确盛水容器的人。
+
+其实，我们在安装系统的时候，经常会手动选择分区格式，其中就有guid和mbr两种，那么guid和mbr格式有什么区别呢，其实... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags"><a class="post-tag" href="/tags.html#日之漫录">#日之漫录</a></div>
+    </li><li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/%E6%97%A5%E4%B9%8B%E6%BC%AB%E5%BD%95/2023/10/10/1.%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F.html">
+          一、文件系统
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Oct 10, 2023</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 1 min</span>
+      </div>
+      <a class="post-excerpt" href="/%E6%97%A5%E4%B9%8B%E6%BC%AB%E5%BD%95/2023/10/10/1.%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F.html">
+        <p>
+        1 背景
+在计算机领域，文件系统是操作系统用来管理和组织计算机储存设备上的文件和目录的一种方法。不同的文件系统有不同的特点和适用场景。
+
+我把小结写到前面。因为小结的内容可能比下面每一部分的阐述更重要。
+
+EXT4是Linux操作系统的默认文件系统。Linux系统可以支持查看ext、ext2、ext3、ext4、xfs、NTFS、FAT（FAT16）、FAT32、exFAT。
+
+NTFS是Windows操作系统的默认文件系统。（Windows系统下不支持查看EXT系统文件）。
+
+2 文件系统
+
+2.1 NTFS
+
+NTFS（New Technology File System）是由微软开发的一种高性能的文件系统。它是Windows操作系统的默认文件系统，提供了许多先进的功能和特性。
+
+... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags"><a class="post-tag" href="/tags.html#日之漫录">#日之漫录</a></div>
+    </li><li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/%E6%97%A5%E4%B9%8B%E6%BC%AB%E5%BD%95/2023/09/21/Ubuntu22.04%E4%BF%AE%E6%94%B9%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95%E8%83%8C%E6%99%AF%E5%9B%BE.html">
+          Ubuntu22.04修改用户登录背景图
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Sep 21, 2023</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 1 min</span>
+      </div>
+      <a class="post-excerpt" href="/%E6%97%A5%E4%B9%8B%E6%BC%AB%E5%BD%95/2023/09/21/Ubuntu22.04%E4%BF%AE%E6%94%B9%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95%E8%83%8C%E6%99%AF%E5%9B%BE.html">
+        <p>
+        
+  我们需要做的第一件事是下载一个 Bash 脚本，它可以帮助我们轻松更改登录屏幕的背景图像。该脚本托管在 GitHub 存储库中，可以使用以下 wget 命令下载。
+    wget -qO - https://github.com/PRATAP-KUMAR/ubuntu-gdm-set-background/archive/main.tar.gz | tar zx --strip-components=1 ubuntu-gdm-set-background-main/ubuntu-gdm-set-background
+    
+  
+  以下软件包是脚本运行所必需的，必须首先安装：
+    sudo apt update
+sudo apt install libglib2.0-d... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags"><a class="post-tag" href="/tags.html#日之漫录">#日之漫录</a></div>
+    </li><li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/%E6%97%A5%E4%B9%8B%E6%BC%AB%E5%BD%95/2023/08/29/C_Plus_Plus%E5%85%B3%E4%BA%8E%E5%91%BD%E5%90%8D%E7%A9%BA%E9%97%B4%E7%9F%A5%E8%AF%86%E7%82%B9.html">
+          C_Plus_Plus关于命名空间知识点
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Aug 29, 2023</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 1 min</span>
+      </div>
+      <a class="post-excerpt" href="/%E6%97%A5%E4%B9%8B%E6%BC%AB%E5%BD%95/2023/08/29/C_Plus_Plus%E5%85%B3%E4%BA%8E%E5%91%BD%E5%90%8D%E7%A9%BA%E9%97%B4%E7%9F%A5%E8%AF%86%E7%82%B9.html">
+        <p>
+        1 命名空间内实现
+namespace NsOne {
+  int a = 1;
+  int func () {
+    std::cout &lt;&lt; a &lt;&lt; std::endl;
+    return 0;
+  }
+}
+
+2 命名空间内定义，外部实现
+namespace NsTwo {
+  extern int var;
+  void func ();
+  class Hi;
+}
+
+
+int NsTwo::var = 2;
+
+class NsTwo::Hi {
+public:
+  /* C++11之后是允许的，在成员变量声明的同时进行初始化 */
+  int a = 1;
+};
+
+void
+NsTwo::func () {
+  std::cout &lt;&lt... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags"><a class="post-tag" href="/tags.html#日之漫录">#日之漫录</a></div>
+    </li><li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/%E6%97%A5%E4%B9%8B%E6%BC%AB%E5%BD%95/2023/08/16/Arm%E6%9E%B6%E6%9E%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5.html">
+          Arm架构基本概念
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Aug 16, 2023</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 1 min</span>
+      </div>
+      <a class="post-excerpt" href="/%E6%97%A5%E4%B9%8B%E6%BC%AB%E5%BD%95/2023/08/16/Arm%E6%9E%B6%E6%9E%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5.html">
+        <p>
+        1 Linux下查询系统架构命令
+uname -m
+
+
+  lieryang@lieryang-desktop:~/Downloads$ uname -m
+
+  aarch64
+
+
+2 ARMv7、ARMv8和ArmV9
+ARMv7架构
+特点： 32位架构，引入了Thumb-2指令集用于提高代码密度。
+
+主要代表核心： Cortex-A7, Cortex-A9, Cortex-A15, Cortex-A17, Cortex-A53, Cortex-A57等。
+
+ARMv8架构
+特点： 64位架构，引入了AArch64指令集用于64位模式，保留了AArch32指令集用于32位模式。
+
+主要代表核心： Cortex-A53, Cortex-A57, Cortex-A72, Cortex-A... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags"><a class="post-tag" href="/tags.html#日之漫录">#日之漫录</a></div>
+    </li><li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/%E6%97%A5%E4%B9%8B%E6%BC%AB%E5%BD%95/2023/06/01/C%E8%AF%AD%E8%A8%80%E7%BC%96%E7%A8%8B%E6%B3%A8%E9%87%8A%E8%A7%84%E8%8C%83.html">
+          C语言编程注释规范
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Jun 01, 2023</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 3 mins</span>
+      </div>
+      <a class="post-excerpt" href="/%E6%97%A5%E4%B9%8B%E6%BC%AB%E5%BD%95/2023/06/01/C%E8%AF%AD%E8%A8%80%E7%BC%96%E7%A8%8B%E6%B3%A8%E9%87%8A%E8%A7%84%E8%8C%83.html">
+        <p>
+        1 说明性文件头部应进行注释
+
+说明性文件(如头文件.h 文件、.inc 文件、.def 文件、编译说明文件.cfg 等)头部应进行注释，注释必须列出：版权说明、版本号、生成日期、作者、内容、功能、与其它文件的关系、修改日志等，头文件的注释中还应有函数功能简要说明。
+
+示例：下面这段头文件的头注释比较标准，当然，并不局限于此格式，但上述信息建议要包含在内。
+
+
+/**
+
+ * Copyright (C), 2020-2099, Lieryng Tech. Co., Ltd.
+
+ * File name:      // 文件名
+
+ * Author:       Version:        Date: // 作者、版本及完成日期
+
+ * Description:    // 用于详... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags"><a class="post-tag" href="/tags.html#日之漫录">#日之漫录</a></div>
+    </li><li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/gobject%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0202109/2021/09/02/9-GObject%E4%BF%A1%E5%8F%B7%E6%9C%BA%E5%88%B6-%E4%BF%A1%E5%8F%B7Accumulator.html">
+          九、GObject信号机制--信号Accumulator
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Sep 02, 2021</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 6 mins</span>
+      </div>
+      <a class="post-excerpt" href="/gobject%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0202109/2021/09/02/9-GObject%E4%BF%A1%E5%8F%B7%E6%9C%BA%E5%88%B6-%E4%BF%A1%E5%8F%B7Accumulator.html">
+        <p>
+        1 类设计
+/* file name : signal-demo.h */
+#ifndef SIGNAL_DEMO_H
+#define SIGNAL_DEMO_H
+
+#include &lt;glib-object.h&gt;
+
+#define SIGNAL_TYPE_DEMO (signal_demo_get_type ())
+#define SIGNAL_DEMO(object) \
+        G_TYPE_CHECK_INSTANCE_CAST ((object), SIGNAL_TYPE_DEMO, SignalDemo)
+#define SIGNAL_IS_DEMO(object) \
+        G_TYPE_CHECK_INSTANCE_TYPE ((objec... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags"><a class="post-tag" href="/tags.html#GObject">#GObject</a></div>
+    </li><li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/gobject%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0202109/2021/09/02/8-GObject%E4%BF%A1%E5%8F%B7%E6%9C%BA%E5%88%B6.html">
+          八、GObject信号机制
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Sep 02, 2021</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 3 mins</span>
+      </div>
+      <a class="post-excerpt" href="/gobject%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0202109/2021/09/02/8-GObject%E4%BF%A1%E5%8F%B7%E6%9C%BA%E5%88%B6.html">
+        <p>
+        1 编写SignalDemo类
+
+/* file name ： signal-demo.h */
+#ifndef SIGNAL_DEMO_H
+#define SIGNAL_DEMO_H
+  
+#include &lt;glib-object.h&gt;
+  
+#define SIGNAL_TYPE_DEMO (signal_demo_get_type ())
+#define SIGNAL_DEMO(object) \
+        G_TYPE_CHECK_INSTANCE_CAST ((object), SIGNAL_TYPE_DEMO, SignalDemo)
+#define SIGNAL_IS_DEMO(object) \
+        G_TYPE_CHECK_INSTAN... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags"><a class="post-tag" href="/tags.html#GObject">#GObject</a></div>
+    </li><li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/gobject%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0202109/2021/09/02/7-GObject%E9%97%AD%E5%8C%85.html">
+          七、GObject闭包
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Sep 02, 2021</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 7 mins</span>
+      </div>
+      <a class="post-excerpt" href="/gobject%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0202109/2021/09/02/7-GObject%E9%97%AD%E5%8C%85.html">
+        <p>
+          闭包：一个函数加上它所访问的所有非局部变量（传入的参数？）
+
+#include &lt;math.h&gt;
+#include &lt;glib-object.h&gt;
+ 
+void
+g_cclosure_user_marshal_INT__VOID_VOID (GClosure     *closure,
+                                        GValue       *return_value G_GNUC_UNUSED,
+                                        guint         n_param_values,
+                                     ... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags"><a class="post-tag" href="/tags.html#GObject">#GObject</a></div>
+    </li><li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/gobject%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0202109/2021/09/01/6-%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0%E4%B8%8E%E9%97%AD%E5%8C%85.html">
+          六、回调函数与闭包
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Sep 01, 2021</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 4 mins</span>
+      </div>
+      <a class="post-excerpt" href="/gobject%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0202109/2021/09/01/6-%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0%E4%B8%8E%E9%97%AD%E5%8C%85.html">
+        <p>
+        1 回调函数
+1.1 C库函数-qsort()
+
+void qsort(void *base, size_t nitems, size_t size, int (*compar)(const void *, const void*))
+
+参数
+
+
+  base – 指向要排序的数组的第一个元素的指针。
+  nitems – 由base指向的数组中元素的个数。
+  size – 数组中每个元素的大小，以字节为单位。
+  compar – 用来比较两个元素的函数。
+
+
+#include&lt;stdio.h&gt;
+#include&lt;stdlib.h&gt;
+#include&lt;string.h&gt;
+
+static int
+str_compare(const void *s1... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags"><a class="post-tag" href="/tags.html#GObject">#GObject</a></div>
+    </li><li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/gobject%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0202109/2021/08/31/5-GObject%E5%AF%B9%E6%8E%A5%E5%8F%A3%E7%9A%84%E6%A8%A1%E6%8B%9F.html">
+          五、GObject对接口的模拟
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Aug 31, 2021</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 5 mins</span>
+      </div>
+      <a class="post-excerpt" href="/gobject%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0202109/2021/08/31/5-GObject%E5%AF%B9%E6%8E%A5%E5%8F%A3%E7%9A%84%E6%A8%A1%E6%8B%9F.html">
+        <p>
+        1 USB接口
+1.1 USB接口头文件
+
+/* file name : my-iusb.h */
+#ifndef MY_IUSB_H
+#define MY_IUSB_H
+  
+#include &lt;glib-object.h&gt;
+  
+#define MY_TYPE_IUSB (my_iusb_get_type ())
+#define MY_IUSB(obj) (G_TYPE_CHECK_INSTANCE_CAST ((obj),MY_TYPE_IUSB, MyIUsb))
+#define MY_IS_IUSB(obj) (G_TYPE_CHECK_INSTANCE_TYPE ((obj), MY_TYPE_IUSB))
+/* 用于MyIUsb接口的实例结构体中取出类结构体指... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags"><a class="post-tag" href="/tags.html#GObject">#GObject</a></div>
+    </li><li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/gobject%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0202109/2021/08/31/4-GObject%E5%AD%90%E7%B1%BB%E7%9A%84%E7%BB%A7%E6%89%BF.html">
+          四、GObject子类的继承
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Aug 31, 2021</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 13 mins</span>
+      </div>
+      <a class="post-excerpt" href="/gobject%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0202109/2021/08/31/4-GObject%E5%AD%90%E7%B1%BB%E7%9A%84%E7%BB%A7%E6%89%BF.html">
+        <p>
+        1 Bibtex文献类的设计
+1.1 Bibtex类头文件
+
+/* file name: my-bibtex.h */
+#ifndef KB_BIBTEX_H
+#define KB_BIBTEX_H
+
+#include&lt;glib-object.h&gt;
+
+#define MY_TYPE_BIBTEX (my_bibtex_get_type())
+#define MY_BIBTEX(object) \
+        G_TYPE_CHECK_INSTANCE_CAST ((object), MY_TYPE_BIBTEX, MyBibtex)
+
+typedef struct _MyBibtex MyBibtex;
+struct _MyBibtex{
+  GObject paren... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags"><a class="post-tag" href="/tags.html#GObject">#GObject</a></div>
+    </li><li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/gobject%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0202109/2021/08/26/3-%E7%A7%81%E6%9C%89%E5%B1%9E%E6%80%A7%E7%9A%84%E6%9F%A5%E7%9C%8B%E4%B8%8E%E8%AE%BE%E7%BD%AE.html">
+          三、GObject私有属性的查看与设置
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Aug 26, 2021</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 6 mins</span>
+      </div>
+      <a class="post-excerpt" href="/gobject%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0202109/2021/08/26/3-%E7%A7%81%E6%9C%89%E5%B1%9E%E6%80%A7%E7%9A%84%E6%9F%A5%E7%9C%8B%E4%B8%8E%E8%AE%BE%E7%BD%AE.html">
+        <p>
+        1.1 类头文件
+
+#ifndef PM_DLIST_H
+#define PM_DLIST_H
+
+#include &lt;glib-object.h&gt;
+
+#define PM_TYPE_DLIST (pm_dlist_get_type ())
+/* 将基类指针类型转换为PMDList类的指针类型 */
+#define PM_DLIST(object) G_TYPE_CHECK_INSTANCE_CAST ((object),\
+                                                      PM_TYPE_DLIST, PMDList)
+
+typedef struct _PMDList PMDList;
+struct  _PMDLis... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags"><a class="post-tag" href="/tags.html#GObject">#GObject</a></div>
+    </li><li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/gobject%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0202109/2021/08/26/2-GObject%E5%AD%90%E7%B1%BB%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%A7%81%E6%9C%89%E5%B1%9E%E6%80%A7%E6%A8%A1%E6%8B%9F.html">
+          二、GObject子类对象的私有属性模拟
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Aug 26, 2021</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 3 mins</span>
+      </div>
+      <a class="post-excerpt" href="/gobject%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0202109/2021/08/26/2-GObject%E5%AD%90%E7%B1%BB%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%A7%81%E6%9C%89%E5%B1%9E%E6%80%A7%E6%A8%A1%E6%8B%9F.html">
+        <p>
+        1.1 PMDList类头文件
+
+/*  file name : pm-dlist.h */
+#ifndef PM_DLIST_H
+#define PM_DLIST_H
+
+#include &lt;glib-object.h&gt;
+
+/**
+  *   通过该宏指向的pm_dlist_get_type函数
+  * 可以获得PMDList类结构体信息和初始化函数
+  * pm_dlist_get_type函数内部的实现由G_DEFINE_TYPE宏实现
+  */
+#define PM_TYPE_DLIST (pm_dlist_get_type ())
+  
+typedef struct _PMDList PMDList;
+struct  _PMDList {
+        GObje... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags"><a class="post-tag" href="/tags.html#GObject">#GObject</a></div>
+    </li><li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/gobject%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0202109/2021/08/26/1-%E4%BD%BF%E7%94%A8GObject%E5%BA%93%E6%A8%A1%E6%8B%9F%E7%B1%BB%E7%9A%84%E5%B0%81%E8%A3%85.html">
+          一、使用GObject库模拟类的封装
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Aug 26, 2021</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 2 mins</span>
+      </div>
+      <a class="post-excerpt" href="/gobject%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0202109/2021/08/26/1-%E4%BD%BF%E7%94%A8GObject%E5%BA%93%E6%A8%A1%E6%8B%9F%E7%B1%BB%E7%9A%84%E5%B0%81%E8%A3%85.html">
+        <p>
+        1 子类结构体
+
+ 本人GObject学习主要参考博客，讲的深入浅出，基本把我学习GStreamer遇见的基于GObject函数将明白了。
+
+1.1 PM_Dlist类的头文件
+
+/* file name : pm-dlist.h */
+#ifndef PM_DLIST_H
+#define PM_DLIST_H
+
+#include&lt;glib-object.h&gt;
+
+/* pm_dlist_get_type 函数的作用就是获取PMDList类的具体结构 */
+#define PM_TYPE_DLIST (pm_dlist_get_type())
+
+typedef struct _PMDListNode PMDListNode;
+struct _PMDListNode{
+  PM... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags"><a class="post-tag" href="/tags.html#GObject">#GObject</a></div>
+    </li></ul>
+
+  <!-- Pagination links --></div>
+</div>
+
+
+  </section>
+  <section class="sidebar" style="margin-left: 15px;">
+    <!-- Get sidebar items -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="common-list">
+  <ul>
+    <li>
+      <a href="/index.html">
+        All<span>82</span>
+      </a>
+    </li>
+
+    
+      <li>
+        <a href="/categories.html#h-CUDA">
+          CUDA <span>1</span>
+        </a>
+      </li>
+    
+      <li>
+        <a href="/categories.html#h-C语言">
+          C语言 <span>2</span>
+        </a>
+      </li>
+    
+      <li>
+        <a href="/categories.html#h-DeepStream">
+          DeepStream <span>1</span>
+        </a>
+      </li>
+    
+      <li>
+        <a href="/categories.html#h-GLib学习笔记">
+          GLib学习笔记 <span>3</span>
+        </a>
+      </li>
+    
+      <li>
+        <a href="/categories.html#h-GObject学习笔记">
+          GObject学习笔记 <span>14</span>
+        </a>
+      </li>
+    
+      <li>
+        <a href="/categories.html#h-GObject学习笔记202109">
+          GObject学习笔记202109 <span>9</span>
+        </a>
+      </li>
+    
+      <li>
+        <a href="/categories.html#h-GStreamer核心对象">
+          GStreamer核心对象 <span>25</span>
+        </a>
+      </li>
+    
+      <li>
+        <a href="/categories.html#h-GStreamer设计">
+          GStreamer设计 <span>2</span>
+        </a>
+      </li>
+    
+      <li>
+        <a href="/categories.html#h-乐理">
+          乐理 <span>3</span>
+        </a>
+      </li>
+    
+      <li>
+        <a href="/categories.html#h-单词">
+          单词 <span>2</span>
+        </a>
+      </li>
+    
+      <li>
+        <a href="/categories.html#h-日之漫录">
+          日之漫录 <span>20</span>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+</section>
+</div>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+    <div class="site-footer-inner"><div>李尓阳工作室 <span class="copyleft">&copy;</span> 2018-2023 Lieryang</div>
+      <div class="footer-col gmail"> E-mail sxlisibo@gmail.com</div>
+      <div>Powered by <a title="Jekyll is a simple, blog-aware, static site
+      generator." href="https://jekyllrb.com/">Jekyll</a> &amp; <a title="Yat, yet
+      another theme." href="https://github.com/jeffreytse/jekyll-theme-yat">Yat Theme</a>.</div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

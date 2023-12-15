@@ -1,0 +1,1045 @@
+<!DOCTYPE html>
+<html><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>二、关于电脑安装多系统 | 李尔阳主页</title>
+<meta name="generator" content="Jekyll v3.9.3" />
+<meta property="og:title" content="二、关于电脑安装多系统" />
+<meta name="author" content="LieryangStack" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="1 基础知识 1.1 分区表" />
+<meta property="og:description" content="1 基础知识 1.1 分区表" />
+<link rel="canonical" href="https://lieryangstack.github.io//%E6%97%A5%E4%B9%8B%E6%BC%AB%E5%BD%95/2023/10/10/2.%E5%85%B3%E4%BA%8E%E7%94%B5%E8%84%91%E5%AE%89%E8%A3%85%E5%A4%9A%E7%B3%BB%E7%BB%9F.html" />
+<meta property="og:url" content="https://lieryangstack.github.io//%E6%97%A5%E4%B9%8B%E6%BC%AB%E5%BD%95/2023/10/10/2.%E5%85%B3%E4%BA%8E%E7%94%B5%E8%84%91%E5%AE%89%E8%A3%85%E5%A4%9A%E7%B3%BB%E7%BB%9F.html" />
+<meta property="og:site_name" content="李尔阳主页" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2023-10-10T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="二、关于电脑安装多系统" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"LieryangStack"},"dateModified":"2023-10-10T00:00:00+00:00","datePublished":"2023-10-10T00:00:00+00:00","description":"1 基础知识 1.1 分区表","headline":"二、关于电脑安装多系统","mainEntityOfPage":{"@type":"WebPage","@id":"https://lieryangstack.github.io//%E6%97%A5%E4%B9%8B%E6%BC%AB%E5%BD%95/2023/10/10/2.%E5%85%B3%E4%BA%8E%E7%94%B5%E8%84%91%E5%AE%89%E8%A3%85%E5%A4%9A%E7%B3%BB%E7%BB%9F.html"},"url":"https://lieryangstack.github.io//%E6%97%A5%E4%B9%8B%E6%BC%AB%E5%BD%95/2023/10/10/2.%E5%85%B3%E4%BA%8E%E7%94%B5%E8%84%91%E5%AE%89%E8%A3%85%E5%A4%9A%E7%B3%BB%E7%BB%9F.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="shortcut icon" type="image/x-icon" href="/lieryang.ico">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-noto-sans@0.0.72/index.min.css">
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <script src="/assets/js/main.js"></script><link type="application/atom+xml" rel="alternate" href="https://lieryangstack.github.io//feed.xml" title="李尔阳主页" /><link rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
+
+<!-- and it's easy to individually load additional languages -->
+<script charset="UTF-8"
+        src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/go.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+// Init highlight js
+document.addEventListener('DOMContentLoaded', function(event) {
+  var els = document.querySelectorAll('pre code')
+
+  function addLangData(block) {
+    var outer = block.parentElement.parentElement.parentElement;
+    var lang = block.getAttribute('data-lang');
+    for (var i = 0; i < outer.classList.length; i++) {
+      var cls = outer.classList[i];
+      if (cls.startsWith('language-')) {
+        lang = cls;
+        break;
+      }
+    }
+    if (!lang) {
+      cls = block.getAttribute('class');
+      lang = cls ? cls.replace('hljs ', '') : '';
+    }
+    if (lang.startsWith('language-')) {
+      lang = lang.substr(9);
+    }
+    block.setAttribute('class', 'hljs ' + lang);
+    block.parentNode.setAttribute('data-lang', lang);
+  }
+
+  function addBadge(block) {
+    var enabled = ('true' || 'true').toLowerCase();
+    if (enabled == 'true') {
+      var pre = block.parentElement;
+      pre.classList.add('badge');
+    }
+  }
+
+  function handle(block) {
+    addLangData(block);
+    addBadge(block)
+    hljs.highlightBlock(block);
+  }
+
+  for (var i = 0; i < els.length; i++) {
+    var el = els[i];
+    handle(el);
+  }
+});
+</script>
+
+<style>
+  /* code language badge */
+  pre.badge::before {
+    content: attr(data-lang);
+    color: #fff;
+    background-color: #ff4e00;
+    padding: 0 .5em;
+    border-radius: 0 2px;
+    text-transform: uppercase;
+    text-align: center;
+    min-width: 32px;
+    display: inline-block;
+    position: absolute;
+    right: 0;
+  }
+
+  /* fix wrong badge display for firefox browser */
+  code > table pre::before {
+    display: none;
+  }
+</style>
+<link href='https://lieryangstack.github.io//assets/css/syntax.css' rel='stylesheet' type='text/css' />
+</head>
+<body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<header class="site-header " role="banner">
+
+  <div class="wrapper">
+    <div class="site-header-inner"><span class="site-brand"><a class="site-brand-inner" rel="author" href="/">
+  <img class="site-favicon" title="李尔阳主页" src="" onerror="this.style.display='none'">
+  李尔阳主页
+</a>
+</span><nav class="site-nav">
+          <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+          <label for="nav-trigger">
+            <span class="menu-icon">
+              <svg viewBox="0 0 18 15" width="18px" height="15px">
+                <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+              </svg>
+            </span>
+          </label>
+
+          <!-- <div class="trigger"><a class="page-link" href="/about.html">关于</a><a class="page-link" href="/archives.html">归档</a><a class="page-link" href="/categories.html">分类</a><a class="page-link" href="/">主页</a><a class="page-link" href="/tags.html">标签</a>
+
+
+
+
+
+
+
+
+
+</div> -->
+
+          <div class="trigger">
+             <a class="page-link" href="/about.html">关于</a>
+            <a class="page-link" href="/categories.html">分类</a>
+            <a class="page-link" href="/archives.html">归档</a>
+            <a class="page-link" href="/tags.html">标签</a>
+            <a class="page-link" href="/assets/index.html">下载</a>
+            <!-- 在这里添加更多的导航项 -->
+          </div>
+          
+
+        </nav></div>
+  </div>
+</header>
+
+<script>
+  function initHeader() {
+    var lastScrollY = getScrollPos().y;
+    var documentElement = document.documentElement;
+
+    function storeScrollData() {
+      var y = getScrollPos().y;var scrollStatus = "";
+
+      if (y <= 0) {
+        scrollStatus = "top";
+      } else if ((window.innerHeight + y) >= document.body.offsetHeight) {
+        scrollStatus = "bottom";
+      } else {
+        var isScrollDown = (y - lastScrollY > 0) ? true : false;
+        scrollStatus = isScrollDown ? "down" : "up";
+      }
+
+      lastScrollY = y;
+      documentElement.setAttribute("data-scroll-status", scrollStatus);
+    }
+
+    window.addEventListener('scroll', function(e) {
+      storeScrollData();
+    });
+
+    storeScrollData();
+  }
+  document.addEventListener('DOMContentLoaded', initHeader);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  function hashLocate(hashValue) {
+    hashValue = hashValue.replace(/^.*#h-/, '');
+    hashValue = decodeURIComponent(hashValue);
+    var element = document.getElementById(hashValue);
+
+    if (!element) {
+      return;
+    }
+
+    var header = document.querySelector('header.site-header');
+    var headerRect = header.getBoundingClientRect();
+    var headerTop = Math.floor(headerRect.top);
+    var headerHeight = Math.floor(headerRect.height);
+    var scrollPos = getScrollPos();
+    var offsetY = element.offsetTop - (headerTop + headerHeight + 20);
+
+    if (offsetY == scrollPos.y) {
+      return;
+    }
+
+    if (headerTop == 0  && offsetY > scrollPos.y) {
+      offsetY += headerHeight + 2;
+    } else if (headerTop < 0  && offsetY < scrollPos.y) {
+      offsetY -= headerHeight - 2;
+    }
+
+    smoothScrollTo(offsetY);
+  }
+
+  // The first event occurred
+  window.addEventListener('load', function(event) {
+    if (window.location.hash) {
+      hashLocate(window.location.hash);
+    }
+  });
+
+  // The first event occurred
+  window.addEventListener('click', function(event) {
+    if (event.target.tagName.toLowerCase() == 'a') {
+      hashLocate(event.target.getAttribute('href'));
+    }
+  });
+</script>
+<div class="theme-toggle">
+  <input type="checkbox" id="theme-switch">
+  <label for="theme-switch">
+    <div class="toggle"></div>
+    <div class="names">
+      <p class="light">Light</p>
+      <p class="dark">Dark</p>
+    </div>
+  </label>
+</div>
+
+
+
+
+<script>
+  (function() {
+    var sw = document.getElementById('theme-switch');
+    var html = document.getElementsByTagName('html')[0];
+    var nightModeOption = ('auto' || 'auto').toLowerCase();
+    var storage = nightModeOption === 'manual'
+        ? localStorage
+        : sessionStorage;
+    var themeData = loadThemeData();
+
+    function saveThemeData(data) {
+      storage.setItem('theme', JSON.stringify(data));
+    }
+
+    function loadThemeData() {
+      var data = storage.getItem('theme');
+      try {
+        data = JSON.parse(data ? data : '');
+      } catch(e) {
+        data = { nightShift: undefined, autoToggleAt: 0 };
+        saveThemeData(data);
+      }
+      return data;
+    }
+
+    function handleThemeToggle(nightShift) {
+      themeData.nightShift = nightShift;
+      saveThemeData(themeData);
+      html.dataset.theme = nightShift ? 'dark' : 'light';
+      setTimeout(function() {
+        sw.checked = nightShift ? true : false;
+      }, 50);
+    }
+
+    function autoThemeToggle() {
+      // Next time point of theme toggle
+      var now = new Date();
+      var toggleAt = new Date();
+      var hours = now.getHours();
+      var nightShift = hours >= 19 || hours <=7;
+
+      if (nightShift) {
+        if (hours > 7) {
+          toggleAt.setDate(toggleAt.getDate() + 1);
+        }
+        toggleAt.setHours(7);
+      } else {
+        toggleAt.setHours(19);
+      }
+
+      toggleAt.setMinutes(0);
+      toggleAt.setSeconds(0);
+      toggleAt.setMilliseconds(0)
+
+      var delay = toggleAt.getTime() - now.getTime();
+
+      // auto toggle theme mode
+      setTimeout(function() {
+        handleThemeToggle(!nightShift);
+      }, delay);
+
+      return {
+        nightShift: nightShift,
+        toggleAt: toggleAt.getTime()
+      };
+    }
+
+    // Listen the theme toggle event
+    sw.addEventListener('change', function(event) {
+      handleThemeToggle(event.target.checked);
+    });
+
+    if (nightModeOption == 'auto') {
+      var data = autoThemeToggle();
+
+      // Toggle theme by local setting
+      if (data.toggleAt > themeData.autoToggleAt) {
+        themeData.autoToggleAt = data.toggleAt;
+        handleThemeToggle(data.nightShift);
+      } else {
+        handleThemeToggle(themeData.nightShift);
+      }
+    } else if (nightModeOption == 'manual') {
+      handleThemeToggle(themeData.nightShift);
+    } else {
+      var nightShift = themeData.nightShift;
+      if (nightShift === undefined) {
+        nightShift = nightModeOption === 'on';
+      }
+      handleThemeToggle(nightShift);
+    }
+  })();
+</script>
+<div id="click-to-top" class="click-to-top">
+  <i class="fa fa-arrow-up"></i>
+</div>
+<script>
+  (function () {
+    const clickToTop = document.getElementById('click-to-top');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 100) {
+        clickToTop.classList.add('show')
+      }else {
+        clickToTop.classList.remove('show')
+      }
+    });
+    clickToTop.addEventListener('click', () => {
+      window.smoothScrollTo(0);
+    });
+  })();
+</script>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <div class="framework">
+  <section class="main">
+
+     <div class="post">
+  <section>
+
+
+
+
+
+
+
+
+
+<header class="post-header">
+  <h1 class="post-title p-name" itemprop="name headline">二、关于电脑安装多系统</h1>
+  <h2 class="post-subtitle"></h2>
+
+  <p class="post-meta">
+    <time class="dt-published" datetime="2023-10-10T00:00:00+00:00" itemprop="datePublished"><i class="fa fa-calendar"></i> Oct 10, 2023
+    </time>
+
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 1 min</span>
+  </p><div class="post-tags"><a class="post-tag" href="/tags.html#日之漫录">#日之漫录</a></div></header>
+<article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+    <div class="post-content e-content" itemprop="articleBody">
+
+      <h2 id="1-基础知识">1 基础知识</h2>
+<h3 id="11-分区表">1.1 分区表</h3>
+
+<p><a href="2023-10-10-1.文件系统.md">上一节</a>学习了文件系统的相关基本知识,其实就是每个分区的文件系统格式。像适用于windows的NTFS,用于Mac系统的Hfs+,还有用于通用格式的exfat等等。这些我们只需要使用磁盘工具简单的格式化成相应的分区就可以了。它的作用就像是一个盛水的容器。</p>
+
+<p>但如果是在一个大容量硬盘里分了2个区，或者是在硬盘里安装了操作系统，那么就来到了这一节的话题。分区表。</p>
+
+<p>分区表顾名思义，就是记录着硬盘里所有分区信息的文件，它的作用就是告知启动系统，需要加载硬盘的哪块部分。到哪里去找文件。分区表的作用，就像是一个指引你要去拿正确盛水容器的人。</p>
+
+<p>其实，我们在安装系统的时候，经常会手动选择分区格式，其中就有guid和mbr两种，那么guid和mbr格式有什么区别呢，其实<a href="https://www.somode.com/winnews/19696.html">他们主要就是启动方式和支持分区的区别</a>。</p>
+
+<blockquote>
+  <p>可以点击上方软连接，查看区别</p>
+</blockquote>
+
+<ul>
+  <li>
+    <p><strong>MBR格式</strong>：MBR（Master Boot Record）分区表是传统的分区表格式，用于BIOS启动的硬盘。MBR分区表支持最多四个主分区，或者三个主分区和一个扩展分区，每个扩展分区可以包含多个逻辑分区。</p>
+
+    <p>MBR的意思是“主引导记录”，是传统分区类型，只支持一个硬盘上最多4个主分区，最大的缺点是不支持2TB以上硬盘容量，而GUID就是新兴的GPT方式，支持的主分区数量没有限制。MBR支持win7版本系统以下的32位和64位，而GUID支持win7版本以上的64位系统。对于MBR需要了解的是，MBR是一个特殊的启动扇区，主要存在于磁盘驱动器开始部分，而且这个扇区包含了已安装的操作系统系统信息，并用一小段代码来启动系统。如果MBR的信息损坏或误删就不能正常启动Windows，这时候就需要找一个引导修复即可。</p>
+  </li>
+  <li>
+    <p><strong>GUID格式</strong>：GPT（GUID Partition Table）分区表：GPT是一种现代的分区表格式，用于UEFI启动的硬盘和较新的计算机系统。它支持更多的分区，具有更大的分区容量，以及更强的数据完整性和安全性。</p>
+
+    <p>GUID（全称：Globally Unique Identifier），是一种由算法生成的二进制长度为128位的数字标识符。GUID主要用于在拥有多个节点、多台计算机的网络或系统中。在理想情况下，任何计算机和计算机集群都不会生成两个相同的GUID。GUID 的总数达到了2^128个，所以随机生成两个相同GUID的可能性非常小，但并不为0。所以，用于生成GUID的算法通常都加入了非随机的参数（如时间），以保证这种重复的情况不会发生。GUID一词有时也专指微软对UUID标准的实现。另外，还有磁盘分区表方案的含义，全局唯一标识分区表是一个实体硬盘的分区表的结构布局的标准。</p>
+
+    <p><img src="/assets/rizhimanlu/20231010/image.png" alt="Alt text" /></p>
+  </li>
+</ul>
+
+<h3 id="12-启动模式">1.2 启动模式</h3>
+<blockquote>
+  <p>在有了文件系统和分区表的基础知识后，就可以讲启动模式的概念了。</p>
+
+  <p>在Legacy启动模式中，硬盘分区格式应该为MBR格式</p>
+
+  <p>在UEFI启动模式中，硬盘分区格式应该为GUID（GPT）格式</p>
+</blockquote>
+
+<p>两种启动模式：
+其中BIOS设置中，有两种让他启动进入系统的方法，分别是为UEFI和Legacey。 如下图：</p>
+
+<p><img src="/assets/rizhimanlu/20231010/image-1.png" alt="Alt text" /></p>
+
+<p>华硕主板里面的CSM支持，CSM支持的含义就是（兼容legacy+MBR启动模式）</p>
+
+<p><img src="/assets/rizhimanlu/20231010/Screenshot%20from%202023-10-13%2010-19-18.png" alt="" /></p>
+
+<p>其中（Legacy）BIOS是传统式的，而UEFI（Unified Extensible Firmware Interface）是后来发展出的可扩展固件接口，与legacy BIOS 相比，UEFI最大的几个区别在于：</p>
+<ul>
+  <li>1.编码99%都是由C语言完成；</li>
+  <li>2.一改之前的中断、硬件端口操作的方法，而采用了Driver/protocol的新方式；</li>
+  <li>3.将不支持X86实模式，而直接采用Flat mode（也就是不能用DOS了，现在有些 EFI 或 UEFI 能用是因为做了兼容，但实际上这部分不属于UEFI的定义了）；</li>
+  <li>4.输出也不再是单纯的二进制code，改为Removable Binary Drivers；</li>
+  <li>5.OS启动不再是调用Int19，而是直接利用protocol/device Path；</li>
+  <li>6.对于第三方的开发，前者基本上做不到，除非参与BIOS的设计，但是还要受到ROM的大小限制，而后者就便利多了。</li>
+  <li>7.弥补BIOS对新硬件的支持不足的问题。</li>
+</ul>
+
+<p><strong>从开机流程看他们的不同：</strong>
+大家都知道Win8系统相对于Win7系统在开机速度上有相当大的提升，这是因为Win8系统为了提升系统性能和对硬件的优化，加入了诸如开机引导及应用预缓存等技术。而其中的UEFI BIOS引导，则能使平台开机更智能，开机速度更快。 让我们来看一下他们的开机到进入系统的区别：</p>
+
+<p>这个是传统的Legacy运行流程：</p>
+
+<p><img src="/assets/rizhimanlu/20231010/image-2.png" alt="Alt text" /></p>
+
+<p>这个是UEFI运行流程：</p>
+
+<p><img src="/assets/rizhimanlu/20231010/image-3.png" alt="Alt text" /></p>
+
+<p>对比采用传统BIOS引导启动方式，UEFI BIOS减少了BIOS自检的步骤，节省了大量的时间，从而加快平台的启动。UEFI只支持64位系统且磁盘分区必须为GPT模式。</p>
+
+<h2 id="2-系统安装">2 系统安装</h2>
+<h3 id="21-window">2.1 Window</h3>
+
+<p>使用<a href="https://www.wepe.cn/">微PE工具箱</a>安装PE系统到U盘（这个PE系统安装ISO比较纯净）</p>
+
+<h3 id="22-ubuntu">2.2 Ubuntu</h3>
+<p>由于我使用的是华硕主板，13Intel处理器，需要关闭VMD模式，否则Ubuntu20.04系统无法识别固态硬盘</p>
+
+<p><img src="/assets/rizhimanlu/20231010/2023-10-13%20170543.png" alt="" /></p>
+
+<p><span style="background-color:pink">最重要的是选择第二项或者第三项安装</span></p>
+
+<p><img src="/assets/rizhimanlu/20231010/2023-10-13%20170553.png" alt="" /></p>
+
+<h4 id="erase-disk-and-install-ubuntu">Erase disk and install Ubuntu</h4>
+
+<p><img src="/assets/rizhimanlu/20231010/Screenshot%20from%202023-10-13%2017-14-34.png" alt="" /></p>
+
+<h4 id="something-else">Something else</h4>
+
+<h2 id="参考">参考</h2>
+
+<p><a href="https://baijiahao.baidu.com/s?id=1741369293945103912">1.guid和mbr格式有什么区别</a></p>
+
+<p><a href="https://baijiahao.baidu.com/s?id=1748833557637845905&amp;wfr=spider&amp;for=pc">2.硬盘上的分区表是什么？分区和分区表一样嘛？</a></p>
+
+<p><a href="https://blog.csdn.net/weixin_44657888/article/details/130482647">3.UEFI与 Legacy BIOS两种启动模式详解</a></p>
+
+
+    </div>
+
+</article>
+<div class="post-nav"><a class="previous" href="/%E6%97%A5%E4%B9%8B%E6%BC%AB%E5%BD%95/2023/10/10/1.%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F.html" title="一、文件系统">一、文件系统</a><a class="next" href="/%E6%97%A5%E4%B9%8B%E6%BC%AB%E5%BD%95/2023/10/10/3.GRUB%E5%90%AF%E5%8A%A8%E5%8A%A0%E8%BD%BD%E5%99%A8%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93.html" title="三、GRUB 启动加载器问题总结">三、GRUB 启动加载器问题总结</a></div><!--<div class="post-related">
+      <div>Related Articles</div>
+      <ul>
+        <li><a class="post-link" href="/gobject%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0202109/2021/08/26/1-%E4%BD%BF%E7%94%A8GObject%E5%BA%93%E6%A8%A1%E6%8B%9F%E7%B1%BB%E7%9A%84%E5%B0%81%E8%A3%85.html" title="三、GRUB 启动加载器问题总结">一、使用GObject库模拟类的封装</a></li><li><a class="post-link" href="/%E6%97%A5%E4%B9%8B%E6%BC%AB%E5%BD%95/2023/06/01/C%E8%AF%AD%E8%A8%80%E7%BC%96%E7%A8%8B%E6%B3%A8%E9%87%8A%E8%A7%84%E8%8C%83.html" title="三、GRUB 启动加载器问题总结">C语言编程注释规范</a></li><li><a class="post-link" href="/gstreamer%E6%A0%B8%E5%BF%83%E5%AF%B9%E8%B1%A1/2023/12/06/21-GstPadTemplate.html" title="三、GRUB 启动加载器问题总结">二十一、GstPadTemplate</a></li><li><a class="post-link" href="/%E5%8D%95%E8%AF%8D/2023/11/28/11%E6%9C%88%E5%8D%95%E8%AF%8D.html" title="三、GRUB 启动加载器问题总结">11月单词</a></li></ul>
+    </div>--><div class="post-related">
+      <div>相关文章</div>
+      <ul><li><a class="post-link" href="/%E6%97%A5%E4%B9%8B%E6%BC%AB%E5%BD%95/2023/12/15/CPU%E6%9E%B6%E6%9E%84.html" title="CPU架构">CPU架构</a></li><li><a class="post-link" href="/%E6%97%A5%E4%B9%8B%E6%BC%AB%E5%BD%95/2023/11/10/NVIDIA%E6%98%BE%E5%8D%A1%E5%AE%89%E8%A3%85.html" title="NVIDIA显卡安装">NVIDIA显卡安装</a></li><li><a class="post-link" href="/%E6%97%A5%E4%B9%8B%E6%BC%AB%E5%BD%95/2023/11/10/Ubuntu%E7%BE%8E%E5%8C%96.html" title="Ubuntu美化">Ubuntu美化</a></li><li><a class="post-link" href="/%E6%97%A5%E4%B9%8B%E6%BC%AB%E5%BD%95/2023/11/10/%E6%90%9C%E7%8B%97%E8%BE%93%E5%85%A5%E6%B3%95%E5%AE%89%E8%A3%85.html" title="搜狗输入法安装">搜狗输入法安装</a></li></ul>
+    </div><div class="post-comments"><div id="disqus_thread"></div>
+<script>
+    /**
+    *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+    *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
+    /*
+    var disqus_config = function () {
+    this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+    this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+    */
+    (function() { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+    s.src = 'https://pzhou-me.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div></section>
+</div>
+
+
+  </section>
+  <section class="sidebar" style="margin-left: 15px;">
+    <!-- Get sidebar items --><style type="text/css" media="screen">
+.post-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.post-menu ul li {
+  margin-bottom: 5px;  /* 增加每个列表项底部的间距 */
+}
+
+.post-menu ul li a {
+  font-size: 16px; /* 设置目录链接的字体大小 */
+}
+
+.post-menu-content {
+  max-height: 600px; /* 设置最大高度 */
+  min-width: 300px;
+  overflow: hidden; /* 默认隐藏滚动条 */
+  white-space: nowrap; /* 水平方向上的内容不换行 */
+}
+
+/* 自定义垂直滚动条的样式 */
+.post-menu-content::-webkit-scrollbar {
+  width: 8px; /* 垂直滚动条的宽度 */
+  height: 8px; /* 水平滚动条的高度 */
+}
+
+/* 自定义垂直滚动条轨道 */
+.post-menu-content::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* 自定义垂直滚动条滑块 */
+.post-menu-content::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* 当鼠标悬停在垂直滚动条滑块上时 */
+.post-menu-content::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* 一级标题样式 */
+.post-menu ul li.h-h2 {
+  margin-left: 0;
+  margin-bottom: 10px;
+}
+
+/* 二级标题样式 */
+.post-menu ul li.h-h3 {
+  margin-left: 20px;
+  margin-bottom: 10px;
+}
+
+/* 三级标题样式 */
+.post-menu ul li.h-h4 {
+  margin-left: 40px;
+  margin-bottom: 10px;
+}
+
+
+</style>
+
+
+
+<div class="post-menu">
+  <div class="post-menu-title">目录</div>
+  <div class="post-menu-content"></div>
+</div>
+
+<script>
+  function generateContent() {
+    var menu = document.querySelector(".post-menu");
+    var menuContent =  menu.querySelector(".post-menu-content");
+    var headings = document.querySelector(".post-content").querySelectorAll("h2, h3, h4, h5, h6");
+
+    // Hide menu when no headings
+    if (headings.length === 0) {
+      return menu.style.display = "none";
+    }
+
+    // Generate post menu
+    var menuHTML = '';
+    for (var i = 0; i < headings.length; i++) {
+      var h = headings[i];
+      menuHTML += (
+        '<li class="h-' + h.tagName.toLowerCase() + '">'
+        + '<a href="#h-' + h.getAttribute('id') + '">' + h.textContent + '</a></li>');
+    }
+
+    menuContent.innerHTML = '<ul>' + menuHTML + '</ul>';
+
+    // The header element
+    var header = document.querySelector('header.site-header');
+
+    function doMenuCollapse(index, over_items) {
+      var items = menuContent.firstChild.children;
+
+      if (over_items == undefined) {
+        over_items = 20;
+      }
+
+      if (items.length < over_items) {
+        return;
+      }
+
+      var activeItem = items[index];
+      var beginItem = activeItem
+      var endItem = activeItem
+      var beginIndex = index;
+      var endIndex = index + 1;
+      while (beginIndex >= 0
+        && !items[beginIndex].classList.contains('h-h2')) {
+        beginIndex -= 1;
+      }
+      while (endIndex < items.length
+        && !items[endIndex].classList.contains('h-h2')) {
+        endIndex += 1;
+      }
+      for (var i = 0; i < beginIndex; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+      for (var i = beginIndex + 1; i < endIndex; i++) {
+        item = items[i]
+        // if (!item.classList.contains('h-h2')) {
+          item.style.display = '';
+        // }
+      }
+      for (var i = endIndex; i < items.length; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+    }
+
+    // Init menu collapsed
+    doMenuCollapse(-1);
+
+    // Active the menu item
+    window.addEventListener('scroll', function (event) {
+      var lastActive = menuContent.querySelector('.active');
+      var changed = true;
+      var activeIndex = -1;
+      for (var i = headings.length - 1; i >= 0; i--) {
+        var h = headings[i];
+        var headingRect = h.getBoundingClientRect();
+        var headerRect = header.getBoundingClientRect();
+        var headerTop = Math.floor(headerRect.top);
+        var headerHeight = Math.floor(headerRect.height);
+        var headerHeight = headerTop + headerHeight + 20;
+        if (headingRect.top <= headerHeight) {
+          var id = 'h-' + h.getAttribute('id');
+          var a = menuContent.querySelector('a[href="#' + id  + '"]');
+          var curActive = a.parentNode;
+          if (curActive) {
+            curActive.classList.add('active');
+            activeIndex = i;
+          }
+          if (lastActive == curActive) {
+            changed = false;
+          }
+          break;
+        }
+      }
+      if (changed) {
+        if (lastActive) {
+          lastActive.classList.remove('active');
+        }
+        doMenuCollapse(activeIndex);
+      }
+      event.preventDefault();
+    });
+  }
+  generateContent();
+</script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const menuContent = document.querySelector('.post-menu-content');
+
+    // 鼠标进入事件
+    menuContent.addEventListener('mouseenter', function() {
+      menuContent.style.overflow = 'auto';
+    });
+
+    // 鼠标离开事件
+    menuContent.addEventListener('mouseleave', function() {
+      menuContent.style.overflow = 'hidden';
+    });
+  });
+</script>
+
+</section>
+</div>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+    <div class="site-footer-inner"><div>李尓阳工作室 <span class="copyleft">&copy;</span> 2018-2023 Lieryang</div>
+      <div class="footer-col gmail"> E-mail sxlisibo@gmail.com</div>
+      <div>Powered by <a title="Jekyll is a simple, blog-aware, static site
+      generator." href="https://jekyllrb.com/">Jekyll</a> &amp; <a title="Yat, yet
+      another theme." href="https://github.com/jeffreytse/jekyll-theme-yat">Yat Theme</a>.</div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

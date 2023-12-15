@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+<html><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>一、文件系统 | 李尔阳主页</title>
+<meta name="generator" content="Jekyll v3.9.3" />
+<meta property="og:title" content="一、文件系统" />
+<meta name="author" content="LieryangStack" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="1 背景 在计算机领域，文件系统是操作系统用来管理和组织计算机储存设备上的文件和目录的一种方法。不同的文件系统有不同的特点和适用场景。" />
+<meta property="og:description" content="1 背景 在计算机领域，文件系统是操作系统用来管理和组织计算机储存设备上的文件和目录的一种方法。不同的文件系统有不同的特点和适用场景。" />
+<link rel="canonical" href="https://lieryangstack.github.io//%E6%97%A5%E4%B9%8B%E6%BC%AB%E5%BD%95/2023/10/10/1.%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F.html" />
+<meta property="og:url" content="https://lieryangstack.github.io//%E6%97%A5%E4%B9%8B%E6%BC%AB%E5%BD%95/2023/10/10/1.%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F.html" />
+<meta property="og:site_name" content="李尔阳主页" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2023-10-10T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="一、文件系统" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"LieryangStack"},"dateModified":"2023-10-10T00:00:00+00:00","datePublished":"2023-10-10T00:00:00+00:00","description":"1 背景 在计算机领域，文件系统是操作系统用来管理和组织计算机储存设备上的文件和目录的一种方法。不同的文件系统有不同的特点和适用场景。","headline":"一、文件系统","mainEntityOfPage":{"@type":"WebPage","@id":"https://lieryangstack.github.io//%E6%97%A5%E4%B9%8B%E6%BC%AB%E5%BD%95/2023/10/10/1.%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F.html"},"url":"https://lieryangstack.github.io//%E6%97%A5%E4%B9%8B%E6%BC%AB%E5%BD%95/2023/10/10/1.%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="shortcut icon" type="image/x-icon" href="/lieryang.ico">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-noto-sans@0.0.72/index.min.css">
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <script src="/assets/js/main.js"></script><link type="application/atom+xml" rel="alternate" href="https://lieryangstack.github.io//feed.xml" title="李尔阳主页" /><link rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
+
+<!-- and it's easy to individually load additional languages -->
+<script charset="UTF-8"
+        src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/go.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+// Init highlight js
+document.addEventListener('DOMContentLoaded', function(event) {
+  var els = document.querySelectorAll('pre code')
+
+  function addLangData(block) {
+    var outer = block.parentElement.parentElement.parentElement;
+    var lang = block.getAttribute('data-lang');
+    for (var i = 0; i < outer.classList.length; i++) {
+      var cls = outer.classList[i];
+      if (cls.startsWith('language-')) {
+        lang = cls;
+        break;
+      }
+    }
+    if (!lang) {
+      cls = block.getAttribute('class');
+      lang = cls ? cls.replace('hljs ', '') : '';
+    }
+    if (lang.startsWith('language-')) {
+      lang = lang.substr(9);
+    }
+    block.setAttribute('class', 'hljs ' + lang);
+    block.parentNode.setAttribute('data-lang', lang);
+  }
+
+  function addBadge(block) {
+    var enabled = ('true' || 'true').toLowerCase();
+    if (enabled == 'true') {
+      var pre = block.parentElement;
+      pre.classList.add('badge');
+    }
+  }
+
+  function handle(block) {
+    addLangData(block);
+    addBadge(block)
+    hljs.highlightBlock(block);
+  }
+
+  for (var i = 0; i < els.length; i++) {
+    var el = els[i];
+    handle(el);
+  }
+});
+</script>
+
+<style>
+  /* code language badge */
+  pre.badge::before {
+    content: attr(data-lang);
+    color: #fff;
+    background-color: #ff4e00;
+    padding: 0 .5em;
+    border-radius: 0 2px;
+    text-transform: uppercase;
+    text-align: center;
+    min-width: 32px;
+    display: inline-block;
+    position: absolute;
+    right: 0;
+  }
+
+  /* fix wrong badge display for firefox browser */
+  code > table pre::before {
+    display: none;
+  }
+</style>
+<link href='https://lieryangstack.github.io//assets/css/syntax.css' rel='stylesheet' type='text/css' />
+</head>
+<body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<header class="site-header " role="banner">
+
+  <div class="wrapper">
+    <div class="site-header-inner"><span class="site-brand"><a class="site-brand-inner" rel="author" href="/">
+  <img class="site-favicon" title="李尔阳主页" src="" onerror="this.style.display='none'">
+  李尔阳主页
+</a>
+</span><nav class="site-nav">
+          <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+          <label for="nav-trigger">
+            <span class="menu-icon">
+              <svg viewBox="0 0 18 15" width="18px" height="15px">
+                <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+              </svg>
+            </span>
+          </label>
+
+          <!-- <div class="trigger"><a class="page-link" href="/about.html">关于</a><a class="page-link" href="/archives.html">归档</a><a class="page-link" href="/categories.html">分类</a><a class="page-link" href="/">主页</a><a class="page-link" href="/tags.html">标签</a>
+
+
+
+
+
+
+
+
+
+</div> -->
+
+          <div class="trigger">
+             <a class="page-link" href="/about.html">关于</a>
+            <a class="page-link" href="/categories.html">分类</a>
+            <a class="page-link" href="/archives.html">归档</a>
+            <a class="page-link" href="/tags.html">标签</a>
+            <a class="page-link" href="/assets/index.html">下载</a>
+            <!-- 在这里添加更多的导航项 -->
+          </div>
+          
+
+        </nav></div>
+  </div>
+</header>
+
+<script>
+  function initHeader() {
+    var lastScrollY = getScrollPos().y;
+    var documentElement = document.documentElement;
+
+    function storeScrollData() {
+      var y = getScrollPos().y;var scrollStatus = "";
+
+      if (y <= 0) {
+        scrollStatus = "top";
+      } else if ((window.innerHeight + y) >= document.body.offsetHeight) {
+        scrollStatus = "bottom";
+      } else {
+        var isScrollDown = (y - lastScrollY > 0) ? true : false;
+        scrollStatus = isScrollDown ? "down" : "up";
+      }
+
+      lastScrollY = y;
+      documentElement.setAttribute("data-scroll-status", scrollStatus);
+    }
+
+    window.addEventListener('scroll', function(e) {
+      storeScrollData();
+    });
+
+    storeScrollData();
+  }
+  document.addEventListener('DOMContentLoaded', initHeader);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  function hashLocate(hashValue) {
+    hashValue = hashValue.replace(/^.*#h-/, '');
+    hashValue = decodeURIComponent(hashValue);
+    var element = document.getElementById(hashValue);
+
+    if (!element) {
+      return;
+    }
+
+    var header = document.querySelector('header.site-header');
+    var headerRect = header.getBoundingClientRect();
+    var headerTop = Math.floor(headerRect.top);
+    var headerHeight = Math.floor(headerRect.height);
+    var scrollPos = getScrollPos();
+    var offsetY = element.offsetTop - (headerTop + headerHeight + 20);
+
+    if (offsetY == scrollPos.y) {
+      return;
+    }
+
+    if (headerTop == 0  && offsetY > scrollPos.y) {
+      offsetY += headerHeight + 2;
+    } else if (headerTop < 0  && offsetY < scrollPos.y) {
+      offsetY -= headerHeight - 2;
+    }
+
+    smoothScrollTo(offsetY);
+  }
+
+  // The first event occurred
+  window.addEventListener('load', function(event) {
+    if (window.location.hash) {
+      hashLocate(window.location.hash);
+    }
+  });
+
+  // The first event occurred
+  window.addEventListener('click', function(event) {
+    if (event.target.tagName.toLowerCase() == 'a') {
+      hashLocate(event.target.getAttribute('href'));
+    }
+  });
+</script>
+<div class="theme-toggle">
+  <input type="checkbox" id="theme-switch">
+  <label for="theme-switch">
+    <div class="toggle"></div>
+    <div class="names">
+      <p class="light">Light</p>
+      <p class="dark">Dark</p>
+    </div>
+  </label>
+</div>
+
+
+
+
+<script>
+  (function() {
+    var sw = document.getElementById('theme-switch');
+    var html = document.getElementsByTagName('html')[0];
+    var nightModeOption = ('auto' || 'auto').toLowerCase();
+    var storage = nightModeOption === 'manual'
+        ? localStorage
+        : sessionStorage;
+    var themeData = loadThemeData();
+
+    function saveThemeData(data) {
+      storage.setItem('theme', JSON.stringify(data));
+    }
+
+    function loadThemeData() {
+      var data = storage.getItem('theme');
+      try {
+        data = JSON.parse(data ? data : '');
+      } catch(e) {
+        data = { nightShift: undefined, autoToggleAt: 0 };
+        saveThemeData(data);
+      }
+      return data;
+    }
+
+    function handleThemeToggle(nightShift) {
+      themeData.nightShift = nightShift;
+      saveThemeData(themeData);
+      html.dataset.theme = nightShift ? 'dark' : 'light';
+      setTimeout(function() {
+        sw.checked = nightShift ? true : false;
+      }, 50);
+    }
+
+    function autoThemeToggle() {
+      // Next time point of theme toggle
+      var now = new Date();
+      var toggleAt = new Date();
+      var hours = now.getHours();
+      var nightShift = hours >= 19 || hours <=7;
+
+      if (nightShift) {
+        if (hours > 7) {
+          toggleAt.setDate(toggleAt.getDate() + 1);
+        }
+        toggleAt.setHours(7);
+      } else {
+        toggleAt.setHours(19);
+      }
+
+      toggleAt.setMinutes(0);
+      toggleAt.setSeconds(0);
+      toggleAt.setMilliseconds(0)
+
+      var delay = toggleAt.getTime() - now.getTime();
+
+      // auto toggle theme mode
+      setTimeout(function() {
+        handleThemeToggle(!nightShift);
+      }, delay);
+
+      return {
+        nightShift: nightShift,
+        toggleAt: toggleAt.getTime()
+      };
+    }
+
+    // Listen the theme toggle event
+    sw.addEventListener('change', function(event) {
+      handleThemeToggle(event.target.checked);
+    });
+
+    if (nightModeOption == 'auto') {
+      var data = autoThemeToggle();
+
+      // Toggle theme by local setting
+      if (data.toggleAt > themeData.autoToggleAt) {
+        themeData.autoToggleAt = data.toggleAt;
+        handleThemeToggle(data.nightShift);
+      } else {
+        handleThemeToggle(themeData.nightShift);
+      }
+    } else if (nightModeOption == 'manual') {
+      handleThemeToggle(themeData.nightShift);
+    } else {
+      var nightShift = themeData.nightShift;
+      if (nightShift === undefined) {
+        nightShift = nightModeOption === 'on';
+      }
+      handleThemeToggle(nightShift);
+    }
+  })();
+</script>
+<div id="click-to-top" class="click-to-top">
+  <i class="fa fa-arrow-up"></i>
+</div>
+<script>
+  (function () {
+    const clickToTop = document.getElementById('click-to-top');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 100) {
+        clickToTop.classList.add('show')
+      }else {
+        clickToTop.classList.remove('show')
+      }
+    });
+    clickToTop.addEventListener('click', () => {
+      window.smoothScrollTo(0);
+    });
+  })();
+</script>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <div class="framework">
+  <section class="main">
+
+     <div class="post">
+  <section>
+
+
+
+
+
+
+
+
+
+<header class="post-header">
+  <h1 class="post-title p-name" itemprop="name headline">一、文件系统</h1>
+  <h2 class="post-subtitle"></h2>
+
+  <p class="post-meta">
+    <time class="dt-published" datetime="2023-10-10T00:00:00+00:00" itemprop="datePublished"><i class="fa fa-calendar"></i> Oct 10, 2023
+    </time>
+
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 1 min</span>
+  </p><div class="post-tags"><a class="post-tag" href="/tags.html#日之漫录">#日之漫录</a></div></header>
+<article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+    <div class="post-content e-content" itemprop="articleBody">
+
+      <h2 id="1-背景">1 背景</h2>
+<p>在计算机领域，文件系统是操作系统用来管理和组织计算机储存设备上的文件和目录的一种方法。不同的文件系统有不同的特点和适用场景。</p>
+
+<p>我把小结写到前面。因为小结的内容可能比下面每一部分的阐述更重要。</p>
+
+<p>EXT4是Linux操作系统的默认文件系统。Linux系统可以支持查看ext、ext2、ext3、ext4、xfs、NTFS、FAT（FAT16）、FAT32、exFAT。</p>
+
+<p>NTFS是Windows操作系统的默认文件系统。（Windows系统下不支持查看EXT系统文件）。</p>
+
+<h2 id="2-文件系统">2 文件系统</h2>
+
+<h3 id="21-ntfs">2.1 NTFS</h3>
+
+<p><strong>NTFS</strong>（New Technology File System）是由微软开发的一种高性能的文件系统。它是<span style="background-color: lightcoral;">Windows操作系统的默认文件系统</span>，提供了许多先进的功能和特性。</p>
+
+<ul>
+  <li>
+    <p><strong>功能特点</strong>：NTFS支持文件和目录的权限控制，可以设置不同用户对文件的访问权限，保护数据的安全性。它还支持文件加密和压缩，可以对文件进行加密，防止未经授权的访问。同时，NTFS还具有容错性，可以通过磁盘镜像和日志功能来保护数据的完整性。</p>
+  </li>
+  <li>
+    <p><strong>使用步骤</strong>：在Windows操作系统中，使用NTFS文件系统非常简单。只需要在格式化磁盘时选择NTFS文件系统即可。如果已经有一个FAT32格式的磁盘，可以通过转换工具将其转换为NTFS格式。</p>
+  </li>
+</ul>
+
+<h3 id="22-fat32">2.2 FAT32</h3>
+
+<p><strong>FAT32</strong>（File Allocation Table 32）是一种较早期的文件系统，最早由微软引入。它的设计简单，兼容性好，适用于小容量存储设备。</p>
+
+<ul>
+  <li>
+    <p><strong>功能特点</strong>：FAT32文件系统支持文件和目录的管理，可以方便地进行文件的读写操作。它的兼容性非常好，几乎可以在所有操作系统中使用。此外，FAT32文件系统对存储设备的要求较低，可以在较小容量的磁盘上使用。</p>
+  </li>
+  <li>
+    <p><strong>使用步骤</strong>：在Windows操作系统中，使用FAT32文件系统也非常简单。只需要在格式化磁盘时选择FAT32文件系统即可。需要注意的是，FAT32文件系统有文件大小限制，<span style="background-color: lightcoral;">单个文件不能超过4GB。</span></p>
+  </li>
+  <li>
+    <p><strong>补充</strong>：<code class="language-plaintext highlighter-rouge">FAT（FAT16）、FAT32、NTFS和exFAT是U盘常见分区格式</code>，一般情况下，U盘格式是FAT和FAT32。
+  随着技术的进步，文件所占内容越来越大，FAT和FAT32格式已经不能满足用户的需求，<code class="language-plaintext highlighter-rouge">越来越多用户选择将U盘格式转为NTFS或exFAT</code>。</p>
+  </li>
+</ul>
+
+<h3 id="23-ext4">2.3 EXT4</h3>
+
+<p><strong>EXT4</strong>（Fourth Extended File System）是<span style="background-color: lightcoral;">Linux操作系统中最常用的文件系统之一</span>。它是EXT文件系统的后继版本，提供了更高的性能和可靠性。</p>
+
+<ul>
+  <li>
+    <p><strong>功能特点</strong>：EXT4文件系统支持文件和目录的管理，具有较高的性能和可靠性。它支持文件的权限控制和日志功能，可以保护数据的安全性和完整性。此外，EXT4文件系统还支持文件的压缩和加密。</p>
+  </li>
+  <li><strong>使用步骤</strong>：在Linux操作系统中，使用EXT4文件系统是默认选择。只需要在格式化磁盘时选择EXT4文件系统即可。如果已经有一个EXT2或EXT3格式的磁盘，可以通过转换工具将其转换为EXT4格式。</li>
+  <li>
+    <p><strong>补充</strong>：</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>EXT3</th>
+          <th>EXT4</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>16TB文件系统和最大2TB文件</td>
+          <td>1EB文件系统和最大16TB文件</td>
+        </tr>
+        <tr>
+          <td>32000个子目录</td>
+          <td>无限数量的子目录</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+</ul>
+
+<h3 id="24-hfs">2.4 HFS+</h3>
+
+<p><strong>HFS+</strong>（Hierarchical File System Plus）是<span style="background-color: lightcoral;">苹果公司开发的一种文件系统，用于Mac操作系统。</span>它是HFS文件系统的改进版本，提供了更好的性能和可靠性。</p>
+
+<ul>
+  <li>
+    <p><strong>功能特点</strong>：HFS+文件系统支持文件和目录的管理，具有较高的性能和可靠性。它支持文件的权限控制和日志功能，可以保护数据的安全性和完整性。此外，HFS+文件系统还支持文件的压缩和加密。</p>
+  </li>
+  <li>
+    <p><strong>使用步骤</strong>：在Mac操作系统中，使用HFS+文件系统是默认选择。只需要在格式化磁盘时选择HFS+文件系统即可。</p>
+  </li>
+</ul>
+
+<h3 id="25-exfat">2.5 exFAT</h3>
+
+<p><strong>exFAT</strong>（Extended File Allocation Table）是微软开发的一种文件系统，用于支持移动设备和闪存存储设备。它是FAT32文件系统的改进版本，提供了更好的性能和可靠性。</p>
+
+<ul>
+  <li>
+    <p><strong>功能特点</strong>：exFAT文件系统支持文件和目录的管理，具有较高的性能和可靠性。它支持较大文件和存储设备的格式化，可以在移动设备和闪存存储设备上使用。此外，exFAT文件系统对存储设备的要求较低。</p>
+  </li>
+  <li>
+    <p><strong>使用步骤</strong>：在Windows和Mac操作系统中，使用exFAT文件系统非常简单。只需要在格式化磁盘时选择exFAT文件系统即可。</p>
+  </li>
+</ul>
+
+<h3 id="26-xfs">2.6 XFS</h3>
+
+<p><strong>XFS</strong>（X File System）是一种高性能的文件系统，最早由SGI（Silicon Graphics Inc.）开发。它主要用于UNIX和Linux操作系统，提供了许多先进的功能和特性。</p>
+
+<ul>
+  <li>
+    <p><strong>功能特点</strong>：XFS文件系统支持文件和目录的管理，具有较高的性能和可靠性。它支持大容量存储设备和大文件，可以在大型服务器上使用。此外，XFS文件系统还具有快速恢复和容错功能。</p>
+  </li>
+  <li>
+    <p><strong>使用步骤</strong>：在Linux操作系统中，使用XFS文件系统非常简单。只需要在格式化磁盘时选择XFS文件系统即可。</p>
+  </li>
+</ul>
+
+<h2 id="参考">参考</h2>
+<p><a href="https://www.sparktry.com/2017/9825.html">1.六种文件系统，详解NTFS、FAT32、EXT4等常见文件系统</a></p>
+
+<p><a href="https://blog.csdn.net/weixin_45264425/article/details/127160215">2.Ext3、Ext4、FAT、FAT32、NTFS、exFAT、Sparse、Raw</a></p>
+
+
+    </div>
+
+</article>
+<div class="post-nav"><a class="previous" href="/%E6%97%A5%E4%B9%8B%E6%BC%AB%E5%BD%95/2023/09/21/Ubuntu22.04%E4%BF%AE%E6%94%B9%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95%E8%83%8C%E6%99%AF%E5%9B%BE.html" title="Ubuntu22.04修改用户登录背景图">Ubuntu22.04修改用户登录背景图</a><a class="next" href="/%E6%97%A5%E4%B9%8B%E6%BC%AB%E5%BD%95/2023/10/10/2.%E5%85%B3%E4%BA%8E%E7%94%B5%E8%84%91%E5%AE%89%E8%A3%85%E5%A4%9A%E7%B3%BB%E7%BB%9F.html" title="二、关于电脑安装多系统">二、关于电脑安装多系统</a></div><!--<div class="post-related">
+      <div>Related Articles</div>
+      <ul>
+        <li><a class="post-link" href="/gstreamer%E6%A0%B8%E5%BF%83%E5%AF%B9%E8%B1%A1/2023/12/01/15-GstTask.html" title="二、关于电脑安装多系统">十五、GstTask</a></li><li><a class="post-link" href="/gstreamer%E8%AE%BE%E8%AE%A1/2023/12/08/1-%E6%8F%92%E4%BB%B6%E7%BC%96%E5%86%99.html" title="二、关于电脑安装多系统">一、插件编写</a></li><li><a class="post-link" href="/gstreamer%E8%AE%BE%E8%AE%A1/2023/12/07/GStreamer%E8%AE%BE%E8%AE%A1-%E5%89%8D%E8%A8%80.html" title="二、关于电脑安装多系统">GStreamer设计-前言</a></li><li><a class="post-link" href="/gstreamer%E6%A0%B8%E5%BF%83%E5%AF%B9%E8%B1%A1/2023/11/26/5-GstMomery.html" title="二、关于电脑安装多系统">五、GstMemory</a></li></ul>
+    </div>--><div class="post-related">
+      <div>相关文章</div>
+      <ul><li><a class="post-link" href="/%E6%97%A5%E4%B9%8B%E6%BC%AB%E5%BD%95/2023/12/15/CPU%E6%9E%B6%E6%9E%84.html" title="CPU架构">CPU架构</a></li><li><a class="post-link" href="/%E6%97%A5%E4%B9%8B%E6%BC%AB%E5%BD%95/2023/11/10/NVIDIA%E6%98%BE%E5%8D%A1%E5%AE%89%E8%A3%85.html" title="NVIDIA显卡安装">NVIDIA显卡安装</a></li><li><a class="post-link" href="/%E6%97%A5%E4%B9%8B%E6%BC%AB%E5%BD%95/2023/11/10/Ubuntu%E7%BE%8E%E5%8C%96.html" title="Ubuntu美化">Ubuntu美化</a></li><li><a class="post-link" href="/%E6%97%A5%E4%B9%8B%E6%BC%AB%E5%BD%95/2023/11/10/%E6%90%9C%E7%8B%97%E8%BE%93%E5%85%A5%E6%B3%95%E5%AE%89%E8%A3%85.html" title="搜狗输入法安装">搜狗输入法安装</a></li></ul>
+    </div><div class="post-comments"><div id="disqus_thread"></div>
+<script>
+    /**
+    *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+    *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
+    /*
+    var disqus_config = function () {
+    this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+    this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+    */
+    (function() { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+    s.src = 'https://pzhou-me.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div></section>
+</div>
+
+
+  </section>
+  <section class="sidebar" style="margin-left: 15px;">
+    <!-- Get sidebar items --><style type="text/css" media="screen">
+.post-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.post-menu ul li {
+  margin-bottom: 5px;  /* 增加每个列表项底部的间距 */
+}
+
+.post-menu ul li a {
+  font-size: 16px; /* 设置目录链接的字体大小 */
+}
+
+.post-menu-content {
+  max-height: 600px; /* 设置最大高度 */
+  min-width: 300px;
+  overflow: hidden; /* 默认隐藏滚动条 */
+  white-space: nowrap; /* 水平方向上的内容不换行 */
+}
+
+/* 自定义垂直滚动条的样式 */
+.post-menu-content::-webkit-scrollbar {
+  width: 8px; /* 垂直滚动条的宽度 */
+  height: 8px; /* 水平滚动条的高度 */
+}
+
+/* 自定义垂直滚动条轨道 */
+.post-menu-content::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* 自定义垂直滚动条滑块 */
+.post-menu-content::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* 当鼠标悬停在垂直滚动条滑块上时 */
+.post-menu-content::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* 一级标题样式 */
+.post-menu ul li.h-h2 {
+  margin-left: 0;
+  margin-bottom: 10px;
+}
+
+/* 二级标题样式 */
+.post-menu ul li.h-h3 {
+  margin-left: 20px;
+  margin-bottom: 10px;
+}
+
+/* 三级标题样式 */
+.post-menu ul li.h-h4 {
+  margin-left: 40px;
+  margin-bottom: 10px;
+}
+
+
+</style>
+
+
+
+<div class="post-menu">
+  <div class="post-menu-title">目录</div>
+  <div class="post-menu-content"></div>
+</div>
+
+<script>
+  function generateContent() {
+    var menu = document.querySelector(".post-menu");
+    var menuContent =  menu.querySelector(".post-menu-content");
+    var headings = document.querySelector(".post-content").querySelectorAll("h2, h3, h4, h5, h6");
+
+    // Hide menu when no headings
+    if (headings.length === 0) {
+      return menu.style.display = "none";
+    }
+
+    // Generate post menu
+    var menuHTML = '';
+    for (var i = 0; i < headings.length; i++) {
+      var h = headings[i];
+      menuHTML += (
+        '<li class="h-' + h.tagName.toLowerCase() + '">'
+        + '<a href="#h-' + h.getAttribute('id') + '">' + h.textContent + '</a></li>');
+    }
+
+    menuContent.innerHTML = '<ul>' + menuHTML + '</ul>';
+
+    // The header element
+    var header = document.querySelector('header.site-header');
+
+    function doMenuCollapse(index, over_items) {
+      var items = menuContent.firstChild.children;
+
+      if (over_items == undefined) {
+        over_items = 20;
+      }
+
+      if (items.length < over_items) {
+        return;
+      }
+
+      var activeItem = items[index];
+      var beginItem = activeItem
+      var endItem = activeItem
+      var beginIndex = index;
+      var endIndex = index + 1;
+      while (beginIndex >= 0
+        && !items[beginIndex].classList.contains('h-h2')) {
+        beginIndex -= 1;
+      }
+      while (endIndex < items.length
+        && !items[endIndex].classList.contains('h-h2')) {
+        endIndex += 1;
+      }
+      for (var i = 0; i < beginIndex; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+      for (var i = beginIndex + 1; i < endIndex; i++) {
+        item = items[i]
+        // if (!item.classList.contains('h-h2')) {
+          item.style.display = '';
+        // }
+      }
+      for (var i = endIndex; i < items.length; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+    }
+
+    // Init menu collapsed
+    doMenuCollapse(-1);
+
+    // Active the menu item
+    window.addEventListener('scroll', function (event) {
+      var lastActive = menuContent.querySelector('.active');
+      var changed = true;
+      var activeIndex = -1;
+      for (var i = headings.length - 1; i >= 0; i--) {
+        var h = headings[i];
+        var headingRect = h.getBoundingClientRect();
+        var headerRect = header.getBoundingClientRect();
+        var headerTop = Math.floor(headerRect.top);
+        var headerHeight = Math.floor(headerRect.height);
+        var headerHeight = headerTop + headerHeight + 20;
+        if (headingRect.top <= headerHeight) {
+          var id = 'h-' + h.getAttribute('id');
+          var a = menuContent.querySelector('a[href="#' + id  + '"]');
+          var curActive = a.parentNode;
+          if (curActive) {
+            curActive.classList.add('active');
+            activeIndex = i;
+          }
+          if (lastActive == curActive) {
+            changed = false;
+          }
+          break;
+        }
+      }
+      if (changed) {
+        if (lastActive) {
+          lastActive.classList.remove('active');
+        }
+        doMenuCollapse(activeIndex);
+      }
+      event.preventDefault();
+    });
+  }
+  generateContent();
+</script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const menuContent = document.querySelector('.post-menu-content');
+
+    // 鼠标进入事件
+    menuContent.addEventListener('mouseenter', function() {
+      menuContent.style.overflow = 'auto';
+    });
+
+    // 鼠标离开事件
+    menuContent.addEventListener('mouseleave', function() {
+      menuContent.style.overflow = 'hidden';
+    });
+  });
+</script>
+
+</section>
+</div>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+    <div class="site-footer-inner"><div>李尓阳工作室 <span class="copyleft">&copy;</span> 2018-2023 Lieryang</div>
+      <div class="footer-col gmail"> E-mail sxlisibo@gmail.com</div>
+      <div>Powered by <a title="Jekyll is a simple, blog-aware, static site
+      generator." href="https://jekyllrb.com/">Jekyll</a> &amp; <a title="Yat, yet
+      another theme." href="https://github.com/jeffreytse/jekyll-theme-yat">Yat Theme</a>.</div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,1288 @@
+<!DOCTYPE html>
+<html><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>十、声明和定义类型宏总结 | 李尔阳主页</title>
+<meta name="generator" content="Jekyll v3.9.3" />
+<meta property="og:title" content="十、声明和定义类型宏总结" />
+<meta name="author" content="LieryangStack" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="1 G_DEFINE_XX_TYPE" />
+<meta property="og:description" content="1 G_DEFINE_XX_TYPE" />
+<link rel="canonical" href="https://lieryangstack.github.io//gobject%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/2023/11/18/10-%E5%A3%B0%E6%98%8E%E5%92%8C%E5%AE%9A%E4%B9%89%E5%AE%8F%E6%80%BB%E7%BB%93.html" />
+<meta property="og:url" content="https://lieryangstack.github.io//gobject%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/2023/11/18/10-%E5%A3%B0%E6%98%8E%E5%92%8C%E5%AE%9A%E4%B9%89%E5%AE%8F%E6%80%BB%E7%BB%93.html" />
+<meta property="og:site_name" content="李尔阳主页" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2023-11-18T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="十、声明和定义类型宏总结" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"LieryangStack"},"dateModified":"2023-11-18T00:00:00+00:00","datePublished":"2023-11-18T00:00:00+00:00","description":"1 G_DEFINE_XX_TYPE","headline":"十、声明和定义类型宏总结","mainEntityOfPage":{"@type":"WebPage","@id":"https://lieryangstack.github.io//gobject%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/2023/11/18/10-%E5%A3%B0%E6%98%8E%E5%92%8C%E5%AE%9A%E4%B9%89%E5%AE%8F%E6%80%BB%E7%BB%93.html"},"url":"https://lieryangstack.github.io//gobject%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/2023/11/18/10-%E5%A3%B0%E6%98%8E%E5%92%8C%E5%AE%9A%E4%B9%89%E5%AE%8F%E6%80%BB%E7%BB%93.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="shortcut icon" type="image/x-icon" href="/lieryang.ico">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-noto-sans@0.0.72/index.min.css">
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <script src="/assets/js/main.js"></script><link type="application/atom+xml" rel="alternate" href="https://lieryangstack.github.io//feed.xml" title="李尔阳主页" /><link rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
+
+<!-- and it's easy to individually load additional languages -->
+<script charset="UTF-8"
+        src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/go.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+// Init highlight js
+document.addEventListener('DOMContentLoaded', function(event) {
+  var els = document.querySelectorAll('pre code')
+
+  function addLangData(block) {
+    var outer = block.parentElement.parentElement.parentElement;
+    var lang = block.getAttribute('data-lang');
+    for (var i = 0; i < outer.classList.length; i++) {
+      var cls = outer.classList[i];
+      if (cls.startsWith('language-')) {
+        lang = cls;
+        break;
+      }
+    }
+    if (!lang) {
+      cls = block.getAttribute('class');
+      lang = cls ? cls.replace('hljs ', '') : '';
+    }
+    if (lang.startsWith('language-')) {
+      lang = lang.substr(9);
+    }
+    block.setAttribute('class', 'hljs ' + lang);
+    block.parentNode.setAttribute('data-lang', lang);
+  }
+
+  function addBadge(block) {
+    var enabled = ('true' || 'true').toLowerCase();
+    if (enabled == 'true') {
+      var pre = block.parentElement;
+      pre.classList.add('badge');
+    }
+  }
+
+  function handle(block) {
+    addLangData(block);
+    addBadge(block)
+    hljs.highlightBlock(block);
+  }
+
+  for (var i = 0; i < els.length; i++) {
+    var el = els[i];
+    handle(el);
+  }
+});
+</script>
+
+<style>
+  /* code language badge */
+  pre.badge::before {
+    content: attr(data-lang);
+    color: #fff;
+    background-color: #ff4e00;
+    padding: 0 .5em;
+    border-radius: 0 2px;
+    text-transform: uppercase;
+    text-align: center;
+    min-width: 32px;
+    display: inline-block;
+    position: absolute;
+    right: 0;
+  }
+
+  /* fix wrong badge display for firefox browser */
+  code > table pre::before {
+    display: none;
+  }
+</style>
+<link href='https://lieryangstack.github.io//assets/css/syntax.css' rel='stylesheet' type='text/css' />
+</head>
+<body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<header class="site-header " role="banner">
+
+  <div class="wrapper">
+    <div class="site-header-inner"><span class="site-brand"><a class="site-brand-inner" rel="author" href="/">
+  <img class="site-favicon" title="李尔阳主页" src="" onerror="this.style.display='none'">
+  李尔阳主页
+</a>
+</span><nav class="site-nav">
+          <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+          <label for="nav-trigger">
+            <span class="menu-icon">
+              <svg viewBox="0 0 18 15" width="18px" height="15px">
+                <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+              </svg>
+            </span>
+          </label>
+
+          <!-- <div class="trigger"><a class="page-link" href="/about.html">关于</a><a class="page-link" href="/archives.html">归档</a><a class="page-link" href="/categories.html">分类</a><a class="page-link" href="/">主页</a><a class="page-link" href="/tags.html">标签</a>
+
+
+
+
+
+
+
+
+
+</div> -->
+
+          <div class="trigger">
+             <a class="page-link" href="/about.html">关于</a>
+            <a class="page-link" href="/categories.html">分类</a>
+            <a class="page-link" href="/archives.html">归档</a>
+            <a class="page-link" href="/tags.html">标签</a>
+            <a class="page-link" href="/assets/index.html">下载</a>
+            <!-- 在这里添加更多的导航项 -->
+          </div>
+          
+
+        </nav></div>
+  </div>
+</header>
+
+<script>
+  function initHeader() {
+    var lastScrollY = getScrollPos().y;
+    var documentElement = document.documentElement;
+
+    function storeScrollData() {
+      var y = getScrollPos().y;var scrollStatus = "";
+
+      if (y <= 0) {
+        scrollStatus = "top";
+      } else if ((window.innerHeight + y) >= document.body.offsetHeight) {
+        scrollStatus = "bottom";
+      } else {
+        var isScrollDown = (y - lastScrollY > 0) ? true : false;
+        scrollStatus = isScrollDown ? "down" : "up";
+      }
+
+      lastScrollY = y;
+      documentElement.setAttribute("data-scroll-status", scrollStatus);
+    }
+
+    window.addEventListener('scroll', function(e) {
+      storeScrollData();
+    });
+
+    storeScrollData();
+  }
+  document.addEventListener('DOMContentLoaded', initHeader);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  function hashLocate(hashValue) {
+    hashValue = hashValue.replace(/^.*#h-/, '');
+    hashValue = decodeURIComponent(hashValue);
+    var element = document.getElementById(hashValue);
+
+    if (!element) {
+      return;
+    }
+
+    var header = document.querySelector('header.site-header');
+    var headerRect = header.getBoundingClientRect();
+    var headerTop = Math.floor(headerRect.top);
+    var headerHeight = Math.floor(headerRect.height);
+    var scrollPos = getScrollPos();
+    var offsetY = element.offsetTop - (headerTop + headerHeight + 20);
+
+    if (offsetY == scrollPos.y) {
+      return;
+    }
+
+    if (headerTop == 0  && offsetY > scrollPos.y) {
+      offsetY += headerHeight + 2;
+    } else if (headerTop < 0  && offsetY < scrollPos.y) {
+      offsetY -= headerHeight - 2;
+    }
+
+    smoothScrollTo(offsetY);
+  }
+
+  // The first event occurred
+  window.addEventListener('load', function(event) {
+    if (window.location.hash) {
+      hashLocate(window.location.hash);
+    }
+  });
+
+  // The first event occurred
+  window.addEventListener('click', function(event) {
+    if (event.target.tagName.toLowerCase() == 'a') {
+      hashLocate(event.target.getAttribute('href'));
+    }
+  });
+</script>
+<div class="theme-toggle">
+  <input type="checkbox" id="theme-switch">
+  <label for="theme-switch">
+    <div class="toggle"></div>
+    <div class="names">
+      <p class="light">Light</p>
+      <p class="dark">Dark</p>
+    </div>
+  </label>
+</div>
+
+
+
+
+<script>
+  (function() {
+    var sw = document.getElementById('theme-switch');
+    var html = document.getElementsByTagName('html')[0];
+    var nightModeOption = ('auto' || 'auto').toLowerCase();
+    var storage = nightModeOption === 'manual'
+        ? localStorage
+        : sessionStorage;
+    var themeData = loadThemeData();
+
+    function saveThemeData(data) {
+      storage.setItem('theme', JSON.stringify(data));
+    }
+
+    function loadThemeData() {
+      var data = storage.getItem('theme');
+      try {
+        data = JSON.parse(data ? data : '');
+      } catch(e) {
+        data = { nightShift: undefined, autoToggleAt: 0 };
+        saveThemeData(data);
+      }
+      return data;
+    }
+
+    function handleThemeToggle(nightShift) {
+      themeData.nightShift = nightShift;
+      saveThemeData(themeData);
+      html.dataset.theme = nightShift ? 'dark' : 'light';
+      setTimeout(function() {
+        sw.checked = nightShift ? true : false;
+      }, 50);
+    }
+
+    function autoThemeToggle() {
+      // Next time point of theme toggle
+      var now = new Date();
+      var toggleAt = new Date();
+      var hours = now.getHours();
+      var nightShift = hours >= 19 || hours <=7;
+
+      if (nightShift) {
+        if (hours > 7) {
+          toggleAt.setDate(toggleAt.getDate() + 1);
+        }
+        toggleAt.setHours(7);
+      } else {
+        toggleAt.setHours(19);
+      }
+
+      toggleAt.setMinutes(0);
+      toggleAt.setSeconds(0);
+      toggleAt.setMilliseconds(0)
+
+      var delay = toggleAt.getTime() - now.getTime();
+
+      // auto toggle theme mode
+      setTimeout(function() {
+        handleThemeToggle(!nightShift);
+      }, delay);
+
+      return {
+        nightShift: nightShift,
+        toggleAt: toggleAt.getTime()
+      };
+    }
+
+    // Listen the theme toggle event
+    sw.addEventListener('change', function(event) {
+      handleThemeToggle(event.target.checked);
+    });
+
+    if (nightModeOption == 'auto') {
+      var data = autoThemeToggle();
+
+      // Toggle theme by local setting
+      if (data.toggleAt > themeData.autoToggleAt) {
+        themeData.autoToggleAt = data.toggleAt;
+        handleThemeToggle(data.nightShift);
+      } else {
+        handleThemeToggle(themeData.nightShift);
+      }
+    } else if (nightModeOption == 'manual') {
+      handleThemeToggle(themeData.nightShift);
+    } else {
+      var nightShift = themeData.nightShift;
+      if (nightShift === undefined) {
+        nightShift = nightModeOption === 'on';
+      }
+      handleThemeToggle(nightShift);
+    }
+  })();
+</script>
+<div id="click-to-top" class="click-to-top">
+  <i class="fa fa-arrow-up"></i>
+</div>
+<script>
+  (function () {
+    const clickToTop = document.getElementById('click-to-top');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 100) {
+        clickToTop.classList.add('show')
+      }else {
+        clickToTop.classList.remove('show')
+      }
+    });
+    clickToTop.addEventListener('click', () => {
+      window.smoothScrollTo(0);
+    });
+  })();
+</script>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <div class="framework">
+  <section class="main">
+
+     <div class="post">
+  <section>
+
+
+
+
+
+
+
+
+
+<header class="post-header">
+  <h1 class="post-title p-name" itemprop="name headline">十、声明和定义类型宏总结</h1>
+  <h2 class="post-subtitle"></h2>
+
+  <p class="post-meta">
+    <time class="dt-published" datetime="2023-11-18T00:00:00+00:00" itemprop="datePublished"><i class="fa fa-calendar"></i> Nov 18, 2023
+    </time>
+
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 7 mins</span>
+  </p><div class="post-tags"><a class="post-tag" href="/tags.html#GObject">#GObject</a></div></header>
+<article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+    <div class="post-content e-content" itemprop="articleBody">
+
+      <h2 id="1-g_define_xx_type">1 G_DEFINE_XX_TYPE</h2>
+
+<p>学习GStreamer过程中，代码中用到了一些其他的G_DEFINE_G_DEFINE_XX_TYPE，我在这里补充总结一下。</p>
+
+<ul>
+  <li>
+    <p><strong>普通对象 G_DEFINE_TYPE</strong>：普通的GObject继承对象。</p>
+  </li>
+  <li>
+    <p><strong>抽象对象 G_DEFINE_ABSTRACT_TYPE</strong>：抽象对象不能创建实例。它只能被继承。</p>
+  </li>
+  <li>
+    <p><strong>最终对象 G_DEFINE_FINAL_TYPE</strong>：最终对象，没有自己的类结构体成员。</p>
+  </li>
+  <li>
+    <p><strong>接口对象 G_DEFINE_INTERFACE</strong>：接口对象可以当做一个抽象类来看待（注册该类型的时候也就仅仅注册了类，并没有注册实例结构体），但是与抽象类不同的是，虚函数可以由任意对象实现。</p>
+  </li>
+  <li>
+    <p><strong>结构体封装对象 G_DEFINE_BOXED_TYPE</strong>：对自定义结构体进行封装，封装成可以注册类型GTYPE系统的对象。已经与GObject对象不同，没有GObject对象的引用，信号，属性等特性。</p>
+  </li>
+</ul>
+
+<h3 id="11-普通对象">1.1 普通对象</h3>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="cp">#define G_DEFINE_TYPE(TN, t_n, T_P)			    G_DEFINE_TYPE_EXTENDED (TN, t_n, T_P, 0, {})
+</span>
+<span class="cp">#define G_DEFINE_TYPE_WITH_CODE(TN, t_n, T_P, _C_)	    _G_DEFINE_TYPE_EXTENDED_BEGIN (TN, t_n, T_P, 0) {_C_;} _G_DEFINE_TYPE_EXTENDED_END()
+</span>
+<span class="cp">#define G_DEFINE_TYPE_WITH_PRIVATE(TN, t_n, T_P)            G_DEFINE_TYPE_EXTENDED (TN, t_n, T_P, 0, G_ADD_PRIVATE (TN))
+</span>
+<span class="cm">/* XX_WITH_CODE的宏其实和直接定义、有私有结构体定义都一样 */</span>
+<span class="cp">#define G_DEFINE_TYPE_EXTENDED(TN, t_n, T_P, _f_, _C_)	    _G_DEFINE_TYPE_EXTENDED_BEGIN (TN, t_n, T_P, _f_) {_C_;} _G_DEFINE_TYPE_EXTENDED_END()
+</span>
+</code></pre></div></div>
+
+<h4 id="111-g_define_type">1.1.1 G_DEFINE_TYPE</h4>
+
+<p>G_DEFINE_TYPE 宏展开参考代码 <a href="/assets/GObjectStudy/202311/10_GObject/example4_G_DEFINE_TYPE.i">/assets/GObjectStudy/202311/10_GObject/example4_G_DEFINE_TYPE.i</a></p>
+
+<p>具体展开和定义那些函数可以参考 <a href="/gobject学习笔记/2023/11/15/3-类型系统和注册流程.html#h-6-g_define_type-宏">6 G_DEFINE_TYPE 宏</a></p>
+
+<ol>
+  <li>
+    <p><strong>声明</strong>实例初始化函数;</p>
+  </li>
+  <li>
+    <p><strong>声明</strong>类初始化函数;</p>
+  </li>
+  <li>
+    <p><strong>定义</strong>t_double_get_type函数（t_double_class_intern_init、t_double_get_type_once函数都是被t_double_get_type函数调用，所有可以把他们合到一起）</p>
+  </li>
+  <li>
+    <p><strong>定义</strong>t_double_get_instance_private函数（使用G_DEFINE_TYPE宏，_get_instance_private该函数内部的TDouble_private_offset变量并没有被赋值）</p>
+
+    <p>只有在 <code class="language-plaintext highlighter-rouge">G_DEFINE_TYPE_WITH_PRIVATE</code> 宏时候使用。</p>
+  </li>
+</ol>
+
+<h4 id="112-g_define_type_with_code">1.1.2 G_DEFINE_TYPE_WITH_CODE</h4>
+
+<p>G_DEFINE_TYPE 宏展开参考代码 <a href="/assets/GObjectStudy/202311/10_GObject/example4_G_DEFINE_TYPE_WITH_CODE%20.i">/assets/GObjectStudy/202311/10_GObject/example4_G_DEFINE_TYPE_WITH_CODE.i</a></p>
+
+<p>  两个声明和两个定义都和 <strong>G_DEFINE_TYPE</strong> 宏一样</p>
+
+<p><span style="color: red;">  唯一不一样的地方就是，t_double_get_type 调用的 t_double_get_type_once 内部可以插入用户自定义要执行的代码。</span></p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">__attribute__</span> <span class="p">((</span><span class="n">__noinline__</span><span class="p">))</span> <span class="k">static</span> <span class="n">GType</span> 
+<span class="nf">t_double_get_type_once</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span> 
+  <span class="n">GType</span> <span class="n">g_define_type_id</span> <span class="o">=</span> <span class="n">g_type_register_static_simple</span> <span class="p">(((</span><span class="n">GType</span><span class="p">)</span> <span class="p">((</span><span class="mi">20</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="mi">2</span><span class="p">))),</span> 
+                                                          <span class="n">g_intern_static_string</span> <span class="p">(</span><span class="s">"TDouble"</span><span class="p">),</span> 
+                                                          <span class="k">sizeof</span> <span class="p">(</span><span class="n">TDoubleClass</span><span class="p">),</span> 
+                                                          <span class="p">(</span><span class="n">GClassInitFunc</span><span class="p">)(</span><span class="kt">void</span> <span class="p">(</span><span class="o">*</span><span class="p">)(</span><span class="kt">void</span><span class="p">))</span> <span class="n">t_double_class_intern_init</span><span class="p">,</span> 
+                                                          <span class="k">sizeof</span> <span class="p">(</span><span class="n">TDouble</span><span class="p">),</span> 
+                                                          <span class="p">(</span><span class="n">GInstanceInitFunc</span><span class="p">)(</span><span class="kt">void</span> <span class="p">(</span><span class="o">*</span><span class="p">)(</span><span class="kt">void</span><span class="p">))</span> <span class="n">t_double_init</span><span class="p">,</span> 
+                                                          <span class="p">(</span><span class="n">GTypeFlags</span><span class="p">)</span> <span class="mi">0</span><span class="p">);</span> 
+  
+  <span class="p">{</span> <span class="p">{</span><span class="n">add</span><span class="p">();}</span> <span class="p">}</span>  <span class="cm">/* 用户自定义插入的代码 */</span>
+  
+  <span class="k">return</span> <span class="n">g_define_type_id</span><span class="p">;</span> 
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h4 id="113-g_define_type_with_private">1.1.3 G_DEFINE_TYPE_WITH_PRIVATE</h4>
+
+<p>G_DEFINE_TYPE 宏展开参考代码 <a href="/assets/GObjectStudy/202311/10_GObject/example4_G_DEFINE_TYPE_WITH_PRIVATE.i">/assets/GObjectStudy/202311/10_GObject/example4_G_DEFINE_TYPE_WITH_PRIVATE.i</a></p>
+
+<p>  两个声明和两个定义都和 <strong>G_DEFINE_TYPE</strong> 宏一样</p>
+
+<p><span style="color: red;">  唯一不一样的地方就是，<strong>t_double_get_type</strong>调用的 <strong>t_double_get_type_once</strong> 内部插入了 <strong>G_ADD_PRIVATE(TDouble)</strong> 宏</span>，该宏展开代码如下：</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">__attribute__</span> <span class="p">((</span><span class="n">__noinline__</span><span class="p">))</span> <span class="k">static</span> <span class="n">GType</span> 
+<span class="nf">t_double_get_type_once</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span> 
+  <span class="n">GType</span> <span class="n">g_define_type_id</span> <span class="o">=</span> <span class="n">g_type_register_static_simple</span> <span class="p">(((</span><span class="n">GType</span><span class="p">)</span> <span class="p">((</span><span class="mi">20</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="mi">2</span><span class="p">))),</span>
+                                                          <span class="n">g_intern_static_string</span> <span class="p">(</span><span class="s">"TDouble"</span><span class="p">),</span> 
+                                                          <span class="k">sizeof</span> <span class="p">(</span><span class="n">TDoubleClass</span><span class="p">),</span> <span class="p">(</span><span class="n">GClassInitFunc</span><span class="p">)(</span><span class="kt">void</span> <span class="p">(</span><span class="o">*</span><span class="p">)(</span><span class="kt">void</span><span class="p">))</span> 
+                                                          <span class="n">t_double_class_intern_init</span><span class="p">,</span> 
+                                                          <span class="k">sizeof</span> <span class="p">(</span><span class="n">TDouble</span><span class="p">),</span> 
+                                                          <span class="p">(</span><span class="n">GInstanceInitFunc</span><span class="p">)(</span><span class="kt">void</span> <span class="p">(</span><span class="o">*</span><span class="p">)(</span><span class="kt">void</span><span class="p">))</span> <span class="n">t_double_init</span><span class="p">,</span> 
+                                                          <span class="p">(</span><span class="n">GTypeFlags</span><span class="p">)</span> <span class="mi">0</span><span class="p">);</span> <span class="p">{</span> 
+    
+    <span class="n">TDouble_private_offset</span> <span class="o">=</span> <span class="n">g_type_add_instance_private</span> <span class="p">(</span><span class="n">g_define_type_id</span><span class="p">,</span> <span class="k">sizeof</span> <span class="p">(</span><span class="n">TDoublePrivate</span><span class="p">));</span> 
+    
+    <span class="p">}</span> 
+    
+    <span class="k">return</span> <span class="n">g_define_type_id</span><span class="p">;</span> 
+    
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>  其实跟 <strong>G_DEFINE_TYPE_WITH_CODE</strong> 一样，只不过 <strong>_WITH_CODE</strong>宏是用户自己插入代码，而 <strong>_WITH_PRIVATE</strong> 宏是插入 <strong>G_ADD_PRIVATE(TDouble)</strong></p>
+
+<h3 id="12-抽象对象">1.2 抽象对象</h3>
+
+<p>普通对象定义讲明白之后，抽象对象定义也很容易理解。</p>
+
+<p><span style="color: red;">抽象对象不能创建实例</span>，展开抽象对象定义宏后，与 G_DEFINE_TYPE 唯一不同的地方就是 t_double_get_type_once 函数中的 GTypeFlags变量的参数是 <strong>G_TYPE_FLAG_ABSTRACT</strong>。</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">typedef</span> <span class="k">enum</span>    <span class="cm">/*&lt; skip &gt;*/</span>
+<span class="p">{</span>
+  <span class="n">G_TYPE_FLAG_NONE</span> <span class="n">GOBJECT_AVAILABLE_ENUMERATOR_IN_2_74</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="n">G_TYPE_FLAG_ABSTRACT</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">4</span><span class="p">),</span>
+  <span class="n">G_TYPE_FLAG_VALUE_ABSTRACT</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">5</span><span class="p">),</span>
+  <span class="n">G_TYPE_FLAG_FINAL</span> <span class="n">GOBJECT_AVAILABLE_ENUMERATOR_IN_2_70</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">6</span><span class="p">),</span>
+  <span class="n">G_TYPE_FLAG_DEPRECATED</span> <span class="n">GOBJECT_AVAILABLE_ENUMERATOR_IN_2_76</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">7</span><span class="p">)</span>
+<span class="p">}</span> <span class="n">GTypeFlags</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>例如：抽象对象一般作为一个基类（比如实现 整形数字对象、小数数学对象，可以把数字作为一个抽象对象）</p>
+
+<h4 id="121-g_define_abstract_type">1.2.1 G_DEFINE_ABSTRACT_TYPE</h4>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#define G_DEFINE_TYPE(TN, t_n, T_P)			    G_DEFINE_TYPE_EXTENDED (TN, t_n, T_P, 0, {})
+</span>
+<span class="cp">#define G_DEFINE_ABSTRACT_TYPE(TN, t_n, T_P)		    G_DEFINE_TYPE_EXTENDED (TN, t_n, T_P, G_TYPE_FLAG_ABSTRACT, {})
+</span></code></pre></div></div>
+
+<p>前面已经讲过了 <code class="language-plaintext highlighter-rouge">G_DEFINE_TYPE</code> 的展开，这里可以通过两个宏的第一次展开，可以看到仅仅flag不一样</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">__attribute__</span> <span class="p">((</span><span class="n">__noinline__</span><span class="p">))</span> <span class="k">static</span> <span class="n">GType</span> 
+<span class="nf">t_double_get_type_once</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span> 
+  <span class="n">GType</span> <span class="n">g_define_type_id</span> <span class="o">=</span> <span class="n">g_type_register_static_simple</span> <span class="p">(((</span><span class="n">GType</span><span class="p">)</span> <span class="p">((</span><span class="mi">20</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="mi">2</span><span class="p">))),</span> 
+                                                          <span class="n">g_intern_static_string</span> <span class="p">(</span><span class="s">"TDouble"</span><span class="p">),</span> 
+                                                          <span class="k">sizeof</span> <span class="p">(</span><span class="n">TDoubleClass</span><span class="p">),</span> 
+                                                          <span class="p">(</span><span class="n">GClassInitFunc</span><span class="p">)(</span><span class="kt">void</span> <span class="p">(</span><span class="o">*</span><span class="p">)(</span><span class="kt">void</span><span class="p">))</span> <span class="n">t_double_class_intern_init</span><span class="p">,</span> 
+                                                          <span class="k">sizeof</span> <span class="p">(</span><span class="n">TDouble</span><span class="p">),</span> 
+                                                          <span class="p">(</span><span class="n">GInstanceInitFunc</span><span class="p">)(</span><span class="kt">void</span> <span class="p">(</span><span class="o">*</span><span class="p">)(</span><span class="kt">void</span><span class="p">))</span> <span class="n">t_double_init</span><span class="p">,</span> 
+                                                          <span class="p">(</span><span class="n">GTypeFlags</span><span class="p">)</span> <span class="n">G_TYPE_FLAG_ABSTRACT</span><span class="p">);</span> 
+  
+  <span class="p">{</span> <span class="p">{</span> <span class="p">{};</span> <span class="p">}</span> <span class="p">}</span>  <span class="cm">/* 用户自定义插入的代码地方，也就是宏最后那一对花括号 */</span>
+  
+  <span class="k">return</span> <span class="n">g_define_type_id</span><span class="p">;</span> 
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h4 id="122-g_define_abstract_type_with_code">1.2.2 G_DEFINE_ABSTRACT_TYPE_WITH_CODE</h4>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#define G_DEFINE_TYPE_WITH_CODE(TN, t_n, T_P, _C_)	    _G_DEFINE_TYPE_EXTENDED_BEGIN (TN, t_n, T_P, 0) {_C_;} _G_DEFINE_TYPE_EXTENDED_END()
+</span>
+<span class="cp">#define G_DEFINE_ABSTRACT_TYPE_WITH_CODE(TN, t_n, T_P, _C_) _G_DEFINE_TYPE_EXTENDED_BEGIN (TN, t_n, T_P, G_TYPE_FLAG_ABSTRACT) {_C_;} _G_DEFINE_TYPE_EXTENDED_END()
+</span></code></pre></div></div>
+
+<h4 id="123-g_define_abstract_type_with_private">1.2.3 G_DEFINE_ABSTRACT_TYPE_WITH_PRIVATE</h4>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="cp">#define G_DEFINE_TYPE_WITH_PRIVATE(TN, t_n, T_P)            G_DEFINE_TYPE_EXTENDED (TN, t_n, T_P, 0, G_ADD_PRIVATE (TN))
+</span>
+<span class="cp">#define G_DEFINE_ABSTRACT_TYPE_WITH_PRIVATE(TN, t_n, T_P)   G_DEFINE_TYPE_EXTENDED (TN, t_n, T_P, G_TYPE_FLAG_ABSTRACT, G_ADD_PRIVATE (TN))
+</span></code></pre></div></div>
+
+<h3 id="13-最终对象">1.3 最终对象</h3>
+
+<p><span style="color: red;">最终对象不能被继承</span>，展开最终对象定义宏后，与 G_DEFINE_TYPE 唯一不同的地方就是 t_double_get_type_once 函数中的 GTypeFlags变量的参数是 <strong>G_TYPE_FLAG_FINAL</strong>。</p>
+
+<p>一个final类型对象不需要有自己的类结构体成员。</p>
+
+<h4 id="131-g_define_final_type">1.3.1 G_DEFINE_FINAL_TYPE</h4>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#define G_DEFINE_FINAL_TYPE(TN, t_n, T_P)    G_DEFINE_TYPE_EXTENDED (TN, t_n, T_P, G_TYPE_FLAG_FINAL, {}) GOBJECT_AVAILABLE_MACRO_IN_2_70
+</span></code></pre></div></div>
+
+<h4 id="132-g_define_final_type_with_code">1.3.2 G_DEFINE_FINAL_TYPE_WITH_CODE</h4>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#define G_DEFINE_FINAL_TYPE_WITH_CODE(TN, t_n, T_P, _C_)  _G_DEFINE_TYPE_EXTENDED_BEGIN (TN, t_n, T_P, G_TYPE_FLAG_FINAL) {_C_;} _G_DEFINE_TYPE_EXTENDED_END() GOBJECT_AVAILABLE_MACRO_IN_2_70
+</span></code></pre></div></div>
+
+<h4 id="133-g_define_final_type_with_private">1.3.3 G_DEFINE_FINAL_TYPE_WITH_PRIVATE</h4>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#define G_DEFINE_FINAL_TYPE_WITH_PRIVATE(TN, t_n, T_P)  G_DEFINE_TYPE_EXTENDED (TN, t_n, T_P, G_TYPE_FLAG_FINAL, G_ADD_PRIVATE (TN)) GOBJECT_AVAILABLE_MACRO_IN_2_70
+</span></code></pre></div></div>
+
+<h3 id="14-接口对象">1.4 接口对象</h3>
+
+<p>接口对象可以当做一个抽象类来看待（注册该类型的时候也就仅仅注册了类，并没有注册实例结构体），但是与抽象类不同的是，虚函数可以由任意对象实现。</p>
+
+<ol>
+  <li>
+    <p><strong>声明</strong> 接口初始化函数;</p>
+
+    <p><code class="language-plaintext highlighter-rouge">static void t_comparable_default_init (TComparableInterface *klass);</code></p>
+  </li>
+  <li>
+    <p><strong>定义</strong>t_t_comparable_get_type函数。（没有实例结构体及其实例初始化函数）</p>
+
+    <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="n">GType</span> <span class="n">g_define_type_id</span> <span class="o">=</span> <span class="n">g_type_register_static_simple</span> <span class="p">(((</span><span class="n">GType</span><span class="p">)</span> <span class="p">((</span><span class="mi">2</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="mi">2</span><span class="p">))),</span> 
+                                                           <span class="n">g_intern_static_string</span> <span class="p">(</span><span class="s">"TComparable"</span><span class="p">),</span> 
+                                                           <span class="k">sizeof</span> <span class="p">(</span><span class="n">TComparableInterface</span><span class="p">),</span> 
+                                                           <span class="p">(</span><span class="n">GClassInitFunc</span><span class="p">)(</span><span class="kt">void</span> <span class="p">(</span><span class="o">*</span><span class="p">)(</span><span class="kt">void</span><span class="p">))</span> <span class="n">t_comparable_default_init</span><span class="p">,</span> 
+                                                           <span class="mi">0</span><span class="p">,</span>  <span class="cm">/*没有实例结构体*/</span>
+                                                           <span class="p">(</span><span class="n">GInstanceInitFunc</span><span class="p">)</span> <span class="p">((</span><span class="kt">void</span> <span class="o">*</span><span class="p">)</span><span class="mi">0</span><span class="p">),</span> <span class="cm">/* 没有实例初始化函数 */</span>
+                                                           <span class="p">(</span><span class="n">GTypeFlags</span><span class="p">)</span> <span class="mi">0</span><span class="p">);</span> 
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<h4 id="141-g_define_interface">1.4.1 G_DEFINE_INTERFACE</h4>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#define G_DEFINE_INTERFACE(TN, t_n, T_P)		    G_DEFINE_INTERFACE_WITH_CODE(TN, t_n, T_P, ;)
+</span></code></pre></div></div>
+
+<h4 id="142-g_define_interface_with_code">1.4.2 G_DEFINE_INTERFACE_WITH_CODE</h4>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#define G_DEFINE_INTERFACE_WITH_CODE(TN, t_n, T_P, _C_)     _G_DEFINE_INTERFACE_EXTENDED_BEGIN(TN, t_n, T_P) {_C_;} _G_DEFINE_INTERFACE_EXTENDED_END()
+</span></code></pre></div></div>
+
+<h3 id="15-结构体封装对象">1.5 结构体封装对象</h3>
+
+<p><code class="language-plaintext highlighter-rouge">G_DEFINE_BOXED_TYPE</code>` 在 GObject 系统中是一个宏，用于定义新的 “boxed type” 。GObject 的 boxed types 用于处理纯旧数据（POD）结构，这些数据类型如结构体或联合体，并使其与 GObject 类型系统兼容。</p>
+
+<p>定义了 boxed type 后，你可以在 GObject 系统中，例如在 GValue 或信号中，使用这些类型。</p>
+
+<ol>
+  <li>
+    <p><span style="color:red">这类型对象没有信号，属性，引用计数等GObject具有的特性。<span></span></span></p>
+  </li>
+  <li>
+    <p><span style="color:red">GBoxed不区分实例和类结构体，只有一个结构体定义<span></span></span></p>
+  </li>
+  <li>
+    <p><span style="color:red">这类型不会自动注释到类型系统(需要调用my_struct_get_type()函数)，不能使用g_object_new。<span></span></span></p>
+  </li>
+</ol>
+
+<h4 id="151-g_define_boxed_type">1.5.1 G_DEFINE_BOXED_TYPE</h4>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#define G_DEFINE_BOXED_TYPE(TypeName, type_name, copy_func, free_func) G_DEFINE_BOXED_TYPE_WITH_CODE (TypeName, type_name, copy_func, free_func, {})
+</span></code></pre></div></div>
+
+<h4 id="152-g_define_boxed_type_with_code">1.5.2 G_DEFINE_BOXED_TYPE_WITH_CODE</h4>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#define G_DEFINE_BOXED_TYPE_WITH_CODE(TypeName, type_name, copy_func, free_func, _C_) _G_DEFINE_BOXED_TYPE_BEGIN (TypeName, type_name, copy_func, free_func) {_C_;} _G_DEFINE_TYPE_EXTENDED_END()
+</span></code></pre></div></div>
+
+<h2 id="2-g_declare_xx">2 G_DECLARE_XX</h2>
+
+<h3 id="21-g_declare_final_type">2.1 G_DECLARE_FINAL_TYPE</h3>
+
+<p><span style="color: red;">一个final类型对象不需要有自己的类结构体成员</span></p>
+
+<p>G_DECLARE_FINAL_TYPE执行以下主要操作:</p>
+
+<ul>
+  <li>
+    <p><strong>声明</strong> GType t_double_get_type (void);</p>
+  </li>
+  <li>
+    <p><strong>定义</strong> <code class="language-plaintext highlighter-rouge">typedef struct _TDouble TDouble;</code>。</p>
+  </li>
+  <li>
+    <p><strong>定义</strong> 类结构体。一个final类型对象不需要有自己的类结构体成员。</p>
+
+    <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">typedef</span> <span class="k">struct</span> <span class="p">{</span> 
+  <span class="n">GObjectClass</span> <span class="n">parent_class</span><span class="p">;</span> 
+<span class="p">}</span> <span class="n">TDoubleClass</span><span class="p">;</span> 
+</code></pre></div>    </div>
+  </li>
+  <li><strong>定义</strong> <code class="language-plaintext highlighter-rouge">T_DOUBLE</code> 宏。例如，如果对象是TDouble，宏就是T_DOUBLE。它将展开为一个函数，将实参转换为指向对象的指针。例如，T_Double (obj)将obj类型强制转换为TDouble *。</li>
+  <li><strong>定义</strong> <code class="language-plaintext highlighter-rouge">T_IS_DOUBLE</code> 宏。例如，如果对象是TDouble，宏就是T_IS_DOUBLE。它将扩展为一个函数，该函数检查参数是否指向TDouble的实例。如果参数指向TDouble的后代，则返回true。</li>
+</ul>
+
+<h3 id="22-g_declare_derivable_type">2.2 G_DECLARE_DERIVABLE_TYPE</h3>
+
+<p><span style="color: red;">一个可派生类型实例对象仅有父实例</span></p>
+
+<p>G_DECLARE_DERIVABLE_TYPE执行以下主要操作:</p>
+
+<ul>
+  <li>
+    <p><strong>声明</strong> GType t_double_get_type (void);</p>
+  </li>
+  <li>
+    <p><strong>定义</strong> <code class="language-plaintext highlighter-rouge">typedef struct _TDoubleClass TDoubleClass;</code>。</p>
+  </li>
+  <li>
+    <p><strong>定义</strong> 实例结构体。其成员仅为其父实例。</p>
+
+    <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">typedef</span> <span class="k">struct</span> <span class="n">_TDouble</span> <span class="n">TDouble</span><span class="p">;</span> 
+<span class="k">struct</span> <span class="n">_TDouble</span> <span class="p">{</span> <span class="n">GObject</span> <span class="n">parent_instance</span><span class="p">;</span> <span class="p">};</span> 
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><strong>定义</strong> <code class="language-plaintext highlighter-rouge">T_DOUBLE</code> 宏。</p>
+  </li>
+  <li>
+    <p><strong>定义</strong> <code class="language-plaintext highlighter-rouge">T_IS_DOUBLE</code> 宏。</p>
+  </li>
+  <li>
+    <p><strong>定义</strong> <code class="language-plaintext highlighter-rouge">T_DOUBLE_CLASS</code> 宏。</p>
+  </li>
+  <li>
+    <p><strong>定义</strong> <code class="language-plaintext highlighter-rouge">T_IS_DOUBLE_CLASS</code> 宏。</p>
+  </li>
+  <li>
+    <p><strong>定义</strong> <code class="language-plaintext highlighter-rouge">T_DOUBLE_GET_CLASS</code> 宏。</p>
+  </li>
+</ul>
+
+<h3 id="23-g_declare_interface">2.3 G_DECLARE_INTERFACE</h3>
+
+<p><span style="color: red;">仅仅有一个接口类，没有实例结构体</span></p>
+
+<p>G_DECLARE_INTERFACE执行以下主要操作:</p>
+
+<ul>
+  <li>
+    <p><strong>声明</strong> GType t_comparable_get_type (void);</p>
+  </li>
+  <li><strong>定义</strong>
+    <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="cm">/* 感觉没有必要存在，因为注册该类型就不会注册实例结构体 */</span>
+<span class="k">typedef</span> <span class="k">struct</span> <span class="n">_TComparable</span> <span class="n">TComparable</span><span class="p">;</span>
+
+<span class="k">typedef</span> <span class="k">struct</span> <span class="n">_TComparableInterface</span> <span class="n">TComparableInterface</span><span class="p">;</span> 
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><strong>定义</strong> <code class="language-plaintext highlighter-rouge">T_COMPARABLE</code> 宏。</p>
+  </li>
+  <li>
+    <p><strong>定义</strong> <code class="language-plaintext highlighter-rouge">T_IS_COMPARABLE</code> 宏。</p>
+  </li>
+  <li><strong>定义</strong> <code class="language-plaintext highlighter-rouge">T_COMPARABLE_GET_IFACE</code> 宏。</li>
+</ul>
+
+
+    </div>
+
+</article>
+<div class="post-nav"><a class="previous" href="/gobject%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/2023/11/17/9-%E6%8E%A5%E5%8F%A3.html" title="九、接口">九、接口</a><a class="next" href="/gstreamer%E6%A0%B8%E5%BF%83%E5%AF%B9%E8%B1%A1/2023/11/19/GStreamer%E6%A0%B8%E5%BF%83%E5%AF%B9%E8%B1%A1-%E5%89%8D%E8%A8%80.html" title="GStreamer核心对象-前言">GStreamer核心对象-前言</a></div><!--<div class="post-related">
+      <div>Related Articles</div>
+      <ul>
+        <li><a class="post-link" href="/gobject%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/2023/11/15/2-GObject.html" title="GStreamer核心对象-前言">二、GObject</a></li><li><a class="post-link" href="/%E6%97%A5%E4%B9%8B%E6%BC%AB%E5%BD%95/2023/11/09/github%E4%B8%AA%E4%BA%BA%E4%B8%BB%E9%A1%B5.html" title="GStreamer核心对象-前言">Github个人主页</a></li><li><a class="post-link" href="/%E4%B9%90%E7%90%86/2023/12/10/1-%E4%B9%90%E7%90%86.html" title="GStreamer核心对象-前言">一、乐理</a></li><li><a class="post-link" href="/gstreamer%E6%A0%B8%E5%BF%83%E5%AF%B9%E8%B1%A1/2023/12/01/14-GstContext.html" title="GStreamer核心对象-前言">十四、GstContext</a></li></ul>
+    </div>--><div class="post-related">
+      <div>相关文章</div>
+      <ul><li><a class="post-link" href="/gobject%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/2023/11/23/14-GInitiallyUnowned.html" title="十四、GInitiallyUnowned类型">十四、GInitiallyUnowned类型</a></li><li><a class="post-link" href="/gobject%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/2023/11/20/11-%E6%8E%A5%E5%8F%A3%E8%A1%A5%E5%85%85.html" title="十一、接口补充">十一、接口补充</a></li><li><a class="post-link" href="/gobject%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/2023/11/20/12-GBoxed%E7%B1%BB%E5%9E%8B.html" title="十二、GBoxed类型">十二、GBoxed类型</a></li><li><a class="post-link" href="/gobject%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/2023/11/20/13-GValue.html" title="十三、GValue学习笔记">十三、GValue学习笔记</a></li></ul>
+    </div><div class="post-comments"><div id="disqus_thread"></div>
+<script>
+    /**
+    *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+    *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
+    /*
+    var disqus_config = function () {
+    this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+    this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+    */
+    (function() { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+    s.src = 'https://pzhou-me.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div></section>
+</div>
+
+
+  </section>
+  <section class="sidebar" style="margin-left: 15px;">
+    <!-- Get sidebar items --><style type="text/css" media="screen">
+.post-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.post-menu ul li {
+  margin-bottom: 5px;  /* 增加每个列表项底部的间距 */
+}
+
+.post-menu ul li a {
+  font-size: 16px; /* 设置目录链接的字体大小 */
+}
+
+.post-menu-content {
+  max-height: 600px; /* 设置最大高度 */
+  min-width: 300px;
+  overflow: hidden; /* 默认隐藏滚动条 */
+  white-space: nowrap; /* 水平方向上的内容不换行 */
+}
+
+/* 自定义垂直滚动条的样式 */
+.post-menu-content::-webkit-scrollbar {
+  width: 8px; /* 垂直滚动条的宽度 */
+  height: 8px; /* 水平滚动条的高度 */
+}
+
+/* 自定义垂直滚动条轨道 */
+.post-menu-content::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* 自定义垂直滚动条滑块 */
+.post-menu-content::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* 当鼠标悬停在垂直滚动条滑块上时 */
+.post-menu-content::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* 一级标题样式 */
+.post-menu ul li.h-h2 {
+  margin-left: 0;
+  margin-bottom: 10px;
+}
+
+/* 二级标题样式 */
+.post-menu ul li.h-h3 {
+  margin-left: 20px;
+  margin-bottom: 10px;
+}
+
+/* 三级标题样式 */
+.post-menu ul li.h-h4 {
+  margin-left: 40px;
+  margin-bottom: 10px;
+}
+
+
+</style>
+
+
+
+<div class="post-menu">
+  <div class="post-menu-title">目录</div>
+  <div class="post-menu-content"></div>
+</div>
+
+<script>
+  function generateContent() {
+    var menu = document.querySelector(".post-menu");
+    var menuContent =  menu.querySelector(".post-menu-content");
+    var headings = document.querySelector(".post-content").querySelectorAll("h2, h3, h4, h5, h6");
+
+    // Hide menu when no headings
+    if (headings.length === 0) {
+      return menu.style.display = "none";
+    }
+
+    // Generate post menu
+    var menuHTML = '';
+    for (var i = 0; i < headings.length; i++) {
+      var h = headings[i];
+      menuHTML += (
+        '<li class="h-' + h.tagName.toLowerCase() + '">'
+        + '<a href="#h-' + h.getAttribute('id') + '">' + h.textContent + '</a></li>');
+    }
+
+    menuContent.innerHTML = '<ul>' + menuHTML + '</ul>';
+
+    // The header element
+    var header = document.querySelector('header.site-header');
+
+    function doMenuCollapse(index, over_items) {
+      var items = menuContent.firstChild.children;
+
+      if (over_items == undefined) {
+        over_items = 20;
+      }
+
+      if (items.length < over_items) {
+        return;
+      }
+
+      var activeItem = items[index];
+      var beginItem = activeItem
+      var endItem = activeItem
+      var beginIndex = index;
+      var endIndex = index + 1;
+      while (beginIndex >= 0
+        && !items[beginIndex].classList.contains('h-h2')) {
+        beginIndex -= 1;
+      }
+      while (endIndex < items.length
+        && !items[endIndex].classList.contains('h-h2')) {
+        endIndex += 1;
+      }
+      for (var i = 0; i < beginIndex; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+      for (var i = beginIndex + 1; i < endIndex; i++) {
+        item = items[i]
+        // if (!item.classList.contains('h-h2')) {
+          item.style.display = '';
+        // }
+      }
+      for (var i = endIndex; i < items.length; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+    }
+
+    // Init menu collapsed
+    doMenuCollapse(-1);
+
+    // Active the menu item
+    window.addEventListener('scroll', function (event) {
+      var lastActive = menuContent.querySelector('.active');
+      var changed = true;
+      var activeIndex = -1;
+      for (var i = headings.length - 1; i >= 0; i--) {
+        var h = headings[i];
+        var headingRect = h.getBoundingClientRect();
+        var headerRect = header.getBoundingClientRect();
+        var headerTop = Math.floor(headerRect.top);
+        var headerHeight = Math.floor(headerRect.height);
+        var headerHeight = headerTop + headerHeight + 20;
+        if (headingRect.top <= headerHeight) {
+          var id = 'h-' + h.getAttribute('id');
+          var a = menuContent.querySelector('a[href="#' + id  + '"]');
+          var curActive = a.parentNode;
+          if (curActive) {
+            curActive.classList.add('active');
+            activeIndex = i;
+          }
+          if (lastActive == curActive) {
+            changed = false;
+          }
+          break;
+        }
+      }
+      if (changed) {
+        if (lastActive) {
+          lastActive.classList.remove('active');
+        }
+        doMenuCollapse(activeIndex);
+      }
+      event.preventDefault();
+    });
+  }
+  generateContent();
+</script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const menuContent = document.querySelector('.post-menu-content');
+
+    // 鼠标进入事件
+    menuContent.addEventListener('mouseenter', function() {
+      menuContent.style.overflow = 'auto';
+    });
+
+    // 鼠标离开事件
+    menuContent.addEventListener('mouseleave', function() {
+      menuContent.style.overflow = 'hidden';
+    });
+  });
+</script>
+
+</section>
+</div>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+    <div class="site-footer-inner"><div>李尓阳工作室 <span class="copyleft">&copy;</span> 2018-2023 Lieryang</div>
+      <div class="footer-col gmail"> E-mail sxlisibo@gmail.com</div>
+      <div>Powered by <a title="Jekyll is a simple, blog-aware, static site
+      generator." href="https://jekyllrb.com/">Jekyll</a> &amp; <a title="Yat, yet
+      another theme." href="https://github.com/jeffreytse/jekyll-theme-yat">Yat Theme</a>.</div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

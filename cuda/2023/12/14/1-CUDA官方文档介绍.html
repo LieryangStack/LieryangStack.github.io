@@ -1,0 +1,1202 @@
+<!DOCTYPE html>
+<html><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>一、CUDA官方文档介绍 | 李尔阳主页</title>
+<meta name="generator" content="Jekyll v3.9.3" />
+<meta property="og:title" content="一、CUDA官方文档介绍" />
+<meta name="author" content="LieryangStack" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="1 CUDA 编程手册系列第一章：CUDA 简介" />
+<meta property="og:description" content="1 CUDA 编程手册系列第一章：CUDA 简介" />
+<link rel="canonical" href="https://lieryangstack.github.io//cuda/2023/12/14/1-CUDA%E5%AE%98%E6%96%B9%E6%96%87%E6%A1%A3%E4%BB%8B%E7%BB%8D.html" />
+<meta property="og:url" content="https://lieryangstack.github.io//cuda/2023/12/14/1-CUDA%E5%AE%98%E6%96%B9%E6%96%87%E6%A1%A3%E4%BB%8B%E7%BB%8D.html" />
+<meta property="og:site_name" content="李尔阳主页" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2023-12-14T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="一、CUDA官方文档介绍" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"LieryangStack"},"dateModified":"2023-12-14T00:00:00+00:00","datePublished":"2023-12-14T00:00:00+00:00","description":"1 CUDA 编程手册系列第一章：CUDA 简介","headline":"一、CUDA官方文档介绍","mainEntityOfPage":{"@type":"WebPage","@id":"https://lieryangstack.github.io//cuda/2023/12/14/1-CUDA%E5%AE%98%E6%96%B9%E6%96%87%E6%A1%A3%E4%BB%8B%E7%BB%8D.html"},"url":"https://lieryangstack.github.io//cuda/2023/12/14/1-CUDA%E5%AE%98%E6%96%B9%E6%96%87%E6%A1%A3%E4%BB%8B%E7%BB%8D.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="shortcut icon" type="image/x-icon" href="/lieryang.ico">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-noto-sans@0.0.72/index.min.css">
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <script src="/assets/js/main.js"></script><link type="application/atom+xml" rel="alternate" href="https://lieryangstack.github.io//feed.xml" title="李尔阳主页" /><link rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
+
+<!-- and it's easy to individually load additional languages -->
+<script charset="UTF-8"
+        src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/go.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+// Init highlight js
+document.addEventListener('DOMContentLoaded', function(event) {
+  var els = document.querySelectorAll('pre code')
+
+  function addLangData(block) {
+    var outer = block.parentElement.parentElement.parentElement;
+    var lang = block.getAttribute('data-lang');
+    for (var i = 0; i < outer.classList.length; i++) {
+      var cls = outer.classList[i];
+      if (cls.startsWith('language-')) {
+        lang = cls;
+        break;
+      }
+    }
+    if (!lang) {
+      cls = block.getAttribute('class');
+      lang = cls ? cls.replace('hljs ', '') : '';
+    }
+    if (lang.startsWith('language-')) {
+      lang = lang.substr(9);
+    }
+    block.setAttribute('class', 'hljs ' + lang);
+    block.parentNode.setAttribute('data-lang', lang);
+  }
+
+  function addBadge(block) {
+    var enabled = ('true' || 'true').toLowerCase();
+    if (enabled == 'true') {
+      var pre = block.parentElement;
+      pre.classList.add('badge');
+    }
+  }
+
+  function handle(block) {
+    addLangData(block);
+    addBadge(block)
+    hljs.highlightBlock(block);
+  }
+
+  for (var i = 0; i < els.length; i++) {
+    var el = els[i];
+    handle(el);
+  }
+});
+</script>
+
+<style>
+  /* code language badge */
+  pre.badge::before {
+    content: attr(data-lang);
+    color: #fff;
+    background-color: #ff4e00;
+    padding: 0 .5em;
+    border-radius: 0 2px;
+    text-transform: uppercase;
+    text-align: center;
+    min-width: 32px;
+    display: inline-block;
+    position: absolute;
+    right: 0;
+  }
+
+  /* fix wrong badge display for firefox browser */
+  code > table pre::before {
+    display: none;
+  }
+</style>
+<link href='https://lieryangstack.github.io//assets/css/syntax.css' rel='stylesheet' type='text/css' />
+</head>
+<body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<header class="site-header " role="banner">
+
+  <div class="wrapper">
+    <div class="site-header-inner"><span class="site-brand"><a class="site-brand-inner" rel="author" href="/">
+  <img class="site-favicon" title="李尔阳主页" src="" onerror="this.style.display='none'">
+  李尔阳主页
+</a>
+</span><nav class="site-nav">
+          <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+          <label for="nav-trigger">
+            <span class="menu-icon">
+              <svg viewBox="0 0 18 15" width="18px" height="15px">
+                <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+              </svg>
+            </span>
+          </label>
+
+          <!-- <div class="trigger"><a class="page-link" href="/about.html">关于</a><a class="page-link" href="/archives.html">归档</a><a class="page-link" href="/categories.html">分类</a><a class="page-link" href="/">主页</a><a class="page-link" href="/tags.html">标签</a>
+
+
+
+
+
+
+
+
+
+</div> -->
+
+          <div class="trigger">
+             <a class="page-link" href="/about.html">关于</a>
+            <a class="page-link" href="/categories.html">分类</a>
+            <a class="page-link" href="/archives.html">归档</a>
+            <a class="page-link" href="/tags.html">标签</a>
+            <a class="page-link" href="/assets/index.html">下载</a>
+            <!-- 在这里添加更多的导航项 -->
+          </div>
+          
+
+        </nav></div>
+  </div>
+</header>
+
+<script>
+  function initHeader() {
+    var lastScrollY = getScrollPos().y;
+    var documentElement = document.documentElement;
+
+    function storeScrollData() {
+      var y = getScrollPos().y;var scrollStatus = "";
+
+      if (y <= 0) {
+        scrollStatus = "top";
+      } else if ((window.innerHeight + y) >= document.body.offsetHeight) {
+        scrollStatus = "bottom";
+      } else {
+        var isScrollDown = (y - lastScrollY > 0) ? true : false;
+        scrollStatus = isScrollDown ? "down" : "up";
+      }
+
+      lastScrollY = y;
+      documentElement.setAttribute("data-scroll-status", scrollStatus);
+    }
+
+    window.addEventListener('scroll', function(e) {
+      storeScrollData();
+    });
+
+    storeScrollData();
+  }
+  document.addEventListener('DOMContentLoaded', initHeader);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  function hashLocate(hashValue) {
+    hashValue = hashValue.replace(/^.*#h-/, '');
+    hashValue = decodeURIComponent(hashValue);
+    var element = document.getElementById(hashValue);
+
+    if (!element) {
+      return;
+    }
+
+    var header = document.querySelector('header.site-header');
+    var headerRect = header.getBoundingClientRect();
+    var headerTop = Math.floor(headerRect.top);
+    var headerHeight = Math.floor(headerRect.height);
+    var scrollPos = getScrollPos();
+    var offsetY = element.offsetTop - (headerTop + headerHeight + 20);
+
+    if (offsetY == scrollPos.y) {
+      return;
+    }
+
+    if (headerTop == 0  && offsetY > scrollPos.y) {
+      offsetY += headerHeight + 2;
+    } else if (headerTop < 0  && offsetY < scrollPos.y) {
+      offsetY -= headerHeight - 2;
+    }
+
+    smoothScrollTo(offsetY);
+  }
+
+  // The first event occurred
+  window.addEventListener('load', function(event) {
+    if (window.location.hash) {
+      hashLocate(window.location.hash);
+    }
+  });
+
+  // The first event occurred
+  window.addEventListener('click', function(event) {
+    if (event.target.tagName.toLowerCase() == 'a') {
+      hashLocate(event.target.getAttribute('href'));
+    }
+  });
+</script>
+<div class="theme-toggle">
+  <input type="checkbox" id="theme-switch">
+  <label for="theme-switch">
+    <div class="toggle"></div>
+    <div class="names">
+      <p class="light">Light</p>
+      <p class="dark">Dark</p>
+    </div>
+  </label>
+</div>
+
+
+
+
+<script>
+  (function() {
+    var sw = document.getElementById('theme-switch');
+    var html = document.getElementsByTagName('html')[0];
+    var nightModeOption = ('auto' || 'auto').toLowerCase();
+    var storage = nightModeOption === 'manual'
+        ? localStorage
+        : sessionStorage;
+    var themeData = loadThemeData();
+
+    function saveThemeData(data) {
+      storage.setItem('theme', JSON.stringify(data));
+    }
+
+    function loadThemeData() {
+      var data = storage.getItem('theme');
+      try {
+        data = JSON.parse(data ? data : '');
+      } catch(e) {
+        data = { nightShift: undefined, autoToggleAt: 0 };
+        saveThemeData(data);
+      }
+      return data;
+    }
+
+    function handleThemeToggle(nightShift) {
+      themeData.nightShift = nightShift;
+      saveThemeData(themeData);
+      html.dataset.theme = nightShift ? 'dark' : 'light';
+      setTimeout(function() {
+        sw.checked = nightShift ? true : false;
+      }, 50);
+    }
+
+    function autoThemeToggle() {
+      // Next time point of theme toggle
+      var now = new Date();
+      var toggleAt = new Date();
+      var hours = now.getHours();
+      var nightShift = hours >= 19 || hours <=7;
+
+      if (nightShift) {
+        if (hours > 7) {
+          toggleAt.setDate(toggleAt.getDate() + 1);
+        }
+        toggleAt.setHours(7);
+      } else {
+        toggleAt.setHours(19);
+      }
+
+      toggleAt.setMinutes(0);
+      toggleAt.setSeconds(0);
+      toggleAt.setMilliseconds(0)
+
+      var delay = toggleAt.getTime() - now.getTime();
+
+      // auto toggle theme mode
+      setTimeout(function() {
+        handleThemeToggle(!nightShift);
+      }, delay);
+
+      return {
+        nightShift: nightShift,
+        toggleAt: toggleAt.getTime()
+      };
+    }
+
+    // Listen the theme toggle event
+    sw.addEventListener('change', function(event) {
+      handleThemeToggle(event.target.checked);
+    });
+
+    if (nightModeOption == 'auto') {
+      var data = autoThemeToggle();
+
+      // Toggle theme by local setting
+      if (data.toggleAt > themeData.autoToggleAt) {
+        themeData.autoToggleAt = data.toggleAt;
+        handleThemeToggle(data.nightShift);
+      } else {
+        handleThemeToggle(themeData.nightShift);
+      }
+    } else if (nightModeOption == 'manual') {
+      handleThemeToggle(themeData.nightShift);
+    } else {
+      var nightShift = themeData.nightShift;
+      if (nightShift === undefined) {
+        nightShift = nightModeOption === 'on';
+      }
+      handleThemeToggle(nightShift);
+    }
+  })();
+</script>
+<div id="click-to-top" class="click-to-top">
+  <i class="fa fa-arrow-up"></i>
+</div>
+<script>
+  (function () {
+    const clickToTop = document.getElementById('click-to-top');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 100) {
+        clickToTop.classList.add('show')
+      }else {
+        clickToTop.classList.remove('show')
+      }
+    });
+    clickToTop.addEventListener('click', () => {
+      window.smoothScrollTo(0);
+    });
+  })();
+</script>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <div class="framework">
+  <section class="main">
+
+     <div class="post">
+  <section>
+
+
+
+
+
+
+
+
+
+<header class="post-header">
+  <h1 class="post-title p-name" itemprop="name headline">一、CUDA官方文档介绍</h1>
+  <h2 class="post-subtitle"></h2>
+
+  <p class="post-meta">
+    <time class="dt-published" datetime="2023-12-14T00:00:00+00:00" itemprop="datePublished"><i class="fa fa-calendar"></i> Dec 14, 2023
+    </time>
+
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 5 mins</span>
+  </p><div class="post-tags"><a class="post-tag" href="/tags.html#CUDA">#CUDA</a></div></header>
+<article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+    <div class="post-content e-content" itemprop="articleBody">
+
+      <h2 id="1-cuda-编程手册系列第一章cuda-简介">1 CUDA 编程手册系列第一章：CUDA 简介</h2>
+
+<h3 id="11-我们为什么要使用gpu">1.1 我们为什么要使用GPU</h3>
+
+<p>GPU（Graphics Processing Unit）在相同的价格和功率范围内，比CPU提供更高的指令吞吐量和内存带宽。许多应用程序利用这些更高的能力，在GPU上比在CPU上运行得更快。其他计算设备，如FPGA，也非常节能，但提供的编程灵活性要比GPU少得多。</p>
+
+<p>GPU和CPU在功能上的差异是因为它们的设计目标不同。虽然 CPU 旨在以尽可能快的速度执行一系列称为线程的操作，并且可以并行执行数十个这样的线程。但GPU却能并行执行成千上万个(摊销较慢的单线程性能以实现更大的吞吐量)。</p>
+
+<p>GPU 专门用于高度并行计算，因此设计时更多的晶体管用于数据处理，而不是数据缓存和流量控制。</p>
+
+<p>下图显示了 CPU 与 GPU 的芯片资源分布示例。</p>
+
+<p><img src="/assets/CUDA/01_Introduction/CPU与GPU的芯片资源分布.png" alt="" /></p>
+
+<p>将更多晶体管用于数据处理，例如浮点计算，有利于高度并行计算。GPU可以通过计算隐藏内存访问延迟，而不是依靠大数据缓存和复杂的流控制来避免长时间的内存访问延迟，这两者在晶体管方面都是昂贵的。</p>
+
+<h3 id="12-cuda通用并行计算平台和编程模型">1.2 CUDA®：通用并行计算平台和编程模型</h3>
+
+<p>2006 年 11 月，NVIDIA® 推出了 CUDA（Compute Unified Device Architecture），这是一种通用并行计算平台和编程模型，它利用 NVIDIA GPU 中的并行计算引擎以比 CPU 更有效的方式解决许多复杂的计算问题。</p>
+
+<p>CUDA 附带一个软件环境，允许开发人员使用 C++ 作为高级编程语言。 如下图所示，支持其他语言、应用程序编程接口或基于指令的方法，例如 FORTRAN、DirectCompute、OpenACC。</p>
+
+<p><img src="/assets/CUDA/01_Introduction/CUDA支持的编程语言.png" alt="" /></p>
+
+<h3 id="13-可扩展的编程模型">1.3 可扩展的编程模型</h3>
+
+<p>多核 CPU 和众核 GPU 的出现意味着主流处理器芯片现在是并行系统。挑战在于开发能够透明地扩展可并行的应用软件，来利用不断增加的处理器内核数量。就像 3D 图形应用程序透明地将其并行性扩展到具有广泛不同内核数量的多核 GPU 一样。</p>
+
+<p>CUDA 并行编程模型旨在克服这一挑战，同时为熟悉 C 等标准编程语言的程序员保持较低的学习曲线。</p>
+
+<p>其核心是三个关键抽象——线程组的层次结构、共享内存和屏障同步——它们只是作为最小的语言扩展集向程序员公开。</p>
+
+<p>这些抽象提供了细粒度的数据并行和线程并行，嵌套在粗粒度的数据并行和任务并行中。它们指导程序员将问题划分为可以由线程块并行独立解决的粗略子问题，并将每个子问题划分为可以由块内所有线程并行协作解决的更精细的部分。</p>
+
+<p>这种分解通过允许线程在解决每个子问题时进行协作来保留语言表达能力，同时实现自动可扩展性。实际上，每个线程块都可以在 GPU 内的任何可用multiprocessor上以乱序、并发或顺序调度，以便编译的 CUDA 程序可以在任意数量的多处理器上执行，如下图所示，并且只有运行时系统需要知道物理multiprocessor个数。</p>
+
+<p>这种可扩展的编程模型允许 GPU 架构通过简单地扩展multiprocessor和内存分区的数量来跨越广泛的市场范围：高性能发烧友 GeForce GPU ，专业的 Quadro 和 Tesla 计算产品。</p>
+
+<p><img src="/assets/CUDA/01_Introduction/MultithreadedCUDAProgram.png" alt="" /></p>
+
+<p><strong>注意</strong>：GPU 是围绕一系列流式多处理器 (SM: Streaming Multiprocessors) 构建的。多线程程序被划分为彼此独立执行的线程块，因此具有更多multiprocessor的GPU将比具有更少多处理器的GPU在更短的时间内完成程序执行。</p>
+
+<h2 id="2-cuda-编程手册系列第二章-cuda-编程模型概述">2 CUDA 编程手册系列第二章: CUDA 编程模型概述</h2>
+
+<h3 id="21-内核">2.1 内核</h3>
+
+<p>CUDA C++ 通过允许程序员定义称为kernel的 C++ 函数来扩展 C++，当调用内核时，由 N 个不同的 CUDA 线程并行执行 N 次，而不是像常规 C++ 函数那样只执行一次。</p>
+
+<p>使用 <strong>global</strong> 声明说明符定义内核，并使用新的 «&lt;…»&gt; 执行配置语法指定内核调用的 CUDA 线程数。 每个执行内核的线程都有一个唯一的线程 ID，可以通过内置变量在内核中访问。</p>
+
+<p>作为说明，以下示例代码使用内置变量 threadIdx 将两个大小为 N 的向量 A 和 B 相加，并将结果存储到向量 C 中：</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Kernel definition</span>
+<span class="n">__global__</span> <span class="kt">void</span> <span class="nf">VecAdd</span><span class="p">(</span><span class="kt">float</span><span class="o">*</span> <span class="n">A</span><span class="p">,</span> <span class="kt">float</span><span class="o">*</span> <span class="n">B</span><span class="p">,</span> <span class="kt">float</span><span class="o">*</span> <span class="n">C</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">threadIdx</span><span class="p">.</span><span class="n">x</span><span class="p">;</span>
+    <span class="n">C</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">B</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="p">...</span>
+    <span class="c1">// Kernel invocation with N threads</span>
+    <span class="n">VecAdd</span><span class="o">&lt;&lt;&lt;</span><span class="mi">1</span><span class="p">,</span> <span class="n">N</span><span class="o">&gt;&gt;&gt;</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">C</span><span class="p">);</span>
+    <span class="p">...</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>这里，执行 VecAdd() 的 N 个线程中的每一个线程都会执行一个加法。</p>
+
+<h3 id="22-线程层次">2.2 线程层次</h3>
+
+<p>为方便起见，threadIdx 是一个 3 分量向量，因此可以使用一维、二维或三维的线程索引来识别线程，形成一个一维、二维或三维的线程块，称为block。 这提供了一种跨域的元素（例如向量、矩阵或体积）调用计算的方法。</p>
+
+<p>线程的索引和它的线程 ID 以一种直接的方式相互关联：对于一维块，它们是相同的； 对于大小为(Dx, Dy)的二维块，索引为(x, y)的线程的线程ID为<code class="language-plaintext highlighter-rouge">(x + y*Dx)</code>； 对于大小为 (Dx, Dy, Dz) 的三维块，索引为 (x, y, z) 的线程的线程 ID 为 <code class="language-plaintext highlighter-rouge">(x + y*Dx + z*Dx*Dy)</code>。</p>
+
+<p>例如，下面的代码将两个大小为NxN的矩阵A和B相加，并将结果存储到矩阵C中:</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Kernel definition</span>
+<span class="n">__global__</span> <span class="kt">void</span> <span class="nf">MatAdd</span><span class="p">(</span><span class="kt">float</span> <span class="n">A</span><span class="p">[</span><span class="n">N</span><span class="p">][</span><span class="n">N</span><span class="p">],</span> <span class="kt">float</span> <span class="n">B</span><span class="p">[</span><span class="n">N</span><span class="p">][</span><span class="n">N</span><span class="p">],</span>
+                       <span class="kt">float</span> <span class="n">C</span><span class="p">[</span><span class="n">N</span><span class="p">][</span><span class="n">N</span><span class="p">])</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">threadIdx</span><span class="p">.</span><span class="n">x</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">threadIdx</span><span class="p">.</span><span class="n">y</span><span class="p">;</span>
+    <span class="n">C</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="n">B</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">];</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="p">...</span>
+    <span class="c1">// Kernel invocation with one block of N * N * 1 threads</span>
+    <span class="kt">int</span> <span class="n">numBlocks</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="n">dim3</span> <span class="n">threadsPerBlock</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">N</span><span class="p">);</span>
+    <span class="n">MatAdd</span><span class="o">&lt;&lt;&lt;</span><span class="n">numBlocks</span><span class="p">,</span> <span class="n">threadsPerBlock</span><span class="o">&gt;&gt;&gt;</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">C</span><span class="p">);</span>
+    <span class="p">...</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>每个块的线程数量是有限制的，因为一个块的所有线程都应该驻留在同一个处理器核心上，并且必须共享该核心有限的内存资源。在当前的gpu上，一个线程块可能包含多达1024个线程。</p>
+
+<p>但是，一个内核可以由多个形状相同的线程块执行，因此线程总数等于每个块的线程数乘以块数。</p>
+
+<p>块被组织成一维、二维或三维的线程块网格(grid)，如下图所示。网格中的线程块数量通常由正在处理的数据的大小决定，通常超过系统中的处理器数量。</p>
+
+<p><img src="/assets/CUDA/01_Introduction/线程块中的线程.png" alt="" /></p>
+
+<p><code class="language-plaintext highlighter-rouge">&lt;&lt;&lt;...&gt;&gt;&gt;</code> 语法中指定的每个块的线程数和每个网格的块数可以是 int 或 dim3 类型。如上例所示，可以指定二维块或网格。</p>
+
+<p>网格中的每个块都可以由一个一维、二维或三维的惟一索引标识，该索引可以通过内置的blockIdx变量在内核中访问。线程块的维度可以通过内置的blockDim变量在内核中访问。</p>
+
+<p>扩展前面的MatAdd()示例来处理多个块，代码如下所示。</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Kernel definition</span>
+<span class="n">__global__</span> <span class="kt">void</span> <span class="nf">MatAdd</span><span class="p">(</span><span class="kt">float</span> <span class="n">A</span><span class="p">[</span><span class="n">N</span><span class="p">][</span><span class="n">N</span><span class="p">],</span> <span class="kt">float</span> <span class="n">B</span><span class="p">[</span><span class="n">N</span><span class="p">][</span><span class="n">N</span><span class="p">],</span>
+<span class="kt">float</span> <span class="n">C</span><span class="p">[</span><span class="n">N</span><span class="p">][</span><span class="n">N</span><span class="p">])</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">blockIdx</span><span class="p">.</span><span class="n">x</span> <span class="o">*</span> <span class="n">blockDim</span><span class="p">.</span><span class="n">x</span> <span class="o">+</span> <span class="n">threadIdx</span><span class="p">.</span><span class="n">x</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">blockIdx</span><span class="p">.</span><span class="n">y</span> <span class="o">*</span> <span class="n">blockDim</span><span class="p">.</span><span class="n">y</span> <span class="o">+</span> <span class="n">threadIdx</span><span class="p">.</span><span class="n">y</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">N</span> <span class="o">&amp;&amp;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">N</span><span class="p">)</span>
+        <span class="n">C</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="n">B</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">];</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="p">...</span>
+    <span class="c1">// Kernel invocation</span>
+    <span class="n">dim3</span> <span class="n">threadsPerBlock</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">16</span><span class="p">);</span>
+    <span class="n">dim3</span> <span class="n">numBlocks</span><span class="p">(</span><span class="n">N</span> <span class="o">/</span> <span class="n">threadsPerBlock</span><span class="p">.</span><span class="n">x</span><span class="p">,</span> <span class="n">N</span> <span class="o">/</span> <span class="n">threadsPerBlock</span><span class="p">.</span><span class="n">y</span><span class="p">);</span>
+    <span class="n">MatAdd</span><span class="o">&lt;&lt;&lt;</span><span class="n">numBlocks</span><span class="p">,</span> <span class="n">threadsPerBlock</span><span class="o">&gt;&gt;&gt;</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">C</span><span class="p">);</span>
+    <span class="p">...</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>线程块大小为16×16(256个线程)，尽管在本例中是任意更改的，但这是一种常见的选择。网格是用足够的块创建的，这样每个矩阵元素就有一个线程来处理。为简单起见，本例假设每个维度中每个网格的线程数可以被该维度中每个块的线程数整除，尽管事实并非如此。</p>
+
+<p>程块需要独立执行：必须可以以任何顺序执行它们，并行或串行。 这种独立性要求允许跨任意数量的内核以任意顺序调度线程块，如下图所示，使程序员能够编写随内核数量扩展的代码。</p>
+
+<p><img src="/assets/CUDA/01_Introduction/任意数量的内核.png" alt="" /></p>
+
+<p>块内的线程可以通过一些共享内存共享数据并通过同步它们的执行来协调内存访问来进行协作。 更准确地说，可以通过调用 __syncthreads() 内部函数来指定内核中的同步点； __syncthreads() 充当屏障，块中的所有线程必须等待，然后才能继续。 Shared Memory 给出了一个使用共享内存的例子。 除了 __syncthreads() 之外，Cooperative Groups API 还提供了一组丰富的线程同步示例。</p>
+
+<p>为了高效协作，共享内存是每个处理器内核附近的低延迟内存（很像 L1 缓存），并且 __syncthreads() 是轻量级的。</p>
+
+<h3 id="23-存储单元层次">2.3 存储单元层次</h3>
+
+<p>CUDA 线程可以在执行期间从多个内存空间访问数据，如下图所示。每个线程都有私有的本地内存。 每个线程块都具有对该块的所有线程可见的共享内存，并且具有与该块相同的生命周期。 所有线程都可以访问相同的全局内存。</p>
+
+<p><img src="/assets/CUDA/01_Introduction/内存.png" alt="" /></p>
+
+<p>还有两个额外的只读内存空间可供所有线程访问：常量和纹理内存空间。 全局、常量和纹理内存空间针对不同的内存使用进行了优化（请参阅设备内存访问）。 纹理内存还为某些特定数据格式提供不同的寻址模式以及数据过滤（请参阅纹理和表面内存）。</p>
+
+<p>全局、常量和纹理内存空间在同一应用程序的内核启动中是持久的。</p>
+
+<h3 id="24-异构编程">2.4 异构编程</h3>
+
+<p>如下图所示，CUDA 编程模型假定 CUDA 线程在物理独立的设备上执行，该设备作为运行 C++ 程序的主机的协处理器运行。例如，当内核在 GPU 上执行而 C++ 程序的其余部分在 CPU 上执行时，就是这种情况。</p>
+
+<p><img src="/assets/CUDA/01_Introduction/异构编程.png" alt="" /></p>
+
+<p>CUDA 编程模型还假设主机(host)和设备(device)都在 DRAM 中维护自己独立的内存空间，分别称为主机内存和设备内存。因此，程序通过调用 CUDA 运行时（在编程接口中描述）来管理内核可见的全局、常量和纹理内存空间。这包括设备内存分配和释放以及主机和设备内存之间的数据传输。</p>
+
+<p>统一内存提供托管内存来桥接主机和设备内存空间。托管内存可从系统中的所有 CPU 和 GPU 访问，作为具有公共地址空间的单个连贯内存映像。此功能可实现设备内存的超额订阅，并且无需在主机和设备上显式镜像数据，从而大大简化了移植应用程序的任务。有关统一内存的介绍，请参阅统一内存编程。</p>
+
+<p>注:串行代码在主机(host)上执行，并行代码在设备(device)上执行。</p>
+
+<h3 id="25-异步simt编程模型">2.5 异步SIMT编程模型</h3>
+
+<p>在 CUDA 编程模型中，线程是进行计算或内存操作的最低抽象级别。 从基于 NVIDIA Ampere GPU 架构的设备开始，CUDA 编程模型通过异步编程模型为内存操作提供加速。 异步编程模型定义了与 CUDA 线程相关的异步操作的行为。</p>
+
+<p>异步编程模型为 CUDA 线程之间的同步定义了异步屏障的行为。 该模型还解释并定义了如何使用 cuda::memcpy_async 在 GPU计算时从全局内存中异步移动数据。</p>
+
+<h4 id="251-异步操作">2.5.1 异步操作</h4>
+
+<p>异步操作定义为由CUDA线程发起的操作，并且与其他线程一样异步执行。在结构良好的程序中，一个或多个CUDA线程与异步操作同步。发起异步操作的CUDA线程不需要在同步线程中.</p>
+
+<p>这样的异步线程（as-if 线程）总是与发起异步操作的 CUDA 线程相关联。异步操作使用同步对象来同步操作的完成。这样的同步对象可以由用户显式管理（例如，cuda::memcpy_async）或在库中隐式管理（例如，cooperative_groups::memcpy_async）。</p>
+
+<p>同步对象可以是 cuda::barrier 或 cuda::pipeline。这些对象在Asynchronous Barrier 和 Asynchronous Data Copies using cuda::pipeline.中进行了详细说明。这些同步对象可以在不同的线程范围内使用。作用域定义了一组线程，这些线程可以使用同步对象与异步操作进行同步。下表定义了CUDA c++中可用的线程作用域，以及可以与每个线程同步的线程。</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Thread Scope</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>cuda::thread_scope::thread_scope_thread</td>
+      <td>Only the CUDA thread which initiated asynchronous operations synchronizes.</td>
+    </tr>
+    <tr>
+      <td>cuda::thread_scope::thread_scope_block</td>
+      <td>All or any CUDA threads within the same thread block as the initiating thread synchronizes.</td>
+    </tr>
+    <tr>
+      <td>cuda::thread_scope::thread_scope_device</td>
+      <td>All or any CUDA threads in the same GPU device as the initiating thread synchronizes.</td>
+    </tr>
+    <tr>
+      <td>cuda::thread_scope::thread_scope_system</td>
+      <td>All or any CUDA or CPU threads in the same system as the initiating thread synchronizes.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>这些线程作用域是在CUDA标准c++库中作为标准c++的扩展实现的。</p>
+
+<h3 id="26-compute-capability">2.6 Compute Capability</h3>
+
+<p>设备的Compute Capability由版本号表示，有时也称其“SM版本”。该版本号标识GPU硬件支持的特性，并由应用程序在运行时使用，以确定当前GPU上可用的硬件特性和指令。</p>
+
+<p>Compute Capability包括一个主要版本号X和一个次要版本号Y，用X.Y表示</p>
+
+<p>主版本号相同的设备具有相同的核心架构。设备的主要修订号是8，为NVIDIA Ampere GPU的体系结构的基础上,7基于Volta设备架构,6设备基于Pascal架构,5设备基于Maxwell架构,3基于Kepler架构的设备,2设备基于Fermi架构,1是基于Tesla架构的设备。</p>
+
+<p>次要修订号对应于对核心架构的增量改进，可能包括新特性。</p>
+
+<p>Turing是计算能力7.5的设备架构，是基于Volta架构的增量更新。</p>
+
+<p>CUDA-Enabled GPUs 列出了所有支持 CUDA 的设备及其计算能力。Compute Capabilities给出了每个计算能力的技术规格。</p>
+
+<p><strong>注意</strong>：特定GPU的计算能力版本不应与CUDA版本(如CUDA 7.5、CUDA 8、CUDA 9)混淆，CUDA版本指的是CUDA软件平台的版本。CUDA平台被应用开发人员用来创建运行在许多代GPU架构上的应用程序，包括未来尚未发明的GPU架构。尽管CUDA平台的新版本通常会通过支持新的GPU架构的计算能力版本来增加对该架构的本地支持，但CUDA平台的新版本通常也会包含软件功能。
+从CUDA 7.0和CUDA 9.0开始，不再支持Tesla和Fermi架构。</p>
+
+<h2 id="参考">参考</h2>
+
+<h3 id="参考1官方参考手册">参考1：官方参考手册</h3>
+<p><a href="https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#">1. 官方手册</a></p>
+
+<p><a href="https://developer.nvidia.com/zh-cn/blog/cuda-intro-cn/">2. CUDA 编程手册系列第一章：CUDA 简介</a></p>
+
+<p><a href="https://developer.nvidia.com/zh-cn/blog/cuda-model-intro-cn/">3. CUDA 编程手册系列第二章: CUDA 编程模型概述</a></p>
+
+<p><a href="https://developer.nvidia.com/zh-cn/blog/cuda-programming-model-interface-cn/">4. CUDA 编程手册系列第三章: CUDA 编程模型接口</a></p>
+
+<p><a href="https://developer.nvidia.com/zh-cn/blog/cuda-hardware-cn/">5. CUDA 编程手册系列第四章: 硬件的实现</a></p>
+
+<p><a href="https://developer.nvidia.com/zh-cn/blog/cuda-performance-guide-cn/">6. CUDA 编程手册系列第五章: 性能指南</a></p>
+
+<h3 id="参考2网络搜集教程">参考2：网络搜集教程</h3>
+<p><a href="https://blog.csdn.net/qq_41854911/article/details/132526657">1. CUDA编程入门极简教程</a></p>
+
+<p><a href="https://zhuanlan.zhihu.com/p/645330027">2. CUDA（一）：CUDA 编程基础</a></p>
+
+<h3 id="参考3编写示例程序">参考3：编写示例程序</h3>
+
+<p><a href="https://blog.csdn.net/xiaoyezi_1834/article/details/52754043">1. [CUDA实战] 第一个样例程序</a></p>
+
+<p><a href="https://blog.csdn.net/qq_43257640/article/details/117415021">2. 【CUDA编程】一：从简单的实例入门</a></p>
+
+<h3 id="未学习参考">未学习参考</h3>
+
+<p><a href="https://blog.csdn.net/God_WeiYang/article/details/113156246?spm=1001.2101.3001.6650.2&amp;utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-2-113156246-blog-132526657.235%5Ev39%5Epc_relevant_yljh&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-2-113156246-blog-132526657.235%5Ev39%5Epc_relevant_yljh&amp;utm_relevant_index=3">推荐几个不错的CUDA入门教程（非广告）</a></p>
+
+<p><a href="https://face2ai.com/program-blog/#GPU%E7%BC%96%E7%A8%8B">谭升的博客 人工智能基础</a></p>
+
+
+    </div>
+
+</article>
+<div class="post-nav"><a class="previous" href="/%E4%B9%90%E7%90%86/2023/12/10/3-%E4%B9%90%E7%90%86.html" title="三、乐理">三、乐理</a><a class="next" href="/deepstream/2023/12/14/1-x86%E5%AE%89%E8%A3%85DeepStream.html" title="一、x86安装DeepStream">一、x86安装DeepStream</a></div><!--<div class="post-related">
+      <div>Related Articles</div>
+      <ul>
+        <li><a class="post-link" href="/gobject%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0202109/2021/08/26/2-GObject%E5%AD%90%E7%B1%BB%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%A7%81%E6%9C%89%E5%B1%9E%E6%80%A7%E6%A8%A1%E6%8B%9F.html" title="一、x86安装DeepStream">二、GObject子类对象的私有属性模拟</a></li><li><a class="post-link" href="/gobject%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/2023/11/17/7-%E5%8F%AF%E6%B4%BE%E7%94%9F%E5%92%8C%E9%9D%9E%E6%8A%BD%E8%B1%A1%E7%B1%BB%E5%9E%8B.html" title="一、x86安装DeepStream">七、可派生和非抽象类型</a></li><li><a class="post-link" href="/%E5%8D%95%E8%AF%8D/2023/12/01/12%E6%9C%88%E7%AC%AC%E4%B8%80%E5%91%A8.html" title="一、x86安装DeepStream">12月第一周</a></li><li><a class="post-link" href="/gstreamer%E6%A0%B8%E5%BF%83%E5%AF%B9%E8%B1%A1/2023/11/20/1-GstStructure.html" title="一、x86安装DeepStream">一、GstStructure</a></li></ul>
+    </div>--><div class="post-related">
+      <div>相关文章</div>
+      <ul></ul>
+    </div><div class="post-comments"><div id="disqus_thread"></div>
+<script>
+    /**
+    *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+    *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
+    /*
+    var disqus_config = function () {
+    this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+    this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+    */
+    (function() { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+    s.src = 'https://pzhou-me.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div></section>
+</div>
+
+
+  </section>
+  <section class="sidebar" style="margin-left: 15px;">
+    <!-- Get sidebar items --><style type="text/css" media="screen">
+.post-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.post-menu ul li {
+  margin-bottom: 5px;  /* 增加每个列表项底部的间距 */
+}
+
+.post-menu ul li a {
+  font-size: 16px; /* 设置目录链接的字体大小 */
+}
+
+.post-menu-content {
+  max-height: 600px; /* 设置最大高度 */
+  min-width: 300px;
+  overflow: hidden; /* 默认隐藏滚动条 */
+  white-space: nowrap; /* 水平方向上的内容不换行 */
+}
+
+/* 自定义垂直滚动条的样式 */
+.post-menu-content::-webkit-scrollbar {
+  width: 8px; /* 垂直滚动条的宽度 */
+  height: 8px; /* 水平滚动条的高度 */
+}
+
+/* 自定义垂直滚动条轨道 */
+.post-menu-content::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* 自定义垂直滚动条滑块 */
+.post-menu-content::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* 当鼠标悬停在垂直滚动条滑块上时 */
+.post-menu-content::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* 一级标题样式 */
+.post-menu ul li.h-h2 {
+  margin-left: 0;
+  margin-bottom: 10px;
+}
+
+/* 二级标题样式 */
+.post-menu ul li.h-h3 {
+  margin-left: 20px;
+  margin-bottom: 10px;
+}
+
+/* 三级标题样式 */
+.post-menu ul li.h-h4 {
+  margin-left: 40px;
+  margin-bottom: 10px;
+}
+
+
+</style>
+
+
+
+<div class="post-menu">
+  <div class="post-menu-title">目录</div>
+  <div class="post-menu-content"></div>
+</div>
+
+<script>
+  function generateContent() {
+    var menu = document.querySelector(".post-menu");
+    var menuContent =  menu.querySelector(".post-menu-content");
+    var headings = document.querySelector(".post-content").querySelectorAll("h2, h3, h4, h5, h6");
+
+    // Hide menu when no headings
+    if (headings.length === 0) {
+      return menu.style.display = "none";
+    }
+
+    // Generate post menu
+    var menuHTML = '';
+    for (var i = 0; i < headings.length; i++) {
+      var h = headings[i];
+      menuHTML += (
+        '<li class="h-' + h.tagName.toLowerCase() + '">'
+        + '<a href="#h-' + h.getAttribute('id') + '">' + h.textContent + '</a></li>');
+    }
+
+    menuContent.innerHTML = '<ul>' + menuHTML + '</ul>';
+
+    // The header element
+    var header = document.querySelector('header.site-header');
+
+    function doMenuCollapse(index, over_items) {
+      var items = menuContent.firstChild.children;
+
+      if (over_items == undefined) {
+        over_items = 20;
+      }
+
+      if (items.length < over_items) {
+        return;
+      }
+
+      var activeItem = items[index];
+      var beginItem = activeItem
+      var endItem = activeItem
+      var beginIndex = index;
+      var endIndex = index + 1;
+      while (beginIndex >= 0
+        && !items[beginIndex].classList.contains('h-h2')) {
+        beginIndex -= 1;
+      }
+      while (endIndex < items.length
+        && !items[endIndex].classList.contains('h-h2')) {
+        endIndex += 1;
+      }
+      for (var i = 0; i < beginIndex; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+      for (var i = beginIndex + 1; i < endIndex; i++) {
+        item = items[i]
+        // if (!item.classList.contains('h-h2')) {
+          item.style.display = '';
+        // }
+      }
+      for (var i = endIndex; i < items.length; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+    }
+
+    // Init menu collapsed
+    doMenuCollapse(-1);
+
+    // Active the menu item
+    window.addEventListener('scroll', function (event) {
+      var lastActive = menuContent.querySelector('.active');
+      var changed = true;
+      var activeIndex = -1;
+      for (var i = headings.length - 1; i >= 0; i--) {
+        var h = headings[i];
+        var headingRect = h.getBoundingClientRect();
+        var headerRect = header.getBoundingClientRect();
+        var headerTop = Math.floor(headerRect.top);
+        var headerHeight = Math.floor(headerRect.height);
+        var headerHeight = headerTop + headerHeight + 20;
+        if (headingRect.top <= headerHeight) {
+          var id = 'h-' + h.getAttribute('id');
+          var a = menuContent.querySelector('a[href="#' + id  + '"]');
+          var curActive = a.parentNode;
+          if (curActive) {
+            curActive.classList.add('active');
+            activeIndex = i;
+          }
+          if (lastActive == curActive) {
+            changed = false;
+          }
+          break;
+        }
+      }
+      if (changed) {
+        if (lastActive) {
+          lastActive.classList.remove('active');
+        }
+        doMenuCollapse(activeIndex);
+      }
+      event.preventDefault();
+    });
+  }
+  generateContent();
+</script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const menuContent = document.querySelector('.post-menu-content');
+
+    // 鼠标进入事件
+    menuContent.addEventListener('mouseenter', function() {
+      menuContent.style.overflow = 'auto';
+    });
+
+    // 鼠标离开事件
+    menuContent.addEventListener('mouseleave', function() {
+      menuContent.style.overflow = 'hidden';
+    });
+  });
+</script>
+
+</section>
+</div>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+    <div class="site-footer-inner"><div>李尓阳工作室 <span class="copyleft">&copy;</span> 2018-2023 Lieryang</div>
+      <div class="footer-col gmail"> E-mail sxlisibo@gmail.com</div>
+      <div>Powered by <a title="Jekyll is a simple, blog-aware, static site
+      generator." href="https://jekyllrb.com/">Jekyll</a> &amp; <a title="Yat, yet
+      another theme." href="https://github.com/jeffreytse/jekyll-theme-yat">Yat Theme</a>.</div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

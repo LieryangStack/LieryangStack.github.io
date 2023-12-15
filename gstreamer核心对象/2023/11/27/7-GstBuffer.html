@@ -1,0 +1,1241 @@
+<!DOCTYPE html>
+<html><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>七、GstBuffer | 李尔阳主页</title>
+<meta name="generator" content="Jekyll v3.9.3" />
+<meta property="og:title" content="七、GstBuffer" />
+<meta name="author" content="LieryangStack" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="1 GstBuffer基本概念" />
+<meta property="og:description" content="1 GstBuffer基本概念" />
+<link rel="canonical" href="https://lieryangstack.github.io//gstreamer%E6%A0%B8%E5%BF%83%E5%AF%B9%E8%B1%A1/2023/11/27/7-GstBuffer.html" />
+<meta property="og:url" content="https://lieryangstack.github.io//gstreamer%E6%A0%B8%E5%BF%83%E5%AF%B9%E8%B1%A1/2023/11/27/7-GstBuffer.html" />
+<meta property="og:site_name" content="李尔阳主页" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2023-11-27T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="七、GstBuffer" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"LieryangStack"},"dateModified":"2023-11-27T00:00:00+00:00","datePublished":"2023-11-27T00:00:00+00:00","description":"1 GstBuffer基本概念","headline":"七、GstBuffer","mainEntityOfPage":{"@type":"WebPage","@id":"https://lieryangstack.github.io//gstreamer%E6%A0%B8%E5%BF%83%E5%AF%B9%E8%B1%A1/2023/11/27/7-GstBuffer.html"},"url":"https://lieryangstack.github.io//gstreamer%E6%A0%B8%E5%BF%83%E5%AF%B9%E8%B1%A1/2023/11/27/7-GstBuffer.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="shortcut icon" type="image/x-icon" href="/lieryang.ico">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-noto-sans@0.0.72/index.min.css">
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <script src="/assets/js/main.js"></script><link type="application/atom+xml" rel="alternate" href="https://lieryangstack.github.io//feed.xml" title="李尔阳主页" /><link rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
+
+<!-- and it's easy to individually load additional languages -->
+<script charset="UTF-8"
+        src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/go.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+// Init highlight js
+document.addEventListener('DOMContentLoaded', function(event) {
+  var els = document.querySelectorAll('pre code')
+
+  function addLangData(block) {
+    var outer = block.parentElement.parentElement.parentElement;
+    var lang = block.getAttribute('data-lang');
+    for (var i = 0; i < outer.classList.length; i++) {
+      var cls = outer.classList[i];
+      if (cls.startsWith('language-')) {
+        lang = cls;
+        break;
+      }
+    }
+    if (!lang) {
+      cls = block.getAttribute('class');
+      lang = cls ? cls.replace('hljs ', '') : '';
+    }
+    if (lang.startsWith('language-')) {
+      lang = lang.substr(9);
+    }
+    block.setAttribute('class', 'hljs ' + lang);
+    block.parentNode.setAttribute('data-lang', lang);
+  }
+
+  function addBadge(block) {
+    var enabled = ('true' || 'true').toLowerCase();
+    if (enabled == 'true') {
+      var pre = block.parentElement;
+      pre.classList.add('badge');
+    }
+  }
+
+  function handle(block) {
+    addLangData(block);
+    addBadge(block)
+    hljs.highlightBlock(block);
+  }
+
+  for (var i = 0; i < els.length; i++) {
+    var el = els[i];
+    handle(el);
+  }
+});
+</script>
+
+<style>
+  /* code language badge */
+  pre.badge::before {
+    content: attr(data-lang);
+    color: #fff;
+    background-color: #ff4e00;
+    padding: 0 .5em;
+    border-radius: 0 2px;
+    text-transform: uppercase;
+    text-align: center;
+    min-width: 32px;
+    display: inline-block;
+    position: absolute;
+    right: 0;
+  }
+
+  /* fix wrong badge display for firefox browser */
+  code > table pre::before {
+    display: none;
+  }
+</style>
+<link href='https://lieryangstack.github.io//assets/css/syntax.css' rel='stylesheet' type='text/css' />
+</head>
+<body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<header class="site-header " role="banner">
+
+  <div class="wrapper">
+    <div class="site-header-inner"><span class="site-brand"><a class="site-brand-inner" rel="author" href="/">
+  <img class="site-favicon" title="李尔阳主页" src="" onerror="this.style.display='none'">
+  李尔阳主页
+</a>
+</span><nav class="site-nav">
+          <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+          <label for="nav-trigger">
+            <span class="menu-icon">
+              <svg viewBox="0 0 18 15" width="18px" height="15px">
+                <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+              </svg>
+            </span>
+          </label>
+
+          <!-- <div class="trigger"><a class="page-link" href="/about.html">关于</a><a class="page-link" href="/archives.html">归档</a><a class="page-link" href="/categories.html">分类</a><a class="page-link" href="/">主页</a><a class="page-link" href="/tags.html">标签</a>
+
+
+
+
+
+
+
+
+
+</div> -->
+
+          <div class="trigger">
+             <a class="page-link" href="/about.html">关于</a>
+            <a class="page-link" href="/categories.html">分类</a>
+            <a class="page-link" href="/archives.html">归档</a>
+            <a class="page-link" href="/tags.html">标签</a>
+            <a class="page-link" href="/assets/index.html">下载</a>
+            <!-- 在这里添加更多的导航项 -->
+          </div>
+          
+
+        </nav></div>
+  </div>
+</header>
+
+<script>
+  function initHeader() {
+    var lastScrollY = getScrollPos().y;
+    var documentElement = document.documentElement;
+
+    function storeScrollData() {
+      var y = getScrollPos().y;var scrollStatus = "";
+
+      if (y <= 0) {
+        scrollStatus = "top";
+      } else if ((window.innerHeight + y) >= document.body.offsetHeight) {
+        scrollStatus = "bottom";
+      } else {
+        var isScrollDown = (y - lastScrollY > 0) ? true : false;
+        scrollStatus = isScrollDown ? "down" : "up";
+      }
+
+      lastScrollY = y;
+      documentElement.setAttribute("data-scroll-status", scrollStatus);
+    }
+
+    window.addEventListener('scroll', function(e) {
+      storeScrollData();
+    });
+
+    storeScrollData();
+  }
+  document.addEventListener('DOMContentLoaded', initHeader);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  function hashLocate(hashValue) {
+    hashValue = hashValue.replace(/^.*#h-/, '');
+    hashValue = decodeURIComponent(hashValue);
+    var element = document.getElementById(hashValue);
+
+    if (!element) {
+      return;
+    }
+
+    var header = document.querySelector('header.site-header');
+    var headerRect = header.getBoundingClientRect();
+    var headerTop = Math.floor(headerRect.top);
+    var headerHeight = Math.floor(headerRect.height);
+    var scrollPos = getScrollPos();
+    var offsetY = element.offsetTop - (headerTop + headerHeight + 20);
+
+    if (offsetY == scrollPos.y) {
+      return;
+    }
+
+    if (headerTop == 0  && offsetY > scrollPos.y) {
+      offsetY += headerHeight + 2;
+    } else if (headerTop < 0  && offsetY < scrollPos.y) {
+      offsetY -= headerHeight - 2;
+    }
+
+    smoothScrollTo(offsetY);
+  }
+
+  // The first event occurred
+  window.addEventListener('load', function(event) {
+    if (window.location.hash) {
+      hashLocate(window.location.hash);
+    }
+  });
+
+  // The first event occurred
+  window.addEventListener('click', function(event) {
+    if (event.target.tagName.toLowerCase() == 'a') {
+      hashLocate(event.target.getAttribute('href'));
+    }
+  });
+</script>
+<div class="theme-toggle">
+  <input type="checkbox" id="theme-switch">
+  <label for="theme-switch">
+    <div class="toggle"></div>
+    <div class="names">
+      <p class="light">Light</p>
+      <p class="dark">Dark</p>
+    </div>
+  </label>
+</div>
+
+
+
+
+<script>
+  (function() {
+    var sw = document.getElementById('theme-switch');
+    var html = document.getElementsByTagName('html')[0];
+    var nightModeOption = ('auto' || 'auto').toLowerCase();
+    var storage = nightModeOption === 'manual'
+        ? localStorage
+        : sessionStorage;
+    var themeData = loadThemeData();
+
+    function saveThemeData(data) {
+      storage.setItem('theme', JSON.stringify(data));
+    }
+
+    function loadThemeData() {
+      var data = storage.getItem('theme');
+      try {
+        data = JSON.parse(data ? data : '');
+      } catch(e) {
+        data = { nightShift: undefined, autoToggleAt: 0 };
+        saveThemeData(data);
+      }
+      return data;
+    }
+
+    function handleThemeToggle(nightShift) {
+      themeData.nightShift = nightShift;
+      saveThemeData(themeData);
+      html.dataset.theme = nightShift ? 'dark' : 'light';
+      setTimeout(function() {
+        sw.checked = nightShift ? true : false;
+      }, 50);
+    }
+
+    function autoThemeToggle() {
+      // Next time point of theme toggle
+      var now = new Date();
+      var toggleAt = new Date();
+      var hours = now.getHours();
+      var nightShift = hours >= 19 || hours <=7;
+
+      if (nightShift) {
+        if (hours > 7) {
+          toggleAt.setDate(toggleAt.getDate() + 1);
+        }
+        toggleAt.setHours(7);
+      } else {
+        toggleAt.setHours(19);
+      }
+
+      toggleAt.setMinutes(0);
+      toggleAt.setSeconds(0);
+      toggleAt.setMilliseconds(0)
+
+      var delay = toggleAt.getTime() - now.getTime();
+
+      // auto toggle theme mode
+      setTimeout(function() {
+        handleThemeToggle(!nightShift);
+      }, delay);
+
+      return {
+        nightShift: nightShift,
+        toggleAt: toggleAt.getTime()
+      };
+    }
+
+    // Listen the theme toggle event
+    sw.addEventListener('change', function(event) {
+      handleThemeToggle(event.target.checked);
+    });
+
+    if (nightModeOption == 'auto') {
+      var data = autoThemeToggle();
+
+      // Toggle theme by local setting
+      if (data.toggleAt > themeData.autoToggleAt) {
+        themeData.autoToggleAt = data.toggleAt;
+        handleThemeToggle(data.nightShift);
+      } else {
+        handleThemeToggle(themeData.nightShift);
+      }
+    } else if (nightModeOption == 'manual') {
+      handleThemeToggle(themeData.nightShift);
+    } else {
+      var nightShift = themeData.nightShift;
+      if (nightShift === undefined) {
+        nightShift = nightModeOption === 'on';
+      }
+      handleThemeToggle(nightShift);
+    }
+  })();
+</script>
+<div id="click-to-top" class="click-to-top">
+  <i class="fa fa-arrow-up"></i>
+</div>
+<script>
+  (function () {
+    const clickToTop = document.getElementById('click-to-top');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 100) {
+        clickToTop.classList.add('show')
+      }else {
+        clickToTop.classList.remove('show')
+      }
+    });
+    clickToTop.addEventListener('click', () => {
+      window.smoothScrollTo(0);
+    });
+  })();
+</script>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <div class="framework">
+  <section class="main">
+
+     <div class="post">
+  <section>
+
+
+
+
+
+
+
+
+
+<header class="post-header">
+  <h1 class="post-title p-name" itemprop="name headline">七、GstBuffer</h1>
+  <h2 class="post-subtitle"></h2>
+
+  <p class="post-meta">
+    <time class="dt-published" datetime="2023-11-27T00:00:00+00:00" itemprop="datePublished"><i class="fa fa-calendar"></i> Nov 27, 2023
+    </time>
+
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 6 mins</span>
+  </p><div class="post-tags"><a class="post-tag" href="/tags.html#GStreamer">#GStreamer</a></div></header>
+<article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+    <div class="post-content e-content" itemprop="articleBody">
+
+      <h2 id="1-gstbuffer基本概念">1 GstBuffer基本概念</h2>
+
+<ul>
+  <li>
+    <p>缓冲区（Buffers）是 GStreamer 中数据传输的基本单元。Buffers包含事件timing、偏移量offset、GstMemory和GstMemory块相关联的其他任意元数据metadata。</p>
+  </li>
+  <li>
+    <p>通常使用 gst_buffer_new 创建缓冲区。创建缓冲区后，通常会为其分配内存并将其添加到缓冲区中。以下示例创建了一个可以容纳给定宽度、高度和每像素位数的视频帧的缓冲区。</p>
+
+    <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="n">GstBuffer</span> <span class="o">*</span><span class="n">buffer</span><span class="p">;</span>
+  <span class="n">GstMemory</span> <span class="o">*</span><span class="n">memory</span><span class="p">;</span>
+  <span class="n">gint</span> <span class="n">size</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">bpp</span><span class="p">;</span>
+  <span class="p">...</span>
+  <span class="n">size</span> <span class="o">=</span> <span class="n">width</span> <span class="o">*</span> <span class="n">height</span> <span class="o">*</span> <span class="n">bpp</span><span class="p">;</span>
+  <span class="n">buffer</span> <span class="o">=</span> <span class="n">gst_buffer_new</span> <span class="p">();</span>
+  <span class="n">memory</span> <span class="o">=</span> <span class="n">gst_allocator_alloc</span> <span class="p">(</span><span class="nb">NULL</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+  <span class="n">gst_buffer_insert_memory</span> <span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">memory</span><span class="p">);</span>
+  <span class="p">...</span>
+</code></pre></div>    </div>
+
+    <p>或者，使用 gst_buffer_new_allocate 来创建一个具有预分配数据的缓冲区（已经包含GstMemory，不需要再手动创建GstMemory和添加到GstBuffer）。</p>
+  </li>
+  <li>
+    <p>缓冲区可以包含 GstMemory 对象的列表。您可以使用 gst_buffer_n_memory 获取有多少内存对象，并可以使用 gst_buffer_peek_memory 获取内存的指针。</p>
+  </li>
+  <li>
+    <p>缓冲区通常有时间戳和持续时间，但这些都不是必须的（它们可能被设置为 GST_CLOCK_TIME_NONE）。只要能为这些值提供有意义的值，就应该设置。时间戳和持续时间以纳秒为单位（它们是 GstClockTime 值）。</p>
+  </li>
+  <li>
+    <p>缓冲区的 DTS 指的是缓冲区应该被解码的时间戳，通常是单调递增的。缓冲区的 PTS 指的是缓冲区内容应该呈现给用户的时间戳，并不总是单调递增的。</p>
+  </li>
+  <li>
+    <p>缓冲区还可以有开始和/或结束偏移量。这些是媒体类型特定的。对于视频缓冲区，开始偏移量通常是帧号。对于音频缓冲区，它将是到目前为止产生的样本数。对于压缩数据，它可能是源文件或目标文件中的字节偏移量。同样，结束偏移量将是缓冲区结束的偏移量。只有在知道缓冲区的媒体类型（前一个 CAPS 事件）时，这些才能被有意义地解释。可以将一个或两个都设置为 GST_BUFFER_OFFSET_NONE。</p>
+  </li>
+  <li>
+    <p>使用 gst_buffer_ref 可以增加缓冲区的引用计数。当您想在将缓冲区推送到下一个元素后保留对缓冲区的引用时，必须这样做。缓冲区的引用计数决定了缓冲区的可写性，只有当引用计数正好为1时，即当调用者拥有对缓冲区的唯一引用时，缓冲区才是可写的。</p>
+
+    <p>要有效地从现有的一个缓冲区创建一个较小的缓冲区，可以使用 gst_buffer_copy_region。这种方法试图在两个缓冲区之间共享内存对象。</p>
+
+    <p>如果插件想要就地修改缓冲区的数据或元数据，它应该首先使用 gst_buffer_make_writable 获取一个安全可修改的缓冲区。这个函数是经过优化的，只有在必要时才会制作副本。</p>
+  </li>
+  <li>
+    <p>可以使用 GST_BUFFER_FLAG_SET 和 GST_BUFFER_FLAG_UNSET 宏设置和取消设置缓冲区的几个标志。使用 GST_BUFFER_FLAG_IS_SET 测试是否设置了某个 GstBufferFlags 标志。</p>
+  </li>
+  <li>
+    <p>可以使用 gst_buffer_append 高效地将缓冲区合并成一个更大的缓冲区。只有在绝对需要时才会进行内存复制。</p>
+  </li>
+  <li>
+    <p>可以使用 gst_buffer_add_meta 在缓冲区上设置任意额外的元数据。元数据可以通过 gst_buffer_get_meta 检索。另见 GstMeta。</p>
+  </li>
+  <li>
+    <p>元素应该使用 gst_pad_push （参见 GstPad）将缓冲区解除引用或推出到源垫上。</p>
+  </li>
+  <li>
+    <p>通常通过使用 gst_buffer_unref 来释放缓冲区。当引用计数降至0时，缓冲区所指向的任何内存和元数据也会被解除引用。从 GstBufferPool 分配的缓冲区在引用计数降至0时将被返回到池中。</p>
+  </li>
+  <li>
+    <p>GstParentBufferMeta 是可以附加到 GstBuffer 上的元数据，用于保留对另一个缓冲区的引用，只有在子 GstBuffer 被释放时才会释放。</p>
+  </li>
+  <li>
+    <p>通常情况下，当子缓冲区直接使用父缓冲区的 GstMemory 并且希望在 GstMemory 可以重新使用之前防止父缓冲区被返回到缓冲区池时，会使用 GstParentBufferMeta。（自 1.6 版本起）</p>
+  </li>
+</ul>
+
+<h2 id="2-gstbuffer类型结构">2 GstBuffer类型结构</h2>
+
+<p><code class="language-plaintext highlighter-rouge">GstBuffer</code> 是一个继承于 <code class="language-plaintext highlighter-rouge">GstMiniObject</code> 的GBoxed类型对象。</p>
+
+<h3 id="21-gstbuffer类型注册宏定义">2.1 GstBuffer类型注册宏定义</h3>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/* filename: gstbuffer.h */</span>
+<span class="n">GST_API</span> <span class="n">GType</span> <span class="n">_gst_buffer_type</span><span class="p">;</span>
+<span class="cp">#define GST_TYPE_BUFFER                         (_gst_buffer_type)
+</span>
+<span class="cm">/* filename: gstbuffer.c */</span>
+<span class="n">GType</span> <span class="n">_gst_buffer_type</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+<span class="n">GST_DEFINE_MINI_OBJECT_TYPE</span> <span class="p">(</span><span class="n">GstBuffer</span><span class="p">,</span> <span class="n">gst_buffer</span><span class="p">);</span>
+
+<span class="cm">/**
+ * @calledby: gst_init调用
+*/</span>
+<span class="kt">void</span>
+<span class="nf">_priv_gst_buffer_initialize</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="n">_gst_buffer_type</span> <span class="o">=</span> <span class="n">gst_buffer_get_type</span> <span class="p">();</span>
+
+<span class="cp">#ifdef NO_64BIT_ATOMIC_INT_FOR_PLATFORM
+</span>  <span class="n">GST_CAT_WARNING</span> <span class="p">(</span><span class="n">GST_CAT_PERFORMANCE</span><span class="p">,</span>
+      <span class="s">"No 64-bit atomic int defined for this platform/toolchain!"</span><span class="p">);</span>
+<span class="cp">#endif
+</span><span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="22-gstbuffer类型相关枚举">2.2 GstBuffer类型相关枚举</h3>
+
+<h4 id="221-gstbufferflags">2.2.1 GstBufferFlags</h4>
+
+<p><code class="language-plaintext highlighter-rouge">GstBufferFlags</code> 枚举使用在第一个成员 <code class="language-plaintext highlighter-rouge">GstMiniObject</code> 的flag成员中。</p>
+
+<ul>
+  <li><strong>GST_BUFFER_FLAG_TAG_MEMORY</strong>：GstBuffer只要修改GstMemory存储，就会设定此标志。例如：GstMemory添加到GstBuffer的时候会给flag设定此标志，调用的是 <code class="language-plaintext highlighter-rouge">_memory_add</code> 函数，该函数中会设定此标志。</li>
+</ul>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/* filename: gstbuffer.h */</span>
+<span class="cm">/**
+ * GstBufferFlags:
+ * @GST_BUFFER_FLAG_LIVE: 缓冲区包含实时数据，在 PAUSED 状态时应该被丢弃。
+ * @GST_BUFFER_FLAG_DECODE_ONLY: 缓冲区包含应该被丢弃的数据，因为它将会被剪辑到段边界，
+ *                               或者因为它不包含应该向用户显示的数据。
+ * @GST_BUFFER_FLAG_DISCONT: 缓冲区标记了流中的数据不连续性。这通常发生在寻找操作后，
+ *                           或从实时或网络源丢弃缓冲区后。
+ * @GST_BUFFER_FLAG_RESYNC: 缓冲区的时间戳可能有不连续性，这个缓冲区是重新同步的好时机。
+ * @GST_BUFFER_FLAG_CORRUPTED: 缓冲区数据已损坏。
+ * @GST_BUFFER_FLAG_MARKER: 缓冲区包含特定于媒体的标记。对于视频，这是帧边界的结束，
+ *                           对于音频，这是说话开始的标志。对于 RTP 数据包，这与
+ *                           RTP 数据包头中的标记标志相匹配。
+ * @GST_BUFFER_FLAG_HEADER: 缓冲区包含解码后续数据所需的头信息。
+ * @GST_BUFFER_FLAG_GAP: 缓冲区被创建用于填补流中的间隙，并包含媒体中立数据
+ *                       （元素可以切换到优化的代码路径，忽略缓冲区内容）。
+ * @GST_BUFFER_FLAG_DROPPABLE: 缓冲区可以被丢弃而不破坏流，例如为了减少带宽。
+ * @GST_BUFFER_FLAG_DELTA_UNIT: 此单元不能独立解码。
+ * @GST_BUFFER_FLAG_TAG_MEMORY: 当缓冲区的内存被添加/移除时设置此标志。
+ * @GST_BUFFER_FLAG_LAST: 可以从此标志开始添加额外的特定于媒体的标志。
+ *
+ * 用于描述 #GstBuffer 属性的一组缓冲区标志。
+ */</span>
+<span class="k">typedef</span> <span class="k">enum</span> <span class="p">{</span>
+  <span class="n">GST_BUFFER_FLAG_LIVE</span>          <span class="o">=</span> <span class="p">(</span><span class="n">GST_MINI_OBJECT_FLAG_LAST</span> <span class="o">&lt;&lt;</span> <span class="mi">0</span><span class="p">),</span>
+  <span class="n">GST_BUFFER_FLAG_DECODE_ONLY</span>   <span class="o">=</span> <span class="p">(</span><span class="n">GST_MINI_OBJECT_FLAG_LAST</span> <span class="o">&lt;&lt;</span> <span class="mi">1</span><span class="p">),</span>
+  <span class="n">GST_BUFFER_FLAG_DISCONT</span>       <span class="o">=</span> <span class="p">(</span><span class="n">GST_MINI_OBJECT_FLAG_LAST</span> <span class="o">&lt;&lt;</span> <span class="mi">2</span><span class="p">),</span>
+  <span class="n">GST_BUFFER_FLAG_RESYNC</span>        <span class="o">=</span> <span class="p">(</span><span class="n">GST_MINI_OBJECT_FLAG_LAST</span> <span class="o">&lt;&lt;</span> <span class="mi">3</span><span class="p">),</span>
+  <span class="n">GST_BUFFER_FLAG_CORRUPTED</span>     <span class="o">=</span> <span class="p">(</span><span class="n">GST_MINI_OBJECT_FLAG_LAST</span> <span class="o">&lt;&lt;</span> <span class="mi">4</span><span class="p">),</span>
+  <span class="n">GST_BUFFER_FLAG_MARKER</span>        <span class="o">=</span> <span class="p">(</span><span class="n">GST_MINI_OBJECT_FLAG_LAST</span> <span class="o">&lt;&lt;</span> <span class="mi">5</span><span class="p">),</span>
+  <span class="n">GST_BUFFER_FLAG_HEADER</span>        <span class="o">=</span> <span class="p">(</span><span class="n">GST_MINI_OBJECT_FLAG_LAST</span> <span class="o">&lt;&lt;</span> <span class="mi">6</span><span class="p">),</span>
+  <span class="n">GST_BUFFER_FLAG_GAP</span>           <span class="o">=</span> <span class="p">(</span><span class="n">GST_MINI_OBJECT_FLAG_LAST</span> <span class="o">&lt;&lt;</span> <span class="mi">7</span><span class="p">),</span>
+  <span class="n">GST_BUFFER_FLAG_DROPPABLE</span>     <span class="o">=</span> <span class="p">(</span><span class="n">GST_MINI_OBJECT_FLAG_LAST</span> <span class="o">&lt;&lt;</span> <span class="mi">8</span><span class="p">),</span>
+  <span class="n">GST_BUFFER_FLAG_DELTA_UNIT</span>    <span class="o">=</span> <span class="p">(</span><span class="n">GST_MINI_OBJECT_FLAG_LAST</span> <span class="o">&lt;&lt;</span> <span class="mi">9</span><span class="p">),</span>
+  <span class="n">GST_BUFFER_FLAG_TAG_MEMORY</span>    <span class="o">=</span> <span class="p">(</span><span class="n">GST_MINI_OBJECT_FLAG_LAST</span> <span class="o">&lt;&lt;</span> <span class="mi">10</span><span class="p">),</span>
+  <span class="cm">/* 枚举值与上面标志对应 */</span>
+  
+  <span class="cm">/**
+   * GST_BUFFER_FLAG_SYNC_AFTER:
+   *
+   * 写入磁盘或永久存储的元素应确保在写入此缓冲区的内容后同步数据。
+   *
+   * 自版本 1.6 起。
+   */</span>
+  <span class="n">GST_BUFFER_FLAG_SYNC_AFTER</span>    <span class="o">=</span> <span class="p">(</span><span class="n">GST_MINI_OBJECT_FLAG_LAST</span> <span class="o">&lt;&lt;</span> <span class="mi">11</span><span class="p">),</span>
+
+  <span class="cm">/**
+   * GST_BUFFER_FLAG_NON_DROPPABLE:
+   *
+   * 这个缓冲区很重要，不应该被丢弃。
+   *
+   * 这可以用来标记重要的缓冲区，例如标记携带关键帧或编解码器设置数据的 RTP 数据包，
+   * 用于 RTP 前向错误纠正目的，或防止由于 QoS 而导致的静态视频帧被元素丢弃。
+   *
+   * 自版本 1.14 起。
+   */</span>
+  <span class="n">GST_BUFFER_FLAG_NON_DROPPABLE</span> <span class="o">=</span> <span class="p">(</span><span class="n">GST_MINI_OBJECT_FLAG_LAST</span> <span class="o">&lt;&lt;</span> <span class="mi">12</span><span class="p">),</span>
+
+  <span class="n">GST_BUFFER_FLAG_LAST</span>          <span class="o">=</span> <span class="p">(</span><span class="n">GST_MINI_OBJECT_FLAG_LAST</span> <span class="o">&lt;&lt;</span> <span class="mi">16</span><span class="p">)</span>
+<span class="p">}</span> <span class="n">GstBufferFlags</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h4 id="222-gstbuffercopyflags">2.2.2 GstBufferCopyFlags</h4>
+
+<p>这个是GstBuffer拷贝的时候使用的flags。提供给 <code class="language-plaintext highlighter-rouge">gst_buffer_copy_into</code> 函数使用的标志，用于指定应该复制那些项目。</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/**
+ * GstBufferCopyFlags：
+ * @GST_BUFFER_COPY_NONE：不复制任何内容
+ * @GST_BUFFER_COPY_FLAGS：表示要拷贝GstBuffer的flags（GstBufferFlags）
+ * @GST_BUFFER_COPY_TIMESTAMPS：表示要拷贝GstBuffer的 pts, dts, duration, offset 和 offset_end
+ * @GST_BUFFER_COPY_MEMORY：表示被拷贝的GstBuffer中的GstMemory中的data被引用到要拷贝的GstBuffer中。
+ *                         如果内存被标记为NO_SHARE，会进行实际的内存复制，而是简单地引用。
+ *                         添加 @GST_BUFFER_COPY_DEEP 来强制进行真正的复制。
+ * @GST_BUFFER_COPY_MERGE：表示应该合并GstBuffer缓冲区内存
+ * @GST_BUFFER_COPY_META： 表示应该拷贝GstBuffer的元数据
+ *
+ * 一组可以提供给 gst_buffer_copy_into() 函数的标志，
+ * 用于指定应该复制哪些项目。
+ */</span>
+<span class="k">typedef</span> <span class="k">enum</span> <span class="p">{</span>
+  <span class="n">GST_BUFFER_COPY_NONE</span>           <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="n">GST_BUFFER_COPY_FLAGS</span>          <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">0</span><span class="p">),</span>
+  <span class="n">GST_BUFFER_COPY_TIMESTAMPS</span>     <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">1</span><span class="p">),</span>
+  <span class="n">GST_BUFFER_COPY_META</span>           <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">2</span><span class="p">),</span>
+  <span class="n">GST_BUFFER_COPY_MEMORY</span>         <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">3</span><span class="p">),</span>
+  <span class="n">GST_BUFFER_COPY_MERGE</span>          <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">4</span><span class="p">),</span>
+
+  <span class="cm">/**
+   * GST_BUFFER_COPY_DEEP:
+   *
+   * 表示内存应该被深拷贝，而不是ref引用一下
+   *
+   * Since: 1.2
+   */</span>
+  <span class="n">GST_BUFFER_COPY_DEEP</span>           <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">5</span><span class="p">)</span>
+<span class="p">}</span> <span class="n">GstBufferCopyFlags</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h3 id="23-gstbuffer相关结构体">2.3 GstBuffer相关结构体</h3>
+
+<h4 id="231-gstbuffer">2.3.1 GstBuffer</h4>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/* filename: gstbuffer.h */</span>
+<span class="cm">/**
+ * GstBuffer:
+ * @mini_object: 父结构
+ * @pool: 指向缓冲区拥有者的池的指针
+ * @pts: 缓冲区的展示时间戳，当 pts 未知或不相关时可以是 #GST_CLOCK_TIME_NONE。pts 包含媒体应该呈现给用户的时间戳。
+ * @dts: 缓冲区的解码时间戳，当 dts 未知或不相关时可以是 #GST_CLOCK_TIME_NONE。dts 包含媒体应该被处理的时间戳。
+ * @duration: 缓冲区数据的持续时间，当持续时间未知或不相关时可以是 #GST_CLOCK_TIME_NONE。
+ * @offset: 缓冲区数据的特定于媒体的偏移量。
+ *     对于视频帧，这是此缓冲区的帧号。
+ *     对于音频样本，这是此缓冲区中第一个样本的偏移量。
+ *     对于文件数据或压缩数据，这是此缓冲区中第一个字节的字节偏移量。
+ * @offset_end: 此缓冲区中包含的最后一个偏移量。它的格式与 @offset 相同。
+ *
+ * #GstBuffer 的结构。使用相关的宏来访问公共变量。
+ */</span>
+
+<span class="k">struct</span> <span class="n">_GstBuffer</span> <span class="p">{</span>
+  <span class="n">GstMiniObject</span>          <span class="n">mini_object</span><span class="p">;</span>
+
+  <span class="cm">/*&lt; public &gt;*/</span> <span class="cm">/* with COW */</span>
+  <span class="n">GstBufferPool</span>         <span class="o">*</span><span class="n">pool</span><span class="p">;</span>
+
+  <span class="cm">/* timestamp */</span>
+  <span class="n">GstClockTime</span>           <span class="n">pts</span><span class="p">;</span>
+  <span class="n">GstClockTime</span>           <span class="n">dts</span><span class="p">;</span>
+  <span class="n">GstClockTime</span>           <span class="n">duration</span><span class="p">;</span>
+
+  <span class="cm">/* media specific offset */</span>
+  <span class="n">guint64</span>                <span class="n">offset</span><span class="p">;</span>
+  <span class="n">guint64</span>                <span class="n">offset_end</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h4 id="232-gstbufferimpl">2.3.2 GstBufferImpl</h4>
+
+<p><code class="language-plaintext highlighter-rouge">gst_buffer_new</code> 函数实际创建的是 <code class="language-plaintext highlighter-rouge">GstBufferImpl</code> 结构体。</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/* filename: gstbuffer.c */</span>
+<span class="k">typedef</span> <span class="k">struct</span>
+<span class="p">{</span>
+  <span class="n">GstBuffer</span> <span class="n">buffer</span><span class="p">;</span>
+
+  <span class="n">gsize</span> <span class="n">slice_size</span><span class="p">;</span> <span class="cm">/* 存储的一般都是 sizeof(GstBufferImpl)  */</span>
+
+  <span class="cm">/* the memory blocks */</span>
+  <span class="n">guint</span> <span class="n">len</span><span class="p">;</span>
+  <span class="n">GstMemory</span> <span class="o">*</span><span class="n">mem</span><span class="p">[</span><span class="n">GST_BUFFER_MEM_MAX</span><span class="p">];</span>
+
+  <span class="cm">/* memory of the buffer when allocated from 1 chunk */</span>
+  <span class="n">GstMemory</span> <span class="o">*</span><span class="n">bufmem</span><span class="p">;</span>
+
+  <span class="cm">/* FIXME, make metadata allocation more efficient by using part of the
+   * GstBufferImpl */</span>
+  <span class="n">GstMetaItem</span> <span class="o">*</span><span class="n">item</span><span class="p">;</span>
+  <span class="n">GstMetaItem</span> <span class="o">*</span><span class="n">tail_item</span><span class="p">;</span>
+<span class="p">}</span> <span class="n">GstBufferImpl</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h2 id="3-gstbuffer对象相关函数">3 GstBuffer对象相关函数</h2>
+
+<h3 id="31-gst_buffer_new">3.1 gst_buffer_new</h3>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/**
+ * @name: gst_buffer_new
+ * @brief: 创建一个GstBufferImpl，并且初始化
+ * @note: 此时的GstBuffer是空的，没有data（GstMemory）
+ * @return: 新创建的GstBuffer
+ */</span>
+<span class="n">GstBuffer</span> <span class="o">*</span>
+<span class="nf">gst_buffer_new</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="n">GstBufferImpl</span> <span class="o">*</span><span class="n">newbuf</span><span class="p">;</span>
+
+  <span class="n">newbuf</span> <span class="o">=</span> <span class="n">g_slice_new</span> <span class="p">(</span><span class="n">GstBufferImpl</span><span class="p">);</span>
+  <span class="n">GST_CAT_LOG</span> <span class="p">(</span><span class="n">GST_CAT_BUFFER</span><span class="p">,</span> <span class="s">"new %p"</span><span class="p">,</span> <span class="n">newbuf</span><span class="p">);</span>
+
+  <span class="n">gst_buffer_init</span> <span class="p">(</span><span class="n">newbuf</span><span class="p">,</span> <span class="k">sizeof</span> <span class="p">(</span><span class="n">GstBufferImpl</span><span class="p">));</span>
+
+  <span class="k">return</span> <span class="n">GST_BUFFER_CAST</span> <span class="p">(</span><span class="n">newbuf</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="4-metadata">4 MetaData</h2>
+
+<h3 id="41-gstparentbuffermeta">4.1 GstParentBufferMeta</h3>
+
+<h3 id="42-gstreferencetimestampmeta">4.2 GstReferenceTimestampMeta</h3>
+
+
+    </div>
+
+</article>
+<div class="post-nav"><a class="previous" href="/gstreamer%E6%A0%B8%E5%BF%83%E5%AF%B9%E8%B1%A1/2023/11/27/6-GstMeta.html" title="六、GstMeta">六、GstMeta</a><a class="next" href="/%E5%8D%95%E8%AF%8D/2023/11/28/11%E6%9C%88%E5%8D%95%E8%AF%8D.html" title="11月单词">11月单词</a></div><!--<div class="post-related">
+      <div>Related Articles</div>
+      <ul>
+        <li><a class="post-link" href="/gstreamer%E6%A0%B8%E5%BF%83%E5%AF%B9%E8%B1%A1/2023/12/01/11-GstCpas.html" title="11月单词">十一、GstCpas</a></li><li><a class="post-link" href="/gstreamer%E6%A0%B8%E5%BF%83%E5%AF%B9%E8%B1%A1/2023/12/01/15-GstTask.html" title="11月单词">十五、GstTask</a></li><li><a class="post-link" href="/%E6%97%A5%E4%B9%8B%E6%BC%AB%E5%BD%95/2023/10/27/%E8%B0%83%E8%AF%95%E5%B7%A5%E5%85%B7%E5%AD%A6%E4%B9%A0.html" title="11月单词">调试工具学习</a></li><li><a class="post-link" href="/%E6%97%A5%E4%B9%8B%E6%BC%AB%E5%BD%95/2023/11/08/Ubuntu%E6%9B%B4%E6%96%B0%E6%97%B6%E9%97%B4.html" title="11月单词">Ubuntu更新时间</a></li></ul>
+    </div>--><div class="post-related">
+      <div>相关文章</div>
+      <ul><li><a class="post-link" href="/gstreamer%E6%A0%B8%E5%BF%83%E5%AF%B9%E8%B1%A1/2023/12/09/23-GstElement.html" title="二十三、GstElement">二十三、GstElement</a></li><li><a class="post-link" href="/gstreamer%E6%A0%B8%E5%BF%83%E5%AF%B9%E8%B1%A1/2023/12/06/20-GstEvent.html" title="二十、GstEvent">二十、GstEvent</a></li><li><a class="post-link" href="/gstreamer%E6%A0%B8%E5%BF%83%E5%AF%B9%E8%B1%A1/2023/12/06/21-GstPadTemplate.html" title="二十一、GstPadTemplate">二十一、GstPadTemplate</a></li><li><a class="post-link" href="/gstreamer%E6%A0%B8%E5%BF%83%E5%AF%B9%E8%B1%A1/2023/12/06/22-GstPad.html" title="二十二、GstPad">二十二、GstPad</a></li></ul>
+    </div><div class="post-comments"><div id="disqus_thread"></div>
+<script>
+    /**
+    *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+    *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
+    /*
+    var disqus_config = function () {
+    this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+    this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+    */
+    (function() { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+    s.src = 'https://pzhou-me.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div></section>
+</div>
+
+
+  </section>
+  <section class="sidebar" style="margin-left: 15px;">
+    <!-- Get sidebar items --><style type="text/css" media="screen">
+.post-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.post-menu ul li {
+  margin-bottom: 5px;  /* 增加每个列表项底部的间距 */
+}
+
+.post-menu ul li a {
+  font-size: 16px; /* 设置目录链接的字体大小 */
+}
+
+.post-menu-content {
+  max-height: 600px; /* 设置最大高度 */
+  min-width: 300px;
+  overflow: hidden; /* 默认隐藏滚动条 */
+  white-space: nowrap; /* 水平方向上的内容不换行 */
+}
+
+/* 自定义垂直滚动条的样式 */
+.post-menu-content::-webkit-scrollbar {
+  width: 8px; /* 垂直滚动条的宽度 */
+  height: 8px; /* 水平滚动条的高度 */
+}
+
+/* 自定义垂直滚动条轨道 */
+.post-menu-content::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* 自定义垂直滚动条滑块 */
+.post-menu-content::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* 当鼠标悬停在垂直滚动条滑块上时 */
+.post-menu-content::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* 一级标题样式 */
+.post-menu ul li.h-h2 {
+  margin-left: 0;
+  margin-bottom: 10px;
+}
+
+/* 二级标题样式 */
+.post-menu ul li.h-h3 {
+  margin-left: 20px;
+  margin-bottom: 10px;
+}
+
+/* 三级标题样式 */
+.post-menu ul li.h-h4 {
+  margin-left: 40px;
+  margin-bottom: 10px;
+}
+
+
+</style>
+
+
+
+<div class="post-menu">
+  <div class="post-menu-title">目录</div>
+  <div class="post-menu-content"></div>
+</div>
+
+<script>
+  function generateContent() {
+    var menu = document.querySelector(".post-menu");
+    var menuContent =  menu.querySelector(".post-menu-content");
+    var headings = document.querySelector(".post-content").querySelectorAll("h2, h3, h4, h5, h6");
+
+    // Hide menu when no headings
+    if (headings.length === 0) {
+      return menu.style.display = "none";
+    }
+
+    // Generate post menu
+    var menuHTML = '';
+    for (var i = 0; i < headings.length; i++) {
+      var h = headings[i];
+      menuHTML += (
+        '<li class="h-' + h.tagName.toLowerCase() + '">'
+        + '<a href="#h-' + h.getAttribute('id') + '">' + h.textContent + '</a></li>');
+    }
+
+    menuContent.innerHTML = '<ul>' + menuHTML + '</ul>';
+
+    // The header element
+    var header = document.querySelector('header.site-header');
+
+    function doMenuCollapse(index, over_items) {
+      var items = menuContent.firstChild.children;
+
+      if (over_items == undefined) {
+        over_items = 20;
+      }
+
+      if (items.length < over_items) {
+        return;
+      }
+
+      var activeItem = items[index];
+      var beginItem = activeItem
+      var endItem = activeItem
+      var beginIndex = index;
+      var endIndex = index + 1;
+      while (beginIndex >= 0
+        && !items[beginIndex].classList.contains('h-h2')) {
+        beginIndex -= 1;
+      }
+      while (endIndex < items.length
+        && !items[endIndex].classList.contains('h-h2')) {
+        endIndex += 1;
+      }
+      for (var i = 0; i < beginIndex; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+      for (var i = beginIndex + 1; i < endIndex; i++) {
+        item = items[i]
+        // if (!item.classList.contains('h-h2')) {
+          item.style.display = '';
+        // }
+      }
+      for (var i = endIndex; i < items.length; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+    }
+
+    // Init menu collapsed
+    doMenuCollapse(-1);
+
+    // Active the menu item
+    window.addEventListener('scroll', function (event) {
+      var lastActive = menuContent.querySelector('.active');
+      var changed = true;
+      var activeIndex = -1;
+      for (var i = headings.length - 1; i >= 0; i--) {
+        var h = headings[i];
+        var headingRect = h.getBoundingClientRect();
+        var headerRect = header.getBoundingClientRect();
+        var headerTop = Math.floor(headerRect.top);
+        var headerHeight = Math.floor(headerRect.height);
+        var headerHeight = headerTop + headerHeight + 20;
+        if (headingRect.top <= headerHeight) {
+          var id = 'h-' + h.getAttribute('id');
+          var a = menuContent.querySelector('a[href="#' + id  + '"]');
+          var curActive = a.parentNode;
+          if (curActive) {
+            curActive.classList.add('active');
+            activeIndex = i;
+          }
+          if (lastActive == curActive) {
+            changed = false;
+          }
+          break;
+        }
+      }
+      if (changed) {
+        if (lastActive) {
+          lastActive.classList.remove('active');
+        }
+        doMenuCollapse(activeIndex);
+      }
+      event.preventDefault();
+    });
+  }
+  generateContent();
+</script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const menuContent = document.querySelector('.post-menu-content');
+
+    // 鼠标进入事件
+    menuContent.addEventListener('mouseenter', function() {
+      menuContent.style.overflow = 'auto';
+    });
+
+    // 鼠标离开事件
+    menuContent.addEventListener('mouseleave', function() {
+      menuContent.style.overflow = 'hidden';
+    });
+  });
+</script>
+
+</section>
+</div>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+    <div class="site-footer-inner"><div>李尓阳工作室 <span class="copyleft">&copy;</span> 2018-2023 Lieryang</div>
+      <div class="footer-col gmail"> E-mail sxlisibo@gmail.com</div>
+      <div>Powered by <a title="Jekyll is a simple, blog-aware, static site
+      generator." href="https://jekyllrb.com/">Jekyll</a> &amp; <a title="Yat, yet
+      another theme." href="https://github.com/jeffreytse/jekyll-theme-yat">Yat Theme</a>.</div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

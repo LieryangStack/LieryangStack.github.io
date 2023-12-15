@@ -1,0 +1,1358 @@
+<!DOCTYPE html>
+<html><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>四、GObject子类的继承 | 李尔阳主页</title>
+<meta name="generator" content="Jekyll v3.9.3" />
+<meta property="og:title" content="四、GObject子类的继承" />
+<meta name="author" content="LieryangStack" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="1 Bibtex文献类的设计 1.1 Bibtex类头文件" />
+<meta property="og:description" content="1 Bibtex文献类的设计 1.1 Bibtex类头文件" />
+<link rel="canonical" href="https://lieryangstack.github.io//gobject%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0202109/2021/08/31/4-GObject%E5%AD%90%E7%B1%BB%E7%9A%84%E7%BB%A7%E6%89%BF.html" />
+<meta property="og:url" content="https://lieryangstack.github.io//gobject%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0202109/2021/08/31/4-GObject%E5%AD%90%E7%B1%BB%E7%9A%84%E7%BB%A7%E6%89%BF.html" />
+<meta property="og:site_name" content="李尔阳主页" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-08-31T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="四、GObject子类的继承" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"LieryangStack"},"dateModified":"2021-08-31T00:00:00+00:00","datePublished":"2021-08-31T00:00:00+00:00","description":"1 Bibtex文献类的设计 1.1 Bibtex类头文件","headline":"四、GObject子类的继承","mainEntityOfPage":{"@type":"WebPage","@id":"https://lieryangstack.github.io//gobject%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0202109/2021/08/31/4-GObject%E5%AD%90%E7%B1%BB%E7%9A%84%E7%BB%A7%E6%89%BF.html"},"url":"https://lieryangstack.github.io//gobject%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0202109/2021/08/31/4-GObject%E5%AD%90%E7%B1%BB%E7%9A%84%E7%BB%A7%E6%89%BF.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="shortcut icon" type="image/x-icon" href="/lieryang.ico">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-noto-sans@0.0.72/index.min.css">
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <script src="/assets/js/main.js"></script><link type="application/atom+xml" rel="alternate" href="https://lieryangstack.github.io//feed.xml" title="李尔阳主页" /><link rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
+
+<!-- and it's easy to individually load additional languages -->
+<script charset="UTF-8"
+        src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/go.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+// Init highlight js
+document.addEventListener('DOMContentLoaded', function(event) {
+  var els = document.querySelectorAll('pre code')
+
+  function addLangData(block) {
+    var outer = block.parentElement.parentElement.parentElement;
+    var lang = block.getAttribute('data-lang');
+    for (var i = 0; i < outer.classList.length; i++) {
+      var cls = outer.classList[i];
+      if (cls.startsWith('language-')) {
+        lang = cls;
+        break;
+      }
+    }
+    if (!lang) {
+      cls = block.getAttribute('class');
+      lang = cls ? cls.replace('hljs ', '') : '';
+    }
+    if (lang.startsWith('language-')) {
+      lang = lang.substr(9);
+    }
+    block.setAttribute('class', 'hljs ' + lang);
+    block.parentNode.setAttribute('data-lang', lang);
+  }
+
+  function addBadge(block) {
+    var enabled = ('true' || 'true').toLowerCase();
+    if (enabled == 'true') {
+      var pre = block.parentElement;
+      pre.classList.add('badge');
+    }
+  }
+
+  function handle(block) {
+    addLangData(block);
+    addBadge(block)
+    hljs.highlightBlock(block);
+  }
+
+  for (var i = 0; i < els.length; i++) {
+    var el = els[i];
+    handle(el);
+  }
+});
+</script>
+
+<style>
+  /* code language badge */
+  pre.badge::before {
+    content: attr(data-lang);
+    color: #fff;
+    background-color: #ff4e00;
+    padding: 0 .5em;
+    border-radius: 0 2px;
+    text-transform: uppercase;
+    text-align: center;
+    min-width: 32px;
+    display: inline-block;
+    position: absolute;
+    right: 0;
+  }
+
+  /* fix wrong badge display for firefox browser */
+  code > table pre::before {
+    display: none;
+  }
+</style>
+<link href='https://lieryangstack.github.io//assets/css/syntax.css' rel='stylesheet' type='text/css' />
+</head>
+<body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<header class="site-header " role="banner">
+
+  <div class="wrapper">
+    <div class="site-header-inner"><span class="site-brand"><a class="site-brand-inner" rel="author" href="/">
+  <img class="site-favicon" title="李尔阳主页" src="" onerror="this.style.display='none'">
+  李尔阳主页
+</a>
+</span><nav class="site-nav">
+          <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+          <label for="nav-trigger">
+            <span class="menu-icon">
+              <svg viewBox="0 0 18 15" width="18px" height="15px">
+                <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+              </svg>
+            </span>
+          </label>
+
+          <!-- <div class="trigger"><a class="page-link" href="/about.html">关于</a><a class="page-link" href="/archives.html">归档</a><a class="page-link" href="/categories.html">分类</a><a class="page-link" href="/">主页</a><a class="page-link" href="/tags.html">标签</a>
+
+
+
+
+
+
+
+
+
+</div> -->
+
+          <div class="trigger">
+             <a class="page-link" href="/about.html">关于</a>
+            <a class="page-link" href="/categories.html">分类</a>
+            <a class="page-link" href="/archives.html">归档</a>
+            <a class="page-link" href="/tags.html">标签</a>
+            <a class="page-link" href="/assets/index.html">下载</a>
+            <!-- 在这里添加更多的导航项 -->
+          </div>
+          
+
+        </nav></div>
+  </div>
+</header>
+
+<script>
+  function initHeader() {
+    var lastScrollY = getScrollPos().y;
+    var documentElement = document.documentElement;
+
+    function storeScrollData() {
+      var y = getScrollPos().y;var scrollStatus = "";
+
+      if (y <= 0) {
+        scrollStatus = "top";
+      } else if ((window.innerHeight + y) >= document.body.offsetHeight) {
+        scrollStatus = "bottom";
+      } else {
+        var isScrollDown = (y - lastScrollY > 0) ? true : false;
+        scrollStatus = isScrollDown ? "down" : "up";
+      }
+
+      lastScrollY = y;
+      documentElement.setAttribute("data-scroll-status", scrollStatus);
+    }
+
+    window.addEventListener('scroll', function(e) {
+      storeScrollData();
+    });
+
+    storeScrollData();
+  }
+  document.addEventListener('DOMContentLoaded', initHeader);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  function hashLocate(hashValue) {
+    hashValue = hashValue.replace(/^.*#h-/, '');
+    hashValue = decodeURIComponent(hashValue);
+    var element = document.getElementById(hashValue);
+
+    if (!element) {
+      return;
+    }
+
+    var header = document.querySelector('header.site-header');
+    var headerRect = header.getBoundingClientRect();
+    var headerTop = Math.floor(headerRect.top);
+    var headerHeight = Math.floor(headerRect.height);
+    var scrollPos = getScrollPos();
+    var offsetY = element.offsetTop - (headerTop + headerHeight + 20);
+
+    if (offsetY == scrollPos.y) {
+      return;
+    }
+
+    if (headerTop == 0  && offsetY > scrollPos.y) {
+      offsetY += headerHeight + 2;
+    } else if (headerTop < 0  && offsetY < scrollPos.y) {
+      offsetY -= headerHeight - 2;
+    }
+
+    smoothScrollTo(offsetY);
+  }
+
+  // The first event occurred
+  window.addEventListener('load', function(event) {
+    if (window.location.hash) {
+      hashLocate(window.location.hash);
+    }
+  });
+
+  // The first event occurred
+  window.addEventListener('click', function(event) {
+    if (event.target.tagName.toLowerCase() == 'a') {
+      hashLocate(event.target.getAttribute('href'));
+    }
+  });
+</script>
+<div class="theme-toggle">
+  <input type="checkbox" id="theme-switch">
+  <label for="theme-switch">
+    <div class="toggle"></div>
+    <div class="names">
+      <p class="light">Light</p>
+      <p class="dark">Dark</p>
+    </div>
+  </label>
+</div>
+
+
+
+
+<script>
+  (function() {
+    var sw = document.getElementById('theme-switch');
+    var html = document.getElementsByTagName('html')[0];
+    var nightModeOption = ('auto' || 'auto').toLowerCase();
+    var storage = nightModeOption === 'manual'
+        ? localStorage
+        : sessionStorage;
+    var themeData = loadThemeData();
+
+    function saveThemeData(data) {
+      storage.setItem('theme', JSON.stringify(data));
+    }
+
+    function loadThemeData() {
+      var data = storage.getItem('theme');
+      try {
+        data = JSON.parse(data ? data : '');
+      } catch(e) {
+        data = { nightShift: undefined, autoToggleAt: 0 };
+        saveThemeData(data);
+      }
+      return data;
+    }
+
+    function handleThemeToggle(nightShift) {
+      themeData.nightShift = nightShift;
+      saveThemeData(themeData);
+      html.dataset.theme = nightShift ? 'dark' : 'light';
+      setTimeout(function() {
+        sw.checked = nightShift ? true : false;
+      }, 50);
+    }
+
+    function autoThemeToggle() {
+      // Next time point of theme toggle
+      var now = new Date();
+      var toggleAt = new Date();
+      var hours = now.getHours();
+      var nightShift = hours >= 19 || hours <=7;
+
+      if (nightShift) {
+        if (hours > 7) {
+          toggleAt.setDate(toggleAt.getDate() + 1);
+        }
+        toggleAt.setHours(7);
+      } else {
+        toggleAt.setHours(19);
+      }
+
+      toggleAt.setMinutes(0);
+      toggleAt.setSeconds(0);
+      toggleAt.setMilliseconds(0)
+
+      var delay = toggleAt.getTime() - now.getTime();
+
+      // auto toggle theme mode
+      setTimeout(function() {
+        handleThemeToggle(!nightShift);
+      }, delay);
+
+      return {
+        nightShift: nightShift,
+        toggleAt: toggleAt.getTime()
+      };
+    }
+
+    // Listen the theme toggle event
+    sw.addEventListener('change', function(event) {
+      handleThemeToggle(event.target.checked);
+    });
+
+    if (nightModeOption == 'auto') {
+      var data = autoThemeToggle();
+
+      // Toggle theme by local setting
+      if (data.toggleAt > themeData.autoToggleAt) {
+        themeData.autoToggleAt = data.toggleAt;
+        handleThemeToggle(data.nightShift);
+      } else {
+        handleThemeToggle(themeData.nightShift);
+      }
+    } else if (nightModeOption == 'manual') {
+      handleThemeToggle(themeData.nightShift);
+    } else {
+      var nightShift = themeData.nightShift;
+      if (nightShift === undefined) {
+        nightShift = nightModeOption === 'on';
+      }
+      handleThemeToggle(nightShift);
+    }
+  })();
+</script>
+<div id="click-to-top" class="click-to-top">
+  <i class="fa fa-arrow-up"></i>
+</div>
+<script>
+  (function () {
+    const clickToTop = document.getElementById('click-to-top');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 100) {
+        clickToTop.classList.add('show')
+      }else {
+        clickToTop.classList.remove('show')
+      }
+    });
+    clickToTop.addEventListener('click', () => {
+      window.smoothScrollTo(0);
+    });
+  })();
+</script>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <div class="framework">
+  <section class="main">
+
+     <div class="post">
+  <section>
+
+
+
+
+
+
+
+
+
+<header class="post-header">
+  <h1 class="post-title p-name" itemprop="name headline">四、GObject子类的继承</h1>
+  <h2 class="post-subtitle"></h2>
+
+  <p class="post-meta">
+    <time class="dt-published" datetime="2021-08-31T00:00:00+00:00" itemprop="datePublished"><i class="fa fa-calendar"></i> Aug 31, 2021
+    </time>
+
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 13 mins</span>
+  </p><div class="post-tags"><a class="post-tag" href="/tags.html#GObject">#GObject</a></div></header>
+<article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+    <div class="post-content e-content" itemprop="articleBody">
+
+      <h2 id="1-bibtex文献类的设计">1 Bibtex文献类的设计</h2>
+<h3 id="11-bibtex类头文件">1.1 Bibtex类头文件</h3>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/* file name: my-bibtex.h */</span>
+<span class="cp">#ifndef KB_BIBTEX_H
+#define KB_BIBTEX_H
+</span>
+<span class="cp">#include&lt;glib-object.h&gt;
+</span>
+<span class="cp">#define MY_TYPE_BIBTEX (my_bibtex_get_type())
+#define MY_BIBTEX(object) \
+        G_TYPE_CHECK_INSTANCE_CAST ((object), MY_TYPE_BIBTEX, MyBibtex)
+</span>
+<span class="k">typedef</span> <span class="k">struct</span> <span class="n">_MyBibtex</span> <span class="n">MyBibtex</span><span class="p">;</span>
+<span class="k">struct</span> <span class="n">_MyBibtex</span><span class="p">{</span>
+  <span class="n">GObject</span> <span class="n">parent</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="k">typedef</span> <span class="k">struct</span> <span class="n">_MyBibtexClass</span> <span class="n">MyBibtexClass</span><span class="p">;</span>
+<span class="k">struct</span> <span class="n">_MyBibtexClass</span><span class="p">{</span>
+  <span class="n">GObjectClass</span> <span class="n">parent_class</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="n">GType</span> <span class="nf">my_bibtex_get_type</span><span class="p">(</span><span class="kt">void</span><span class="p">);</span>
+
+<span class="kt">void</span> 
+<span class="nf">my_bibtex_printf</span><span class="p">(</span><span class="n">MyBibtex</span> <span class="o">*</span><span class="n">self</span><span class="p">);</span>
+
+<span class="cp">#endif
+</span></code></pre></div></div>
+<h3 id="12-bibtex类函数实现">1.2 Bibtex类函数实现</h3>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include"my-bibtex.h"
+</span>
+<span class="cm">/* 类型注册 系统自动生成my_bibtex_get_type()函数 */</span>
+<span class="n">G_DEFINE_TYPE</span> <span class="p">(</span><span class="n">MyBibtex</span><span class="p">,</span> <span class="n">my_bibtex</span><span class="p">,</span> <span class="n">G_TYPE_OBJECT</span><span class="p">);</span>
+
+<span class="cp">#define MY_BIBTEX_GET_PRIVATE(object) (\
+        G_TYPE_INSTANCE_GET_PRIVATE ((object), MY_TYPE_BIBTEX, MyBibtexPrivate))
+</span>
+<span class="cm">/* 对象私有属性 */</span>
+<span class="k">typedef</span> <span class="k">struct</span> <span class="n">_MyBibtexPrivate</span> <span class="n">MyBibtexPrivate</span><span class="p">;</span>
+<span class="k">struct</span> <span class="n">_MyBibtexPrivate</span><span class="p">{</span>
+  <span class="n">GString</span> <span class="o">*</span><span class="n">title</span><span class="p">;</span>
+  <span class="n">GString</span> <span class="o">*</span><span class="n">author</span><span class="p">;</span>
+  <span class="n">GString</span> <span class="o">*</span><span class="n">publisher</span><span class="p">;</span>
+  <span class="n">guint</span> <span class="n">year</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="k">enum</span> <span class="n">PROPERTY_BIBTEX</span> <span class="p">{</span>
+  <span class="n">PROPERTY_0</span><span class="p">,</span>
+  <span class="n">PROPERTY_TITLE</span><span class="p">,</span>
+  <span class="n">PROPERTY_AUTHOR</span><span class="p">,</span>
+  <span class="n">PROPERTY_PUBLISHER</span><span class="p">,</span>
+  <span class="n">PROPERTY_YEAR</span><span class="p">,</span>
+  <span class="n">N_PROPERTIES</span>
+<span class="p">};</span>
+
+<span class="k">static</span> <span class="kt">void</span>
+<span class="nf">my_bibtex_set_property</span> <span class="p">(</span><span class="n">GObject</span> <span class="o">*</span><span class="n">object</span><span class="p">,</span> <span class="n">guint</span> <span class="n">property_id</span><span class="p">,</span>
+                        <span class="k">const</span> <span class="n">GValue</span> <span class="o">*</span><span class="n">value</span><span class="p">,</span> <span class="n">GParamSpec</span> <span class="o">*</span><span class="n">pspec</span><span class="p">)</span>
+<span class="p">{</span>       
+  <span class="n">MyBibtex</span> <span class="o">*</span><span class="n">self</span> <span class="o">=</span> <span class="n">MY_BIBTEX</span> <span class="p">(</span><span class="n">object</span><span class="p">);</span>
+  <span class="n">MyBibtexPrivate</span> <span class="o">*</span><span class="n">priv</span> <span class="o">=</span> <span class="n">MY_BIBTEX_GET_PRIVATE</span> <span class="p">(</span><span class="n">self</span><span class="p">);</span>
+    
+  <span class="k">switch</span> <span class="p">(</span><span class="n">property_id</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">case</span> <span class="n">PROPERTY_TITLE</span><span class="p">:</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">priv</span><span class="o">-&gt;</span><span class="n">title</span><span class="p">)</span>
+                <span class="n">g_string_free</span> <span class="p">(</span><span class="n">priv</span><span class="o">-&gt;</span><span class="n">title</span><span class="p">,</span> <span class="n">TRUE</span><span class="p">);</span>
+        <span class="n">priv</span><span class="o">-&gt;</span><span class="n">title</span> <span class="o">=</span> <span class="n">g_string_new</span> <span class="p">(</span><span class="n">g_value_get_string</span> <span class="p">(</span><span class="n">value</span><span class="p">));</span>
+        <span class="k">break</span><span class="p">;</span>
+  <span class="k">case</span> <span class="n">PROPERTY_AUTHOR</span><span class="p">:</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">priv</span><span class="o">-&gt;</span><span class="n">author</span><span class="p">)</span>
+                <span class="n">g_string_free</span> <span class="p">(</span><span class="n">priv</span><span class="o">-&gt;</span><span class="n">author</span><span class="p">,</span> <span class="n">TRUE</span><span class="p">);</span>
+        <span class="n">priv</span><span class="o">-&gt;</span><span class="n">author</span> <span class="o">=</span> <span class="n">g_string_new</span> <span class="p">(</span><span class="n">g_value_get_string</span> <span class="p">(</span><span class="n">value</span><span class="p">));</span>
+        <span class="k">break</span><span class="p">;</span>
+  <span class="k">case</span> <span class="n">PROPERTY_PUBLISHER</span><span class="p">:</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">priv</span><span class="o">-&gt;</span><span class="n">publisher</span><span class="p">)</span>
+                <span class="n">g_string_free</span> <span class="p">(</span><span class="n">priv</span><span class="o">-&gt;</span><span class="n">publisher</span><span class="p">,</span> <span class="n">TRUE</span><span class="p">);</span>
+        <span class="n">priv</span><span class="o">-&gt;</span><span class="n">publisher</span> <span class="o">=</span> <span class="n">g_string_new</span> <span class="p">(</span><span class="n">g_value_get_string</span> <span class="p">(</span><span class="n">value</span><span class="p">));</span>
+        <span class="k">break</span><span class="p">;</span>
+  <span class="k">case</span> <span class="n">PROPERTY_YEAR</span><span class="p">:</span>
+        <span class="n">priv</span><span class="o">-&gt;</span><span class="n">year</span> <span class="o">=</span> <span class="n">g_value_get_uint</span> <span class="p">(</span><span class="n">value</span><span class="p">);</span>
+        <span class="k">break</span><span class="p">;</span>
+  <span class="nl">default:</span>
+        <span class="n">G_OBJECT_WARN_INVALID_PROPERTY_ID</span> <span class="p">(</span><span class="n">object</span><span class="p">,</span> <span class="n">property_id</span><span class="p">,</span> <span class="n">pspec</span><span class="p">);</span>
+        <span class="k">break</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+ 
+<span class="k">static</span> <span class="kt">void</span>
+<span class="nf">my_bibtex_get_property</span> <span class="p">(</span><span class="n">GObject</span> <span class="o">*</span><span class="n">object</span><span class="p">,</span> <span class="n">guint</span> <span class="n">property_id</span><span class="p">,</span>
+                        <span class="n">GValue</span> <span class="o">*</span><span class="n">value</span><span class="p">,</span> <span class="n">GParamSpec</span> <span class="o">*</span><span class="n">pspec</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="n">MyBibtex</span> <span class="o">*</span><span class="n">self</span> <span class="o">=</span> <span class="n">MY_BIBTEX</span> <span class="p">(</span><span class="n">object</span><span class="p">);</span>
+  <span class="n">MyBibtexPrivate</span> <span class="o">*</span><span class="n">priv</span> <span class="o">=</span> <span class="n">MY_BIBTEX_GET_PRIVATE</span> <span class="p">(</span><span class="n">self</span><span class="p">);</span>
+  <span class="n">GString</span> <span class="o">*</span><span class="n">similar</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+    
+  <span class="k">switch</span> <span class="p">(</span><span class="n">property_id</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">case</span> <span class="n">PROPERTY_TITLE</span><span class="p">:</span>
+        <span class="n">g_value_set_string</span> <span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">priv</span><span class="o">-&gt;</span><span class="n">title</span><span class="o">-&gt;</span><span class="n">str</span><span class="p">);</span>
+        <span class="k">break</span><span class="p">;</span>
+  <span class="k">case</span> <span class="n">PROPERTY_AUTHOR</span><span class="p">:</span>
+        <span class="n">g_value_set_string</span> <span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">priv</span><span class="o">-&gt;</span><span class="n">author</span><span class="o">-&gt;</span><span class="n">str</span><span class="p">);</span>
+        <span class="k">break</span><span class="p">;</span>
+  <span class="k">case</span> <span class="n">PROPERTY_PUBLISHER</span><span class="p">:</span>
+        <span class="n">g_value_set_string</span> <span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">priv</span><span class="o">-&gt;</span><span class="n">publisher</span><span class="o">-&gt;</span><span class="n">str</span><span class="p">);</span>
+        <span class="k">break</span><span class="p">;</span>
+  <span class="k">case</span> <span class="n">PROPERTY_YEAR</span><span class="p">:</span>
+        <span class="n">g_value_set_uint</span> <span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">priv</span><span class="o">-&gt;</span><span class="n">year</span><span class="p">);</span>
+        <span class="k">break</span><span class="p">;</span>
+  <span class="nl">default:</span>
+        <span class="n">G_OBJECT_WARN_INVALID_PROPERTY_ID</span> <span class="p">(</span><span class="n">object</span><span class="p">,</span> <span class="n">property_id</span><span class="p">,</span> <span class="n">pspec</span><span class="p">);</span>
+        <span class="k">break</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="cm">/* 参数名之所以使用klass而不是class，为了C++编译的时候防止和关键字class冲突 */</span>
+<span class="k">static</span> <span class="kt">void</span>
+<span class="nf">my_bibtex_class_init</span> <span class="p">(</span><span class="n">MyBibtexClass</span> <span class="o">*</span><span class="n">klass</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="n">g_type_class_add_private</span> <span class="p">(</span><span class="n">klass</span><span class="p">,</span> 
+                            <span class="k">sizeof</span> <span class="p">(</span><span class="n">MyBibtexPrivate</span><span class="p">));</span>
+  <span class="n">GObjectClass</span> <span class="o">*</span><span class="n">base_class</span> <span class="o">=</span> <span class="n">G_OBJECT_CLASS</span> <span class="p">(</span><span class="n">klass</span><span class="p">);</span>
+  <span class="n">base_class</span><span class="o">-&gt;</span><span class="n">set_property</span> <span class="o">=</span> <span class="n">my_bibtex_set_property</span><span class="p">;</span>
+  <span class="n">base_class</span><span class="o">-&gt;</span><span class="n">get_property</span> <span class="o">=</span> <span class="n">my_bibtex_get_property</span><span class="p">;</span>
+  <span class="n">GParamSpec</span> <span class="o">*</span><span class="n">properties</span><span class="p">[</span><span class="n">N_PROPERTIES</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="nb">NULL</span><span class="p">,};</span>
+  <span class="n">properties</span><span class="p">[</span><span class="n">PROPERTY_TITLE</span><span class="p">]</span> <span class="o">=</span>
+          <span class="n">g_param_spec_string</span> <span class="p">(</span><span class="s">"title"</span><span class="p">,</span>
+                                <span class="s">"Title"</span><span class="p">,</span>
+                                <span class="s">"Bibliography title"</span><span class="p">,</span>
+                                <span class="nb">NULL</span><span class="p">,</span>
+                                <span class="n">G_PARAM_READWRITE</span><span class="p">);</span>
+  <span class="n">properties</span><span class="p">[</span><span class="n">PROPERTY_AUTHOR</span><span class="p">]</span> <span class="o">=</span>
+          <span class="n">g_param_spec_string</span> <span class="p">(</span><span class="s">"author"</span><span class="p">,</span>
+                                <span class="s">"Author"</span><span class="p">,</span>
+                                <span class="s">"Bibliography author"</span><span class="p">,</span>
+                                <span class="nb">NULL</span><span class="p">,</span>
+                                <span class="n">G_PARAM_READWRITE</span><span class="p">);</span>
+  <span class="n">properties</span><span class="p">[</span><span class="n">PROPERTY_PUBLISHER</span><span class="p">]</span> <span class="o">=</span>
+          <span class="n">g_param_spec_string</span> <span class="p">(</span><span class="s">"publisher"</span><span class="p">,</span>
+                                <span class="s">"Publisher"</span><span class="p">,</span>
+                                <span class="s">"Bibliography Publisher"</span><span class="p">,</span>
+                                <span class="nb">NULL</span><span class="p">,</span>
+                                <span class="n">G_PARAM_READWRITE</span><span class="p">);</span>
+  <span class="n">properties</span><span class="p">[</span><span class="n">PROPERTY_YEAR</span><span class="p">]</span> <span class="o">=</span>
+          <span class="n">g_param_spec_uint</span> <span class="p">(</span><span class="s">"year"</span><span class="p">,</span>
+                              <span class="s">"Year"</span><span class="p">,</span>
+                              <span class="s">"Bibliography year"</span><span class="p">,</span>
+                              <span class="mi">0</span><span class="p">,</span>
+                              <span class="n">G_MAXUINT</span><span class="p">,</span>
+                              <span class="mi">0</span><span class="p">,</span>
+                              <span class="n">G_PARAM_READWRITE</span><span class="p">);</span>
+  <span class="n">g_object_class_install_properties</span> <span class="p">(</span><span class="n">base_class</span><span class="p">,</span> <span class="n">N_PROPERTIES</span><span class="p">,</span> <span class="n">properties</span><span class="p">);</span>
+
+<span class="p">}</span>
+
+<span class="k">static</span> <span class="kt">void</span>
+<span class="nf">my_bibtex_init</span> <span class="p">(</span><span class="n">MyBibtex</span> <span class="o">*</span><span class="n">self</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> 
+<span class="nf">my_bibtex_printf</span><span class="p">(</span><span class="n">MyBibtex</span> <span class="o">*</span><span class="n">self</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="n">gchar</span> <span class="o">*</span><span class="n">title</span><span class="p">,</span> <span class="o">*</span><span class="n">author</span><span class="p">,</span> <span class="o">*</span><span class="n">publisher</span><span class="p">;</span>
+  <span class="n">gint</span> <span class="n">year</span><span class="p">;</span>
+
+  <span class="n">g_object_get</span><span class="p">(</span><span class="n">G_OBJECT</span><span class="p">(</span><span class="n">self</span><span class="p">),</span>
+               <span class="s">"title"</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">title</span><span class="p">,</span>
+               <span class="s">"author"</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">author</span><span class="p">,</span>
+               <span class="s">"publisher"</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">publisher</span><span class="p">,</span>
+               <span class="s">"year"</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">year</span><span class="p">,</span>
+               <span class="nb">NULL</span><span class="p">);</span>
+
+  <span class="n">g_printf</span><span class="p">(</span><span class="s">"    Title: %s</span><span class="se">\n</span><span class="s">"</span>
+           <span class="s">"   Author: %s</span><span class="se">\n</span><span class="s">"</span>
+           <span class="s">"Publisher: %s</span><span class="se">\n</span><span class="s">"</span>
+           <span class="s">"     Year: %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">author</span><span class="p">,</span> <span class="n">publisher</span><span class="p">,</span> <span class="n">year</span><span class="p">);</span>
+  
+  <span class="cm">/*g_free 是因为系统重新创建了字符串内存空间，没有指向私有属性的地址*/</span>
+  <span class="n">g_free</span><span class="p">(</span><span class="n">title</span><span class="p">);</span>
+  <span class="n">g_free</span><span class="p">(</span><span class="n">author</span><span class="p">);</span>
+  <span class="n">g_free</span><span class="p">(</span><span class="n">publisher</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p><strong>分析</strong>
+  除了构造类属性，与前面的有所区别，本文采用的是ParamSpec类型的指针数组，一遍在类属性构造完毕后，使用个<strong>g_object_class_install_properties</strong>函数一并安装到类结构体中。 而不是像上一篇文档那样<strong>g_object_class_install_property</strong>一个一个安装。
+  打印输出文献信息函数，为什么要释放内存。因为get_property属性的时候，新建的一个字符串变量。该变量不等于私有属性字符串变量地址。故必须释放，且不会引起私有属性错误。</p>
+
+<h2 id="2-article文献类的设计">2 Article文献类的设计</h2>
+<h3 id="21-article文献类头文件">2.1 Article文献类头文件</h3>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include"my-bibtex.h"
+</span>
+<span class="cm">/* 类的数据类型获取函数宏 */</span>
+<span class="cp">#define MY_TYPE_ARTICLE (my_article_get_type())
+</span>
+<span class="cp">#define MY_ARTICLE(object) \
+        G_TYPE_CHECK_INSTANCE_CAST ((object), MY_TYPE_ARTICLE, MyArticle)
+</span>
+<span class="k">typedef</span> <span class="k">struct</span> <span class="n">_MyArticle</span> <span class="n">MyArticle</span><span class="p">;</span>
+<span class="k">struct</span> <span class="n">_MyArticle</span><span class="p">{</span>
+  <span class="n">MyBibtex</span> <span class="n">parent</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="k">typedef</span> <span class="k">struct</span> <span class="n">_MyArticleClass</span> <span class="n">MyArticleClass</span><span class="p">;</span>
+<span class="k">struct</span> <span class="n">_MyArticleClass</span><span class="p">{</span>
+  <span class="n">MyBibtexClass</span> <span class="n">parent_class</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="n">GType</span>
+<span class="nf">my_article_get_type</span><span class="p">();</span>
+
+<span class="kt">void</span> 
+<span class="nf">my_article_printf</span><span class="p">(</span><span class="n">MyArticle</span> <span class="o">*</span><span class="n">self</span><span class="p">);</span>
+</code></pre></div></div>
+<p><strong>分析</strong>
+  类实例结构体和类结构体都是继承与MyBibtex类。</p>
+
+<h3 id="22-article类函数实现">2.2 Article类函数实现</h3>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include"my-article.h"
+#include"my-bibtex.h"
+</span>
+<span class="n">G_DEFINE_TYPE</span><span class="p">(</span><span class="n">MyArticle</span><span class="p">,</span> <span class="n">my_article</span><span class="p">,</span> <span class="n">MY_TYPE_BIBTEX</span><span class="p">);</span>
+<span class="cp">#define MY_ARTICLE_GET_PRIVATE(object) (\
+        G_TYPE_INSTANCE_GET_PRIVATE ((object), MY_TYPE_ARTICLE, MyArticlePrivate))
+</span>
+
+<span class="cm">/* 对象私有属性 */</span>
+<span class="k">typedef</span> <span class="k">struct</span> <span class="n">_MyArticlePrivate</span> <span class="n">MyArticlePrivate</span><span class="p">;</span>
+<span class="k">struct</span> <span class="n">_MyArticlePrivate</span><span class="p">{</span>
+  <span class="n">GString</span> <span class="o">*</span><span class="n">journal</span><span class="p">;</span>
+  <span class="n">GString</span> <span class="o">*</span><span class="n">volume</span><span class="p">;</span>
+  <span class="n">GString</span> <span class="o">*</span><span class="n">number</span><span class="p">;</span>
+  <span class="n">GString</span> <span class="o">*</span><span class="n">pages</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="k">enum</span> <span class="n">PROPERTY_ARTICLE</span> <span class="p">{</span>
+  <span class="n">PROPERTY_0</span><span class="p">,</span>
+  <span class="n">PROPERTY_JOURNAL</span><span class="p">,</span>
+  <span class="n">PROPERTY_VOLUME</span><span class="p">,</span>
+  <span class="n">PROPERTY_NUMBER</span><span class="p">,</span>
+  <span class="n">PROPERTY_PAGES</span><span class="p">,</span>
+  <span class="n">N_PROPERTIES</span>
+<span class="p">};</span>
+
+<span class="k">static</span> <span class="kt">void</span>
+<span class="nf">my_article_set_property</span> <span class="p">(</span><span class="n">GObject</span> <span class="o">*</span><span class="n">object</span><span class="p">,</span> <span class="n">guint</span> <span class="n">property_id</span><span class="p">,</span>
+                        <span class="k">const</span> <span class="n">GValue</span> <span class="o">*</span><span class="n">value</span><span class="p">,</span> <span class="n">GParamSpec</span> <span class="o">*</span><span class="n">pspec</span><span class="p">)</span>
+<span class="p">{</span>       
+  <span class="n">MyArticle</span> <span class="o">*</span><span class="n">self</span> <span class="o">=</span> <span class="n">MY_ARTICLE</span> <span class="p">(</span><span class="n">object</span><span class="p">);</span>
+  <span class="n">MyArticlePrivate</span> <span class="o">*</span><span class="n">priv</span> <span class="o">=</span> <span class="n">MY_ARTICLE_GET_PRIVATE</span> <span class="p">(</span><span class="n">self</span><span class="p">);</span>
+    
+  <span class="k">switch</span> <span class="p">(</span><span class="n">property_id</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">case</span> <span class="n">PROPERTY_JOURNAL</span><span class="p">:</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">priv</span><span class="o">-&gt;</span><span class="n">journal</span><span class="p">)</span>
+                <span class="n">g_string_free</span> <span class="p">(</span><span class="n">priv</span><span class="o">-&gt;</span><span class="n">journal</span><span class="p">,</span> <span class="n">TRUE</span><span class="p">);</span>
+        <span class="n">priv</span><span class="o">-&gt;</span><span class="n">journal</span> <span class="o">=</span> <span class="n">g_string_new</span> <span class="p">(</span><span class="n">g_value_get_string</span> <span class="p">(</span><span class="n">value</span><span class="p">));</span>
+        <span class="k">break</span><span class="p">;</span>
+  <span class="k">case</span> <span class="n">PROPERTY_VOLUME</span><span class="p">:</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">priv</span><span class="o">-&gt;</span><span class="n">volume</span><span class="p">)</span>
+                <span class="n">g_string_free</span> <span class="p">(</span><span class="n">priv</span><span class="o">-&gt;</span><span class="n">volume</span><span class="p">,</span> <span class="n">TRUE</span><span class="p">);</span>
+        <span class="n">priv</span><span class="o">-&gt;</span><span class="n">volume</span> <span class="o">=</span> <span class="n">g_string_new</span> <span class="p">(</span><span class="n">g_value_get_string</span> <span class="p">(</span><span class="n">value</span><span class="p">));</span>
+        <span class="k">break</span><span class="p">;</span>
+  <span class="k">case</span> <span class="n">PROPERTY_NUMBER</span><span class="p">:</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">priv</span><span class="o">-&gt;</span><span class="n">number</span><span class="p">)</span>
+                <span class="n">g_string_free</span> <span class="p">(</span><span class="n">priv</span><span class="o">-&gt;</span><span class="n">number</span><span class="p">,</span> <span class="n">TRUE</span><span class="p">);</span>
+        <span class="n">priv</span><span class="o">-&gt;</span><span class="n">number</span> <span class="o">=</span> <span class="n">g_string_new</span> <span class="p">(</span><span class="n">g_value_get_string</span> <span class="p">(</span><span class="n">value</span><span class="p">));</span>
+        <span class="k">break</span><span class="p">;</span>
+  <span class="k">case</span> <span class="n">PROPERTY_PAGES</span><span class="p">:</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">priv</span><span class="o">-&gt;</span><span class="n">pages</span><span class="p">)</span>
+                <span class="n">g_string_free</span> <span class="p">(</span><span class="n">priv</span><span class="o">-&gt;</span><span class="n">pages</span><span class="p">,</span> <span class="n">TRUE</span><span class="p">);</span>
+        <span class="n">priv</span><span class="o">-&gt;</span><span class="n">pages</span> <span class="o">=</span> <span class="n">g_string_new</span> <span class="p">(</span><span class="n">g_value_get_string</span> <span class="p">(</span><span class="n">value</span><span class="p">));</span>
+        <span class="k">break</span><span class="p">;</span>
+  <span class="nl">default:</span>
+        <span class="n">G_OBJECT_WARN_INVALID_PROPERTY_ID</span> <span class="p">(</span><span class="n">object</span><span class="p">,</span> <span class="n">property_id</span><span class="p">,</span> <span class="n">pspec</span><span class="p">);</span>
+        <span class="k">break</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+ 
+<span class="k">static</span> <span class="kt">void</span>
+<span class="nf">my_article_get_property</span> <span class="p">(</span><span class="n">GObject</span> <span class="o">*</span><span class="n">object</span><span class="p">,</span> <span class="n">guint</span> <span class="n">property_id</span><span class="p">,</span>
+                        <span class="n">GValue</span> <span class="o">*</span><span class="n">value</span><span class="p">,</span> <span class="n">GParamSpec</span> <span class="o">*</span><span class="n">pspec</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="n">MyArticle</span> <span class="o">*</span><span class="n">self</span> <span class="o">=</span> <span class="n">MY_ARTICLE</span> <span class="p">(</span><span class="n">object</span><span class="p">);</span>
+  <span class="n">MyArticlePrivate</span> <span class="o">*</span><span class="n">priv</span> <span class="o">=</span> <span class="n">MY_ARTICLE_GET_PRIVATE</span> <span class="p">(</span><span class="n">self</span><span class="p">);</span>
+  <span class="n">GString</span> <span class="o">*</span><span class="n">similar</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+    
+  <span class="k">switch</span> <span class="p">(</span><span class="n">property_id</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">case</span> <span class="n">PROPERTY_JOURNAL</span><span class="p">:</span>
+        <span class="n">g_value_set_string</span> <span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">priv</span><span class="o">-&gt;</span><span class="n">journal</span><span class="o">-&gt;</span><span class="n">str</span><span class="p">);</span>
+        <span class="k">break</span><span class="p">;</span>
+  <span class="k">case</span> <span class="n">PROPERTY_VOLUME</span><span class="p">:</span>
+        <span class="n">g_value_set_string</span> <span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">priv</span><span class="o">-&gt;</span><span class="n">volume</span><span class="o">-&gt;</span><span class="n">str</span><span class="p">);</span>
+        <span class="k">break</span><span class="p">;</span>
+  <span class="k">case</span> <span class="n">PROPERTY_NUMBER</span><span class="p">:</span>
+        <span class="n">g_value_set_string</span> <span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">priv</span><span class="o">-&gt;</span><span class="n">number</span><span class="o">-&gt;</span><span class="n">str</span><span class="p">);</span>
+        <span class="k">break</span><span class="p">;</span>
+  <span class="k">case</span> <span class="n">PROPERTY_PAGES</span><span class="p">:</span>
+        <span class="n">g_value_set_string</span> <span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">priv</span><span class="o">-&gt;</span><span class="n">pages</span><span class="o">-&gt;</span><span class="n">str</span><span class="p">);</span>
+        <span class="k">break</span><span class="p">;</span>
+  <span class="nl">default:</span>
+        <span class="n">G_OBJECT_WARN_INVALID_PROPERTY_ID</span> <span class="p">(</span><span class="n">object</span><span class="p">,</span> <span class="n">property_id</span><span class="p">,</span> <span class="n">pspec</span><span class="p">);</span>
+        <span class="k">break</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="cm">/* 参数名之所以使用klass而不是class，为了C++编译的时候防止和关键字class冲突 */</span>
+<span class="k">static</span> <span class="kt">void</span>
+<span class="nf">my_article_class_init</span> <span class="p">(</span><span class="n">MyArticleClass</span> <span class="o">*</span><span class="n">klass</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="n">g_type_class_add_private</span> <span class="p">(</span><span class="n">klass</span><span class="p">,</span> 
+                            <span class="k">sizeof</span> <span class="p">(</span><span class="n">MyArticlePrivate</span><span class="p">));</span>
+
+  <span class="n">GObjectClass</span> <span class="o">*</span><span class="n">base_class</span> <span class="o">=</span> <span class="n">G_OBJECT_CLASS</span> <span class="p">(</span><span class="n">klass</span><span class="p">);</span>
+  <span class="n">g_printf</span><span class="p">(</span><span class="s">"Article***: %p</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">base_class</span><span class="p">);</span>
+  <span class="n">base_class</span><span class="o">-&gt;</span><span class="n">set_property</span> <span class="o">=</span> <span class="n">my_article_set_property</span><span class="p">;</span>
+  <span class="n">base_class</span><span class="o">-&gt;</span><span class="n">get_property</span> <span class="o">=</span> <span class="n">my_article_get_property</span><span class="p">;</span>
+  <span class="n">GParamSpec</span> <span class="o">*</span><span class="n">properties</span><span class="p">[</span><span class="n">N_PROPERTIES</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="nb">NULL</span><span class="p">,};</span>
+  <span class="n">properties</span><span class="p">[</span><span class="n">PROPERTY_JOURNAL</span><span class="p">]</span> <span class="o">=</span>
+          <span class="n">g_param_spec_string</span> <span class="p">(</span><span class="s">"journal"</span><span class="p">,</span>
+                                <span class="s">"Journal"</span><span class="p">,</span>
+                                <span class="s">"Bibliography journal"</span><span class="p">,</span>
+                                <span class="nb">NULL</span><span class="p">,</span>
+                                <span class="n">G_PARAM_READWRITE</span><span class="p">);</span>
+  <span class="n">properties</span><span class="p">[</span><span class="n">PROPERTY_VOLUME</span><span class="p">]</span> <span class="o">=</span>
+          <span class="n">g_param_spec_string</span> <span class="p">(</span><span class="s">"volume"</span><span class="p">,</span>
+                                <span class="s">"Volume"</span><span class="p">,</span>
+                                <span class="s">"Bibliography volume"</span><span class="p">,</span>
+                                <span class="nb">NULL</span><span class="p">,</span>
+                                <span class="n">G_PARAM_READWRITE</span><span class="p">);</span>
+  <span class="n">properties</span><span class="p">[</span><span class="n">PROPERTY_NUMBER</span><span class="p">]</span> <span class="o">=</span>
+          <span class="n">g_param_spec_string</span> <span class="p">(</span><span class="s">"number"</span><span class="p">,</span>
+                                <span class="s">"Number"</span><span class="p">,</span>
+                                <span class="s">"Bibliography number"</span><span class="p">,</span>
+                                <span class="nb">NULL</span><span class="p">,</span>
+                                <span class="n">G_PARAM_READWRITE</span><span class="p">);</span>
+  <span class="n">properties</span><span class="p">[</span><span class="n">PROPERTY_PAGES</span><span class="p">]</span> <span class="o">=</span>
+          <span class="n">g_param_spec_string</span> <span class="p">(</span><span class="s">"pages"</span><span class="p">,</span>
+                              <span class="s">"Pages"</span><span class="p">,</span>
+                              <span class="s">"Bibliography pages"</span><span class="p">,</span>
+                              <span class="nb">NULL</span><span class="p">,</span>
+                              <span class="n">G_PARAM_READWRITE</span><span class="p">);</span>
+  <span class="n">g_object_class_install_properties</span> <span class="p">(</span><span class="n">base_class</span><span class="p">,</span> <span class="n">N_PROPERTIES</span><span class="p">,</span> <span class="n">properties</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">static</span> <span class="kt">void</span>
+<span class="nf">my_article_init</span> <span class="p">(</span><span class="n">MyArticle</span> <span class="o">*</span><span class="n">self</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="p">}</span>
+
+
+<span class="kt">void</span> 
+<span class="nf">my_article_printf</span><span class="p">(</span><span class="n">MyArticle</span> <span class="o">*</span><span class="n">self</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="n">my_bibtex_printf</span><span class="p">(</span><span class="o">&amp;</span><span class="n">self</span><span class="o">-&gt;</span><span class="n">parent</span><span class="p">);</span>
+
+  <span class="n">gchar</span> <span class="o">*</span><span class="n">journal</span><span class="p">,</span> <span class="o">*</span><span class="n">volume</span><span class="p">,</span> <span class="o">*</span><span class="n">number</span><span class="p">,</span> <span class="o">*</span><span class="n">pages</span><span class="p">;</span>
+
+  <span class="n">g_object_get</span><span class="p">(</span><span class="n">G_OBJECT</span><span class="p">(</span><span class="n">self</span><span class="p">),</span>
+               <span class="s">"journal"</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">journal</span><span class="p">,</span>
+               <span class="s">"volume"</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">volume</span><span class="p">,</span>
+               <span class="s">"number"</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">number</span><span class="p">,</span>
+               <span class="s">"pages"</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">pages</span><span class="p">,</span>
+               <span class="nb">NULL</span><span class="p">);</span>
+
+  <span class="n">g_printf</span><span class="p">(</span><span class="s">"  Journal: %s</span><span class="se">\n</span><span class="s">"</span>
+           <span class="s">"   Volume: %s</span><span class="se">\n</span><span class="s">"</span>
+           <span class="s">"   Number: %s</span><span class="se">\n</span><span class="s">"</span>
+           <span class="s">"    Pages: %s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">journal</span><span class="p">,</span> <span class="n">volume</span><span class="p">,</span> <span class="n">number</span><span class="p">,</span> <span class="n">pages</span><span class="p">);</span>
+  
+  <span class="cm">/*g_free 是因为系统重新创建了字符串内存空间，没有指向私有属性的地址*/</span>
+  <span class="n">g_free</span><span class="p">(</span><span class="n">journal</span><span class="p">);</span>
+  <span class="n">g_free</span><span class="p">(</span><span class="n">volume</span><span class="p">);</span>
+  <span class="n">g_free</span><span class="p">(</span><span class="n">number</span><span class="p">);</span>
+  <span class="n">g_free</span><span class="p">(</span><span class="n">pages</span><span class="p">);</span>
+<span class="p">}</span>
+
+</code></pre></div></div>
+<p><strong>分析</strong>
+  G_DEFINE_TYPE(MyArticle, my_article, MY_TYPE_BIBTEX);
+第三个参数是父类结构体信息。</p>
+<h1 id="3-主函数的实现">3 主函数的实现</h1>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include"my-bibtex.h"
+#include"my-article.h"
+</span>
+<span class="kt">int</span>
+<span class="nf">main</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="n">g_type_init</span> <span class="p">();</span>
+    
+  <span class="n">MyArticle</span> <span class="o">*</span><span class="n">entry</span> <span class="o">=</span> <span class="n">g_object_new</span> <span class="p">(</span><span class="n">MY_TYPE_ARTICLE</span><span class="p">,</span>
+                                    <span class="s">"title"</span><span class="p">,</span> <span class="s">"Breaking paragraphs into lines"</span><span class="p">,</span>
+                                    <span class="s">"author"</span><span class="p">,</span> <span class="s">"Knuth, D.E. and Plass, M.F."</span><span class="p">,</span>
+                                    <span class="s">"publisher"</span><span class="p">,</span> <span class="s">"Wiley Online Library"</span><span class="p">,</span>
+                                    <span class="s">"journal"</span><span class="p">,</span> <span class="s">"Software: Practice and Experience"</span><span class="p">,</span>
+                                    <span class="s">"volume"</span><span class="p">,</span> <span class="s">"11"</span><span class="p">,</span>
+                                    <span class="s">"number"</span><span class="p">,</span> <span class="s">"11"</span><span class="p">,</span>
+                                    <span class="s">"year"</span><span class="p">,</span> <span class="mi">1981</span><span class="p">,</span>
+                                    <span class="s">"pages"</span><span class="p">,</span> <span class="s">"1119-1184"</span><span class="p">,</span>
+                                    <span class="nb">NULL</span><span class="p">);</span>
+  <span class="n">my_article_printf</span> <span class="p">(</span><span class="n">entry</span><span class="p">);</span>
+
+  <span class="n">g_object_unref</span> <span class="p">(</span><span class="n">entry</span><span class="p">);</span>
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+</code></pre></div></div>
+
+
+
+    </div>
+
+</article>
+<div class="post-nav"><a class="previous" href="/gobject%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0202109/2021/08/26/3-%E7%A7%81%E6%9C%89%E5%B1%9E%E6%80%A7%E7%9A%84%E6%9F%A5%E7%9C%8B%E4%B8%8E%E8%AE%BE%E7%BD%AE.html" title="三、GObject私有属性的查看与设置">三、GObject私有属性的查看与设置</a><a class="next" href="/gobject%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0202109/2021/08/31/5-GObject%E5%AF%B9%E6%8E%A5%E5%8F%A3%E7%9A%84%E6%A8%A1%E6%8B%9F.html" title="五、GObject对接口的模拟">五、GObject对接口的模拟</a></div><!--<div class="post-related">
+      <div>Related Articles</div>
+      <ul>
+        <li><a class="post-link" href="/glib%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/2023/12/02/2-GThread.html" title="五、GObject对接口的模拟">二、GThread</a></li><li><a class="post-link" href="/gstreamer%E6%A0%B8%E5%BF%83%E5%AF%B9%E8%B1%A1/2023/11/30/8-GstBufferPool.html" title="五、GObject对接口的模拟">八、GstBufferPool</a></li><li><a class="post-link" href="/%E6%97%A5%E4%B9%8B%E6%BC%AB%E5%BD%95/2023/11/07/grep_ps_top%E5%91%BD%E4%BB%A4.html" title="五、GObject对接口的模拟">grep、ps、top命令</a></li><li><a class="post-link" href="/gstreamer%E6%A0%B8%E5%BF%83%E5%AF%B9%E8%B1%A1/2023/11/20/2-GstMiniObject.html" title="五、GObject对接口的模拟">二、GstMiniObject</a></li></ul>
+    </div>--><div class="post-related">
+      <div>相关文章</div>
+      <ul><li><a class="post-link" href="/gobject%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0202109/2021/09/02/7-GObject%E9%97%AD%E5%8C%85.html" title="七、GObject闭包">七、GObject闭包</a></li><li><a class="post-link" href="/gobject%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0202109/2021/09/02/8-GObject%E4%BF%A1%E5%8F%B7%E6%9C%BA%E5%88%B6.html" title="八、GObject信号机制">八、GObject信号机制</a></li><li><a class="post-link" href="/gobject%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0202109/2021/09/02/9-GObject%E4%BF%A1%E5%8F%B7%E6%9C%BA%E5%88%B6-%E4%BF%A1%E5%8F%B7Accumulator.html" title="九、GObject信号机制--信号Accumulator">九、GObject信号机制--信号Accumulator</a></li><li><a class="post-link" href="/gobject%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0202109/2021/09/01/6-%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0%E4%B8%8E%E9%97%AD%E5%8C%85.html" title="六、回调函数与闭包">六、回调函数与闭包</a></li></ul>
+    </div><div class="post-comments"><div id="disqus_thread"></div>
+<script>
+    /**
+    *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+    *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
+    /*
+    var disqus_config = function () {
+    this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+    this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+    */
+    (function() { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+    s.src = 'https://pzhou-me.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div></section>
+</div>
+
+
+  </section>
+  <section class="sidebar" style="margin-left: 15px;">
+    <!-- Get sidebar items --><style type="text/css" media="screen">
+.post-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.post-menu ul li {
+  margin-bottom: 5px;  /* 增加每个列表项底部的间距 */
+}
+
+.post-menu ul li a {
+  font-size: 16px; /* 设置目录链接的字体大小 */
+}
+
+.post-menu-content {
+  max-height: 600px; /* 设置最大高度 */
+  min-width: 300px;
+  overflow: hidden; /* 默认隐藏滚动条 */
+  white-space: nowrap; /* 水平方向上的内容不换行 */
+}
+
+/* 自定义垂直滚动条的样式 */
+.post-menu-content::-webkit-scrollbar {
+  width: 8px; /* 垂直滚动条的宽度 */
+  height: 8px; /* 水平滚动条的高度 */
+}
+
+/* 自定义垂直滚动条轨道 */
+.post-menu-content::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* 自定义垂直滚动条滑块 */
+.post-menu-content::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* 当鼠标悬停在垂直滚动条滑块上时 */
+.post-menu-content::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* 一级标题样式 */
+.post-menu ul li.h-h2 {
+  margin-left: 0;
+  margin-bottom: 10px;
+}
+
+/* 二级标题样式 */
+.post-menu ul li.h-h3 {
+  margin-left: 20px;
+  margin-bottom: 10px;
+}
+
+/* 三级标题样式 */
+.post-menu ul li.h-h4 {
+  margin-left: 40px;
+  margin-bottom: 10px;
+}
+
+
+</style>
+
+
+
+<div class="post-menu">
+  <div class="post-menu-title">目录</div>
+  <div class="post-menu-content"></div>
+</div>
+
+<script>
+  function generateContent() {
+    var menu = document.querySelector(".post-menu");
+    var menuContent =  menu.querySelector(".post-menu-content");
+    var headings = document.querySelector(".post-content").querySelectorAll("h2, h3, h4, h5, h6");
+
+    // Hide menu when no headings
+    if (headings.length === 0) {
+      return menu.style.display = "none";
+    }
+
+    // Generate post menu
+    var menuHTML = '';
+    for (var i = 0; i < headings.length; i++) {
+      var h = headings[i];
+      menuHTML += (
+        '<li class="h-' + h.tagName.toLowerCase() + '">'
+        + '<a href="#h-' + h.getAttribute('id') + '">' + h.textContent + '</a></li>');
+    }
+
+    menuContent.innerHTML = '<ul>' + menuHTML + '</ul>';
+
+    // The header element
+    var header = document.querySelector('header.site-header');
+
+    function doMenuCollapse(index, over_items) {
+      var items = menuContent.firstChild.children;
+
+      if (over_items == undefined) {
+        over_items = 20;
+      }
+
+      if (items.length < over_items) {
+        return;
+      }
+
+      var activeItem = items[index];
+      var beginItem = activeItem
+      var endItem = activeItem
+      var beginIndex = index;
+      var endIndex = index + 1;
+      while (beginIndex >= 0
+        && !items[beginIndex].classList.contains('h-h2')) {
+        beginIndex -= 1;
+      }
+      while (endIndex < items.length
+        && !items[endIndex].classList.contains('h-h2')) {
+        endIndex += 1;
+      }
+      for (var i = 0; i < beginIndex; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+      for (var i = beginIndex + 1; i < endIndex; i++) {
+        item = items[i]
+        // if (!item.classList.contains('h-h2')) {
+          item.style.display = '';
+        // }
+      }
+      for (var i = endIndex; i < items.length; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+    }
+
+    // Init menu collapsed
+    doMenuCollapse(-1);
+
+    // Active the menu item
+    window.addEventListener('scroll', function (event) {
+      var lastActive = menuContent.querySelector('.active');
+      var changed = true;
+      var activeIndex = -1;
+      for (var i = headings.length - 1; i >= 0; i--) {
+        var h = headings[i];
+        var headingRect = h.getBoundingClientRect();
+        var headerRect = header.getBoundingClientRect();
+        var headerTop = Math.floor(headerRect.top);
+        var headerHeight = Math.floor(headerRect.height);
+        var headerHeight = headerTop + headerHeight + 20;
+        if (headingRect.top <= headerHeight) {
+          var id = 'h-' + h.getAttribute('id');
+          var a = menuContent.querySelector('a[href="#' + id  + '"]');
+          var curActive = a.parentNode;
+          if (curActive) {
+            curActive.classList.add('active');
+            activeIndex = i;
+          }
+          if (lastActive == curActive) {
+            changed = false;
+          }
+          break;
+        }
+      }
+      if (changed) {
+        if (lastActive) {
+          lastActive.classList.remove('active');
+        }
+        doMenuCollapse(activeIndex);
+      }
+      event.preventDefault();
+    });
+  }
+  generateContent();
+</script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const menuContent = document.querySelector('.post-menu-content');
+
+    // 鼠标进入事件
+    menuContent.addEventListener('mouseenter', function() {
+      menuContent.style.overflow = 'auto';
+    });
+
+    // 鼠标离开事件
+    menuContent.addEventListener('mouseleave', function() {
+      menuContent.style.overflow = 'hidden';
+    });
+  });
+</script>
+
+</section>
+</div>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+    <div class="site-footer-inner"><div>李尓阳工作室 <span class="copyleft">&copy;</span> 2018-2023 Lieryang</div>
+      <div class="footer-col gmail"> E-mail sxlisibo@gmail.com</div>
+      <div>Powered by <a title="Jekyll is a simple, blog-aware, static site
+      generator." href="https://jekyllrb.com/">Jekyll</a> &amp; <a title="Yat, yet
+      another theme." href="https://github.com/jeffreytse/jekyll-theme-yat">Yat Theme</a>.</div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

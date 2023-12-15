@@ -1,0 +1,64 @@
+#! /usr/bin/env stap
+
+global gobject_types_2_0_7600_6
+global gobject_type_names_2_0_7600_6
+global gobject_signal_names_2_0_7600_6
+
+probe begin {
+    print("===Hello World===\n")
+}
+
+probe process("/usr/local/glib-2.76.6/lib/x86_64-linux-gnu/libgobject-2.0.so.0.7600.6").mark("type__new")
+{
+  gobject_types_2_0_7600_6[pid(),user_string($arg1)] = $arg3;
+  gobject_type_names_2_0_7600_6[pid(),$arg3] = user_string($arg1);
+}
+
+probe process("/usr/local/glib-2.76.6/lib/x86_64-linux-gnu/libgobject-2.0.so.0.7600.6").mark("signal__new")
+{
+  gobject_signal_names_2_0_7600_6[pid(),$arg1] = user_string($arg2);
+}
+
+probe process("/usr/local/glib-2.76.6/lib/x86_64-linux-gnu/libgobject-2.0.so.0.7600.6").mark("object__new")
+{
+  object = $arg1; 
+  gtype = $arg2; 
+  type = gobject_type_names_2_0_7600_6[pid(),$arg2];
+  printf("gobject.object_new(%s) -> %p\n", type, object);
+}
+
+probe process("/usr/local/glib-2.76.6/lib/x86_64-linux-gnu/libgobject-2.0.so.0.7600.6").mark("object__finalize")
+{
+  object = $arg1; 
+  gtype = $arg2; 
+  type = gobject_type_names_2_0_7600_6[pid(),$arg2];
+  printf("gobject.object_finalize(%p[%s])\n", object, type);
+}
+
+probe process("/usr/local/glib-2.76.6/lib/x86_64-linux-gnu/libglib-2.0.so.0.7600.6").mark("mem__alloc")
+{
+  mem = $arg1; 
+  n_bytes = $arg2; 
+  zeroed = $arg3; 
+  failable = $arg4; 
+  printf("glib.mem_alloc(n_bytes=%d) -> %p\n", n_bytes, mem);
+}
+
+probe process("/usr/local/glib-2.76.6/lib/x86_64-linux-gnu/libglib-2.0.so.0.7600.6").mark("mem__realloc")
+{
+  mem = $arg1; 
+  old_mem = $arg2; 
+  n_bytes = $arg3;  
+  failable = $arg4; 
+  printf("glib.mem_realloc(old_mem=%p, n_bytes=%d) -> %p\n", old_mem, n_bytes, mem);
+}
+
+probe process("/usr/local/glib-2.76.6/lib/x86_64-linux-gnu/libglib-2.0.so.0.7600.6").mark("mem__free")
+{
+  mem = $arg1;  /* ARG: @mem: Raw memory pointer */
+  printf("glib.mem_free(mem=%p)\n", mem);
+}
+ 
+probe end {
+    print("===GunLe===\n")
+}
