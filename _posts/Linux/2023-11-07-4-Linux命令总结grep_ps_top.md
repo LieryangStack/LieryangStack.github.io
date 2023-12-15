@@ -1,9 +1,9 @@
 ---
 layout: post
-title: 十三、grep、ps、top命令
+title: 四、Linux命令总结grep、ps、top
 subtitle: 
-categories: 日之漫录
-tags: [日之漫录]
+categories: Linux
+tags: [Linux]
 ---
 
 ## 1 grep 命令

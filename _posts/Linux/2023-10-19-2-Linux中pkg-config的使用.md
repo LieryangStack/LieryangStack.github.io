@@ -1,9 +1,9 @@
 ---
 layout: post
-title: 八、Linux中pkg-config的使用
+title: 二、Linux中pkg-config的使用
 subtitle: 
-categories: 日之漫录
-tags: [日之漫录]
+categories: Linux
+tags: [Linux]
 ---
 
 meson中的dependency命令使用的是pkg-config命令，学习meson之前，先学习pkg-config。
