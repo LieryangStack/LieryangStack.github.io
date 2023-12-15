@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Linux中pkg-config的使用
+title: 八、Linux中pkg-config的使用
 subtitle: 
 categories: 日之漫录
 tags: [日之漫录]

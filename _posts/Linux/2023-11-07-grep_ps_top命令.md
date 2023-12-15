@@ -1,6 +1,6 @@
 ---
 layout: post
-title: grep、ps、top命令
+title: 十三、grep、ps、top命令
 subtitle: 
 categories: 日之漫录
 tags: [日之漫录]
