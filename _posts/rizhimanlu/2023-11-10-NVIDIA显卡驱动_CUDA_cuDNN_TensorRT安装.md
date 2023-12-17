@@ -1,12 +1,13 @@
 ---
 layout: post
 title: 四、NVIDIA显卡驱动、CUDA、cuDNN、TensorRt安装
-subtitle: 
 categories: 日之漫录
 tags: [日之漫录]
 ---
 
-## 1 禁用nouveau(nouveau是通用的驱动程序)（必须）
+## 1 NVIDIA显卡驱动安装
+
+### 1 禁用nouveau(nouveau是通用的驱动程序)（必须）
 
 1. `lsmod | grep nouveau` 命令查看是否有输出
 
@@ -19,7 +20,7 @@ tags: [日之漫录]
     ```
 3.重启后，重新查看`lsmod | grep nouveau`是否有输出
 
-## 2 安装依赖
+### 2 安装依赖
 
 ```
 sudo apt-get update   #更新软件列表
@@ -27,7 +28,7 @@ sudo apt-get update   #更新软件列表
 sudo apt-get install g++ gcc make pkg-config libglvnd-dev -y
 ```
 
-## 3 安装驱动
+### 3 安装驱动
 
 下载相应驱动：[https://www.nvidia.cn/Download/index.aspx?lang=en-us](https://www.nvidia.cn/Download/index.aspx?lang=en-us)
 
@@ -38,3 +39,4 @@ sudo chmod 777 NVIDIA-Linux-x86_64-430.26.run   #给你下载的驱动赋予可�
 sudo ./NVIDIA-Linux-x86_64-430.26.run    #安装
 sudo  service  gdm3 start   #重启显示服务，完成
 ```
+
