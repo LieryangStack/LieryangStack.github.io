@@ -1,9 +1,9 @@
 ---
 layout: post
-title: 十一、C调用C++
+title: 二、C调用C++
 subtitle: 
-categories: 日之漫录
-tags: [日之漫录]
+categories: C++
+tags: [C++]
 ---
 
 

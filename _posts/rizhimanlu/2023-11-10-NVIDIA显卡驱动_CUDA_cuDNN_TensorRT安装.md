@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 十六、NVIDIA显卡安装
+title: 四、NVIDIA显卡驱动、CUDA、cuDNN、TensorRt安装
 subtitle: 
 categories: 日之漫录
 tags: [日之漫录]

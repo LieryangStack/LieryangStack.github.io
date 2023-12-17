@@ -1,9 +1,9 @@
 ---
 layout: post
-title: 二、C_Plus_Plus关于命名空间知识点
+title: 一、C_Plus_Plus关于命名空间知识点
 subtitle: 
-categories: 日之漫录
-tags: [日之漫录]
+categories: C++
+tags: [C++]
 ---
 
 ## 1 命名空间内实现
