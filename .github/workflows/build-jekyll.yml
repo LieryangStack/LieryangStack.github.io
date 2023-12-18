@@ -11,10 +11,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: 3.0  # 指定所需的 Ruby 版本
-
       # Use GitHub Actions' cache to cache dependencies on servers
       - uses: actions/cache@v3
         with:
@@ -25,7 +21,7 @@ jobs:
       
       # Use GitHub Deploy Action to build and deploy to Github
       # For latest version: `jeffreytse/jekyll-deploy-action@master`
-      - uses: jeffreytse/jekyll-deploy-action@v0.5.0
+      - uses: ad-m/github-push-action@master
         with:
           provider: 'github'         # Default is github
           token: ${{ secrets.MY_TOKEN }} # It's your Personal Access Token(PAT)
