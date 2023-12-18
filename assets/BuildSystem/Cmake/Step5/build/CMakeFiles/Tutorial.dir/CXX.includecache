@@ -1,0 +1,24 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../MathFunctions/MathFunctions.h
+
+/home/lieryang/Desktop/build-system/Step5/tutorial.cxx
+cmath
+-
+iostream
+-
+string
+-
+MathFunctions.h
+/home/lieryang/Desktop/build-system/Step5/MathFunctions.h
+TutorialConfig.h
+/home/lieryang/Desktop/build-system/Step5/TutorialConfig.h
+
+TutorialConfig.h
+

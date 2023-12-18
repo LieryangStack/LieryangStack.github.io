@@ -1,0 +1,5 @@
+/home/lieryang/Desktop/build-system/Step5/install/lib/libMathFunctions.a
+/home/lieryang/Desktop/build-system/Step5/install/lib/libSqrtLibrary.a
+/home/lieryang/Desktop/build-system/Step5/install/include/MathFunctions.h
+/home/lieryang/Desktop/build-system/Step5/install/bin/Tutorial
+/home/lieryang/Desktop/build-system/Step5/install/include/TutorialConfig.h

@@ -1,0 +1,22 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/lieryang/Desktop/build-system/Step3/MathFunctions/MathFunctions.cxx
+MathFunctions.h
+/home/lieryang/Desktop/build-system/Step3/MathFunctions/MathFunctions.h
+cmath
+-
+iostream
+-
+mysqrt.h
+/home/lieryang/Desktop/build-system/Step3/MathFunctions/mysqrt.h
+
+/home/lieryang/Desktop/build-system/Step3/MathFunctions/MathFunctions.h
+
+/home/lieryang/Desktop/build-system/Step3/MathFunctions/mysqrt.h
+

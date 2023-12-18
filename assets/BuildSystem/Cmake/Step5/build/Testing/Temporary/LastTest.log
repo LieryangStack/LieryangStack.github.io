@@ -1,0 +1,253 @@
+Start testing: Oct 17 17:28 CST
+----------------------------------------------------------
+1/10 Testing: Runs
+1/10 Test: Runs
+Command: "/home/lieryang/Desktop/build-system/Step5/build/Tutorial" "25"
+Directory: /home/lieryang/Desktop/build-system/Step5/build
+"Runs" start time: Oct 17 17:28 CST
+Output:
+----------------------------------------------------------
+Computing sqrt of 25 to be 13
+Computing sqrt of 25 to be 7.46154
+Computing sqrt of 25 to be 5.40603
+Computing sqrt of 25 to be 5.01525
+Computing sqrt of 25 to be 5.00002
+Computing sqrt of 25 to be 5
+Computing sqrt of 25 to be 5
+Computing sqrt of 25 to be 5
+Computing sqrt of 25 to be 5
+Computing sqrt of 25 to be 5
+The square root of 25 is 5
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"Runs" end time: Oct 17 17:28 CST
+"Runs" time elapsed: 00:00:00
+----------------------------------------------------------
+
+2/10 Testing: Usage
+2/10 Test: Usage
+Command: "/home/lieryang/Desktop/build-system/Step5/build/Tutorial"
+Directory: /home/lieryang/Desktop/build-system/Step5/build
+"Usage" start time: Oct 17 17:28 CST
+Output:
+----------------------------------------------------------
+/home/lieryang/Desktop/build-system/Step5/build/Tutorial Version 1.0
+Usage: /home/lieryang/Desktop/build-system/Step5/build/Tutorial number
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Pass Reason:
+Required regular expression found. Regex=[Usage:.*number]
+"Usage" end time: Oct 17 17:28 CST
+"Usage" time elapsed: 00:00:00
+----------------------------------------------------------
+
+3/10 Testing: StandardUse
+3/10 Test: StandardUse
+Command: "/home/lieryang/Desktop/build-system/Step5/build/Tutorial" "4"
+Directory: /home/lieryang/Desktop/build-system/Step5/build
+"StandardUse" start time: Oct 17 17:28 CST
+Output:
+----------------------------------------------------------
+Computing sqrt of 4 to be 2.5
+Computing sqrt of 4 to be 2.05
+Computing sqrt of 4 to be 2.00061
+Computing sqrt of 4 to be 2
+Computing sqrt of 4 to be 2
+Computing sqrt of 4 to be 2
+Computing sqrt of 4 to be 2
+Computing sqrt of 4 to be 2
+Computing sqrt of 4 to be 2
+Computing sqrt of 4 to be 2
+The square root of 4 is 2
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Pass Reason:
+Required regular expression found. Regex=[4 is 2]
+"StandardUse" end time: Oct 17 17:28 CST
+"StandardUse" time elapsed: 00:00:00
+----------------------------------------------------------
+
+4/10 Testing: Comp4
+4/10 Test: Comp4
+Command: "/home/lieryang/Desktop/build-system/Step5/build/Tutorial" "4"
+Directory: /home/lieryang/Desktop/build-system/Step5/build
+"Comp4" start time: Oct 17 17:28 CST
+Output:
+----------------------------------------------------------
+Computing sqrt of 4 to be 2.5
+Computing sqrt of 4 to be 2.05
+Computing sqrt of 4 to be 2.00061
+Computing sqrt of 4 to be 2
+Computing sqrt of 4 to be 2
+Computing sqrt of 4 to be 2
+Computing sqrt of 4 to be 2
+Computing sqrt of 4 to be 2
+Computing sqrt of 4 to be 2
+Computing sqrt of 4 to be 2
+The square root of 4 is 2
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Pass Reason:
+Required regular expression found. Regex=[4 is 2]
+"Comp4" end time: Oct 17 17:28 CST
+"Comp4" time elapsed: 00:00:00
+----------------------------------------------------------
+
+5/10 Testing: Comp9
+5/10 Test: Comp9
+Command: "/home/lieryang/Desktop/build-system/Step5/build/Tutorial" "9"
+Directory: /home/lieryang/Desktop/build-system/Step5/build
+"Comp9" start time: Oct 17 17:28 CST
+Output:
+----------------------------------------------------------
+Computing sqrt of 9 to be 5
+Computing sqrt of 9 to be 3.4
+Computing sqrt of 9 to be 3.02353
+Computing sqrt of 9 to be 3.00009
+Computing sqrt of 9 to be 3
+Computing sqrt of 9 to be 3
+Computing sqrt of 9 to be 3
+Computing sqrt of 9 to be 3
+Computing sqrt of 9 to be 3
+Computing sqrt of 9 to be 3
+The square root of 9 is 3
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Pass Reason:
+Required regular expression found. Regex=[9 is 3]
+"Comp9" end time: Oct 17 17:28 CST
+"Comp9" time elapsed: 00:00:00
+----------------------------------------------------------
+
+6/10 Testing: Comp5
+6/10 Test: Comp5
+Command: "/home/lieryang/Desktop/build-system/Step5/build/Tutorial" "5"
+Directory: /home/lieryang/Desktop/build-system/Step5/build
+"Comp5" start time: Oct 17 17:28 CST
+Output:
+----------------------------------------------------------
+Computing sqrt of 5 to be 3
+Computing sqrt of 5 to be 2.33333
+Computing sqrt of 5 to be 2.2381
+Computing sqrt of 5 to be 2.23607
+Computing sqrt of 5 to be 2.23607
+Computing sqrt of 5 to be 2.23607
+Computing sqrt of 5 to be 2.23607
+Computing sqrt of 5 to be 2.23607
+Computing sqrt of 5 to be 2.23607
+Computing sqrt of 5 to be 2.23607
+The square root of 5 is 2.23607
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Pass Reason:
+Required regular expression found. Regex=[5 is 2.236]
+"Comp5" end time: Oct 17 17:28 CST
+"Comp5" time elapsed: 00:00:00
+----------------------------------------------------------
+
+7/10 Testing: Comp7
+7/10 Test: Comp7
+Command: "/home/lieryang/Desktop/build-system/Step5/build/Tutorial" "7"
+Directory: /home/lieryang/Desktop/build-system/Step5/build
+"Comp7" start time: Oct 17 17:28 CST
+Output:
+----------------------------------------------------------
+Computing sqrt of 7 to be 4
+Computing sqrt of 7 to be 2.875
+Computing sqrt of 7 to be 2.65489
+Computing sqrt of 7 to be 2.64577
+Computing sqrt of 7 to be 2.64575
+Computing sqrt of 7 to be 2.64575
+Computing sqrt of 7 to be 2.64575
+Computing sqrt of 7 to be 2.64575
+Computing sqrt of 7 to be 2.64575
+Computing sqrt of 7 to be 2.64575
+The square root of 7 is 2.64575
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Pass Reason:
+Required regular expression found. Regex=[7 is 2.645]
+"Comp7" end time: Oct 17 17:28 CST
+"Comp7" time elapsed: 00:00:00
+----------------------------------------------------------
+
+8/10 Testing: Comp25
+8/10 Test: Comp25
+Command: "/home/lieryang/Desktop/build-system/Step5/build/Tutorial" "25"
+Directory: /home/lieryang/Desktop/build-system/Step5/build
+"Comp25" start time: Oct 17 17:28 CST
+Output:
+----------------------------------------------------------
+Computing sqrt of 25 to be 13
+Computing sqrt of 25 to be 7.46154
+Computing sqrt of 25 to be 5.40603
+Computing sqrt of 25 to be 5.01525
+Computing sqrt of 25 to be 5.00002
+Computing sqrt of 25 to be 5
+Computing sqrt of 25 to be 5
+Computing sqrt of 25 to be 5
+Computing sqrt of 25 to be 5
+Computing sqrt of 25 to be 5
+The square root of 25 is 5
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Pass Reason:
+Required regular expression found. Regex=[25 is 5]
+"Comp25" end time: Oct 17 17:28 CST
+"Comp25" time elapsed: 00:00:00
+----------------------------------------------------------
+
+9/10 Testing: Comp-25
+9/10 Test: Comp-25
+Command: "/home/lieryang/Desktop/build-system/Step5/build/Tutorial" "-25"
+Directory: /home/lieryang/Desktop/build-system/Step5/build
+"Comp-25" start time: Oct 17 17:28 CST
+Output:
+----------------------------------------------------------
+The square root of -25 is 0
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Pass Reason:
+Required regular expression found. Regex=[-25 is (-nan|nan|0)]
+"Comp-25" end time: Oct 17 17:28 CST
+"Comp-25" time elapsed: 00:00:00
+----------------------------------------------------------
+
+10/10 Testing: Comp0.0001
+10/10 Test: Comp0.0001
+Command: "/home/lieryang/Desktop/build-system/Step5/build/Tutorial" "0.0001"
+Directory: /home/lieryang/Desktop/build-system/Step5/build
+"Comp0.0001" start time: Oct 17 17:28 CST
+Output:
+----------------------------------------------------------
+Computing sqrt of 0.0001 to be 0.50005
+Computing sqrt of 0.0001 to be 0.250125
+Computing sqrt of 0.0001 to be 0.125262
+Computing sqrt of 0.0001 to be 0.0630304
+Computing sqrt of 0.0001 to be 0.0323084
+Computing sqrt of 0.0001 to be 0.0177018
+Computing sqrt of 0.0001 to be 0.0116755
+Computing sqrt of 0.0001 to be 0.0101202
+Computing sqrt of 0.0001 to be 0.0100007
+Computing sqrt of 0.0001 to be 0.01
+The square root of 0.0001 is 0.01
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Pass Reason:
+Required regular expression found. Regex=[0.0001 is 0.01]
+"Comp0.0001" end time: Oct 17 17:28 CST
+"Comp0.0001" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Oct 17 17:28 CST
