@@ -48,6 +48,8 @@ Qt6.0在2020年12月正式发布，它引入了很多新的特性，主要包括
 
 下载开源版本的在线安装软件：[https://www.qt.io/download-open-source](https://www.qt.io/download-open-source)，这里我们选择定制安装。
 
+安装可能比较慢，可以使用镜像 `.\qt-unified-windows-x86-online.exe --mirror https://mirrors.ustc.edu.cn/qtproject`
+
 ![Alt text](/assets/Qt6/ChapterOne/Qt选择安装方式.png)
 
 - **Archive**：复选框表示存档的版本
