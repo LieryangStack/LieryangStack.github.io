@@ -124,7 +124,23 @@ Qt Design Studio 4.1.0 LTS。Qt Design Studio是QML编程设计界面的工具�
 
 #### 1.2.2.3 WebAssembly配置
 
-WebAssembly（TP）我们可以将用Qt编写的程序编译为WebAssembly格式，发布到Web浏览器上运行。
+WebAssembly（缩写为wasm）是一种使用非JavaScript代码，并使其在浏览器中运行的方法。这些代码可以是C、C++或Rust等。它们会被编译进你的浏览器，在你的 CPU 上以接近原生的速度运行。WebAssembly就是用来解决JavaScript 当前存在的一些效率等问题，WebAssembly不能替代 Javascript，相反，这两种技术是相辅相成的。通过 JavaScript API，你可以将 WebAssembly模块加载到你的页面中。也就是说，你可以通过 WebAssembly来充分利用编译代码的性能，同时保持 JavaScript 的灵活性。
+
+WebAssembly作为一种小型且快速的**二进制格式编程语言**，它可以为Web应用提供接近原生的性能。
+
+**安装Emscripten**
+
+Emscripten是一个编译到WebAssembly的工具链。它可以让你在没有浏览器插件的情况下以接近本地的速度在网络上运行Qt。
+
+1. <spand style="color:red;">一定要先安装Python</pasn>
+2. 下载emsdk：[https://github.com/emscripten-core/emsdk](https://github.com/emscripten-core/emsdk)
+3. 
+
+https://doc.qt.io/qt-6/wasm.html
+https://emscripten.org/docs/getting_started/downloads.html
+https://blog.csdn.net/c1s2d3n4cs/article/details/122739295
+
+![Alt text](image.png)
 
 #### 1.2.2.4 Qt其他组件
 
