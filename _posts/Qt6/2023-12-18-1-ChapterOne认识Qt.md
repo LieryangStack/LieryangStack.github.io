@@ -42,34 +42,95 @@ Qt6.0在2020年12月正式发布，它引入了很多新的特性，主要包括
 
 ## 1.2 Qt的安装
 
-下载开源版本的在线安装软件：[https://www.qt.io/download-open-source](https://www.qt.io/download-open-source)
+这一小节没有根据书本内容编排，根据我对Qt的使用进行补充编写。
 
-这里我们选择定制安装
+### 1.2.1 下载Qt安装软件
+
+下载开源版本的在线安装软件：[https://www.qt.io/download-open-source](https://www.qt.io/download-open-source)，这里我们选择定制安装。
 
 ![Alt text](/assets/Qt6/ChapterOne/Qt选择安装方式.png)
 
-Archive复选框表示存档的版本，LTS复选框表示长期支持版本，Latest releases复选框表示最新发布的版本，Preview复选框表示技术预览版本。
+- **Archive**：复选框表示存档的版本
+- **Latest supported releases**：复选框表示最新发布的版本
+- **Preview**：复选框表示技术预览版本
 
 ![Alt text](/assets/Qt6/ChapterOne/Qt6选择安装内容.png)
 
+我选择安装以上组件，各组件有什么作用，我在下一节进行总结，我的Qt在Windows下被成功安装在 `C:\Qt`。
 
-**IDE**：
-- Qt Creator 6.0.2。Qt Creator是开发Qt程序的IDE软件，是必须安装的，默认自动安装。
-- Qt Design Studio 2.3.1-community。Qt Design Studio是QML编程设计界面的工具软件。
-  
-**编译工具**：
+![Alt text](/assets/Qt6/ChapterOne/Qt安装目录组成.png)
 
-- MSVC 2019 64bit。是微软的Visual C++工具集的一部分，用于Windows平台上的应用程序开发。具体来说，MSVC（Microsoft Visual C++）是一个编译器和工具集，它使开发者能够使用C++语言开发应用程序和库。安装 `Visual Studio 2019` 就会附带 `MSVC 2019 64bit` 编译器和相关工具。
-- MinGW 11.2.0 64-bit。一个用于 Windows 平台的 GCC（GNU Compiler Collection）编译器的移植版本。MinGW（Minimalist GNU for Windows）提供了一套完整的开源编程工具集，允许开发者在 Windows 上编译和运行使用 C、C++、Fortran 等语言编写的应用程序。一般使用该编译工具。
-- CMake 3.21.1 64-bit。CMake是一个构建工具。Qt传统的构建工具是qmake。
-- Ninja 1.10.2。Ninja是一个小型的构建系统，专注于构建速度。CMake可以和Ninja结合使用。
+- `5.15.2` 文件夹里面的 `mingw` 目录包含的是 Qt 的类库文件，例如头文件、静态库、动态库等，这些类库文件使用 MinGW 工具集编译而成。
 
-**模块**：
-- WebAssembly（TP）。我们可以将用Qt编写的程序编译为WebAssembly格式，发布到Web浏览器上运行。
+- `Tools` 文件夹里面的 `mingw` 目录包含的是 MinGW 工具集，例如编译器 g++、链接器 ld、make 工具、打包工具 ar 等。
+
+- `vcredist` 文件夹存储 VC 运行库安装文件。
+
+
+### 1.2.2 Qt有哪些组件
+
+首先应该先介绍一下Qt有哪些界面设计软件和IDE。
+
+#### 1.2.2.1 Qt界面设计软件和IDE
+
+**Qt Designer**
+
+Qt设计师（Qt Designer）是Qt界面设计软件，也就是 `*.ui` 文件编辑软件。该软件跟随Qt版本和编译工具链都会编译生成该界面设计软件，只要安装编译工具链就会附带该软件安装。
+
+![Alt text](/assets/Qt6/ChapterOne/QtDesigner.png)
+
+由于编译工具链和Qt版本的不同，会有不同的`Qt Designer`，该软件会被集成在`Qt Creator`中使用线程调用。
+
+![Alt text](/assets/Qt6/ChapterOne/QtDesigner文件路径.png)
+
+**Qt Creator**
+
+`Qt Creator`是集成编译环境IDE，可以进行界面设计，编辑编译程序。点击Design就可以调用`Qt Designer`软件。
+
+![Alt text](/assets/Qt6/ChapterOne/QtCreator.png)
+
+`Qt Creator`在 Developer and Designer Tools 里面可以选择安装。`Qt Creator`使用微软的MSVC编译的，安装目录是在 `C:\Qt\Tools\QtCreator`，同时由于使用MSVC编译，Qt安装目录还会下载VC相关组件安装包 `C:\Qt\vcredist`。
+
+![Alt text](/assets/Qt6/ChapterOne/QtCreator如何安装.png)
+
+![Alt text](/assets/Qt6/ChapterOne/vcredist.png)
+
+**Qt Design Studio**
+
+Qt Design Studio 4.1.0 LTS。Qt Design Studio是QML编程设计界面的工具软件, `LTS` 表示长期支持版本。该软件也是使用MSVC编译生成的，安装目录是 `C:\Qt\Tools\QtDesignStudio-4.1.0-lts`。
+
+![Alt text](/assets/Qt6/ChapterOne/QtDesignStudio.png)
+
+#### 1.2.2.2 Qt编译工具链和构建系统组件
+
+1. `MSVC` 和 `MinGw` 是编译工具链。
+2. `Ninja` 和 `Make`都是构建系统。
+3. `CMake` 和 `qmake` 是元构建系统，生成构建系统`Make`需要的`Makefile`文件，`Make` 或者 `Ninja` 调用编译工具链生成可执行文件。
+
+
+**编译工具链**
+
+- **MSVC 2019 64bit**：是微软的Visual C++工具集的一部分，用于Windows平台上的应用程序开发。具体来说，MSVC（Microsoft Visual C++）是一个编译器和工具集，它使开发者能够使用C++语言开发应用程序和库。安装 `Visual Studio 2019` 就会附带 `MSVC 2019 64bit` 编译器和相关工具。
+
+- **MinGW 11.2.0 64-bit**：一个用于 Windows 平台的 GCC（GNU Compiler Collection）编译器的移植版本。MinGW（Minimalist GNU for Windows）提供了一套完整的开源编程工具集，允许开发者在 Windows 上编译和运行使用 C、C++、Fortran 等语言编写的应用程序。一般使用该编译工具。
+
+**构建系统**
+
+- **CMake 3.21.1 64-bit**：CMake是一个构建工具（元构建系统）。Qt传统的构建工具是qmake。
+
+- **Ninja 1.10.2**：Ninja是一个小型的构建系统，专注于构建速度。CMake可以和Ninja结合使用。
+
+#### 1.2.2.3 WebAssembly配置
+
+WebAssembly（TP）我们可以将用Qt编写的程序编译为WebAssembly格式，发布到Web浏览器上运行。
+
+#### 1.2.2.4 Qt其他组件
+
 - Qt Quick 3D。这是Qt的一个模块，它为Qt Quick提供一些实现3D图形功能的APi。Qt Quick是QML的控件库。
-- Qt Creator 6.0.2 Plugin Development。为Qt Creator开发插件所需的一些头文件和库文件，需要安装（补充：Qt Designer是一个窗口界面设计软件，被集成到了Qt Creator中）。
+- Qt Creator 6.0.2 Plugin Development。为Qt Creator开发插件所需的一些头文件和库文件。
 - Qt Installer Framework 4.2。这是为发布应用软件制作安装包的工具软件。
 - OpenSSL 1.1.1j Tookit。安全套接字层（secure socket layer，SSL）是一种网络安全通信协议，使用SSL协议可以保障网络通信不被窃听，OpenSSL是实现了SSL协议的一个开源工具包
+
 
 ## 1.3 编写一个Hello World程序
 
