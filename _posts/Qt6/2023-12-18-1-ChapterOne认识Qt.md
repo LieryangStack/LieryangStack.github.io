@@ -130,17 +130,49 @@ WebAssembly作为一种小型且快速的**二进制格式编程语言**，它�
 
 **安装Emscripten**
 
+>此时我的Qt修改了安装版本，此时为Qt6.6.1。
+
 Emscripten是一个编译到WebAssembly的工具链。它可以让你在没有浏览器插件的情况下以接近本地的速度在网络上运行Qt。
 
-1. <spand style="color:red;">一定要先安装Python</pasn>
+1. <spand style="color:red;">一定要先安装Python</spand>，下载链接：[https://www.python.org/downloads/windows/](https://www.python.org/downloads/windows/)
 2. 下载emsdk：[https://github.com/emscripten-core/emsdk](https://github.com/emscripten-core/emsdk)
-3. 
+3. 不同版本的Qt都会有对应的emsdk版本：[https://doc.qt.io/qt-6/wasm.html]https://doc.qt.io/qt-6/wasm.html()
+    ```
+    Qt 6.2: 2.0.14
+    Qt 6.3: 3.0.0
+    Qt 6.4: 3.1.14
+    Qt 6.5: 3.1.25
+    Qt 6.6: 3.1.37
+    ```
 
-https://doc.qt.io/qt-6/wasm.html
-https://emscripten.org/docs/getting_started/downloads.html
-https://blog.csdn.net/c1s2d3n4cs/article/details/122739295
+4. Windows和Linux下安装方法参考：[https://emscripten.org/docs/getting_started/downloads.html](https://emscripten.org/docs/getting_started/downloads.html)
+    ```sh
+    git clone https://github.com/emscripten-core/emsdk.git
+    cd emsdk
+    git pull
 
-![Alt text](image.png)
+    # windows下安装方法
+    ./emsdk.bat install 3.1.37
+    ./emsdk.bat activate 3.1.37
+    ./emsdk_env.bat
+    
+    # Linux下安装方法
+    ./emsdk install 3.1.37
+    ./emsdk activate 3.1.37
+    source ./emsdk_env.sh
+    ```
+5. 设定环境变量（脚本设定的只是终端临时环境变量）
+![Alt text](/assets/Qt6/ChapterOne/emsdk环境变量设定.png)
+
+6. 测试是否安装成功
+![Alt text](/assets/Qt6/ChapterOne/emsdk是否安装成功.png)
+
+7. Qt设定emsdk
+![Alt text](/assets/Qt6/ChapterOne/image.png)
+![Alt text](/assets/Qt6/ChapterOne/image-1.png)
+![Alt text](/assets/Qt6/ChapterOne/image-2.png)
+![Alt text](/assets/Qt6/ChapterOne/image-3.png)
+
 
 #### 1.2.2.4 Qt其他组件
 
