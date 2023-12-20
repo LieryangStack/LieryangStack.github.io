@@ -136,7 +136,12 @@ Emscripten是一个编译到WebAssembly的工具链。它可以让你在没有�
 
 1. <spand style="color:red;">一定要先安装Python</spand>，下载链接：[https://www.python.org/downloads/windows/](https://www.python.org/downloads/windows/)
 2. 下载emsdk：[https://github.com/emscripten-core/emsdk](https://github.com/emscripten-core/emsdk)
-3. 不同版本的Qt都会有对应的emsdk版本：[https://doc.qt.io/qt-6/wasm.html]https://doc.qt.io/qt-6/wasm.html()
+    ```sh
+    git clone https://github.com/emscripten-core/emsdk.git
+    cd emsdk
+    git pull
+    ```
+3. 不同版本的Qt都会有对应的emsdk版本：[https://doc.qt.io/qt-6/wasm.html](https://doc.qt.io/qt-6/wasm.html)
     ```
     Qt 6.2: 2.0.14
     Qt 6.3: 3.0.0
@@ -147,10 +152,6 @@ Emscripten是一个编译到WebAssembly的工具链。它可以让你在没有�
 
 4. Windows和Linux下安装方法参考：[https://emscripten.org/docs/getting_started/downloads.html](https://emscripten.org/docs/getting_started/downloads.html)
     ```sh
-    git clone https://github.com/emscripten-core/emsdk.git
-    cd emsdk
-    git pull
-
     # windows下安装方法
     ./emsdk.bat install 3.1.37
     ./emsdk.bat activate 3.1.37
@@ -164,10 +165,10 @@ Emscripten是一个编译到WebAssembly的工具链。它可以让你在没有�
 5. 设定环境变量（脚本设定的只是终端临时环境变量）
 ![Alt text](/assets/Qt6/ChapterOne/emsdk环境变量设定.png)
 
-6. 测试是否安装成功
+1. 测试是否安装成功
 ![Alt text](/assets/Qt6/ChapterOne/emsdk是否安装成功.png)
 
-7. Qt设定emsdk
+1. Qt设定emsdk
 ![Alt text](/assets/Qt6/ChapterOne/image.png)
 ![Alt text](/assets/Qt6/ChapterOne/image-1.png)
 ![Alt text](/assets/Qt6/ChapterOne/image-2.png)
@@ -184,9 +185,22 @@ Emscripten是一个编译到WebAssembly的工具链。它可以让你在没有�
 
 ## 1.3 编写一个Hello World程序
 
+### 1.3.1 Qt Creator编译环境
 
+![Alt text](/assets/Qt6/ChapterOne/编译工具链-1.png)
+![Alt text](/assets/Qt6/ChapterOne/编译工具链-2.png)
+![Alt text](/assets/Qt6/ChapterOne/编译工具链-3.png)
+![Alt text](/assets/Qt6/ChapterOne/编译工具链-4.png)
+![Alt text](/assets/Qt6/ChapterOne/编译工具链-5.png)
 
-### 1.3.1 Qt Creator简介
+### 1.3.2 Qt 交叉编译环境
+
+https://download.qt.io/official_releases
+
+源文件路径：C:\Qt\SourcesCode\qt-everywhere-src-6.6.1
+GCC编译器路径：C:\Program Files (x86)\Arm GNU Toolchain aarch64-none-linux-gnu\13.2 Rel1
+
+![Alt text](image.png)
 
 ### 1.3.2 新建一个GUI项目
 
