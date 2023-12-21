@@ -9,7 +9,27 @@ tags: [Qt6开发学习]
 
 ### 2.1.1 GUI项目文件组成
 
+![Alt text](/assets/Qt6/ChapterTwo/项目管理目录树.png)
+
+- **samp2_1.pro**: 是qmake构建系统的项目配置文件，其中存储了项目的各种设置内容。
+- **widget.ui**: 是UI文件，这是用于窗口界面可视化设计的文件。
+- **main.c**: 是主程序文件，包含main()函数。
+- **widget.h**: 是窗口类定义头文件，它用到了UI文件widget.ui中的一个可视化设计的窗口界面。
+- **widget.cpp**: 是对应于widget.h的源程序文件。
+
 ### 2.1.2 项目配置文件
+
+#### 2.1.2.1 qmake
+
+如果使用qmake构建系统，就会生成后缀 `.pro` 的项目配置文件。
+
+qmake工具有助于简化跨不同平台的开发项目的构建过程。它自动化生成Makefile的过程，因此只需要几行信息就能创建每一个Makefile。即使软件项目不是用Qt编写的，你也可以使用qmake。
+
+qmake基于项目文件中的信息生成Makefile。项目文件由开发者创建，通常很简单，但对于复杂的项目，也可以创建更复杂的项目文件。
+
+qmake包含了支持Qt开发的附加功能，能够自动包含元对象编译器（meta-object compiler，MOC）和用户界面编译器（user interface compiler，UIC）生成构建规则。
+
+qmake还能为Microsoft Visual Studio生成项目，而无需开发者更改项目文件。
 
 ### 2.1.3 UI文件
 
