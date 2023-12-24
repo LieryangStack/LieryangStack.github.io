@@ -1,4 +1,4 @@
-#include <gtk/gtk.h>
+#include "myMethod.h"
 
 //
 // Should provided the active view for a GTK application
