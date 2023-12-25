@@ -1,6 +1,6 @@
 option('someoption', type : 'string', value : 'optval', description : 'An option')
 
-option('other_one', type : 'boolean', value : false)
+option('print', type : 'boolean', value : true)
 
 option('combo_opt', type : 'combo', choices : ['one', 'two', 'three'], value : 'three')
 

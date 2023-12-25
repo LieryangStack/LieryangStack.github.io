@@ -90,8 +90,3 @@ src = ['source1.c', 'source2.c', 'source3.c']
 executable('myexe', src)
 ```
 
-## 3.3 示例三
-
-```python
-
-```

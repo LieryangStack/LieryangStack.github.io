@@ -215,6 +215,12 @@ str | int | bool | feature | list[str | int | bool] get_option(
 )
 ```
 
+## 7 示例程序
+
+[测试程序文件夹目录：/assets/BuildSystem/Meson/14_WriteMesonFile/](/assets/BuildSystem/Meson/14_WriteMesonFile/)
+
+![Alt text](/assets/BuildSystem/Meson/14_WriteMesonFile/测试选项和重新配置.png)
+
 ## 8 参考
 
 [参考1：Build options](https://mesonbuild.com/Build-options.html#builtin-build-options)

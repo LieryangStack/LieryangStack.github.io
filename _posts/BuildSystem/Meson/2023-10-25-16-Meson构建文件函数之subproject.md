@@ -31,22 +31,6 @@ subproject subproject(
 )
 ```
 
-## 7 get_option()
-
-获取位置参数中指定的项目构建选项的值。
-
-请注意，对于以 dir 结尾的内置选项（如 bindir 和 libdir）返回的值通常是相对于（并位于）前缀的路径，但您不应依赖于此，因为在某些情况下它也可以是绝对路径。install_dir 参数按预期处理这一点，但如果您需要绝对路径，例如用于定义等，您应该使用路径连接运算符，如此：get_option('prefix') / get_option('localstatedir')。永远不要手动将路径拼接为字符串。
-
-对于类型为 feature 的选项，返回的是一个特性选项对象，而不是字符串。有关更多详细信息，请参阅特性选项文档。
-
-### 7.1 get_option()定义
-
-```python
-# Obtains the value of the [project build option](Build-options
-str | int | bool | feature | list[str | int | bool] get_option(
-  str option_name,     # Name of the option to query
-)
-```
 
 
 

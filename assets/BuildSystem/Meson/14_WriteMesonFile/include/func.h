@@ -2,6 +2,6 @@
 #define __MY_METHOD_H__
 
 
-void fun();
+void func();
 
 #endif
