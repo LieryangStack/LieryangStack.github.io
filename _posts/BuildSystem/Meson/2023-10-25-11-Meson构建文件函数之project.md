@@ -41,15 +41,32 @@ void project(
 
 ## 3 project()举例
 
-```meson
+示例程序会在第十四节option讲述完毕，综合十一到第十四节内容编写一个示例程序。
+
+```python
 project('glib', 'c',
   version : '2.76.6',
   # NOTE: See the policy in docs/meson-version.md before changing the Meson dependency
   meson_version : '>= 0.60.0',
   default_options : [
+    'prefix=/home/lieryang/application/',
     'buildtype=debugoptimized',
     'warning_level=3',
     'c_std=gnu99'
   ]
 )
 ```
+
+default_options 可以修改内置选项的默认值，比如： `buildtype` 修改构建类型的值， `prefix` 修改前缀的值。
+
+选项值还可以通过以下方式修改：
+
+```sh
+meson setup build --prefix=/home/lieryang/local
+# -Doption还可以选项用户自定义选项的值
+meson setup build -Dprefix=/home/lieryang/local
+```
+
+## 4 参考
+
+[参考1：内置选项Built-in options](https://mesonbuild.com/Builtin-options.html)

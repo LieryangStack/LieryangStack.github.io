@@ -1,0 +1,20 @@
+option('someoption', type : 'string', value : 'optval', description : 'An option')
+
+option('other_one', type : 'boolean', value : false)
+
+option('combo_opt', type : 'combo', choices : ['one', 'two', 'three'], value : 'three')
+
+# 自 0.45.0 版本起
+option('integer_opt', type : 'integer', min : 0, max : 5, value : 3) 
+
+# 自 0.44.0 版本起
+option('free_array_opt', type : 'array', value : ['one', 'two']) 
+
+option('array_opt', type : 'array', choices : ['one', 'two', 'three'], value : ['one', 'two'])
+
+# 自 0.47.0 版本起
+option('some_feature', type : 'feature', value : 'enabled')
+
+option('long_desc', type : 'string', value : 'optval',
+description : 'An option with a very long description' +
+'that does something in a specific context') 
