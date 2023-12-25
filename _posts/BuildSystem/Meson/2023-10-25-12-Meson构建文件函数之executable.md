@@ -1,60 +1,13 @@
 ---
 layout: post
-title: 二、Meson编写构建文件——函数总结
+title: 十二、Meson构建文件函数——executable()
 categories: Meson
 tags: [Meson]
 ---
 
 Meson本质上是用 `Python` 编写的，所以这些函数也都是Python函数。
 
-## 1 project()
-
-`project()` 每个项目中调用的第一个函数，用于初始化 Meson。
-
-此函数的第一个参数必须是一个字符串，用于定义该项目的名称。
-
-项目名称可以是您想要的任何字符串，它只用于描述目的。然而，由于它被写入，例如依赖性清单，通常有意义的是将其与项目压缩包或 pkg-config 名称保持一致。因此，例如，你可能希望使用 libfoobar 而不是 The Foobar Library 作为名称。
-
-其后可以跟随项目使用的编程语言列表。（自 0.40.0 版本起）语言列表是可选的。
-
-这些语言可用于 native: false（默认值）（host机器）目标和 native: true（build机器）目标。（自 0.56.0 版本起）不需要指定语言的构建机器编译器。
-
-支持的语言值包括 c、cpp（用于 C++）、cuda、cython、d、objc、objcpp、fortran、java、cs（用于 C#）、vala 和 rust。
-
-### 1.1 project()定义
-
-```python
-# The first function called in each project, to initialize Meson
-void project(
-  str project_name,     # The name of the project
-  str language...,      # The languages that Meson should initialize
-
-  # Keyword arguments:
-  default_options : list[str] | dict[str | bool | int | list[str]]  # Accepts strings in the form `key=value`
-  license         : str | list[str]                               # Takes a string or array of strings describing the license(s) the code is under
-  license_files   : str | list[str]                               # Takes a string or array of strings with the paths to the license file(s)
-  meson_version   : str                                           # Takes a string describing which Meson version the project requires
-  subproject_dir  : str                                           # Specifies the top level directory name that holds Meson subprojects
-  version         : str | file                                    # A free form string describing the version of this project
-)
-```
-
-### 1.2 project()举例
-
-```meson
-project('glib', 'c',
-  version : '2.76.6',
-  # NOTE: See the policy in docs/meson-version.md before changing the Meson dependency
-  meson_version : '>= 0.60.0',
-  default_options : [
-    'buildtype=debugoptimized',
-    'warning_level=3',
-    'c_std=gnu99'
-  ]
-)
-```
-
-## 2 executable()
+## 1 executable()
 
 创建一个新的可执行文件。第一个参数指定其名称，其余的位置参数定义要使用的输入文件。
 
@@ -64,7 +17,7 @@ kwargs 的列表（例如 sources、objects 和 dependencies）总是被扁平�
 
 自从 1.3.0 版本起，只要每个目标都有不同的 name_suffix，可执行文件的名称可以在多个目标中相同。
 
-### 2.1 executable()定义
+## 2 executable()定义
 
 ```python
 # Creates a new executable
@@ -114,9 +67,9 @@ exe executable(
 )
 ```
 
-### 2.2 executable()举例
+## 3 executable()举例
 
-#### 2.2.1 示例一
+### 3.1 示例一
 
 ```python
 app2_resources = gnome.compile_resources('exampleapp2_resources',
@@ -129,17 +82,10 @@ executable('exampleapp2',
   c_args: common_cflags)
 ```
 
-#### 2.2.2 示例二
+## 3.2 示例二
 
 ```python
 project('simple', 'c')
 src = ['source1.c', 'source2.c', 'source3.c']
 executable('myexe', src)
 ```
-
-## 3 include_directories()
-
-
-
-
-
