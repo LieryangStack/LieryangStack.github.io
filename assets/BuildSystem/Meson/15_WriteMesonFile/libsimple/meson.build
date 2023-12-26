@@ -1,6 +1,7 @@
-project('libsimple', 'cpp', version: '1.0')
+# project('libsimple', 'cpp', version: '1.0')
 
 inc = include_directories('include')
+
 # 生成动态库 libsimple.so
 libsimple = shared_library('simple',
                            'simple.cpp',

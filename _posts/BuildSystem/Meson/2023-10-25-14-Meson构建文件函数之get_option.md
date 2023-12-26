@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 十四、Meson构建文件——get_option()
+title: 十四、Meson构建文件函数——get_option()
 categories: Meson
 tags: [Meson]
 ---
