@@ -1,0 +1,37 @@
+/*gcc编译设置*/
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "cppbuild",
+			"label": "C/C++: gcc build active file",
+			"command": "/usr/bin/gcc", /*使用Gcc命令编译*/
+			"args": [
+				"-g",
+				"${file}",
+				"-o",
+				"${fileDirname}/${fileBasenameNoExtension}",
+				"`pkg-config",
+				"--cflags",
+				"--libs",
+				"gstreamer-video-1.0",
+				"gstreamer-audio-1.0",
+				"gstreamer-pbutils-1.0",
+				"gstreamer-gl-1.0",
+				"gstreamer-1.0`",
+				"-lX11"
+			],
+			"options": {
+				"cwd": "${fileDirname}"
+			},
+			"problemMatcher": [
+				"$gcc"
+			],
+			"group": {
+				"kind": "build",
+				"isDefault": true /*Ctrl+Shift+B快捷键是否启用*/
+			},
+			"detail": "compiler: /usr/bin/gcc"
+		}
+	]
+}
