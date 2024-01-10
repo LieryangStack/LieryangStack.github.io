@@ -1,20 +1,20 @@
 ---
 layout: post
-title: 三、WireShark分析——TCP协议
+title: 三、WireShark抓包分析——HTTP协议
 categories: 计算机网络
 tags: [计算机网络]
 ---
 
 ## 1 TCP报文格式
 
-![Alt text](image-5.png)
-![Alt text](image-6.png)
+![Alt text](/assets/ComputerNetwork/2024010903TCP/image-5.png)
+![Alt text](/assets/ComputerNetwork/2024010903TCP/image-6.png)
 
 ### 1.1 TCP选项
 
 常见的TCP选项有7种，如图所示：
 
-![Alt text](image-7.png)
+![Alt text](/assets/ComputerNetwork/2024010903TCP/image-7.png)
 
 ​1、kind=0，选项表结束（EOP）选项
 
@@ -49,30 +49,58 @@ TCP通信时，如果某个TCP报文段丢失，则TCP会重传最后被确认�
 7、kind=8，时间戳选项
 
 该选项提供了较为准确的计算通信双方之间的回路时间（RoundTrip Time，RTT）的方法，从而为TCP流量控制提供重要信息。我们可以通过修改/proc/sys/net/ipv4/tcp_timestamps内核变量来启用或关闭时间戳选项。
-————————————————
-版权声明：本文为CSDN博主「1390811049」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。
-原文链接：https://blog.csdn.net/ly1390811049/article/details/119548772
 
-## 2 TCP三次握手
+## 2 HTTP分析
+
+### 2.1 TCP三次握手
+
+[实验文件：/assets/ComputerNetwork/2024010903TCP/HTTP_Capture_Test.pcapng](/assets/ComputerNetwork/2024010903TCP/HTTP_Capture_Test.pcapng)
 
 本次使用HTTP协议学习章节中搭建的服务器，通过访问服务器`127.0.0.1:80`，抓包数据分析。
 
-![Alt text](image.png)
+![Alt text](/assets/ComputerNetwork/2024010903TCP/image.png)
 
 打开WireShark首选项关闭分析TCP序列号
 
-![Alt text](image-1.png)
+![Alt text](/assets/ComputerNetwork/2024010903TCP/image-1.png)
 
 可以看到第一次发送握手信号的时候，TCP报文会有选项表示MSS和窗口扩大因子。此时首部长度（TCP格式前部长度32字节）
 
 传输数据的时候没有TCP选项，所以TCP首部长度20字节
 
-![Alt text](image-2.png)
+![Alt text](/assets/ComputerNetwork/2024010903TCP/image-2.png)
 
-## 3 TCP数据传输
+### 2.2 TCP数据传输
 
-`TCP segment of a reassembled PDU`：一个重新装配的数据协议单元的TCP报，也就是说数据协议单元被TCP传输层重新分割了。只有在传输最后一个TCP段的时候，会不显示该标记TCP segment of a reassembled PDU。
+<font color='red'>注意：</font>
 
-![Alt text](image-3.png)
+1. 完成三次握手的时候Flags依次是 `[SYN] [SYN,ACK] [ACK]`,客户端或者服务器传输数据的时候Flags是 `[PSH, ACK]`。
+2. 传输数据的时候：发送方`ACK = Seq(接受方）`，接收方 `ACK = Seq(发送方) + Len(有效报文长度)`，`Seq` 由各自维护。
 
-![Alt text](image-4.png)
+3. `TCP segment of a reassembled PDU`表示一个重新装配的数据协议单元的TCP报，也就是说数据协议单元被TCP传输层重新分割了。只有在传输最后一个TCP段的时候，会不显示该标记TCP segment of a reassembled PDU。
+
+#### 2.2.1 客户端发送GET
+![Alt text](/assets/ComputerNetwork/2024010903TCP/image-3.png)
+
+通过上图不难发现，第一次客户端发送数据和第三次握手的`Seq` 和 `Ack` 相等。
+
+![Alt text](/assets/ComputerNetwork/2024010903TCP/image-4.png)
+
+应用层协议就是对TCP传输 `payload` 的一种定义
+
+#### 2.2.2 服务器回复OK
+
+![Alt text](/assets/ComputerNetwork/2024010903TCP/服务器回复.png)
+
+### 2.3 TCP四次挥手
+
+![Alt text](/assets/ComputerNetwork/2024010903TCP/HTTP四次挥手.png)
+
+### 2.4 查看TCP传输数据
+
+右击 -> Follow -> TCP Stream
+
+![Alt text](/assets/ComputerNetwork/2024010903TCP/右击Follow.png)
+
+![Alt text](/assets/ComputerNetwork/2024010903TCP/查看不同TCP流.png)
+
