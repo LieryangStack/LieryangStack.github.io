@@ -1,8 +1,8 @@
 ---
 layout: post
-title: NVIDIA显卡驱动、CUDA、cuDNN、TensorRt安装
-categories: 日之漫录
-tags: [日之漫录]
+title: 一、NVIDIA显卡驱动、CUDA、cuDNN、TensorRt安装
+categories: NVIDIA
+tags: [NVIDIA]
 ---
 
 NVIDIA显卡驱动和CUDA选择 `run` 文件进行安装，cuDNN和TensorRt选择 `tar` 文件解压放到指定目录，添加相关环境变量。
