@@ -151,7 +151,7 @@ cuDNN是NVIDIA推出的用于自家GPU进行神经网络训练和推理的加速
 
 ### 3.1 cuDNN下载
 
-[cuDNN下载地址：https://blog.csdn.net/qq_41701723/article/details/131633183](https://blog.csdn.net/qq_41701723/article/details/131633183)
+[cuDNN下载地址：https://developer.nvidia.com/rdp/cudnn-archive](https://developer.nvidia.com/rdp/cudnn-archive)
 
 我选择下载 `Local Installer for Linux x86_64 (Tar)`
 
@@ -223,3 +223,5 @@ cd TensorRT-8.6.1.6/bin
 ```
 
 ![Alt text](/assets/rizhimanlu/20231110/TensorRt运行.png)
+
+
