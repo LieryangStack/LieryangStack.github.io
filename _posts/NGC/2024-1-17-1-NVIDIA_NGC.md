@@ -1,15 +1,15 @@
 ---
 layout: post
-title: 二、NGC
-categories: NVIDIA
-tags: [NVIDIA]
+title: 一、NGC——快速开始
+categories: NGC
+tags: [NGC]
 ---
 
 NGC，全称 NVIDIA GPU Cloud，是一款基于GPU加速，用于深度学习和高性能计算的<font color='red'>容器</font>。
 
 ## 1 Pytorch
 
-![Alt text](image-1.png)
+![Alt text](/assets/NGC/image-1.png)
 
 官网的概述中提供了两种运行方式：
 
@@ -20,7 +20,7 @@ NGC，全称 NVIDIA GPU Cloud，是一款基于GPU加速，用于深度学习和
 
 ### 1.1 使用Docker运行PyTorch
 
-![Alt text](image-2.png)
+![Alt text](/assets/NGC/image-2.png)
 
 ```sh
 sudo docker run --gpus all -it -p 8888:8888 nvcr.io/nvidia/pytorch:23.12-py3
@@ -33,15 +33,15 @@ sudo docker run --gpus all -it -p 8888:8888 nvcr.io/nvidia/pytorch:23.12-py3
 ### 1.2 运行Jupter Notebook
 
 1. 运行 `jupyter notebook --port 8888`
-![Alt text](image-3.png)
+![Alt text](/assets/NGC/image-3.png)
 
 2. 网页打开Jupter Notebook
 
-![Alt text](image-4.png)
+![Alt text](/assets/NGC/image-4.png)
 
 3. 使用目标检测SSD示例
 
-![Alt text](image-5.png)
+![Alt text](/assets/NGC/image-5.png)
 
 ## 2 相关错误问题
 
@@ -49,5 +49,5 @@ sudo docker run --gpus all -it -p 8888:8888 nvcr.io/nvidia/pytorch:23.12-py3
 
 重新 `docker login nvcr.io`
 
-![Alt text](image.png)
+![Alt text](/assets/NGC/image.png)
 
