@@ -35,7 +35,7 @@ sudo systemctl enable vsftpd #设置 vsftpd 服务开机自启动
 ps -ef | grep ftp
 ```
 
-![Alt text](image.png)
+![Alt text](/assets/Ubuntu/20240126/image.png)
 
 ## 2 访问FTP服务器
 
@@ -47,6 +47,8 @@ ps -ef | grep ftp
 ```sh
 sudo apt-get install filezilla -y
 ```
+
+![Alt text](/assets/Ubuntu/20240126/image-1.png)
 
 ## 参考
 
