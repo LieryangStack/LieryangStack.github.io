@@ -1,0 +1,56 @@
+---
+layout: post
+title: 六、Ubuntu文件传输FTP
+categories: Ubuntu
+tags: [Ubuntu]
+---
+
+## 1 安装vsftpd
+
+1. 在开始设置 FTP 服务器之前，您需要安装一个称为 vsftpd 的软件包，它是一个流行的 FTP 服务器软件。执行以下命令以安装 vsftpd：
+
+```sh
+sudo apt-get install vsftpd -y
+```
+
+2. 配置`vsftpd`
+
+```sh
+sudo gedit /etc/vsftpd.conf
+```
+
+  a. 启用本地用户登录 `local_enable=YES`，这将允许本地用户通过 FTP 登录到服务器。
+  b. 启用被用户写入文件 `write_enable=YES`，这将控制用户是否有权限在服务器上执行写入操作。
+
+3. 配置保存后，重启FTP服务
+   
+```sh
+sudo systemctl restart vsftpd # 重启vsftpd服务
+sudo systemctl enable vsftpd #设置 vsftpd 服务开机自启动
+```
+
+4. 查看FTP运行状态
+
+```sh
+ps -ef | grep ftp
+```
+
+![Alt text](image.png)
+
+## 2 访问FTP服务器
+
+- **FileZilla**：FileZilla 是一个流行的开源 FTP 客户端，可在 Linux、Windows 和 macOS 上运行。
+- **Nautilus**：Nautilus 是 GNOME 桌面环境中的文件管理器，支持 FTP 协议。
+
+### 2.1 FileZilla
+
+```sh
+sudo apt-get install filezilla -y
+```
+
+## 参考
+
+[参考1：如何在 Ubuntu Linux 中设置和使用 FTP 服务器？](https://cloud.tencent.com/developer/article/2297781)
+
+
+
