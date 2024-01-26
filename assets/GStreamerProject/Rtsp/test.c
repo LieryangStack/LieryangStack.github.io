@@ -13,12 +13,6 @@ typedef struct _CustomData
   GstElement *convert;
   GstElement *sink;
 
-  GstElement *h264depay_t;
-  GstElement *h264parse_t;
-  GstElement *decode_t;
-  GstElement *convert_t;
-  GstElement *sink_t;
-
 } CustomData;
 
 /* Handler for the pad-added signal */
@@ -63,15 +57,9 @@ main (int argc, char *argv[])
 
   data.h264depay = gst_element_factory_make ("rtph264depay", "rtph264depay");
   data.h264parse = gst_element_factory_make ("h264parse", "h264parse");
-  data.decode = gst_element_factory_make ("avdec_h264", "avdec_h264");
-  data.convert = gst_element_factory_make ("videoconvert", "videoconvert");
-  data.sink = gst_element_factory_make ("ximagesink", "sink");
-
-  // data.h264depay_t = gst_element_factory_make ("rtph264depay", "rtph264depay_t");
-  // data.h264parse_t = gst_element_factory_make ("h264parse", "h264parse_t");
-  // data.decode_t = gst_element_factory_make ("avdec_h264", "avdec_h264_t");
-  // data.convert_t = gst_element_factory_make ("videoconvert", "videoconvert_t");
-  // data.sink_t = gst_element_factory_make ("ximagesink", "sink_t");
+  data.decode = gst_element_factory_make ("nvv4l2decoder", "nvv4l2decoder"); // nvv4l2decoder avdec_h264
+  data.convert = gst_element_factory_make ("nvvideoconvert", "videoconvert");
+  data.sink = gst_element_factory_make ("nveglglessink", "sink");
 
   /* Create the empty pipeline */
   data.pipeline = gst_pipeline_new ("test-pipeline");
@@ -82,19 +70,11 @@ main (int argc, char *argv[])
     return -1;
   }
 
-  // if (!data.h264depay_t || !data.h264parse_t || !data.decode_t || !data.convert_t || !data.sink_t) {
-  //   g_printerr ("Not all elements could be created.\n");
-  //   return -1;
-  // }
-
   /* Build the pipeline. Note that we are NOT linking the source at this
    * point. We will do it later. */
   gst_bin_add_many (GST_BIN (data.pipeline), data.source, data.h264depay, \
       data.h264parse, data.decode, data.convert, data.sink, NULL);
 
-  // gst_bin_add_many (GST_BIN (data.pipeline), data.h264depay_t, \
-  //     data.h264parse_t, data.decode_t, data.convert_t, data.sink_t, NULL);
-  
 
   if (!gst_element_link_many (data.h264depay, data.h264parse, \
                               data.decode, data.convert, data.sink, NULL)) {
@@ -103,17 +83,10 @@ main (int argc, char *argv[])
     return -1;
   }
 
-  // if (!gst_element_link_many (data.h264depay_t, data.h264parse_t, \
-  //                             data.decode_t, data.convert_t, data.sink_t, NULL)) {
-  //   g_printerr ("Elements could not be linked.\n");
-  //   gst_object_unref (data.pipeline);
-  //   return -1;
-  // }
-
   /* Set the URI to play */
   g_object_set(data.source, "location", "rtsp://admin:yangquan123@192.168.11.112:554/Streaming/Channels/102", NULL);
   
-  g_object_set(data.source, "location", "rtsp://admin:QFXFDQ@192.168.101.16:554/Streaming/Channels/101", NULL);
+  // g_object_set(data.source, "location", "rtsp://admin:QFXFDQ@192.168.101.16:554/Streaming/Channels/101", NULL);
 
 
   /* Connect to the pad-added signal */
