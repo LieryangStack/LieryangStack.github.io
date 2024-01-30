@@ -84,7 +84,8 @@ main (int argc, char *argv[])
   }
 
   /* Set the URI to play */
-  g_object_set(data.source, "location", "rtsp://admin:yangquan123@192.168.11.112:554/Streaming/Channels/102", NULL);
+  g_object_set(data.source, "location", "rtsp://admin:YEERBA@192.168.10.11:554/Streaming/Channels/101", \
+                            "latency", 300, "protocols", 0x04, NULL);
   
   // g_object_set(data.source, "location", "rtsp://admin:QFXFDQ@192.168.101.16:554/Streaming/Channels/101", NULL);
 
