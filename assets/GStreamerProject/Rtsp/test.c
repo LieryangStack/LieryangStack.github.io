@@ -49,6 +49,8 @@ main (int argc, char *argv[])
   GstStateChangeReturn ret;
   gboolean terminate = FALSE;
 
+  g_setenv("GST_DEBUG_DUMP_DOT_DIR", "./", TRUE);
+
   /* Initialize GStreamer */
   gst_init (&argc, &argv);
 
@@ -59,7 +61,7 @@ main (int argc, char *argv[])
   data.h264parse = gst_element_factory_make ("h264parse", "h264parse");
   data.decode = gst_element_factory_make ("nvv4l2decoder", "nvv4l2decoder"); // nvv4l2decoder avdec_h264
   data.convert = gst_element_factory_make ("nvvideoconvert", "videoconvert");
-  data.sink = gst_element_factory_make ("nveglglessink", "sink");
+  data.sink = gst_element_factory_make ("nv3dsink", "sink");
 
   /* Create the empty pipeline */
   data.pipeline = gst_pipeline_new ("test-pipeline");
@@ -85,7 +87,7 @@ main (int argc, char *argv[])
 
   /* Set the URI to play */
   g_object_set(data.source, "location", "rtsp://admin:YEERBA@192.168.10.11:554/Streaming/Channels/101", \
-                            "latency", 300, "protocols", 0x04, NULL);
+                            "latency", 50, "protocols", 0x04, NULL);
   
   // g_object_set(data.source, "location", "rtsp://admin:QFXFDQ@192.168.101.16:554/Streaming/Channels/101", NULL);
 
@@ -138,9 +140,12 @@ main (int argc, char *argv[])
             GstState old_state, new_state, pending_state;
             gst_message_parse_state_changed (msg, &old_state, &new_state,
                 &pending_state);
-            g_print ("Pipeline state changed from %s to %s:\n",
+            g_message ("Pipeline state changed from %s to %s:\n",
                 gst_element_state_get_name (old_state),
                 gst_element_state_get_name (new_state));
+            char state_name[100];
+            g_snprintf (state_name, 100, "%s", gst_element_state_get_name (new_state));
+            GST_DEBUG_BIN_TO_DOT_FILE_WITH_TS(GST_BIN(data.pipeline), GST_DEBUG_GRAPH_SHOW_ALL, state_name);
           }
           break;
         default:
@@ -174,7 +179,8 @@ pad_added_handler (GstElement * src, GstPad * new_pad, CustomData * data)
   new_pad_struct = gst_caps_get_structure (new_pad_caps, 0);
   new_pad_type = gst_structure_get_name (new_pad_struct);
 
-  g_print("%s type is %s\n", GST_PAD_NAME (new_pad), new_pad_type);
+  g_message("%s type is %s\n", GST_PAD_NAME (new_pad), new_pad_type);
+  // gst_structure_foreach (new_pad_struct, print_pad_structure, NULL);
 
   sink_pad = gst_element_get_static_pad (data->h264depay, "sink");
 
@@ -186,19 +192,17 @@ pad_added_handler (GstElement * src, GstPad * new_pad, CustomData * data)
 
   /* If our converter is already linked, we have nothing to do here */
   if (gst_pad_is_linked (sink_pad)) {
-    g_print ("We are already linked. Ignoring.\n");
+    g_message ("We are already linked. Ignoring.\n");
     goto exit;
   }
 
   /* Attempt the link */
   ret = gst_pad_link (new_pad, sink_pad);
   if (GST_PAD_LINK_FAILED (ret)) {
-    g_print ("Type is '%s' but link failed.\n", new_pad_type);
+    g_message ("Type is '%s' but link failed. ret = %d\n", new_pad_type, ret);
   } else {
-    g_print ("Link succeeded (type '%s').\n", new_pad_type);
+    g_message ("Link succeeded (type '%s').\n", new_pad_type);
   }
-
-  GST_DEBUG_BIN_TO_DOT_FILE_WITH_TS(GST_BIN(data->pipeline), GST_DEBUG_GRAPH_SHOW_ALL, "pipeline");
 
 exit:
   /* Unreference the new pad's caps, if we got them */
