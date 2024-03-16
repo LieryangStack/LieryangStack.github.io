@@ -82,11 +82,39 @@ executable('exampleapp2',
   c_args: common_cflags)
 ```
 
-## 3.2 示例二
+### 3.2 示例二
 
 ```python
 project('simple', 'c')
 src = ['source1.c', 'source2.c', 'source3.c']
 executable('myexe', src)
+```
+
+
+### 3.3 
+
+```python
+executable(`test_name`, [extra_sources, file_name],
+      dependencies: common_deps + extra_deps,
+    )
+# 或者 ，因为 dependencies 要求的变量类型是列表lib，所有可以有两种方式
+# common_deps + extra_deps == [common_deps, extra_deps]
+executable(`test_name`, [extra_sources, file_name],
+      dependencies: [common_deps, extra_deps],
+    )
+```
+
+
+### 3.4
+
+```python
+executable(exe_name,
+      src_file,
+      install: true,
+      install_tag: 'bin',
+      include_directories : [configinc],
+      dependencies : [glib_dep, gobject_dep, gmodule_dep, mathlib, gst_dep] + extra_deps,
+      c_args: gst_c_args + extra_c_args + ['-DG_LOG_DOMAIN="@0@"'.format(exe_name)],
+    )
 ```
 
