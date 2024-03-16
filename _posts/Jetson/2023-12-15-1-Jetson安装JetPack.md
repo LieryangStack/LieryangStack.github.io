@@ -61,6 +61,8 @@ Bus 001 Device 011: ID 0955:7323 NVIDIA Corp. APX
 
 #### 存在问题
 
+1. NVME问题
+
 By further investigating, the root cause is that the layout used to flash external device is changed to “flash_l4t_t194_nvme.xml” from “flash_l4t_external.xml” in “nvsdkmanager_flash.sh” for T194 device.
 
 This only affects the customer who is using SDKM to flash device on T194 device. For customers who use initrd flash to flash device, there is no effect.
@@ -70,6 +72,12 @@ For the customers who want to extend the size of APP partition on external devic
 Flashed the device. If customer has flashed device before, skip this step.
 Find the “nvsdkmanager_flash.sh” under “~/nvidia/nvidia_sdk//Linux_for_Tegra/” and replace the “flash_l4t_t194_nvme.xml” with “flash_l4t_external.xml”
 Re-flash the device
+
+![Alt text](image.png)
+
+2. 无法自动连接虚拟机问题
+
+![Alt text](image-1.png)
 
 #### 2.2 开机后安装相关组件
 
