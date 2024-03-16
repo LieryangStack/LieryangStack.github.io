@@ -73,11 +73,11 @@ Flashed the device. If customer has flashed device before, skip this step.
 Find the “nvsdkmanager_flash.sh” under “~/nvidia/nvidia_sdk//Linux_for_Tegra/” and replace the “flash_l4t_t194_nvme.xml” with “flash_l4t_external.xml”
 Re-flash the device
 
-![Alt text](image.png)
+![Alt text](/assets/Jetson/01_JetPackInstall/image-5.png)
 
 2. 无法自动连接虚拟机问题
 
-![Alt text](image-1.png)
+![Alt text](/assets/Jetson/01_JetPackInstall/image-6.png)
 
 #### 2.2 开机后安装相关组件
 
