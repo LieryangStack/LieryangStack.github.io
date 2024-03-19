@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>天气信息</title>
+</head>
+<body>
+    <h1>获取当前天气信息</h1>
+    <button id="getWeatherBtn">获取天气</button>
+    <div id="weatherResult"></div>
+
+    <script>
+        document.getElementById('getWeatherBtn').addEventListener('click', function() {
+            fetch('http://localhost:5000/weather')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('weatherResult').innerHTML = `
+                        城市：${data.city}<br>
+                        温度：${data.temperature}<br>
+                        天气状况：${data.condition}
+                    `;
+                })
+                .catch(error => console.error('Error:', error));
+        });
+    </script>
+</body>
+</html>
