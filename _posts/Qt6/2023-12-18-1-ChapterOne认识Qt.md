@@ -134,7 +134,7 @@ WebAssembly作为一种小型且快速的**二进制格式编程语言**，它�
 
 Emscripten是一个编译到WebAssembly的工具链。它可以让你在没有浏览器插件的情况下以接近本地的速度在网络上运行Qt。
 
-1. <spand style="color:red;">一定要先安装Python</spand>，下载链接：[https://www.python.org/downloads/windows/](https://www.python.org/downloads/windows/)
+1. <font color="red">一定要先安装Python</font>，下载链接：[https://www.python.org/downloads/windows/](https://www.python.org/downloads/windows/)
 2. 下载emsdk：[https://github.com/emscripten-core/emsdk](https://github.com/emscripten-core/emsdk)
     ```sh
     git clone https://github.com/emscripten-core/emsdk.git
