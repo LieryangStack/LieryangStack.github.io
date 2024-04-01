@@ -37,14 +37,42 @@ moc工具读取C++源文件。如果它发现一个或多个包含Q_OBJECT宏的
 
 - QMetaObject::newInstance() 构造类的新实例。
 
+可以使用 qobject_cast() 在 QObject 类上执行动态转换。qobject_cast() 函数的行为类似于标准 C++ 的 dynamic_cast()，但有两个优点：不需要 RTTI 支持，且可以跨动态库边界工作。它尝试将其参数转换为尖括号中指定的指针类型，如果对象是正确的类型（在运行时确定），则返回非零指针；如果对象类型不兼容，则返回 nullptr。
 
-https://blog.csdn.net/qq_21980099/article/details/119055774
-https://blog.csdn.net/weixin_41199566/article/details/135102491
-https://blog.csdn.net/MrHHHHHH/article/details/134841714
-https://blog.csdn.net/m0_73443478/article/details/129026374
-https://blog.csdn.net/m0_73482095/article/details/135385841
-https://blog.csdn.net/lucust/article/details/132079640
-https://blog.csdn.net/m0_60259116/article/details/129639058
+例如，假设 MyWidget 从 QWidget 继承，并且用 Q_OBJECT 宏声明：
 
-https://blog.csdn.net/qq_16488989/article/details/109204955
-https://blog.csdn.net/hitzsf/article/details/108007919
+```c++
+QObject *obj = new MyWidget;
+```
+
+变量 obj 的类型是 QObject *，实际上指向一个 MyWidget 对象，因此我们可以适当地转换它：
+
+```c++
+QWidget *widget = qobject_cast<QWidget *>(obj);
+```
+
+从 QObject 到 QWidget 的转换是成功的，因为对象实际上是一个 MyWidget，它是 QWidget 的子类。既然我们知道 obj 是一个 MyWidget，我们也可以将它转换为 MyWidget *：
+
+```c++
+MyWidget *myWidget = qobject_cast<MyWidget *>(obj);
+```
+
+转换到 MyWidget 是成功的，因为 qobject_cast() 不区分内置的 Qt 类型和自定义类型。
+
+```c++
+QLabel *label = qobject_cast<QLabel *>(obj);
+// label is 0
+```
+
+另一方面，转换为 QLabel 失败。然后指针被设置为 0。这使得我们可以在运行时根据类型不同地处理不同类型的对象：
+
+```c++
+if (QLabel *label = qobject_cast<QLabel *>(obj)) {
+    label->setText(tr("Ping"));
+} else if (QPushButton *button = qobject_cast<QPushButton *>(obj)) {
+    button->setText(tr("Pong!"));
+}
+```
+
+虽然可以在没有 Q_OBJECT 宏和没有元对象代码的情况下使用 QObject 作为基类，但如果不使用 Q_OBJECT 宏，则这里描述的信号和槽以及其他特性将不可用。从元对象系统的角度来看，没有元代码的 QObject 子类相当于其最接近的带有元对象代码的祖先。这意味着例如，QMetaObject::className() 将不会返回你的类的实际名称，而是返回这个祖先的类名。
+因此，我们强烈建议所有 QObject 的子类无论是否真的使用信号、槽和属性都使用 Q_OBJECT 宏。
