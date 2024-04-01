@@ -1,7 +1,6 @@
 ---
 layout: post
 title: 一、C_Plus_Plus关于命名空间知识点
-subtitle: 
 categories: C++
 tags: [C++]
 ---
