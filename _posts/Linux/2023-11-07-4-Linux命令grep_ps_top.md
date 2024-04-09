@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 四、Linux命令总结grep、ps、top
+title: 四、Linux命令grep、ps、top
 subtitle: 
 categories: Linux
 tags: [Linux]
