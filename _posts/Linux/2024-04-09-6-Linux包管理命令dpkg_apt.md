@@ -138,3 +138,8 @@ apt 命令行实用程序于2014年推出第一个稳定版本，用于 Debian �
     ![alt text](/assets/Linux/06_dpkg_apt/image-14.png)
 
 7. `sudo apt download flameshot` 只下载软件包
+
+
+## 4 Package
+
+[https://packages.ubuntu.com/](https://packages.ubuntu.com/)页面提供了 Ubuntu 软件包存档中所有可用软件包的信息。
