@@ -13,7 +13,7 @@ dpkg（底层工具）->apt-get（上层工具）->apt（apt-get的再封装）
 
 不同的 Linux 发行版使用不同的包管理系统，一般而言，大多数发行版分别属于两大包管理技术阵营： Debian 的`.deb`，和红帽的`.rpm`。
 
-![Alt text](image-4.png)
+![Alt text](/assets/Linux/06_dpkg_apt/image-4.png)
 
 - **dpkg**：这个机制最早是由Debian Linux社群所开发出来的﹐通过dpkg 的机制，Debian提供的软件就能够简单的安装起来，同时还能提供安装后的软件信息。只要是衍生于
 
@@ -21,7 +21,7 @@ dpkg（底层工具）->apt-get（上层工具）->apt（apt-get的再封装）
 
 - **RPM**：这个机制最早是由Red Hat这家公司开发出来的﹐后来实在很好用﹐因此很多distributions 就使用这个机制来作为软件安装的管理方式。包括Fedora, CentOS, SuSE等等知名的开发商都是使用RPM。
 
-![Alt text](image-5.png)
+![Alt text](/assets/Linux/06_dpkg_apt/image-5.png)
 
 软件包管理系统通常由两种工具类型组成：**底层工具**用来处理这些任务，比方说安装和删除软件包文件，**上层工具**完成元数据搜索和依赖解析。
 
@@ -34,31 +34,31 @@ dpkg与apt的不同：<font color="red">dpkg主要是用来安装已经下载到
 1. `dpkg -i <.deb file name>` 安装软件包
 
 2. `dpkg -L <package>` 查看系统<font color="red">已安装软件包</font>的所安装位置 
-    ![alt text](image-7.png)
+    ![alt text](/assets/Linux/06_dpkg_apt/image-7.png)
 
 3. `dpkg -c <.deb file name>` 查看软件包安装文件的目录与路径
-    ![alt text](image-8.png)
+    ![alt text](/assets/Linux/06_dpkg_apt/image-8.png)
 
 4. `dpkg -l` 列出当前系统中已经安装的软件以及软件包的状态
-    ![alt text](image-9.png)
+    ![alt text](/assets/Linux/06_dpkg_apt/image-9.png)
 
 5. `dpkg -r <package>` 删除软件包（保留其配置信息和依赖包）
 
     比如：安装了 `apache2`,配置文件位于 `/etc/apache2/`目录。
 
-    ![alt text](image-10.png)
+    ![alt text](/assets/Linux/06_dpkg_apt/image-10.png)
 
     从下图可以看见配置文件被保留
 
-    ![alt text](image-11.png)
+    ![alt text](/assets/Linux/06_dpkg_apt/image-11.png)
 
     从下面可以看见依赖包被保留
 
-    ![alt text](image-12.png)
+    ![alt text](/assets/Linux/06_dpkg_apt/image-12.png)
 
 6. `dpkg -p <package>` 删除一个包（包括配置信息）
 
-    ![alt text](image-13.png)
+    ![alt text](/assets/Linux/06_dpkg_apt/image-13.png)
 
 
 **关于依赖项的删除**
@@ -67,7 +67,7 @@ dpkg与apt的不同：<font color="red">dpkg主要是用来安装已经下载到
 
 这个命令会删除系统以为不需要的依赖项，但是有些依赖项可能会被其他手动安装的包使用（通过make命令安装到库目录）。因为这个命令只检测这些依赖是否被包管理所安装的包使用。
 
-![Alt text](image.png)
+![Alt text](/assets/Linux/06_dpkg_apt/image.png)
 
 ## 2 apt-get
 
@@ -119,23 +119,22 @@ apt 命令行实用程序于2014年推出第一个稳定版本，用于 Debian �
 
 2. `apt show flameshot` 查看包的详细信息
 
-    ![Alt text](image-1.png)
+    ![Alt text](/assets/Linux/06_dpkg_apt/image-1.png)
 
 3. `sudo apt install flameshot` 安装包
 
-    ![Alt text](image-2.png)
+    ![Alt text](/assets/Linux/06_dpkg_apt/image-2.png)
 
 4. `sudo apt autoremove` 删除系统不需要的包（安装其他软件时候使用的依赖包）
 
-    ![Alt text](image.png)
+    ![Alt text](/assets/Linux/06_dpkg_apt/image.png)
 
 5. `sudo apt list --upgradable` 查看系统可更新软件包
 
-    ![alt text](image-6.png)
+    ![alt text](/assets/Linux/06_dpkg_apt/image-6.png)
 
-6. `sudo apt download flameshot` 只下载软件包
+6. `sudo apt list --installed | grep flame` 查看系统已安装软件包
 
-7. `sudo apt list --installed | grep flame`
+    ![alt text](/assets/Linux/06_dpkg_apt/image-14.png)
 
-    ![alt text](image-14.png)
-
+7. `sudo apt download flameshot` 只下载软件包
