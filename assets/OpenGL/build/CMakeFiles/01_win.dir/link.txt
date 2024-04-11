@@ -1,0 +1,1 @@
+/usr/bin/c++  -g   CMakeFiles/01_win.dir/2024040801/01_create_window.cpp.o  -o 01_win 

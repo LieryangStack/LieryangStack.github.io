@@ -1,3 +1,3 @@
-/home/lieryang/Desktop/build-system/Step1/Step1_build/CMakeFiles/Tutorial.dir
-/home/lieryang/Desktop/build-system/Step1/Step1_build/CMakeFiles/edit_cache.dir
-/home/lieryang/Desktop/build-system/Step1/Step1_build/CMakeFiles/rebuild_cache.dir
+/home/lieryang/Desktop/LieryangStack.github.io/assets/BuildSystem/Cmake/Step1/Step1_build/CMakeFiles/rebuild_cache.dir
+/home/lieryang/Desktop/LieryangStack.github.io/assets/BuildSystem/Cmake/Step1/Step1_build/CMakeFiles/edit_cache.dir
+/home/lieryang/Desktop/LieryangStack.github.io/assets/BuildSystem/Cmake/Step1/Step1_build/CMakeFiles/Tutorial.dir

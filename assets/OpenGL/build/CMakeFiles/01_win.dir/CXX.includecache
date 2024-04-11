@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../glad/include/glad.h
+KHR/khrplatform.h
+-
+
+/home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/2024040801/01_create_window.cpp
+glad.h
+-
+GLFW/glfw3.h
+-
+iostream
+-
+
