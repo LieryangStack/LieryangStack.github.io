@@ -1,0 +1,1 @@
+add_executable(01_create_window 01_create_window.cpp)

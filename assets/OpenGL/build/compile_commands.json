@@ -1,7 +1,12 @@
 [
 {
   "directory": "/home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build",
-  "command": "/usr/bin/c++   -I/home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/glad/include  -g   -o CMakeFiles/01_win.dir/2024040801/01_create_window.cpp.o -c /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/2024040801/01_create_window.cpp",
+  "command": "/usr/bin/gcc-12  -I/home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL -g -o CMakeFiles/glad.dir/glad/glad.c.o -c /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/glad/glad.c",
+  "file": "/home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/glad/glad.c"
+},
+{
+  "directory": "/home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build/2024040801",
+  "command": "/usr/bin/c++  -I/home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL -g -o CMakeFiles/01_create_window.dir/01_create_window.cpp.o -c /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/2024040801/01_create_window.cpp",
   "file": "/home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/2024040801/01_create_window.cpp"
 }
 ]

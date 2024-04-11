@@ -19,7 +19,7 @@
 */
 
 /* 获取OpenGL相关函数指针的地址 */
-#include <glad.h>
+#include <glad/glad.h>
 /* OpenGL上下文和窗口相关函数 */
 #include <GLFW/glfw3.h>
 

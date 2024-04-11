@@ -87,14 +87,14 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build/CMakeFiles /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build//CMakeFiles/progress.marks
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
+	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(CMAKE_COMMAND) -E cmake_progress_start /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build/CMakeFiles /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build/2024040801//CMakeFiles/progress.marks
+	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 2024040801/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 clean
+	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 2024040801/clean
 .PHONY : clean
 
 # The main clean target
@@ -103,68 +103,56 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 preinstall
+	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 2024040801/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 preinstall
+	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 2024040801/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	$(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
-#=============================================================================
-# Target rules for targets named glad
+# Convenience name for target.
+2024040801/CMakeFiles/01_create_window.dir/rule:
+	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 2024040801/CMakeFiles/01_create_window.dir/rule
+.PHONY : 2024040801/CMakeFiles/01_create_window.dir/rule
 
-# Build rule for target.
-glad: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 glad
-.PHONY : glad
-
-# fast build rule for target.
-glad/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/glad.dir/build.make CMakeFiles/glad.dir/build
-.PHONY : glad/fast
-
-#=============================================================================
-# Target rules for targets named 01_create_window
-
-# Build rule for target.
-01_create_window: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 01_create_window
+# Convenience name for target.
+01_create_window: 2024040801/CMakeFiles/01_create_window.dir/rule
 .PHONY : 01_create_window
 
 # fast build rule for target.
 01_create_window/fast:
-	$(MAKE) $(MAKESILENT) -f 2024040801/CMakeFiles/01_create_window.dir/build.make 2024040801/CMakeFiles/01_create_window.dir/build
+	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) $(MAKESILENT) -f 2024040801/CMakeFiles/01_create_window.dir/build.make 2024040801/CMakeFiles/01_create_window.dir/build
 .PHONY : 01_create_window/fast
 
-glad/glad.o: glad/glad.c.o
-.PHONY : glad/glad.o
+01_create_window.o: 01_create_window.cpp.o
+.PHONY : 01_create_window.o
 
 # target to build an object file
-glad/glad.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/glad.dir/build.make CMakeFiles/glad.dir/glad/glad.c.o
-.PHONY : glad/glad.c.o
+01_create_window.cpp.o:
+	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) $(MAKESILENT) -f 2024040801/CMakeFiles/01_create_window.dir/build.make 2024040801/CMakeFiles/01_create_window.dir/01_create_window.cpp.o
+.PHONY : 01_create_window.cpp.o
 
-glad/glad.i: glad/glad.c.i
-.PHONY : glad/glad.i
+01_create_window.i: 01_create_window.cpp.i
+.PHONY : 01_create_window.i
 
 # target to preprocess a source file
-glad/glad.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/glad.dir/build.make CMakeFiles/glad.dir/glad/glad.c.i
-.PHONY : glad/glad.c.i
+01_create_window.cpp.i:
+	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) $(MAKESILENT) -f 2024040801/CMakeFiles/01_create_window.dir/build.make 2024040801/CMakeFiles/01_create_window.dir/01_create_window.cpp.i
+.PHONY : 01_create_window.cpp.i
 
-glad/glad.s: glad/glad.c.s
-.PHONY : glad/glad.s
+01_create_window.s: 01_create_window.cpp.s
+.PHONY : 01_create_window.s
 
 # target to generate assembly for a file
-glad/glad.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/glad.dir/build.make CMakeFiles/glad.dir/glad/glad.c.s
-.PHONY : glad/glad.c.s
+01_create_window.cpp.s:
+	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) $(MAKESILENT) -f 2024040801/CMakeFiles/01_create_window.dir/build.make 2024040801/CMakeFiles/01_create_window.dir/01_create_window.cpp.s
+.PHONY : 01_create_window.cpp.s
 
 # Help Target
 help:
@@ -175,10 +163,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... 01_create_window"
-	@echo "... glad"
-	@echo "... glad/glad.o"
-	@echo "... glad/glad.i"
-	@echo "... glad/glad.s"
+	@echo "... 01_create_window.o"
+	@echo "... 01_create_window.i"
+	@echo "... 01_create_window.s"
 .PHONY : help
 
 
@@ -190,6 +177,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	$(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 
