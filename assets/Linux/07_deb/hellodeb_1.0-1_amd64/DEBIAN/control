@@ -1,5 +1,5 @@
 Package: hellodeb
-Version: 1.0
+Version: 1.0-1
 Architecture: amd64
 Maintainer: EryangLi <sxlisibo@163.com>
 Description: 学习deb包制作
