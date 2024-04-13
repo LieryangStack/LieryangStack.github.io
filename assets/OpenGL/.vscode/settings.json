@@ -1,3 +1,4 @@
 {
   "cmake.generator": "Unix Makefiles", // "Ninja" 或 "Unix Makefiles"，取决于您的选择
+  "cmake.sourceDirectory": "${workspaceFolder}"
 }
