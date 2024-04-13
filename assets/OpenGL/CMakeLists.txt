@@ -4,9 +4,12 @@ cmake_minimum_required(VERSION 3.10)
 # 该项目名称为OpenGLStudy，该项目编程语言C++
 project(OpenGLStudy VERSION 1.0 LANGUAGES C CXX)
 
+# 使用PkgConfig组件
 find_package(PkgConfig REQUIRED)
 
+# 通过pkg-config查找 glfw3 
 pkg_search_module(PKG_GLFW REQUIRED glfw3)
+
 
 add_library(glad STATIC glad/glad.c)
 

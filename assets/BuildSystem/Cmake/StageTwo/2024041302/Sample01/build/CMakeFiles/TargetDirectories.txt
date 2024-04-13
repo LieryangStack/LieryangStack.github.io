@@ -1,0 +1,3 @@
+/home/lieryang/Documents/Sample01/build/CMakeFiles/rebuild_cache.dir
+/home/lieryang/Documents/Sample01/build/CMakeFiles/edit_cache.dir
+/home/lieryang/Documents/Sample01/build/CMakeFiles/main.dir
