@@ -1172,12 +1172,8 @@ create_demux_pipeline (AppCtx * appCtx, guint index)
 
     last_elem = instance_bin->osd_bin.bin;
   }
-  /* 为整个 processing_demux_bin_%d 添加Ghost sink pad  */
+  
   NVGSTDS_BIN_ADD_GHOST_PAD (instance_bin->bin, last_elem, "sink");
-
-  /**
-   * 在osd_bin中的nvosd元素的sink pad添加Buffer探针函数 gie_processing_done_buf_prob ()
-  */
   if (config->osd_config.enable) {
     NVGSTDS_ELEM_ADD_PROBE (instance_bin->all_bbox_buffer_probe_id,
         instance_bin->osd_bin.nvosd, "sink",
@@ -1197,10 +1193,17 @@ done:
 }
 
 /**
- * Function to add components to pipeline which are dependent on number
- * of streams. These components work on single buffer. If tiling is being
- * used then single instance will be created otherwise < N > such instances
- * will be created for < N > streams
+ * @brief: 这是一个添加组件到管道的函数，这些组件依赖于流的数量。这些组件处理单个缓冲区。
+ *         如果使用了平铺，则会创建一个实例，否则会为 < N > 个流创建 < N > 个这样的实例。
+ * 
+ * @note: 在osd_bin中的nvosd元素的sink pad添加Buffer探针函数 gie_processing_done_buf_prob ()
+ * 
+ * 该函数创建的bin如下：
+ * 
+ * |————————————processing_bin_%d————————————|
+ * |                                         |
+ * |        osd_bin -> sink_bin              |
+ * |_________________________________________|
  */
 static gboolean
 create_processing_instance (AppCtx * appCtx, guint index)
@@ -1519,6 +1522,7 @@ done:
   return ret;
 }
 
+
 static gboolean
 is_sink_available_for_source_id (NvDsConfig * config, guint source_id)
 {
@@ -1659,7 +1663,7 @@ create_pipeline (AppCtx * appCtx,
     g_object_set (pipeline->multi_src_bin.nvmultiurisrcbin, "port",
         config->http_port, NULL);
 
-  } else {
+  } else {  /* 我一般使用的是这个，上面那个暂时没了解 */
     if (!create_multi_source_bin (config->num_source_sub_bins,
             config->multi_source_config, &pipeline->multi_src_bin))
       goto done;
@@ -1707,9 +1711,7 @@ create_pipeline (AppCtx * appCtx,
     gst_bin_add (GST_BIN (pipeline->pipeline), pipeline->demuxer);
 
     /** NOTE:
-     * demux output is supported for only one source
-     * If multiple [sink] groups are configured with link_to_demux=1, only the first [sink]
-     * shall be constructed for all occurences of [sink] groups with link_to_demux=1
+     * 解复用输出仅支持一个源。如果多个[sink]组配置了link_to_demux=1，那么只有第一个[sink]会为所有配置了link_to_demux=1的[sink]组构建。
      */
     {
       gchar pad_name[16];
