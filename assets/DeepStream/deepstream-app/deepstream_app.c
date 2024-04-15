@@ -1122,8 +1122,14 @@ add_and_link_broker_sink (AppCtx * appCtx)
 
 /**
  * @brief: 整个bin的名称为 processing_demux_bin_%d
+ * @note: 在osd_bin中的nvosd元素的sink pad添加Buffer探针函数 gie_processing_done_buf_prob ()
  * 
+ * 该函数创建的bin如下：
  * 
+ * |——————processing_demux_bin_%d————————————|
+ * |                                         |
+ * |        osd_bin -> sink_bin              |
+ * |_________________________________________|
 */
 static gboolean
 create_demux_pipeline (AppCtx * appCtx, guint index)
@@ -1166,8 +1172,12 @@ create_demux_pipeline (AppCtx * appCtx, guint index)
 
     last_elem = instance_bin->osd_bin.bin;
   }
-  
+  /* 为整个 processing_demux_bin_%d 添加Ghost sink pad  */
   NVGSTDS_BIN_ADD_GHOST_PAD (instance_bin->bin, last_elem, "sink");
+
+  /**
+   * 在osd_bin中的nvosd元素的sink pad添加Buffer探针函数 gie_processing_done_buf_prob ()
+  */
   if (config->osd_config.enable) {
     NVGSTDS_ELEM_ADD_PROBE (instance_bin->all_bbox_buffer_probe_id,
         instance_bin->osd_bin.nvosd, "sink",
