@@ -136,6 +136,71 @@ glad/fast:
 	$(MAKE) -f 2024040801/CMakeFiles/01_create_window.dir/build.make 2024040801/CMakeFiles/01_create_window.dir/build
 .PHONY : 01_create_window/fast
 
+#=============================================================================
+# Target rules for targets named 02_practice_3
+
+# Build rule for target.
+02_practice_3: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 02_practice_3
+.PHONY : 02_practice_3
+
+# fast build rule for target.
+02_practice_3/fast:
+	$(MAKE) -f 2024041601/CMakeFiles/02_practice_3.dir/build.make 2024041601/CMakeFiles/02_practice_3.dir/build
+.PHONY : 02_practice_3/fast
+
+#=============================================================================
+# Target rules for targets named 02_practice_2
+
+# Build rule for target.
+02_practice_2: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 02_practice_2
+.PHONY : 02_practice_2
+
+# fast build rule for target.
+02_practice_2/fast:
+	$(MAKE) -f 2024041601/CMakeFiles/02_practice_2.dir/build.make 2024041601/CMakeFiles/02_practice_2.dir/build
+.PHONY : 02_practice_2/fast
+
+#=============================================================================
+# Target rules for targets named 02_practice_1
+
+# Build rule for target.
+02_practice_1: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 02_practice_1
+.PHONY : 02_practice_1
+
+# fast build rule for target.
+02_practice_1/fast:
+	$(MAKE) -f 2024041601/CMakeFiles/02_practice_1.dir/build.make 2024041601/CMakeFiles/02_practice_1.dir/build
+.PHONY : 02_practice_1/fast
+
+#=============================================================================
+# Target rules for targets named 02_hello_ebo
+
+# Build rule for target.
+02_hello_ebo: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 02_hello_ebo
+.PHONY : 02_hello_ebo
+
+# fast build rule for target.
+02_hello_ebo/fast:
+	$(MAKE) -f 2024041601/CMakeFiles/02_hello_ebo.dir/build.make 2024041601/CMakeFiles/02_hello_ebo.dir/build
+.PHONY : 02_hello_ebo/fast
+
+#=============================================================================
+# Target rules for targets named 02_hello_triangle
+
+# Build rule for target.
+02_hello_triangle: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 02_hello_triangle
+.PHONY : 02_hello_triangle
+
+# fast build rule for target.
+02_hello_triangle/fast:
+	$(MAKE) -f 2024041601/CMakeFiles/02_hello_triangle.dir/build.make 2024041601/CMakeFiles/02_hello_triangle.dir/build
+.PHONY : 02_hello_triangle/fast
+
 glad/glad.o: glad/glad.c.o
 
 .PHONY : glad/glad.o
@@ -173,6 +238,11 @@ help:
 	@echo "... edit_cache"
 	@echo "... glad"
 	@echo "... 01_create_window"
+	@echo "... 02_practice_3"
+	@echo "... 02_practice_2"
+	@echo "... 02_practice_1"
+	@echo "... 02_hello_ebo"
+	@echo "... 02_hello_triangle"
 	@echo "... glad/glad.o"
 	@echo "... glad/glad.i"
 	@echo "... glad/glad.s"

@@ -8,5 +8,30 @@
   "directory": "/home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build/2024040801",
   "command": "/usr/bin/c++   -I/home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL    -o CMakeFiles/01_create_window.dir/01_create_window.cpp.o -c /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/2024040801/01_create_window.cpp",
   "file": "/home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/2024040801/01_create_window.cpp"
+},
+{
+  "directory": "/home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build/2024041601",
+  "command": "/usr/bin/c++   -I/home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL    -o CMakeFiles/02_practice_3.dir/02_练习3.cpp.o -c /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/2024041601/02_练习3.cpp",
+  "file": "/home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/2024041601/02_练习3.cpp"
+},
+{
+  "directory": "/home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build/2024041601",
+  "command": "/usr/bin/c++   -I/home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL    -o CMakeFiles/02_practice_2.dir/02_练习2.cpp.o -c /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/2024041601/02_练习2.cpp",
+  "file": "/home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/2024041601/02_练习2.cpp"
+},
+{
+  "directory": "/home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build/2024041601",
+  "command": "/usr/bin/c++   -I/home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL    -o CMakeFiles/02_practice_1.dir/02_练习1.cpp.o -c /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/2024041601/02_练习1.cpp",
+  "file": "/home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/2024041601/02_练习1.cpp"
+},
+{
+  "directory": "/home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build/2024041601",
+  "command": "/usr/bin/c++   -I/home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL    -o CMakeFiles/02_hello_ebo.dir/02_hello_ebo.cpp.o -c /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/2024041601/02_hello_ebo.cpp",
+  "file": "/home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/2024041601/02_hello_ebo.cpp"
+},
+{
+  "directory": "/home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build/2024041601",
+  "command": "/usr/bin/c++   -I/home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL    -o CMakeFiles/02_hello_triangle.dir/02_hello_triangle.cpp.o -c /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/2024041601/02_hello_triangle.cpp",
+  "file": "/home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/2024041601/02_hello_triangle.cpp"
 }
 ]

@@ -1,0 +1,1 @@
+/usr/bin/c++     CMakeFiles/02_hello_ebo.dir/02_hello_ebo.cpp.o  -o 02_hello_ebo -lglfw ../libglad.a 

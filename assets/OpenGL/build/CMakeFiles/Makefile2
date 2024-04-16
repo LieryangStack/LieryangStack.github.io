@@ -71,7 +71,7 @@ CMAKE_BINARY_DIR = /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/
 CMakeFiles/glad.dir/all:
 	$(MAKE) -f CMakeFiles/glad.dir/build.make CMakeFiles/glad.dir/depend
 	$(MAKE) -f CMakeFiles/glad.dir/build.make CMakeFiles/glad.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build/CMakeFiles --progress-num=3,4 "Built target glad"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build/CMakeFiles --progress-num=13,14 "Built target glad"
 .PHONY : CMakeFiles/glad.dir/all
 
 # Include target in all.
@@ -153,6 +153,217 @@ all: 2024040801/CMakeFiles/01_create_window.dir/all
 
 # clean rule for target.
 clean: 2024040801/CMakeFiles/01_create_window.dir/clean
+
+.PHONY : clean
+
+#=============================================================================
+# Directory level rules for directory 2024041601
+
+# Convenience name for "all" pass in the directory.
+2024041601/all: 2024041601/CMakeFiles/02_practice_3.dir/all
+2024041601/all: 2024041601/CMakeFiles/02_practice_2.dir/all
+2024041601/all: 2024041601/CMakeFiles/02_practice_1.dir/all
+2024041601/all: 2024041601/CMakeFiles/02_hello_ebo.dir/all
+2024041601/all: 2024041601/CMakeFiles/02_hello_triangle.dir/all
+
+.PHONY : 2024041601/all
+
+# Convenience name for "clean" pass in the directory.
+2024041601/clean: 2024041601/CMakeFiles/02_practice_3.dir/clean
+2024041601/clean: 2024041601/CMakeFiles/02_practice_2.dir/clean
+2024041601/clean: 2024041601/CMakeFiles/02_practice_1.dir/clean
+2024041601/clean: 2024041601/CMakeFiles/02_hello_ebo.dir/clean
+2024041601/clean: 2024041601/CMakeFiles/02_hello_triangle.dir/clean
+
+.PHONY : 2024041601/clean
+
+# Convenience name for "preinstall" pass in the directory.
+2024041601/preinstall:
+
+.PHONY : 2024041601/preinstall
+
+#=============================================================================
+# Target rules for target 2024041601/CMakeFiles/02_practice_3.dir
+
+# All Build rule for target.
+2024041601/CMakeFiles/02_practice_3.dir/all: CMakeFiles/glad.dir/all
+	$(MAKE) -f 2024041601/CMakeFiles/02_practice_3.dir/build.make 2024041601/CMakeFiles/02_practice_3.dir/depend
+	$(MAKE) -f 2024041601/CMakeFiles/02_practice_3.dir/build.make 2024041601/CMakeFiles/02_practice_3.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build/CMakeFiles --progress-num=11,12 "Built target 02_practice_3"
+.PHONY : 2024041601/CMakeFiles/02_practice_3.dir/all
+
+# Include target in all.
+all: 2024041601/CMakeFiles/02_practice_3.dir/all
+
+.PHONY : all
+
+# Build rule for subdir invocation for target.
+2024041601/CMakeFiles/02_practice_3.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build/CMakeFiles 4
+	$(MAKE) -f CMakeFiles/Makefile2 2024041601/CMakeFiles/02_practice_3.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build/CMakeFiles 0
+.PHONY : 2024041601/CMakeFiles/02_practice_3.dir/rule
+
+# Convenience name for target.
+02_practice_3: 2024041601/CMakeFiles/02_practice_3.dir/rule
+
+.PHONY : 02_practice_3
+
+# clean rule for target.
+2024041601/CMakeFiles/02_practice_3.dir/clean:
+	$(MAKE) -f 2024041601/CMakeFiles/02_practice_3.dir/build.make 2024041601/CMakeFiles/02_practice_3.dir/clean
+.PHONY : 2024041601/CMakeFiles/02_practice_3.dir/clean
+
+# clean rule for target.
+clean: 2024041601/CMakeFiles/02_practice_3.dir/clean
+
+.PHONY : clean
+
+#=============================================================================
+# Target rules for target 2024041601/CMakeFiles/02_practice_2.dir
+
+# All Build rule for target.
+2024041601/CMakeFiles/02_practice_2.dir/all: CMakeFiles/glad.dir/all
+	$(MAKE) -f 2024041601/CMakeFiles/02_practice_2.dir/build.make 2024041601/CMakeFiles/02_practice_2.dir/depend
+	$(MAKE) -f 2024041601/CMakeFiles/02_practice_2.dir/build.make 2024041601/CMakeFiles/02_practice_2.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build/CMakeFiles --progress-num=9,10 "Built target 02_practice_2"
+.PHONY : 2024041601/CMakeFiles/02_practice_2.dir/all
+
+# Include target in all.
+all: 2024041601/CMakeFiles/02_practice_2.dir/all
+
+.PHONY : all
+
+# Build rule for subdir invocation for target.
+2024041601/CMakeFiles/02_practice_2.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build/CMakeFiles 4
+	$(MAKE) -f CMakeFiles/Makefile2 2024041601/CMakeFiles/02_practice_2.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build/CMakeFiles 0
+.PHONY : 2024041601/CMakeFiles/02_practice_2.dir/rule
+
+# Convenience name for target.
+02_practice_2: 2024041601/CMakeFiles/02_practice_2.dir/rule
+
+.PHONY : 02_practice_2
+
+# clean rule for target.
+2024041601/CMakeFiles/02_practice_2.dir/clean:
+	$(MAKE) -f 2024041601/CMakeFiles/02_practice_2.dir/build.make 2024041601/CMakeFiles/02_practice_2.dir/clean
+.PHONY : 2024041601/CMakeFiles/02_practice_2.dir/clean
+
+# clean rule for target.
+clean: 2024041601/CMakeFiles/02_practice_2.dir/clean
+
+.PHONY : clean
+
+#=============================================================================
+# Target rules for target 2024041601/CMakeFiles/02_practice_1.dir
+
+# All Build rule for target.
+2024041601/CMakeFiles/02_practice_1.dir/all: CMakeFiles/glad.dir/all
+	$(MAKE) -f 2024041601/CMakeFiles/02_practice_1.dir/build.make 2024041601/CMakeFiles/02_practice_1.dir/depend
+	$(MAKE) -f 2024041601/CMakeFiles/02_practice_1.dir/build.make 2024041601/CMakeFiles/02_practice_1.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build/CMakeFiles --progress-num=7,8 "Built target 02_practice_1"
+.PHONY : 2024041601/CMakeFiles/02_practice_1.dir/all
+
+# Include target in all.
+all: 2024041601/CMakeFiles/02_practice_1.dir/all
+
+.PHONY : all
+
+# Build rule for subdir invocation for target.
+2024041601/CMakeFiles/02_practice_1.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build/CMakeFiles 4
+	$(MAKE) -f CMakeFiles/Makefile2 2024041601/CMakeFiles/02_practice_1.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build/CMakeFiles 0
+.PHONY : 2024041601/CMakeFiles/02_practice_1.dir/rule
+
+# Convenience name for target.
+02_practice_1: 2024041601/CMakeFiles/02_practice_1.dir/rule
+
+.PHONY : 02_practice_1
+
+# clean rule for target.
+2024041601/CMakeFiles/02_practice_1.dir/clean:
+	$(MAKE) -f 2024041601/CMakeFiles/02_practice_1.dir/build.make 2024041601/CMakeFiles/02_practice_1.dir/clean
+.PHONY : 2024041601/CMakeFiles/02_practice_1.dir/clean
+
+# clean rule for target.
+clean: 2024041601/CMakeFiles/02_practice_1.dir/clean
+
+.PHONY : clean
+
+#=============================================================================
+# Target rules for target 2024041601/CMakeFiles/02_hello_ebo.dir
+
+# All Build rule for target.
+2024041601/CMakeFiles/02_hello_ebo.dir/all: CMakeFiles/glad.dir/all
+	$(MAKE) -f 2024041601/CMakeFiles/02_hello_ebo.dir/build.make 2024041601/CMakeFiles/02_hello_ebo.dir/depend
+	$(MAKE) -f 2024041601/CMakeFiles/02_hello_ebo.dir/build.make 2024041601/CMakeFiles/02_hello_ebo.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build/CMakeFiles --progress-num=3,4 "Built target 02_hello_ebo"
+.PHONY : 2024041601/CMakeFiles/02_hello_ebo.dir/all
+
+# Include target in all.
+all: 2024041601/CMakeFiles/02_hello_ebo.dir/all
+
+.PHONY : all
+
+# Build rule for subdir invocation for target.
+2024041601/CMakeFiles/02_hello_ebo.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build/CMakeFiles 4
+	$(MAKE) -f CMakeFiles/Makefile2 2024041601/CMakeFiles/02_hello_ebo.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build/CMakeFiles 0
+.PHONY : 2024041601/CMakeFiles/02_hello_ebo.dir/rule
+
+# Convenience name for target.
+02_hello_ebo: 2024041601/CMakeFiles/02_hello_ebo.dir/rule
+
+.PHONY : 02_hello_ebo
+
+# clean rule for target.
+2024041601/CMakeFiles/02_hello_ebo.dir/clean:
+	$(MAKE) -f 2024041601/CMakeFiles/02_hello_ebo.dir/build.make 2024041601/CMakeFiles/02_hello_ebo.dir/clean
+.PHONY : 2024041601/CMakeFiles/02_hello_ebo.dir/clean
+
+# clean rule for target.
+clean: 2024041601/CMakeFiles/02_hello_ebo.dir/clean
+
+.PHONY : clean
+
+#=============================================================================
+# Target rules for target 2024041601/CMakeFiles/02_hello_triangle.dir
+
+# All Build rule for target.
+2024041601/CMakeFiles/02_hello_triangle.dir/all: CMakeFiles/glad.dir/all
+	$(MAKE) -f 2024041601/CMakeFiles/02_hello_triangle.dir/build.make 2024041601/CMakeFiles/02_hello_triangle.dir/depend
+	$(MAKE) -f 2024041601/CMakeFiles/02_hello_triangle.dir/build.make 2024041601/CMakeFiles/02_hello_triangle.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build/CMakeFiles --progress-num=5,6 "Built target 02_hello_triangle"
+.PHONY : 2024041601/CMakeFiles/02_hello_triangle.dir/all
+
+# Include target in all.
+all: 2024041601/CMakeFiles/02_hello_triangle.dir/all
+
+.PHONY : all
+
+# Build rule for subdir invocation for target.
+2024041601/CMakeFiles/02_hello_triangle.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build/CMakeFiles 4
+	$(MAKE) -f CMakeFiles/Makefile2 2024041601/CMakeFiles/02_hello_triangle.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build/CMakeFiles 0
+.PHONY : 2024041601/CMakeFiles/02_hello_triangle.dir/rule
+
+# Convenience name for target.
+02_hello_triangle: 2024041601/CMakeFiles/02_hello_triangle.dir/rule
+
+.PHONY : 02_hello_triangle
+
+# clean rule for target.
+2024041601/CMakeFiles/02_hello_triangle.dir/clean:
+	$(MAKE) -f 2024041601/CMakeFiles/02_hello_triangle.dir/build.make 2024041601/CMakeFiles/02_hello_triangle.dir/clean
+.PHONY : 2024041601/CMakeFiles/02_hello_triangle.dir/clean
+
+# clean rule for target.
+clean: 2024041601/CMakeFiles/02_hello_triangle.dir/clean
 
 .PHONY : clean
 
