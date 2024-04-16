@@ -1,0 +1,5 @@
+add_executable(03_practice_one 03_practice_one.cpp)
+add_executable(03_practice_two 03_practice_two.cpp)
+add_executable(03_practice_three 03_practice_three.cpp)
+add_executable(03_shaders_uniform 03_shaders_uniform.cpp)
+add_executable(03_shaders_class 03_shaders_class.cpp)

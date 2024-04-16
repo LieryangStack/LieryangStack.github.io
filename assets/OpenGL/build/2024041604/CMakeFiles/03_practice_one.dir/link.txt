@@ -1,0 +1,1 @@
+/usr/bin/c++ -g CMakeFiles/03_practice_one.dir/03_practice_one.cpp.o -o 03_practice_one   -L/usr/lib/gcc/x86_64-linux-gnu/12  -lglfw ../libglad.a 

@@ -1,0 +1,1 @@
+add_executable(04_textures 04_textures.cpp)

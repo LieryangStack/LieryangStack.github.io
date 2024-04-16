@@ -1,1 +1,0 @@
-/usr/bin/c++     CMakeFiles/02_practice_1.dir/02_练习1.cpp.o  -o 02_practice_1 -lglfw ../libglad.a 

@@ -1,0 +1,235 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"childIndexes" : 
+					[
+						1,
+						2,
+						3,
+						4
+					],
+					"jsonFile" : "directory-.-Debug-f5ebdc15457944623624.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.10"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						12
+					]
+				},
+				{
+					"build" : "2024040801",
+					"jsonFile" : "directory-2024040801-Debug-1b27c480090d661bfb76.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.10"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "2024040801",
+					"targetIndexes" : 
+					[
+						0
+					]
+				},
+				{
+					"build" : "2024041602",
+					"jsonFile" : "directory-2024041602-Debug-a7e0c94c6b6d6c1cc8b5.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.10"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "2024041602",
+					"targetIndexes" : 
+					[
+						1,
+						2,
+						3,
+						4,
+						5
+					]
+				},
+				{
+					"build" : "2024041604",
+					"jsonFile" : "directory-2024041604-Debug-a421011fdaf0533c7956.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.10"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "2024041604",
+					"targetIndexes" : 
+					[
+						6,
+						7,
+						8,
+						9,
+						10
+					]
+				},
+				{
+					"build" : "2024041605",
+					"jsonFile" : "directory-2024041605-Debug-0469746c859658014706.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.10"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "2024041605",
+					"targetIndexes" : 
+					[
+						11
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4
+					],
+					"name" : "OpenGLStudy",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4,
+						5,
+						6,
+						7,
+						8,
+						9,
+						10,
+						11,
+						12
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 1,
+					"id" : "01_create_window::@4e72b2389cc879411b88",
+					"jsonFile" : "target-01_create_window-Debug-49364a20d9dd7fa9e570.json",
+					"name" : "01_create_window",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "02_hello_ebo::@457ef3b884f6295a0c74",
+					"jsonFile" : "target-02_hello_ebo-Debug-5e178ca85ca144e6926b.json",
+					"name" : "02_hello_ebo",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "02_hello_triangle::@457ef3b884f6295a0c74",
+					"jsonFile" : "target-02_hello_triangle-Debug-a730e443c79d3cda288c.json",
+					"name" : "02_hello_triangle",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "02_practice_1::@457ef3b884f6295a0c74",
+					"jsonFile" : "target-02_practice_1-Debug-27fc25dd6fbc5363aa65.json",
+					"name" : "02_practice_1",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "02_practice_2::@457ef3b884f6295a0c74",
+					"jsonFile" : "target-02_practice_2-Debug-f1f02f57d73391a17824.json",
+					"name" : "02_practice_2",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "02_practice_3::@457ef3b884f6295a0c74",
+					"jsonFile" : "target-02_practice_3-Debug-831059e27dec4eda8875.json",
+					"name" : "02_practice_3",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 3,
+					"id" : "03_practice_one::@0f161c56fb5dd0151071",
+					"jsonFile" : "target-03_practice_one-Debug-4ff26bdb8701f3c19e8f.json",
+					"name" : "03_practice_one",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 3,
+					"id" : "03_practice_three::@0f161c56fb5dd0151071",
+					"jsonFile" : "target-03_practice_three-Debug-0eaaa503d02cb75b6826.json",
+					"name" : "03_practice_three",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 3,
+					"id" : "03_practice_two::@0f161c56fb5dd0151071",
+					"jsonFile" : "target-03_practice_two-Debug-03f06f684bf006d0ed34.json",
+					"name" : "03_practice_two",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 3,
+					"id" : "03_shaders_class::@0f161c56fb5dd0151071",
+					"jsonFile" : "target-03_shaders_class-Debug-63f68fb809899d6318e3.json",
+					"name" : "03_shaders_class",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 3,
+					"id" : "03_shaders_uniform::@0f161c56fb5dd0151071",
+					"jsonFile" : "target-03_shaders_uniform-Debug-ebd66f0145e07348033a.json",
+					"name" : "03_shaders_uniform",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 4,
+					"id" : "04_textures::@7dbb55940bf025f18628",
+					"jsonFile" : "target-04_textures-Debug-1c83ec6b082f39f0fe54.json",
+					"name" : "04_textures",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "glad::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-glad-Debug-db8726f28af53d3088e8.json",
+					"name" : "glad",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build",
+		"source" : "/home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 3
+	}
+}
