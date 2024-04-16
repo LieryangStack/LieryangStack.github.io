@@ -1,0 +1,5 @@
+add_executable(02_hello_triangle 02_hello_triangle.cpp)
+add_executable(02_hello_ebo 02_hello_ebo.cpp)
+add_executable(02_practice_1 02_练习1.cpp)
+add_executable(02_practice_2 02_练习2.cpp)
+add_executable(02_practice_3 02_练习3.cpp)

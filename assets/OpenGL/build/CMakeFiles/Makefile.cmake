@@ -8,6 +8,7 @@ set(CMAKE_DEPENDS_GENERATOR "Unix Makefiles")
 set(CMAKE_MAKEFILE_DEPENDS
   "CMakeCache.txt"
   "../2024040801/CMakeLists.txt"
+  "../2024041601/CMakeLists.txt"
   "../CMakeLists.txt"
   "CMakeFiles/3.13.5/CMakeCCompiler.cmake"
   "CMakeFiles/3.13.5/CMakeCXXCompiler.cmake"
@@ -37,10 +38,16 @@ set(CMAKE_MAKEFILE_OUTPUTS
 set(CMAKE_MAKEFILE_PRODUCTS
   "CMakeFiles/CMakeDirectoryInformation.cmake"
   "2024040801/CMakeFiles/CMakeDirectoryInformation.cmake"
+  "2024041601/CMakeFiles/CMakeDirectoryInformation.cmake"
   )
 
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
   "CMakeFiles/glad.dir/DependInfo.cmake"
   "2024040801/CMakeFiles/01_create_window.dir/DependInfo.cmake"
+  "2024041601/CMakeFiles/02_practice_3.dir/DependInfo.cmake"
+  "2024041601/CMakeFiles/02_practice_2.dir/DependInfo.cmake"
+  "2024041601/CMakeFiles/02_practice_1.dir/DependInfo.cmake"
+  "2024041601/CMakeFiles/02_hello_ebo.dir/DependInfo.cmake"
+  "2024041601/CMakeFiles/02_hello_triangle.dir/DependInfo.cmake"
   )

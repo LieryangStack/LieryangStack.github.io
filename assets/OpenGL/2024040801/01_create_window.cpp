@@ -18,7 +18,7 @@
  *  3....
 */
 
-/* 获取OpenGL相关函数指针的地址 */
+/* 获取OpenGL相关函数指针的地址, glad.h头文件要在glfw3.h之前 */
 #include <glad/glad.h>
 /* OpenGL上下文和窗口相关函数 */
 #include <GLFW/glfw3.h>
@@ -32,8 +32,7 @@ const unsigned int SCR_WIDTH = 800;
 const unsigned int SCR_HEIGHT = 600;
 
 /**
- * 我使用的是Jetson Xavier Nx，没有找到 libglfw3.so库文件，存在libglfw.so
- * g++ -o 01_Hello 01_Hello.cpp -lglfw -lGL -lX11 -lpthread -lXrandr -lXi -ldl -I./glad/include
+ * g++ 01_create_windowcpp ../glad/glad.c -o 01_Hello 01_Hello.cpp -lglfw -I../
 */
 
 
@@ -63,9 +62,9 @@ processInput(GLFWwindow *window) {
 */
 void 
 framebuffer_size_callback(GLFWwindow* window, int width, int height) {
-    // make sure the viewport matches the new window dimensions; note that width and 
-    // height will be significantly larger than specified on retina displays.
-    glViewport(0, 0, width, height);
+  // make sure the viewport matches the new window dimensions; note that width and 
+  // height will be significantly larger than specified on retina displays.
+  glViewport(0, 0, width, height);
 }
 
 
@@ -127,9 +126,12 @@ main(int argc, char **argv) {
      * 它在这一迭代中被用来绘制，并且将会作为输出显示在屏幕上。
     */
     glfwSwapBuffers(window);
+
     /**
-     * s函数检查有没有触发什么事件（比如键盘输入、鼠标移动等）、更新窗口状态，
+     * 函数检查有没有触发什么事件（比如键盘输入、鼠标移动等）、更新窗口状态，
      * 并调用对应的回调函数（可以通过回调方法手动设置）。
+     * 
+     * 如果窗口状态发生改变，glfwPollEvents会调用 framebuffer_size_callback () 函数
     */
     glfwPollEvents();
   }
