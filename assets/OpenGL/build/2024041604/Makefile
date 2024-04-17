@@ -56,17 +56,6 @@ CMAKE_BINARY_DIR = /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/
 #=============================================================================
 # Targets provided globally by CMake.
 
-# Special rule for the target edit_cache
-edit_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake cache editor..."
-	/usr/bin/cmake-gui -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
-.PHONY : edit_cache
-
-# Special rule for the target edit_cache
-edit_cache/fast: edit_cache
-
-.PHONY : edit_cache/fast
-
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
@@ -77,6 +66,17 @@ rebuild_cache:
 rebuild_cache/fast: rebuild_cache
 
 .PHONY : rebuild_cache/fast
+
+# Special rule for the target edit_cache
+edit_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake cache editor..."
+	/usr/bin/cmake-gui -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+.PHONY : edit_cache
+
+# Special rule for the target edit_cache
+edit_cache/fast: edit_cache
+
+.PHONY : edit_cache/fast
 
 # The main all target
 all: cmake_check_build_system
@@ -111,214 +111,214 @@ depend:
 .PHONY : depend
 
 # Convenience name for target.
-2024041604/CMakeFiles/03_shaders_class.dir/rule:
-	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) -f CMakeFiles/Makefile2 2024041604/CMakeFiles/03_shaders_class.dir/rule
-.PHONY : 2024041604/CMakeFiles/03_shaders_class.dir/rule
+2024041604/CMakeFiles/04_shaders_class.dir/rule:
+	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) -f CMakeFiles/Makefile2 2024041604/CMakeFiles/04_shaders_class.dir/rule
+.PHONY : 2024041604/CMakeFiles/04_shaders_class.dir/rule
 
 # Convenience name for target.
-03_shaders_class: 2024041604/CMakeFiles/03_shaders_class.dir/rule
+04_shaders_class: 2024041604/CMakeFiles/04_shaders_class.dir/rule
 
-.PHONY : 03_shaders_class
+.PHONY : 04_shaders_class
 
 # fast build rule for target.
-03_shaders_class/fast:
-	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) -f 2024041604/CMakeFiles/03_shaders_class.dir/build.make 2024041604/CMakeFiles/03_shaders_class.dir/build
-.PHONY : 03_shaders_class/fast
+04_shaders_class/fast:
+	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) -f 2024041604/CMakeFiles/04_shaders_class.dir/build.make 2024041604/CMakeFiles/04_shaders_class.dir/build
+.PHONY : 04_shaders_class/fast
 
 # Convenience name for target.
-2024041604/CMakeFiles/03_shaders_uniform.dir/rule:
-	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) -f CMakeFiles/Makefile2 2024041604/CMakeFiles/03_shaders_uniform.dir/rule
-.PHONY : 2024041604/CMakeFiles/03_shaders_uniform.dir/rule
+2024041604/CMakeFiles/04_shaders_uniform.dir/rule:
+	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) -f CMakeFiles/Makefile2 2024041604/CMakeFiles/04_shaders_uniform.dir/rule
+.PHONY : 2024041604/CMakeFiles/04_shaders_uniform.dir/rule
 
 # Convenience name for target.
-03_shaders_uniform: 2024041604/CMakeFiles/03_shaders_uniform.dir/rule
+04_shaders_uniform: 2024041604/CMakeFiles/04_shaders_uniform.dir/rule
 
-.PHONY : 03_shaders_uniform
+.PHONY : 04_shaders_uniform
 
 # fast build rule for target.
-03_shaders_uniform/fast:
-	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) -f 2024041604/CMakeFiles/03_shaders_uniform.dir/build.make 2024041604/CMakeFiles/03_shaders_uniform.dir/build
-.PHONY : 03_shaders_uniform/fast
+04_shaders_uniform/fast:
+	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) -f 2024041604/CMakeFiles/04_shaders_uniform.dir/build.make 2024041604/CMakeFiles/04_shaders_uniform.dir/build
+.PHONY : 04_shaders_uniform/fast
 
 # Convenience name for target.
-2024041604/CMakeFiles/03_practice_three.dir/rule:
-	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) -f CMakeFiles/Makefile2 2024041604/CMakeFiles/03_practice_three.dir/rule
-.PHONY : 2024041604/CMakeFiles/03_practice_three.dir/rule
+2024041604/CMakeFiles/04_practice_three.dir/rule:
+	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) -f CMakeFiles/Makefile2 2024041604/CMakeFiles/04_practice_three.dir/rule
+.PHONY : 2024041604/CMakeFiles/04_practice_three.dir/rule
 
 # Convenience name for target.
-03_practice_three: 2024041604/CMakeFiles/03_practice_three.dir/rule
+04_practice_three: 2024041604/CMakeFiles/04_practice_three.dir/rule
 
-.PHONY : 03_practice_three
+.PHONY : 04_practice_three
 
 # fast build rule for target.
-03_practice_three/fast:
-	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) -f 2024041604/CMakeFiles/03_practice_three.dir/build.make 2024041604/CMakeFiles/03_practice_three.dir/build
-.PHONY : 03_practice_three/fast
+04_practice_three/fast:
+	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) -f 2024041604/CMakeFiles/04_practice_three.dir/build.make 2024041604/CMakeFiles/04_practice_three.dir/build
+.PHONY : 04_practice_three/fast
 
 # Convenience name for target.
-2024041604/CMakeFiles/03_practice_two.dir/rule:
-	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) -f CMakeFiles/Makefile2 2024041604/CMakeFiles/03_practice_two.dir/rule
-.PHONY : 2024041604/CMakeFiles/03_practice_two.dir/rule
+2024041604/CMakeFiles/04_practice_two.dir/rule:
+	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) -f CMakeFiles/Makefile2 2024041604/CMakeFiles/04_practice_two.dir/rule
+.PHONY : 2024041604/CMakeFiles/04_practice_two.dir/rule
 
 # Convenience name for target.
-03_practice_two: 2024041604/CMakeFiles/03_practice_two.dir/rule
+04_practice_two: 2024041604/CMakeFiles/04_practice_two.dir/rule
 
-.PHONY : 03_practice_two
+.PHONY : 04_practice_two
 
 # fast build rule for target.
-03_practice_two/fast:
-	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) -f 2024041604/CMakeFiles/03_practice_two.dir/build.make 2024041604/CMakeFiles/03_practice_two.dir/build
-.PHONY : 03_practice_two/fast
+04_practice_two/fast:
+	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) -f 2024041604/CMakeFiles/04_practice_two.dir/build.make 2024041604/CMakeFiles/04_practice_two.dir/build
+.PHONY : 04_practice_two/fast
 
 # Convenience name for target.
-2024041604/CMakeFiles/03_practice_one.dir/rule:
-	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) -f CMakeFiles/Makefile2 2024041604/CMakeFiles/03_practice_one.dir/rule
-.PHONY : 2024041604/CMakeFiles/03_practice_one.dir/rule
+2024041604/CMakeFiles/04_practice_one.dir/rule:
+	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) -f CMakeFiles/Makefile2 2024041604/CMakeFiles/04_practice_one.dir/rule
+.PHONY : 2024041604/CMakeFiles/04_practice_one.dir/rule
 
 # Convenience name for target.
-03_practice_one: 2024041604/CMakeFiles/03_practice_one.dir/rule
+04_practice_one: 2024041604/CMakeFiles/04_practice_one.dir/rule
 
-.PHONY : 03_practice_one
+.PHONY : 04_practice_one
 
 # fast build rule for target.
-03_practice_one/fast:
-	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) -f 2024041604/CMakeFiles/03_practice_one.dir/build.make 2024041604/CMakeFiles/03_practice_one.dir/build
-.PHONY : 03_practice_one/fast
+04_practice_one/fast:
+	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) -f 2024041604/CMakeFiles/04_practice_one.dir/build.make 2024041604/CMakeFiles/04_practice_one.dir/build
+.PHONY : 04_practice_one/fast
 
-03_practice_one.o: 03_practice_one.cpp.o
+04_practice_one.o: 04_practice_one.cpp.o
 
-.PHONY : 03_practice_one.o
-
-# target to build an object file
-03_practice_one.cpp.o:
-	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) -f 2024041604/CMakeFiles/03_practice_one.dir/build.make 2024041604/CMakeFiles/03_practice_one.dir/03_practice_one.cpp.o
-.PHONY : 03_practice_one.cpp.o
-
-03_practice_one.i: 03_practice_one.cpp.i
-
-.PHONY : 03_practice_one.i
-
-# target to preprocess a source file
-03_practice_one.cpp.i:
-	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) -f 2024041604/CMakeFiles/03_practice_one.dir/build.make 2024041604/CMakeFiles/03_practice_one.dir/03_practice_one.cpp.i
-.PHONY : 03_practice_one.cpp.i
-
-03_practice_one.s: 03_practice_one.cpp.s
-
-.PHONY : 03_practice_one.s
-
-# target to generate assembly for a file
-03_practice_one.cpp.s:
-	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) -f 2024041604/CMakeFiles/03_practice_one.dir/build.make 2024041604/CMakeFiles/03_practice_one.dir/03_practice_one.cpp.s
-.PHONY : 03_practice_one.cpp.s
-
-03_practice_three.o: 03_practice_three.cpp.o
-
-.PHONY : 03_practice_three.o
+.PHONY : 04_practice_one.o
 
 # target to build an object file
-03_practice_three.cpp.o:
-	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) -f 2024041604/CMakeFiles/03_practice_three.dir/build.make 2024041604/CMakeFiles/03_practice_three.dir/03_practice_three.cpp.o
-.PHONY : 03_practice_three.cpp.o
+04_practice_one.cpp.o:
+	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) -f 2024041604/CMakeFiles/04_practice_one.dir/build.make 2024041604/CMakeFiles/04_practice_one.dir/04_practice_one.cpp.o
+.PHONY : 04_practice_one.cpp.o
 
-03_practice_three.i: 03_practice_three.cpp.i
+04_practice_one.i: 04_practice_one.cpp.i
 
-.PHONY : 03_practice_three.i
+.PHONY : 04_practice_one.i
 
 # target to preprocess a source file
-03_practice_three.cpp.i:
-	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) -f 2024041604/CMakeFiles/03_practice_three.dir/build.make 2024041604/CMakeFiles/03_practice_three.dir/03_practice_three.cpp.i
-.PHONY : 03_practice_three.cpp.i
+04_practice_one.cpp.i:
+	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) -f 2024041604/CMakeFiles/04_practice_one.dir/build.make 2024041604/CMakeFiles/04_practice_one.dir/04_practice_one.cpp.i
+.PHONY : 04_practice_one.cpp.i
 
-03_practice_three.s: 03_practice_three.cpp.s
+04_practice_one.s: 04_practice_one.cpp.s
 
-.PHONY : 03_practice_three.s
+.PHONY : 04_practice_one.s
 
 # target to generate assembly for a file
-03_practice_three.cpp.s:
-	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) -f 2024041604/CMakeFiles/03_practice_three.dir/build.make 2024041604/CMakeFiles/03_practice_three.dir/03_practice_three.cpp.s
-.PHONY : 03_practice_three.cpp.s
+04_practice_one.cpp.s:
+	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) -f 2024041604/CMakeFiles/04_practice_one.dir/build.make 2024041604/CMakeFiles/04_practice_one.dir/04_practice_one.cpp.s
+.PHONY : 04_practice_one.cpp.s
 
-03_practice_two.o: 03_practice_two.cpp.o
+04_practice_three.o: 04_practice_three.cpp.o
 
-.PHONY : 03_practice_two.o
+.PHONY : 04_practice_three.o
 
 # target to build an object file
-03_practice_two.cpp.o:
-	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) -f 2024041604/CMakeFiles/03_practice_two.dir/build.make 2024041604/CMakeFiles/03_practice_two.dir/03_practice_two.cpp.o
-.PHONY : 03_practice_two.cpp.o
+04_practice_three.cpp.o:
+	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) -f 2024041604/CMakeFiles/04_practice_three.dir/build.make 2024041604/CMakeFiles/04_practice_three.dir/04_practice_three.cpp.o
+.PHONY : 04_practice_three.cpp.o
 
-03_practice_two.i: 03_practice_two.cpp.i
+04_practice_three.i: 04_practice_three.cpp.i
 
-.PHONY : 03_practice_two.i
+.PHONY : 04_practice_three.i
 
 # target to preprocess a source file
-03_practice_two.cpp.i:
-	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) -f 2024041604/CMakeFiles/03_practice_two.dir/build.make 2024041604/CMakeFiles/03_practice_two.dir/03_practice_two.cpp.i
-.PHONY : 03_practice_two.cpp.i
+04_practice_three.cpp.i:
+	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) -f 2024041604/CMakeFiles/04_practice_three.dir/build.make 2024041604/CMakeFiles/04_practice_three.dir/04_practice_three.cpp.i
+.PHONY : 04_practice_three.cpp.i
 
-03_practice_two.s: 03_practice_two.cpp.s
+04_practice_three.s: 04_practice_three.cpp.s
 
-.PHONY : 03_practice_two.s
+.PHONY : 04_practice_three.s
 
 # target to generate assembly for a file
-03_practice_two.cpp.s:
-	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) -f 2024041604/CMakeFiles/03_practice_two.dir/build.make 2024041604/CMakeFiles/03_practice_two.dir/03_practice_two.cpp.s
-.PHONY : 03_practice_two.cpp.s
+04_practice_three.cpp.s:
+	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) -f 2024041604/CMakeFiles/04_practice_three.dir/build.make 2024041604/CMakeFiles/04_practice_three.dir/04_practice_three.cpp.s
+.PHONY : 04_practice_three.cpp.s
 
-03_shaders_class.o: 03_shaders_class.cpp.o
+04_practice_two.o: 04_practice_two.cpp.o
 
-.PHONY : 03_shaders_class.o
+.PHONY : 04_practice_two.o
 
 # target to build an object file
-03_shaders_class.cpp.o:
-	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) -f 2024041604/CMakeFiles/03_shaders_class.dir/build.make 2024041604/CMakeFiles/03_shaders_class.dir/03_shaders_class.cpp.o
-.PHONY : 03_shaders_class.cpp.o
+04_practice_two.cpp.o:
+	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) -f 2024041604/CMakeFiles/04_practice_two.dir/build.make 2024041604/CMakeFiles/04_practice_two.dir/04_practice_two.cpp.o
+.PHONY : 04_practice_two.cpp.o
 
-03_shaders_class.i: 03_shaders_class.cpp.i
+04_practice_two.i: 04_practice_two.cpp.i
 
-.PHONY : 03_shaders_class.i
+.PHONY : 04_practice_two.i
 
 # target to preprocess a source file
-03_shaders_class.cpp.i:
-	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) -f 2024041604/CMakeFiles/03_shaders_class.dir/build.make 2024041604/CMakeFiles/03_shaders_class.dir/03_shaders_class.cpp.i
-.PHONY : 03_shaders_class.cpp.i
+04_practice_two.cpp.i:
+	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) -f 2024041604/CMakeFiles/04_practice_two.dir/build.make 2024041604/CMakeFiles/04_practice_two.dir/04_practice_two.cpp.i
+.PHONY : 04_practice_two.cpp.i
 
-03_shaders_class.s: 03_shaders_class.cpp.s
+04_practice_two.s: 04_practice_two.cpp.s
 
-.PHONY : 03_shaders_class.s
+.PHONY : 04_practice_two.s
 
 # target to generate assembly for a file
-03_shaders_class.cpp.s:
-	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) -f 2024041604/CMakeFiles/03_shaders_class.dir/build.make 2024041604/CMakeFiles/03_shaders_class.dir/03_shaders_class.cpp.s
-.PHONY : 03_shaders_class.cpp.s
+04_practice_two.cpp.s:
+	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) -f 2024041604/CMakeFiles/04_practice_two.dir/build.make 2024041604/CMakeFiles/04_practice_two.dir/04_practice_two.cpp.s
+.PHONY : 04_practice_two.cpp.s
 
-03_shaders_uniform.o: 03_shaders_uniform.cpp.o
+04_shaders_class.o: 04_shaders_class.cpp.o
 
-.PHONY : 03_shaders_uniform.o
+.PHONY : 04_shaders_class.o
 
 # target to build an object file
-03_shaders_uniform.cpp.o:
-	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) -f 2024041604/CMakeFiles/03_shaders_uniform.dir/build.make 2024041604/CMakeFiles/03_shaders_uniform.dir/03_shaders_uniform.cpp.o
-.PHONY : 03_shaders_uniform.cpp.o
+04_shaders_class.cpp.o:
+	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) -f 2024041604/CMakeFiles/04_shaders_class.dir/build.make 2024041604/CMakeFiles/04_shaders_class.dir/04_shaders_class.cpp.o
+.PHONY : 04_shaders_class.cpp.o
 
-03_shaders_uniform.i: 03_shaders_uniform.cpp.i
+04_shaders_class.i: 04_shaders_class.cpp.i
 
-.PHONY : 03_shaders_uniform.i
+.PHONY : 04_shaders_class.i
 
 # target to preprocess a source file
-03_shaders_uniform.cpp.i:
-	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) -f 2024041604/CMakeFiles/03_shaders_uniform.dir/build.make 2024041604/CMakeFiles/03_shaders_uniform.dir/03_shaders_uniform.cpp.i
-.PHONY : 03_shaders_uniform.cpp.i
+04_shaders_class.cpp.i:
+	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) -f 2024041604/CMakeFiles/04_shaders_class.dir/build.make 2024041604/CMakeFiles/04_shaders_class.dir/04_shaders_class.cpp.i
+.PHONY : 04_shaders_class.cpp.i
 
-03_shaders_uniform.s: 03_shaders_uniform.cpp.s
+04_shaders_class.s: 04_shaders_class.cpp.s
 
-.PHONY : 03_shaders_uniform.s
+.PHONY : 04_shaders_class.s
 
 # target to generate assembly for a file
-03_shaders_uniform.cpp.s:
-	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) -f 2024041604/CMakeFiles/03_shaders_uniform.dir/build.make 2024041604/CMakeFiles/03_shaders_uniform.dir/03_shaders_uniform.cpp.s
-.PHONY : 03_shaders_uniform.cpp.s
+04_shaders_class.cpp.s:
+	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) -f 2024041604/CMakeFiles/04_shaders_class.dir/build.make 2024041604/CMakeFiles/04_shaders_class.dir/04_shaders_class.cpp.s
+.PHONY : 04_shaders_class.cpp.s
+
+04_shaders_uniform.o: 04_shaders_uniform.cpp.o
+
+.PHONY : 04_shaders_uniform.o
+
+# target to build an object file
+04_shaders_uniform.cpp.o:
+	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) -f 2024041604/CMakeFiles/04_shaders_uniform.dir/build.make 2024041604/CMakeFiles/04_shaders_uniform.dir/04_shaders_uniform.cpp.o
+.PHONY : 04_shaders_uniform.cpp.o
+
+04_shaders_uniform.i: 04_shaders_uniform.cpp.i
+
+.PHONY : 04_shaders_uniform.i
+
+# target to preprocess a source file
+04_shaders_uniform.cpp.i:
+	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) -f 2024041604/CMakeFiles/04_shaders_uniform.dir/build.make 2024041604/CMakeFiles/04_shaders_uniform.dir/04_shaders_uniform.cpp.i
+.PHONY : 04_shaders_uniform.cpp.i
+
+04_shaders_uniform.s: 04_shaders_uniform.cpp.s
+
+.PHONY : 04_shaders_uniform.s
+
+# target to generate assembly for a file
+04_shaders_uniform.cpp.s:
+	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) -f 2024041604/CMakeFiles/04_shaders_uniform.dir/build.make 2024041604/CMakeFiles/04_shaders_uniform.dir/04_shaders_uniform.cpp.s
+.PHONY : 04_shaders_uniform.cpp.s
 
 # Help Target
 help:
@@ -326,28 +326,28 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
-	@echo "... edit_cache"
-	@echo "... 03_shaders_class"
 	@echo "... rebuild_cache"
-	@echo "... 03_shaders_uniform"
-	@echo "... 03_practice_three"
-	@echo "... 03_practice_two"
-	@echo "... 03_practice_one"
-	@echo "... 03_practice_one.o"
-	@echo "... 03_practice_one.i"
-	@echo "... 03_practice_one.s"
-	@echo "... 03_practice_three.o"
-	@echo "... 03_practice_three.i"
-	@echo "... 03_practice_three.s"
-	@echo "... 03_practice_two.o"
-	@echo "... 03_practice_two.i"
-	@echo "... 03_practice_two.s"
-	@echo "... 03_shaders_class.o"
-	@echo "... 03_shaders_class.i"
-	@echo "... 03_shaders_class.s"
-	@echo "... 03_shaders_uniform.o"
-	@echo "... 03_shaders_uniform.i"
-	@echo "... 03_shaders_uniform.s"
+	@echo "... 04_shaders_class"
+	@echo "... 04_shaders_uniform"
+	@echo "... 04_practice_three"
+	@echo "... 04_practice_two"
+	@echo "... edit_cache"
+	@echo "... 04_practice_one"
+	@echo "... 04_practice_one.o"
+	@echo "... 04_practice_one.i"
+	@echo "... 04_practice_one.s"
+	@echo "... 04_practice_three.o"
+	@echo "... 04_practice_three.i"
+	@echo "... 04_practice_three.s"
+	@echo "... 04_practice_two.o"
+	@echo "... 04_practice_two.i"
+	@echo "... 04_practice_two.s"
+	@echo "... 04_shaders_class.o"
+	@echo "... 04_shaders_class.i"
+	@echo "... 04_shaders_class.s"
+	@echo "... 04_shaders_uniform.o"
+	@echo "... 04_shaders_uniform.i"
+	@echo "... 04_shaders_uniform.s"
 .PHONY : help
 
 

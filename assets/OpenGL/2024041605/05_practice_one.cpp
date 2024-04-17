@@ -21,7 +21,7 @@
 #define STB_IMAGE_IMPLEMENTATION
 
 #include "glad/glad.h"
-#include "stb_image.h"
+#include "common/stb_image.h"
 #include <GLFW/glfw3.h>
 #include <iostream>
 

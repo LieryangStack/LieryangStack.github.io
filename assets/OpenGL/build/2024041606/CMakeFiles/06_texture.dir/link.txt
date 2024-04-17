@@ -1,0 +1,1 @@
+/usr/bin/c++  -g   CMakeFiles/06_texture.dir/06_texture.cpp.o  -o 06_texture  -L/usr/lib/gcc/x86_64-linux-gnu/12 -lglfw ../libglad.a 

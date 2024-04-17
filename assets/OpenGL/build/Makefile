@@ -202,82 +202,108 @@ glad/fast:
 .PHONY : 02_hello_triangle/fast
 
 #=============================================================================
-# Target rules for targets named 03_shaders_class
+# Target rules for targets named 04_shaders_class
 
 # Build rule for target.
-03_shaders_class: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 03_shaders_class
-.PHONY : 03_shaders_class
+04_shaders_class: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 04_shaders_class
+.PHONY : 04_shaders_class
 
 # fast build rule for target.
-03_shaders_class/fast:
-	$(MAKE) -f 2024041604/CMakeFiles/03_shaders_class.dir/build.make 2024041604/CMakeFiles/03_shaders_class.dir/build
-.PHONY : 03_shaders_class/fast
+04_shaders_class/fast:
+	$(MAKE) -f 2024041604/CMakeFiles/04_shaders_class.dir/build.make 2024041604/CMakeFiles/04_shaders_class.dir/build
+.PHONY : 04_shaders_class/fast
 
 #=============================================================================
-# Target rules for targets named 03_shaders_uniform
+# Target rules for targets named 04_shaders_uniform
 
 # Build rule for target.
-03_shaders_uniform: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 03_shaders_uniform
-.PHONY : 03_shaders_uniform
+04_shaders_uniform: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 04_shaders_uniform
+.PHONY : 04_shaders_uniform
 
 # fast build rule for target.
-03_shaders_uniform/fast:
-	$(MAKE) -f 2024041604/CMakeFiles/03_shaders_uniform.dir/build.make 2024041604/CMakeFiles/03_shaders_uniform.dir/build
-.PHONY : 03_shaders_uniform/fast
+04_shaders_uniform/fast:
+	$(MAKE) -f 2024041604/CMakeFiles/04_shaders_uniform.dir/build.make 2024041604/CMakeFiles/04_shaders_uniform.dir/build
+.PHONY : 04_shaders_uniform/fast
 
 #=============================================================================
-# Target rules for targets named 03_practice_three
+# Target rules for targets named 04_practice_three
 
 # Build rule for target.
-03_practice_three: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 03_practice_three
-.PHONY : 03_practice_three
+04_practice_three: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 04_practice_three
+.PHONY : 04_practice_three
 
 # fast build rule for target.
-03_practice_three/fast:
-	$(MAKE) -f 2024041604/CMakeFiles/03_practice_three.dir/build.make 2024041604/CMakeFiles/03_practice_three.dir/build
-.PHONY : 03_practice_three/fast
+04_practice_three/fast:
+	$(MAKE) -f 2024041604/CMakeFiles/04_practice_three.dir/build.make 2024041604/CMakeFiles/04_practice_three.dir/build
+.PHONY : 04_practice_three/fast
 
 #=============================================================================
-# Target rules for targets named 03_practice_two
+# Target rules for targets named 04_practice_two
 
 # Build rule for target.
-03_practice_two: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 03_practice_two
-.PHONY : 03_practice_two
+04_practice_two: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 04_practice_two
+.PHONY : 04_practice_two
 
 # fast build rule for target.
-03_practice_two/fast:
-	$(MAKE) -f 2024041604/CMakeFiles/03_practice_two.dir/build.make 2024041604/CMakeFiles/03_practice_two.dir/build
-.PHONY : 03_practice_two/fast
+04_practice_two/fast:
+	$(MAKE) -f 2024041604/CMakeFiles/04_practice_two.dir/build.make 2024041604/CMakeFiles/04_practice_two.dir/build
+.PHONY : 04_practice_two/fast
 
 #=============================================================================
-# Target rules for targets named 03_practice_one
+# Target rules for targets named 04_practice_one
 
 # Build rule for target.
-03_practice_one: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 03_practice_one
-.PHONY : 03_practice_one
+04_practice_one: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 04_practice_one
+.PHONY : 04_practice_one
 
 # fast build rule for target.
-03_practice_one/fast:
-	$(MAKE) -f 2024041604/CMakeFiles/03_practice_one.dir/build.make 2024041604/CMakeFiles/03_practice_one.dir/build
-.PHONY : 03_practice_one/fast
+04_practice_one/fast:
+	$(MAKE) -f 2024041604/CMakeFiles/04_practice_one.dir/build.make 2024041604/CMakeFiles/04_practice_one.dir/build
+.PHONY : 04_practice_one/fast
 
 #=============================================================================
-# Target rules for targets named 04_textures
+# Target rules for targets named 05_textures
 
 # Build rule for target.
-04_textures: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 04_textures
-.PHONY : 04_textures
+05_textures: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 05_textures
+.PHONY : 05_textures
 
 # fast build rule for target.
-04_textures/fast:
-	$(MAKE) -f 2024041605/CMakeFiles/04_textures.dir/build.make 2024041605/CMakeFiles/04_textures.dir/build
-.PHONY : 04_textures/fast
+05_textures/fast:
+	$(MAKE) -f 2024041605/CMakeFiles/05_textures.dir/build.make 2024041605/CMakeFiles/05_textures.dir/build
+.PHONY : 05_textures/fast
+
+#=============================================================================
+# Target rules for targets named 06_texture_filter
+
+# Build rule for target.
+06_texture_filter: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 06_texture_filter
+.PHONY : 06_texture_filter
+
+# fast build rule for target.
+06_texture_filter/fast:
+	$(MAKE) -f 2024041606/CMakeFiles/06_texture_filter.dir/build.make 2024041606/CMakeFiles/06_texture_filter.dir/build
+.PHONY : 06_texture_filter/fast
+
+#=============================================================================
+# Target rules for targets named 06_texture_wrap
+
+# Build rule for target.
+06_texture_wrap: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 06_texture_wrap
+.PHONY : 06_texture_wrap
+
+# fast build rule for target.
+06_texture_wrap/fast:
+	$(MAKE) -f 2024041606/CMakeFiles/06_texture_wrap.dir/build.make 2024041606/CMakeFiles/06_texture_wrap.dir/build
+.PHONY : 06_texture_wrap/fast
 
 glad/glad.o: glad/glad.c.o
 
@@ -321,12 +347,14 @@ help:
 	@echo "... 02_practice_1"
 	@echo "... 02_hello_ebo"
 	@echo "... 02_hello_triangle"
-	@echo "... 03_shaders_class"
-	@echo "... 03_shaders_uniform"
-	@echo "... 03_practice_three"
-	@echo "... 03_practice_two"
-	@echo "... 03_practice_one"
-	@echo "... 04_textures"
+	@echo "... 04_shaders_class"
+	@echo "... 04_shaders_uniform"
+	@echo "... 04_practice_three"
+	@echo "... 04_practice_two"
+	@echo "... 04_practice_one"
+	@echo "... 05_textures"
+	@echo "... 06_texture_filter"
+	@echo "... 06_texture_wrap"
 	@echo "... glad/glad.o"
 	@echo "... glad/glad.i"
 	@echo "... glad/glad.s"

@@ -1,0 +1,2 @@
+add_executable(06_texture_wrap 06_texture_wrap.cpp)
+add_executable(06_texture_filter 06_texture_filter.cpp)

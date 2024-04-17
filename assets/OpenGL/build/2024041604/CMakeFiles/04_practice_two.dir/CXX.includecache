@@ -1,0 +1,22 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+..//glad/glad.h
+KHR/khrplatform.h
+-
+
+/home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/2024041604/04_practice_two.cpp
+glad/glad.h
+-
+GLFW/glfw3.h
+-
+iostream
+-
+cmath
+-
+

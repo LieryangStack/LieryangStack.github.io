@@ -1,1 +1,1 @@
-add_executable(04_textures 04_textures.cpp)
+add_executable(05_textures 05_textures.cpp)

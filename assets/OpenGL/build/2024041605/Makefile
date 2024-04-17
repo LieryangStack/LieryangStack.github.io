@@ -111,46 +111,46 @@ depend:
 .PHONY : depend
 
 # Convenience name for target.
-2024041605/CMakeFiles/04_textures.dir/rule:
-	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) -f CMakeFiles/Makefile2 2024041605/CMakeFiles/04_textures.dir/rule
-.PHONY : 2024041605/CMakeFiles/04_textures.dir/rule
+2024041605/CMakeFiles/05_textures.dir/rule:
+	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) -f CMakeFiles/Makefile2 2024041605/CMakeFiles/05_textures.dir/rule
+.PHONY : 2024041605/CMakeFiles/05_textures.dir/rule
 
 # Convenience name for target.
-04_textures: 2024041605/CMakeFiles/04_textures.dir/rule
+05_textures: 2024041605/CMakeFiles/05_textures.dir/rule
 
-.PHONY : 04_textures
+.PHONY : 05_textures
 
 # fast build rule for target.
-04_textures/fast:
-	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) -f 2024041605/CMakeFiles/04_textures.dir/build.make 2024041605/CMakeFiles/04_textures.dir/build
-.PHONY : 04_textures/fast
+05_textures/fast:
+	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) -f 2024041605/CMakeFiles/05_textures.dir/build.make 2024041605/CMakeFiles/05_textures.dir/build
+.PHONY : 05_textures/fast
 
-04_textures.o: 04_textures.cpp.o
+05_textures.o: 05_textures.cpp.o
 
-.PHONY : 04_textures.o
+.PHONY : 05_textures.o
 
 # target to build an object file
-04_textures.cpp.o:
-	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) -f 2024041605/CMakeFiles/04_textures.dir/build.make 2024041605/CMakeFiles/04_textures.dir/04_textures.cpp.o
-.PHONY : 04_textures.cpp.o
+05_textures.cpp.o:
+	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) -f 2024041605/CMakeFiles/05_textures.dir/build.make 2024041605/CMakeFiles/05_textures.dir/05_textures.cpp.o
+.PHONY : 05_textures.cpp.o
 
-04_textures.i: 04_textures.cpp.i
+05_textures.i: 05_textures.cpp.i
 
-.PHONY : 04_textures.i
+.PHONY : 05_textures.i
 
 # target to preprocess a source file
-04_textures.cpp.i:
-	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) -f 2024041605/CMakeFiles/04_textures.dir/build.make 2024041605/CMakeFiles/04_textures.dir/04_textures.cpp.i
-.PHONY : 04_textures.cpp.i
+05_textures.cpp.i:
+	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) -f 2024041605/CMakeFiles/05_textures.dir/build.make 2024041605/CMakeFiles/05_textures.dir/05_textures.cpp.i
+.PHONY : 05_textures.cpp.i
 
-04_textures.s: 04_textures.cpp.s
+05_textures.s: 05_textures.cpp.s
 
-.PHONY : 04_textures.s
+.PHONY : 05_textures.s
 
 # target to generate assembly for a file
-04_textures.cpp.s:
-	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) -f 2024041605/CMakeFiles/04_textures.dir/build.make 2024041605/CMakeFiles/04_textures.dir/04_textures.cpp.s
-.PHONY : 04_textures.cpp.s
+05_textures.cpp.s:
+	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) -f 2024041605/CMakeFiles/05_textures.dir/build.make 2024041605/CMakeFiles/05_textures.dir/05_textures.cpp.s
+.PHONY : 05_textures.cpp.s
 
 # Help Target
 help:
@@ -160,10 +160,10 @@ help:
 	@echo "... depend"
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
-	@echo "... 04_textures"
-	@echo "... 04_textures.o"
-	@echo "... 04_textures.i"
-	@echo "... 04_textures.s"
+	@echo "... 05_textures"
+	@echo "... 05_textures.o"
+	@echo "... 05_textures.i"
+	@echo "... 05_textures.s"
 .PHONY : help
 
 
