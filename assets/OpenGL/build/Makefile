@@ -267,6 +267,45 @@ glad/fast:
 .PHONY : 04_practice_one/fast
 
 #=============================================================================
+# Target rules for targets named 05_practice_two
+
+# Build rule for target.
+05_practice_two: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 05_practice_two
+.PHONY : 05_practice_two
+
+# fast build rule for target.
+05_practice_two/fast:
+	$(MAKE) -f 2024041605/CMakeFiles/05_practice_two.dir/build.make 2024041605/CMakeFiles/05_practice_two.dir/build
+.PHONY : 05_practice_two/fast
+
+#=============================================================================
+# Target rules for targets named 05_practice_one
+
+# Build rule for target.
+05_practice_one: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 05_practice_one
+.PHONY : 05_practice_one
+
+# fast build rule for target.
+05_practice_one/fast:
+	$(MAKE) -f 2024041605/CMakeFiles/05_practice_one.dir/build.make 2024041605/CMakeFiles/05_practice_one.dir/build
+.PHONY : 05_practice_one/fast
+
+#=============================================================================
+# Target rules for targets named 05_textures_combined
+
+# Build rule for target.
+05_textures_combined: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 05_textures_combined
+.PHONY : 05_textures_combined
+
+# fast build rule for target.
+05_textures_combined/fast:
+	$(MAKE) -f 2024041605/CMakeFiles/05_textures_combined.dir/build.make 2024041605/CMakeFiles/05_textures_combined.dir/build
+.PHONY : 05_textures_combined/fast
+
+#=============================================================================
 # Target rules for targets named 05_textures
 
 # Build rule for target.
@@ -352,6 +391,9 @@ help:
 	@echo "... 04_practice_three"
 	@echo "... 04_practice_two"
 	@echo "... 04_practice_one"
+	@echo "... 05_practice_two"
+	@echo "... 05_practice_one"
+	@echo "... 05_textures_combined"
 	@echo "... 05_textures"
 	@echo "... 06_texture_filter"
 	@echo "... 06_texture_wrap"

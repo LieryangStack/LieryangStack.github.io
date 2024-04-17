@@ -111,6 +111,51 @@ depend:
 .PHONY : depend
 
 # Convenience name for target.
+2024041605/CMakeFiles/05_practice_two.dir/rule:
+	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) -f CMakeFiles/Makefile2 2024041605/CMakeFiles/05_practice_two.dir/rule
+.PHONY : 2024041605/CMakeFiles/05_practice_two.dir/rule
+
+# Convenience name for target.
+05_practice_two: 2024041605/CMakeFiles/05_practice_two.dir/rule
+
+.PHONY : 05_practice_two
+
+# fast build rule for target.
+05_practice_two/fast:
+	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) -f 2024041605/CMakeFiles/05_practice_two.dir/build.make 2024041605/CMakeFiles/05_practice_two.dir/build
+.PHONY : 05_practice_two/fast
+
+# Convenience name for target.
+2024041605/CMakeFiles/05_practice_one.dir/rule:
+	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) -f CMakeFiles/Makefile2 2024041605/CMakeFiles/05_practice_one.dir/rule
+.PHONY : 2024041605/CMakeFiles/05_practice_one.dir/rule
+
+# Convenience name for target.
+05_practice_one: 2024041605/CMakeFiles/05_practice_one.dir/rule
+
+.PHONY : 05_practice_one
+
+# fast build rule for target.
+05_practice_one/fast:
+	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) -f 2024041605/CMakeFiles/05_practice_one.dir/build.make 2024041605/CMakeFiles/05_practice_one.dir/build
+.PHONY : 05_practice_one/fast
+
+# Convenience name for target.
+2024041605/CMakeFiles/05_textures_combined.dir/rule:
+	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) -f CMakeFiles/Makefile2 2024041605/CMakeFiles/05_textures_combined.dir/rule
+.PHONY : 2024041605/CMakeFiles/05_textures_combined.dir/rule
+
+# Convenience name for target.
+05_textures_combined: 2024041605/CMakeFiles/05_textures_combined.dir/rule
+
+.PHONY : 05_textures_combined
+
+# fast build rule for target.
+05_textures_combined/fast:
+	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) -f 2024041605/CMakeFiles/05_textures_combined.dir/build.make 2024041605/CMakeFiles/05_textures_combined.dir/build
+.PHONY : 05_textures_combined/fast
+
+# Convenience name for target.
 2024041605/CMakeFiles/05_textures.dir/rule:
 	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) -f CMakeFiles/Makefile2 2024041605/CMakeFiles/05_textures.dir/rule
 .PHONY : 2024041605/CMakeFiles/05_textures.dir/rule
@@ -124,6 +169,60 @@ depend:
 05_textures/fast:
 	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) -f 2024041605/CMakeFiles/05_textures.dir/build.make 2024041605/CMakeFiles/05_textures.dir/build
 .PHONY : 05_textures/fast
+
+05_practice_one.o: 05_practice_one.cpp.o
+
+.PHONY : 05_practice_one.o
+
+# target to build an object file
+05_practice_one.cpp.o:
+	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) -f 2024041605/CMakeFiles/05_practice_one.dir/build.make 2024041605/CMakeFiles/05_practice_one.dir/05_practice_one.cpp.o
+.PHONY : 05_practice_one.cpp.o
+
+05_practice_one.i: 05_practice_one.cpp.i
+
+.PHONY : 05_practice_one.i
+
+# target to preprocess a source file
+05_practice_one.cpp.i:
+	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) -f 2024041605/CMakeFiles/05_practice_one.dir/build.make 2024041605/CMakeFiles/05_practice_one.dir/05_practice_one.cpp.i
+.PHONY : 05_practice_one.cpp.i
+
+05_practice_one.s: 05_practice_one.cpp.s
+
+.PHONY : 05_practice_one.s
+
+# target to generate assembly for a file
+05_practice_one.cpp.s:
+	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) -f 2024041605/CMakeFiles/05_practice_one.dir/build.make 2024041605/CMakeFiles/05_practice_one.dir/05_practice_one.cpp.s
+.PHONY : 05_practice_one.cpp.s
+
+05_practice_two.o: 05_practice_two.cpp.o
+
+.PHONY : 05_practice_two.o
+
+# target to build an object file
+05_practice_two.cpp.o:
+	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) -f 2024041605/CMakeFiles/05_practice_two.dir/build.make 2024041605/CMakeFiles/05_practice_two.dir/05_practice_two.cpp.o
+.PHONY : 05_practice_two.cpp.o
+
+05_practice_two.i: 05_practice_two.cpp.i
+
+.PHONY : 05_practice_two.i
+
+# target to preprocess a source file
+05_practice_two.cpp.i:
+	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) -f 2024041605/CMakeFiles/05_practice_two.dir/build.make 2024041605/CMakeFiles/05_practice_two.dir/05_practice_two.cpp.i
+.PHONY : 05_practice_two.cpp.i
+
+05_practice_two.s: 05_practice_two.cpp.s
+
+.PHONY : 05_practice_two.s
+
+# target to generate assembly for a file
+05_practice_two.cpp.s:
+	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) -f 2024041605/CMakeFiles/05_practice_two.dir/build.make 2024041605/CMakeFiles/05_practice_two.dir/05_practice_two.cpp.s
+.PHONY : 05_practice_two.cpp.s
 
 05_textures.o: 05_textures.cpp.o
 
@@ -152,6 +251,33 @@ depend:
 	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) -f 2024041605/CMakeFiles/05_textures.dir/build.make 2024041605/CMakeFiles/05_textures.dir/05_textures.cpp.s
 .PHONY : 05_textures.cpp.s
 
+05_textures_combined.o: 05_textures_combined.cpp.o
+
+.PHONY : 05_textures_combined.o
+
+# target to build an object file
+05_textures_combined.cpp.o:
+	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) -f 2024041605/CMakeFiles/05_textures_combined.dir/build.make 2024041605/CMakeFiles/05_textures_combined.dir/05_textures_combined.cpp.o
+.PHONY : 05_textures_combined.cpp.o
+
+05_textures_combined.i: 05_textures_combined.cpp.i
+
+.PHONY : 05_textures_combined.i
+
+# target to preprocess a source file
+05_textures_combined.cpp.i:
+	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) -f 2024041605/CMakeFiles/05_textures_combined.dir/build.make 2024041605/CMakeFiles/05_textures_combined.dir/05_textures_combined.cpp.i
+.PHONY : 05_textures_combined.cpp.i
+
+05_textures_combined.s: 05_textures_combined.cpp.s
+
+.PHONY : 05_textures_combined.s
+
+# target to generate assembly for a file
+05_textures_combined.cpp.s:
+	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) -f 2024041605/CMakeFiles/05_textures_combined.dir/build.make 2024041605/CMakeFiles/05_textures_combined.dir/05_textures_combined.cpp.s
+.PHONY : 05_textures_combined.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -159,11 +285,23 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... rebuild_cache"
+	@echo "... 05_practice_two"
+	@echo "... 05_practice_one"
 	@echo "... edit_cache"
+	@echo "... 05_textures_combined"
 	@echo "... 05_textures"
+	@echo "... 05_practice_one.o"
+	@echo "... 05_practice_one.i"
+	@echo "... 05_practice_one.s"
+	@echo "... 05_practice_two.o"
+	@echo "... 05_practice_two.i"
+	@echo "... 05_practice_two.s"
 	@echo "... 05_textures.o"
 	@echo "... 05_textures.i"
 	@echo "... 05_textures.s"
+	@echo "... 05_textures_combined.o"
+	@echo "... 05_textures_combined.i"
+	@echo "... 05_textures_combined.s"
 .PHONY : help
 
 

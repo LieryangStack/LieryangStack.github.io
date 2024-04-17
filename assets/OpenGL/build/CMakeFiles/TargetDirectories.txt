@@ -19,7 +19,10 @@
 /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build/2024041604/CMakeFiles/edit_cache.dir
 /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build/2024041604/CMakeFiles/04_practice_one.dir
 /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build/2024041605/CMakeFiles/rebuild_cache.dir
+/home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build/2024041605/CMakeFiles/05_practice_two.dir
+/home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build/2024041605/CMakeFiles/05_practice_one.dir
 /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build/2024041605/CMakeFiles/edit_cache.dir
+/home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build/2024041605/CMakeFiles/05_textures_combined.dir
 /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build/2024041605/CMakeFiles/05_textures.dir
 /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build/2024041606/CMakeFiles/edit_cache.dir
 /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build/2024041606/CMakeFiles/rebuild_cache.dir

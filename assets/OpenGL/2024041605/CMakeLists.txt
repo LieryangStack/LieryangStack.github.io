@@ -1,1 +1,4 @@
 add_executable(05_textures 05_textures.cpp)
+add_executable(05_textures_combined 05_textures_combined.cpp)
+add_executable(05_practice_one 05_practice_one.cpp)
+add_executable(05_practice_two 05_practice_two.cpp)
