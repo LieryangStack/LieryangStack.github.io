@@ -1,8 +1,7 @@
 file(REMOVE_RECURSE
-  "02_practice_2"
-  "02_practice_2.pdb"
   "CMakeFiles/02_practice_2.dir/02_练习2.cpp.o"
-  "CMakeFiles/02_practice_2.dir/02_练习2.cpp.o.d"
+  "02_practice_2.pdb"
+  "02_practice_2"
 )
 
 # Per-language clean rules from dependency scanning.

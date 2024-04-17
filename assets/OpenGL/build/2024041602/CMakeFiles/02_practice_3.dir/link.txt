@@ -1,1 +1,1 @@
-/usr/bin/c++ -g CMakeFiles/02_practice_3.dir/02_练习3.cpp.o -o 02_practice_3   -L/usr/lib/gcc/x86_64-linux-gnu/12  -lglfw ../libglad.a 
+/usr/bin/c++  -g   CMakeFiles/02_practice_3.dir/02_练习3.cpp.o  -o 02_practice_3  -L/usr/lib/gcc/x86_64-linux-gnu/12 -lglfw ../libglad.a 

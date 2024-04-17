@@ -1,8 +1,7 @@
 file(REMOVE_RECURSE
-  "02_hello_triangle"
-  "02_hello_triangle.pdb"
   "CMakeFiles/02_hello_triangle.dir/02_hello_triangle.cpp.o"
-  "CMakeFiles/02_hello_triangle.dir/02_hello_triangle.cpp.o.d"
+  "02_hello_triangle.pdb"
+  "02_hello_triangle"
 )
 
 # Per-language clean rules from dependency scanning.
