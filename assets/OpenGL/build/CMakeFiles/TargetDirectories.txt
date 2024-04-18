@@ -30,3 +30,6 @@
 /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build/2024041606/CMakeFiles/rebuild_cache.dir
 /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build/2024041606/CMakeFiles/06_texture_filter.dir
 /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build/2024041606/CMakeFiles/06_texture_wrap.dir
+/home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build/2024041807/CMakeFiles/rebuild_cache.dir
+/home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build/2024041807/CMakeFiles/edit_cache.dir
+/home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build/2024041807/CMakeFiles/07_transformations.dir

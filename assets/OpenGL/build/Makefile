@@ -370,6 +370,19 @@ main/fast:
 	$(MAKE) -f 2024041606/CMakeFiles/06_texture_wrap.dir/build.make 2024041606/CMakeFiles/06_texture_wrap.dir/build
 .PHONY : 06_texture_wrap/fast
 
+#=============================================================================
+# Target rules for targets named 07_transformations
+
+# Build rule for target.
+07_transformations: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 07_transformations
+.PHONY : 07_transformations
+
+# fast build rule for target.
+07_transformations/fast:
+	$(MAKE) -f 2024041807/CMakeFiles/07_transformations.dir/build.make 2024041807/CMakeFiles/07_transformations.dir/build
+.PHONY : 07_transformations/fast
+
 glad/glad.o: glad/glad.c.o
 
 .PHONY : glad/glad.o
@@ -425,6 +438,7 @@ help:
 	@echo "... 05_textures"
 	@echo "... 06_texture_filter"
 	@echo "... 06_texture_wrap"
+	@echo "... 07_transformations"
 	@echo "... glad/glad.o"
 	@echo "... glad/glad.i"
 	@echo "... glad/glad.s"

@@ -64,11 +64,11 @@ include 2024041604/CMakeFiles/04_practice_three.dir/flags.make
 
 2024041604/CMakeFiles/04_practice_three.dir/04_practice_three.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/04_practice_three.dir/04_practice_three.cpp.i"
-	$(CMAKE_COMMAND) -E cmake_unimplemented_variable CMAKE_CXX_CREATE_PREPROCESSED_SOURCE
+	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build/2024041604 && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/2024041604/04_practice_three.cpp > CMakeFiles/04_practice_three.dir/04_practice_three.cpp.i
 
 2024041604/CMakeFiles/04_practice_three.dir/04_practice_three.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/04_practice_three.dir/04_practice_three.cpp.s"
-	$(CMAKE_COMMAND) -E cmake_unimplemented_variable CMAKE_CXX_CREATE_ASSEMBLY_SOURCE
+	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build/2024041604 && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/2024041604/04_practice_three.cpp -o CMakeFiles/04_practice_three.dir/04_practice_three.cpp.s
 
 # Object files for target 04_practice_three
 04_practice_three_OBJECTS = \
@@ -80,6 +80,7 @@ include 2024041604/CMakeFiles/04_practice_three.dir/flags.make
 2024041604/04_practice_three: 2024041604/CMakeFiles/04_practice_three.dir/04_practice_three.cpp.o
 2024041604/04_practice_three: 2024041604/CMakeFiles/04_practice_three.dir/build.make
 2024041604/04_practice_three: libglad.a
+2024041604/04_practice_three: ../lib/libglm.a
 2024041604/04_practice_three: 2024041604/CMakeFiles/04_practice_three.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable 04_practice_three"
 	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build/2024041604 && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/04_practice_three.dir/link.txt --verbose=$(VERBOSE)

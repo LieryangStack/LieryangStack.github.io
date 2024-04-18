@@ -1,1 +1,1 @@
-/usr/bin/c++     CMakeFiles/02_hello_ebo.dir/02_hello_ebo.cpp.o  -o 02_hello_ebo -lglfw ../libglad.a 
+/usr/bin/c++     CMakeFiles/02_hello_ebo.dir/02_hello_ebo.cpp.o  -o 02_hello_ebo  -L/usr/lib/gcc/x86_64-linux-gnu/12 -lglfw ../libglad.a ../../lib/libglm.a 

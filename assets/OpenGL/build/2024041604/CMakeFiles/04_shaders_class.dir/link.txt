@@ -1,1 +1,1 @@
-/usr/bin/c++     CMakeFiles/04_shaders_class.dir/04_shaders_class.cpp.o  -o 04_shaders_class -lglfw ../libglad.a 
+/usr/bin/c++     CMakeFiles/04_shaders_class.dir/04_shaders_class.cpp.o  -o 04_shaders_class  -L/usr/lib/gcc/x86_64-linux-gnu/12 -lglfw ../libglad.a ../../lib/libglm.a 

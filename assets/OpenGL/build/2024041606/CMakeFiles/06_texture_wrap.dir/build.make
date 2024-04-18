@@ -64,11 +64,11 @@ include 2024041606/CMakeFiles/06_texture_wrap.dir/flags.make
 
 2024041606/CMakeFiles/06_texture_wrap.dir/06_texture_wrap.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/06_texture_wrap.dir/06_texture_wrap.cpp.i"
-	$(CMAKE_COMMAND) -E cmake_unimplemented_variable CMAKE_CXX_CREATE_PREPROCESSED_SOURCE
+	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build/2024041606 && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/2024041606/06_texture_wrap.cpp > CMakeFiles/06_texture_wrap.dir/06_texture_wrap.cpp.i
 
 2024041606/CMakeFiles/06_texture_wrap.dir/06_texture_wrap.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/06_texture_wrap.dir/06_texture_wrap.cpp.s"
-	$(CMAKE_COMMAND) -E cmake_unimplemented_variable CMAKE_CXX_CREATE_ASSEMBLY_SOURCE
+	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build/2024041606 && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/2024041606/06_texture_wrap.cpp -o CMakeFiles/06_texture_wrap.dir/06_texture_wrap.cpp.s
 
 # Object files for target 06_texture_wrap
 06_texture_wrap_OBJECTS = \
@@ -80,6 +80,7 @@ include 2024041606/CMakeFiles/06_texture_wrap.dir/flags.make
 2024041606/06_texture_wrap: 2024041606/CMakeFiles/06_texture_wrap.dir/06_texture_wrap.cpp.o
 2024041606/06_texture_wrap: 2024041606/CMakeFiles/06_texture_wrap.dir/build.make
 2024041606/06_texture_wrap: libglad.a
+2024041606/06_texture_wrap: ../lib/libglm.a
 2024041606/06_texture_wrap: 2024041606/CMakeFiles/06_texture_wrap.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable 06_texture_wrap"
 	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build/2024041606 && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/06_texture_wrap.dir/link.txt --verbose=$(VERBOSE)

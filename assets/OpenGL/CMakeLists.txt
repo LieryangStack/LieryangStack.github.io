@@ -19,18 +19,19 @@ target_include_directories(glad PUBLIC
 
 # add_executable(01_win 2024040801/01_create_window.cpp)
 
-# find_library(GL_LIB glfw3 "${PROJECT_SOURCE_DIR}/lib")
+# 指定路径搜索库
+find_library(GLM_LIB NAMES glm PATHS "${PROJECT_SOURCE_DIR}/lib")
 
 include_directories(${PROJECT_SOURCE_DIR})
 
-link_libraries(${PKG_GLFW_LIBRARIES} glad)
+link_libraries(${PKG_GLFW_LIBRARIES} glad ${GLM_LIB})
 
 add_subdirectory(2024040801)
 add_subdirectory(2024041602)
 add_subdirectory(2024041604)
 add_subdirectory(2024041605)
 add_subdirectory(2024041606)
-# add_subdirectory(2024041607)
+add_subdirectory(2024041807)
 
 # target_link_libraries(01_win ${PKG_GLFW_LIBRARIES} glad)
 

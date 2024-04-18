@@ -64,11 +64,11 @@ include 2024041602/CMakeFiles/02_hello_ebo.dir/flags.make
 
 2024041602/CMakeFiles/02_hello_ebo.dir/02_hello_ebo.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/02_hello_ebo.dir/02_hello_ebo.cpp.i"
-	$(CMAKE_COMMAND) -E cmake_unimplemented_variable CMAKE_CXX_CREATE_PREPROCESSED_SOURCE
+	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build/2024041602 && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/2024041602/02_hello_ebo.cpp > CMakeFiles/02_hello_ebo.dir/02_hello_ebo.cpp.i
 
 2024041602/CMakeFiles/02_hello_ebo.dir/02_hello_ebo.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/02_hello_ebo.dir/02_hello_ebo.cpp.s"
-	$(CMAKE_COMMAND) -E cmake_unimplemented_variable CMAKE_CXX_CREATE_ASSEMBLY_SOURCE
+	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build/2024041602 && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/2024041602/02_hello_ebo.cpp -o CMakeFiles/02_hello_ebo.dir/02_hello_ebo.cpp.s
 
 # Object files for target 02_hello_ebo
 02_hello_ebo_OBJECTS = \
@@ -80,6 +80,7 @@ include 2024041602/CMakeFiles/02_hello_ebo.dir/flags.make
 2024041602/02_hello_ebo: 2024041602/CMakeFiles/02_hello_ebo.dir/02_hello_ebo.cpp.o
 2024041602/02_hello_ebo: 2024041602/CMakeFiles/02_hello_ebo.dir/build.make
 2024041602/02_hello_ebo: libglad.a
+2024041602/02_hello_ebo: ../lib/libglm.a
 2024041602/02_hello_ebo: 2024041602/CMakeFiles/02_hello_ebo.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable 02_hello_ebo"
 	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build/2024041602 && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/02_hello_ebo.dir/link.txt --verbose=$(VERBOSE)

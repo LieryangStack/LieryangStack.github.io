@@ -64,11 +64,11 @@ include 2024041605/CMakeFiles/main.dir/flags.make
 
 2024041605/CMakeFiles/main.dir/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/main.dir/main.cpp.i"
-	$(CMAKE_COMMAND) -E cmake_unimplemented_variable CMAKE_CXX_CREATE_PREPROCESSED_SOURCE
+	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build/2024041605 && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/2024041605/main.cpp > CMakeFiles/main.dir/main.cpp.i
 
 2024041605/CMakeFiles/main.dir/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/main.dir/main.cpp.s"
-	$(CMAKE_COMMAND) -E cmake_unimplemented_variable CMAKE_CXX_CREATE_ASSEMBLY_SOURCE
+	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build/2024041605 && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/2024041605/main.cpp -o CMakeFiles/main.dir/main.cpp.s
 
 # Object files for target main
 main_OBJECTS = \
@@ -80,6 +80,7 @@ main_EXTERNAL_OBJECTS =
 2024041605/main: 2024041605/CMakeFiles/main.dir/main.cpp.o
 2024041605/main: 2024041605/CMakeFiles/main.dir/build.make
 2024041605/main: libglad.a
+2024041605/main: ../lib/libglm.a
 2024041605/main: 2024041605/CMakeFiles/main.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable main"
 	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build/2024041605 && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/main.dir/link.txt --verbose=$(VERBOSE)

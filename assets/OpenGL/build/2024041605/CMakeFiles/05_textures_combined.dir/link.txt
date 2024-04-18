@@ -1,1 +1,1 @@
-/usr/bin/c++     CMakeFiles/05_textures_combined.dir/05_textures_combined.cpp.o  -o 05_textures_combined -lglfw ../libglad.a 
+/usr/bin/c++     CMakeFiles/05_textures_combined.dir/05_textures_combined.cpp.o  -o 05_textures_combined  -L/usr/lib/gcc/x86_64-linux-gnu/12 -lglfw ../libglad.a ../../lib/libglm.a 

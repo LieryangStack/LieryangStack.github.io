@@ -6,6 +6,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 set(CMAKE_DEPENDS_CHECK_CXX
   "/home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/2024041604/04_shaders_uniform.cpp" "/home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build/2024041604/CMakeFiles/04_shaders_uniform.dir/04_shaders_uniform.cpp.o"
   )
+set(CMAKE_CXX_COMPILER_ID "GNU")
 
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH

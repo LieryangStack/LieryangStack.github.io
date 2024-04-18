@@ -6,6 +6,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 set(CMAKE_DEPENDS_CHECK_C
   "/home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/glad/glad.c" "/home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build/CMakeFiles/glad.dir/glad/glad.c.o"
   )
+set(CMAKE_C_COMPILER_ID "GNU")
 
 # The include file search paths:
 set(CMAKE_C_TARGET_INCLUDE_PATH

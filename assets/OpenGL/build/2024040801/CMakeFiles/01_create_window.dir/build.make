@@ -64,11 +64,11 @@ include 2024040801/CMakeFiles/01_create_window.dir/flags.make
 
 2024040801/CMakeFiles/01_create_window.dir/01_create_window.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/01_create_window.dir/01_create_window.cpp.i"
-	$(CMAKE_COMMAND) -E cmake_unimplemented_variable CMAKE_CXX_CREATE_PREPROCESSED_SOURCE
+	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build/2024040801 && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/2024040801/01_create_window.cpp > CMakeFiles/01_create_window.dir/01_create_window.cpp.i
 
 2024040801/CMakeFiles/01_create_window.dir/01_create_window.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/01_create_window.dir/01_create_window.cpp.s"
-	$(CMAKE_COMMAND) -E cmake_unimplemented_variable CMAKE_CXX_CREATE_ASSEMBLY_SOURCE
+	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build/2024040801 && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/2024040801/01_create_window.cpp -o CMakeFiles/01_create_window.dir/01_create_window.cpp.s
 
 # Object files for target 01_create_window
 01_create_window_OBJECTS = \
@@ -80,6 +80,7 @@ include 2024040801/CMakeFiles/01_create_window.dir/flags.make
 2024040801/01_create_window: 2024040801/CMakeFiles/01_create_window.dir/01_create_window.cpp.o
 2024040801/01_create_window: 2024040801/CMakeFiles/01_create_window.dir/build.make
 2024040801/01_create_window: libglad.a
+2024040801/01_create_window: ../lib/libglm.a
 2024040801/01_create_window: 2024040801/CMakeFiles/01_create_window.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable 01_create_window"
 	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build/2024040801 && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/01_create_window.dir/link.txt --verbose=$(VERBOSE)

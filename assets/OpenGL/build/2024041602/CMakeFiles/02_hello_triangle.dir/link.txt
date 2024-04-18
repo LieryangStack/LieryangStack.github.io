@@ -1,1 +1,1 @@
-/usr/bin/c++     CMakeFiles/02_hello_triangle.dir/02_hello_triangle.cpp.o  -o 02_hello_triangle -lglfw ../libglad.a 
+/usr/bin/c++     CMakeFiles/02_hello_triangle.dir/02_hello_triangle.cpp.o  -o 02_hello_triangle  -L/usr/lib/gcc/x86_64-linux-gnu/12 -lglfw ../libglad.a ../../lib/libglm.a 

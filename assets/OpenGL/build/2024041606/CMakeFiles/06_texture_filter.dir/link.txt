@@ -1,1 +1,1 @@
-/usr/bin/c++     CMakeFiles/06_texture_filter.dir/06_texture_filter.cpp.o  -o 06_texture_filter -lglfw ../libglad.a 
+/usr/bin/c++     CMakeFiles/06_texture_filter.dir/06_texture_filter.cpp.o  -o 06_texture_filter  -L/usr/lib/gcc/x86_64-linux-gnu/12 -lglfw ../libglad.a ../../lib/libglm.a 
