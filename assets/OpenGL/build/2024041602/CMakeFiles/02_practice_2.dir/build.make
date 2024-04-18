@@ -64,11 +64,11 @@ include 2024041602/CMakeFiles/02_practice_2.dir/flags.make
 
 2024041602/CMakeFiles/02_practice_2.dir/02_练习2.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/02_practice_2.dir/02_练习2.cpp.i"
-	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build/2024041602 && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/2024041602/02_练习2.cpp > CMakeFiles/02_practice_2.dir/02_练习2.cpp.i
+	$(CMAKE_COMMAND) -E cmake_unimplemented_variable CMAKE_CXX_CREATE_PREPROCESSED_SOURCE
 
 2024041602/CMakeFiles/02_practice_2.dir/02_练习2.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/02_practice_2.dir/02_练习2.cpp.s"
-	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build/2024041602 && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/2024041602/02_练习2.cpp -o CMakeFiles/02_practice_2.dir/02_练习2.cpp.s
+	$(CMAKE_COMMAND) -E cmake_unimplemented_variable CMAKE_CXX_CREATE_ASSEMBLY_SOURCE
 
 # Object files for target 02_practice_2
 02_practice_2_OBJECTS = \

@@ -1,1 +1,0 @@
-/usr/bin/c++  -g   CMakeFiles/04_textures.dir/04_textures.cpp.o  -o 04_textures  -L/usr/lib/gcc/x86_64-linux-gnu/12 -lglfw ../libglad.a 

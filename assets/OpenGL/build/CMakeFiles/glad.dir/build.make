@@ -64,11 +64,11 @@ CMakeFiles/glad.dir/glad/glad.c.o: ../glad/glad.c
 
 CMakeFiles/glad.dir/glad/glad.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/glad.dir/glad/glad.c.i"
-	/usr/bin/gcc-12 $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/glad/glad.c > CMakeFiles/glad.dir/glad/glad.c.i
+	$(CMAKE_COMMAND) -E cmake_unimplemented_variable CMAKE_C_CREATE_PREPROCESSED_SOURCE
 
 CMakeFiles/glad.dir/glad/glad.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/glad.dir/glad/glad.c.s"
-	/usr/bin/gcc-12 $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/glad/glad.c -o CMakeFiles/glad.dir/glad/glad.c.s
+	$(CMAKE_COMMAND) -E cmake_unimplemented_variable CMAKE_C_CREATE_ASSEMBLY_SOURCE
 
 # Object files for target glad
 glad_OBJECTS = \

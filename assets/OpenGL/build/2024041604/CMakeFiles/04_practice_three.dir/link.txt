@@ -1,1 +1,1 @@
-/usr/bin/c++  -g   CMakeFiles/04_practice_three.dir/04_practice_three.cpp.o  -o 04_practice_three  -L/usr/lib/gcc/x86_64-linux-gnu/12 -lglfw ../libglad.a 
+/usr/bin/c++     CMakeFiles/04_practice_three.dir/04_practice_three.cpp.o  -o 04_practice_three -lglfw ../libglad.a 

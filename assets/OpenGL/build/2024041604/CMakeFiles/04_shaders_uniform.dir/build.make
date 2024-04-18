@@ -64,11 +64,11 @@ include 2024041604/CMakeFiles/04_shaders_uniform.dir/flags.make
 
 2024041604/CMakeFiles/04_shaders_uniform.dir/04_shaders_uniform.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/04_shaders_uniform.dir/04_shaders_uniform.cpp.i"
-	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build/2024041604 && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/2024041604/04_shaders_uniform.cpp > CMakeFiles/04_shaders_uniform.dir/04_shaders_uniform.cpp.i
+	$(CMAKE_COMMAND) -E cmake_unimplemented_variable CMAKE_CXX_CREATE_PREPROCESSED_SOURCE
 
 2024041604/CMakeFiles/04_shaders_uniform.dir/04_shaders_uniform.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/04_shaders_uniform.dir/04_shaders_uniform.cpp.s"
-	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build/2024041604 && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/2024041604/04_shaders_uniform.cpp -o CMakeFiles/04_shaders_uniform.dir/04_shaders_uniform.cpp.s
+	$(CMAKE_COMMAND) -E cmake_unimplemented_variable CMAKE_CXX_CREATE_ASSEMBLY_SOURCE
 
 # Object files for target 04_shaders_uniform
 04_shaders_uniform_OBJECTS = \

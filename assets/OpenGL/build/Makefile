@@ -69,8 +69,8 @@ rebuild_cache/fast: rebuild_cache
 
 # Special rule for the target edit_cache
 edit_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake cache editor..."
-	/usr/bin/cmake-gui -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
+	/usr/local/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -267,6 +267,32 @@ glad/fast:
 .PHONY : 04_practice_one/fast
 
 #=============================================================================
+# Target rules for targets named main
+
+# Build rule for target.
+main: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 main
+.PHONY : main
+
+# fast build rule for target.
+main/fast:
+	$(MAKE) -f 2024041605/CMakeFiles/main.dir/build.make 2024041605/CMakeFiles/main.dir/build
+.PHONY : main/fast
+
+#=============================================================================
+# Target rules for targets named 05_practice_four
+
+# Build rule for target.
+05_practice_four: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 05_practice_four
+.PHONY : 05_practice_four
+
+# fast build rule for target.
+05_practice_four/fast:
+	$(MAKE) -f 2024041605/CMakeFiles/05_practice_four.dir/build.make 2024041605/CMakeFiles/05_practice_four.dir/build
+.PHONY : 05_practice_four/fast
+
+#=============================================================================
 # Target rules for targets named 05_practice_two
 
 # Build rule for target.
@@ -391,6 +417,8 @@ help:
 	@echo "... 04_practice_three"
 	@echo "... 04_practice_two"
 	@echo "... 04_practice_one"
+	@echo "... main"
+	@echo "... 05_practice_four"
 	@echo "... 05_practice_two"
 	@echo "... 05_practice_one"
 	@echo "... 05_textures_combined"

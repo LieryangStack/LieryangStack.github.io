@@ -69,8 +69,8 @@ rebuild_cache/fast: rebuild_cache
 
 # Special rule for the target edit_cache
 edit_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake cache editor..."
-	/usr/bin/cmake-gui -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
+	/usr/local/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -109,6 +109,36 @@ preinstall/fast:
 depend:
 	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
+
+# Convenience name for target.
+2024041605/CMakeFiles/main.dir/rule:
+	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) -f CMakeFiles/Makefile2 2024041605/CMakeFiles/main.dir/rule
+.PHONY : 2024041605/CMakeFiles/main.dir/rule
+
+# Convenience name for target.
+main: 2024041605/CMakeFiles/main.dir/rule
+
+.PHONY : main
+
+# fast build rule for target.
+main/fast:
+	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) -f 2024041605/CMakeFiles/main.dir/build.make 2024041605/CMakeFiles/main.dir/build
+.PHONY : main/fast
+
+# Convenience name for target.
+2024041605/CMakeFiles/05_practice_four.dir/rule:
+	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) -f CMakeFiles/Makefile2 2024041605/CMakeFiles/05_practice_four.dir/rule
+.PHONY : 2024041605/CMakeFiles/05_practice_four.dir/rule
+
+# Convenience name for target.
+05_practice_four: 2024041605/CMakeFiles/05_practice_four.dir/rule
+
+.PHONY : 05_practice_four
+
+# fast build rule for target.
+05_practice_four/fast:
+	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) -f 2024041605/CMakeFiles/05_practice_four.dir/build.make 2024041605/CMakeFiles/05_practice_four.dir/build
+.PHONY : 05_practice_four/fast
 
 # Convenience name for target.
 2024041605/CMakeFiles/05_practice_two.dir/rule:
@@ -169,6 +199,33 @@ depend:
 05_textures/fast:
 	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) -f 2024041605/CMakeFiles/05_textures.dir/build.make 2024041605/CMakeFiles/05_textures.dir/build
 .PHONY : 05_textures/fast
+
+05_practice_four.o: 05_practice_four.cpp.o
+
+.PHONY : 05_practice_four.o
+
+# target to build an object file
+05_practice_four.cpp.o:
+	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) -f 2024041605/CMakeFiles/05_practice_four.dir/build.make 2024041605/CMakeFiles/05_practice_four.dir/05_practice_four.cpp.o
+.PHONY : 05_practice_four.cpp.o
+
+05_practice_four.i: 05_practice_four.cpp.i
+
+.PHONY : 05_practice_four.i
+
+# target to preprocess a source file
+05_practice_four.cpp.i:
+	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) -f 2024041605/CMakeFiles/05_practice_four.dir/build.make 2024041605/CMakeFiles/05_practice_four.dir/05_practice_four.cpp.i
+.PHONY : 05_practice_four.cpp.i
+
+05_practice_four.s: 05_practice_four.cpp.s
+
+.PHONY : 05_practice_four.s
+
+# target to generate assembly for a file
+05_practice_four.cpp.s:
+	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) -f 2024041605/CMakeFiles/05_practice_four.dir/build.make 2024041605/CMakeFiles/05_practice_four.dir/05_practice_four.cpp.s
+.PHONY : 05_practice_four.cpp.s
 
 05_practice_one.o: 05_practice_one.cpp.o
 
@@ -278,6 +335,33 @@ depend:
 	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) -f 2024041605/CMakeFiles/05_textures_combined.dir/build.make 2024041605/CMakeFiles/05_textures_combined.dir/05_textures_combined.cpp.s
 .PHONY : 05_textures_combined.cpp.s
 
+main.o: main.cpp.o
+
+.PHONY : main.o
+
+# target to build an object file
+main.cpp.o:
+	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) -f 2024041605/CMakeFiles/main.dir/build.make 2024041605/CMakeFiles/main.dir/main.cpp.o
+.PHONY : main.cpp.o
+
+main.i: main.cpp.i
+
+.PHONY : main.i
+
+# target to preprocess a source file
+main.cpp.i:
+	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) -f 2024041605/CMakeFiles/main.dir/build.make 2024041605/CMakeFiles/main.dir/main.cpp.i
+.PHONY : main.cpp.i
+
+main.s: main.cpp.s
+
+.PHONY : main.s
+
+# target to generate assembly for a file
+main.cpp.s:
+	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) -f 2024041605/CMakeFiles/main.dir/build.make 2024041605/CMakeFiles/main.dir/main.cpp.s
+.PHONY : main.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -285,11 +369,16 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... rebuild_cache"
+	@echo "... main"
+	@echo "... 05_practice_four"
 	@echo "... 05_practice_two"
 	@echo "... 05_practice_one"
 	@echo "... edit_cache"
 	@echo "... 05_textures_combined"
 	@echo "... 05_textures"
+	@echo "... 05_practice_four.o"
+	@echo "... 05_practice_four.i"
+	@echo "... 05_practice_four.s"
 	@echo "... 05_practice_one.o"
 	@echo "... 05_practice_one.i"
 	@echo "... 05_practice_one.s"
@@ -302,6 +391,9 @@ help:
 	@echo "... 05_textures_combined.o"
 	@echo "... 05_textures_combined.i"
 	@echo "... 05_textures_combined.s"
+	@echo "... main.o"
+	@echo "... main.i"
+	@echo "... main.s"
 .PHONY : help
 
 
