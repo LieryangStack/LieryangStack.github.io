@@ -101,6 +101,11 @@
 },
 {
   "directory": "/home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build/2024041807",
+  "command": "/usr/bin/c++   -I/home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL  -g   -o CMakeFiles/07_glm_study.dir/07_glm_study.cpp.o -c /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/2024041807/07_glm_study.cpp",
+  "file": "/home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/2024041807/07_glm_study.cpp"
+},
+{
+  "directory": "/home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build/2024041807",
   "command": "/usr/bin/c++   -I/home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL  -g   -o CMakeFiles/07_transformations.dir/07_transformations.cpp.o -c /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/2024041807/07_transformations.cpp",
   "file": "/home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/2024041807/07_transformations.cpp"
 }

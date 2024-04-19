@@ -78,5 +78,6 @@ set(CMAKE_DEPEND_INFO_FILES
   "2024041605/CMakeFiles/05_textures.dir/DependInfo.cmake"
   "2024041606/CMakeFiles/06_texture_filter.dir/DependInfo.cmake"
   "2024041606/CMakeFiles/06_texture_wrap.dir/DependInfo.cmake"
+  "2024041807/CMakeFiles/07_glm_study.dir/DependInfo.cmake"
   "2024041807/CMakeFiles/07_transformations.dir/DependInfo.cmake"
   )

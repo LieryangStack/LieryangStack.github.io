@@ -111,6 +111,21 @@ depend:
 .PHONY : depend
 
 # Convenience name for target.
+2024041807/CMakeFiles/07_glm_study.dir/rule:
+	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) -f CMakeFiles/Makefile2 2024041807/CMakeFiles/07_glm_study.dir/rule
+.PHONY : 2024041807/CMakeFiles/07_glm_study.dir/rule
+
+# Convenience name for target.
+07_glm_study: 2024041807/CMakeFiles/07_glm_study.dir/rule
+
+.PHONY : 07_glm_study
+
+# fast build rule for target.
+07_glm_study/fast:
+	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) -f 2024041807/CMakeFiles/07_glm_study.dir/build.make 2024041807/CMakeFiles/07_glm_study.dir/build
+.PHONY : 07_glm_study/fast
+
+# Convenience name for target.
 2024041807/CMakeFiles/07_transformations.dir/rule:
 	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) -f CMakeFiles/Makefile2 2024041807/CMakeFiles/07_transformations.dir/rule
 .PHONY : 2024041807/CMakeFiles/07_transformations.dir/rule
@@ -124,6 +139,33 @@ depend:
 07_transformations/fast:
 	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) -f 2024041807/CMakeFiles/07_transformations.dir/build.make 2024041807/CMakeFiles/07_transformations.dir/build
 .PHONY : 07_transformations/fast
+
+07_glm_study.o: 07_glm_study.cpp.o
+
+.PHONY : 07_glm_study.o
+
+# target to build an object file
+07_glm_study.cpp.o:
+	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) -f 2024041807/CMakeFiles/07_glm_study.dir/build.make 2024041807/CMakeFiles/07_glm_study.dir/07_glm_study.cpp.o
+.PHONY : 07_glm_study.cpp.o
+
+07_glm_study.i: 07_glm_study.cpp.i
+
+.PHONY : 07_glm_study.i
+
+# target to preprocess a source file
+07_glm_study.cpp.i:
+	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) -f 2024041807/CMakeFiles/07_glm_study.dir/build.make 2024041807/CMakeFiles/07_glm_study.dir/07_glm_study.cpp.i
+.PHONY : 07_glm_study.cpp.i
+
+07_glm_study.s: 07_glm_study.cpp.s
+
+.PHONY : 07_glm_study.s
+
+# target to generate assembly for a file
+07_glm_study.cpp.s:
+	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) -f 2024041807/CMakeFiles/07_glm_study.dir/build.make 2024041807/CMakeFiles/07_glm_study.dir/07_glm_study.cpp.s
+.PHONY : 07_glm_study.cpp.s
 
 07_transformations.o: 07_transformations.cpp.o
 
@@ -160,7 +202,11 @@ help:
 	@echo "... depend"
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
+	@echo "... 07_glm_study"
 	@echo "... 07_transformations"
+	@echo "... 07_glm_study.o"
+	@echo "... 07_glm_study.i"
+	@echo "... 07_glm_study.s"
 	@echo "... 07_transformations.o"
 	@echo "... 07_transformations.i"
 	@echo "... 07_transformations.s"

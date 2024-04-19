@@ -1,1 +1,2 @@
 add_executable(07_transformations 07_transformations.cpp)
+add_executable(07_glm_study 07_glm_study.cpp)

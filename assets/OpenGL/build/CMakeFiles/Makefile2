@@ -71,7 +71,7 @@ CMAKE_BINARY_DIR = /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/
 CMakeFiles/glad.dir/all:
 	$(MAKE) -f CMakeFiles/glad.dir/build.make CMakeFiles/glad.dir/depend
 	$(MAKE) -f CMakeFiles/glad.dir/build.make CMakeFiles/glad.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build/CMakeFiles --progress-num=39,40 "Built target glad"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build/CMakeFiles --progress-num=41,42 "Built target glad"
 .PHONY : CMakeFiles/glad.dir/all
 
 # Include target in all.
@@ -613,7 +613,7 @@ clean: 2024041604/CMakeFiles/04_practice_one.dir/clean
 2024041605/CMakeFiles/main.dir/all: CMakeFiles/glad.dir/all
 	$(MAKE) -f 2024041605/CMakeFiles/main.dir/build.make 2024041605/CMakeFiles/main.dir/depend
 	$(MAKE) -f 2024041605/CMakeFiles/main.dir/build.make 2024041605/CMakeFiles/main.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build/CMakeFiles --progress-num=41,42 "Built target main"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build/CMakeFiles --progress-num=43,44 "Built target main"
 .PHONY : 2024041605/CMakeFiles/main.dir/all
 
 # Include target in all.
@@ -926,11 +926,13 @@ clean: 2024041606/CMakeFiles/06_texture_wrap.dir/clean
 # Directory level rules for directory 2024041807
 
 # Convenience name for "all" pass in the directory.
+2024041807/all: 2024041807/CMakeFiles/07_glm_study.dir/all
 2024041807/all: 2024041807/CMakeFiles/07_transformations.dir/all
 
 .PHONY : 2024041807/all
 
 # Convenience name for "clean" pass in the directory.
+2024041807/clean: 2024041807/CMakeFiles/07_glm_study.dir/clean
 2024041807/clean: 2024041807/CMakeFiles/07_transformations.dir/clean
 
 .PHONY : 2024041807/clean
@@ -941,13 +943,50 @@ clean: 2024041606/CMakeFiles/06_texture_wrap.dir/clean
 .PHONY : 2024041807/preinstall
 
 #=============================================================================
+# Target rules for target 2024041807/CMakeFiles/07_glm_study.dir
+
+# All Build rule for target.
+2024041807/CMakeFiles/07_glm_study.dir/all: CMakeFiles/glad.dir/all
+	$(MAKE) -f 2024041807/CMakeFiles/07_glm_study.dir/build.make 2024041807/CMakeFiles/07_glm_study.dir/depend
+	$(MAKE) -f 2024041807/CMakeFiles/07_glm_study.dir/build.make 2024041807/CMakeFiles/07_glm_study.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build/CMakeFiles --progress-num=37,38 "Built target 07_glm_study"
+.PHONY : 2024041807/CMakeFiles/07_glm_study.dir/all
+
+# Include target in all.
+all: 2024041807/CMakeFiles/07_glm_study.dir/all
+
+.PHONY : all
+
+# Build rule for subdir invocation for target.
+2024041807/CMakeFiles/07_glm_study.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build/CMakeFiles 4
+	$(MAKE) -f CMakeFiles/Makefile2 2024041807/CMakeFiles/07_glm_study.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build/CMakeFiles 0
+.PHONY : 2024041807/CMakeFiles/07_glm_study.dir/rule
+
+# Convenience name for target.
+07_glm_study: 2024041807/CMakeFiles/07_glm_study.dir/rule
+
+.PHONY : 07_glm_study
+
+# clean rule for target.
+2024041807/CMakeFiles/07_glm_study.dir/clean:
+	$(MAKE) -f 2024041807/CMakeFiles/07_glm_study.dir/build.make 2024041807/CMakeFiles/07_glm_study.dir/clean
+.PHONY : 2024041807/CMakeFiles/07_glm_study.dir/clean
+
+# clean rule for target.
+clean: 2024041807/CMakeFiles/07_glm_study.dir/clean
+
+.PHONY : clean
+
+#=============================================================================
 # Target rules for target 2024041807/CMakeFiles/07_transformations.dir
 
 # All Build rule for target.
 2024041807/CMakeFiles/07_transformations.dir/all: CMakeFiles/glad.dir/all
 	$(MAKE) -f 2024041807/CMakeFiles/07_transformations.dir/build.make 2024041807/CMakeFiles/07_transformations.dir/depend
 	$(MAKE) -f 2024041807/CMakeFiles/07_transformations.dir/build.make 2024041807/CMakeFiles/07_transformations.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build/CMakeFiles --progress-num=37,38 "Built target 07_transformations"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build/CMakeFiles --progress-num=39,40 "Built target 07_transformations"
 .PHONY : 2024041807/CMakeFiles/07_transformations.dir/all
 
 # Include target in all.

@@ -371,6 +371,19 @@ main/fast:
 .PHONY : 06_texture_wrap/fast
 
 #=============================================================================
+# Target rules for targets named 07_glm_study
+
+# Build rule for target.
+07_glm_study: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 07_glm_study
+.PHONY : 07_glm_study
+
+# fast build rule for target.
+07_glm_study/fast:
+	$(MAKE) -f 2024041807/CMakeFiles/07_glm_study.dir/build.make 2024041807/CMakeFiles/07_glm_study.dir/build
+.PHONY : 07_glm_study/fast
+
+#=============================================================================
 # Target rules for targets named 07_transformations
 
 # Build rule for target.
@@ -438,6 +451,7 @@ help:
 	@echo "... 05_textures"
 	@echo "... 06_texture_filter"
 	@echo "... 06_texture_wrap"
+	@echo "... 07_glm_study"
 	@echo "... 07_transformations"
 	@echo "... glad/glad.o"
 	@echo "... glad/glad.i"
