@@ -101,6 +101,16 @@
 },
 {
   "directory": "/home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build/2024041807",
+  "command": "/usr/bin/c++   -I/home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL  -g   -o CMakeFiles/07_practice_two.dir/07_practice_two.cpp.o -c /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/2024041807/07_practice_two.cpp",
+  "file": "/home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/2024041807/07_practice_two.cpp"
+},
+{
+  "directory": "/home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build/2024041807",
+  "command": "/usr/bin/c++   -I/home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL  -g   -o CMakeFiles/07_practice_one.dir/07_practice_one.cpp.o -c /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/2024041807/07_practice_one.cpp",
+  "file": "/home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/2024041807/07_practice_one.cpp"
+},
+{
+  "directory": "/home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build/2024041807",
   "command": "/usr/bin/c++   -I/home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL  -g   -o CMakeFiles/07_glm_study.dir/07_glm_study.cpp.o -c /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/2024041807/07_glm_study.cpp",
   "file": "/home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/2024041807/07_glm_study.cpp"
 },

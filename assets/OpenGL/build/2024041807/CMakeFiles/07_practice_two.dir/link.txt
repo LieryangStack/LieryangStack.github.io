@@ -1,0 +1,1 @@
+/usr/bin/c++  -g   CMakeFiles/07_practice_two.dir/07_practice_two.cpp.o  -o 07_practice_two  -L/usr/lib/gcc/x86_64-linux-gnu/12 -lglfw ../libglad.a ../../lib/libglm.a 

@@ -371,6 +371,32 @@ main/fast:
 .PHONY : 06_texture_wrap/fast
 
 #=============================================================================
+# Target rules for targets named 07_practice_two
+
+# Build rule for target.
+07_practice_two: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 07_practice_two
+.PHONY : 07_practice_two
+
+# fast build rule for target.
+07_practice_two/fast:
+	$(MAKE) -f 2024041807/CMakeFiles/07_practice_two.dir/build.make 2024041807/CMakeFiles/07_practice_two.dir/build
+.PHONY : 07_practice_two/fast
+
+#=============================================================================
+# Target rules for targets named 07_practice_one
+
+# Build rule for target.
+07_practice_one: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 07_practice_one
+.PHONY : 07_practice_one
+
+# fast build rule for target.
+07_practice_one/fast:
+	$(MAKE) -f 2024041807/CMakeFiles/07_practice_one.dir/build.make 2024041807/CMakeFiles/07_practice_one.dir/build
+.PHONY : 07_practice_one/fast
+
+#=============================================================================
 # Target rules for targets named 07_glm_study
 
 # Build rule for target.
@@ -451,6 +477,8 @@ help:
 	@echo "... 05_textures"
 	@echo "... 06_texture_filter"
 	@echo "... 06_texture_wrap"
+	@echo "... 07_practice_two"
+	@echo "... 07_practice_one"
 	@echo "... 07_glm_study"
 	@echo "... 07_transformations"
 	@echo "... glad/glad.o"

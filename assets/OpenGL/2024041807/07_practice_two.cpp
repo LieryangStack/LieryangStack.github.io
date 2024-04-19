@@ -270,9 +270,10 @@ main (int argc, char **argv) {
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
     
 
-    trans = glm::translate(trans, glm::vec3(0.5f, -0.5f, 0.0f));
+    trans = glm::translate(trans, glm::vec3(-0.5f, 0.5f, 0.0f));
+    float scaleAmount = static_cast<float>(sin(glfwGetTime()));
     /* 因为rotate()函数的角度处理是通过 cos和sin，所以 glfwGetTime() 直接赋值就可以*/
-    trans = glm::rotate(trans, (float)glfwGetTime(), glm::vec3(0.0f, 0.0f, 1.0f));
+    trans = glm::scale(trans, glm::vec3(scaleAmount, scaleAmount, scaleAmount));
     
 
     /**

@@ -1,5 +1,7 @@
 /**
  * @brief: 建议您在组合矩阵时，先进行缩放操作，然后是旋转，最后才是位移，否则它们会（消极地）互相影响。
+ * 
+ * trans * vec4 = 位移 * 旋转 * 缩放 * vec4
 */
 
 #define STB_IMAGE_IMPLEMENTATION
@@ -265,15 +267,9 @@ main (int argc, char **argv) {
 
     /* 创建转换矩阵 */
     glm::mat4 trans = glm::mat4(1.0f);
-    glUniformMatrix4fv(glGetUniformLocation(shaderProgram, "transform"), \
-                       1, GL_FALSE, glm::value_ptr(trans));
-    glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
-    
-
-    trans = glm::translate(trans, glm::vec3(0.5f, -0.5f, 0.0f));
     /* 因为rotate()函数的角度处理是通过 cos和sin，所以 glfwGetTime() 直接赋值就可以*/
     trans = glm::rotate(trans, (float)glfwGetTime(), glm::vec3(0.0f, 0.0f, 1.0f));
-    
+    trans = glm::translate(trans, glm::vec3(0.5f, -0.5f, 0.0f));    
 
     /**
      * @param location: 表示uniform的位置值

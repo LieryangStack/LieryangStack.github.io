@@ -111,6 +111,36 @@ depend:
 .PHONY : depend
 
 # Convenience name for target.
+2024041807/CMakeFiles/07_practice_two.dir/rule:
+	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) -f CMakeFiles/Makefile2 2024041807/CMakeFiles/07_practice_two.dir/rule
+.PHONY : 2024041807/CMakeFiles/07_practice_two.dir/rule
+
+# Convenience name for target.
+07_practice_two: 2024041807/CMakeFiles/07_practice_two.dir/rule
+
+.PHONY : 07_practice_two
+
+# fast build rule for target.
+07_practice_two/fast:
+	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) -f 2024041807/CMakeFiles/07_practice_two.dir/build.make 2024041807/CMakeFiles/07_practice_two.dir/build
+.PHONY : 07_practice_two/fast
+
+# Convenience name for target.
+2024041807/CMakeFiles/07_practice_one.dir/rule:
+	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) -f CMakeFiles/Makefile2 2024041807/CMakeFiles/07_practice_one.dir/rule
+.PHONY : 2024041807/CMakeFiles/07_practice_one.dir/rule
+
+# Convenience name for target.
+07_practice_one: 2024041807/CMakeFiles/07_practice_one.dir/rule
+
+.PHONY : 07_practice_one
+
+# fast build rule for target.
+07_practice_one/fast:
+	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) -f 2024041807/CMakeFiles/07_practice_one.dir/build.make 2024041807/CMakeFiles/07_practice_one.dir/build
+.PHONY : 07_practice_one/fast
+
+# Convenience name for target.
 2024041807/CMakeFiles/07_glm_study.dir/rule:
 	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) -f CMakeFiles/Makefile2 2024041807/CMakeFiles/07_glm_study.dir/rule
 .PHONY : 2024041807/CMakeFiles/07_glm_study.dir/rule
@@ -167,6 +197,60 @@ depend:
 	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) -f 2024041807/CMakeFiles/07_glm_study.dir/build.make 2024041807/CMakeFiles/07_glm_study.dir/07_glm_study.cpp.s
 .PHONY : 07_glm_study.cpp.s
 
+07_practice_one.o: 07_practice_one.cpp.o
+
+.PHONY : 07_practice_one.o
+
+# target to build an object file
+07_practice_one.cpp.o:
+	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) -f 2024041807/CMakeFiles/07_practice_one.dir/build.make 2024041807/CMakeFiles/07_practice_one.dir/07_practice_one.cpp.o
+.PHONY : 07_practice_one.cpp.o
+
+07_practice_one.i: 07_practice_one.cpp.i
+
+.PHONY : 07_practice_one.i
+
+# target to preprocess a source file
+07_practice_one.cpp.i:
+	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) -f 2024041807/CMakeFiles/07_practice_one.dir/build.make 2024041807/CMakeFiles/07_practice_one.dir/07_practice_one.cpp.i
+.PHONY : 07_practice_one.cpp.i
+
+07_practice_one.s: 07_practice_one.cpp.s
+
+.PHONY : 07_practice_one.s
+
+# target to generate assembly for a file
+07_practice_one.cpp.s:
+	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) -f 2024041807/CMakeFiles/07_practice_one.dir/build.make 2024041807/CMakeFiles/07_practice_one.dir/07_practice_one.cpp.s
+.PHONY : 07_practice_one.cpp.s
+
+07_practice_two.o: 07_practice_two.cpp.o
+
+.PHONY : 07_practice_two.o
+
+# target to build an object file
+07_practice_two.cpp.o:
+	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) -f 2024041807/CMakeFiles/07_practice_two.dir/build.make 2024041807/CMakeFiles/07_practice_two.dir/07_practice_two.cpp.o
+.PHONY : 07_practice_two.cpp.o
+
+07_practice_two.i: 07_practice_two.cpp.i
+
+.PHONY : 07_practice_two.i
+
+# target to preprocess a source file
+07_practice_two.cpp.i:
+	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) -f 2024041807/CMakeFiles/07_practice_two.dir/build.make 2024041807/CMakeFiles/07_practice_two.dir/07_practice_two.cpp.i
+.PHONY : 07_practice_two.cpp.i
+
+07_practice_two.s: 07_practice_two.cpp.s
+
+.PHONY : 07_practice_two.s
+
+# target to generate assembly for a file
+07_practice_two.cpp.s:
+	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) -f 2024041807/CMakeFiles/07_practice_two.dir/build.make 2024041807/CMakeFiles/07_practice_two.dir/07_practice_two.cpp.s
+.PHONY : 07_practice_two.cpp.s
+
 07_transformations.o: 07_transformations.cpp.o
 
 .PHONY : 07_transformations.o
@@ -202,11 +286,19 @@ help:
 	@echo "... depend"
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
+	@echo "... 07_practice_two"
+	@echo "... 07_practice_one"
 	@echo "... 07_glm_study"
 	@echo "... 07_transformations"
 	@echo "... 07_glm_study.o"
 	@echo "... 07_glm_study.i"
 	@echo "... 07_glm_study.s"
+	@echo "... 07_practice_one.o"
+	@echo "... 07_practice_one.i"
+	@echo "... 07_practice_one.s"
+	@echo "... 07_practice_two.o"
+	@echo "... 07_practice_two.i"
+	@echo "... 07_practice_two.s"
 	@echo "... 07_transformations.o"
 	@echo "... 07_transformations.i"
 	@echo "... 07_transformations.s"
