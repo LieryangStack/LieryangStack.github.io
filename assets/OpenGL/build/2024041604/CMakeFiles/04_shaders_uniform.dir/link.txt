@@ -1,1 +1,1 @@
-/usr/bin/c++     CMakeFiles/04_shaders_uniform.dir/04_shaders_uniform.cpp.o  -o 04_shaders_uniform  -L/usr/lib/gcc/x86_64-linux-gnu/12 -lglfw ../libglad.a ../../lib/libglm.a 
+/usr/bin/c++  -g   CMakeFiles/04_shaders_uniform.dir/04_shaders_uniform.cpp.o  -o 04_shaders_uniform  -L/usr/lib/gcc/x86_64-linux-gnu/12 -lglfw ../libglad.a ../../lib/libglm.a 
