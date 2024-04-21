@@ -37,6 +37,11 @@ if(NOT DEFINED CMAKE_CROSSCOMPILING)
   set(CMAKE_CROSSCOMPILING "FALSE")
 endif()
 
+# Set default install directory permissions.
+if(NOT DEFINED CMAKE_OBJDUMP)
+  set(CMAKE_OBJDUMP "/usr/bin/objdump")
+endif()
+
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
   include("/home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build/2024040801/cmake_install.cmake")
@@ -45,6 +50,7 @@ if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   include("/home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build/2024041605/cmake_install.cmake")
   include("/home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build/2024041606/cmake_install.cmake")
   include("/home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build/2024041807/cmake_install.cmake")
+  include("/home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build/2024041908/cmake_install.cmake")
 
 endif()
 

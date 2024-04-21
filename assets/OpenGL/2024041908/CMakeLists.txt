@@ -1,0 +1,2 @@
+add_executable(08_coordinate_systems 08_coordinate_systems.cpp) 
+add_executable(08_coordinate_systems_3d 08_coordinate_systems_3d.cpp)
