@@ -25,7 +25,7 @@
 					"source" : ".",
 					"targetIndexes" : 
 					[
-						24
+						25
 					]
 				},
 				{
@@ -98,7 +98,7 @@
 						13,
 						14,
 						15,
-						25
+						26
 					]
 				},
 				{
@@ -148,7 +148,8 @@
 					"targetIndexes" : 
 					[
 						22,
-						23
+						23,
+						24
 					]
 				}
 			],
@@ -195,7 +196,8 @@
 						22,
 						23,
 						24,
-						25
+						25,
+						26
 					]
 				}
 			],
@@ -367,6 +369,13 @@
 					"id" : "08_coordinate_systems_3d::@7ab74819a713c827a42f",
 					"jsonFile" : "target-08_coordinate_systems_3d-Debug-5c9c437175f739488c51.json",
 					"name" : "08_coordinate_systems_3d",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 7,
+					"id" : "08_coordinate_systems_3d_multi::@7ab74819a713c827a42f",
+					"jsonFile" : "target-08_coordinate_systems_3d_multi-Debug-58c1f68ddfe6970c5627.json",
+					"name" : "08_coordinate_systems_3d_multi",
 					"projectIndex" : 0
 				},
 				{

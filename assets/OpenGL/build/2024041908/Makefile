@@ -144,6 +144,20 @@ depend:
 	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) $(MAKESILENT) -f 2024041908/CMakeFiles/08_coordinate_systems_3d.dir/build.make 2024041908/CMakeFiles/08_coordinate_systems_3d.dir/build
 .PHONY : 08_coordinate_systems_3d/fast
 
+# Convenience name for target.
+2024041908/CMakeFiles/08_coordinate_systems_3d_multi.dir/rule:
+	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 2024041908/CMakeFiles/08_coordinate_systems_3d_multi.dir/rule
+.PHONY : 2024041908/CMakeFiles/08_coordinate_systems_3d_multi.dir/rule
+
+# Convenience name for target.
+08_coordinate_systems_3d_multi: 2024041908/CMakeFiles/08_coordinate_systems_3d_multi.dir/rule
+.PHONY : 08_coordinate_systems_3d_multi
+
+# fast build rule for target.
+08_coordinate_systems_3d_multi/fast:
+	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) $(MAKESILENT) -f 2024041908/CMakeFiles/08_coordinate_systems_3d_multi.dir/build.make 2024041908/CMakeFiles/08_coordinate_systems_3d_multi.dir/build
+.PHONY : 08_coordinate_systems_3d_multi/fast
+
 08_coordinate_systems.o: 08_coordinate_systems.cpp.o
 .PHONY : 08_coordinate_systems.o
 
@@ -192,6 +206,30 @@ depend:
 	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) $(MAKESILENT) -f 2024041908/CMakeFiles/08_coordinate_systems_3d.dir/build.make 2024041908/CMakeFiles/08_coordinate_systems_3d.dir/08_coordinate_systems_3d.cpp.s
 .PHONY : 08_coordinate_systems_3d.cpp.s
 
+08_coordinate_systems_3d_multi.o: 08_coordinate_systems_3d_multi.cpp.o
+.PHONY : 08_coordinate_systems_3d_multi.o
+
+# target to build an object file
+08_coordinate_systems_3d_multi.cpp.o:
+	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) $(MAKESILENT) -f 2024041908/CMakeFiles/08_coordinate_systems_3d_multi.dir/build.make 2024041908/CMakeFiles/08_coordinate_systems_3d_multi.dir/08_coordinate_systems_3d_multi.cpp.o
+.PHONY : 08_coordinate_systems_3d_multi.cpp.o
+
+08_coordinate_systems_3d_multi.i: 08_coordinate_systems_3d_multi.cpp.i
+.PHONY : 08_coordinate_systems_3d_multi.i
+
+# target to preprocess a source file
+08_coordinate_systems_3d_multi.cpp.i:
+	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) $(MAKESILENT) -f 2024041908/CMakeFiles/08_coordinate_systems_3d_multi.dir/build.make 2024041908/CMakeFiles/08_coordinate_systems_3d_multi.dir/08_coordinate_systems_3d_multi.cpp.i
+.PHONY : 08_coordinate_systems_3d_multi.cpp.i
+
+08_coordinate_systems_3d_multi.s: 08_coordinate_systems_3d_multi.cpp.s
+.PHONY : 08_coordinate_systems_3d_multi.s
+
+# target to generate assembly for a file
+08_coordinate_systems_3d_multi.cpp.s:
+	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) $(MAKESILENT) -f 2024041908/CMakeFiles/08_coordinate_systems_3d_multi.dir/build.make 2024041908/CMakeFiles/08_coordinate_systems_3d_multi.dir/08_coordinate_systems_3d_multi.cpp.s
+.PHONY : 08_coordinate_systems_3d_multi.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -202,12 +240,16 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... 08_coordinate_systems"
 	@echo "... 08_coordinate_systems_3d"
+	@echo "... 08_coordinate_systems_3d_multi"
 	@echo "... 08_coordinate_systems.o"
 	@echo "... 08_coordinate_systems.i"
 	@echo "... 08_coordinate_systems.s"
 	@echo "... 08_coordinate_systems_3d.o"
 	@echo "... 08_coordinate_systems_3d.i"
 	@echo "... 08_coordinate_systems_3d.s"
+	@echo "... 08_coordinate_systems_3d_multi.o"
+	@echo "... 08_coordinate_systems_3d_multi.i"
+	@echo "... 08_coordinate_systems_3d_multi.s"
 .PHONY : help
 
 

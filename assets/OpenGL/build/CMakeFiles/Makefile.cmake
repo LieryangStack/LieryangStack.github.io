@@ -86,4 +86,5 @@ set(CMAKE_DEPEND_INFO_FILES
   "2024041807/CMakeFiles/07_practice_two.dir/DependInfo.cmake"
   "2024041908/CMakeFiles/08_coordinate_systems.dir/DependInfo.cmake"
   "2024041908/CMakeFiles/08_coordinate_systems_3d.dir/DependInfo.cmake"
+  "2024041908/CMakeFiles/08_coordinate_systems_3d_multi.dir/DependInfo.cmake"
   )

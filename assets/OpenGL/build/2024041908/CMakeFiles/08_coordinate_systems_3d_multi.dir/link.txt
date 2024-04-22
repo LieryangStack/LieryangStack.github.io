@@ -1,0 +1,1 @@
+/usr/bin/c++ -g CMakeFiles/08_coordinate_systems_3d_multi.dir/08_coordinate_systems_3d_multi.cpp.o -o 08_coordinate_systems_3d_multi   -L/usr/lib/gcc/x86_64-linux-gnu/12  -lglfw ../libglad.a ../../lib/libglm.a 

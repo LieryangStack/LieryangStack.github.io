@@ -454,6 +454,19 @@ main/fast:
 	$(MAKE) $(MAKESILENT) -f 2024041908/CMakeFiles/08_coordinate_systems_3d.dir/build.make 2024041908/CMakeFiles/08_coordinate_systems_3d.dir/build
 .PHONY : 08_coordinate_systems_3d/fast
 
+#=============================================================================
+# Target rules for targets named 08_coordinate_systems_3d_multi
+
+# Build rule for target.
+08_coordinate_systems_3d_multi: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 08_coordinate_systems_3d_multi
+.PHONY : 08_coordinate_systems_3d_multi
+
+# fast build rule for target.
+08_coordinate_systems_3d_multi/fast:
+	$(MAKE) $(MAKESILENT) -f 2024041908/CMakeFiles/08_coordinate_systems_3d_multi.dir/build.make 2024041908/CMakeFiles/08_coordinate_systems_3d_multi.dir/build
+.PHONY : 08_coordinate_systems_3d_multi/fast
+
 glad/glad.o: glad/glad.c.o
 .PHONY : glad/glad.o
 
@@ -510,6 +523,7 @@ help:
 	@echo "... 07_transformations"
 	@echo "... 08_coordinate_systems"
 	@echo "... 08_coordinate_systems_3d"
+	@echo "... 08_coordinate_systems_3d_multi"
 	@echo "... glad"
 	@echo "... main"
 	@echo "... glad/glad.o"
