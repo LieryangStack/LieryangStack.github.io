@@ -12,7 +12,16 @@
     "fcntl.h": "c",
     "string.h": "c",
     "signal.h": "c",
-    "termios.h": "c"
+    "termios.h": "c",
+    "termio.h": "c",
+    "features.h": "c",
+    "array": "c",
+    "*.tcc": "c",
+    "memory": "c",
+    "istream": "c",
+    "functional": "c",
+    "tuple": "c",
+    "utility": "c"
   },
   "C_Cpp_Runner.msvcBatchPath": "",
   "C_Cpp_Runner.cCompilerPath": "gcc",

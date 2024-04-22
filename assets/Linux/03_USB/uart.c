@@ -193,7 +193,7 @@ main (int argc, char *argv[]) {
    *            如果该标志未设置，程序将一直等待设备就绪，可能会阻塞进程。
    * O_NOCTTY:  是用来打开一个串口设备时，避免该串口设备成为进程的控制终端的一个选项
   */
-  fd = open("/dev/ttyUSB0", O_RDWR | O_NDELAY | O_NOCTTY | O_NONBLOCK);
+  fd = open("/dev/ttyUSB0", O_RDWR | O_NOCTTY );
 
   if (fd == -1) {
     printf("Could not open serial port on /dev/ttyUSB0!\n");
@@ -215,8 +215,8 @@ main (int argc, char *argv[]) {
   termAttr.c_lflag = 0;                               // Turn off line procesinng
   termAttr.c_cflag = 0;                               // Turn off character processing
   termAttr.c_cflag |= (CS8|CREAD|CLOCAL);             // Read 8 bit
-  termAttr.c_cc[VMIN] = 0;                            // No minimal chars
-  termAttr.c_cc[VTIME] = 1;                           // Wait 0.1 s for input
+  termAttr.c_cc[VMIN] = 9;                            // No minimal chars
+  termAttr.c_cc[VTIME] = 0;                           // Wait 0.1 s for input
   tcsetattr(fd,TCSANOW,&termAttr);   // Save settings
 
   /* Flush anything already in the serial buffer */
@@ -227,7 +227,7 @@ main (int argc, char *argv[]) {
   //                                vpf_device_read_thread_func, NULL);
 
   async_io_init();
-
+  
 
   /* 读取风速 */
   GSource *source = g_timeout_source_new_seconds(1);
