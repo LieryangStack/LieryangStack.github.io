@@ -33,6 +33,7 @@ add_subdirectory(2024041605)
 add_subdirectory(2024041606)
 add_subdirectory(2024041807)
 add_subdirectory(2024041908)
+add_subdirectory(2024042309)
 
 # target_link_libraries(01_win ${PKG_GLFW_LIBRARIES} glad)
 

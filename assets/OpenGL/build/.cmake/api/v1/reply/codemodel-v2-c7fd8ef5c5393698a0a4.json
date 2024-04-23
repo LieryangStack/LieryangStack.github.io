@@ -14,7 +14,8 @@
 						4,
 						5,
 						6,
-						7
+						7,
+						8
 					],
 					"jsonFile" : "directory-.-Debug-f5ebdc15457944623624.json",
 					"minimumCMakeVersion" : 
@@ -25,7 +26,7 @@
 					"source" : ".",
 					"targetIndexes" : 
 					[
-						25
+						26
 					]
 				},
 				{
@@ -98,7 +99,7 @@
 						13,
 						14,
 						15,
-						26
+						27
 					]
 				},
 				{
@@ -151,6 +152,21 @@
 						23,
 						24
 					]
+				},
+				{
+					"build" : "2024042309",
+					"jsonFile" : "directory-2024042309-Debug-d5baa7d1b9ce12d0940e.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.10"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "2024042309",
+					"targetIndexes" : 
+					[
+						25
+					]
 				}
 			],
 			"name" : "Debug",
@@ -166,7 +182,8 @@
 						4,
 						5,
 						6,
-						7
+						7,
+						8
 					],
 					"name" : "OpenGLStudy",
 					"targetIndexes" : 
@@ -197,7 +214,8 @@
 						23,
 						24,
 						25,
-						26
+						26,
+						27
 					]
 				}
 			],
@@ -376,6 +394,13 @@
 					"id" : "08_coordinate_systems_3d_multi::@7ab74819a713c827a42f",
 					"jsonFile" : "target-08_coordinate_systems_3d_multi-Debug-58c1f68ddfe6970c5627.json",
 					"name" : "08_coordinate_systems_3d_multi",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 8,
+					"id" : "09_camera_circle::@f1968c84966437b7e63d",
+					"jsonFile" : "target-09_camera_circle-Debug-90de9eb176bd711a2e2b.json",
+					"name" : "09_camera_circle",
 					"projectIndex" : 0
 				},
 				{

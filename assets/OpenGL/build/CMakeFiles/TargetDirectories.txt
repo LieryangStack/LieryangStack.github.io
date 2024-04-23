@@ -41,3 +41,6 @@
 /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build/2024041908/CMakeFiles/08_coordinate_systems_3d_multi.dir
 /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build/2024041908/CMakeFiles/edit_cache.dir
 /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build/2024041908/CMakeFiles/rebuild_cache.dir
+/home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build/2024042309/CMakeFiles/09_camera_circle.dir
+/home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build/2024042309/CMakeFiles/edit_cache.dir
+/home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build/2024042309/CMakeFiles/rebuild_cache.dir

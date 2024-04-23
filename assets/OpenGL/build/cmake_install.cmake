@@ -51,6 +51,7 @@ if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   include("/home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build/2024041606/cmake_install.cmake")
   include("/home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build/2024041807/cmake_install.cmake")
   include("/home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build/2024041908/cmake_install.cmake")
+  include("/home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build/2024042309/cmake_install.cmake")
 
 endif()
 

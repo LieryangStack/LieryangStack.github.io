@@ -14,6 +14,7 @@ set(CMAKE_MAKEFILE_DEPENDS
   "../2024041606/CMakeLists.txt"
   "../2024041807/CMakeLists.txt"
   "../2024041908/CMakeLists.txt"
+  "../2024042309/CMakeLists.txt"
   "../CMakeLists.txt"
   "CMakeFiles/3.22.1/CMakeCCompiler.cmake"
   "CMakeFiles/3.22.1/CMakeCXXCompiler.cmake"
@@ -56,6 +57,7 @@ set(CMAKE_MAKEFILE_PRODUCTS
   "2024041606/CMakeFiles/CMakeDirectoryInformation.cmake"
   "2024041807/CMakeFiles/CMakeDirectoryInformation.cmake"
   "2024041908/CMakeFiles/CMakeDirectoryInformation.cmake"
+  "2024042309/CMakeFiles/CMakeDirectoryInformation.cmake"
   )
 
 # Dependency information for all targets:
@@ -87,4 +89,5 @@ set(CMAKE_DEPEND_INFO_FILES
   "2024041908/CMakeFiles/08_coordinate_systems.dir/DependInfo.cmake"
   "2024041908/CMakeFiles/08_coordinate_systems_3d.dir/DependInfo.cmake"
   "2024041908/CMakeFiles/08_coordinate_systems_3d_multi.dir/DependInfo.cmake"
+  "2024042309/CMakeFiles/09_camera_circle.dir/DependInfo.cmake"
   )

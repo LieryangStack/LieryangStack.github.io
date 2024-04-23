@@ -467,6 +467,19 @@ main/fast:
 	$(MAKE) $(MAKESILENT) -f 2024041908/CMakeFiles/08_coordinate_systems_3d_multi.dir/build.make 2024041908/CMakeFiles/08_coordinate_systems_3d_multi.dir/build
 .PHONY : 08_coordinate_systems_3d_multi/fast
 
+#=============================================================================
+# Target rules for targets named 09_camera_circle
+
+# Build rule for target.
+09_camera_circle: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 09_camera_circle
+.PHONY : 09_camera_circle
+
+# fast build rule for target.
+09_camera_circle/fast:
+	$(MAKE) $(MAKESILENT) -f 2024042309/CMakeFiles/09_camera_circle.dir/build.make 2024042309/CMakeFiles/09_camera_circle.dir/build
+.PHONY : 09_camera_circle/fast
+
 glad/glad.o: glad/glad.c.o
 .PHONY : glad/glad.o
 
@@ -524,6 +537,7 @@ help:
 	@echo "... 08_coordinate_systems"
 	@echo "... 08_coordinate_systems_3d"
 	@echo "... 08_coordinate_systems_3d_multi"
+	@echo "... 09_camera_circle"
 	@echo "... glad"
 	@echo "... main"
 	@echo "... glad/glad.o"

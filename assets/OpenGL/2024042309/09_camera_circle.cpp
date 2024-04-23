@@ -18,6 +18,11 @@ void processInput(GLFWwindow *window);
 const unsigned int SCR_WIDTH = 800;
 const unsigned int SCR_HEIGHT = 600;
 
+/* 摄像机所需的变量 */
+glm::vec3 cameraPos   = glm::vec3(0.0f, 0.0f,  3.0f);
+glm::vec3 cameraFront = glm::vec3(0.0f, 0.0f, -1.0f);
+glm::vec3 cameraUp    = glm::vec3(0.0f, 1.0f,  0.0f);
+
 
 const char *vertexShaderSource = "#version 330 core\n"
     "layout (location = 0) in vec3 aPos;\n"
@@ -46,8 +51,17 @@ const char *fragmentShaderSource = "#version 330 core\n"
 
 void 
 processInput(GLFWwindow *window) {
+  float cameraSpeed = 0.05f;
   if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
       glfwSetWindowShouldClose(window, true);
+  if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
+        cameraPos += cameraSpeed * cameraFront;
+  if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
+      cameraPos -= cameraSpeed * cameraFront;
+  if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
+      cameraPos -= glm::normalize(glm::cross(cameraFront, cameraUp)) * cameraSpeed;
+  if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
+      cameraPos += glm::normalize(glm::cross(cameraFront, cameraUp)) * cameraSpeed;
 }
 
 
@@ -303,22 +317,37 @@ main (int argc, char **argv) {
     glBindVertexArray(VAO); 
 
     /* 创建变化矩阵 */
-    glm::mat4 view          = glm::mat4(1.0f);
     glm::mat4 projection    = glm::mat4(1.0f);
     // model = glm::rotate(model, (float)glfwGetTime(), glm::vec3(1.0f, 1.0f, 1.0f));
     // model = glm::rotate(model, glm::radians(80.0f), glm::vec3(1.0f, 0.0f, 0.0f));
-    view  = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));
+    
     projection = glm::perspective(glm::radians(45.0f), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
 
-    glUniformMatrix4fv(glGetUniformLocation(shaderProgram, "view"), \
-                       1, GL_FALSE, glm::value_ptr(view));
     glUniformMatrix4fv(glGetUniformLocation(shaderProgram, "projection"), \
                        1, GL_FALSE, glm::value_ptr(projection));
 
     for (unsigned int i = 0; i < 10; i++) {
-      /* 创建变化矩阵 */
+
+      glm::mat4 view          = glm::mat4(1.0f);
       glm::mat4 model         = glm::mat4(1.0f);
-      
+
+      /*  (camX)^2 + (camZ)^2 = (radius)^2 */
+      float radius = 10.0f;
+      float camX = sin(glfwGetTime()) * radius;
+      float camZ = cos(glfwGetTime()) * radius;
+
+      /* 世界 -> 观察 
+       *
+       * 第一个参数：摄像机的位置
+       * 第二个参数：目标位置（摄像机注视点的位置）
+       * 第三个参数：上向量（我们计算右向量使用的那个上向量）
+       */
+      view = glm::lookAt(cameraPos, cameraPos + cameraFront, cameraUp);
+      view = glm::lookAt(glm::vec3(0.0, 0.0, 15.0), glm::vec3(0.0, 0.0, 0.0), glm::vec3(0.0, 1.0, 0.0)); 
+      glm::vec3 test = cameraPos + cameraFront;
+      printf ("cameraPos = (%0.2f, %0.2f, %0.2f)\n", cameraPos.x, cameraPos.y, cameraPos.z);
+      printf ("test = (%0.2f, %0.2f, %0.2f)\n", test.x, test.y, test.z);
+      /* 局部 -> 世界 */
       model = glm::translate(model, cubePositions[i]);
       // model = glm::perspective(glm::radians(45.0f), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
       float angle = (float)glfwGetTime() + (20.0f * i);
@@ -327,7 +356,8 @@ main (int argc, char **argv) {
 
       glUniformMatrix4fv(glGetUniformLocation(shaderProgram, "model"), \
                         1, GL_FALSE, glm::value_ptr(model));
-
+      glUniformMatrix4fv(glGetUniformLocation(shaderProgram, "view"), \
+                       1, GL_FALSE, glm::value_ptr(view));
 
       glDrawArrays(GL_TRIANGLES, 0, 36);
     }

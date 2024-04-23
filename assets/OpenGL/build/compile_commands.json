@@ -133,5 +133,10 @@
   "directory": "/home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build/2024041908",
   "command": "/usr/bin/c++  -I/home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL -g -o CMakeFiles/08_coordinate_systems_3d_multi.dir/08_coordinate_systems_3d_multi.cpp.o -c /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/2024041908/08_coordinate_systems_3d_multi.cpp",
   "file": "/home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/2024041908/08_coordinate_systems_3d_multi.cpp"
+},
+{
+  "directory": "/home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build/2024042309",
+  "command": "/usr/bin/c++  -I/home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL -g -o CMakeFiles/09_camera_circle.dir/09_camera_circle.cpp.o -c /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/2024042309/09_camera_circle.cpp",
+  "file": "/home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/2024042309/09_camera_circle.cpp"
 }
 ]
