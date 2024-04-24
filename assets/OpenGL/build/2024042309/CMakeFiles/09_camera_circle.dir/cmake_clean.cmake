@@ -1,8 +1,7 @@
 file(REMOVE_RECURSE
-  "09_camera_circle"
-  "09_camera_circle.pdb"
   "CMakeFiles/09_camera_circle.dir/09_camera_circle.cpp.o"
-  "CMakeFiles/09_camera_circle.dir/09_camera_circle.cpp.o.d"
+  "09_camera_circle.pdb"
+  "09_camera_circle"
 )
 
 # Per-language clean rules from dependency scanning.

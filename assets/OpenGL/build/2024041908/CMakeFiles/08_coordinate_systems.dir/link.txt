@@ -1,1 +1,1 @@
-/usr/bin/c++ -g CMakeFiles/08_coordinate_systems.dir/08_coordinate_systems.cpp.o -o 08_coordinate_systems   -L/usr/lib/gcc/x86_64-linux-gnu/12  -lglfw ../libglad.a ../../lib/libglm.a 
+/usr/bin/c++  -g   CMakeFiles/08_coordinate_systems.dir/08_coordinate_systems.cpp.o  -o 08_coordinate_systems  -L/usr/lib/gcc/x86_64-linux-gnu/12 -lglfw ../libglad.a ../../lib/libglm.a 

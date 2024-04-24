@@ -1,1 +1,1 @@
-/usr/bin/c++ -g CMakeFiles/04_practice_two.dir/04_practice_two.cpp.o -o 04_practice_two   -L/usr/lib/gcc/x86_64-linux-gnu/12  -lglfw ../libglad.a ../../lib/libglm.a 
+/usr/bin/c++  -g   CMakeFiles/04_practice_two.dir/04_practice_two.cpp.o  -o 04_practice_two  -L/usr/lib/gcc/x86_64-linux-gnu/12 -lglfw ../libglad.a ../../lib/libglm.a 
