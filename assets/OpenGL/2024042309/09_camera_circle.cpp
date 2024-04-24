@@ -340,10 +340,10 @@ main (int argc, char **argv) {
        *
        * 第一个参数：摄像机的位置
        * 第二个参数：目标位置（摄像机注视点的位置）
-       * 第三个参数：上向量（我们计算右向量使用的那个上向量）
+       * 第三个参数：上向量（我们计算右向量，右向量就是x轴的正方向，使用的那个上向量）
        */
       view = glm::lookAt(cameraPos, cameraPos + cameraFront, cameraUp);
-      view = glm::lookAt(glm::vec3(0.0, 0.0, 15.0), glm::vec3(0.0, 0.0, 0.0), glm::vec3(0.0, 1.0, 0.0)); 
+      // view = glm::lookAt(glm::vec3(0.0, 0.0, 15.0), glm::vec3(0.0, 0.0, 0.0), glm::vec3(0.0, 1.0, 0.0)); 
       glm::vec3 test = cameraPos + cameraFront;
       printf ("cameraPos = (%0.2f, %0.2f, %0.2f)\n", cameraPos.x, cameraPos.y, cameraPos.z);
       printf ("test = (%0.2f, %0.2f, %0.2f)\n", test.x, test.y, test.z);
