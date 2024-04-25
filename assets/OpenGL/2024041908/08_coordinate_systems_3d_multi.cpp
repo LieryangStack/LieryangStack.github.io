@@ -182,7 +182,7 @@ main (int argc, char **argv) {
 
   glm::vec3 cubePositions[] = {
     glm::vec3( 0.0f,  0.0f,  0.0f), 
-    glm::vec3( 2.0f,  5.0f, -15.0f), 
+    glm::vec3( 2.0f,  0.5f,  0.0f), 
     glm::vec3(-1.5f, -2.2f, -2.5f),  
     glm::vec3(-3.8f, -2.0f, -12.3f),  
     glm::vec3( 2.4f, -0.4f, -3.5f),  
@@ -307,7 +307,7 @@ main (int argc, char **argv) {
     glm::mat4 projection    = glm::mat4(1.0f);
     // model = glm::rotate(model, (float)glfwGetTime(), glm::vec3(1.0f, 1.0f, 1.0f));
     // model = glm::rotate(model, glm::radians(80.0f), glm::vec3(1.0f, 0.0f, 0.0f));
-    view  = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));
+    view  = glm::translate(view, glm::vec3(0.0f, 0.0f, -1.5f));
     projection = glm::perspective(glm::radians(45.0f), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
 
     glUniformMatrix4fv(glGetUniformLocation(shaderProgram, "view"), \
@@ -315,14 +315,13 @@ main (int argc, char **argv) {
     glUniformMatrix4fv(glGetUniformLocation(shaderProgram, "projection"), \
                        1, GL_FALSE, glm::value_ptr(projection));
 
-    for (unsigned int i = 0; i < 10; i++) {
+    for (unsigned int i = 0; i < 2; i++) {
       /* 创建变化矩阵 */
       glm::mat4 model         = glm::mat4(1.0f);
       
       model = glm::translate(model, cubePositions[i]);
-      // model = glm::perspective(glm::radians(45.0f), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
-      float angle = (float)glfwGetTime() + (20.0f * i);
-      model = glm::rotate(model, angle, glm::vec3(1.0f, 1.0f, 1.0f));
+      // float angle = (float)glfwGetTime() + (20.0f * i);
+      // model = glm::rotate(model, angle, glm::vec3(1.0f, 1.0f, 1.0f));
       
 
       glUniformMatrix4fv(glGetUniformLocation(shaderProgram, "model"), \
