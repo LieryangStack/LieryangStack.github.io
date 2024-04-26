@@ -1,1 +1,1 @@
-/usr/bin/c++  -g   CMakeFiles/07_glm_study.dir/07_glm_study.cpp.o  -o 07_glm_study  -L/usr/lib/gcc/x86_64-linux-gnu/12 -lglfw ../libglad.a ../../lib/libglm.a 
+/usr/bin/c++ -g CMakeFiles/07_glm_study.dir/07_glm_study.cpp.o -o 07_glm_study   -L/usr/lib/gcc/x86_64-linux-gnu/12  -lglfw ../libglad.a ../../lib/libglm.a 

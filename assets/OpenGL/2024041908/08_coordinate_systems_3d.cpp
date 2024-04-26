@@ -293,10 +293,12 @@ main (int argc, char **argv) {
     glm::mat4 view          = glm::mat4(1.0f);
     glm::mat4 projection    = glm::mat4(1.0f);
     // model = glm::rotate(model, (float)glfwGetTime(), glm::vec3(1.0f, 1.0f, 1.0f));
-    model = glm::rotate(model, glm::radians(45.0f), glm::vec3(1.0f, 1.0f, 1.0f));
-    // view  = glm::translate(view, glm::vec3(0.0f, 0.0f, -1.50f));
-    // projection = glm::perspective(glm::radians(45.0f), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
-    projection = glm::ortho(-5.0f, 5.0f, -5.0f, 5.0f, -5.0f, 5.0f);
+    model = glm::rotate(model, glm::radians(35.0f), glm::vec3(1.0f, 1.0f, 1.0f));
+    view  = glm::translate(view, glm::vec3(0.0f, 0.0f, 2.50f));
+    projection = glm::perspective(glm::radians(45.0f), (float)SCR_WIDTH / (float)SCR_HEIGHT, -0.2f, -100.0f);
+
+    /* 缩小5倍 */
+    // projection = glm::ortho(-5.0f, 5.0f, -5.0f, 5.0f, -5.0f, 5.0f);
     //原始坐标系，三轴都是(-1, 1);
 
     /**

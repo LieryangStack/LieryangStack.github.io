@@ -1,7 +1,8 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/04_shaders_class.dir/04_shaders_class.cpp.o"
-  "04_shaders_class.pdb"
   "04_shaders_class"
+  "04_shaders_class.pdb"
+  "CMakeFiles/04_shaders_class.dir/04_shaders_class.cpp.o"
+  "CMakeFiles/04_shaders_class.dir/04_shaders_class.cpp.o.d"
 )
 
 # Per-language clean rules from dependency scanning.

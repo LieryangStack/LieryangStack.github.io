@@ -1,7 +1,8 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/08_coordinate_systems.dir/08_coordinate_systems.cpp.o"
-  "08_coordinate_systems.pdb"
   "08_coordinate_systems"
+  "08_coordinate_systems.pdb"
+  "CMakeFiles/08_coordinate_systems.dir/08_coordinate_systems.cpp.o"
+  "CMakeFiles/08_coordinate_systems.dir/08_coordinate_systems.cpp.o.d"
 )
 
 # Per-language clean rules from dependency scanning.
