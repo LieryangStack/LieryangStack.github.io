@@ -1,1 +1,1 @@
-/usr/bin/c++ -g CMakeFiles/07_transformations.dir/07_transformations.cpp.o -o 07_transformations   -L/usr/lib/gcc/x86_64-linux-gnu/12  -lglfw ../libglad.a ../../lib/libglm.a 
+/usr/bin/c++  -g   CMakeFiles/07_transformations.dir/07_transformations.cpp.o  -o 07_transformations  -L/usr/lib/gcc/x86_64-linux-gnu/12 -lglfw ../libglad.a ../../lib/libglm.a 

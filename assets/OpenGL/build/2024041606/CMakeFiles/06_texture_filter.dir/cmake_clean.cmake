@@ -1,8 +1,7 @@
 file(REMOVE_RECURSE
-  "06_texture_filter"
-  "06_texture_filter.pdb"
   "CMakeFiles/06_texture_filter.dir/06_texture_filter.cpp.o"
-  "CMakeFiles/06_texture_filter.dir/06_texture_filter.cpp.o.d"
+  "06_texture_filter.pdb"
+  "06_texture_filter"
 )
 
 # Per-language clean rules from dependency scanning.

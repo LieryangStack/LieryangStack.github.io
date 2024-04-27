@@ -1,1 +1,1 @@
-/usr/bin/c++ -g CMakeFiles/09_camera_circle.dir/09_camera_circle.cpp.o -o 09_camera_circle   -L/usr/lib/gcc/x86_64-linux-gnu/12  -lglfw ../libglad.a ../../lib/libglm.a 
+/usr/bin/c++  -g   CMakeFiles/09_camera_circle.dir/09_camera_circle.cpp.o  -o 09_camera_circle  -L/usr/lib/gcc/x86_64-linux-gnu/12 -lglfw ../libglad.a ../../lib/libglm.a 

@@ -1,1 +1,1 @@
-/usr/bin/c++ -g CMakeFiles/06_texture_wrap.dir/06_texture_wrap.cpp.o -o 06_texture_wrap   -L/usr/lib/gcc/x86_64-linux-gnu/12  -lglfw ../libglad.a ../../lib/libglm.a 
+/usr/bin/c++  -g   CMakeFiles/06_texture_wrap.dir/06_texture_wrap.cpp.o  -o 06_texture_wrap  -L/usr/lib/gcc/x86_64-linux-gnu/12 -lglfw ../libglad.a ../../lib/libglm.a 

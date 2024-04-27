@@ -1,8 +1,7 @@
 file(REMOVE_RECURSE
-  "07_glm_study"
-  "07_glm_study.pdb"
   "CMakeFiles/07_glm_study.dir/07_glm_study.cpp.o"
-  "CMakeFiles/07_glm_study.dir/07_glm_study.cpp.o.d"
+  "07_glm_study.pdb"
+  "07_glm_study"
 )
 
 # Per-language clean rules from dependency scanning.

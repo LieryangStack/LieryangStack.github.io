@@ -1,8 +1,7 @@
 file(REMOVE_RECURSE
-  "05_textures_combined"
-  "05_textures_combined.pdb"
   "CMakeFiles/05_textures_combined.dir/05_textures_combined.cpp.o"
-  "CMakeFiles/05_textures_combined.dir/05_textures_combined.cpp.o.d"
+  "05_textures_combined.pdb"
+  "05_textures_combined"
 )
 
 # Per-language clean rules from dependency scanning.

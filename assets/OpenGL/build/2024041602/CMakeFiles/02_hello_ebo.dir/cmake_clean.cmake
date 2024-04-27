@@ -1,8 +1,7 @@
 file(REMOVE_RECURSE
-  "02_hello_ebo"
-  "02_hello_ebo.pdb"
   "CMakeFiles/02_hello_ebo.dir/02_hello_ebo.cpp.o"
-  "CMakeFiles/02_hello_ebo.dir/02_hello_ebo.cpp.o.d"
+  "02_hello_ebo.pdb"
+  "02_hello_ebo"
 )
 
 # Per-language clean rules from dependency scanning.
