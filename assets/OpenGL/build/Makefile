@@ -462,6 +462,19 @@ main/fast:
 .PHONY : 08_coordinate_systems/fast
 
 #=============================================================================
+# Target rules for targets named 09_camera_keyboard_dt
+
+# Build rule for target.
+09_camera_keyboard_dt: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 09_camera_keyboard_dt
+.PHONY : 09_camera_keyboard_dt
+
+# fast build rule for target.
+09_camera_keyboard_dt/fast:
+	$(MAKE) -f 2024042309/CMakeFiles/09_camera_keyboard_dt.dir/build.make 2024042309/CMakeFiles/09_camera_keyboard_dt.dir/build
+.PHONY : 09_camera_keyboard_dt/fast
+
+#=============================================================================
 # Target rules for targets named 09_camera_circle
 
 # Build rule for target.
@@ -536,6 +549,7 @@ help:
 	@echo "... 08_coordinate_systems_3d_multi"
 	@echo "... 08_coordinate_systems_3d"
 	@echo "... 08_coordinate_systems"
+	@echo "... 09_camera_keyboard_dt"
 	@echo "... 09_camera_circle"
 	@echo "... glad/glad.o"
 	@echo "... glad/glad.i"

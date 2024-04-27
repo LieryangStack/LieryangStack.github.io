@@ -111,6 +111,21 @@ depend:
 .PHONY : depend
 
 # Convenience name for target.
+2024042309/CMakeFiles/09_camera_keyboard_dt.dir/rule:
+	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) -f CMakeFiles/Makefile2 2024042309/CMakeFiles/09_camera_keyboard_dt.dir/rule
+.PHONY : 2024042309/CMakeFiles/09_camera_keyboard_dt.dir/rule
+
+# Convenience name for target.
+09_camera_keyboard_dt: 2024042309/CMakeFiles/09_camera_keyboard_dt.dir/rule
+
+.PHONY : 09_camera_keyboard_dt
+
+# fast build rule for target.
+09_camera_keyboard_dt/fast:
+	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) -f 2024042309/CMakeFiles/09_camera_keyboard_dt.dir/build.make 2024042309/CMakeFiles/09_camera_keyboard_dt.dir/build
+.PHONY : 09_camera_keyboard_dt/fast
+
+# Convenience name for target.
 2024042309/CMakeFiles/09_camera_circle.dir/rule:
 	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) -f CMakeFiles/Makefile2 2024042309/CMakeFiles/09_camera_circle.dir/rule
 .PHONY : 2024042309/CMakeFiles/09_camera_circle.dir/rule
@@ -152,6 +167,33 @@ depend:
 	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) -f 2024042309/CMakeFiles/09_camera_circle.dir/build.make 2024042309/CMakeFiles/09_camera_circle.dir/09_camera_circle.cpp.s
 .PHONY : 09_camera_circle.cpp.s
 
+09_camera_keyboard_dt.o: 09_camera_keyboard_dt.cpp.o
+
+.PHONY : 09_camera_keyboard_dt.o
+
+# target to build an object file
+09_camera_keyboard_dt.cpp.o:
+	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) -f 2024042309/CMakeFiles/09_camera_keyboard_dt.dir/build.make 2024042309/CMakeFiles/09_camera_keyboard_dt.dir/09_camera_keyboard_dt.cpp.o
+.PHONY : 09_camera_keyboard_dt.cpp.o
+
+09_camera_keyboard_dt.i: 09_camera_keyboard_dt.cpp.i
+
+.PHONY : 09_camera_keyboard_dt.i
+
+# target to preprocess a source file
+09_camera_keyboard_dt.cpp.i:
+	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) -f 2024042309/CMakeFiles/09_camera_keyboard_dt.dir/build.make 2024042309/CMakeFiles/09_camera_keyboard_dt.dir/09_camera_keyboard_dt.cpp.i
+.PHONY : 09_camera_keyboard_dt.cpp.i
+
+09_camera_keyboard_dt.s: 09_camera_keyboard_dt.cpp.s
+
+.PHONY : 09_camera_keyboard_dt.s
+
+# target to generate assembly for a file
+09_camera_keyboard_dt.cpp.s:
+	cd /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build && $(MAKE) -f 2024042309/CMakeFiles/09_camera_keyboard_dt.dir/build.make 2024042309/CMakeFiles/09_camera_keyboard_dt.dir/09_camera_keyboard_dt.cpp.s
+.PHONY : 09_camera_keyboard_dt.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -160,10 +202,14 @@ help:
 	@echo "... depend"
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
+	@echo "... 09_camera_keyboard_dt"
 	@echo "... 09_camera_circle"
 	@echo "... 09_camera_circle.o"
 	@echo "... 09_camera_circle.i"
 	@echo "... 09_camera_circle.s"
+	@echo "... 09_camera_keyboard_dt.o"
+	@echo "... 09_camera_keyboard_dt.i"
+	@echo "... 09_camera_keyboard_dt.s"
 .PHONY : help
 
 
