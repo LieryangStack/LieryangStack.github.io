@@ -40,6 +40,7 @@ f (A p) {
 A
 f1 () {
 	A p;
+	cout << "f1()中p的地址 = " << &p << endl;
 	return p;
 }
 
@@ -73,7 +74,7 @@ main(int argc, char const *argv[]) {
 	p2 = f1 (); /* 等号操作符重载 */
 	cout << "p2地址（f1函数的返回值赋值给p2之后）= " << &p2 << endl;
 
-	A p3 = f1 (); /* 拷贝构造函数 */
+	A p3 = f1 (); /* 默认构造函数 */
 	cout << "p3地址（f1函数的返回值直接初始化给p3） = " << &p3 << endl;
 
 	return 0;
