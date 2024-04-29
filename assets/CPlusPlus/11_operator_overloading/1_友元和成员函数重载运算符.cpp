@@ -18,27 +18,36 @@ public:
     cout << "~Complex () " << endl;
   }
 
+  friend const Complex operator+(int c1, const Complex& c2);
+
   friend const Complex operator+(const Complex& c1, const Complex& c2);
 
+  const Complex operator+(const Complex& another);
 
-  // const Complex operator+(const Complex& another);
 private:
   float _x;
   float _y;
 };
 
 const Complex 
-operator+(const Complex& c1, const Complex& c2) {
-  cout << "友元函数重载" << endl;
-  const Complex c3(c1._x + c2._x, c1._y + c2._y);
+operator+(int c1, const Complex& c2) {
+  cout << "operator+(int c1, const Complex& c2)友元函数重载" << endl;
+  const Complex c3(c1 + c2._x, 0 + c2._y);
   return c3;
 }
 
-// const Complex 
-// Complex::operator+(const Complex& another) {
-//   cout << "成员函数重载" << endl;
-//   return Complex (this->_x + another._x, this->_y + another._y);
-// }
+const Complex 
+operator+(const Complex& c1, const Complex& c2) {
+  cout << "operator+(Complex& c1, const Complex& c2)友元函数重载" << endl;
+  const Complex c3(c1._x + c2._x, c2._y + c2._y);
+  return c3;
+}
+
+const Complex 
+Complex::operator+(const Complex& another) {
+  cout << "Complex::operator+(const Complex& another) 成员函数重载" << endl;
+  return Complex (this->_x + another._x, this->_y + another._y);
+}
 
 int 
 main(int argc, char const *argv[]) {
@@ -47,11 +56,8 @@ main(int argc, char const *argv[]) {
   Complex c2(3, 4);
 
   Complex c3 = c1 + c2;
+  Complex c4 = 2 + c3;
 
-  // const 修饰对象 
-  // https://blog.csdn.net/2301_78694061/article/details/136300367
-  https://blog.csdn.net/qq_52302919/article/details/127129326
-https://blog.csdn.net/2301_78694061/article/details/136300367
-https://blog.csdn.net/weixin_64314142/article/details/135756322
+
   return EXIT_SUCCESS;
 }
