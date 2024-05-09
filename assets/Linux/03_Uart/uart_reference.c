@@ -22,22 +22,6 @@
 static gint fd = 0; /* 串口设备文件描述符 */
 static struct termios tc_old_cfg, tc_new_cfg; /* 终端配置 */
 
-
-static GThread *vpf_device_read_thread = NULL;
-
-static void *
-vpf_device_read_thread_func (gpointer user_data) {
-
-  guint8 buffer[255];
-  
-  while (1) {
-    gint n = read(fd, &buffer, 255);
-    for (gint i = 0; i < n; i++)
-      g_print("0x%hhx ", buffer[i]);
-    g_print("n = %d\n", n);
-  }
-}
-
 static gboolean
 vpf_device_read_wind_speed (gpointer data){
   guint8 cmd[] = {0x01, 0x03, 0x00, 0x00, 0x00, 0x02, 0xC4, 0x0B};
@@ -45,12 +29,24 @@ vpf_device_read_wind_speed (gpointer data){
   return TRUE;
 }
 
+static gboolean
+vpf_device_read (GIOChannel *source, GIOCondition condition, gpointer data) {
+	guint8 buffer[255];
+	gint n = read(fd, &buffer, 255);
+	for (gint i = 0; i < n; i++)
+		g_print("0x%hhx ", buffer[i]);
+	g_print("n = %d\n", n);
+  
+	return TRUE;
+}
+
 int 
 main(int argc, char const *argv[]) {
 
 	gint ret_val = 0; /* 该线程返回值 */
+	GIOChannel *channel = NULL;
 
-	 GMainLoop *loop = g_main_loop_new(NULL, FALSE);
+	GMainLoop *loop = g_main_loop_new(NULL, FALSE);
   
 	/**
    * O_RDWR:    指示该设备文件可以进行读写操作。
@@ -118,21 +114,19 @@ main(int argc, char const *argv[]) {
 	/* 设置终端控制属性,TCSANOW：不等数据传输完毕就立即改变属性 */
 	tcsetattr(fd, TCSANOW, &tc_new_cfg);
 
-	vpf_device_read_thread = g_thread_new ("vpf.device.read.thread", \
-																vpf_device_read_thread_func, NULL);
+	channel = g_io_channel_unix_new (fd);
+	g_io_add_watch(channel, G_IO_IN | G_IO_HUP | G_IO_ERR,(GIOFunc)vpf_device_read, NULL);
 
 	// g_timeout_add_seconds (1, vpf_device_read_wind_speed, NULL);
 	g_timeout_add (30, vpf_device_read_wind_speed, NULL);
 
-
 	g_main_loop_run(loop);
 
 exit:
-  /* 等待一个线程完成，并且会把vpf_device_read_thread资源释放 */
-  if (vpf_device_read_thread)
-    g_thread_join (vpf_device_read_thread);
 	if (fd > 0)
     close(fd);
+	if (channel)
+		g_io_channel_unref (channel);
 	if (ret_val == 0)
 		 tcsetattr(fd, TCSANOW, &tc_old_cfg); /* 恢复到之前的配置 */
 
