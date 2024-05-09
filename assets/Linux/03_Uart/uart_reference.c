@@ -14,6 +14,8 @@
  *************************************************************************************************************************************************
 */
 
+#define TIME_PER_MS 1000
+
 #include <termios.h> /* 结构体 struct termios， 函数 tcgetattr()  tcsetattr() tcflush()  cfsetospeed() cfgetospeed() */
 #include <fcntl.h> /* 函数 open()  */
 #include <unistd.h> /* 函数 read() write() close() */
@@ -24,10 +26,31 @@ static struct termios tc_old_cfg, tc_new_cfg; /* 终端配置 */
 
 static gboolean
 vpf_device_read_wind_speed (gpointer data){
-  guint8 cmd[] = {0x01, 0x03, 0x00, 0x00, 0x00, 0x02, 0xC4, 0x0B};
+  guint8 cmd[] = {0x02, 0x03, 0x00, 0x00, 0x00, 0x02, 0xC4, 0x38};
   write (fd, cmd, sizeof (cmd));
+	g_usleep (TIME_PER_MS * 10);
   return TRUE;
 }
+
+static gboolean
+vpf_device_send_alarm(gpointer data) {
+  // guint8 cmd[] = {0x01, 0x06, 0x11, 0x03, 0x00, 0x01, 0xBD, 0x36};
+	
+	static gboolean light = TRUE;
+
+	if (light) {
+		guint8 cmd[] = {0xff, 0x06, 0x00, 0xc2, 0x00, 0x11, 0xfd, 0xe4};
+		write(fd, cmd, sizeof(cmd));
+		light = FALSE;
+	} else {
+		guint8 cmd[] = {0xff, 0x06, 0x00, 0xc2, 0x00, 0x60, 0x3d, 0xc0};
+		write(fd, cmd, sizeof(cmd));
+		light = TRUE;
+	}
+	g_usleep (TIME_PER_MS * 10);
+  return TRUE;
+}
+
 
 static gboolean
 vpf_device_read (GIOChannel *source, GIOCondition condition, gpointer data) {
@@ -117,16 +140,18 @@ main(int argc, char const *argv[]) {
 	channel = g_io_channel_unix_new (fd);
 	g_io_add_watch(channel, G_IO_IN | G_IO_HUP | G_IO_ERR,(GIOFunc)vpf_device_read, NULL);
 
-	// g_timeout_add_seconds (1, vpf_device_read_wind_speed, NULL);
-	g_timeout_add (30, vpf_device_read_wind_speed, NULL);
+	// g_timeout_add_seconds (1, vpf_device_send_alarm, NULL);
+	g_timeout_add (100, vpf_device_read_wind_speed, NULL);
+	g_timeout_add (500, vpf_device_send_alarm, NULL);
 
 	g_main_loop_run(loop);
 
 exit:
-	if (fd > 0)
-    close(fd);
+	
 	if (channel)
 		g_io_channel_unref (channel);
+	if (fd > 0)
+    close(fd);
 	if (ret_val == 0)
 		 tcsetattr(fd, TCSANOW, &tc_old_cfg); /* 恢复到之前的配置 */
 
