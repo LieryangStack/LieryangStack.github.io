@@ -73,8 +73,10 @@ test_rwlock5 (void)
   gboolean ret;
 
   ret = g_rw_lock_reader_trylock (&lock);
+  g_print ("ret = %d\n", ret);
   g_assert (ret);
   ret = g_rw_lock_reader_trylock (&lock);
+  g_print ("ret = %d\n", ret);
   g_assert (ret);
 
   g_rw_lock_reader_unlock (&lock);

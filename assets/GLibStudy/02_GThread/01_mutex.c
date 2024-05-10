@@ -65,9 +65,8 @@ test_mutex (void) {
   g_print ("g_mutex_trylock (&mutex) =%d\n", g_mutex_trylock (&mutex));
   ret_val = current_number = current_number + 1;
 
-  /* 会发生错误， g_mutex_clear() called on uninitialised or locked mutex */
+  /* 如果没有解锁，会发生错误， g_mutex_clear() called on uninitialised or locked mutex */
   // g_mutex_clear (&mutex);
-
   g_mutex_unlock (&mutex);
   g_mutex_unlock (&local_mutex);
 

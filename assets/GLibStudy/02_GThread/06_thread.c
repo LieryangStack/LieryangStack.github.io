@@ -199,7 +199,7 @@ thread6_func (gpointer data)
 
   g_assert_cmpstr (name, ==, data);
 #endif
-
+  
   return NULL;
 }
 
