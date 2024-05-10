@@ -72,11 +72,10 @@ void init_GLES(void)
     int fullscreen   =   0;
 
     EGLint egl_config_attr[] = {
-        EGL_BUFFER_SIZE,    16,
-        EGL_DEPTH_SIZE,     16,
-        EGL_STENCIL_SIZE,   0,
-        EGL_SURFACE_TYPE,
-        EGL_WINDOW_BIT,
+        EGL_BUFFER_SIZE, 16,
+        EGL_DEPTH_SIZE, 16,
+        EGL_STENCIL_SIZE, 0,
+        EGL_SURFACE_TYPE, EGL_WINDOW_BIT,
         EGL_NONE
     };
 

@@ -1,0 +1,36 @@
+/*gcc编译设置*/
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "cppbuild",
+			"label": "C/C++: gcc build active file",
+			"command": "/usr/bin/gcc", /*使用Gcc命令编译*/
+			"args": [
+				"-g",
+				"${file}",
+				"-o",
+				"${fileDirname}/${fileBasenameNoExtension}",
+				"-lX11", 
+				"-lEGL",
+				"-lGLESv2", 
+				"-lm",
+				"`pkg-config",
+				"--cflags",
+				"--libs",
+				"glib-2.0`",
+			],
+			"options": {
+				"cwd": "${fileDirname}"
+			},
+			"problemMatcher": [
+				"$gcc"
+			],
+			"group": {
+				"kind": "build",
+				"isDefault": true /*Ctrl+Shift+B快捷键是否启用*/
+			},
+			"detail": "compiler: /usr/bin/gcc"
+		}
+	]
+}
