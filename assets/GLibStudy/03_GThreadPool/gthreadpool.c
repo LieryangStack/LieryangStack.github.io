@@ -83,6 +83,7 @@ typedef struct
   GError *error;
 } SpawnThreadData;
 
+/* 非独占线程池相关队列，根据该队列是否有数据，创建线程 */
 static GCond spawn_thread_cond;
 static GAsyncQueue *spawn_thread_queue;
 
@@ -196,7 +197,7 @@ g_thread_pool_wait_for_new_task (GRealThreadPool *pool)
       /* This is a superfluous thread, so it goes to the global pool. */
       DEBUG_MSG (("superfluous thread %p in pool %p.",
                   g_thread_self (), pool));
-    } else if (pool->pool.exclusive) {
+    } else if (pool->pool.exclusive) {  /* 独占线程池 */
       /* Exclusive threads stay attached to the pool. */
       task = g_async_queue_pop_unlocked (pool->queue);
 
@@ -204,7 +205,7 @@ g_thread_pool_wait_for_new_task (GRealThreadPool *pool)
                   "(%d running, %d unprocessed).",
                   g_thread_self (), pool, pool->num_threads,
                   g_async_queue_length_unlocked (pool->queue)));
-    } else {
+    } else { /* 非独占线程池 */
       /* A thread will wait for new tasks for at most 1/2
         * second before going to the global pool.
         */
@@ -231,6 +232,7 @@ g_thread_pool_wait_for_new_task (GRealThreadPool *pool)
 
 /**
  * 非独占线程执行调度函数
+ * 整个进程中，所有非独占线程任务，都是由该函数调度，该函数线程只会创建一个
 */
 static gpointer
 g_thread_pool_spawn_thread (gpointer data) {
@@ -246,10 +248,11 @@ g_thread_pool_spawn_thread (gpointer data) {
       g_snprintf (name, sizeof (name), "pool-%s", prgname);
 
     g_async_queue_lock (spawn_thread_queue);
-    /* Spawn a new thread for the given pool and wake the requesting thread
-      * up again with the result. This new thread will have the scheduler
-      * settings inherited from this thread and in extension of the thread
-      * that created the first non-exclusive thread-pool. */
+    
+    /**
+     * 从队列pop数据，如果 spawn_thread_queue 是空的，这个函数会一直阻塞，直到有数据可以pop 
+     * 这个函数中有 g_cond_wait 操作（如果没有数据可读）
+     */
     spawn_thread_data = g_async_queue_pop_unlocked (spawn_thread_queue);
     thread = g_thread_try_new (name, g_thread_pool_thread_proxy, spawn_thread_data->pool, &error);
 
@@ -264,7 +267,7 @@ g_thread_pool_spawn_thread (gpointer data) {
 }
 
 /**
- * 独占线程执行调度函数
+ * @brief: 线程池中线程执行函数
 */
 static gpointer
 g_thread_pool_thread_proxy (gpointer data)
@@ -392,11 +395,8 @@ g_thread_pool_start_thread (GRealThreadPool  *pool,
       /* 对于独占线程池，我们会直接创建线程，然后调度等待任务执行 */
       thread = g_thread_try_new (name, g_thread_pool_thread_proxy, pool, error);
     } else {
-      /* For non-exclusive thread-pools this can be called at any time
-        * when a new thread is needed. We make sure to create a new thread
-        * here with the correct scheduler settings by going via our helper
-        * thread.
-        */
+      
+      /* 非独占线程池 */
       SpawnThreadData spawn_thread_data = { (GThreadPool *) pool, NULL, NULL };
 
       g_async_queue_lock (spawn_thread_queue);
@@ -440,8 +440,10 @@ g_thread_pool_start_thread (GRealThreadPool  *pool,
  *
  * 将 g_get_num_processors() 传递给 @max_threads 可以创建与系统上的逻辑处理器数量相同的线程。这不会将每个线程固定到特定的处理器上。
  *
- * 参数 @exclusive 决定线程池是否独占所有线程，或与其他线程池共享线程。如果 @exclusive 是 %TRUE，则立即启动 @max_threads 个线程，
- * 并且它们将专门为此线程池运行，直到被 g_thread_pool_free() 销毁。如果 @exclusive 是 %FALSE，则在需要时创建线程，并在所有非独占线程池之间共享。
+ * 参数 @exclusive 决定线程池是否独占所有线程，或与其他线程池共享线程。
+ * 
+ * 如果 @exclusive 是 %TRUE，则立即启动 @max_threads 个线程，并且它们将专门为此线程池运行，直到被 g_thread_pool_free() 销毁。
+ * 如果 @exclusive 是 %FALSE，则在需要时创建线程，并在所有非独占线程池之间共享。
  * 这意味着对于独占线程池，@max_threads 不能为 -1。此外，独占线程池不受 g_thread_pool_set_max_idle_time() 的影响，因为它们的线程永远不会被视为空闲并返回到全局池中。
  *
  * 请注意，独占线程池使用的线程将全部继承当前线程的调度设置，而非独占线程池使用的线程将继承创建此类线程池的第一个线程的调度设置。
@@ -496,7 +498,7 @@ g_thread_pool_new_full (GFunc           func,
   retval = g_new (GRealThreadPool, 1);
 
   retval->pool.func = func;
-  retval->pool.user_data = user_data;
+  retval->pool.user_data = user_data; /* 创建线程池时候传入的用户数据 */
   retval->pool.exclusive = exclusive;
   retval->queue = g_async_queue_new_full (item_free_func);
   g_cond_init (&retval->cond);

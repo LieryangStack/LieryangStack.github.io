@@ -39,10 +39,17 @@ test_exclusive_true () {
   g_print ("num_threads_runing = %d\n", num_threads_runing);
   g_print ("max_threads = %d\n", max_threads);
 
+  g_thread_pool_push (pool, pool, NULL);
+
+  g_usleep (G_USEC_PER_SEC * 1);
+
   // g_thread_pool_push (pool, pool, NULL);
   // g_thread_pool_push (pool, pool, NULL);
   // g_thread_pool_push (pool, pool, NULL);
-  // g_thread_pool_push (pool, pool, NULL);
+
+  pool = g_thread_pool_new (pool_func, NULL, 2, FALSE, NULL);
+  g_thread_pool_push (pool, pool, NULL);
+
 
   g_usleep (G_USEC_PER_SEC * 1);
 
