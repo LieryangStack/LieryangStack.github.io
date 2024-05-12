@@ -71,6 +71,7 @@
     "typeinfo": "cpp",
     "valarray": "cpp",
     "variant": "cpp",
-    "gl.h": "c"
+    "gl.h": "c",
+    "gtk.h": "c"
   }
 }

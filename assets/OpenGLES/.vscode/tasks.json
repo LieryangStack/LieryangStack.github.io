@@ -13,12 +13,13 @@
 				"${fileDirname}/${fileBasenameNoExtension}",
 				"-lX11", 
 				"-lEGL",
-				"/usr/lib/x86_64-linux-gnu/libGLESv2_nvidia.so.2",
+				//"/usr/lib/x86_64-linux-gnu/libGLESv2_nvidia.so.2",
+				"-lGLESv2",
 				"-lm",
 				"`pkg-config",
 				"--cflags",
 				"--libs",
-				"glib-2.0`",
+				"gtk4`",
 			],
 			"options": {
 				"cwd": "${fileDirname}"

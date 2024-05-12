@@ -188,7 +188,7 @@ main(int argc, char* argv[]) {
    * 期望的EGL帧缓存配置列表,配置为一个key一个value的形式 
    * 指定EGL surface类型
   */
-  EGLint attr[] = {       // some attributes to set up our egl-interface
+  EGLint attr[] = {       // some attributes to set up our egl"nterface
     EGL_BUFFER_SIZE, 16,
     EGL_RENDERABLE_TYPE, EGL_OPENGL_ES2_BIT,
     EGL_NONE
@@ -386,8 +386,6 @@ main(int argc, char* argv[]) {
   */
   glBindVertexArray(0); 
 
-
-
   // gint vPosition = glGetAttribLocation(shaderProgram, "vPosition"); /* 2.0 */
   
 	XSelectInput (display, win, KeyPressMask | StructureNotifyMask);
@@ -396,7 +394,6 @@ main(int argc, char* argv[]) {
 
   Atom wmDeleteMessage = XInternAtom(display, "WM_DELETE_WINDOW", False);
   XSetWMProtocols(display, win, &wmDeleteMessage, 1);
-  
 
 	while (!main_quit) {
 
@@ -419,6 +416,8 @@ main(int argc, char* argv[]) {
     /* 状态使用函数：它使用了当前状态来获取应该清除的颜色 */
     glClear(GL_COLOR_BUFFER_BIT);
 
+    
+
     /* 用于指定当前使用的着色器程序 */
     glUseProgram(shaderProgram);
     glBindVertexArray(VAO); 
@@ -427,6 +426,8 @@ main(int argc, char* argv[]) {
     // glEnableVertexAttribArray(0); 
 
     glDrawArrays (GL_TRIANGLES, 0, 6);
+
+    
 
 		eglSwapBuffers (egl_display, egl_surface);
 	}
@@ -444,3 +445,4 @@ main(int argc, char* argv[]) {
  
   return 0;
 }
+
