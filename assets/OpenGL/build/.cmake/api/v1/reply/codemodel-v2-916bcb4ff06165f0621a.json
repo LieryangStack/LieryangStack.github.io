@@ -26,7 +26,7 @@
 					"source" : ".",
 					"targetIndexes" : 
 					[
-						26
+						27
 					]
 				},
 				{
@@ -99,7 +99,7 @@
 						13,
 						14,
 						15,
-						27
+						28
 					]
 				},
 				{
@@ -165,7 +165,8 @@
 					"source" : "2024042309",
 					"targetIndexes" : 
 					[
-						25
+						25,
+						26
 					]
 				}
 			],
@@ -215,7 +216,8 @@
 						24,
 						25,
 						26,
-						27
+						27,
+						28
 					]
 				}
 			],
@@ -401,6 +403,13 @@
 					"id" : "09_camera_circle::@f1968c84966437b7e63d",
 					"jsonFile" : "target-09_camera_circle-Debug-90de9eb176bd711a2e2b.json",
 					"name" : "09_camera_circle",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 8,
+					"id" : "09_camera_keyboard_dt::@f1968c84966437b7e63d",
+					"jsonFile" : "target-09_camera_keyboard_dt-Debug-07182f8f110468203fc8.json",
+					"name" : "09_camera_keyboard_dt",
 					"projectIndex" : 0
 				},
 				{

@@ -1,8 +1,4 @@
-/* Created by exoticorn ( http://talk.maemo.org/showthread.php?t=37356 )
- * edited and commented by André Bergner [endboss]
- *
- * libraries needed:   libx11-dev, libgles2-dev
- *
+/* 
  * compile with:   gcc  -lX11 -lEGL -lGLESv2  main.cpp
  */
 
@@ -15,6 +11,7 @@
 
 #include <X11/Xlib.h>
 #include <X11/Xatom.h>
+#include <X11/keysymdef.h>
 
 #include <GLES2/gl2.h>
 #include <EGL/egl.h>
@@ -22,176 +19,27 @@
 #include <glib.h>
 
 
-
-const char vertex_src [] =
-"                                        \
-   attribute vec4        position;       \
-   varying mediump vec2  pos;            \
-   uniform vec4          offset;         \
-                                         \
-   void main()                           \
-   {                                     \
-      gl_Position = position + offset;   \
-      pos = position.xy;                 \
-   }                                     \
-";
- 
- 
-const char fragment_src [] =
-"                                                      \
-   varying mediump vec2    pos;                        \
-   uniform mediump float   phase;                      \
-                                                       \
-   void  main()                                        \
-   {                                                   \
-      gl_FragColor  =  vec4( 1., 0.9, 0.7, 1.0 ) *     \
-        cos( 30.*sqrt(pos.x*pos.x + 1.5*pos.y*pos.y)   \
-             + atan(pos.y,pos.x) - phase );            \
-   }                                                   \
-";
-//  some more formulas to play with...
-//      cos( 20.*(pos.x*pos.x + pos.y*pos.y) - phase );
-//      cos( 20.*sqrt(pos.x*pos.x + pos.y*pos.y) + atan(pos.y,pos.x) - phase );
-//      cos( 30.*sqrt(pos.x*pos.x + 1.5*pos.y*pos.y - 1.8*pos.x*pos.y*pos.y)
-//            + atan(pos.y,pos.x) - phase );
- 
- 
-void
-print_shader_info_log ( GLuint  shader) {
-   GLint  length;
- 
-   glGetShaderiv ( shader , GL_INFO_LOG_LENGTH , &length );
- 
-   if ( length ) {
-      char* buffer  = (char *) malloc(length);
-      glGetShaderInfoLog ( shader , length , NULL , buffer );
-      printf ("shader info: %s",  buffer);
-      free (buffer);
- 
-      GLint success;
-      glGetShaderiv( shader, GL_COMPILE_STATUS, &success );
-      if ( success != GL_TRUE )   exit ( 1 );
-   }
-}
- 
- 
-GLuint
-load_shader (const char  *shader_source,
-             GLenum       type ) {
-
-   GLuint  shader = glCreateShader( type );
- 
-   glShaderSource  ( shader , 1 , &shader_source , NULL );
-   glCompileShader ( shader );
- 
-   print_shader_info_log ( shader );
- 
-   return shader;
-}
- 
- 
-EGLDisplay egl_display = NULL;
-EGLContext egl_context = NULL;
-EGLSurface egl_surface = NULL;
-EGLBoolean update_pos = EGL_FALSE;
-
-GLfloat
-   norm_x    =  0.0,
-   norm_y    =  0.0,
-   offset_x  =  0.0,
-   offset_y  =  0.0,
-   p1_pos_x  =  0.0,
-   p1_pos_y  =  0.0;
- 
-GLint
-   phase_loc,
-   offset_loc,
-   position_loc;
- 
-const float vertexArray[] = {
-   0.0,  0.5,  0.0,
-  -0.5,  0.0,  0.0,
-   0.0, -0.5,  0.0,
-   0.5,  0.0,  0.0,
-   0.0,  0.5,  0.0 
-};
- 
- 
-static void 
-render(Display* display, Window win) {
-
-   static float  phase = 0;
-   static int    donesetup = 0;
- 
-   static XWindowAttributes gwa;
- 
-   // draw
- 
-   if ( !donesetup ) {
-    XWindowAttributes  gwa;
-    XGetWindowAttributes ( display , win , &gwa );
-    glViewport ( 0 , 0 , gwa.width , gwa.height );
-    glClearColor ( 0.08 , 0.06 , 0.07 , 1.);    // background color
-    donesetup = 1;
-   }
-   glClear ( GL_COLOR_BUFFER_BIT );
- 
-   glUniform1f ( phase_loc , phase );  // write the value of phase to the shaders phase
-   phase  =  fmodf ( phase + 0.5f , 2.f * 3.141f );    // and update the local variable
- 
-   if ( update_pos ) {  // if the position of the texture has changed due to user action
-    GLfloat old_offset_x  =  offset_x;
-    GLfloat old_offset_y  =  offset_y;
-
-    offset_x  =  norm_x - p1_pos_x;
-    offset_y  =  norm_y - p1_pos_y;
-
-    p1_pos_x  =  norm_x;
-    p1_pos_y  =  norm_y;
-
-    offset_x  +=  old_offset_x;
-    offset_y  +=  old_offset_y;
-
-    update_pos = EGL_FALSE;
-   }
- 
-   glUniform4f ( offset_loc  ,  offset_x , offset_y , 0.0 , 0.0 );
- 
-   glVertexAttribPointer ( position_loc, 3, GL_FLOAT, GL_FALSE, 0, vertexArray );
-   glEnableVertexAttribArray ( position_loc );
-   glDrawArrays ( GL_TRIANGLE_STRIP, 0, 5 );
- 
-   eglSwapBuffers ( egl_display, egl_surface );  // get the rendered buffer to the screen
-}
- 
- 
-////////////////////////////////////////////////////////////////////////////////////////////
- 
-static int
-our_error_handler ( Display    * x_display,
-                    XErrorEvent* event
-                    ) {
-  printf ("cought X11 error %d (looks like this is not Maemo)\n", event->error_code);
-  return 0;
-}
- 
 int 
 main(int argc, char* argv[]) {
 
-   Display* display = NULL;		/* X Display结构体指针 */
-   int screen_num;		/* 屏幕序号，X11角度来看多屏幕与现在多屏幕是不同的  */
-   Window win;			/* 被创建的窗口ID */
-   unsigned int display_width, 
-               display_height;	/*  display显示屏的长和宽 */
-   unsigned int width, height;	/* win显示窗口的长和宽  */
-   unsigned int win_x, win_y;	/* win显示窗口的坐标*/
-   unsigned int win_border_width; /* win显示窗口边界宽度 */
-   char *display_name = getenv("DISPLAY");  /* 获取环境变量DISPLAY的值 */
-   XEvent ev;
+	Display* display = NULL;		/* X Display结构体指针 */
+	int screen_num;		/* 屏幕序号，X11角度来看多屏幕与现在多屏幕是不同的  */
+	Window win;			/* 被创建的窗口ID */
+	unsigned int display_width, 
+							display_height;	/*  display显示屏的长和宽 */
+	unsigned int width, height;	/* win显示窗口的长和宽  */
+	unsigned int win_x, win_y;	/* win显示窗口的坐标*/
+	unsigned int win_border_width; /* win显示窗口边界宽度 */
+	char *display_name = getenv("DISPLAY");  /* 获取环境变量DISPLAY的值 */
+	XEvent event;
 
   EGLint major = 0;
   EGLint minor = 0;
   EGLint num_configs = 0;
+	EGLDisplay egl_display = NULL;
+	EGLSurface egl_surface = NULL;
+	EGLContext egl_context = NULL;
+  EGLConfig egl_config = NULL;
   EGLConfig *configs_list = NULL;
 
 
@@ -307,14 +155,15 @@ main(int argc, char* argv[]) {
     EGL_RENDERABLE_TYPE, EGL_OPENGL_ES2_BIT,
     EGL_NONE
   };
- 
-  EGLConfig ecfg;
-  EGLint num_config;
 
   /**
-   * 
+   * @brief: 返回一个和期望的EGL帧缓存配置列表configSpec匹配的EGL帧缓存配置列表，存储在eglConfig中
+   * @param attrib_list: 期望的配置属性
+   * @param configs(out)： frame buffer配置列表
+   * @param config_size: 想要选中符合的frame buffer配置的最大个数
+   * @param num_config(out): 获取到多少个可用frame buffer配置列表
   */
-  if ( eglChooseConfig( egl_display, attr, &ecfg, 1, &num_configs ) == EGL_FALSE ) {
+  if ( eglChooseConfig( egl_display, attr, &egl_config, 1, &num_configs ) == EGL_FALSE ) {
     g_error("Failed to choose config (eglError: %d)\n", eglGetError());
     return FALSE;
   }
@@ -323,99 +172,57 @@ main(int argc, char* argv[]) {
     g_error("Didn't get exactly one config, but %d\n", num_configs);
     return FALSE;
   }
+   
+	/* 通过egl和NativeWindow以及EGL帧缓冲配置创建EGLSurface。最后一个参数为属性信息，0表示不需要属性) */
+	egl_surface = eglCreateWindowSurface ( egl_display, egl_config, win, NULL );
+	if ( egl_surface == EGL_NO_SURFACE ) {
+		fprintf (stderr, "Unable to create EGL surface (eglError: %d\n", eglGetError());
+		return FALSE;
+	}
+
+	/* 渲染上下文EGLContext关联的帧缓冲配置列表，EGL_CONTEXT_CLIENT_VERSION表示这里是配置EGLContext的版本 */
+	EGLint ctxattr[] = { EGL_CONTEXT_CLIENT_VERSION, 2, EGL_NONE };
+
+	/* 通过Display和上面获取到的的EGL帧缓存配置列表创建一个EGLContext， EGL_NO_CONTEXT表示不需要多个设备共享上下文 */
+	egl_context = eglCreateContext ( egl_display, egl_config, EGL_NO_CONTEXT, ctxattr );
+	if ( egl_context == EGL_NO_CONTEXT ) {
+		g_error("Unable to create EGL context (eglError: %d\n", eglGetError());
+		return FALSE;
+	}
+
+	/* 将EGLContext和当前线程以及draw和read的EGLSurface关联，关联之后，当前线程就成为了OpenGL es的渲染线程 */
+	eglMakeCurrent( egl_display, egl_surface, egl_surface, egl_context );
+
+
+	XSelectInput (display, win, KeyPressMask);
+
+	gboolean main_quit = FALSE;
+
+	while (!main_quit) {
+
+		XNextEvent (display, &event);
+
+		switch (event.type) {
+			case KeyPress: 
+				if (event.xkey.keycode == 9) /* 9表示ESC键*/
+					main_quit = TRUE;
+				break;
+		}
+
+		/* 状态设置函数 */
+    glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+    /* 状态使用函数：它使用了当前状态来获取应该清除的颜色 */
+    glClear(GL_COLOR_BUFFER_BIT);
+		eglSwapBuffers (egl_display, egl_surface);
+	}
+
+
+	eglDestroyContext ( egl_display, egl_context );
+	eglDestroySurface ( egl_display, egl_surface );
+	eglTerminate      ( egl_display );
+
+	XDestroyWindow    ( display, win );
+	XCloseDisplay     ( display );
  
-   egl_surface = eglCreateWindowSurface ( egl_display, ecfg, win, NULL );
-   if ( egl_surface == EGL_NO_SURFACE ) {
-      fprintf (stderr, "Unable to create EGL surface (eglError: %d\n", eglGetError());
-      return 1;
-   }
- 
-   //// egl-contexts collect all state descriptions needed required for operation
-   EGLint ctxattr[] = {
-      EGL_CONTEXT_CLIENT_VERSION, 2,
-      EGL_NONE
-   };
-   egl_context = eglCreateContext ( egl_display, ecfg, EGL_NO_CONTEXT, ctxattr );
-   if ( egl_context == EGL_NO_CONTEXT ) {
-      fprintf (stderr, "Unable to create EGL context (eglError: %d\n", eglGetError());
-      return 1;
-   }
- 
-   //// associate the egl-context with the egl-surface
-   eglMakeCurrent( egl_display, egl_surface, egl_surface, egl_context );
- 
- 
-   ///////  the openGL part  ///////////////////////////////////////////////////////////////
- 
-   GLuint vertexShader   = load_shader ( vertex_src , GL_VERTEX_SHADER  );     // load vertex shader
-   GLuint fragmentShader = load_shader ( fragment_src , GL_FRAGMENT_SHADER );  // load fragment shader
- 
-   GLuint shaderProgram  = glCreateProgram ();                 // create program object
-   glAttachShader ( shaderProgram, vertexShader );             // and attach both...
-   glAttachShader ( shaderProgram, fragmentShader );           // ... shaders to it
- 
-   glLinkProgram ( shaderProgram );    // link the program
-   glUseProgram  ( shaderProgram );    // and select it for usage
- 
-   //// now get the locations (kind of handle) of the shaders variables
-   position_loc  = glGetAttribLocation  ( shaderProgram , "position" );
-   phase_loc     = glGetUniformLocation ( shaderProgram , "phase"    );
-   offset_loc    = glGetUniformLocation ( shaderProgram , "offset"   );
-   if ( position_loc < 0  ||  phase_loc < 0  ||  offset_loc < 0 ) {
-      fprintf (stderr, "Unable to get uniform location\n");
-      return 1;
-   }
- 
- 
-   const float
-      window_width  = 800.0,
-      window_height = 480.0;
- 
-   //// this is needed for time measuring  -->  frames per second
-   struct timezone  tz;
-   struct timeval  t1, t2;
-   gettimeofday ( &t1 , &tz );
-   int  num_frames = 0;
- 
-   EGLBoolean quit = EGL_FALSE;
-   while ( !quit ) {    // the main loop
- 
-      while ( XPending ( display ) ) {   // check for events from the x-server
- 
-         XEvent  xev;
-         XNextEvent( display, &xev );
- 
-         if ( xev.type == MotionNotify ) {  // if mouse has moved
-//            cout << "move to: << xev.xmotion.x << "," << xev.xmotion.y << endl;
-            GLfloat window_y  =  (window_height - xev.xmotion.y) - window_height / 2.0;
-            norm_y            =  window_y / (window_height / 2.0);
-            GLfloat window_x  =  xev.xmotion.x - window_width / 2.0;
-            norm_x            =  window_x / (window_width / 2.0);
-            update_pos = EGL_TRUE;
-         }
- 
-         if ( xev.type == KeyPress )   quit = EGL_TRUE;
-      }
- 
-      render(display, win);   // now we finally put something on the screen
- 
-      if ( ++num_frames % 100 == 0 ) {
-         gettimeofday( &t2, &tz );
-         float dt  =  t2.tv_sec - t1.tv_sec + (t2.tv_usec - t1.tv_usec) * 1e-6;
-         printf ("fps: %f\n", num_frames / dt);
-         num_frames = 0;
-         t1 = t2;
-      }
-//      usleep( 1000*10 );
-   }
- 
- 
-   ////  cleaning up...
-   eglDestroyContext ( egl_display, egl_context );
-   eglDestroySurface ( egl_display, egl_surface );
-   eglTerminate      ( egl_display );
-   XDestroyWindow    ( display, win );
-   XCloseDisplay     ( display );
- 
-   return 0;
+  return 0;
 }

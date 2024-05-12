@@ -5,7 +5,7 @@
 		{
 			"type": "cppbuild",
 			"label": "C/C++: gcc build active file",
-			"command": "/usr/bin/gcc", /*使用Gcc命令编译*/
+			"command": "/usr/bin/g++", /*使用Gcc命令编译*/
 			"args": [
 				"-g",
 				"${file}",
@@ -13,7 +13,7 @@
 				"${fileDirname}/${fileBasenameNoExtension}",
 				"-lX11", 
 				"-lEGL",
-				"-lGLESv2", 
+				"/usr/lib/x86_64-linux-gnu/libGLESv2_nvidia.so.2",
 				"-lm",
 				"`pkg-config",
 				"--cflags",

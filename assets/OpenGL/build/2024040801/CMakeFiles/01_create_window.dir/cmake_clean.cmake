@@ -1,7 +1,8 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/01_create_window.dir/01_create_window.cpp.o"
-  "01_create_window.pdb"
   "01_create_window"
+  "01_create_window.pdb"
+  "CMakeFiles/01_create_window.dir/01_create_window.cpp.o"
+  "CMakeFiles/01_create_window.dir/01_create_window.cpp.o.d"
 )
 
 # Per-language clean rules from dependency scanning.

@@ -1,7 +1,8 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/09_camera_keyboard_dt.dir/09_camera_keyboard_dt.cpp.o"
-  "09_camera_keyboard_dt.pdb"
   "09_camera_keyboard_dt"
+  "09_camera_keyboard_dt.pdb"
+  "CMakeFiles/09_camera_keyboard_dt.dir/09_camera_keyboard_dt.cpp.o"
+  "CMakeFiles/09_camera_keyboard_dt.dir/09_camera_keyboard_dt.cpp.o.d"
 )
 
 # Per-language clean rules from dependency scanning.

@@ -27,13 +27,13 @@
 				"cwd": "${fileDirname}"
 			},
 			"problemMatcher": [
-				"$gcc"
+				"$g++"
 			],
 			"group": {
 				"kind": "build",
 				"isDefault": true /*Ctrl+Shift+B快捷键是否启用*/
 			},
-			"detail": "compiler: /usr/bin/gcc"
+			"detail": "compiler: /usr/bin/g++"
 		}
 	]
 }
