@@ -6,14 +6,75 @@ tags: [GLib]
 ---
 
 
-https://zh.wikipedia.org/wiki/%E5%93%88%E5%B8%8C%E8%A1%A8
+## 1 基本概念
 
-https://blog.csdn.net/weixin_52109967/article/details/125955738
+### 1.1 哈希表基本概念
 
-https://blog.csdn.net/songzihuan/article/details/105712600
+- 哈希表（Hash Table）也叫散列表，哈希表本质上就是一个数组，只不过数组存放的是单一的数据，而哈希表中存放的是键值对，通过Key可以直接找到所映射的Value。
 
+- key通过哈希函数（hash function）得到数组的索引，进而存取索引位置的值。
 
-## GHashTable
+- 不同的key通过哈希函数可能得到相同的索引值，此时，产生了哈希碰撞。
+
+- 通过在数组中插入链表或者二叉树，可以解决哈希碰撞的问题。
+
+  ![alt text](image-1.png)
+
+### 1.2 哈希表实现原理
+
+1. 通过散列函数（映射函数），将key传入函数，计算出数组的下标值。比如以下time33哈希函数：
+
+    ```c
+    uint32_t time33(char const *str, int len) 
+    { 
+        unsigned long  hash = 0; 
+        for (int i = 0; i < len; i++) { 
+            hash = hash *33 + (unsigned long) str[i]; 
+        } 
+        return (hash & 0x7FFFFFFF) % MAX_SIZE; 
+    }
+    ```
+
+    具体来说，函数接受一个指向字符串的指针和字符串的长度作为输入。然后，它遍历字符串中的每个字符，将当前哈希值乘以33，对当前所有字符进行如此操作，然后累加起来。最后，通过使用位掩码操作（& 0x7FFFFFFF）来确保返回的哈希值为正数（因为哈希值是无符号整数）。最后取余操作是防止值越界。
+
+    ![alt text](image.png)
+
+2. 比如上图的情况，汉字拼音是key，对应具体的汉字，比如相同的拼音（字符串）计算出的值是相同的，就产生了哈希碰撞。为了解决碰撞，实现哈希表可以有以下两种方式：
+    - 数组 + 链表
+    
+    - 数组 + 二叉树
+
+    以下以链表举例，使用C语言实现。产生哈希碰撞的时候，可以遍历该点的链表（每个数组元素都是链表的头节点），找到对应的key。
+
+    ```c
+    #ifndef MAX_SIZE
+    #define MAX_SIZE (1024 ^ 2)
+    //  定义哈系表的范围(也就是通过time_33哈系后的值在跟MAX_SIZE整除，从而限定了范围)
+
+    // 一个捅，由key和value组成，同时next为链表所用[解决哈系冲突]
+    typedef struct HashNode
+    {
+        char *key;
+        char *value;
+        struct HashNode *next;  // 解决Hash冲突
+
+    } HashNode;
+
+    // 一张哈希表，由一个指针组成，该指针起数组作用，内部存储捅的指针
+    typedef struct HashTable{
+        struct HashNode **HashNode;  // 这是一个指针数组
+    } HashTable;
+
+    HashTable *make_HashTable();
+    HashNode *make_HashNode(char *key, char *value);
+    int login_node(HashTable *ht, HashNode *hn);
+    HashNode *find_node(HashTable *ht, char *key);
+
+    #endif
+
+    ```
+
+## 2 GHashTable
 
 - GHashTable提供了键和值之间的关联，其优化使得在给定键的情况下，可以非常快速地找到关联的值。
 
@@ -37,4 +98,7 @@ https://blog.csdn.net/songzihuan/article/details/105712600
 
 
 
+## 参考
 
+[参考1：图解哈希表及其原理](https://www.cnblogs.com/Steven-HU/p/14505316.html)
+[参考2：图解数据结构(04) -- 哈希表](https://blog.csdn.net/jianghao233/article/details/103772274)
