@@ -57,7 +57,7 @@ struct _GRealThreadPool
   GCond cond;
   gint max_threads; /* 线程池中最多能持有多少个线程 */
   guint num_threads; /* 目前线程池中运行的线程数量（独有线程池 num_threads 等于 max_threads） */
-  gboolean running;
+  gboolean running; /* 一般情况下都是 TRUE，只有 pool 释放后才是 FALSE */
   gboolean immediate; /* 是否立即停止 */
   gboolean waiting;
   GCompareDataFunc sort_func;

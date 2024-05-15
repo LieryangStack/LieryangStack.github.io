@@ -43,7 +43,7 @@ test_exclusive_true () {
 
   g_usleep (G_USEC_PER_SEC * 1);
 
-  // g_thread_pool_push (pool, pool, NULL);
+  g_thread_pool_push (pool, pool, NULL);
   // g_thread_pool_push (pool, pool, NULL);
   // g_thread_pool_push (pool, pool, NULL);
 
