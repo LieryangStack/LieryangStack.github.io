@@ -9,7 +9,8 @@
     "gthreadprivate.h": "c",
     "glib_trace.h": "c",
     "stdio.h": "c",
-    "*.tcc": "c"
+    "*.tcc": "c",
+    "system_error": "c"
   },
   "C_Cpp_Runner.msvcBatchPath": "",
   "C_Cpp_Runner.cCompilerPath": "gcc",
