@@ -27,7 +27,7 @@ main(int argc, char *argv[]){
   gchar *name = g_strdup (static_name);
 
   quark = g_quark_from_static_string(name);
-
+  
   g_print("%s has been Quark %d\n",name, quark);
 
   name[0] = '@';

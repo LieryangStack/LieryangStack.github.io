@@ -247,6 +247,6 @@ test_slist_7 () {
   list = g_slist_insert_sorted (list, GINT_TO_POINTER(14), sort_r);
 
   g_slist_foreach(list, print, NULL);
-
+  G_SLIst
   g_slist_free (list);
 }

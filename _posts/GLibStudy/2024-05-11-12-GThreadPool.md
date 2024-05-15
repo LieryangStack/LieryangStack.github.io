@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 三、GLib——GThreadPool
+title: 十二、GLib——GThreadPool
 categories: GLib学习笔记
 tags: [GLib]
 ---

@@ -19,9 +19,17 @@ tags: [GLib]
 
 - 对于几乎每个函数，都存在两个变体，一个是上锁GMutex队列的，另一个是不上锁GMutex队列的。通过这种方式，你可以在多个队列访问指令中保持队列锁（使用g_async_queue_lock()获取它，并使用g_async_queue_unlock()释放它）。这可能是必要的，以确保队列的完整性，但应仅在确实需要时使用，因为如果不明智地使用，它可能会使你的代码更加困难。通常情况下，你应该只使用不带有_unlocked后缀的不进行上锁函数变体。
 
+**总结**：
+
 <font color="red">
 在许多情况下，当你需要将工作分配给一组工作线程时，使用GThreadPool可能更方便，而不是手动使用GAsyncQueue。GThreadPool在内部使用GAsyncQueue实现。
 </font>
+
+1. `GAsyncQueue` 没有在类型系统注册，但是自定义结构体存在引用计数。所以有 `g_async_queue_ref` 和 `g_async_queue_ref_unlocked`。（除了创建和解引用，没有其他函数会修改引用计数）
+
+2. `g_async_queue_new` 或者 `g_async_queue_new_full` 创建队列，`g_async_queue_ref` 和 `g_async_queue_ref_unlocked`释放队列。
+
+3. `GAsyncQueue` 相关函数后缀 `_unlocked` 不带有互斥锁，没有该后缀的函数多线程安全。
 
 ## 2 GAsyncQueue结构体
 

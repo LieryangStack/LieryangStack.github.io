@@ -27,6 +27,7 @@ g_thread_thread_proxy (gpointer data) {
 int
 main (int argc, char *argv[]) {
 
+  /* 这里创建后 ref_count = 1 */
   GAsyncQueue *queue = g_async_queue_new ();
 
   GThread *thread1 = g_thread_try_new ("thread1", g_thread_thread_proxy, queue, NULL);
@@ -46,6 +47,7 @@ main (int argc, char *argv[]) {
   g_thread_unref (thread1);
   g_thread_unref (thread2);
 
+  /* 除了ref函数，没有其他函数能修改引用计数，所以此时 ref_count == 1 */
   g_async_queue_unref (queue);
 
   return 0;

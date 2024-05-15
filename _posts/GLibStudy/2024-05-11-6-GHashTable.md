@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 四、GLib——GHashTable
+title: 六、GLib——GHashTable
 categories: GLib学习笔记
 tags: [GLib]
 ---
@@ -18,7 +18,7 @@ tags: [GLib]
 
 - 通过在数组中插入链表或者二叉树，可以解决哈希碰撞的问题。
 
-  ![alt text](image-1.png)
+  ![alt text](/assets/GLibStudy/06_GHashTable/image/image-1.png)
 
 ### 1.2 哈希表实现原理
 
@@ -37,7 +37,7 @@ tags: [GLib]
 
     具体来说，函数接受一个指向字符串的指针和字符串的长度作为输入。然后，它遍历字符串中的每个字符，将当前哈希值乘以33，对当前所有字符进行如此操作，然后累加起来。最后，通过使用位掩码操作（& 0x7FFFFFFF）来确保返回的哈希值为正数（因为哈希值是无符号整数）。最后取余操作是防止值越界。
 
-    ![alt text](image.png)
+    ![alt text](/assets/GLibStudy/06_GHashTable/image/image.png)
 
 2. 比如上图的情况，汉字拼音是key，对应具体的汉字，比如相同的拼音（字符串）计算出的值是相同的，就产生了哈希碰撞。为了解决碰撞，实现哈希表可以有以下两种方式：
     - 数组 + 链表
@@ -95,7 +95,122 @@ tags: [GLib]
 - 要销毁GHashTable，使用g_hash_table_destroy()。
 
 
+**总结：**
 
+1. `GHashTable` 没有在类型系统注册，但是自定义结构体存在引用计数。所以有 `g_hash_table_ref` 和 `g_hash_table_unref`。（除了创建和解引用，只有g_hash_table_destroy会修改引用计数）
+
+2. `GHashTable` 多线程不安全。
+
+
+```c
+struct _GHashTable
+{
+  gsize            size;
+  gint             mod;
+  guint            mask;
+  guint            nnodes;
+  guint            noccupied;  /* nnodes + tombstones */
+
+  guint            have_big_keys : 1;
+  guint            have_big_values : 1;
+
+  gpointer         keys;
+  guint           *hashes;
+  gpointer         values;
+
+  GHashFunc        hash_func;
+  GEqualFunc       key_equal_func;
+  gatomicrefcount  ref_count;
+#ifndef G_DISABLE_ASSERT
+  /*
+   * Tracks the structure of the hash table, not its contents: is only
+   * incremented when a node is added or removed (is not incremented
+   * when the key or data of a node is modified).
+   */
+  int              version;
+#endif
+  GDestroyNotify   key_destroy_func;
+  GDestroyNotify   value_destroy_func;
+};
+```
+
+### 2.1 创建与释放哈希表
+
+```c
+/**
+ * @brief: 创建一个引用计数为1的新 #GHashTable。
+ * @hash_func: 这个函数是通过key创建哈希索引值的函数
+ *             由 @hash_func 返回的哈希索引值用于确定将键存储在 #GHashTable 数据结构中的位置。
+ *             对于一些常见类型的键，提供了 g_direct_hash()、g_int_hash()、g_int64_hash()、g_double_hash() 和 g_str_hash() 函数。
+ *             如果 @hash_func 为 %NULL，则使用 g_direct_hash()。
+ * 
+ * @key_equal_func: 在查找 #GHashTable 中的键时使用。
+ *                  对于最常见类型的键，提供了 g_direct_equal()、g_int_equal()、g_int64_equal()、g_double_equal() 和 g_str_equal() 函数。
+ *                  如果 @key_equal_func 为 %NULL，则键会以类似于 g_direct_equal() 的方式直接比较，但没有函数调用的开销。
+ *                  @key_equal_func 被调用时，哈希表中的键作为其第一个参数，要检查的用户提供的键作为其第二个参数。
+ *
+ *
+ * @returns: a new #GHashTable
+ * 
+ */
+GHashTable* g_hash_table_new (GHashFunc hash_func, GEqualFunc key_equal_func);
+
+
+/* 解引用，释放内存，整个可调用GHshTable相关API中，除了创建和ref和g_hash_table_destroy函数，没有其他函数更改ref_count值 */
+void
+g_hash_table_unref (GHashTable *hash_table); /* g_hash_table_destroy也会调用g_hash_table_unref，所以直接使用该解引用函数即可*/
+
+/**
+ * @brief: 销毁 #GHashTable 中的所有键和值，并将其引用计数减 1。如果键和/或值是动态分配的，
+ *         您应该先释放它们，或者使用带有销毁通知器的 g_hash_table_new_full() 创建 #GHashTable。
+ *         在后一种情况下，您提供的销毁函数将在销毁阶段对所有键和值进行调用。
+*/
+void
+g_hash_table_destroy (GHashTable *hash_table)
+{
+  g_return_if_fail (hash_table != NULL);
+
+  g_hash_table_remove_all (hash_table);
+  g_hash_table_unref (hash_table);
+}
+```
+
+### 2.2 哈希表中插入key和value
+
+```c
+/**
+ * @brief: 将新的键和值插入到 #GHashTable 中。
+ * @key: 要插入的键
+ * @value: 与键关联的值
+ * @note: 
+ *       如果键已经存在于 #GHashTable 中，则其当前值将被替换为新值。
+ *       如果在创建 #GHashTable 时提供了 @value_destroy_func，则旧值将使用该函数释放。
+ *       如果在创建 #GHashTable 时提供了 @key_destroy_func，则传递的键将使用该函数释放。
+ *  
+ *       会调用@hash_func函数
+ * 
+ *       从 GLib 2.40 开始，此函数返回一个布尔值，表示新添加的值是否已经在哈希表中。
+ * @return：%TRUE 如果键尚不存在
+*/
+gboolean
+g_hash_table_insert (GHashTable *hash_table,
+                     gpointer    key,
+                     gpointer    value)
+```
+
+### 2.3 哈希表中查找key对应的value
+
+```c
+/**
+ * @brief: 在 #GHashTable 中查找一个 key 对应的 value
+ * @hash_table:  a #GHashTable
+ * @key: 要查找的键
+ * @note: 在 #GHashTable 中查找一个键。请注意，此函数无法区分不存在的键和存在但其值为 %NULL 的键。
+ * @return: key关联的value，如果未找到键则为 %NULL。
+*/
+gpointer    g_hash_table_lookup            (GHashTable     *hash_table,
+                                            gconstpointer   key);
+```
 
 
 ## 参考
