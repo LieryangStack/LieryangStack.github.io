@@ -4,6 +4,37 @@
 
 #include <glib.h>
 
+typedef struct _TEST_GHashTable TEST_GHashTable;
+struct _TEST_GHashTable
+{
+  gsize            size;
+  gint             mod;
+  guint            mask;
+  guint            nnodes;
+  guint            noccupied;  /* nnodes + tombstones */
+
+  guint            have_big_keys : 1;
+  guint            have_big_values : 1;
+
+  gpointer         keys;
+  guint           *hashes;
+  gpointer         values;
+
+  GHashFunc        hash_func;
+  GEqualFunc       key_equal_func;
+  gatomicrefcount  ref_count;
+#ifndef G_DISABLE_ASSERT
+  /*
+   * Tracks the structure of the hash table, not its contents: is only
+   * incremented when a node is added or removed (is not incremented
+   * when the key or data of a node is modified).
+   */
+  int              version;
+#endif
+  GDestroyNotify   key_destroy_func;
+  GDestroyNotify   value_destroy_func;
+};
+
 static guint
 my_hash (gconstpointer key) {
   g_print ("%s\n", __func__);
@@ -51,6 +82,7 @@ main (int argc, char *argv[]) {
   g_print ("key=zi, value=%s\n", str);
 
   /* 创建的时候ref_count == 1，除了创建函数，没有其他函数能修改ref_count，所以此时解引用一次就可以释放所有内存 */
+  g_print ("ref_count = %d\n", ((TEST_GHashTable *)hash_table)->ref_count);
   g_hash_table_unref (hash_table);
   
 

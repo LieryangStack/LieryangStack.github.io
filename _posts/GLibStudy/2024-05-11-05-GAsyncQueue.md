@@ -46,6 +46,20 @@ struct _GAsyncQueue
 };
 ```
 
+**引用计数**：
+
+```c
+/* 引用计数+1，此时 ref_count == 1 */
+GAsyncQueue *g_async_queue_new (void);
+
+/**
+ * 只要中间不调用  `g_async_queue_ref` 和 `g_async_queue_ref_unlocked` ，引用计数就不会改变
+*/
+
+/* 除了ref函数，没有其他函数能修改引用计数，所以此时 ref_count == 1，调用unref即可释放GAsyncQueue内存 */
+g_async_queue_unref (queue);
+```
+
 ## 3 函数总结
 
 关于函数后缀 `_unlocked` 区别：函数内部是否进行锁操作。

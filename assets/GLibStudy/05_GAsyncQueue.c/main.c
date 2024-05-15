@@ -1,5 +1,15 @@
 #include <glib.h>
 
+typedef struct _TEST_GAsyncQueue TEST_GAsyncQueue;
+struct _TEST_GAsyncQueue
+{
+  GMutex mutex;
+  GCond cond;
+  GQueue queue;
+  GDestroyNotify item_free_func;
+  guint waiting_threads;
+  gint ref_count;
+};
 
 static gpointer
 g_thread_thread_proxy (gpointer data) {
@@ -43,11 +53,9 @@ main (int argc, char *argv[]) {
 
   g_thread_join (thread1);
   g_thread_join (thread2);
-  
-  g_thread_unref (thread1);
-  g_thread_unref (thread2);
 
   /* 除了ref函数，没有其他函数能修改引用计数，所以此时 ref_count == 1 */
+  g_print ("ref_count = %d\n", ((TEST_GAsyncQueue *)queue)->ref_count);
   g_async_queue_unref (queue);
 
   return 0;
