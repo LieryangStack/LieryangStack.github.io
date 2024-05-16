@@ -2,29 +2,29 @@
 
 gboolean
 source_prepare_cb(GSource *source, gint *timeout){
-  g_print("prepare\n");
-  *timeout = 1000;
-  return FALSE;
+  g_print("%s\n",__func__);
+  *timeout = -1;
+  return TRUE;
 }
 
 gboolean
 source_check_cb(GSource *source){
-  g_print("check\n");
-  return TRUE;
+  g_print("%s\n",__func__);
+  return FALSE;
 }
 
 gboolean
 source_dispatch_cb(GSource *source,
                    GSourceFunc callback,
                    gpointer data){
-  g_print("dispatch\n");
+  g_print("%s\n",__func__);
   callback(data);
   return TRUE;                  
 }
 
 void
 source_finalize_cb(GSource *source){
-  g_print("finalize\n");
+  g_print("%s\n",__func__);
 }
 
 void
@@ -32,6 +32,12 @@ myidle(gpointer data){
 
   g_print("myidle\n");
 }
+
+gboolean 
+timeout_cb (gpointer user_data) {
+  return TRUE;
+}
+
 
 int
 main(int argc, char *argv[]){
@@ -53,10 +59,15 @@ main(int argc, char *argv[]){
     g_source_attach(source, context);
     g_source_unref(source);
 
+    // g_timeout_add_seconds (1, timeout_cb, NULL);
+    g_idle_add ()
+
     g_main_loop_run(loop);
 
     g_main_context_unref(context);
     g_main_loop_unref(loop);
+
+    
 
     return 0;
 }

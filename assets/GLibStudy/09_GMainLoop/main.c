@@ -5,7 +5,7 @@
 int
 main (int argc, char *argv[]) {
 
-  GSource
+  GMainContext
 
   return 0;
 }
