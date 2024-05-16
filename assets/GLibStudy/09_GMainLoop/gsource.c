@@ -59,6 +59,9 @@ main(int argc, char *argv[]){
     g_source_attach(source, context);
     g_source_unref(source);
 
+    g_io_channel_unix_new
+    g_io_add_watch
+
     // g_timeout_add_seconds (1, timeout_cb, NULL);
     g_idle_add ()
 
