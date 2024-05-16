@@ -77,7 +77,6 @@ timeout_cb (gpointer user_data) {
   return TRUE;
 }
 
-
 int
 main(int argc, char *argv[]){
     GMainLoop *loop = g_main_loop_new(NULL, FALSE);
@@ -99,23 +98,32 @@ main(int argc, char *argv[]){
 
     /* 创建新事件源实例，传入了事件的函数表、事件结构体大小 */
     GSource *source = g_source_new(&g_source_funcs, sizeof(GSource));
+    g_print ("g_source_new After ref_count = %d\n", source->ref_count); /* ref_count = 1 */
     /* 设置新事件源source的回调函数 */
     g_source_set_callback(source, (GSourceFunc)source_cb, "Hello, world!", NULL);
+    g_print ("g_source_set_callback After ref_count = %d\n", source->ref_count); /* ref_count = 1 */
     /* source关联特定的GMainContext对象 */
     g_source_attach(source, context);
+    g_print ("g_source_attach After ref_count = %d\n", source->ref_count); /* ref_count = 2 */
     g_source_unref(source);
+    g_print ("g_source_unref After ref_count = %d\n", source->ref_count); /* ref_count = 1 */
 
-    source = g_source_new(&g_source_myidle_funcs, sizeof(GSource));
+    /**
+     * 最后解引用 context的时候，context会调用 g_source_unref
+    */
+
+    GSource *idle_source = g_source_new(&g_source_myidle_funcs, sizeof(GSource));
     /* 设置新事件源source的回调函数 */
-    g_source_set_callback(source, (GSourceFunc)idle_source_cb, "Hello, world!", NULL);
+    g_source_set_callback(idle_source, (GSourceFunc)idle_source_cb, "Hello, world!", NULL);
     /* source关联特定的GMainContext对象 */
-    g_source_attach(source, context);
-    g_source_unref(source);
+    g_source_attach(idle_source, context);
+    g_source_unref(idle_source);
 
+    
 
     // g_timeout_add_seconds (1, (GSourceFunc)g_main_loop_quit, loop);
 
-    // g_idle_add
+    
 
     g_timeout_add (1, (GSourceFunc)g_main_loop_quit, loop);
 
