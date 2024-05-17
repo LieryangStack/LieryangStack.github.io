@@ -1,0 +1,37 @@
+/*gcc编译设置*/
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "cppbuild",
+			"label": "C/C++: gcc build active file",
+			"command": "/usr/bin/gcc", /*使用Gcc命令编译*/
+			"args": [
+				"-g",
+				"${file}",
+				"-o",
+				"${fileDirname}/${fileBasenameNoExtension}",
+				"`pkg-config",
+				"--cflags",
+				"--libs",
+				"glib-2.0 ",
+				"gio-2.0 ",
+				"gio-unix-2.0 ",
+				"gobject-2.0`",
+				"-I/home/lieryang/Downloads/glib-2.76.6/glib",
+				"-I/home/lieryang/Downloads/glib-2.76.6/build"
+			],
+			"options": {
+				"cwd": "${fileDirname}"
+			},
+			"problemMatcher": [
+				"$gcc"
+			],
+			"group": {
+				"kind": "build",
+				"isDefault": true /*Ctrl+Shift+B快捷键是否启用*/
+			},
+			"detail": "compiler: /usr/bin/gcc"
+		}
+	]
+}
