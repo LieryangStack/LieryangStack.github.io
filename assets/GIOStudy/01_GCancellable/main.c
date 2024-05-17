@@ -1,5 +1,6 @@
 #include <glib.h>
 #include <gio/gio.h>
+#include <gobject/gobject.h>
 
 int
 main (int argc, char *argv[]) {
@@ -18,6 +19,8 @@ main (int argc, char *argv[]) {
 
   g_main_loop_unref (loop);
   g_object_unref (cancellable);
+
+  GTask
 
   return 0;
 }
