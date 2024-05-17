@@ -5,7 +5,7 @@
 int
 main (int argc, char *argv[]) {
 
-  GMainContext
+  g_timeout_add
 
   return 0;
 }

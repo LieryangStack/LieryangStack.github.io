@@ -10,7 +10,8 @@
     "glib_trace.h": "c",
     "stdio.h": "c",
     "*.tcc": "c",
-    "system_error": "c"
+    "system_error": "c",
+    "eventfd.h": "c"
   },
   "C_Cpp_Runner.msvcBatchPath": "",
   "C_Cpp_Runner.cCompilerPath": "gcc",
