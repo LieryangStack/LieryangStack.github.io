@@ -5,8 +5,8 @@
 gboolean
 source_prepare_cb(GSource *source, gint *timeout){
   g_print("%s\n",__func__);
-  *timeout = 100;
-  return TRUE;
+  *timeout = 1000;
+  return FALSE;
 }
 
 gboolean
@@ -40,8 +40,8 @@ source_cb(gpointer data){
 gboolean
 idle_source_prepare_cb(GSource *source, gint *timeout){
   g_print("%s\n",__func__);
-  *timeout = 200;
-  return TRUE;
+  *timeout = 1000;
+  return FALSE;
 }
 
 gboolean
@@ -107,7 +107,7 @@ main(int argc, char *argv[]){
     g_print ("g_source_attach After ref_count = %d\n", source->ref_count); /* ref_count = 2 */
     g_source_unref(source);
     g_print ("g_source_unref After ref_count = %d\n", source->ref_count); /* ref_count = 1 */
-
+    
     /**
      * 最后解引用 context的时候，context会调用 g_source_unref
     */
@@ -120,10 +120,7 @@ main(int argc, char *argv[]){
     g_source_unref(idle_source);
 
     
-
     // g_timeout_add_seconds (1, (GSourceFunc)g_main_loop_quit, loop);
-
-    
 
     g_timeout_add (1, (GSourceFunc)g_main_loop_quit, loop);
 
