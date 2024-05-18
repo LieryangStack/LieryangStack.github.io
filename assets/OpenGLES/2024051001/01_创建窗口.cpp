@@ -13,7 +13,7 @@
 #include <X11/Xatom.h>
 #include <X11/keysymdef.h>
 
-#include <GLES2/gl2.h>
+#include <GLES3/gl32.h>
 #include <EGL/egl.h>
 
 #include <glib.h>
@@ -193,10 +193,28 @@ main(int argc, char* argv[]) {
 	/* 将EGLContext和当前线程以及draw和read的EGLSurface关联，关联之后，当前线程就成为了OpenGL es的渲染线程 */
 	eglMakeCurrent( egl_display, egl_surface, egl_surface, egl_context );
 
-
-	XSelectInput (display, win, KeyPressMask);
+	XSelectInput (display, win, KeyPressMask | StructureNotifyMask);
 
 	gboolean main_quit = FALSE;
+
+  /**
+   * @brief: XInternAtom函数是X WIndow系统中用于获取或定义一个Atom（其实就是名为原子的唯一标识符）
+   * @param atom_name: 这个名称在X服务器上用于查找或创建一个对应的原子。（其实类似与GQuark，字符串与数字对应起来，方便以后直接使用）
+   * @param only_if_exists: 指定一个布尔值，表示是否只返回已存在的原子。如果设置为True，函数只在原子已经存在时返回其标识符；
+   *                        如果该原子不存在，则返回None。如果设置为False，则如果原子不存在，函数会创建一个新的原子并返回其标识符。
+   * 
+   * WM_DELETE_WINDOW协议是X Window系统中用于处理窗口关闭请求的一种标准协议。
+   * 该协议允许应用程序拦截由窗口管理器发送的关闭请求事件，从而决定如何处理关闭窗口的操作。
+   * 例如提示用户保存未保存的更改、执行清理工作等。
+  */
+  Atom wmDeleteMessage = XInternAtom(display, "WM_DELETE_WINDOW", False);
+
+  /**
+   * @brief: XSetWMProtocols函数在X Window系统中用于设置窗口支持的窗口管理器（WM）协议。
+   * @param protocols: 指向包含协议原子的数组。每个原子表示应用程序支持的一个协议，例如WM_DELETE_WINDOW协议表示应用程序希望接收关闭窗口的请求。
+   * @param count: 因为@protocols是一个数组，所以要规定数组的大小。
+  */
+  XSetWMProtocols(display, win, &wmDeleteMessage, 1);
 
 	while (!main_quit) {
 
@@ -207,6 +225,11 @@ main(int argc, char* argv[]) {
 				if (event.xkey.keycode == 9) /* 9表示ESC键*/
 					main_quit = TRUE;
 				break;
+      case ConfigureNotify:
+        int width = event.xconfigure.width;
+        int height = event.xconfigure.height;
+        glViewport(0, 0, width, height);
+        printf("Window size changed to %d x %d\n", width, height);
 		}
 
 		/* 状态设置函数 */
