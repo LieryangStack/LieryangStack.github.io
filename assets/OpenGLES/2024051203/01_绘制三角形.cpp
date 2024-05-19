@@ -77,16 +77,6 @@ main(int argc, char* argv[]) {
   EGLConfig egl_config = NULL;
   EGLConfig *configs_list = NULL;
 
-  // glGetIntegerv(GL_MAJOR_VERSION, &major);
-  // glGetIntegerv(GL_MINOR_VERSION, &minor);
-  // g_print ("gl version = %d.%d\n", major, minor);
-
-   /**
-   * 1. display命名规范 hostname:display_number.screen_number
-   *    可以这样理解：一台计算机可以有多个 display，一个 display 可以有多个屏幕。
-   *    指定参数的时候：因为可以省略掉 hostname 和 screen_number，所以可以用 :0 、:1 、:2 等等
-   * 2. 这个函数用来连接X服务器，Ubuntu Gnome桌面的X服务器就是 Xorg（开机的时候，显示管理器会运行Xorg）
-  */
   display = XOpenDisplay(display_name);
   if (display == NULL) {
     fprintf(stderr, "%s: cannot connect to X server '%s'\n",
@@ -109,16 +99,11 @@ main(int argc, char* argv[]) {
   win_x = 0;
   win_y = 0;
 
-  /* 1. 新建窗口的边界为2个像素，但是由于窗口管理器的存在，这个边界是看不见的
-   * 2. 只有命令行模式下，只启动 Xorg（X服务器），才可以看见边界像素
-   */
-  win_border_width = 2;
-
   /**
    * 所有参数在头文件中都有注释，这里特别主要的是 RootWindow(display, screen_num)
   */
   win = XCreateSimpleWindow(display, RootWindow(display, screen_num),
-                            win_x, win_y, width, height, win_border_width,
+                            win_x, win_y, width, height, 2,
                             BlackPixel(display, screen_num),
                             WhitePixel(display, screen_num));
 
@@ -127,80 +112,31 @@ main(int argc, char* argv[]) {
 
   XMapWindow(display, win); /* 缺少映射到窗口函数，则不会显示 */
 
-	/* 1. 强制处理之前所有发送到服务器（display）的请求，并且等待所有事件处理完成才返回。
-	 * 2. discard: 是一个布尔值。如果设置为True，那么此函数还会清除所有尚未处理的事件。
-	 *             如果设置为False，则不会丢弃这些事件。
-	 * 3.注意：过度使用XSync可能会导致程序效率降低，因为它会中断程序和服务器之间的通信流，
-	 *   并强制服务器处理所有事件。因此，除非有特定的理由，否则最好避免频繁调用此函数。		
-	 */
-  //XSync(display, False); /* 缺少同步函数则不会显示窗口 */
-
-  /**
-   * 函数的主要目的是将任何还未发送到X server的缓冲区中的命令强制发送出去。
-   * 这意味着，如果有任何挂起的请求（例如创建窗口、绘图操作等），
-   * 它们会被立即发送到X server，但不会等待这些命令被执行。
-  */
+  /* 函数的主要目的是将任何还未发送到X server的缓冲区中的命令强制发送出去。*/
 	XFlush(display);
   
-  /**
-   * @brief: 获取本地显示器native_display的EGL显示连接
-   * @param display_id: 指定要连接的显示器。EGL_DEFAULT_DISPLAY表示默认显示器
-   * @return: 成功返回 EGLDisplay 对象，失败返回 EGL_NO_DISPLAY
-  */
   egl_display = eglGetDisplay( (EGLNativeDisplayType) display );
   if ( egl_display == EGL_NO_DISPLAY || eglGetError() != EGL_SUCCESS ) {
     g_error ("Got no EGL display.\n");
     return FALSE;
   }
   
-  /**
-   * @brief: 初始化使用eglGetDisplay获取的EGL显示连接。对已经初始化的EGL显示连接进行初始化除了返回版本号外没有任何效果
-   * @param dpy: 指定要初始化的EGL显示连接
-   * @param major: 返回EGL实现的主要版本号。可以为NULL
-   * @param minor: 返回EGL实现的次要版本号。可以为NULLs
-   * @note: 使用eglTerminate释放与EGL显示连接关联的资源
-   * @return: 如果eglInitialize失败，则返回EGL_FALSE，否则返回EGL_TRUE。当返回EGL_FALSE时，major和minor不会被修改。
-  */
   if ( eglInitialize( egl_display, &major, &minor) == EGL_FALSE || eglGetError() != EGL_SUCCESS) {
     g_error ("Unable to initialize EGL\n");
     return FALSE;
   }
-
   g_print ("egl version = %d.%d\n", major, minor);
 
-  /**
-   * @brief: 获取系统可用的EGL配置信息
-   * @param dpy: 指定要获取配置的EGL显示连接
-   * @param configs: 输出参数，包含当前系统上所有有效的 EGLConfig 配置列表
-   * @param config_size: 要获取多少个有效 EGLConfig 配置列表
-   * @param num_config：实际返回的 GLConfig 个数
-   * @return: 成功返回 TRUE，失败返回 FALSE
-   * 
-  */
-  if ( eglGetConfigs (egl_display, NULL, 0, &num_configs) == EGL_FALSE || eglGetError() != EGL_SUCCESS) {
-    g_error ("Unable to get EGL configs\n");
-    return FALSE;
-  }
-
-  g_print ("egl num_configs = %d\n", num_configs);
-  
   /**
    * 期望的EGL帧缓存配置列表,配置为一个key一个value的形式 
    * 指定EGL surface类型
   */
   EGLint attr[] = {       // some attributes to set up our egl"nterface
     EGL_BUFFER_SIZE, 16,
-    EGL_RENDERABLE_TYPE, EGL_OPENGL_ES2_BIT,
+    EGL_RENDERABLE_TYPE, EGL_OPENGL_ES3_BIT,
     EGL_NONE
   };
 
-  /**
-   * @brief: 返回一个和期望的EGL帧缓存配置列表configSpec匹配的EGL帧缓存配置列表，存储在eglConfig中
-   * @param attrib_list: 期望的配置属性
-   * @param configs(out)： frame buffer配置列表
-   * @param config_size: 想要选中符合的frame buffer配置的最大个数
-   * @param num_config(out): 获取到多少个可用frame buffer配置列表
-  */
   if ( eglChooseConfig( egl_display, attr, &egl_config, 1, &num_configs ) == EGL_FALSE ) {
     g_error("Failed to choose config (eglError: %d)\n", eglGetError());
     return FALSE;
@@ -218,8 +154,12 @@ main(int argc, char* argv[]) {
 		return FALSE;
 	}
 
-	/* 渲染上下文EGLContext关联的帧缓冲配置列表，EGL_CONTEXT_CLIENT_VERSION表示这里是配置EGLContext的版本 */
-	EGLint ctxattr[] = { EGL_CONTEXT_CLIENT_VERSION, 2, EGL_NONE };
+	/* 用于指定请求的 OpenGL 或 OpenGL ES 上下文的主版本和此版本号 */
+	EGLint ctxattr[] = { 
+    EGL_CONTEXT_MAJOR_VERSION, 3, 
+    EGL_CONTEXT_MINOR_VERSION, 2, 
+    EGL_NONE 
+  };
 
 	/* 通过Display和上面获取到的的EGL帧缓存配置列表创建一个EGLContext， EGL_NO_CONTEXT表示不需要多个设备共享上下文 */
 	egl_context = eglCreateContext ( egl_display, egl_config, EGL_NO_CONTEXT, ctxattr );
@@ -235,15 +175,7 @@ main(int argc, char* argv[]) {
   /* 创建一个着色器对象，该对象通过ID来引用的 */
   unsigned int vertexShader = glCreateShader(GL_VERTEX_SHADER);
 
-  /** @brief: 着色器源码附加到着色器对象上 
-   *  @param shader: 这是一个着色器对象的标识符，可以是顶点着色器或片段着色器对象标识符
-   *  @param count:  这是一个整数值，指定了源代码字符串数组的元素数量。
-   *                 通常，这个值为1，表示只有一个源代码字符串。
-   *                 如果你有多个源代码字符串组成的数组，那么这个值应该是源代码字符串数组的元素数量
-   *  @param string: 这是一个指向源代码字符串的指针数组。每个源代码字符串都是一个字符数组，包含了着色器程序的源代码。
-   *  @param length: 这是一个指向整数数组的指针，用于指定每个源代码字符串的长度。如果你的源代码字符串中包含了null终止符（\0），
-   *                 那么你可以将length参数设置为NULL，OpenGL将自动计算每个字符串的长度。
-   */
+
   glShaderSource(vertexShader, 1, &vertexShaderSource, NULL);
   /* 编译着色器对象 */
   glCompileShader(vertexShader);
@@ -400,23 +332,27 @@ main(int argc, char* argv[]) {
 		XNextEvent (display, &event);
 
 		switch (event.type) {
-			case KeyPress: 
+			case KeyPress:
 				if (event.xkey.keycode == 9) /* 9表示ESC键*/
 					main_quit = TRUE;
 				break;
-      case ConfigureNotify:
-        int width = event.xconfigure.width;
-        int height = event.xconfigure.height;
+      case ConfigureNotify: 
+        width = event.xconfigure.width;
+        height = event.xconfigure.height;
         glViewport(0, 0, width, height);
         printf("Window size changed to %d x %d\n", width, height);
+        break;
+      case ClientMessage:
+        if ((Atom)event.xclient.data.l[0] == wmDeleteMessage) { /* 关闭窗口消息 */
+          main_quit = TRUE;
+        }
+        break;
 		}
 
 		/* 状态设置函数 */
     glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
     /* 状态使用函数：它使用了当前状态来获取应该清除的颜色 */
     glClear(GL_COLOR_BUFFER_BIT);
-
-    
 
     /* 用于指定当前使用的着色器程序 */
     glUseProgram(shaderProgram);
@@ -427,15 +363,13 @@ main(int argc, char* argv[]) {
 
     glDrawArrays (GL_TRIANGLES, 0, 6);
 
-    
-
 		eglSwapBuffers (egl_display, egl_surface);
 	}
 
   glDeleteVertexArrays(1, &VAO);
   glDeleteBuffers(1, &VBO);
   glDeleteProgram(shaderProgram);
-
+  
 	eglDestroyContext ( egl_display, egl_context );
 	eglDestroySurface ( egl_display, egl_surface );
 	eglTerminate      ( egl_display );

@@ -33,8 +33,8 @@ main(int argc, char* argv[]) {
 	char *display_name = getenv("DISPLAY");  /* 获取环境变量DISPLAY的值 */
 	XEvent event;
 
-  EGLint major = 0;
-  EGLint minor = 0;
+  EGLint egl_version_major = 0;
+  EGLint egl_version_minor = 0;
   EGLint num_configs = 0;
 	EGLDisplay egl_display = NULL;
 	EGLSurface egl_surface = NULL;
@@ -42,7 +42,7 @@ main(int argc, char* argv[]) {
   EGLConfig egl_config = NULL;
   EGLConfig *configs_list = NULL;
 
-
+  /************************************************X11部分****************************************************/
    /**
    * 1. display命名规范 hostname:display_number.screen_number
    *    可以这样理解：一台计算机可以有多个 display，一个 display 可以有多个屏幕。
@@ -104,6 +104,8 @@ main(int argc, char* argv[]) {
   */
 	XFlush(display);
   
+
+  /************************************************EGL部分****************************************************/
   /**
    * @brief: 获取本地显示器native_display的EGL显示连接
    * @param display_id: 指定要连接的显示器。EGL_DEFAULT_DISPLAY表示默认显示器
@@ -123,12 +125,12 @@ main(int argc, char* argv[]) {
    * @note: 使用eglTerminate释放与EGL显示连接关联的资源
    * @return: 如果eglInitialize失败，则返回EGL_FALSE，否则返回EGL_TRUE。当返回EGL_FALSE时，major和minor不会被修改。
   */
-  if ( eglInitialize( egl_display, &major, &minor) == EGL_FALSE || eglGetError() != EGL_SUCCESS) {
+  if ( eglInitialize( egl_display, &egl_version_major, &egl_version_minor) == EGL_FALSE || eglGetError() != EGL_SUCCESS) {
     g_error ("Unable to initialize EGL\n");
     return FALSE;
   }
 
-  g_print ("egl version %d.%d\n", major, minor);
+  g_print ("egl version %d.%d\n", egl_version_major, egl_version_minor);
 
   /**
    * @brief: 获取系统可用的EGL配置信息
@@ -152,7 +154,7 @@ main(int argc, char* argv[]) {
   */
   EGLint attr[] = {       // some attributes to set up our egl-interface
     EGL_BUFFER_SIZE, 16,
-    EGL_RENDERABLE_TYPE, EGL_OPENGL_ES2_BIT,
+    EGL_RENDERABLE_TYPE, EGL_OPENGL_ES3_BIT,
     EGL_NONE
   };
 
@@ -180,8 +182,12 @@ main(int argc, char* argv[]) {
 		return FALSE;
 	}
 
-	/* 渲染上下文EGLContext关联的帧缓冲配置列表，EGL_CONTEXT_CLIENT_VERSION表示这里是配置EGLContext的版本 */
-	EGLint ctxattr[] = { EGL_CONTEXT_CLIENT_VERSION, 2, EGL_NONE };
+  /* 用于指定请求的 OpenGL 或 OpenGL ES 上下文的主版本和此版本号 */
+  EGLint ctxattr[] = { 
+    EGL_CONTEXT_MAJOR_VERSION, 3, 
+    EGL_CONTEXT_MINOR_VERSION, 2, 
+    EGL_NONE 
+  };
 
 	/* 通过Display和上面获取到的的EGL帧缓存配置列表创建一个EGLContext， EGL_NO_CONTEXT表示不需要多个设备共享上下文 */
 	egl_context = eglCreateContext ( egl_display, egl_config, EGL_NO_CONTEXT, ctxattr );
@@ -216,20 +222,34 @@ main(int argc, char* argv[]) {
   */
   XSetWMProtocols(display, win, &wmDeleteMessage, 1);
 
+  /* 查看OpenGL ES版本 */
+  const GLubyte* version = glGetString(GL_VERSION);
+  printf("OpenGL ES version: %s\n", version);
+
+  /* 查看GLSL ES版本 */
+  const GLubyte* shadingLanguageVersion = glGetString(GL_SHADING_LANGUAGE_VERSION);
+  printf("GLSL version: %s\n", shadingLanguageVersion);
+
 	while (!main_quit) {
 
 		XNextEvent (display, &event);
 
 		switch (event.type) {
-			case KeyPress: 
+			case KeyPress:
 				if (event.xkey.keycode == 9) /* 9表示ESC键*/
 					main_quit = TRUE;
 				break;
-      case ConfigureNotify:
-        int width = event.xconfigure.width;
-        int height = event.xconfigure.height;
+      case ConfigureNotify: 
+        width = event.xconfigure.width;
+        height = event.xconfigure.height;
         glViewport(0, 0, width, height);
         printf("Window size changed to %d x %d\n", width, height);
+        break;
+      case ClientMessage:
+        if ((Atom)event.xclient.data.l[0] == wmDeleteMessage) { /* 关闭窗口消息 */
+          main_quit = TRUE;
+        }
+        break;
 		}
 
 		/* 状态设置函数 */
