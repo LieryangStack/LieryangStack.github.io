@@ -13,46 +13,26 @@
 #include <X11/Xatom.h>
 #include <X11/keysymdef.h>
 
-#include <GLES3/gl32.h>
+#include <GLES2/gl2.h>
 #include <EGL/egl.h>
 
 #include <glib.h>
 
 #include <iostream>
 
-/**
- * location = 0 ，其中的location可以显式地指定着色器程序中的输入和输出变量在内存布局中的位置
- *                因为着色器程序是一个相对独立的程序，我们不能通过变量名来赋值变量值，
- *                所以通过location标识内存的位置传递数据。
- * glVertexAttribPointer 中第一个参数就是location变量的值
- * glEnableVertexAttribArray 的参数也是location变量的值
-*/
-// const char *vertexShaderSource = 
-//     "attribute vec4 vPosition;\n"
-//     "void main()\n"
-//     "{\n"
-//     "   gl_Position = vPosition;\n"
-//     "}\0";
-// const char *fragmentShaderSource = 
-//     "precision mediump float;\n"
-//     "void main()\n"
-//     "{\n"
-//     "  gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);\n"
-//     "}\0";
 
-const char *vertexShaderSource = "#version 320 es\n"
-    "layout (location = 0) in vec3 aPos;\n"
+const char *vertexShaderSource = 
+    "attribute vec4 vPosition;\n"
     "void main()\n"
     "{\n"
-    "   gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);\n"
+    "   gl_Position = vPosition;\n"
     "}\0";
-const char *fragmentShaderSource = "#version 320 es\n"
-    "precision mediump float; //声明float型变量的精度为mediump\n"
-    "out vec4 FragColor;\n"
+const char *fragmentShaderSource = 
+    "precision mediump float;\n"
     "void main()\n"
     "{\n"
-    "   FragColor = vec4(1.0f, 0.5f, 0.2f, 0.1f);\n"
-    "}\n\0";
+    "  gl_FragColor = vec4(1.0, 0.5, 0.6, 0.8);\n"
+    "}\0";
 
 int 
 main(int argc, char* argv[]) {
@@ -132,8 +112,12 @@ main(int argc, char* argv[]) {
    * 指定EGL surface类型
   */
   EGLint attr[] = {       // some attributes to set up our egl"nterface
-    EGL_BUFFER_SIZE, 16,
-    EGL_RENDERABLE_TYPE, EGL_OPENGL_ES3_BIT,
+    EGL_BUFFER_SIZE, 32,
+    EGL_RED_SIZE, 8,
+    EGL_GREEN_SIZE, 8,
+    EGL_BLUE_SIZE, 8,
+    EGL_ALPHA_SIZE, 8,
+    EGL_RENDERABLE_TYPE, EGL_OPENGL_ES2_BIT,
     EGL_NONE
   };
 
@@ -156,8 +140,8 @@ main(int argc, char* argv[]) {
 
 	/* 用于指定请求的 OpenGL 或 OpenGL ES 上下文的主版本和此版本号 */
 	EGLint ctxattr[] = { 
-    EGL_CONTEXT_MAJOR_VERSION, 3, 
-    EGL_CONTEXT_MINOR_VERSION, 2, 
+    EGL_CONTEXT_MAJOR_VERSION, 2, 
+    EGL_CONTEXT_MINOR_VERSION, 0, 
     EGL_NONE 
   };
 
@@ -217,108 +201,16 @@ main(int argc, char* argv[]) {
 
   float vertices[] = {
        /* 第一个三角形 */
-      -0.5f, -0.5f, 0.0f, // left  
-       0.5f, -0.5f, 0.0f, // right 
-       0.0f,  0.5f, 0.0f, // top
+      -0.5f, -0.5f, 0.0f, 1.0f, // left  
+       0.5f, -0.5f, 0.0f, 0.0f,// right 
+       0.0f,  0.5f, 0.0f, 0.9f,// top
        /* 第二个三角形 */
-       0.7f,  0.7f, 0.0f,
-       0.8f,  0.7f, 0.0f,
-       0.75f, 0.8f, 0.0f
+       0.7f,  0.7f, 0.0f, 1.0f,
+       0.8f,  0.7f, 0.0f, 0.0f,
+       0.75f, 0.8f, 0.0f, 0.9f
   };
 
-  const GLfloat triangleVertices[] = {
-        0.0f, 1.0f,
-        -1.0f, -1.0f,
-        1.0f, -1.0f
-  };
-
-  unsigned int VBO, VAO;
-
-  /**
-   * VAO对象存储了以下与顶点数据相关的状态信息：
-   * a.顶点缓冲对象（Vertex Buffer Object，VBO）的绑定状态，用于存储实际的顶点数据。
-   * b.顶点属性指针的配置，包括顶点位置、法线、颜色等。
-   * c.顶点索引缓冲对象的绑定状态（如果使用索引绘制）。
-   * d.其他与顶点数据配置相关的状态，如顶点属性的启用/禁用状态、顶点属性分割和步长等。
-   * 
-   * 通过使用VAO，你可以将顶点数据的配置和状态信息封装在一个对象中，并且在需要时快速切换和重用这些配置。
-   * 这有助于提高代码的可读性、可维护性，并且可以提供更高的渲染性能。
-  */
-
-  /**
-   * @brief: glGenVertexArrays是一个用于生成顶点数组对象的OpenGL函数。（VAO是用于管理顶点数据的状态和配置）
-   * @param       n： 这是一个整数值，指定要生成的VAO对象的数量
-   * @param  arrays： 这是一个指向无符号整数数组的指针，用于接收生成的VAO对象的标识符。
-  */
-  glGenVertexArrays(1, &VAO);
-
-  /**
-   * @brief: 是一个用于生成缓冲对象的OpenGL函数。
-   *         缓冲对象用于存储和管理各种类型的数据，如顶点数据、索引数据、纹理数据等。
-   *         VBO顶点缓冲对象，它会在GPU内存（显存）中存储大量顶点
-   * @param       n： 这是一个整数值，指定要生成的缓冲对象的数量。
-   * @param buffers： 这是一个指向无符号整数数组的指针，用于接收生成的缓冲对象的标识符。
-  */
-  glGenBuffers(1, &VBO);
-
-  /**
-   * @brief: 函数将特定的VAO对象绑定到OpenGL的上下文中。
-   *         一旦绑定了VAO对象，之后的顶点数据配置和操作都会与该VAO对象相关联
-  */
-  glBindVertexArray(VAO);
-
-  /**
-   * @brief: 将特定的缓冲对象绑定到OpenGL的上下文中。
-   *         一旦绑定了缓冲对象，之后的数据操作和配置都会与该缓冲对象相关联。
-  */
-  glBindBuffer(GL_ARRAY_BUFFER, VBO);
-  
-  /**
-   * @brief: 配置VBO缓冲对象，将数据传输到GPU中
-   * 
-   * glBufferData是一个专门用来把用户定义的数据复制到当前绑定缓冲的函数
-   * GL_STATIC_DRAW ：数据不会或几乎不会改变。
-   * GL_DYNAMIC_DRAW：数据会被改变很多。
-   * GL_STREAM_DRAW ：数据每次绘制时都会改变。
-  */
-  glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-
-  /**
-   * @brief: 配置顶点属性指针，使得GPU可以正确解析缓冲对象中的数据。
-   * @param GLuint index: 指定我们要配置的顶点属性。还记得我们在顶点着色器中使用layout(location = 0)
-   *                      定义了position顶点属性的位置值(Location)吗？ 它可以把顶点属性的位置值设置为0。
-   *                      因为我们希望把数据传递到这一个顶点属性中，所以这里我们传入0
-   * @param size:         指定顶点属性的大小。顶点属性是一个vec3，它由3个值组成，所以大小是3。
-   * @param GLenum type:  指定数据的类型，这里是GL_FLOAT(GLSL中vec*都是由浮点数值组成的)。 
-   * @param GLboolean normalized: 定义我们是否希望数据被标准化(Normalize)。如果我们设置为GL_TRUE，
-   *                              所有数据都会被映射到0（对于有符号型signed数据是-1）到1之间。
-   *                              我们把它设置为GL_FALSE。
-   * @param GLsizei stride: 它告诉我们在连续的顶点属性组之间的间隔。
-   *                 由于下个组位置数据在3个float之后，我们把步长设置为3 * sizeof(float)。
-   *                 要注意的是由于我们知道这个数组是紧密排列的（在两个顶点属性之间没有空隙）
-   *                 我们也可以设置为0来让OpenGL决定具体步长是多少（只有当数值是紧密排列时才可用）。
-   *                 一旦我们有更多的顶点属性，我们就必须更小心地定义每个顶点属性之间的间隔，
-   *                 我们在后面会看到更多的例子（译注: 这个参数的意思简单说就是从这个属性第二次出现的地方到整个数组0位置之间有多少字节）。
-   * @param const void *pointer: 需要我们进行这个奇怪的强制类型转换。
-   *                             它表示位置数据在缓冲中起始位置的偏移量(Offset)。
-   *                             由于位置数据在数组的开头，所以这里是0
-  */
-  glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
-  /* 以顶点属性位置值作为参数，启用顶点属性，使得GPU可以使用缓冲对象中的数据进行渲染。；顶点属性默认是禁用的 */
-  glEnableVertexAttribArray(0);
-  /**
-   * 当你将缓冲区对象设置为0,实际上是在解除绑定当前与指定目标关联的缓冲区对象。
-   * 这样可以防止后续对此目标的无意识的修改，从而保护当前绑定的VBO数据
-  */
-  glBindBuffer(GL_ARRAY_BUFFER, 0); 
-
-  /**
-   * 之后你可以解绑 VAO，以便其他 VAO 调用不会意外地修改这个 VAO，但这种情况很少发生。
-   * 修改其他 VAOs 需要调用 glBindVertexArray，所以通常我们不会在不直接必要的情况下解绑 VAOs（或 VBOs）。
-  */
-  glBindVertexArray(0); 
-
-  // gint vPosition = glGetAttribLocation(shaderProgram, "vPosition"); /* 2.0 */
+  gint vPosition = glGetAttribLocation(shaderProgram, "vPosition"); /* 2.0版本 */
   
 	XSelectInput (display, win, KeyPressMask | StructureNotifyMask);
 
@@ -326,6 +218,10 @@ main(int argc, char* argv[]) {
 
   Atom wmDeleteMessage = XInternAtom(display, "WM_DELETE_WINDOW", False);
   XSetWMProtocols(display, win, &wmDeleteMessage, 1);
+
+  /* 开启颜色混合，也就是透明通道 */
+  glEnable(GL_BLEND);
+  glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 	while (!main_quit) {
 
@@ -356,18 +252,16 @@ main(int argc, char* argv[]) {
 
     /* 用于指定当前使用的着色器程序 */
     glUseProgram(shaderProgram);
-    glBindVertexArray(VAO); 
 
-    // glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0 ,vertices); 
-    // glEnableVertexAttribArray(0); 
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 4 * sizeof(float), vertices); 
+    glEnableVertexAttribArray(0); 
 
     glDrawArrays (GL_TRIANGLES, 0, 6);
 
 		eglSwapBuffers (egl_display, egl_surface);
 	}
 
-  glDeleteVertexArrays(1, &VAO);
-  glDeleteBuffers(1, &VBO);
+
   glDeleteProgram(shaderProgram);
   
 	eglDestroyContext ( egl_display, egl_context );
