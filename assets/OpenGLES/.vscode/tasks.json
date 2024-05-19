@@ -16,6 +16,7 @@
 				"-lGLESv2",
 				// "/usr/lib/x86_64-linux-gnu/libGLESv2_nvidia.so.2",
 				"-lm",
+				"-I/home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGLES/common",
 				"`pkg-config",
 				"--cflags",
 				"--libs",

@@ -3,7 +3,7 @@
     {
       "name": "linux-gcc-x64",
       "includePath": [
-        "${workspaceFolder}/**",
+        "${workspaceFolder}/common",
         "/usr/include/gtk-4.0",
         "/usr/include/gio-unix-2.0",
         "/usr/include/pango-1.0",
