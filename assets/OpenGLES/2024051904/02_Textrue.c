@@ -53,7 +53,7 @@ const char *vertexShaderSource = "#version 320 es\n"
  * 我们还可以把得到的纹理颜色与顶点颜色混合，只需把纹理颜色与顶点颜色在片段着色器中相乘来混合二者的颜色
 */
 const char *fragmentShaderSource = "#version 320 es\n"
-    "#extension GL_OES_EGL_image_external : require\n"
+    "#extension GL_OES_EGL_image_external_essl3: require\n"
     "precision mediump float; //声明float型变量的精度为mediump\n"
     "out vec4 FragColor;\n"
     "in vec3 ourColor\n;"
@@ -61,7 +61,7 @@ const char *fragmentShaderSource = "#version 320 es\n"
     "uniform samplerExternalOES tex;"
     "void main()\n"
     "{\n"
-    "   FragColor = texture2D(tex, TexCoord);\n"
+    "   FragColor = texture(tex, TexCoord);\n"
     "}\n\0";
 
 
@@ -143,11 +143,11 @@ main(int argc, char* argv[]) {
    * 指定EGL surface类型
   */
   EGLint attr[] = {       // some attributes to set up our egl"nterface
-    EGL_BUFFER_SIZE, 32,
     EGL_RED_SIZE, 8,
     EGL_GREEN_SIZE, 8,
     EGL_BLUE_SIZE, 8,
     EGL_ALPHA_SIZE, 8,
+    EGL_SURFACE_TYPE, EGL_WINDOW_BIT,
     EGL_RENDERABLE_TYPE, EGL_OPENGL_ES2_BIT,
     EGL_NONE
   };
@@ -322,13 +322,14 @@ main(int argc, char* argv[]) {
   printf ("glEGLImageTargetTexture2DOES = %p\n", glEGLImageTargetTexture2DOES);
 
   // load and create a texture 
-  // -------------------------
+  // -------------------------  必须是 GL_TEXTURE_2D
   GLuint texture[2];
-  glGenTextures(1, texture);
-  glActiveTexture (GL_TEXTURE1);
-  glBindTexture(GL_TEXTURE_2D, texture[1]); 
+  glGenTextures(2, texture);
+  glBindTexture(GL_TEXTURE_2D, texture[0]); 
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+  glTexParameteri (GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+  glTexParameteri (GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 
   // // 在加载图像之前设置翻转Y轴
   // stbi_set_flip_vertically_on_load(true); 已经在着色器中修改纹理坐标了
@@ -339,7 +340,7 @@ main(int argc, char* argv[]) {
   if (img_data)
   {
       glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, img_width, img_height, 0, GL_RGB, GL_UNSIGNED_BYTE, img_data);
-      glGenerateMipmap(GL_TEXTURE_2D);
+      // glGenerateMipmap(GL_TEXTURE_EXTERNAL_OES);
   } else {
       g_print ("Failed to load texture\n");
   }
@@ -350,28 +351,30 @@ main(int argc, char* argv[]) {
       EGL_NONE
   };
 
-
   /**
    * EGL_NATIVE_PIXMAP_KHR  
    * EGL_LINUX_DMA_BUF_EXT
    * EGL_GL_TEXTURE_2D_KHR
    * 
   */
-  EGLImageKHR image = eglCreateImageKHR (egl_display, egl_context, EGL_GL_TEXTURE_2D_KHR,  (EGLClientBuffer)(uintptr_t)texture[1], imageAttributes);
+  EGLImageKHR image = eglCreateImageKHR (egl_display, egl_context, EGL_GL_TEXTURE_2D_KHR,  (EGLClientBuffer)(uintptr_t)texture[0], imageAttributes);
+  
   if (image == EGL_NO_IMAGE_KHR) {
-    g_print ("EGLImageKHR Error\n");
+    g_print ("EGLImageKHR Error id = 0x%X ( %d )\n", eglGetError(), eglGetError());
+    
     return -1;
   }
 
-  glActiveTexture (GL_TEXTURE0);
-  glBindTexture(GL_TEXTURE_EXTERNAL_OES, texture[0]); 
+  glActiveTexture (GL_TEXTURE1);
+  glBindTexture(GL_TEXTURE_EXTERNAL_OES, texture[1]); 
+
   /**
    * GL_TEXTURE_EXTERNAL_OES
    * GL_TEXTURE_2D
   */
   glEGLImageTargetTexture2DOES(GL_TEXTURE_EXTERNAL_OES, image);
 
-    /**
+  /**
    * 当你将缓冲区对象设置为0,实际上是在解除绑定当前与指定目标关联的缓冲区对象。
    * 这样可以防止后续对此目标的无意识的修改，从而保护当前绑定的VBO数据
   */
@@ -386,7 +389,7 @@ main(int argc, char* argv[]) {
 
   /* 使用uniform之前一定要先使用着色器程序对象 */
   glUseProgram(shaderProgram);
-  // glUniform1i(glGetUniformLocation(shaderProgram, "texture1"), 0);
+  glUniform1i(glGetUniformLocation(shaderProgram, "tex"), 1);
 
 
   /* 开启颜色混合，也就是透明通道 */
