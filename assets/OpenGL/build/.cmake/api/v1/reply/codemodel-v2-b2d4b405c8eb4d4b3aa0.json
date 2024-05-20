@@ -1,0 +1,443 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"childIndexes" : 
+					[
+						1,
+						2,
+						3,
+						4,
+						5,
+						6,
+						7,
+						8
+					],
+					"jsonFile" : "directory-.-Debug-f5ebdc15457944623624.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.10"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						27
+					]
+				},
+				{
+					"build" : "2024040801",
+					"jsonFile" : "directory-2024040801-Debug-1b27c480090d661bfb76.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.10"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "2024040801",
+					"targetIndexes" : 
+					[
+						0
+					]
+				},
+				{
+					"build" : "2024041602",
+					"jsonFile" : "directory-2024041602-Debug-a7e0c94c6b6d6c1cc8b5.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.10"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "2024041602",
+					"targetIndexes" : 
+					[
+						1,
+						2,
+						3,
+						4,
+						5
+					]
+				},
+				{
+					"build" : "2024041604",
+					"jsonFile" : "directory-2024041604-Debug-a421011fdaf0533c7956.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.10"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "2024041604",
+					"targetIndexes" : 
+					[
+						6,
+						7,
+						8,
+						9,
+						10
+					]
+				},
+				{
+					"build" : "2024041605",
+					"jsonFile" : "directory-2024041605-Debug-0469746c859658014706.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.10"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "2024041605",
+					"targetIndexes" : 
+					[
+						11,
+						12,
+						13,
+						14,
+						15,
+						28
+					]
+				},
+				{
+					"build" : "2024041606",
+					"jsonFile" : "directory-2024041606-Debug-e07184727076409b7663.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.10"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "2024041606",
+					"targetIndexes" : 
+					[
+						16,
+						17
+					]
+				},
+				{
+					"build" : "2024041807",
+					"jsonFile" : "directory-2024041807-Debug-107ee40accfd1ce01d2c.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.10"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "2024041807",
+					"targetIndexes" : 
+					[
+						18,
+						19,
+						20,
+						21
+					]
+				},
+				{
+					"build" : "2024041908",
+					"jsonFile" : "directory-2024041908-Debug-fe03d969c91f03dc9cfd.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.10"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "2024041908",
+					"targetIndexes" : 
+					[
+						22,
+						23,
+						24
+					]
+				},
+				{
+					"build" : "2024042309",
+					"jsonFile" : "directory-2024042309-Debug-d5baa7d1b9ce12d0940e.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.10"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "2024042309",
+					"targetIndexes" : 
+					[
+						25,
+						26
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4,
+						5,
+						6,
+						7,
+						8
+					],
+					"name" : "OpenGLStudy",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4,
+						5,
+						6,
+						7,
+						8,
+						9,
+						10,
+						11,
+						12,
+						13,
+						14,
+						15,
+						16,
+						17,
+						18,
+						19,
+						20,
+						21,
+						22,
+						23,
+						24,
+						25,
+						26,
+						27,
+						28
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 1,
+					"id" : "01_create_window::@4e72b2389cc879411b88",
+					"jsonFile" : "target-01_create_window-Debug-4b0fc208c70560f85152.json",
+					"name" : "01_create_window",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "02_hello_ebo::@457ef3b884f6295a0c74",
+					"jsonFile" : "target-02_hello_ebo-Debug-f92b3b4a4c49676c06d8.json",
+					"name" : "02_hello_ebo",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "02_hello_triangle::@457ef3b884f6295a0c74",
+					"jsonFile" : "target-02_hello_triangle-Debug-3ef2ab6b2278c0ab4e3b.json",
+					"name" : "02_hello_triangle",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "02_practice_1::@457ef3b884f6295a0c74",
+					"jsonFile" : "target-02_practice_1-Debug-0931d8b53c536b441004.json",
+					"name" : "02_practice_1",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "02_practice_2::@457ef3b884f6295a0c74",
+					"jsonFile" : "target-02_practice_2-Debug-53148c4c5c7d5452e471.json",
+					"name" : "02_practice_2",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "02_practice_3::@457ef3b884f6295a0c74",
+					"jsonFile" : "target-02_practice_3-Debug-4df751cbdb2a151250f4.json",
+					"name" : "02_practice_3",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 3,
+					"id" : "04_practice_one::@0f161c56fb5dd0151071",
+					"jsonFile" : "target-04_practice_one-Debug-beca7c573f7fb485f472.json",
+					"name" : "04_practice_one",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 3,
+					"id" : "04_practice_three::@0f161c56fb5dd0151071",
+					"jsonFile" : "target-04_practice_three-Debug-c1ac76c306854b9f9ba7.json",
+					"name" : "04_practice_three",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 3,
+					"id" : "04_practice_two::@0f161c56fb5dd0151071",
+					"jsonFile" : "target-04_practice_two-Debug-cf9e24271911bdee8080.json",
+					"name" : "04_practice_two",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 3,
+					"id" : "04_shaders_class::@0f161c56fb5dd0151071",
+					"jsonFile" : "target-04_shaders_class-Debug-beacdfd72a91463a9bbe.json",
+					"name" : "04_shaders_class",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 3,
+					"id" : "04_shaders_uniform::@0f161c56fb5dd0151071",
+					"jsonFile" : "target-04_shaders_uniform-Debug-4bb65d032ee4023d12da.json",
+					"name" : "04_shaders_uniform",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 4,
+					"id" : "05_practice_four::@7dbb55940bf025f18628",
+					"jsonFile" : "target-05_practice_four-Debug-4b398726576e232ee4c1.json",
+					"name" : "05_practice_four",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 4,
+					"id" : "05_practice_one::@7dbb55940bf025f18628",
+					"jsonFile" : "target-05_practice_one-Debug-ebb9db8900029f675ec3.json",
+					"name" : "05_practice_one",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 4,
+					"id" : "05_practice_two::@7dbb55940bf025f18628",
+					"jsonFile" : "target-05_practice_two-Debug-0dec4dfd7c3f22e66ded.json",
+					"name" : "05_practice_two",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 4,
+					"id" : "05_textures::@7dbb55940bf025f18628",
+					"jsonFile" : "target-05_textures-Debug-b1eb3e6686003a55f883.json",
+					"name" : "05_textures",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 4,
+					"id" : "05_textures_combined::@7dbb55940bf025f18628",
+					"jsonFile" : "target-05_textures_combined-Debug-c48cce410e33fa572622.json",
+					"name" : "05_textures_combined",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 5,
+					"id" : "06_texture_filter::@f755ee63f8256b36666e",
+					"jsonFile" : "target-06_texture_filter-Debug-7afda0d0b67649faf756.json",
+					"name" : "06_texture_filter",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 5,
+					"id" : "06_texture_wrap::@f755ee63f8256b36666e",
+					"jsonFile" : "target-06_texture_wrap-Debug-8b97172a87260faf10cc.json",
+					"name" : "06_texture_wrap",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 6,
+					"id" : "07_glm_study::@818fe4566a7a50b87004",
+					"jsonFile" : "target-07_glm_study-Debug-eba11cfd92648c541559.json",
+					"name" : "07_glm_study",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 6,
+					"id" : "07_practice_one::@818fe4566a7a50b87004",
+					"jsonFile" : "target-07_practice_one-Debug-8673b9e8540959c38587.json",
+					"name" : "07_practice_one",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 6,
+					"id" : "07_practice_two::@818fe4566a7a50b87004",
+					"jsonFile" : "target-07_practice_two-Debug-9c09c20b69c27c267a2e.json",
+					"name" : "07_practice_two",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 6,
+					"id" : "07_transformations::@818fe4566a7a50b87004",
+					"jsonFile" : "target-07_transformations-Debug-1b4fda618cdfe5a49819.json",
+					"name" : "07_transformations",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 7,
+					"id" : "08_coordinate_systems::@7ab74819a713c827a42f",
+					"jsonFile" : "target-08_coordinate_systems-Debug-cf9cf75e9b5d5a13eac4.json",
+					"name" : "08_coordinate_systems",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 7,
+					"id" : "08_coordinate_systems_3d::@7ab74819a713c827a42f",
+					"jsonFile" : "target-08_coordinate_systems_3d-Debug-b799174902971c5d09c5.json",
+					"name" : "08_coordinate_systems_3d",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 7,
+					"id" : "08_coordinate_systems_3d_multi::@7ab74819a713c827a42f",
+					"jsonFile" : "target-08_coordinate_systems_3d_multi-Debug-3c462dc505c40eb23af6.json",
+					"name" : "08_coordinate_systems_3d_multi",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 8,
+					"id" : "09_camera_circle::@f1968c84966437b7e63d",
+					"jsonFile" : "target-09_camera_circle-Debug-d085aa770b1a3ad8a4d4.json",
+					"name" : "09_camera_circle",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 8,
+					"id" : "09_camera_keyboard_dt::@f1968c84966437b7e63d",
+					"jsonFile" : "target-09_camera_keyboard_dt-Debug-49a6a8d82491b3ac4efa.json",
+					"name" : "09_camera_keyboard_dt",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "glad::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-glad-Debug-db8726f28af53d3088e8.json",
+					"name" : "glad",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 4,
+					"id" : "main::@7dbb55940bf025f18628",
+					"jsonFile" : "target-main-Debug-915af2d2599559556ee5.json",
+					"name" : "main",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build",
+		"source" : "/home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 7
+	}
+}

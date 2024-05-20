@@ -11,9 +11,12 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/2024041605/05_textures_combined.cpp" "2024041605/CMakeFiles/05_textures_combined.dir/05_textures_combined.cpp.o" "gcc" "2024041605/CMakeFiles/05_textures_combined.dir/05_textures_combined.cpp.o.d"
   )
 
-# Targets to which this target links.
-set(CMAKE_TARGET_LINKED_INFO_FILES
-  "/home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build/CMakeFiles/glad.dir/DependInfo.cmake"
+# Targets to which this target links which contain Fortran sources.
+set(CMAKE_Fortran_TARGET_LINKED_INFO_FILES
+  )
+
+# Targets to which this target links which contain Fortran sources.
+set(CMAKE_Fortran_TARGET_FORWARD_LINKED_INFO_FILES
   )
 
 # Fortran module output directory.

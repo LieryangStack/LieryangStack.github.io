@@ -1,1 +1,1 @@
-/usr/bin/c++ -g CMakeFiles/01_create_window.dir/01_create_window.cpp.o -o 01_create_window   -L/usr/lib/gcc/x86_64-linux-gnu/12  -lglfw ../libglad.a ../../lib/libglm.a 
+/usr/bin/c++ -g CMakeFiles/01_create_window.dir/01_create_window.cpp.o -o 01_create_window   -L/usr/lib/gcc/x86_64-linux-gnu/12  -lglfw ../libglad.a /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/lib/libglm.a

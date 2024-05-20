@@ -11,9 +11,12 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/2024040801/01_create_window.cpp" "2024040801/CMakeFiles/01_create_window.dir/01_create_window.cpp.o" "gcc" "2024040801/CMakeFiles/01_create_window.dir/01_create_window.cpp.o.d"
   )
 
-# Targets to which this target links.
-set(CMAKE_TARGET_LINKED_INFO_FILES
-  "/home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/build/CMakeFiles/glad.dir/DependInfo.cmake"
+# Targets to which this target links which contain Fortran sources.
+set(CMAKE_Fortran_TARGET_LINKED_INFO_FILES
+  )
+
+# Targets to which this target links which contain Fortran sources.
+set(CMAKE_Fortran_TARGET_FORWARD_LINKED_INFO_FILES
   )
 
 # Fortran module output directory.

@@ -1,1 +1,1 @@
-/usr/bin/c++ -g CMakeFiles/02_practice_2.dir/02_练习2.cpp.o -o 02_practice_2   -L/usr/lib/gcc/x86_64-linux-gnu/12  -lglfw ../libglad.a ../../lib/libglm.a 
+/usr/bin/c++ -g CMakeFiles/02_practice_2.dir/02_练习2.cpp.o -o 02_practice_2   -L/usr/lib/gcc/x86_64-linux-gnu/12  -lglfw ../libglad.a /home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/lib/libglm.a
