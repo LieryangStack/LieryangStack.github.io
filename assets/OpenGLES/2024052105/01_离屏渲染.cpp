@@ -62,7 +62,7 @@ const char *fragmentShaderSource =
     "out vec4 FragColor;\n"
     "in vec3 ourColor\n;"
     "in vec2 TexCoord;\n"
-    "uniform samplerExternalOES tex;"
+    "uniform sampler2D tex;"
     "void main()\n"
     "{\n"
     "   FragColor = texture(tex, TexCoord);\n"
@@ -107,7 +107,7 @@ main(int argc, char* argv[]) {
   display_height = DisplayHeight(display, screen_num);
 
   /* 新建窗口大小是显示屏大小的三分之一*/
-  width = (display_width / 3);
+  width = (display_width / 10);
   height = (display_height / 3);
 
   /* 放到屏幕左上角 */
@@ -124,6 +124,11 @@ main(int argc, char* argv[]) {
 
   /* 设定接受事件类型 */
   XSelectInput(display, win, ButtonPressMask|StructureNotifyMask );
+
+  XMapWindow(display, win); /* 缺少映射到窗口函数，则不会显示 */
+
+  /* 函数的主要目的是将任何还未发送到X server的缓冲区中的命令强制发送出去。*/
+	XFlush(display);
   
   egl_display = eglGetDisplay( (EGLNativeDisplayType) display );
   if ( egl_display == EGL_NO_DISPLAY || eglGetError() != EGL_SUCCESS ) {
@@ -162,7 +167,14 @@ main(int argc, char* argv[]) {
   }
    
 	/* 通过egl和NativeWindow以及EGL帧缓冲配置创建EGLSurface。最后一个参数为属性信息，0表示不需要属性) */
-	egl_surface = eglCreateWindowSurface ( egl_display, egl_config, win, NULL );
+  EGLint surface_attrs[] = {
+    EGL_WIDTH, 1920,
+    EGL_HEIGHT, 1080,
+    EGL_NONE
+  };
+  
+	// egl_surface = eglCreatePbufferSurface ( egl_display, egl_config, surface_attrs);
+  egl_surface = eglCreateWindowSurface ( egl_display, egl_config, win, NULL);
 	if ( egl_surface == EGL_NO_SURFACE ) {
 		fprintf (stderr, "Unable to create EGL surface (eglError: %d\n", eglGetError());
 		return FALSE;
@@ -243,18 +255,8 @@ main(int argc, char* argv[]) {
       0, 1, 3, // first triangle
       1, 2, 3  // second triangle
   };
-  unsigned int VBO, VAO, EBO;
 
-  /**
-   * VAO对象存储了以下与顶点数据相关的状态信息：
-   * a.顶点缓冲对象（Vertex Buffer Object，VBO）的绑定状态，用于存储实际的顶点数据。
-   * b.顶点属性指针的配置，包括顶点位置、法线、颜色等。
-   * c.顶点索引缓冲对象的绑定状态（如果使用索引绘制）。
-   * d.其他与顶点数据配置相关的状态，如顶点属性的启用/禁用状态、顶点属性分割和步长等。
-   * 
-   * 通过使用VAO，你可以将顶点数据的配置和状态信息封装在一个对象中，并且在需要时快速切换和重用这些配置。
-   * 这有助于提高代码的可读性、可维护性，并且可以提供更高的渲染性能。
-  */
+  guint VBO, VAO, EBO, FBO;
 
   /**
    * @brief: glGenVertexArrays是一个用于生成顶点数组对象的OpenGL函数。（VAO是用于管理顶点数据的状态和配置）
@@ -309,23 +311,22 @@ main(int argc, char* argv[]) {
   glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
   glEnableVertexAttribArray(2);
 
+  /* 先解绑 VAO，再解绑其他的，不然绘制的时候可能不会起作用 */
+  glBindVertexArray(0); 
+  glBindBuffer(GL_ARRAY_BUFFER, 0); 
+  glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+
   /* 查看该设备支持的纹理数量 */
   GLint maxTextureUnits;
   glGetIntegerv(GL_MAX_TEXTURE_IMAGE_UNITS, &maxTextureUnits); /* maxTextureUnits = 32 */
   std::cout << "Maximum texture image units: " << maxTextureUnits << std::endl;
 
   // load and create a texture 
-  // -------------------------
-
-  PFNEGLCREATEIMAGEKHRPROC eglCreateImageKHR = (PFNEGLCREATEIMAGEKHRPROC) eglGetProcAddress ("eglCreateImageKHR");
-  PFNEGLDESTROYIMAGEKHRPROC eglDestroyImageKHR = (PFNEGLDESTROYIMAGEKHRPROC) eglGetProcAddress ("eglDestroyImageKHR");
-  PFNGLEGLIMAGETARGETTEXTURE2DOESPROC glEGLImageTargetTexture2DOES = (PFNGLEGLIMAGETARGETTEXTURE2DOESPROC)eglGetProcAddress ("glEGLImageTargetTexture2DOES");
-
-  // load and create a texture 
   // -------------------------  必须是 GL_TEXTURE_2D
-  GLuint texture[2];
-  glGenTextures(2, texture);
-  glBindTexture(GL_TEXTURE_2D, texture[0]); 
+  GLuint texture;
+  glGenTextures(1, &texture);
+  g_print ("texture id = %d\n", texture);
+  glBindTexture(GL_TEXTURE_2D, texture); 
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
   glTexParameteri (GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
@@ -335,7 +336,7 @@ main(int argc, char* argv[]) {
   // stbi_set_flip_vertically_on_load(true); 已经在着色器中修改纹理坐标了
   int img_width, img_height, nrChannels;
   // The FileSystem::getPath(...) is part of the GitHub repository so we can find files on any IDE/platform; replace it with your own image path.
-  unsigned char *img_data = stbi_load("/home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/2024041606/img/dog.png", \
+  unsigned char *img_data = stbi_load("/home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGLES/2024052105/image/one.png", \
                                   &img_width, &img_height, &nrChannels, 0);
   if (img_data)
   {
@@ -345,51 +346,21 @@ main(int argc, char* argv[]) {
       g_print ("Failed to load texture\n");
   }
 
-  const EGLint imageAttributes[] =
-  {
-      EGL_IMAGE_PRESERVED_KHR, EGL_TRUE,
-      EGL_NONE
-  };
+  // /* 解绑纹理 */
+  // glBindTexture(GL_TEXTURE_2D, 0); 
 
-  /**
-   * EGL_NATIVE_PIXMAP_KHR  像素图创建EGLImageKHR
-   * EGL_LINUX_DMA_BUF_EXT  DMA缓冲区创建EGLImageKHR
-   * EGL_GL_TEXTURE_2D_KHR  使用另一个纹理创建EGLImageKHR
-   * 
-  */
-  EGLImageKHR image = eglCreateImageKHR (egl_display, egl_context, EGL_GL_TEXTURE_2D_KHR,  (EGLClientBuffer)(uintptr_t)texture[0], imageAttributes);
-  
-  if (image == EGL_NO_IMAGE_KHR) {
-    g_print ("EGLImageKHR Error id = 0x%X ( %d )\n", eglGetError(), eglGetError());
-    
-    return -1;
-  }
-
-  glActiveTexture (GL_TEXTURE1);
-  glBindTexture(GL_TEXTURE_EXTERNAL_OES, texture[1]); 
-
-  /**
-   * GL_TEXTURE_EXTERNAL_OES
-   * GL_TEXTURE_2D
-  */
-  glEGLImageTargetTexture2DOES(GL_TEXTURE_EXTERNAL_OES, image);
-
-  /**
-   * 当你将缓冲区对象设置为0,实际上是在解除绑定当前与指定目标关联的缓冲区对象。
-   * 这样可以防止后续对此目标的无意识的修改，从而保护当前绑定的VBO数据
-  */
-  glBindBuffer(GL_ARRAY_BUFFER, 0); 
-
-  /**
-   * 之后你可以解绑 VAO，以便其他 VAO 调用不会意外地修改这个 VAO，但这种情况很少发生。
-   * 修改其他 VAOs 需要调用 glBindVertexArray，所以通常我们不会在不直接必要的情况下解绑 VAOs（或 VBOs）。
-  */
-  glBindVertexArray(0); 
+  // /* 创建帧缓冲对象 */
+  // glGenFramebuffers (1, &FBO);
+  // /* 绑定帧缓冲对象 */
+  // glBindFramebuffer (GL_FRAMEBUFFER, FBO);
+  // /* 将纹理附着到帧缓冲对象上面 */
+  // glFramebufferTexture2D (GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, texture, 0);
+  // /* 解绑 */
+  // glBindFramebuffer (GL_FRAMEBUFFER, 0);
 
 
   /* 使用uniform之前一定要先使用着色器程序对象 */
   glUseProgram(shaderProgram);
-  glUniform1i(glGetUniformLocation(shaderProgram, "tex"), 1);
 
 
   /* 开启颜色混合，也就是透明通道 */
@@ -403,11 +374,6 @@ main(int argc, char* argv[]) {
 
   Atom wmDeleteMessage = XInternAtom(display, "WM_DELETE_WINDOW", False);
   XSetWMProtocols(display, win, &wmDeleteMessage, 1);
-
-  XMapWindow(display, win); /* 缺少映射到窗口函数，则不会显示 */
-
-  /* 函数的主要目的是将任何还未发送到X server的缓冲区中的命令强制发送出去。*/
-	XFlush(display);
 
 	while (!main_quit) {
 
@@ -440,6 +406,7 @@ main(int argc, char* argv[]) {
     /* 用于指定当前使用的着色器程序 */
     glUseProgram(shaderProgram);
     glBindVertexArray(VAO); 
+    glBindTexture(GL_TEXTURE_2D, texture); 
 
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
@@ -450,7 +417,6 @@ main(int argc, char* argv[]) {
   glDeleteBuffers(1, &VBO);
   glDeleteProgram(shaderProgram);
   
-  eglDestroyImage (egl_display, image);
 	eglDestroyContext ( egl_display, egl_context );
 	eglDestroySurface ( egl_display, egl_surface );
 	eglTerminate      ( egl_display );
