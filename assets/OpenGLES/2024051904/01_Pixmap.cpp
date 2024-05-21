@@ -53,7 +53,7 @@ const char *vertexShaderSource = "#version 320 es\n"
  * 我们还可以把得到的纹理颜色与顶点颜色混合，只需把纹理颜色与顶点颜色在片段着色器中相乘来混合二者的颜色
 */
 const char *fragmentShaderSource = "#version 320 es\n"
-    "#extension GL_OES_EGL_image_external : require\n"
+    "#extension GL_OES_EGL_image_external_essl3 : require\n"
     "precision mediump float; //声明float型变量的精度为mediump\n"
     "out vec4 FragColor;\n"
     "in vec3 ourColor\n;"
@@ -61,7 +61,7 @@ const char *fragmentShaderSource = "#version 320 es\n"
     "uniform samplerExternalOES tex;"
     "void main()\n"
     "{\n"
-    "   FragColor = texture2D(tex, TexCoord) * vec4(ourColor, 10);\n"
+    "   FragColor = texture(tex, TexCoord);\n"
     "}\n\0";
 
 
@@ -317,10 +317,6 @@ main(int argc, char* argv[]) {
   PFNEGLCREATEIMAGEKHRPROC eglCreateImageKHR = (PFNEGLCREATEIMAGEKHRPROC) eglGetProcAddress ("eglCreateImageKHR");
   PFNEGLDESTROYIMAGEKHRPROC eglDestroyImageKHR = (PFNEGLDESTROYIMAGEKHRPROC) eglGetProcAddress ("eglDestroyImageKHR");
   PFNGLEGLIMAGETARGETTEXTURE2DOESPROC glEGLImageTargetTexture2DOES = (PFNGLEGLIMAGETARGETTEXTURE2DOESPROC)eglGetProcAddress ("glEGLImageTargetTexture2DOES");
-
-  printf ("eglCreateImageKHR = %p\n", eglCreateImageKHR);
-  printf ("eglDestroyImageKHR = %p\n", eglDestroyImageKHR);
-  printf ("glEGLImageTargetTexture2DOES = %p\n", glEGLImageTargetTexture2DOES);
 
   // load and create a texture 
   // -------------------------

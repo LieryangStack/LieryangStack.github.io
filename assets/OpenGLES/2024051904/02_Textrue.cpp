@@ -3,6 +3,8 @@
  */
 #define STB_IMAGE_IMPLEMENTATION
 
+#include <iostream>
+
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -24,8 +26,6 @@
 
 #include <glib-2.0/glib.h>
 
-#include <iostream>
-
 #include "stb_image.h"
 
 
@@ -36,7 +36,8 @@
  * glVertexAttribPointer 中第一个参数就是location变量的值
  * glEnableVertexAttribArray 的参数也是location变量的值
 */
-const char *vertexShaderSource = "#version 320 es\n"
+const char *vertexShaderSource = 
+    "#version 320 es\n"
     "layout (location = 0) in vec3 aPos;\n"
     "layout (location = 1) in vec3 aColor;\n"
     "layout (location = 2) in vec2 aTexCoord;\n"
@@ -48,13 +49,16 @@ const char *vertexShaderSource = "#version 320 es\n"
     "   ourColor = aColor;\n"
     "   TexCoord = vec2(aTexCoord.x, 1.0f - aTexCoord.y);\n"
     "}\0";
+
 /**
  * FragColor = texture(ourTexture, TexCoord) * vec4(ourColor, 1.0);
  * 我们还可以把得到的纹理颜色与顶点颜色混合，只需把纹理颜色与顶点颜色在片段着色器中相乘来混合二者的颜色
 */
-const char *fragmentShaderSource = "#version 320 es\n"
+
+const char *fragmentShaderSource = 
+    "#version 320 es\n"
     "#extension GL_OES_EGL_image_external_essl3: require\n"
-    "precision mediump float; //声明float型变量的精度为mediump\n"
+    "precision mediump float;\n"
     "out vec4 FragColor;\n"
     "in vec3 ourColor\n;"
     "in vec2 TexCoord;\n"
@@ -310,16 +314,17 @@ main(int argc, char* argv[]) {
   glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
   glEnableVertexAttribArray(2);
 
+  /* 查看该设备支持的纹理数量 */
+  GLint maxTextureUnits;
+  glGetIntegerv(GL_MAX_TEXTURE_IMAGE_UNITS, &maxTextureUnits); /* maxTextureUnits = 32 */
+  std::cout << "Maximum texture image units: " << maxTextureUnits << std::endl;
+
   // load and create a texture 
   // -------------------------
 
   PFNEGLCREATEIMAGEKHRPROC eglCreateImageKHR = (PFNEGLCREATEIMAGEKHRPROC) eglGetProcAddress ("eglCreateImageKHR");
   PFNEGLDESTROYIMAGEKHRPROC eglDestroyImageKHR = (PFNEGLDESTROYIMAGEKHRPROC) eglGetProcAddress ("eglDestroyImageKHR");
   PFNGLEGLIMAGETARGETTEXTURE2DOESPROC glEGLImageTargetTexture2DOES = (PFNGLEGLIMAGETARGETTEXTURE2DOESPROC)eglGetProcAddress ("glEGLImageTargetTexture2DOES");
-
-  printf ("eglCreateImageKHR = %p\n", eglCreateImageKHR);
-  printf ("eglDestroyImageKHR = %p\n", eglDestroyImageKHR);
-  printf ("glEGLImageTargetTexture2DOES = %p\n", glEGLImageTargetTexture2DOES);
 
   // load and create a texture 
   // -------------------------  必须是 GL_TEXTURE_2D
@@ -340,7 +345,7 @@ main(int argc, char* argv[]) {
   if (img_data)
   {
       glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, img_width, img_height, 0, GL_RGB, GL_UNSIGNED_BYTE, img_data);
-      // glGenerateMipmap(GL_TEXTURE_EXTERNAL_OES);
+      glGenerateMipmap(GL_TEXTURE_2D);
   } else {
       g_print ("Failed to load texture\n");
   }
@@ -352,9 +357,9 @@ main(int argc, char* argv[]) {
   };
 
   /**
-   * EGL_NATIVE_PIXMAP_KHR  
-   * EGL_LINUX_DMA_BUF_EXT
-   * EGL_GL_TEXTURE_2D_KHR
+   * EGL_NATIVE_PIXMAP_KHR  像素图创建EGLImageKHR
+   * EGL_LINUX_DMA_BUF_EXT  DMA缓冲区创建EGLImageKHR
+   * EGL_GL_TEXTURE_2D_KHR  使用另一个纹理创建EGLImageKHR
    * 
   */
   EGLImageKHR image = eglCreateImageKHR (egl_display, egl_context, EGL_GL_TEXTURE_2D_KHR,  (EGLClientBuffer)(uintptr_t)texture[0], imageAttributes);
@@ -445,6 +450,7 @@ main(int argc, char* argv[]) {
   glDeleteBuffers(1, &VBO);
   glDeleteProgram(shaderProgram);
   
+  eglDestroyImage (egl_display, image);
 	eglDestroyContext ( egl_display, egl_context );
 	eglDestroySurface ( egl_display, egl_surface );
 	eglTerminate      ( egl_display );
