@@ -20,8 +20,7 @@
 				"`pkg-config",
 				"--cflags",
 				"--libs",
-				"glib-2.0`",
-				// "gtk4`",
+				"gtk4`",
 			],
 			"options": {
 				"cwd": "${fileDirname}"

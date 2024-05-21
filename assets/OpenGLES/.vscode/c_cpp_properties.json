@@ -4,6 +4,7 @@
       "name": "linux-gcc-x64",
       "includePath": [
         "${workspaceFolder}/common",
+        "/home/lieryang/Downloads/gtk-4.13.8",
         "/usr/include/gtk-4.0",
         "/usr/include/gio-unix-2.0",
         "/usr/include/pango-1.0",
@@ -21,7 +22,8 @@
         "/usr/include/libmount", 
         "/usr/include/blkid", 
         "/usr/include/glib-2.0", 
-        "/usr/lib/x86_64-linux-gnu/glib-2.0/include"
+        "/usr/lib/x86_64-linux-gnu/glib-2.0/include",
+        "/usr/local/include"
       ],
       "compilerPath": "/usr/bin/gcc",
       "cStandard": "${default}",

@@ -72,6 +72,7 @@
     "valarray": "cpp",
     "variant": "cpp",
     "gl.h": "c",
-    "gtk.h": "c"
+    "gtk.h": "c",
+    "gtkcss.h": "c"
   }
 }

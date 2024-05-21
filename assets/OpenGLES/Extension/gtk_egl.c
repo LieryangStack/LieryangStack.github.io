@@ -2,14 +2,16 @@
 #include <GLES3/gl32.h>
 #include <EGL/egl.h>
 
-const char *vertexShaderSource = "#version 320 es\n"
+const char *vertexShaderSource = 
+    "#version 320 es\n"
     "layout (location = 0) in vec3 aPos;\n"
     "void main()\n"
     "{\n"
     "   gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);\n"
     "}\0";
 
-const char *fragmentShaderSource = "#version 320 es\n"
+const char *fragmentShaderSource = 
+    "#version 320 es\n"
     "precision mediump float;\n"
     "out vec4 fragColor;\n"
     "void main()\n"
@@ -17,34 +19,18 @@ const char *fragmentShaderSource = "#version 320 es\n"
     "   fragColor = vec4(1.0f, 0.5f, 0.8f, 1.0f);\n"
     "}\n\0";
 
-// const char *vertexShaderSource = 
-//     "attribute vec4 vPosition;\n"
-//     "void main()\n"
-//     "{\n"
-//     "   gl_Position = vPosition;\n"
-//     "}\0";
-// const char *fragmentShaderSource = 
-//     "precision mediump float;\n"
-//     "void main()\n"
-//     "{\n"
-//     "  gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);\n"
-//     "}\0";
-
 float vertices[] = {
       /* 第一个三角形 */
     -0.5f, -0.5f, 0.0f, // left  
-      0.5f, -0.5f, 0.0f, // right 
-      0.0f,  0.5f, 0.0f, // top
-      /* 第二个三角形 */
-      0.7f,  0.7f, 0.0f,
-      0.8f,  0.7f, 0.0f,
-      0.75f, 0.8f, 0.0f
+    0.5f, -0.5f, 0.0f, // right 
+    0.0f,  0.5f, 0.0f // top
 };
 
 static guint shaderProgram;
 
 static void
 realize (GtkWidget *widget) {
+  
   gtk_gl_area_make_current (GTK_GL_AREA (widget));
 
   if (gtk_gl_area_get_error (GTK_GL_AREA (widget)) != NULL)
@@ -104,7 +90,7 @@ render (GtkGLArea    *area,
   
   gint major, minor;
   gdk_gl_context_get_version (context, &major, &minor);
-  g_print ("version = %d\n", major * 100 + minor * 20); 
+  g_print ("version = %d\n", major * 100 + minor * 10); 
 
   /* 状态设置函数 */
   glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
@@ -118,7 +104,7 @@ render (GtkGLArea    *area,
   glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0 ,vertices); 
   glEnableVertexAttribArray(0); 
 
-  glDrawArrays (GL_TRIANGLES, 0, 6);
+  glDrawArrays (GL_TRIANGLES, 0, 3);
 
   return TRUE;
 }
