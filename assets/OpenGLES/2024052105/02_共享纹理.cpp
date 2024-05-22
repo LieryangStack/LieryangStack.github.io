@@ -77,52 +77,10 @@ EGLConfig egl_config = NULL;
 EGLDisplay egl_display = NULL;
 EGLContext egl_context = NULL;
 
+static gint wait_sync = 0;
+
 static gpointer 
 egl_thread_test_func (gpointer data) {
-
-  // char *display_name = getenv("DISPLAY");  /* 获取环境变量DISPLAY的值 */
-  // Display* display = XOpenDisplay(display_name); 
-  // if (display == NULL) {
-  //   g_print ("%s: cannot connect to X server '%s'\n",__func__, display_name);
-  //   exit(1);
-  // }
-  
-  // EGLDisplay egl_display = eglGetDisplay( (EGLNativeDisplayType) display );
-  // if ( egl_display == EGL_NO_DISPLAY || eglGetError() != EGL_SUCCESS ) {
-  //   g_error ("Got no EGL display.\n");
-  //   return FALSE;
-  // }
-  
-  // if ( eglInitialize( egl_display, NULL, NULL) == EGL_FALSE || eglGetError() != EGL_SUCCESS) {
-  //   g_error ("Unable to initialize EGL\n");
-  //   return FALSE;
-  // }
-
-  // /**
-  //  * 期望的EGL帧缓存配置列表,配置为一个key一个value的形式 
-  //  * 指定EGL surface类型
-  // */
-  // EGLint attr[] = {       // some attributes to set up our egl"nterface
-  //   EGL_RED_SIZE, 8,
-  //   EGL_GREEN_SIZE, 8,
-  //   EGL_BLUE_SIZE, 8,
-  //   EGL_ALPHA_SIZE, 8,
-  //   EGL_SURFACE_TYPE, EGL_WINDOW_BIT,
-  //   EGL_RENDERABLE_TYPE, EGL_OPENGL_ES2_BIT,
-  //   EGL_NONE
-  // };
-
-  // EGLint num_configs = 0;
-  // EGLConfig egl_config = NULL;
-  // if ( eglChooseConfig( egl_display, attr, &egl_config, 1, &num_configs ) == EGL_FALSE ) {
-  //   g_error("Failed to choose config (eglError: %d)\n", eglGetError());
-  //   return FALSE;
-  // }
- 
-  // if ( num_configs != 1 ) {
-  //   g_error("Didn't get exactly one config, but %d\n", num_configs);
-  //   return FALSE;
-  // }
   
   EGLint surface_attrs[] = {
     EGL_WIDTH, 1920,
@@ -131,7 +89,7 @@ egl_thread_test_func (gpointer data) {
   };
   EGLSurface  egl_pbuffer_surface = eglCreatePbufferSurface ( egl_display, egl_config, surface_attrs);
   if ( egl_pbuffer_surface == EGL_NO_SURFACE ) {
-		fprintf (stderr, "Unable to create EGL surface (eglError: %d\n", eglGetError());
+		g_print ("Unable to create EGL surface (eglError: %d\n", eglGetError());
 		return FALSE;
 	}
 
@@ -143,18 +101,17 @@ egl_thread_test_func (gpointer data) {
   };
 
 	/* 通过Display和上面获取到的的EGL帧缓存配置列表创建一个EGLContext， EGL_NO_CONTEXT表示不需要多个设备共享上下文 */
-  g_print ("data = %p\n", data);
 	EGLConfig egl_pbuffer_context = eglCreateContext ( egl_display, egl_config, egl_context, ctxattr );
 	if ( egl_pbuffer_context == EGL_NO_CONTEXT ) {
-		g_error("Unable to create EGL context (eglError: %d\n", eglGetError());
+		g_print("Unable to create EGL context (eglError: %d\n", eglGetError());
 		return FALSE;
 	}
 
 	/* 将EGLContext和当前线程以及draw和read的EGLSurface关联，关联之后，当前线程就成为了OpenGL es的渲染线程 */
-	eglMakeCurrent( egl_display, egl_pbuffer_surface, egl_pbuffer_surface, egl_pbuffer_context );
-
-  g_print ("%s\n", __func__);
-
+	if ( eglMakeCurrent( egl_display, egl_pbuffer_surface, egl_pbuffer_surface, egl_pbuffer_context ) == EGL_FALSE ) {
+    g_print ("Unable make context to current (eglError: %d\n", eglGetError());
+    return FALSE;
+  }
 
   // eglMakeCurrent( egl_display, egl_surface, egl_surface, egl_context );
   PFNEGLCREATEIMAGEKHRPROC eglCreateImageKHR = (PFNEGLCREATEIMAGEKHRPROC) eglGetProcAddress ("eglCreateImageKHR");
@@ -167,10 +124,9 @@ egl_thread_test_func (gpointer data) {
   // stbi_set_flip_vertically_on_load(true); 已经在着色器中修改纹理坐标了
   int img_width, img_height, nrChannels;
   // The FileSystem::getPath(...) is part of the GitHub repository so we can find files on any IDE/platform; replace it with your own image path.
-  unsigned char *img_data = stbi_load("/home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL/2024041606/img/dog.png", \
+  unsigned char *img_data = stbi_load("image/test.jpg", \
                                   &img_width, &img_height, &nrChannels, 0);
-  if (img_data)
-  {
+  if (img_data) {
       glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, img_width, img_height, 0, GL_RGB, GL_UNSIGNED_BYTE, img_data);
       glGenerateMipmap(GL_TEXTURE_2D);
   } else {
@@ -193,7 +149,7 @@ egl_thread_test_func (gpointer data) {
   */
   EGLImageKHR image = eglCreateImageKHR (egl_display, egl_pbuffer_context, EGL_GL_TEXTURE_2D_KHR,  (EGLClientBuffer)(uintptr_t)texture[0], imageAttributes);
   if (image == EGL_NO_IMAGE_KHR) {
-    g_print ("EGLImageKHR Error id = 0x%X ( %d )\n", eglGetError(), eglGetError());
+    g_print ("EGLImageKHR Error id = 0x%X \n", eglGetError());
     
     return 0;
   }
@@ -206,11 +162,19 @@ egl_thread_test_func (gpointer data) {
   */
   glEGLImageTargetTexture2DOES(GL_TEXTURE_EXTERNAL_OES, image);
 
+  eglDestroyImageKHR (egl_display, image);
+
   glBindTexture(GL_TEXTURE_EXTERNAL_OES, 0); 
 
-  eglMakeCurrent(egl_display, EGL_NO_SURFACE, EGL_NO_SURFACE, EGL_NO_CONTEXT);
+  glFinish ();
+  // glFlush ();
 
-  // eglMakeCurrent( egl_display, EGL_NO_SURFACE, EGL_NO_SURFACE, EGL_NO_CONTEXT );
+  /* 这个必须要有，我也不明白为什么，好像有 glFinish 或者 glFlush 就可以了 */
+  // eglMakeCurrent(egl_display, EGL_NO_SURFACE, EGL_NO_SURFACE, EGL_NO_CONTEXT);
+  
+  g_print ("finish\n");
+
+  g_atomic_int_inc (&wait_sync);
 
   GMainContext *main_context = g_main_context_new ();
   GMainLoop *main_loop = g_main_loop_new (main_context, TRUE);
@@ -239,6 +203,8 @@ main(int argc, char* argv[]) {
   EGLint minor = 0;
   EGLint num_configs = 0;
   EGLConfig *configs_list = NULL;
+
+  // XInitThreads();
 
   Display* display = XOpenDisplay(display_name); 
   if (display == NULL) {
@@ -299,7 +265,7 @@ main(int argc, char* argv[]) {
     EGL_NONE
   };
 
-  if ( eglChooseConfig( egl_display, attr, &egl_config, 1, &num_configs ) == EGL_FALSE ) {
+  if ( eglChooseConfig( egl_display, attr, &egl_config, 1, &num_configs ) == EGL_FALSE || eglGetError() != EGL_SUCCESS) {
     g_error("Failed to choose config (eglError: %d)\n", eglGetError());
     return FALSE;
   }
@@ -311,8 +277,8 @@ main(int argc, char* argv[]) {
 
 	/* 通过egl和NativeWindow以及EGL帧缓冲配置创建EGLSurface。最后一个参数为属性信息，0表示不需要属性) */
 	EGLSurface egl_surface = eglCreateWindowSurface ( egl_display, egl_config, win, NULL );
-	if ( egl_surface == EGL_NO_SURFACE ) {
-		fprintf (stderr, "Unable to create EGL surface (eglError: %d\n", eglGetError());
+	if ( egl_surface == EGL_NO_SURFACE || eglGetError() != EGL_SUCCESS ) {
+		g_error ("Unable to create EGL surface (eglError: %d\n", eglGetError());
 		return FALSE;
 	}
 
@@ -325,17 +291,17 @@ main(int argc, char* argv[]) {
 
 	/* 通过Display和上面获取到的的EGL帧缓存配置列表创建一个EGLContext， EGL_NO_CONTEXT表示不需要多个设备共享上下文 */
 	egl_context = eglCreateContext ( egl_display, egl_config, EGL_NO_CONTEXT, ctxattr );
-	if ( egl_context == EGL_NO_CONTEXT ) {
+	if ( egl_context == EGL_NO_CONTEXT || eglGetError() != EGL_SUCCESS ) {
 		g_error("Unable to create EGL context (eglError: %d\n", eglGetError());
 		return FALSE;
 	}
 
 	/* 将EGLContext和当前线程以及draw和read的EGLSurface关联，关联之后，当前线程就成为了OpenGL es的渲染线程 */
-	eglMakeCurrent( egl_display, egl_surface, egl_surface, egl_context );
+	if ( eglMakeCurrent( egl_display, egl_surface, egl_surface, egl_context ) == EGL_FALSE ) {
+    g_error("Unable make EGL context to current context (eglError: %d\n", eglGetError());
+		return FALSE;
+  }
 
-  gint error = eglGetError ();
-  if (error)
-    g_print ("error = %d\n", error);
 
     /* 顶点着色器 */
   /* 创建一个着色器对象，该对象通过ID来引用的 */
@@ -386,10 +352,10 @@ main(int argc, char* argv[]) {
   // ------------------------------------------------------------------
   float vertices[] = {
       // positions          // colors           // texture coords
-       0.5f,  0.5f, 0.0f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f, // top right
-       0.5f, -0.5f, 0.0f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f, // bottom right
-      -0.5f, -0.5f, 0.0f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f, // bottom left
-      -0.5f,  0.5f, 0.0f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f  // top left 
+       0.95f,  0.95f, 0.0f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f, // top right
+       0.95f, -0.95f, 0.0f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f, // bottom right
+      -0.95f, -0.95f, 0.0f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f, // bottom left
+      -0.95f,  0.95f, 0.0f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f  // top left 
   };
   unsigned int indices[] = {  
       0, 1, 3, // first triangle
@@ -448,8 +414,6 @@ main(int argc, char* argv[]) {
   */
   glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
-  glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-  glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 
   // position attribute
   glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
@@ -461,11 +425,13 @@ main(int argc, char* argv[]) {
   glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
   glEnableVertexAttribArray(2);
 
+  glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+  glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+
   /* 查看该设备支持的纹理数量 */
   GLint maxTextureUnits;
   glGetIntegerv(GL_MAX_TEXTURE_IMAGE_UNITS, &maxTextureUnits); /* maxTextureUnits = 32 */
   std::cout << "Maximum texture image units: " << maxTextureUnits << std::endl;
-
 
 
   // load and create a texture 
@@ -487,23 +453,17 @@ main(int argc, char* argv[]) {
   glTexParameteri (GL_TEXTURE_EXTERNAL_OES, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
   glBindTexture(GL_TEXTURE_EXTERNAL_OES, 0); 
 
+  // eglMakeCurrent(egl_display, EGL_NO_SURFACE, EGL_NO_SURFACE, EGL_NO_CONTEXT);
 
-  eglMakeCurrent(egl_display, EGL_NO_SURFACE, EGL_NO_SURFACE, EGL_NO_CONTEXT);
-
-  g_print ("egl_context = %p\n", egl_context);
   GThread *egl_thread = g_thread_try_new ("test.egl.textrue", egl_thread_test_func, egl_context, NULL);
 
-  // egl_thread_test_func (NULL);
+  while (!g_atomic_int_compare_and_exchange (&wait_sync, 1, 0));
 
+  // g_thread_join (egl_thread);
+  g_print ("Ack\n");
 
-  g_usleep (G_USEC_PER_SEC);
 
   eglMakeCurrent( egl_display, egl_surface, egl_surface, egl_context );
-
-  // load and create a texture 
-  // -------------------------
-
-
 
   /**
    * 当你将缓冲区对象设置为0,实际上是在解除绑定当前与指定目标关联的缓冲区对象。
@@ -518,12 +478,12 @@ main(int argc, char* argv[]) {
   glBindVertexArray(0); 
 
 
-  glActiveTexture (GL_TEXTURE1);
+  glActiveTexture (GL_TEXTURE0);
   glBindTexture(GL_TEXTURE_EXTERNAL_OES, texture[1]); 
 
   /* 使用uniform之前一定要先使用着色器程序对象 */
   glUseProgram(shaderProgram);
-  glUniform1i(glGetUniformLocation(shaderProgram, "tex"), 1);
+  // glUniform1i(glGetUniformLocation(shaderProgram, "tex"), 1);
 
 
   /* 开启颜色混合，也就是透明通道 */
