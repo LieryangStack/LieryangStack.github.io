@@ -121,7 +121,7 @@ int main(int argc, char** argv) {
     ft2->loadFontData("SimHei.ttf", 0);
 
     YuNet model("face_detection_yunet_2023mar.onnx");
-    Ptr<FaceRecognizerSF> faceRecognizer = FaceRecognizerSF::create("face_recognition_sface_2021dec.onnx", "");
+    cv::Ptr<cv::FaceRecognizerSF> faceRecognizer = cv::FaceRecognizerSF::create("face_recognition_sface_2021dec.onnx", "");
 
     double cosine_similar_thresh = 0.363;
     double l2norm_similar_thresh = 1.128;
@@ -135,13 +135,13 @@ int main(int argc, char** argv) {
 
     /* 导入人脸图片 */
     String input1 = "./lisibo.jpg";
-    cv::Mat image1 = imread(samples::findFile(input1));
+    cv::Mat image1 = cv::imread(samples::findFile(input1));
     if (image1.empty())
     {
         std::cerr << "Cannot read image: " << input1 << std::endl;
         return 2;
     }
-    resize(image1, image1, cv::Size(w, h));
+    cv::resize(image1, image1, cv::Size(w, h));
     cv::Mat faces1 = model.infer(image1);
     if (faces1.rows < 1)
        std::cerr << "Cannot find a face in image1 " << std::endl; 
