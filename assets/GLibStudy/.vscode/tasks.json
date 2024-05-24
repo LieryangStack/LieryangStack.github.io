@@ -14,7 +14,8 @@
 				"`pkg-config",
 				"--cflags",
 				"--libs",
-				"glib-2.0 ",
+				"glib-2.0",
+				"gio-2.0",
 				"gobject-2.0`",
 				"-I/home/lieryang/Downloads/glib-2.76.6/glib",
 				"-I/home/lieryang/Downloads/glib-2.76.6/build"
