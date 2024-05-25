@@ -4,6 +4,13 @@
 #define G_SETTINGS_ENABLE_BACKEND
 #include <gio/gsettingsbackend.h>
 
+/* cp org.vpf.camera.gschema.xml /usr/share/glib-2.0/schemas
+ * glib-compile-schemas /usr/share/glib-2.0/schemas 
+ *
+ * cp org.vpf.camera.gschema.xml /usr/local/gtk-4.8.3/share/glib-2.0/schemas
+ * glib-compile-schemas /usr/local/gtk-4.8.3/share/glib-2.0/schemas
+ */
+
 int 
 main (int argc, char *argv[]) {
 

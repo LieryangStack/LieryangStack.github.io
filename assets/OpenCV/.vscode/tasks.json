@@ -14,7 +14,7 @@
 				"`pkg-config",
 				"--cflags",
 				"--libs",
-				"opencv4`",
+				"/usr/local/opencv-4.9.0/lib/pkgconfig/opencv4.pc`"
 			],
 			"options": {
 				"cwd": "${fileDirname}"

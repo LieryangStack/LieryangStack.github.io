@@ -4,7 +4,7 @@
       "name": "linux-gcc-x64",
       "includePath": [
         "${workspaceFolder}/**",
-        "/usr/local/include/opencv4"
+        "/usr/local/opencv-4.9.0/include/opencv4"
       ],
       "compilerPath": "/usr/bin/gcc",
       "cStandard": "${default}",

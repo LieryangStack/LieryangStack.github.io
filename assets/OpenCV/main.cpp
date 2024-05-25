@@ -87,12 +87,16 @@ cv::Mat visualize(const cv::Mat& image, const cv::Mat& faces, float fps, const c
         int w = static_cast<int>(faces.at<float>(i, 2));
         int h = static_cast<int>(faces.at<float>(i, 3));
 
+
         if (name != NULL) { /* 识别成功 */
           cv::rectangle(output_image, cv::Rect(x1, y1, w, h), CV_RGB(0, 255, 0), 2);
           ft2->putText(output_image, cv::format("%s", name), cv::Point(x1, y1+30), 30, CV_RGB(0, 255, 0), cv::FILLED, cv::LINE_AA, true);
         } else { /* 识别失败 */
           cv::rectangle(output_image, cv::Rect(x1, y1, w, h), CV_RGB(255, 0, 0), 2);
-          ft2->putText(output_image, "无法识别", cv::Point(x1, y1+15), 15, CV_RGB(255, 0, 0), cv::FILLED, cv::LINE_AA, true);
+          if (faces.rows == 1)
+            ft2->putText(output_image, "请录入人脸", cv::Point(x1, y1+15), 15, CV_RGB(255, 0, 0), cv::FILLED, cv::LINE_AA, true);
+          else 
+            ft2->putText(output_image, "人脸过多，请重试", cv::Point(x1, y1+15), 15, CV_RGB(255, 0, 0), cv::FILLED, cv::LINE_AA, true);
         }
         
 
@@ -171,7 +175,7 @@ int main(int argc, char** argv) {
         static long int count = 0;
         if (faces.rows < 1) {
           std::cerr << "Cannot find a face in Frame : " << count++ << std::endl; 
-        } else {
+        } else if (faces.rows == 1) {
           Mat feature2, aligned_face2;
           faceRecognizer->alignCrop(frame, faces.row(0), aligned_face2);
           faceRecognizer->feature(aligned_face2, feature2);
@@ -181,12 +185,12 @@ int main(int argc, char** argv) {
           double cos_score = faceRecognizer->match(feature1, feature2, FaceRecognizerSF::DisType::FR_COSINE);
           double L2_score = faceRecognizer->match(feature1, feature2, FaceRecognizerSF::DisType::FR_NORM_L2);
 
-          if (cos_score >= cosine_similar_thresh && (L2_score <= l2norm_similar_thresh) )
-          {
+          if (cos_score >= cosine_similar_thresh && (L2_score <= l2norm_similar_thresh) ) {
               std::cout << "cos_score = " << cos_score << ", L2_score = " << L2_score;
               std::cout << "They have the same identity;" << std::endl;
               name = "小李子";
           }
+          
         }
         tick_meter.stop();
 
