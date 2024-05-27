@@ -18,6 +18,7 @@ typedef struct _CustomData
   GstElement *h264parse;
   GstElement *decode;
   GstElement *convert;
+  GstElement *filter;
   GstElement *sink;
 
 } CustomData;
@@ -154,13 +155,13 @@ exit:
 static gpointer 
 egl_thread_test_func (gpointer user_data) {
   
-   CustomData data;
+  CustomData data;
   GstBus *bus;
   GstMessage *msg;
   GstStateChangeReturn ret;
   gboolean terminate = FALSE;
 
-  g_setenv("GST_DEBUG_DUMP_DOT_DIR", "./", TRUE);
+  // g_setenv("GST_DEBUG_DUMP_DOT_DIR", "./", TRUE);
 
   /* Initialize GStreamer */
   gst_init (NULL, NULL);
@@ -171,8 +172,20 @@ egl_thread_test_func (gpointer user_data) {
   data.h264depay = gst_element_factory_make ("rtph264depay", "rtph264depay");
   data.h264parse = gst_element_factory_make ("h264parse", "h264parse");
   data.decode = gst_element_factory_make ("nvv4l2decoder", "nvv4l2decoder"); // nvv4l2decoder avdec_h264
+  data.filter = gst_element_factory_make("capsfilter", "filter");
   data.convert = gst_element_factory_make ("nvvideoconvert", "videoconvert");
+
   data.sink = gst_element_factory_make ("nveglglessink", "sink"); //nv3dsink
+
+  GstCaps *caps = gst_caps_new_simple("video/x-raw",
+                                      "format", G_TYPE_STRING, "RGBA",
+                                      NULL);
+  GstCapsFeatures *feature = gst_caps_features_new ("memory:NVMM", NULL);
+  gst_caps_set_features (caps, 0, feature);
+
+  // 设置Caps到filter
+  g_object_set(G_OBJECT(data.filter), "caps", caps, NULL);
+  gst_caps_unref(caps);
 
   g_object_set (data.sink, "egl-display", egl_display,
                            "egl-config", egl_config,
@@ -183,7 +196,7 @@ egl_thread_test_func (gpointer user_data) {
   data.pipeline = gst_pipeline_new ("test-pipeline");
 
   if (!data.pipeline || !data.source || !data.h264depay || !data.h264parse \
-      || !data.decode || !data.convert || !data.sink) {
+      || !data.decode || !data.convert || !data.filter || !data.sink) {
     g_printerr ("Not all elements could be created.\n");
     return NULL;
   }
@@ -191,21 +204,22 @@ egl_thread_test_func (gpointer user_data) {
   /* Build the pipeline. Note that we are NOT linking the source at this
    * point. We will do it later. */
   gst_bin_add_many (GST_BIN (data.pipeline), data.source, data.h264depay, \
-      data.h264parse, data.decode, data.convert, data.sink, NULL);
+      data.h264parse, data.decode, data.convert, data.filter, data.sink, NULL);
 
 
   if (!gst_element_link_many (data.h264depay, data.h264parse, \
-                              data.decode, data.convert, data.sink, NULL)) {
+                              data.decode, data.convert, data.filter, data.sink, NULL)) {
     g_printerr ("Elements could not be linked.\n");
     gst_object_unref (data.pipeline);
     return NULL;
   }
 
   /* Set the URI to play */
-  g_object_set(data.source, "location", "rtsp://admin:YEERBA@192.168.10.11:554/Streaming/Channels/101", \
-                            "latency", 200, "protocols", 0x04, NULL);
+  // g_object_set(data.source, "location", "rtsp://admin:YEERBA@192.168.10.11:554/Streaming/Channels/101", \
+  //                           "latency", 200, "protocols", 0x04, NULL);
   
-  // g_object_set(data.source, "location", "rtsp://admin:QFXFDQ@192.168.101.16:554/Streaming/Channels/101", NULL);
+  g_object_set(data.source, "location", "rtsp://admin:yangquan321@192.168.2.3:554/Streaming/Channels/101", \
+                            "latency", 00, "protocols", 0x04, NULL);
 
 
   /* Connect to the pad-added signal */
@@ -296,7 +310,7 @@ realize (GtkWidget *widget) {
   egl_display = gdk_display_get_egl_display_private (display);
   egl_config = gdk_display_get_egl_config_private (display);
   egl_context = gdk_gl_context_get_egl_context_private (context);
-                           
+
   if (gdk_gl_context_get_use_es (context)) {
 
     guint vertexShader = glCreateShader(GL_VERTEX_SHADER);
@@ -419,7 +433,11 @@ realize (GtkWidget *widget) {
   glTexParameteri (GL_TEXTURE_EXTERNAL_OES, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
   glBindTexture(GL_TEXTURE_EXTERNAL_OES, 0); 
 
+  glUseProgram (0);
+
   GThread *egl_thread = g_thread_try_new ("test.egl.textrue", egl_thread_test_func, egl_context, NULL);
+
+  // g_usleep (G_USEC_PER_SEC * 2);
 
   // while (!g_atomic_int_compare_and_exchange (&wait_sync, 1, 0));
 }
@@ -450,7 +468,7 @@ render (GtkGLArea    *area,
 
   glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
-  glDrawArrays (GL_TRIANGLES, 0, 3);
+  // glDrawArrays (GL_TRIANGLES, 0, 3);
 
   return TRUE;
 }

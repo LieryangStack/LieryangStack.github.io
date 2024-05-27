@@ -102,9 +102,6 @@ egl_thread_test_func (gpointer data) {
 
     // load and create a texture 
   // -------------------------  必须是 GL_TEXTURE_2D
-  glGenTextures(2, texture);
-  g_print ("texture[0] = %d\n", texture[0]);
-  g_print ("texture[1] = %d\n", texture[1]);
   glBindTexture(GL_TEXTURE_2D, texture[0]); 
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
@@ -313,6 +310,10 @@ realize (GtkWidget *widget) {
   glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 
   // eglMakeCurrent(egl_display, EGL_NO_SURFACE, EGL_NO_SURFACE, EGL_NO_CONTEXT);
+
+  glGenTextures(2, texture);
+  g_print ("texture[0] = %d\n", texture[0]);
+  g_print ("texture[1] = %d\n", texture[1]);
 
   GThread *egl_thread = g_thread_try_new ("test.egl.textrue", egl_thread_test_func, egl_context, NULL);
 
