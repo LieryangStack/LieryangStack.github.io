@@ -61,7 +61,7 @@ main (int argc, char *argv[])
   data.h264parse = gst_element_factory_make ("h264parse", "h264parse");
   data.decode = gst_element_factory_make ("nvv4l2decoder", "nvv4l2decoder"); // nvv4l2decoder avdec_h264
   data.convert = gst_element_factory_make ("nvvideoconvert", "videoconvert");
-  data.sink = gst_element_factory_make ("nv3dsink", "sink");
+  data.sink = gst_element_factory_make ("nveglglessink", "sink"); //nv3dsink
 
   /* Create the empty pipeline */
   data.pipeline = gst_pipeline_new ("test-pipeline");
@@ -87,7 +87,7 @@ main (int argc, char *argv[])
 
   /* Set the URI to play */
   g_object_set(data.source, "location", "rtsp://admin:YEERBA@192.168.10.11:554/Streaming/Channels/101", \
-                            "latency", 50, "protocols", 0x04, NULL);
+                            "latency", 200, "protocols", 0x04, NULL);
   
   // g_object_set(data.source, "location", "rtsp://admin:QFXFDQ@192.168.101.16:554/Streaming/Channels/101", NULL);
 

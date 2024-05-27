@@ -5,7 +5,7 @@
 		{
 			"type": "cppbuild",
 			"label": "C/C++: gcc build active file",
-			"command": "/usr/bin/g++", /*使用Gcc命令编译*/
+			"command": "/usr/bin/gcc", /*使用Gcc命令编译*/
 			"args": [
 				"-g",
 				"${file}",
@@ -17,10 +17,16 @@
 				// "/usr/lib/x86_64-linux-gnu/libGLESv2_nvidia.so.2",
 				"-lm",
 				"-I/home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGLES/common",
+				"-L/home/lieryang/Downloads/gtk-4.13.8/bild/gdk/libgdk.a",
 				"`pkg-config",
 				"--cflags",
 				"--libs",
-				"gtk4`",
+				"gtk4",				
+				"gstreamer-video-1.0",
+				"gstreamer-audio-1.0",
+				"gstreamer-pbutils-1.0",
+				"gstreamer-gl-1.0",
+				"gstreamer-1.0`",
 			],
 			"options": {
 				"cwd": "${fileDirname}"

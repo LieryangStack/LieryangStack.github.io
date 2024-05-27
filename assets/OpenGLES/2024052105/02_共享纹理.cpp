@@ -364,17 +364,6 @@ main(int argc, char* argv[]) {
   unsigned int VBO, VAO, EBO;
 
   /**
-   * VAO对象存储了以下与顶点数据相关的状态信息：
-   * a.顶点缓冲对象（Vertex Buffer Object，VBO）的绑定状态，用于存储实际的顶点数据。
-   * b.顶点属性指针的配置，包括顶点位置、法线、颜色等。
-   * c.顶点索引缓冲对象的绑定状态（如果使用索引绘制）。
-   * d.其他与顶点数据配置相关的状态，如顶点属性的启用/禁用状态、顶点属性分割和步长等。
-   * 
-   * 通过使用VAO，你可以将顶点数据的配置和状态信息封装在一个对象中，并且在需要时快速切换和重用这些配置。
-   * 这有助于提高代码的可读性、可维护性，并且可以提供更高的渲染性能。
-  */
-
-  /**
    * @brief: glGenVertexArrays是一个用于生成顶点数组对象的OpenGL函数。（VAO是用于管理顶点数据的状态和配置）
    * @param       n： 这是一个整数值，指定要生成的VAO对象的数量
    *         arrays： 这是一个指向无符号整数数组的指针，用于接收生成的VAO对象的标识符。
@@ -427,12 +416,6 @@ main(int argc, char* argv[]) {
 
   glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
   glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
-
-  /* 查看该设备支持的纹理数量 */
-  GLint maxTextureUnits;
-  glGetIntegerv(GL_MAX_TEXTURE_IMAGE_UNITS, &maxTextureUnits); /* maxTextureUnits = 32 */
-  std::cout << "Maximum texture image units: " << maxTextureUnits << std::endl;
-
 
   // load and create a texture 
   // -------------------------  必须是 GL_TEXTURE_2D
