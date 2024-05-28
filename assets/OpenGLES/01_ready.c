@@ -1,3 +1,5 @@
+#define STB_IMAGE_IMPLEMENTATION
+
 #include <gtk/gtk.h>
 #include <GLES3/gl32.h>
 #include <GLES2/gl2ext.h>
@@ -5,50 +7,9 @@
 #include <EGL/eglext.h>
 
 
+#include "stb_image.h"
+
 #include <gst/gst.h>
-
-/* Structure to contain all our information, so we can pass it to callbacks */
-/* 这里存下了所有需要的局部变量，因为本教程中会有回调函数，使用struct比较方便 */
-typedef struct _CustomData
-{
-  GstElement *pipeline;
-  GstElement *source;
-
-  GstElement *h264depay;
-  GstElement *h264parse;
-  GstElement *decode;
-  GstElement *convert;
-  GstElement *filter;
-  GstElement *sink;
-
-} CustomData;
-
-/* Handler for the pad-added signal */
-static void pad_added_handler (GstElement * src, GstPad * pad,
-    CustomData * data);
-
-gboolean
-print_pad_structure(GQuark   field_id,
-                    const GValue * value,
-                    gpointer user_data){
-
-  g_print("****foreach****\n");
-  g_print("%s\n", G_VALUE_TYPE_NAME(value));
-  if( g_type_is_a(value->g_type, G_TYPE_INT))
-    g_print("%d, %d\n",field_id,g_value_get_int(value));
-  else
-    g_print("%d, %s\n",field_id,g_value_get_string(value));
-
-  return TRUE;
-}
-
-gboolean
-gst_event_callback(GstPad *pad, GstObject *parent, GstEvent *event){
-  g_print("***Event\n");
-  return TRUE;
-}
-
-
 
 /**
  * location = 0 ，其中的location可以显式地指定着色器程序中的输入和输出变量在内存布局中的位置
@@ -83,26 +44,57 @@ const char *fragmentShaderSource =
     "out vec4 FragColor;\n"
     "in vec3 ourColor\n;"
     "in vec2 TexCoord;\n"
-    "uniform samplerExternalOES tex;"
+    "uniform sampler2D tex;"
     "void main()\n"
     "{\n"
     "   FragColor = texture(tex, TexCoord);\n"
     "}\n\0";
 
+/* Structure to contain all our information, so we can pass it to callbacks */
+/* 这里存下了所有需要的局部变量，因为本教程中会有回调函数，使用struct比较方便 */
+typedef struct _CustomData
+{
+  GstElement *pipeline;
+  GstElement *source;
 
+  GstElement *h264depay;
+  GstElement *h264parse;
+  GstElement *queue;
+  GstElement *decode;
+  GstElement *convert;
+  GstElement *filter;
+  GstElement *sink;
 
-static guint VBO, VAO, EBO;
-static GLuint main_texture;
-static EGLImageKHR image;
+} CustomData;
 
-EGLConfig egl_config = NULL;
-EGLDisplay egl_display = NULL;
-EGLContext egl_context = NULL;
+GtkWidget *window;
+GtkWidget *gl_area;
 
-static gint wait_sync = 0;
+/* Handler for the pad-added signal */
+static void pad_added_handler (GstElement * src, GstPad * pad,
+    CustomData * data);
 
+gboolean
+print_pad_structure(GQuark   field_id,
+                    const GValue * value,
+                    gpointer user_data){
 
-/* This function will be called by the pad-added signal */
+  g_print("****foreach****\n");
+  g_print("%s\n", G_VALUE_TYPE_NAME(value));
+  if( g_type_is_a(value->g_type, G_TYPE_INT))
+    g_print("%d, %d\n",field_id,g_value_get_int(value));
+  else
+    g_print("%d, %s\n",field_id,g_value_get_string(value));
+
+  return TRUE;
+}
+
+gboolean
+gst_event_callback(GstPad *pad, GstObject *parent, GstEvent *event){
+  g_print("***Event\n");
+  return TRUE;
+}
+
 static void
 pad_added_handler (GstElement * src, GstPad * new_pad, CustomData * data)
 {
@@ -152,9 +144,28 @@ exit:
 }
 
 
+static guint VBO, VAO, EBO;
+static GLuint texture[2];
+static EGLImageKHR image;
+
+static guint shaderProgram;
+
+EGLConfig egl_config = NULL;
+EGLDisplay egl_display = NULL;
+EGLContext egl_context = NULL;
+
+static gint wait_sync = 0;
+
+static void 
+ui_render_cb (GstElement *sink, gpointer user_data) {
+  gtk_gl_area_queue_render (GTK_GL_AREA (gl_area));
+   
+  g_print ("1\n");
+}
+
 static gpointer 
 egl_thread_test_func (gpointer user_data) {
-  
+
   CustomData data;
   GstBus *bus;
   GstMessage *msg;
@@ -171,11 +182,14 @@ egl_thread_test_func (gpointer user_data) {
 
   data.h264depay = gst_element_factory_make ("rtph264depay", "rtph264depay");
   data.h264parse = gst_element_factory_make ("h264parse", "h264parse");
+  data.queue = gst_element_factory_make ("queue", "queue");
   data.decode = gst_element_factory_make ("nvv4l2decoder", "nvv4l2decoder"); // nvv4l2decoder avdec_h264
   data.filter = gst_element_factory_make("capsfilter", "filter");
   data.convert = gst_element_factory_make ("nvvideoconvert", "videoconvert");
 
   data.sink = gst_element_factory_make ("nveglglessink", "sink"); //nv3dsink
+
+  g_signal_connect (data.sink, "ui-render", ui_render_cb, NULL);
 
   GstCaps *caps = gst_caps_new_simple("video/x-raw",
                                       "format", G_TYPE_STRING, "RGBA",
@@ -187,15 +201,19 @@ egl_thread_test_func (gpointer user_data) {
   g_object_set(G_OBJECT(data.filter), "caps", caps, NULL);
   gst_caps_unref(caps);
 
+  g_print ("UI     egl_display=%p\n", egl_display);
+  g_print ("UI     egl_config=%p\n", egl_config);
+  g_print ("UI     egl_context=%p\n", egl_context);
+
   g_object_set (data.sink, "egl-display", egl_display,
                            "egl-config", egl_config,
                            "egl-share-context", egl_context,
-                           "egl-share-texture", texture, NULL);
+                           "egl-share-texture", texture[0], NULL);
 
   /* Create the empty pipeline */
   data.pipeline = gst_pipeline_new ("test-pipeline");
 
-  if (!data.pipeline || !data.source || !data.h264depay || !data.h264parse \
+  if (!data.pipeline || !data.source || !data.h264depay || !data.h264parse || !data.queue \
       || !data.decode || !data.convert || !data.filter || !data.sink) {
     g_printerr ("Not all elements could be created.\n");
     return NULL;
@@ -203,11 +221,11 @@ egl_thread_test_func (gpointer user_data) {
 
   /* Build the pipeline. Note that we are NOT linking the source at this
    * point. We will do it later. */
-  gst_bin_add_many (GST_BIN (data.pipeline), data.source, data.h264depay, \
+  gst_bin_add_many (GST_BIN (data.pipeline), data.source, data.h264depay, data.queue, \
       data.h264parse, data.decode, data.convert, data.filter, data.sink, NULL);
 
 
-  if (!gst_element_link_many (data.h264depay, data.h264parse, \
+  if (!gst_element_link_many (data.h264depay, data.h264parse, data.queue, \
                               data.decode, data.convert, data.filter, data.sink, NULL)) {
     g_printerr ("Elements could not be linked.\n");
     gst_object_unref (data.pipeline);
@@ -219,7 +237,7 @@ egl_thread_test_func (gpointer user_data) {
   //                           "latency", 200, "protocols", 0x04, NULL);
   
   g_object_set(data.source, "location", "rtsp://admin:yangquan321@192.168.2.3:554/Streaming/Channels/101", \
-                            "latency", 00, "protocols", 0x04, NULL);
+                            "latency", 300, "protocols", 0x04, NULL);
 
 
   /* Connect to the pad-added signal */
@@ -295,8 +313,6 @@ egl_thread_test_func (gpointer user_data) {
   return 0;
 }
 
-static guint shaderProgram;
-
 static void
 realize (GtkWidget *widget) {
   
@@ -310,7 +326,7 @@ realize (GtkWidget *widget) {
   egl_display = gdk_display_get_egl_display_private (display);
   egl_config = gdk_display_get_egl_config_private (display);
   egl_context = gdk_gl_context_get_egl_context_private (context);
-
+                           
   if (gdk_gl_context_get_use_es (context)) {
 
     guint vertexShader = glCreateShader(GL_VERTEX_SHADER);
@@ -421,23 +437,27 @@ realize (GtkWidget *widget) {
 
   // eglMakeCurrent(egl_display, EGL_NO_SURFACE, EGL_NO_SURFACE, EGL_NO_CONTEXT);
 
+  glGenTextures(2, texture);
+  g_print ("texture[0] = %d\n", texture[0]);
+  g_print ("texture[1] = %d\n", texture[1]);
+
   // load and create a texture 
   // -------------------------  必须是 GL_TEXTURE_2D
-  glGenTextures(1, &texture);
-  g_print ("texture = %d\n", texture);
+  glBindTexture(GL_TEXTURE_2D, texture[0]); 
+  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+  glTexParameteri (GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+  glTexParameteri (GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+  glBindTexture(GL_TEXTURE_2D, 0); 
 
-  glBindTexture(GL_TEXTURE_EXTERNAL_OES, texture); 
+  glBindTexture(GL_TEXTURE_EXTERNAL_OES, texture[1]); 
   glTexParameteri(GL_TEXTURE_EXTERNAL_OES, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
   glTexParameteri(GL_TEXTURE_EXTERNAL_OES, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
   glTexParameteri (GL_TEXTURE_EXTERNAL_OES, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
   glTexParameteri (GL_TEXTURE_EXTERNAL_OES, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
   glBindTexture(GL_TEXTURE_EXTERNAL_OES, 0); 
 
-  glUseProgram (0);
-
   GThread *egl_thread = g_thread_try_new ("test.egl.textrue", egl_thread_test_func, egl_context, NULL);
-
-  // g_usleep (G_USEC_PER_SEC * 2);
 
   // while (!g_atomic_int_compare_and_exchange (&wait_sync, 1, 0));
 }
@@ -461,22 +481,20 @@ render (GtkGLArea    *area,
   glClear(GL_COLOR_BUFFER_BIT);
 
   glActiveTexture (GL_TEXTURE0);
-  glBindTexture(GL_TEXTURE_EXTERNAL_OES, texture); 
+  glBindTexture(GL_TEXTURE_2D, texture[0]); 
 
   glUseProgram(shaderProgram);
   glBindVertexArray(VAO); 
 
   glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
-  // glDrawArrays (GL_TRIANGLES, 0, 3);
+  glDrawArrays (GL_TRIANGLES, 0, 3);
 
   return TRUE;
 }
 
 static void
 build_ui (GtkApplication *app) {
-  GtkWidget *window;
-  GtkWidget *gl_area;
 
   if (gtk_application_get_windows (app) != NULL)
     return;
