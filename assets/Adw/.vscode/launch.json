@@ -1,0 +1,13 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "C/C++ Runner: Debug Session",
+      "type": "lldb",
+      "request": "launch",
+      "args": [],
+      "cwd": "/home/lieryang/Desktop/LieryangStack.github.io/assets/Adw/2024053001",
+      "program": "/home/lieryang/Desktop/LieryangStack.github.io/assets/Adw/2024053001/build/Debug/outDebug"
+    }
+  ]
+}
