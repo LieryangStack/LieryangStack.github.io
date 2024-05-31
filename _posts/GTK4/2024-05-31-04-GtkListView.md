@@ -34,3 +34,48 @@ tags: [GTK4]
       char *string;
     };
     ```
+
+    ![alt text](image.png)
+
+#### 1.1.1 GtkStringList函数总结
+```c
+/**
+ * 共同点：都是在List的最后添加一项（item）字符串。
+ * 不同点： gtk_string_list_append 添加的是常量字符串（内部会进行 g_strdup ）
+ *         gtk_string_list_take 已经是堆区创建的字符串 （里面会自动进行 g_free，不需要我们释放）
+*/
+void 
+gtk_string_list_append (GtkStringList *self, const char*string);
+
+void 
+gtk_string_list_take (GtkStringList *self, char *string);                                                 
+```
+
+## 2 GtkSelectionModel
+
+1. 继承 `GListModel` 的一种接口，为了判断那个位置，那个 `item` 被选中。
+
+    ```c
+    G_DECLARE_INTERFACE (GtkSelectionModel, gtk_selection_model, GTK, SELECTION_MODEL, GListModel)
+    ```
+
+2. GtkSelectionModel是一个支持选择的接口。有了这个模型，用户可以通过点击来选择项目。它由GtkMultiSelection、GtkNoSelection和GtkSingleSelection对象实现。这三个对象通常足以构建应用程序。它们是用GListModel创建的。你也可以单独创建它们，然后添加一个GListModel。
+
+    - `GtkNoSelection`不支持选择。当需要GtkSelectionModel时，它是GListModel的包装器
+  
+    - `GtkSingleSelection`支持单选。
+  
+    - `GtkMultiSelection`支持多选。
+  
+
+### 2.1 GtkNoSelection
+
+### 2.2 GtkSingleSelection
+
+### 2.3 GtkMultiSelection
+
+## 3 GtkListItemFactory
+
+### 3.1 GtkSignalListItemFactory
+
+### 3.2 GtkBuilderListItemFactory

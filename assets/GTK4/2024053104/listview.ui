@@ -4,37 +4,129 @@
   <!-- interface-name listview.ui -->
   <requires lib="gtk" version="4.12"/>
   <requires lib="libadwaita" version="1.0"/>
-  <object class="AdwApplicationWindow">
-    <property name="content">
-      <object class="GtkListView">
-        <property name="factory">
-          <object class="GtkListItemFactory">
-            <!-- Custom object fragments -->
-            <property name="child">
-              <object class="GtkLabel">
-                <binding name="label">
-                  <lookup name="string" type="GtkStringObject">
-                    <lookup name="item">GtkListItem</lookup>
-                  </lookup>
-                </binding>
-              </object>
-            </property>
-          </object>
-        </property>
-        <property name="model">
-          <object class="GtkNoSelection">
+  <object class="AdwApplicationWindow" id="win">
+    <property name="height-request">200</property>
+    <property name="width-request">300</property>
+    <child>
+      <object class="GtkBox">
+        <property name="orientation">vertical</property>
+        <property name="spacing">10</property>
+        <child>
+          <object class="AdwHeaderBar"/>
+        </child>
+        <child>
+          <object class="GtkColumnView">
             <property name="model">
-              <object class="GtkStringList">
-                <items>
-                  <item>测试1</item>
-                  <item>测试2</item>
-                  <item>测试3</item>
-                </items>
+              <object class="GtkSingleSelection">
+                <property name="model">
+                  <object class="GtkStringList">
+                    <items>
+                      <item>row1</item>
+                      <item>row2</item>
+                    </items>
+                  </object>
+                </property>
               </object>
             </property>
+            <child>
+              <object class="GtkColumnViewColumn">
+                <property name="factory">
+                  <object class="GtkBuilderListItemFactory">
+                    <property name="bytes">
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;interface&gt;
+  &lt;template class="GtkListItem"&gt;
+    &lt;property name="child"&gt;
+      &lt;object class="GtkLabel"&gt;
+        &lt;property name="xalign"&gt;0&lt;/property&gt;
+        &lt;binding name="label"&gt;
+          &lt;lookup name="string" type="GtkStringObject"&gt;
+            &lt;lookup name="item"&gt;GtkListItem&lt;/lookup&gt;
+          &lt;/lookup&gt;
+        &lt;/binding&gt;
+      &lt;/object&gt;
+    &lt;/property&gt;
+  &lt;/template&gt;
+&lt;/interface&gt;
+</property>
+                  </object>
+                </property>
+                <property name="title">姓名</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkColumnViewColumn">
+                <property name="factory">
+                  <object class="GtkBuilderListItemFactory">
+                    <property name="bytes">
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;interface&gt;
+  &lt;template class="GtkListItem"&gt;
+    &lt;property name="child"&gt;
+      &lt;object class="GtkLabel"&gt;
+        &lt;property name="xalign"&gt;0&lt;/property&gt;
+        &lt;binding name="label"&gt;
+          &lt;lookup name="string" type="GtkStringObject"&gt;
+            &lt;lookup name="item"&gt;GtkListItem&lt;/lookup&gt;
+          &lt;/lookup&gt;
+        &lt;/binding&gt;
+      &lt;/object&gt;
+    &lt;/property&gt;
+  &lt;/template&gt;
+&lt;/interface&gt;
+</property>
+                  </object>
+                </property>
+                <property name="title">年龄</property>
+              </object>
+            </child>
           </object>
-        </property>
+        </child>
+        <child>
+          <object class="GtkListView" id="list_view">
+            <property name="factory">
+              <object class="GtkBuilderListItemFactory">
+                <property name="bytes">
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;interface&gt;
+  &lt;template class="GtkListItem"&gt;
+    &lt;property name="child"&gt;
+      &lt;object class="GtkLabel"&gt;
+        &lt;property name="xalign"&gt;0&lt;/property&gt;
+        &lt;binding name="label"&gt;
+          &lt;lookup name="string" type="GtkStringObject"&gt;
+            &lt;lookup name="item"&gt;GtkListItem&lt;/lookup&gt;
+          &lt;/lookup&gt;
+        &lt;/binding&gt;
+      &lt;/object&gt;
+    &lt;/property&gt;
+  &lt;/template&gt;
+&lt;/interface&gt;
+</property>
+              </object>
+            </property>
+            <property name="height-request">100</property>
+            <property name="model">
+              <object class="GtkMultiSelection">
+                <property name="model">
+                  <object class="GtkStringList">
+                    <items>
+                      <item>测试1</item>
+                      <item>测试2</item>
+                      <item>测试3</item>
+                      <item>测试4</item>
+                      <item>测试5</item>
+                      <item>测试6</item>
+                    </items>
+                  </object>
+                </property>
+              </object>
+            </property>
+            <property name="vexpand">True</property>
+            <property name="width-request">200</property>
+          </object>
+        </child>
       </object>
-    </property>
+    </child>
   </object>
 </interface>
