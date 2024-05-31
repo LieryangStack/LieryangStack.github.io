@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- Created with Cambalache 0.90.2 -->
+<interface>
+  <!-- interface-name listview.ui -->
+  <requires lib="gtk" version="4.12"/>
+  <requires lib="libadwaita" version="1.0"/>
+  <object class="AdwApplicationWindow">
+    <property name="content">
+      <object class="GtkListView">
+        <property name="factory">
+          <object class="GtkListItemFactory">
+            <!-- Custom object fragments -->
+            <property name="child">
+              <object class="GtkLabel">
+                <binding name="label">
+                  <lookup name="string" type="GtkStringObject">
+                    <lookup name="item">GtkListItem</lookup>
+                  </lookup>
+                </binding>
+              </object>
+            </property>
+          </object>
+        </property>
+        <property name="model">
+          <object class="GtkNoSelection">
+            <property name="model">
+              <object class="GtkStringList">
+                <items>
+                  <item>测试1</item>
+                  <item>测试2</item>
+                  <item>测试3</item>
+                </items>
+              </object>
+            </property>
+          </object>
+        </property>
+      </object>
+    </property>
+  </object>
+</interface>

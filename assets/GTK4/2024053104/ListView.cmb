@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<!DOCTYPE cambalache-project SYSTEM "cambalache-project.dtd">
+<cambalache-project version="0.17.3" target_tk="gtk-4.0">
+  <ui>
+	(1,None,"listview.ui","listview.ui",None,None,None,None,None,None,None)
+  </ui>
+  <object>
+	(1,1,"AdwApplicationWindow",None,None,None,None,None,-1,None,None),
+	(1,2,"GtkListView",None,1,None,None,None,-1,None,None),
+	(1,5,"GtkNoSelection",None,2,None,None,None,-1,None,None),
+	(1,6,"GtkStringList",None,5,None,None,None,-1,None,None),
+	(1,7,"GtkListItemFactory",None,2,None,None,None,-1,"&lt;property name=\"child\"&gt;\n      &lt;object class=\"GtkLabel\"&gt;\n        &lt;binding name=\"label\"&gt;\n          &lt;lookup name=\"string\" type=\"GtkStringObject\"&gt;\n            &lt;lookup name=\"item\"&gt;GtkListItem&lt;/lookup&gt;\n          &lt;/lookup&gt;\n        &lt;/binding&gt;\n      &lt;/object&gt;\n&lt;/property&gt;",None)
+  </object>
+  <object_property>
+	(1,1,"AdwApplicationWindow","content",None,None,None,None,None,2,None,None,None,None),
+	(1,2,"GtkListView","factory",None,None,None,None,None,7,None,None,None,None),
+	(1,2,"GtkListView","model",None,None,None,None,None,5,None,None,None,None),
+	(1,5,"GtkNoSelection","model",None,None,None,None,None,6,None,None,None,None)
+  </object_property>
+  <object_data>
+	(1,6,"GtkStringList",1,1,None,None,None,None,None,None),
+	(1,6,"GtkStringList",2,2,"测试1",1,None,None,None,None),
+	(1,6,"GtkStringList",2,3,"测试2",1,None,None,None,None),
+	(1,6,"GtkStringList",2,4,"测试3",1,None,None,None,None)
+  </object_data>
+</cambalache-project>
