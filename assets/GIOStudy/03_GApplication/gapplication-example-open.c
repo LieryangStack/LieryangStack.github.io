@@ -6,11 +6,13 @@ static void
 activate (GApplication *application)
 {
   g_print ("activated\n");
-
+     g_print ("%s\n", g_get_prgname());
   /* 注意：在此处执行返回主循环的较长时间的操作时，
   * 应使用 g_application_hold() 和 g_application_release() 
   * 来保持应用程序在操作完成之前保持运行。
   */
+   g_application_release (application);
+   while(1);
 }
 
 static void
@@ -28,6 +30,7 @@ app_open (GApplication  *application,
       g_free (uri);
     }
 
+
   /* 注意：在此处执行返回主循环的较长时间的操作时，
   * 应使用 g_application_hold() 和 g_application_release() 
   * 来保持应用程序在操作完成之前保持运行。
@@ -44,7 +47,9 @@ main (int argc, char **argv)
                            G_APPLICATION_HANDLES_OPEN);
   g_signal_connect (app, "activate", G_CALLBACK (activate), NULL);
   g_signal_connect (app, "open", G_CALLBACK (app_open), NULL);
-  g_application_set_inactivity_timeout (app, 10000);
+  g_application_set_inactivity_timeout (app, 2000);
+
+  g_application_hold (app);
 
   status = g_application_run (app, argc, argv);
 
