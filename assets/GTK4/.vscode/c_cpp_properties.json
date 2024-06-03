@@ -28,7 +28,8 @@
         "/home/lieryang/Downloads/libadwaita-1.5.1",
         "/home/lieryang/Downloads/libadwaita-1.5.0",
         "/home/lieryang/Downloads/gtk-4.15.1",
-        "/home/lieryang/Downloads/gtk-4.14.4"
+        "/home/lieryang/Downloads/gtk-4.14.4",
+        "/home/lieryang/Downloads/glib-2.75.4"
       ],
       "defines": [],
       "compilerPath": "/usr/bin/clang-14",
