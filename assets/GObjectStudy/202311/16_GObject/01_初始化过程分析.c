@@ -49,8 +49,12 @@ test_derived_finalize (GObject *obj)
 static void
 test_derived_class_init (TestDerivedClass *klass) {
   g_print ("%s (TestDerivedClass = %p)\n", __func__, klass);
-  g_print ("test_derived_parent_class = %p\n", test_derived_parent_class);
-  g_print ("test_derived_parent_class->a = %d\n",((TestObjectClass *) test_derived_parent_class)->a);
+  /* 父类的类结构体地址：test_derived_parent_class */
+  g_print ("test_derived_parent_class = %p, test_derived_parent_class->a = %d\n", \
+            test_derived_parent_class, ((TestObjectClass *) test_derived_parent_class)->a);
+  /* TestDerived类中，拷贝父类结构体部分，父类结构体地址：(TestObjectClass *) klass */
+  g_print ("klass = %p, klass->a = %d\n", \
+            klass, ((TestObjectClass *) klass)->a);
   G_OBJECT_CLASS (klass)->finalize = test_derived_finalize;
 }
 
