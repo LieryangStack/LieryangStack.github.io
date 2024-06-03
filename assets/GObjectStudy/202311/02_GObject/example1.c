@@ -20,8 +20,6 @@ main (int argc, char **argv) {
   g_object_unref (instance1);
   g_object_unref (instance2);
 
-  g_print ("G_IS_OBJECT (instance1) = %d\n", G_IS_OBJECT (instance1));
-
   /* 销毁GObject实例。实例的内存被释放。GObject类型是静态类型。
    （注意静态类型不会销毁类，动态类型在销毁最后一个实例时销毁其类）
      静态类型从不破坏它的类。因此，即使被销毁的实例是最后一个实例，类仍然存在。 
@@ -30,7 +28,7 @@ main (int argc, char **argv) {
      */
   instance3 = g_object_new (G_TYPE_OBJECT, NULL);
   class3 = G_OBJECT_GET_CLASS (instance3);
-  g_print ("The address of the class of instance1 is %p\n", class3);
+  g_print ("The address of the class of instance3 is %p\n", class3);
   g_object_unref (instance3);
 
   return 0;
