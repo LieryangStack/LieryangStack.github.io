@@ -35,7 +35,7 @@ tags: [GTK4]
     };
     ```
 
-    ![alt text](image.png)
+    ![alt text](/assets/GTK4/06_GtkListView/image/image-20.png)
 
 #### 1.1.1 GtkStringList函数总结
 ```c
