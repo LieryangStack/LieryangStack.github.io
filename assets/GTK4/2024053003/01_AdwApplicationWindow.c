@@ -11,7 +11,7 @@ app_activate (GApplication *app, gpointer *user_data) {
   GFile *file = g_file_new_for_path ("css_test.css");
   gtk_css_provider_load_from_file (provider, file);
   gtk_style_context_add_provider_for_display (display, GTK_STYLE_PROVIDER (provider), GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
-  
+  GtkApplicationWindow
   gtk_window_set_application (GTK_WINDOW (win), GTK_APPLICATION (app));
   gtk_window_present (GTK_WINDOW (win));
 
@@ -22,7 +22,6 @@ app_activate (GApplication *app, gpointer *user_data) {
 int
 main (int argc, char *argv[]) {
   g_autoptr (AdwApplication) app = adw_application_new ("test.application", G_APPLICATION_DEFAULT_FLAGS);
-  
   g_signal_connect (app, "activate", G_CALLBACK (app_activate), NULL);
   return g_application_run (G_APPLICATION (app), argc, argv);
 }

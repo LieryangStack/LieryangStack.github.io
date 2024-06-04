@@ -6,8 +6,8 @@ static void
 startup_cb (GApplication *app)
 {
   g_print ("%s\n", __func__);
-  g_application_release (app);
-  g_application_quit (app);
+  g_application_release (app); /* 会再迭代一次看有无事件么有处理，或者是service，则有超时等待 */
+  g_application_quit (app); /* 直接退出，不会再去迭代，或者超时等待 */
 }
 
 static void
