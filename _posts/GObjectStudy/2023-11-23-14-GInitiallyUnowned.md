@@ -9,7 +9,7 @@ tags: [GObject]
 
 一个用于具有初始浮动引用的对象的类型。该对象继承于`GObject`，除了实例初始化的时候把该对象初始位浮点引用外，其余都和`GObject`对象一样。
 
-- 我们在GTK库或者其他库的时候，使用继承 `GInitiallyUnowned` 的GTK对象，处于浮点状态的时候，可能不能直接解引用。但是 `GInitiallyUnowned` 对象可以。其他库可能会包装 `GInitiallyUnowned` 对象。
+- 我们在GTK库或者其他库的时候，使用继承 `GInitiallyUnowned` 的GTK对象，处于浮点状态的时候，不能直接解引用。
 
 - 浮点引用状态调用 `g_object_ref_sink` ，浮点引用状态变成正常引用状态，引用数不变。
 

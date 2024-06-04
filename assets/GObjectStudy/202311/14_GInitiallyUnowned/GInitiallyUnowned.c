@@ -4,6 +4,7 @@ int
 main (int argc, char *argv[]){
 
   GObject *object = g_object_new (G_TYPE_INITIALLY_UNOWNED, NULL);
+
   /* 处于浮点引用状态直接，引用一次 */
   g_object_ref (object);
   /* 此时 object->ref_count = 2 
