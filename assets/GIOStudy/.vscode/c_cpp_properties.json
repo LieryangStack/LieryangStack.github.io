@@ -7,7 +7,7 @@
           "/usr/include/glib-2.0",
           "/usr/lib/x86_64-linux-gnu/glib-2.0/include",
           "/home/lieryang/Downloads/glib-2.76.6",
-          "/home/lieryang/Downloads/glib-2.75.4"
+          "/home/lieryang/Downloads/glib-2.80.2"
         ],
         "defines": [],
         "compilerPath": "/usr/bin/gcc",

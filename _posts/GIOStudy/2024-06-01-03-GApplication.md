@@ -71,76 +71,80 @@ G_IMPLEMENT_INTERFACE (G_TYPE_ACTION_GROUP, g_application_action_group_iface_ini
 G_IMPLEMENT_INTERFACE (G_TYPE_ACTION_MAP, g_application_action_map_iface_init))
 ```
 
+## 3 GApplication 相关函数
+
+内部没有使用 `GMainLoop` 主循环，`GApplication`定义了 `application->priv->use_count`进行表示，迭代事件是否循环运行。
+
+### 3.1 控制 GApplication 运行迭代上下文函数
+
 ```c
+
 /**
- * GApplicationClass:
- * @startup: 在注册后立即在主实例上调用
- * @shutdown: 仅在主循环终止后立即在注册的主实例上调用
- * @activate: 当发生激活时在主实例上调用
- * @open: 当有文件要打开时在主实例上调用
- * @command_line: 当命令行未在本地处理时在主实例上调用
- * @local_command_line: （本地）调用。虚函数有机会检查（并可能替换）命令行参数。
- *     有关更多信息，请参见 g_application_run()。另请参见 
- *     #GApplication::handle-local-options 信号，这是在本地处理某些命令行选项的更简单替代方法
- * @before_emit: 在“activate”、“open”、“command-line”或任何操作调用之前在主实例上调用，
- *     从调用实例获取“平台数据”
- * @after_emit: 在“activate”、“open”、“command-line”或任何操作调用之后在主实例上调用，
- *     从调用实例获取“平台数据”
- * @add_platform_data: （本地）调用以添加“平台数据”，在激活、打开或调用操作时发送到主实例
- * @quit_mainloop: 当应用程序的使用计数降为零时（以及在任何非活动超时之后，如果请求）
- *     在主实例上调用。自 2.32 起不再使用
- * @run_mainloop: 从 g_application_run() 在使用计数不为零时在主实例上调用。
- *     自 2.32 起，GApplication 直接迭代主上下文，不再使用 @run_mainloop
- * @dbus_register: 如果应用程序使用其 D-Bus 后端，在注册期间在本地调用。您可以使用此方法在总线上导出
- *     需要在应用程序尝试占有总线名称之前存在的额外对象。该函数传递到会话总线的 #GDBusConnection 
- *     和 #GApplication 将用于导出 D-Bus API 的对象路径。如果此函数返回 %TRUE，注册将继续进行；
- *     否则，注册将中止。自 2.34 起
- * @dbus_unregister: 如果应用程序使用其 D-Bus 后端，在取消注册期间在本地调用。使用此方法撤消 @dbus_register 
- *     虚函数所做的任何操作。自 2.34 起
- * @handle_local_options: 在命令行选项解析完成后在本地调用。自 2.40 起
- * @name_lost: 当另一个实例接管名称时调用。自 2.60 起
+ * @brief: 增加 @application 的使用计数，使用此函数来表示应用程序有继续运行。
+ * 例如，当一个顶层窗口显示在屏幕上时，GTK+ 会调用 g_application_hold()。
  *
- * #GApplication 的虚函数表。
- *
- * 自 2.28 起
- */
+ * @note: 要取消运行，请调用 g_application_release()。
+*/
+void
+g_application_hold (GApplication *application) {
 
-struct _GApplicationPrivate
+  ...
+
+  application->priv->use_count++;
+}
+
+
+/**
+ * @brief: 减少 @application 的使用计数。当使用计数达到零时，应用程序将停止运行。
+ * @note: 调用该函数前，要先前调用 g_application_hold()，否则不要调用这个函数。
+ **/
+void
+g_application_release (GApplication *application)
 {
-  GApplicationFlags  flags;
-  gchar             *id;
-  gchar             *resource_path;
+  g_return_if_fail (G_IS_APPLICATION (application));
+  g_return_if_fail (application->priv->use_count > 0);
 
-  GActionGroup      *actions;
+  application->priv->use_count--;
 
-  guint              inactivity_timeout_id;
-  guint              inactivity_timeout;
-  guint              use_count;
-  guint              busy_count;
+  if (application->priv->use_count == 0 && application->priv->inactivity_timeout)
+    application->priv->inactivity_timeout_id = g_timeout_add (application->priv->inactivity_timeout,
+                                                              inactivity_timeout_expired, application);
+}
 
-  guint              is_registered : 1;
-  guint              is_remote : 1;
-  guint              did_startup : 1;
-  guint              did_shutdown : 1;
-  guint              must_quit_now : 1;
-
-  GRemoteActionGroup *remote_actions;
-  GApplicationImpl   *impl;
-
-  GNotificationBackend *notifications;
-
-  /* GOptionContext 支持 */
-  GOptionGroup       *main_options;
-  GSList             *option_groups;
-  GHashTable         *packed_options;
-  gboolean            options_parsed;
-  gchar              *parameter_string;
-  gchar              *summary;
-  gchar              *description;
-
-  /* 从 g_application_add_main_option() 分配的选项字符串 */
-  GSList             *option_strings;
-};
 
 ```
 
+### 3.2 g_application_run 函数
+
+```c
+/**
+ * 迭代上下文前会发出： startup、activate 信号 （如果是OPEN标记，则是，startup、open信号）
+ * 迭代上下文退出后会发出：shutdown 信号
+*/
+int
+g_application_run (GApplication  *application,
+                   int            argc,
+                   char         **argv);
+```
+
+### 3.3 关于application迭代上下文循环退出
+
+以下这两种方式都能退出循环，区别就是：
+
+1. 如果使用 `release`，系统还会在 `shutdown` 信号结束后，再迭代检查上下文是否有未处理事件。
+2. 如果使用 `quit`，系统会直接退出。
+
+
+```c
+void
+g_application_release (GApplication *application);
+
+
+void
+g_application_quit (GApplication *application);
+```
+
+### 3.4 如果使用 G_APPLICATION_IS_SERVICE 标记
+
+1. 如果使用`g_application_release`，退出时候会添加一个超时事件，只有该时间结束，才会才出上下文迭代。
+2. 如果使用 `g_application_quit`，会直接退出。

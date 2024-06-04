@@ -5,7 +5,7 @@ app_activate (GApplication *app, gpointer *user_data) {
   GtkBuilder *build = gtk_builder_new_from_file ("01_headerbar.ui");
   GtkWidget *win = GTK_WIDGET (gtk_builder_get_object (build, "win"));
   GtkWidget *headerbar = GTK_WIDGET (gtk_builder_get_object (build, "headerbar"));
-
+  
   GdkDisplay *display = gdk_display_get_default ();
   GtkCssProvider *provider = gtk_css_provider_new ();
   GFile *file = g_file_new_for_path ("css_test.css");
