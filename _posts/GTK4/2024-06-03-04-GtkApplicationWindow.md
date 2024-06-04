@@ -12,7 +12,7 @@ tags: [GTK4]
 G_DEFINE_TYPE_WITH_PRIVATE (GtkApplication, gtk_application, G_TYPE_APPLICATION)
 ```
 
-### 1.1 startup信号
+### 1.1 GApplicationClass类startup信号处理函数重写code
 
 对`GApplication`对象中的默认启动信号，添加了默认处理函数。该函数主要执行了 `gtk_init()`。
 

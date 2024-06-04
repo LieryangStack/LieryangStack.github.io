@@ -5,6 +5,9 @@ app_activate (GApplication *app, gpointer *user_data) {
 
   GtkWidget *win = gtk_application_window_new (GTK_APPLICATION (app));
   gtk_window_set_application (GTK_WINDOW (win), GTK_APPLICATION (app));
+
+  g_print ("%d\n", g_object_is_floating (win));
+
   gtk_window_present (GTK_WINDOW (win));
 }
 
