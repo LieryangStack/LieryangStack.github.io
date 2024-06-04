@@ -8,6 +8,8 @@
 static gboolean
 close_request (GtkWindow* self, gpointer user_data) {
 
+  // g_object_unref (self); 最好不要通过 unref关闭
+
   g_print ("%s\n", __func__);
 
   static gint ret = FALSE;
@@ -30,6 +32,9 @@ app_activate (GApplication *app, gpointer *user_data) {
   gtk_window_present (GTK_WINDOW (win));
 
   g_print ("g_object_is_floating (win) = %d\n", g_object_is_floating (win)); /* 不是附点引用 */
+  /**
+   * 此时 win 的引用计数是 1，通过调用 gtk_window_destory，会使得 win引用计数减一。（不要直接调用 g_object_unref，因为要执行一些操作）
+  */
   g_print ("G_OBJECT (win)->ref_count = %d\n", G_OBJECT (win)->ref_count); /* G_OBJECT (win)->ref_count = 1 */
   g_print ("G_OBJECT (app)->ref_count = %d\n", G_OBJECT (app)->ref_count); /* G_OBJECT (app)->ref_count = 4 */
 }
@@ -41,7 +46,6 @@ main (int argc, char *argv[]) {
   g_signal_connect (app, "activate", G_CALLBACK (app_activate), NULL);
   g_application_run (G_APPLICATION (app), argc, argv);
 
-  g_print ("G_OBJECT (win)->ref_count = %d\n", G_OBJECT (win)->ref_count);
   g_print ("G_OBJECT (app)->ref_count = %d\n", G_OBJECT (app)->ref_count); /* G_OBJECT (app)->ref_count = 1 */
   g_object_unref (app);
 

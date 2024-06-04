@@ -1,13 +1,5 @@
----
-layout: post
-title: 五、GTK4——GtkBox
-categories: GTK4
-tags: [GTK4]
----
+#include <adwaita.h>
 
-## 1 GtkBox引用
-
-```c
 static void 
 app_activate (GApplication *app, gpointer *user_data) {
 
@@ -32,4 +24,16 @@ app_activate (GApplication *app, gpointer *user_data) {
   */
   g_print ("G_OBJECT (box)->ref_count = %d\n", G_OBJECT (box)->ref_count); /* G_OBJECT (win)->ref_count = 1 */
 }
-```
+
+int
+main (int argc, char *argv[]) {
+
+  GtkApplication *app = gtk_application_new ("test.application", G_APPLICATION_DEFAULT_FLAGS);
+  g_signal_connect (app, "activate", G_CALLBACK (app_activate), NULL);
+  g_application_run (G_APPLICATION (app), argc, argv);
+
+  /* 此时：G_OBJECT (app)->ref_count = 1 */
+  g_object_unref (app);
+
+  return 0;
+}
