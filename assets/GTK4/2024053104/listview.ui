@@ -33,21 +33,21 @@
                 <property name="factory">
                   <object class="GtkBuilderListItemFactory">
                     <property name="bytes">
-&lt;?xml version="1.0" encoding="UTF-8"?&gt;
-&lt;interface&gt;
-  &lt;template class="GtkListItem"&gt;
-    &lt;property name="child"&gt;
-      &lt;object class="GtkLabel"&gt;
-        &lt;property name="xalign"&gt;0&lt;/property&gt;
-        &lt;binding name="label"&gt;
-          &lt;lookup name="string" type="GtkStringObject"&gt;
-            &lt;lookup name="item"&gt;GtkListItem&lt;/lookup&gt;
-          &lt;/lookup&gt;
-        &lt;/binding&gt;
-      &lt;/object&gt;
-    &lt;/property&gt;
-  &lt;/template&gt;
-&lt;/interface&gt;
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <template class="GtkListItem">
+    <property name="child">
+      <object class="GtkLabel">
+        <property name="xalign">0</property>
+        <binding name="label">
+          <lookup name="string" type="GtkStringObject">
+            <lookup name="item">GtkListItem</lookup>
+          </lookup>
+        </binding>
+      </object>
+    </property>
+  </template>
+</interface>
 </property>
                   </object>
                 </property>
@@ -59,21 +59,21 @@
                 <property name="factory">
                   <object class="GtkBuilderListItemFactory">
                     <property name="bytes">
-&lt;?xml version="1.0" encoding="UTF-8"?&gt;
-&lt;interface&gt;
-  &lt;template class="GtkListItem"&gt;
-    &lt;property name="child"&gt;
-      &lt;object class="GtkLabel"&gt;
-        &lt;property name="xalign"&gt;0&lt;/property&gt;
-        &lt;binding name="label"&gt;
-          &lt;lookup name="string" type="GtkStringObject"&gt;
-            &lt;lookup name="item"&gt;GtkListItem&lt;/lookup&gt;
-          &lt;/lookup&gt;
-        &lt;/binding&gt;
-      &lt;/object&gt;
-    &lt;/property&gt;
-  &lt;/template&gt;
-&lt;/interface&gt;
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <template class="GtkListItem">
+    <property name="child">
+      <object class="GtkLabel">
+        <property name="xalign">0</property>
+        <binding name="label">
+          <lookup name="string" type="GtkStringObject">
+            <lookup name="item">GtkListItem</lookup>
+          </lookup>
+        </binding>
+      </object>
+    </property>
+  </template>
+</interface>
 </property>
                   </object>
                 </property>
@@ -86,23 +86,23 @@
           <object class="GtkListView" id="list_view">
             <property name="factory">
               <object class="GtkBuilderListItemFactory">
-                <property name="bytes">
-&lt;?xml version="1.0" encoding="UTF-8"?&gt;
-&lt;interface&gt;
-  &lt;template class="GtkListItem"&gt;
-    &lt;property name="child"&gt;
-      &lt;object class="GtkLabel"&gt;
-        &lt;property name="xalign"&gt;0&lt;/property&gt;
-        &lt;binding name="label"&gt;
-          &lt;lookup name="string" type="GtkStringObject"&gt;
-            &lt;lookup name="item"&gt;GtkListItem&lt;/lookup&gt;
-          &lt;/lookup&gt;
-        &lt;/binding&gt;
-      &lt;/object&gt;
-    &lt;/property&gt;
-  &lt;/template&gt;
-&lt;/interface&gt;
-</property>
+                <property name="bytes"><![CDATA[
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <template class="GtkListItem">
+    <property name="child">
+      <object class="GtkLabel">
+        <property name="xalign">0</property>
+        <binding name="label">
+          <lookup name="string" type="GtkStringObject">
+            <lookup name="item">GtkListItem</lookup>
+          </lookup>
+        </binding>
+      </object>
+    </property>
+  </template>
+</interface>
+            ]]></property>
               </object>
             </property>
             <property name="height-request">100</property>

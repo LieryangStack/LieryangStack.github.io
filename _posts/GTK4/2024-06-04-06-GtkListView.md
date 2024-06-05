@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 四、GTK4——GtkListView
+title: 六、GTK4——GtkListView
 categories: GTK4
 tags: [GTK4]
 ---
