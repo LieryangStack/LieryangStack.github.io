@@ -46,7 +46,7 @@ static void
 add_actions (GApplication *app)
 {
   GSimpleAction *action;
-
+  g_simple_action_group_new
   action = g_simple_action_new ("simple-action", NULL);
   g_signal_connect (action, "activate", G_CALLBACK (activate_action), app);
   g_action_map_add_action (G_ACTION_MAP (app), G_ACTION (action));

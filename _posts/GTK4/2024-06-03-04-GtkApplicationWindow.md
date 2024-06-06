@@ -7,7 +7,16 @@ tags: [GTK4]
 
 ## 1 GtkApplication
 
+`GApplication` 实现了 `GActionGroup` 和 `GActionMap` 接口。
+
 ```c
+/* filename: gapplication.c */
+G_DEFINE_TYPE_WITH_CODE (GApplication, g_application, G_TYPE_OBJECT,
+ G_ADD_PRIVATE (GApplication)
+ G_IMPLEMENT_INTERFACE (G_TYPE_ACTION_GROUP, g_application_action_group_iface_init)
+ G_IMPLEMENT_INTERFACE (G_TYPE_ACTION_MAP, g_application_action_map_iface_init))
+
+
 /* filename: gtkapplication.c */
 G_DEFINE_TYPE_WITH_PRIVATE (GtkApplication, gtk_application, G_TYPE_APPLICATION)
 ```
@@ -67,7 +76,7 @@ g_application_hold (G_APPLICATION (application)); /* 应用程序可以进行迭
 
 通过把当前窗口添加到应用程序，使得应用程序可以进行迭代事件循环。
 
-![alt text](/assets/GTK4/03_GtkApplicationWindow/image/image-1.png)
+![alt text](/assets/GTK4/04_GtkApplicationWindow/image/image-1.png)
 
 #### 1.2.2 window-removed
 
@@ -87,7 +96,7 @@ g_application_release (G_APPLICATION (application));
 
 ### 2.1 GtkWindow关闭请求信号close-request
 
-![alt text](/assets/GTK4/03_GtkApplicationWindow/image/image-3.png)
+![alt text](/assets/GTK4/04_GtkApplicationWindow/image/image-3.png)
 
 GtkWindow类初始化函数中：
 
@@ -233,5 +242,5 @@ G_DEFINE_TYPE_WITH_CODE (GtkApplicationWindow, gtk_application_window, GTK_TYPE_
 
 ## 4 Gtk启动应用程序窗口分析
 
-![alt text](/assets/GTK4/03_GtkApplicationWindow/image/image-2.png)
+![alt text](/assets/GTK4/04_GtkApplicationWindow/image/image-2.png)
 

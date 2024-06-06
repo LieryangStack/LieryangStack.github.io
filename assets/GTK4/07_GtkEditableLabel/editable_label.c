@@ -49,6 +49,7 @@ app_activate (GApplication *app, gpointer *user_data) {
   gtk_window_set_application (GTK_WINDOW (win), GTK_APPLICATION (app));
   gtk_window_present (GTK_WINDOW (win));
   
+  GSimpleActionGroup
 }
 
 int
