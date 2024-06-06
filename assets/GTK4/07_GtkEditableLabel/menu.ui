@@ -1,0 +1,226 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- Created with Cambalache 0.90.2 -->
+<interface>
+  <!-- interface-name menu.ui -->
+  <requires lib="gio" version="2.0"/>
+  <requires lib="gtk" version="4.12"/>
+  <object class="GtkListStore" id="liststore1">
+    <columns>
+      <column type="gchararray"/>
+      <column type="gchararray"/>
+      <column type="gint"/>
+      <column type="gchararray"/>
+    </columns>
+    <data>
+      <row>
+        <col id="0">John</col>
+        <col id="1">Doe</col>
+        <col id="2">25</col>
+        <col id="3">This is the John Doe row</col>
+      </row>
+      <row>
+        <col id="0">Mary</col>
+        <col id="1">Unknown</col>
+        <col id="2">50</col>
+        <col id="3">This is the Mary Unknown row</col>
+      </row>
+    </data>
+  </object>
+  <menu id="menubar">
+    <submenu>
+      <attribute name="label" translatable="yes">_File</attribute>
+      <section>
+        <item>
+          <attribute name="action">win.new</attribute>
+          <attribute name="label" translatable="yes">_New</attribute>
+        </item>
+        <item>
+          <attribute name="action">win.open</attribute>
+          <attribute name="label" translatable="yes">_Open</attribute>
+        </item>
+        <item>
+          <attribute name="action">win.save</attribute>
+          <attribute name="label" translatable="yes">_Save</attribute>
+        </item>
+        <item>
+          <attribute name="action">win.save-as</attribute>
+          <attribute name="label" translatable="yes">Save _As</attribute>
+        </item>
+      </section>
+      <section>
+        <item>
+          <attribute name="action">win.quit</attribute>
+          <attribute name="label" translatable="yes">_Quit</attribute>
+        </item>
+      </section>
+    </submenu>
+    <submenu>
+      <attribute name="label" translatable="yes">_Edit</attribute>
+      <section>
+        <item>
+          <attribute name="action">win.copy</attribute>
+          <attribute name="label" translatable="yes">_Copy</attribute>
+        </item>
+        <item>
+          <attribute name="action">win.cut</attribute>
+          <attribute name="label" translatable="yes">_Cut</attribute>
+        </item>
+        <item>
+          <attribute name="action">win.paste</attribute>
+          <attribute name="label" translatable="yes">_Paste</attribute>
+        </item>
+      </section>
+    </submenu>
+    <submenu>
+      <attribute name="label" translatable="yes">_Help</attribute>
+      <section>
+        <item>
+          <attribute name="action">win.help</attribute>
+          <attribute name="label" translatable="yes">_Help</attribute>
+        </item>
+        <item>
+          <attribute name="action">win.about</attribute>
+          <attribute name="label" translatable="yes">_About</attribute>
+        </item>
+      </section>
+    </submenu>
+  </menu>
+  <object class="GtkWindow" id="window1">
+    <property name="default-height">250</property>
+    <property name="default-width">440</property>
+    <property name="title" translatable="yes">Builder</property>
+    <child>
+      <object class="GtkBox" id="vbox1">
+        <property name="orientation">vertical</property>
+        <child>
+          <object class="GtkPopoverMenuBar" id="menubar1">
+            <property name="menu-model">menubar</property>
+            <!-- Custom object fragments -->
+            <accessibility>
+              <property name="label">Main Menu</property>
+            </accessibility>
+          </object>
+        </child>
+        <child>
+          <object class="GtkBox" id="toolbar1">
+            <property name="accessible-role">toolbar</property>
+            <property name="css-classes">toolbar</property>
+            <child>
+              <object class="GtkButton">
+                <property name="action-name">win.new</property>
+                <property name="icon-name">document-new</property>
+                <property name="label" translatable="yes">New</property>
+                <property name="tooltip-text" translatable="yes">Create a new file</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkButton">
+                <property name="action-name">win.open</property>
+                <property name="icon-name">document-open</property>
+                <property name="label" translatable="yes">Open</property>
+                <property name="tooltip-text" translatable="yes">Open a file</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkButton">
+                <property name="action-name">win.save</property>
+                <property name="icon-name">document-save</property>
+                <property name="label" translatable="yes">Save</property>
+                <property name="tooltip-text" translatable="yes">Save a file</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkSeparator"/>
+            </child>
+            <child>
+              <object class="GtkButton">
+                <property name="action-name">win.copy</property>
+                <property name="icon-name">edit-copy</property>
+                <property name="label" translatable="yes">Copy</property>
+                <property name="tooltip-text" translatable="yes">Copy selected object into the clipboard</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkButton">
+                <property name="action-name">win.cut</property>
+                <property name="icon-name">edit-cut</property>
+                <property name="label" translatable="yes">Cut</property>
+                <property name="tooltip-text" translatable="yes">Cut selected object into the clipboard</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkButton">
+                <property name="action-name">win.paste</property>
+                <property name="icon-name">edit-paste</property>
+                <property name="label" translatable="yes">Paste</property>
+                <property name="tooltip-text" translatable="yes">Paste object from the clipboard</property>
+              </object>
+            </child>
+            <!-- Custom object fragments -->
+            <accessibility>
+              <property name="label">Toolbar</property>
+            </accessibility>
+          </object>
+        </child>
+        <child>
+          <object class="GtkScrolledWindow" id="scrolledwindow1">
+            <property name="has-frame">1</property>
+            <property name="hexpand">1</property>
+            <property name="vexpand">1</property>
+            <child>
+              <object class="GtkTreeView" id="treeview1">
+                <property name="model">liststore1</property>
+                <property name="tooltip-column">3</property>
+                <child>
+                  <object class="GtkTreeViewColumn" id="column1">
+                    <property name="title">Name</property>
+                    <child>
+                      <object class="GtkCellRendererText" id="renderer1"/>
+                      <!-- Custom child fragments -->
+                      <attributes>
+                        <attribute name="text">0</attribute>
+                      </attributes>
+                    </child>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkTreeViewColumn" id="column2">
+                    <property name="title">Surname</property>
+                    <child>
+                      <object class="GtkCellRendererText" id="renderer2"/>
+                      <!-- Custom child fragments -->
+                      <attributes>
+                        <attribute name="text">1</attribute>
+                      </attributes>
+                    </child>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkTreeViewColumn" id="column3">
+                    <property name="title">Age</property>
+                    <child>
+                      <object class="GtkCellRendererText" id="renderer3"/>
+                      <!-- Custom child fragments -->
+                      <attributes>
+                        <attribute name="text">2</attribute>
+                      </attributes>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="GtkLabel" id="statusbar1">
+            <property name="margin-bottom">2</property>
+            <property name="margin-end">2</property>
+            <property name="margin-start">2</property>
+            <property name="margin-top">2</property>
+            <property name="xalign">0</property>
+          </object>
+        </child>
+      </object>
+    </child>
+  </object>
+</interface>

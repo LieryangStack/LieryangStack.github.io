@@ -64,6 +64,6 @@ main (int argc, char **argv)
   status = g_application_run (app, argc, argv);
 
   g_object_unref (app);
-
+  
   return status;
 }

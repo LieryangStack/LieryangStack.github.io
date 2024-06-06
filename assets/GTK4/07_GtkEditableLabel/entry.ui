@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- Created with Cambalache 0.90.2 -->
+<interface>
+  <!-- interface-name entry.ui -->
+  <requires lib="gio" version="2.0"/>
+  <requires lib="gtk" version="4.12"/>
+  <requires lib="libadwaita" version="1.0"/>
+  <object class="AdwApplicationWindow" id="win">
+    <child>
+      <object class="GtkBox">
+        <property name="orientation">vertical</property>
+        <child>
+          <object class="AdwHeaderBar" id="headerbar"/>
+        </child>
+        <child>
+          <object class="GtkPopoverMenuBar">
+            <property name="menu-model">menubar</property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkEditableLabel" id="editable_label">
+            <property name="text">test</property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkButton" id="button">
+            <property name="action-name">win.window-new</property>
+            <property name="hexpand">True</property>
+            <property name="icon-name">accessories-text-editor</property>
+            <property name="vexpand">True</property>
+          </object>
+        </child>
+      </object>
+    </child>
+  </object>
+  <menu id="menubar">
+    <submenu>
+      <attribute name="label">_Open</attribute>
+      <section>
+        <item>
+          <attribute name="icon">call-start</attribute>
+          <attribute name="label">Call</attribute>
+        </item>
+        <item>
+          <attribute name="icon">audio-input-microphone-symbolic</attribute>
+        </item>
+      </section>
+    </submenu>
+  </menu>
+</interface>
