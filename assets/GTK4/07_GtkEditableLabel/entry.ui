@@ -50,4 +50,12 @@
   <object class="GtkPopoverMenu" id="popover">
     <property name="menu-model">menubar</property>
   </object>
+  <object class="GtkPopover">
+    <property name="child">
+      <object class="GtkButton">
+        <property name="icon-name">application-x-executable</property>
+        <property name="label">test</property>
+      </object>
+    </property>
+  </object>
 </interface>

@@ -18,6 +18,8 @@
 	(1,10,"(item)",None,8,None,None,None,-1,None,None),
 	(1,11,"GtkPopoverMenuBar",None,2,None,None,None,1,None,None),
 	(1,12,"GtkPopoverMenu","popover",None,None,None,None,None,None,None),
+	(1,13,"GtkPopover",None,None,None,None,None,-1,None,None),
+	(1,14,"GtkButton",None,13,None,None,None,-1,None,None),
 	(2,1,"GtkListStore","liststore1",None,None,None,None,None,None,None),
 	(2,2,"(menu)","menubar",None,None,None,None,None,None,None),
 	(2,3,"(submenu)",None,2,None,None,None,None,None,None),
@@ -71,6 +73,9 @@
 	(1,10,"(item)","icon","audio-input-microphone-symbolic",None,None,None,None,None,None,None,None,None),
 	(1,11,"GtkPopoverMenuBar","menu-model","6",None,None,None,None,None,None,None,None,None),
 	(1,12,"GtkPopoverMenu","menu-model","6",None,None,None,None,None,None,None,None,None),
+	(1,13,"GtkPopover","child",None,None,None,None,None,14,None,None,None,None),
+	(1,14,"GtkButton","icon-name","application-x-executable",None,None,None,None,None,None,None,None,None),
+	(1,14,"GtkButton","label","test",None,None,None,None,None,None,None,None,None),
 	(2,3,"(submenu)","label","_File",1,None,None,None,None,None,None,None,None),
 	(2,5,"(item)","action","win.new",None,None,None,None,None,None,None,None,None),
 	(2,5,"(item)","label","_New",1,None,None,None,None,None,None,None,None),
@@ -155,7 +160,8 @@
 	(2,1,"GtkListStore",5,13,"Mary",12,None,None,None,None),
 	(2,1,"GtkListStore",5,14,"Unknown",12,None,None,None,None),
 	(2,1,"GtkListStore",5,15,"50",12,None,None,None,None),
-	(2,1,"GtkListStore",5,16,"This is the Mary Unknown row",12,None,None,None,None)
+	(2,1,"GtkListStore",5,16,"This is the Mary Unknown row",12,None,None,None,None),
+	(1,9,"(item)",3,1,None,None,None,None,None,None)
   </object_data>
   <object_data_arg>
 	(2,1,"GtkListStore",2,2,"type","gchararray"),
