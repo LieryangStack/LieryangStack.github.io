@@ -7,7 +7,7 @@
   </ui>
   <object>
 	(1,1,"AdwApplicationWindow","win",None,None,None,None,-1,None,None),
-	(1,2,"GtkBox",None,1,None,None,None,-1,None,None),
+	(1,2,"GtkBox",None,1,None,None,None,1,None,None),
 	(1,3,"AdwHeaderBar","headerbar",2,None,None,None,None,None,None),
 	(1,4,"GtkEditableLabel","editable_label",2,None,None,None,2,None,None),
 	(1,5,"GtkButton","button",2,None,None,None,3,None,None),
@@ -17,6 +17,7 @@
 	(1,9,"(item)",None,8,None,None,None,-1,None,None),
 	(1,10,"(item)",None,8,None,None,None,-1,None,None),
 	(1,11,"GtkPopoverMenuBar",None,2,None,None,None,1,None,None),
+	(1,12,"GtkPopoverMenu","popover",None,None,None,None,None,None,None),
 	(2,1,"GtkListStore","liststore1",None,None,None,None,None,None,None),
 	(2,2,"(menu)","menubar",None,None,None,None,None,None,None),
 	(2,3,"(submenu)",None,2,None,None,None,None,None,None),
@@ -69,6 +70,7 @@
 	(1,9,"(item)","label","Call",None,None,None,None,None,None,None,None,None),
 	(1,10,"(item)","icon","audio-input-microphone-symbolic",None,None,None,None,None,None,None,None,None),
 	(1,11,"GtkPopoverMenuBar","menu-model","6",None,None,None,None,None,None,None,None,None),
+	(1,12,"GtkPopoverMenu","menu-model","6",None,None,None,None,None,None,None,None,None),
 	(2,3,"(submenu)","label","_File",1,None,None,None,None,None,None,None,None),
 	(2,5,"(item)","action","win.new",None,None,None,None,None,None,None,None,None),
 	(2,5,"(item)","label","_New",1,None,None,None,None,None,None,None,None),

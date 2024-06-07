@@ -5,10 +5,10 @@ GtkCssProvider *provider;
 
 static void
 fullscreen_changed(GSimpleAction *action, GVariant *value, GtkWindow *win) {
-  if (g_variant_get_boolean (value))
-    gtk_window_maximize (win);
-  else
-    gtk_window_unmaximize (win);
+  // if (g_variant_get_boolean (value))
+  //   gtk_window_maximize (win);
+  // else
+  //   gtk_window_unmaximize (win);
   g_simple_action_set_state (action, value);
 }
 
@@ -54,9 +54,10 @@ app_startup (GApplication *app) {
     = g_simple_action_new_stateful ("color", vtype, g_variant_new_string ("red"));
   g_variant_type_free (vtype);
   GSimpleAction *act_quit
-    = g_simple_action_new ("quit", NULL);
+    = g_simple_action_new_stateful ("quit", vtype, g_variant_new_string ("red"));
+  g_signal_connect (act_quit, "change-state", G_CALLBACK (fullscreen_changed), app);
   g_signal_connect (act_color, "activate", G_CALLBACK (color_activated), NULL);
-  g_signal_connect_swapped (act_quit, "activate", G_CALLBACK (g_application_quit), app);
+  // g_signal_connect_swapped (act_quit, "activate", G_CALLBACK (g_application_quit), app);
   g_action_map_add_action (G_ACTION_MAP (app), G_ACTION (act_color));
   g_action_map_add_action (G_ACTION_MAP (app), G_ACTION (act_quit));
 
@@ -67,24 +68,24 @@ app_startup (GApplication *app) {
   GMenu *section3 = g_menu_new ();
   GMenuItem *menu_item_fullscreen = g_menu_item_new ("Full Screen", "win.fullscreen");
   GMenuItem *menu_item_red = g_menu_item_new ("Red", "app.color::red");
-  GMenuItem *menu_item_green = g_menu_item_new ("Green", "app.color::green");
-  GMenuItem *menu_item_blue = g_menu_item_new ("Blue", "app.color::blue");
-  GMenuItem *menu_item_quit = g_menu_item_new ("Quit", "app.quit");
+  // GMenuItem *menu_item_green = g_menu_item_new ("Green", "app.color::green");
+  // GMenuItem *menu_item_blue = g_menu_item_new ("Blue", "app.color::blue");
+  GMenuItem *menu_item_quit = g_menu_item_new ("Quit", "app.quit::red");
 
   g_menu_append_item (section1, menu_item_fullscreen);
   g_menu_append_item (section2, menu_item_red);
-  g_menu_append_item (section2, menu_item_green);
-  g_menu_append_item (section2, menu_item_blue);
+  // g_menu_append_item (section2, menu_item_green);
+  // g_menu_append_item (section2, menu_item_blue);
   g_menu_append_item (section3, menu_item_quit);
   g_object_unref (menu_item_red);
-  g_object_unref (menu_item_green);
-  g_object_unref (menu_item_blue);
+  // g_object_unref (menu_item_green);
+  // g_object_unref (menu_item_blue);
   g_object_unref (menu_item_fullscreen);
   g_object_unref (menu_item_quit);
 
   g_menu_append_section (menu, NULL, G_MENU_MODEL (section1));
   g_menu_append_section (menu, "Color", G_MENU_MODEL (section2));
-  g_menu_append_section (menu, NULL, G_MENU_MODEL (section3));
+  g_menu_append_section (menu, "退出", G_MENU_MODEL (section3));
   g_menu_append_submenu (menubar, "Menu", G_MENU_MODEL (menu));
   g_object_unref (section1);
   g_object_unref (section2);

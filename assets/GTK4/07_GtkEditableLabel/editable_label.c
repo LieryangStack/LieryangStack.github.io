@@ -16,12 +16,15 @@ item_value_changed (GtkEditableLabel   *widget,
   
 }
 
+GtkWidget *popover;
+
 static void
 window_new (GSimpleAction *action,
-         GVariant      *parameter,
-         gpointer       user_data)
+            GVariant      *parameter,
+            gpointer       user_data)
 {
   g_print ("%s\n", __func__);
+      gtk_popover_popup (GTK_POPOVER (popover));
 }
 
 static GActionEntry action_entries[] = {
@@ -33,8 +36,11 @@ static void
 app_activate (GApplication *app, gpointer *user_data) {
   GtkBuilder *build = gtk_builder_new_from_file ("entry.ui");
   GtkWidget *win = GTK_WIDGET (gtk_builder_get_object (build, "win"));
+  popover = GTK_WIDGET (gtk_builder_get_object (build, "popover"));
   GtkWidget *editable_label = GTK_WIDGET (gtk_builder_get_object (build, "editable_label"));
   g_signal_connect (editable_label, "notify::editing", G_CALLBACK (item_value_changed), NULL);
+
+
 
   GActionMap *action_map = G_ACTION_MAP (g_simple_action_group_new ());
   g_action_map_add_action_entries (action_map,
@@ -48,8 +54,13 @@ app_activate (GApplication *app, gpointer *user_data) {
   //                              G_MENU_MODEL (gtk_builder_get_object (build, "menubar")));
   gtk_window_set_application (GTK_WINDOW (win), GTK_APPLICATION (app));
   gtk_window_present (GTK_WINDOW (win));
-  
-  GSimpleActionGroup
+
+  cairo_rectangle_int_t p = {0, 0, 100, 100};
+
+  gtk_popover_set_has_arrow (GTK_POPOVER (popover), TRUE);
+  // gtk_popover_set_position (GTK_POPOVER (popover), GTK_POS_LEFT);
+  gtk_popover_set_pointing_to (GTK_POPOVER (popover), &p);
+  gtk_widget_set_parent (popover, editable_label);
 }
 
 int

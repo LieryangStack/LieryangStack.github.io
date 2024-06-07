@@ -3,7 +3,7 @@
 <interface>
   <!-- interface-name entry.ui -->
   <requires lib="gio" version="2.0"/>
-  <requires lib="gtk" version="4.12"/>
+  <requires lib="gtk" version="4.14"/>
   <requires lib="libadwaita" version="1.0"/>
   <object class="AdwApplicationWindow" id="win">
     <child>
@@ -47,4 +47,7 @@
       </section>
     </submenu>
   </menu>
+  <object class="GtkPopoverMenu" id="popover">
+    <property name="menu-model">menubar</property>
+  </object>
 </interface>
