@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+
 static void
 activate (GApplication *application)
 {
@@ -10,11 +11,15 @@ activate (GApplication *application)
   g_application_release (application);
 }
 
+
+/**
+ * @brief: 动作触发回调函数
+*/
 static void
-open_action (GAction  *action,
-             GVariant *parameter,
-             gpointer  data)
-{
+open_action_cb (GAction  *action,
+                GVariant *parameter,
+                gpointer  data) {
+  
   GApplication *application = G_APPLICATION (data);
 
   g_application_hold (application);
@@ -67,10 +72,12 @@ main (int argc, char **argv)
   
   /* @name: 动作的名称，比如 open */
   action = g_simple_action_new ("simple-action", NULL);
+  /* 设定激活回调函数 */
   g_signal_connect (action, "activate", G_CALLBACK (open_action), app);
   g_action_map_add_action (G_ACTION_MAP (app), G_ACTION (action));
   g_object_unref (action);
 
+  /* 触发Action */
   g_action_activate (G_ACTION(action), NULL);
 
   /* 应用程序需要被注册，否则无法使用action */

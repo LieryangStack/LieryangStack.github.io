@@ -148,3 +148,8 @@ g_application_quit (GApplication *application);
 
 1. 如果使用`g_application_release`，退出时候会添加一个超时事件，只有该时间结束，才会才出上下文迭代。
 2. 如果使用 `g_application_quit`，会直接退出。
+
+
+## 4 GApplication Action相关
+
+![alt text](/assets/GIOStudy/03_GApplication/image/image.png)

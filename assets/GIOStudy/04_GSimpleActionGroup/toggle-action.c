@@ -10,17 +10,6 @@ activate (GApplication *application)
   g_application_release (application);
 }
 
-static void
-activate_action (GAction  *action,
-                 GVariant *parameter,
-                 gpointer  data)
-{
-  GApplication *application = G_APPLICATION (data);
-
-  g_application_hold (application);
-  g_print ("action %s activated\n", g_action_get_name (action));
-  g_application_release (application);
-}
 
 static void
 activate_toggle_action (GSimpleAction *action,
@@ -42,22 +31,6 @@ activate_toggle_action (GSimpleAction *action,
   g_application_release (application);
 }
 
-static void
-add_actions (GApplication *app)
-{
-  GSimpleAction *action;
-  g_simple_action_group_new
-  action = g_simple_action_new ("simple-action", NULL);
-  g_signal_connect (action, "activate", G_CALLBACK (activate_action), app);
-  g_action_map_add_action (G_ACTION_MAP (app), G_ACTION (action));
-  g_object_unref (action);
-
-  action = g_simple_action_new_stateful ("toggle-action", NULL,
-                                         g_variant_new_boolean (FALSE));
-  g_signal_connect (action, "activate", G_CALLBACK (activate_toggle_action), app);
-  g_action_map_add_action (G_ACTION_MAP (app), G_ACTION (action));
-  g_object_unref (action);
-}
 
 static void
 describe_and_activate_action (GActionGroup *group,
@@ -99,20 +72,18 @@ main (int argc, char **argv)
   g_signal_connect (app, "activate", G_CALLBACK (activate), NULL);
   g_application_set_inactivity_timeout (app, 10000);
 
-  add_actions (app);
+  /**
+   * @state: 该Action具有状态参数，比如toggle按钮，TRUE和FALSE
+  */
+  GSimpleAction *action = g_simple_action_new_stateful ("toggle-action", NULL,
+                                         g_variant_new_boolean (FALSE));
+  g_signal_connect (action, "activate", G_CALLBACK (activate_toggle_action), app);
+  g_action_map_add_action (G_ACTION_MAP (app), G_ACTION (action));
+  g_object_unref (action);
 
-  if (argc > 1 && strcmp (argv[1], "--simple-action") == 0)
-    {
-      g_application_register (app, NULL, NULL);
-      describe_and_activate_action (G_ACTION_GROUP (app), "simple-action");
-      exit (0);
-    }
-  else if (argc > 1 && strcmp (argv[1], "--toggle-action") == 0)
-    {
-      g_application_register (app, NULL, NULL);
-      describe_and_activate_action (G_ACTION_GROUP (app), "toggle-action");
-      exit (0);
-    }
+  /* 应用程序需要被注册，否则无法使用action */
+  g_application_register (app, NULL, NULL);
+  describe_and_activate_action (G_ACTION_GROUP (app), "toggle-action");
 
   status = g_application_run (app, argc, argv);
 
