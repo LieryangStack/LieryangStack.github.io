@@ -9,7 +9,7 @@ fullscreen_changed(GSimpleAction *action, GVariant *value, GtkWindow *win) {
   //   gtk_window_maximize (win);
   // else
   //   gtk_window_unmaximize (win);
-  g_simple_action_set_state (action, value);
+  // g_simple_action_set_state (action, value);
 }
 
 static void
