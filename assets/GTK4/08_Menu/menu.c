@@ -44,6 +44,8 @@ app_activate (GApplication *app) {
 
   gtk_application_window_set_show_menubar (GTK_APPLICATION_WINDOW (win), TRUE);
 
+  
+
   gtk_window_present (win);
 }
 

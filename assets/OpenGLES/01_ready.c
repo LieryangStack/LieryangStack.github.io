@@ -233,11 +233,11 @@ egl_thread_test_func (gpointer user_data) {
   }
 
   /* Set the URI to play */
-  g_object_set(data.source, "location", "rtsp://admin:YEERBA@192.168.10.11:554/Streaming/Channels/101", \
-                            "latency", 200, "protocols", 0x04, NULL);
+  // g_object_set(data.source, "location", "rtsp://admin:YEERBA@192.168.10.11:554/Streaming/Channels/101", \
+  //                           "latency", 200, "protocols", 0x04, NULL);
   
-  // g_object_set(data.source, "location", "rtsp://admin:yangquan321@192.168.2.3:554/Streaming/Channels/101", \
-  //                           "latency", 300, "protocols", 0x04, NULL);
+  g_object_set(data.source, "location", "rtsp://admin:yangquan321@192.168.2.3:554/Streaming/Channels/101", \
+                            "latency", 300, "protocols", 0x04, NULL);
 
 
   /* Connect to the pad-added signal */
@@ -323,9 +323,12 @@ realize (GtkWidget *widget) {
 
   GdkGLContext *context = gtk_gl_area_get_context (GTK_GL_AREA (widget));
   GdkDisplay *display = gdk_gl_context_get_display (context);
-  egl_display = gdk_display_get_egl_display_private (display);
-  egl_config = gdk_display_get_egl_config_private (display);
-  egl_context = gdk_gl_context_get_egl_context_private (context);
+
+  /* 获取当前EGL上下文 */
+  egl_context = eglGetCurrentContext ();
+
+  egl_display = gdk_display_get_egl_display (display);
+  egl_config = gdk_display_get_egl_config (display);
                            
   if (gdk_gl_context_get_use_es (context)) {
 
