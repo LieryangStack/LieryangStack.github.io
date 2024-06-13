@@ -19,7 +19,7 @@
         </child>
         <child>
           <object class="GtkEditableLabel" id="editable_label">
-            <property name="text">test</property>
+            <property name="text">测试</property>
           </object>
         </child>
         <child>
@@ -35,11 +35,11 @@
   </object>
   <menu id="menubar">
     <submenu>
-      <attribute name="label">_Open</attribute>
+      <attribute name="label">打开</attribute>
       <section>
         <item>
           <attribute name="icon">call-start</attribute>
-          <attribute name="label">Call</attribute>
+          <attribute name="label">测试</attribute>
         </item>
         <item>
           <attribute name="icon">audio-input-microphone-symbolic</attribute>

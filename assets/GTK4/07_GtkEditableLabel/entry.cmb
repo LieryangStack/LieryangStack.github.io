@@ -62,14 +62,14 @@
   </object>
   <object_property>
 	(1,2,"GtkOrientable","orientation","vertical",None,None,None,None,None,None,None,None,None),
-	(1,4,"GtkEditable","text","test",None,None,None,None,None,None,None,None,None),
+	(1,4,"GtkEditable","text","测试",None,None,None,None,None,None,None,None,None),
 	(1,5,"GtkActionable","action-name","win.window-new",None,None,None,None,None,None,None,None,None),
 	(1,5,"GtkButton","icon-name","accessories-text-editor",None,None,None,None,None,None,None,None,None),
 	(1,5,"GtkWidget","hexpand","True",None,None,None,None,None,None,None,None,None),
 	(1,5,"GtkWidget","vexpand","True",None,None,None,None,None,None,None,None,None),
-	(1,7,"(submenu)","label","_Open",None,None,None,None,None,None,None,None,None),
+	(1,7,"(submenu)","label","打开",None,None,None,None,None,None,None,None,None),
 	(1,9,"(item)","icon","call-start",None,None,None,None,None,None,None,None,None),
-	(1,9,"(item)","label","Call",None,None,None,None,None,None,None,None,None),
+	(1,9,"(item)","label","测试",None,None,None,None,None,None,None,None,None),
 	(1,10,"(item)","icon","audio-input-microphone-symbolic",None,None,None,None,None,None,None,None,None),
 	(1,11,"GtkPopoverMenuBar","menu-model","6",None,None,None,None,None,None,None,None,None),
 	(1,12,"GtkPopoverMenu","menu-model","6",None,None,None,None,None,None,None,None,None),
