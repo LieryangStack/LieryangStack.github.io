@@ -55,7 +55,7 @@ pkg-config --variable pc_path pkg-config
 
 可以看到默认搜索路径就是 `/usr` 和 `/usr/local` 下面的 `lib`中搜索
 
-![alt text](image.png)
+![alt text](/assets/Linux/02_pkg_config/image.png)
 
 ```sh
 /usr/local/lib/pkgconfig
@@ -69,6 +69,8 @@ pkg-config --variable pc_path pkg-config
 
 ### 2.2 通过环境变量添加搜索路径
 
+#### 2.2.1 PKG_CONFIG_PATH
+
 事实上，pkg-config只是一个工具，所以不是你安装了一个第三方库，pkg-config就能知道第三方库的头文件和库文件的位置的。为了让pkg-config可以得到一个库的信息，就要求库的提供者提供一个.pc文件。默认情况下，比如执行如下命令：
 
 ```bash
@@ -77,7 +79,7 @@ pkg-config --libs --cflags glib-2.0
 
 pkg-config会到默认搜索目录下去寻找glib-2.0.pc文件。也就是说在此目录下的.pc文件，pkg-config是可以自动找到的。然而假如我们安装了一个库，其生成的.pc文件并不在这个默认目录中的话，pkg-config就找不到了。此时我们需要通过 `PKG_CONFIG_PATH` 环境变量来指定pkg-config还应该在哪些地方去寻找.pc文件。
 
-我们可以通过如下命令来设置PKG_CONFIG_PATH环境变量：
+我们可以通过如下命令来设置 `PKG_CONFIG_PATH` 环境变量：
 
 ```bash
 export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/usr/local/harfbuzz-2.9.1/lib/aarch64-linux-gnu/pkgconfig
@@ -87,7 +89,14 @@ export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/usr/local/harfbuzz-2.9.1/lib/aarch64-li
 
 另外还需要注意的是,上述环境变量的设置只对当前的终端窗口有效。为了让其永久生效，我们可以将上述命令写入到 /etc/bash.bashrc 或者 ~./bashrc 等文件中，以方便后续使用。
 
+#### 2.2.2 PKG_CONFIG_LIBDIR
+
+`PKG_CONFIG_LIBDIR` 优先级比 `PKG_CONFIG_PATH` 高，如果设定了 `PKG_CONFIG_LIBDIR`，默认的搜索路径和 `PKG_CONFIG_PATH` 指定的搜索路径都会被覆盖。
+
+`PKG_CONFIG_LIBDIR` 一般用于交叉编译的时候，防止搜索本机的默认pkg-config路径。
+
 ## 3 pkg-config与LD_LIBRARY_PATH
+
 [详细内容参考：3、pkg-config与LD_LIBRARY_PATH](https://blog.csdn.net/fuhanghang/article/details/130206203)
 
 ## 4 pc文件书写规范
