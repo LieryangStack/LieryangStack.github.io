@@ -89,8 +89,10 @@ main (int argc, char *argv[])
   // g_object_set(data.source, "location", "rtsp://admin:YEERBA@192.168.10.11:554/Streaming/Channels/101", \
   //                           "latency", 200, "protocols", 0x04, NULL);
   
-  g_object_set(data.source, "location", "rtsp://admin:yangquan321@192.168.2.3:554/Streaming/Channels/101", NULL);
+  // g_object_set(data.source, "location", "rtsp://admin:yangquan321@192.168.2.3:554/Streaming/Channels/101", NULL);
 
+  g_object_set(data.source, "location", "rtsp://admin:LHLQLW@192.168.2.18:554/Streaming/Channels/101", \
+                            "latency", 300, "protocols", 0x04, NULL);
 
   /* Connect to the pad-added signal */
   /* 在这里把回调函数的src data变量指定参数*/

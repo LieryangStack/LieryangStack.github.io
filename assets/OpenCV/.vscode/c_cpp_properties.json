@@ -1,18 +1,38 @@
 {
   "configurations": [
     {
-      "name": "linux-gcc-x64",
+      "name": "linux-clang-x64",
       "includePath": [
         "${workspaceFolder}/**",
-        "/usr/local/opencv-4.9.0/include/opencv4"
+        "/usr/local/opencv-4.9.0/include/opencv4",
+        "/usr/include/gtk-3.0",
+        "/usr/include/pango-1.0",
+        "/usr/include/harfbuzz",
+        "/usr/include/pango-1.0",
+        "/usr/include/fribidi",
+        "/usr/include/harfbuzz",
+        "/usr/include/gdk-pixbuf-2.0",
+        "/usr/include/x86_64-linux-gnu",
+        "/usr/include/cairo",
+        "/usr/include/uuid",
+        "/usr/include/freetype2",
+        "/usr/include/libpng16",
+        "/usr/include/pixman-1",
+        "/usr/include/graphene-1.0",
+        "/usr/lib/x86_64-linux-gnu/graphene-1.0/include",
+        "/usr/include/libmount",
+        "/usr/include/blkid",
+        "/usr/include/glib-2.0",
+        "/usr/lib/x86_64-linux-gnu/glib-2.0/include",
+        "/home/lieryang/Downloads/libadwaita-1.5.1",
+        "/home/lieryang/Downloads/gtk-4.15.1",
+        "/home/lieryang/Downloads/glib-2.80.2"
       ],
-      "compilerPath": "/usr/bin/gcc",
-      "cStandard": "${default}",
-      "cppStandard": "${default}",
-      "intelliSenseMode": "linux-gcc-x64",
-      "compilerArgs": [
-        ""
-      ]
+      "defines": [],
+      "compilerPath": "/usr/bin/clang-14",
+      "cStandard": "c17",
+      "cppStandard": "c++14",
+      "intelliSenseMode": "linux-clang-x64"
     }
   ],
   "version": 4
