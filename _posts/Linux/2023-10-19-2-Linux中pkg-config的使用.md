@@ -52,6 +52,21 @@ pkg-config --variable pc_path pkg-config
 
 - **pkg-config**：表示我们要查询package的名称。在这里，我们查询的是 `pkg-config` 自己的配置。
 
+
+可以看到默认搜索路径就是 `/usr` 和 `/usr/local` 下面的 `lib`中搜索
+
+![alt text](image.png)
+
+```sh
+/usr/local/lib/pkgconfig
+/usr/local/lib/x86_64-linux-gnu/pkgconfig
+/usr/local/share/pkgconfig
+
+/usr/lib/pkgconfig
+/usr/lib/x86_64-linux-gnu/pkgconfig
+/usr/share/pkgconfig
+```
+
 ### 2.2 通过环境变量添加搜索路径
 
 事实上，pkg-config只是一个工具，所以不是你安装了一个第三方库，pkg-config就能知道第三方库的头文件和库文件的位置的。为了让pkg-config可以得到一个库的信息，就要求库的提供者提供一个.pc文件。默认情况下，比如执行如下命令：
