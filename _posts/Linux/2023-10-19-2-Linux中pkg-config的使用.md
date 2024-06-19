@@ -143,3 +143,8 @@ URL：人们可以通过该URL地址来获取package的更多信息或者package
 
 ## 参考
 [1.Linux中pkg-config的使用](https://blog.csdn.net/fuhanghang/article/details/130206203)
+
+
+export PKG_CONFIG_LIBDIR=/mnt/jetson_rootsys/usr/local/lib/pkgconfig:/mnt/jetson_rootsys/usr/local/lib/aarch64-linux-gnu/pkgconfig:/mnt/jetson_rootsys/usr/local/share/pkgconfig:/mnt/jetson_rootsys/usr/lib/pkgconfig:/mnt/jetson_rootsys/usr/lib/aarch64-linux-gnu/pkgconfig:/mnt/jetson_rootsys/usr/share/pkgconfig
+
+export PKG_CONFIG_SYSROOT_DIR=/mnt/jetson_rootsys
