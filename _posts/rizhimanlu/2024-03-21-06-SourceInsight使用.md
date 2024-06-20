@@ -13,7 +13,7 @@ tags: [日之漫录]
 
 或者
 
-![alt text](image.png)
+![alt text](/assets/rizhimanlu/06_SourceInsight/image.png)
 
 ### 1.2 破解
 
@@ -21,10 +21,10 @@ tags: [日之漫录]
 
 2.  复制 `msimg32.dll` 到安装路径
    
-    ![alt text](image-1.png)
+    ![alt text](/assets/rizhimanlu/06_SourceInsight/image-1.png)
 
 3.  生成授权文件 `si4.lic`
-   ![alt text](image-2.png)
+   ![alt text](/assets/rizhimanlu/06_SourceInsight/image-2.png)
 
 4.  打开 Source Insight 4.0软件，选择导入授权文件激活
 
