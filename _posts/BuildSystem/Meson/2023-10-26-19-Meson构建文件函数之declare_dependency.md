@@ -32,9 +32,11 @@ dep declare_dependency(
 )
 ```
 
+### 3 示例
 
+#### 3.1 示例1
 
-### Method1
+直接使用动态库
 
 ```python
 # Up to you to select which .so file
@@ -43,19 +45,13 @@ foo_dep = declare_dependency(link_with: foo_lib)
 install_data(foo_lib, install_dir : get_option('libdir'))
 ```
 
+#### 3.2 示例2
 
-
-### Method2
+使用编译好的静态库
 
 ```python
-project('myproj', 'c')
-
-cc = meson.get_compiler('c')
-lib_hello = cc.find_library('hello',
-               dirs : ['/opt/hello'])
-inc_hello = include_directories('/opt/hello')
-exec = executable('app',
-                  'main.c',
-                  dependencies : [lib_hello],
-                  include_directories : inc_hello)
+my_inc = include_directories(...)
+my_lib = static_library(...)
+my_dep = declare_dependency(link_with : my_lib,
+                            include_directories : my_inc)
 ```
