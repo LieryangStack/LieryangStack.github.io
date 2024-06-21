@@ -9,18 +9,32 @@ Meson本质上是用 `Python` 编写的，所以这些函数也都是Python函�
 
 ## 1 include_directories()
 
-返回一个不透明对象，其中包含位置参数中给出的相对于当前目录的目录。然后可以将结果传递给构建可执行文件或库时的 include_directories: 关键字参数。您可以在任何子目录中使用返回的对象，Meson 会自动使路径正常工作。
+- 仅仅调用该函数，并不会把目录添加到搜索路径中，因为meson不像cmake不具有全局搜索路径。
 
-请注意，此函数调用本身不会将目录添加到搜索路径中，因为没有全局搜索路径。对于类似的功能，请参阅 add_project_arguments()。
+- 给出的每个目录都被转换为<font color="red">两个包含路径</font>：一个相对于源代码根目录，另一个相对于构建根目录。(所以可以不提供绝对路径，我们既可以获取构建目录路径，也同时获取源代码根目录，源代码根目录就是meson.build所在目录)
 
-另请参阅 executable() 的 implicit_include_directories 参数，它将当前源代码和构建目录添加到包含路径中。
-
-给出的每个目录都被转换为两个包含路径：一个相对于源代码根目录，另一个相对于构建根目录。
+- `@includes`变量可以同时传入多个目录。
 
 ## 2 include_directories()定义
 
 ```python
-# Returns an opaque object which contains the directories (relative to
+'''
+Brief: 
+      根据传入的目录，返回一个不透明对象
+Param:
+      includes(str): 接受0到多个字符串类型路径
+      
+      is_system(bool 默认=flase): 如果设置为 true，则将指定的目录标记为系统目录。
+      这意味着在支持该标志的编译器上，它们将与 -isystem 编译器参数一起使用，
+      而不是 -I（实际上，除了 Visual Studio 以外的所有编译器都支持该标志）。
+
+Returns:
+
+'''
+
+# param includes: 接受 0 到无限个类型为 str 的可变参数
+
+
 inc include_directories(
   str includes...,  # Include paths to add
 
@@ -29,13 +43,24 @@ inc include_directories(
 )
 ```
 
+
+
 ## 3 include_directories()举例
 
 ### 3.1 示例一
 
+可以同时传入多个目录，此时会返回四个路径：
+
+- /project_path
+
+- /project_path/gst/rtsp-server
+
+- /project_path/build_path
+
+- /project_path/build_path/rtsp-server
 
 ```python
-
+rtspserver_incs = include_directories('gst/rtsp-server', '.')
 ```
 
 ### 3.2 示例二
@@ -44,3 +69,7 @@ inc include_directories(
 
 ```
 
+## 参考
+
+[官网：include_directories()
+](https://mesonbuild.com/Reference-manual_functions.html#include_directories)

@@ -9,9 +9,10 @@ Meson本质上是用 `Python` 编写的，所以这些函数也都是Python函�
 
 ## 1 dependency()
 
-dependency 函数用于查找给定名称的外部依赖项（通常是系统上安装的库），首先通过 pkg-config 查找，如果失败则通过 CMake。此外，还支持框架（仅限 OSX）和[特定于库的回退fallback检测逻辑](https://mesonbuild.com/Dependencies.html#dependencies-with-custom-lookup-functionality)。
+- dependency 用于查找给定名称的外部依赖项（通常是系统上安装的库），首先通过 pkg-config 查找，如果失败则通过 CMake。如果查找失败，可以使用[fallback回退处理](https://mesonbuild.com/Dependencies.html#dependencies-with-custom-lookup-functionality)，支持 `pkg-config`、`cmake`、`extraframework`(OSX only) 、 `qmake` 等。
 
-自 0.60.0 版本起，可以提供多个名称，它们将按顺序尝试，首个找到的名称将被使用。只有当系统上没有找到这些名称中的任何一个时，才会使用回退fallback子项目。一旦找到其中一个名称，所有其他名称都将添加到缓存中，因此后续对这些名称的任何调用都将返回相同的值。这在依赖项可能有不同名称的情况下很有用，例如 png 和 libpng。
+- 
+
 
 - 自 0.64.0 版本起，可以通过 WrapDB 提供依赖项fallback的回退。只需使用 meson wrap update-db 命令本地下载数据库，如果系统上未找到依赖项并且项目未自带 .wrap 文件，Meson 将自动回退到 WrapDB 提供的子项目。
 - 依赖项还可以通过其他两种方式解决：
@@ -27,84 +28,83 @@ dependency 函数用于查找给定名称的外部依赖项（通常是系统上
 ## 2 dependency()定义
 
 ```python
-# Finds an external dependency (usually a library installed on your
 dep dependency(
   str names...,  # The names of the dependency to look up
 
   # Keyword arguments:
-  allow_fallback    : bool                                          # Specifies whether Meson should automatically pick a fallback subproject
-  default_options   : list[str] | dict[str | bool | int | list[str]]  # An array of default option values
-  disabler          : bool                                          # Returns a disabler() object instead of a not-found dependency
-  fallback          : list[str] | str                               # Manually specifies a subproject fallback
-  include_type      : str                                           # An enum flag, marking how the dependency
-  language          : str                                           # Defines what language-specific dependency to find
-  method            : str                                           # Defines the way the dependency is detected, the default is
-  native            : bool                                          # If set to `true`, causes Meson to find the dependency on
-  not_found_message : str                                           # An optional string that will be printed as a message() if the dependency was not found.
-  required          : bool | feature                                # When set to `false`, Meson will proceed with the build
-  static            : bool                                          # Tells the dependency provider to try to get static
-  version           : list[str] | str                               # Specifies the required version,
+  # 指定 Meson 是否应自动选择回退子项目
+  allow_fallback    : bool
+  # 默认选项值的数组
+  default_options   : list[str] | dict[str | bool | int | list[str]]
+  # 返回 disabler() 对象，而不是未找到的依赖项 default = false
+  disabler          : bool
+  # 手动指定一个回退子项目
+  fallback          : list[str] | str
+  # 一个枚举标志，标记依赖项的包含类型 default = 'preserve'，可以转换成 -isystem 类型头文件搜索路径
+  include_type      : str 
+  # 定义要查找的特定语言依赖项
+  language          : str
+  # 定义检测依赖项的方式，默认是 default = 'auto'
+  method            : str
+  # 如果设置为 `true`，则 Meson 会在本机系统上查找依赖项
+  native            : bool
+  # 一个可选的字符串，如果未找到依赖项，将作为消息打印
+  not_found_message : str 
+  # 当设置为 `false` 时，Meson 将继续构建
+  required          : bool | feature
+  # 告诉依赖项提供者尝试获取静态依赖项
+  static            : bool
+  version           : list[str] | str
+```
+
+## 3 dependency查找依赖项
+
+- 可以设定`@method`变量来设定查找依赖项方式，其中包括：pkg-config、config-tool、cmake、builtin、system、sysconfig、qmake、extraframework 和 dub。
+
+- 如果不指定默认值是 `auto`。auto 的依赖项方法顺序为：
+
+  1. pkg-config
+
+  2. cmake
+  
+  3. extraframework（仅限 OSX）
+
+### 3.1 查找依赖项示例
+
+```python
+qt5_dep = dependency('qt5', modules : ['Core', 'Gui'], method : 'config-tool')
+gstreamer_dep        = dependency('gstreamer-1.0', method: 'pkg-config')
+gstreamer_video_dep  = dependency('gstreamer-video-1.0', version: '>=1.30')
+```
+
+### 3.2 获取依赖项pkgconfig文件中的变量
+
+我们可以获取 `gstreamer-1.0.pc` 文件中的变量，通过 `dep` 对象的 `get_pkgconfig_variable` 函数。
+
+```python
+'''
+Brief: 
+      dependency创建了dep对象，该对象可以调用该函数，返回pkg-config文件中@var_name变量的值。
+Argument:
+      var_name(str): pkg-config文件中的变量，例如：prefix、includedir、libdir等
+      default(str): 如在文件中找不到@var_name变量，则返回@default值
+      define_variable: 重定义变量的值，格式如下 ['prefix', 'tmp', 'libdir', '/usr/local/gsreamer-1.22.6']
+
+'''
+str get_pkgconfig_variable(
+  str var_name,
+  default         : str
+  define_variable : list[str]
 )
 ```
 
-## 3 依赖项dependencies
+下面图片表示获取 `libdir` 变量路径，同时修改 `prefix` 变量
 
-很少有应用程序是完全自给自足的，它们通常使用外部库和框架来完成工作。Meson 使得查找和使用外部依赖变得非常简单。下面是一个使用 zlib 压缩库的例子。
+![alt text](image.png)
 
-```python
-zdep = dependency('zlib', version : '>=1.2.8')
-exe = executable('zlibprog', 'prog.c', dependencies : zdep)
-```
+也可以使用 `get_variable` 函数，获取其他方式 `method` 中配置文件的值。例如`var = foo_dep.get_variable(cmake : 'CMAKE_VAR', pkgconfig : 'pkg-config-var', configtool : 'get-var', default_value : 'default')`
 
-首先，Meson 被告知要找到外部库 zlib，并在找不到时报错。version 关键字是可选的，用于指定依赖的版本要求。然后使用指定的依赖构建一个可执行文件。注意，用户不需要手动处理编译器或链接器标志，或处理任何其他细节。
-
-如果你有多个依赖，可以将它们作为一个数组传递：
-
-
-```python
-executable('manydeps', 'file.c', dependencies : [dep1, dep2, dep3, dep4])
-```
-
-如果依赖是可选的，你可以告诉 Meson 在找不到依赖时不要报错，然后进行进一步的配置。
-
-```python
-opt_dep = dependency('somedep', required : false)
-if opt_dep.found()
-  # 做一些事情。
-else
-  # 做其他事情。
-endif
-```
-
-你可以将 opt_dep 变量传递给目标构建函数，无论实际的依赖是否被找到。Meson 会忽略未找到的依赖。
-
-Meson 还允许从 pkg-config 文件中获取定义的变量。这可以通过使用 dep.get_pkgconfig_variable() 函数来完成。
-
-```python
-zdep_prefix = zdep.get_pkgconfig_variable('prefix')
-```
-
-这些变量也可以通过传递 define_variable 参数来重新定义，这在某些情况下可能很有用：
-
-```python
-zdep_prefix = zdep.get_pkgconfig_variable('libdir', define_variable: ['prefix', '/tmp'])
-```
-依赖项检测器适用于所有提供 pkg-config 文件的库。不幸的是，有些包没有提供 pkg-config 文件。Meson 对其中一些进行了自动检测支持，稍后在本页中进行了描述。
-
-## 4 从多种方式找到的依赖项中获取任意变量
-
-注意，自 0.51.0 和 0.54.0 版本起，新增了 internal 关键字。
-
-当你需要从多种方式可以找到的依赖项中获取任意变量，并且你不想限制类型时，可以使用通用的 get_variable 方法。这目前支持 cmake、pkg-config 和 config-tool 基于的变量。
-
-```python
-foo_dep = dependency('foo')
-var = foo_dep.get_variable(cmake : 'CMAKE_VAR', pkgconfig : 'pkg-config-var', configtool : 'get-var', default_value : 'default')
-```
-
-它接受 'cmake'、'pkgconfig'、'pkgconfig_define'、'configtool'、'internal' 和 'default_value' 关键字。'pkgconfig_define' 的工作方式类似于 get_pkgconfig_variable 的 'define_variable' 参数。当调用此方法时，将使用与依赖项底层类型对应的关键字来查找变量。如果找不到该变量，或者调用者没有为依赖项的类型提供参数，将会发生以下情况之一：如果提供了 'default_value'，将返回该值；如果没有提供 'default_value'，则会引发错误。
-
-### 4.1 提供资源文件的依赖项
+## 4 提供资源文件的依赖项
 
 有时依赖项提供可安装的文件，其他项目需要使用。例如，wayland-protocols 的 XML 文件。
 
@@ -152,19 +152,7 @@ my_dep = declare_dependency(link_with : my_lib,
 
 这个声明的意思是，首先 Meson 会尝试从系统中查找依赖项（例如通过使用 pkg-config）。如果找不到，那么它会构建名为 foo 的子项目，并从中提取变量 foo_dep。这意味着此函数的返回值要么是外部依赖项对象，要么是内部依赖项对象。由于它们可以互换使用，其余的构建定义不需要关心它是哪一个。Meson 将在幕后处理所有工作以使其正常工作。
 
-## 7 依赖项检测方法
 
-你可以使用 method 关键字让 Meson 知道在搜索依赖项时使用哪种方法。默认值是 auto。其他方法包括 pkg-config、config-tool、cmake、builtin、system、sysconfig、qmake、extraframework 和 dub。
-
-```python
-cups_dep = dependency('cups', method : 'pkg-config')
-```
-
-对于没有特定检测逻辑的依赖项，auto 的依赖项方法顺序为：
-
-- pkg-config
-- cmake
-- extraframework（仅限 OSX）
 
 ### 7.1 System
 
@@ -297,7 +285,7 @@ dep = dependency('cuda', version : '>=10', modules : ['cublas'])
 [参考1：Dependencies](https://mesonbuild.com/Dependencies.html#dependencies-with-custom-lookup-functionality)
 
 
-
+[参考2：Dependency object(dep对象)](https://mesonbuild.com/Reference-manual_returned_dep.html#depget_pkgconfig_variable)
 
 
 

@@ -7,6 +7,10 @@ tags: [Meson]
 
 通过在构建文件设置配置信息，生成头文件，例如`config.h`
 
+- 对同一个 `config.h` 文件，多次同时 `configure_file` ，会把之前`config.h`里面的内容覆盖。
+
+- 
+
 ## 1 如果有输入文件
 
 输入文件名为 `config.h.in，内容如下：
@@ -88,4 +92,12 @@ configure_file(output : 'config2.h',
 )
 
 executable('demo', 'main.cpp')
+```
+
+## 3 区别 set_quoted
+
+类似于 `cfg_data.set`，但是会给字符串加双引号，无需 `cfg_data.set('FOO', '"foo"')` 加另外加 `"`
+
+```python
+cfg_data.set_quoted('FOO', 'foo')
 ```
