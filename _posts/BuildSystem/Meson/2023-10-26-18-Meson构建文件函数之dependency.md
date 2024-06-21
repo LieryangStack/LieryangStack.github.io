@@ -285,52 +285,10 @@ dep = dependency('cuda', version : '>=10', modules : ['cublas'])
 [参考1：Dependencies](https://mesonbuild.com/Dependencies.html#dependencies-with-custom-lookup-functionality)
 
 
+[参考1：Dependency函数](https://mesonbuild.com/Reference-manual_functions.html#dependency)
+
 [参考2：Dependency object(dep对象)](https://mesonbuild.com/Reference-manual_returned_dep.html#depget_pkgconfig_variable)
 
 
-
-
-
-```python
-
-```
-
-
-
-```python
-
-```
-
-
-
-```python
-
-```
-
-
-
-```python
-
-```
-
-
-
-```python
-
-```
-
-
-
-```python
-
-```
-
-
-
-```python
-
-```
-
-
-
+[参考3：Dependencies介绍](https://mesonbuild.com/Dependencies.html#dependencies-with-custom-lookup-functionality)
 
