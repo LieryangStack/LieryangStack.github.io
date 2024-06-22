@@ -9,13 +9,9 @@ Meson本质上是用 `Python` 编写的，所以这些函数也都是Python函�
 
 ## 1 executable()
 
-创建一个新的可执行文件。第一个参数指定其名称，其余的位置参数定义要使用的输入文件。
+- 创建一个新的可执行文件。第一个参数指定其名称，其余的位置参数定义要使用的输入文件。
 
-kwargs 的列表（例如 sources、objects 和 dependencies）总是被扁平化处理，这意味着在创建最终列表时，你可以自由嵌套和添加列表。
-
-返回的对象还具有在 exe 中记录的方法。
-
-自从 1.3.0 版本起，只要每个目标都有不同的 name_suffix，可执行文件的名称可以在多个目标中相同。
+- kwargs 的列表（例如 sources、objects 和 dependencies）总是被扁平化处理，这意味着在创建最终列表时，你可以自由嵌套和添加列表。
 
 ## 2 executable()定义
 
@@ -67,9 +63,38 @@ exe executable(
 )
 ```
 
-## 3 executable()举例
+## 3 编译器和连接器参数
 
-### 3.1 示例一
+- **c_args**: 比如我们使用的是`c`语言，那么`<lang>_args`就是`c_args`，`c_args`表示传入编译器（比如GCC）的相关参数。
+
+- **link_args**: 表示传入链接器（ld）的相关参数。
+
+
+  ```python
+  project('my_project', 'c', version: '1.0')
+
+  cc = meson.get_compiler('c')
+
+  compile_args = ['-DCRT_SECURE_NO_DEPRECATE="sss"', '-DCRT_NONSTDC_NO_DEPRECATE']
+
+  # 也可以直接使用字符串赋值给link_args，使用编译器具备检测功能
+  link_args = cc.get_supported_link_arguments(
+    '-Wl,--rpath,/usr/local:/usr',
+    '-Wl,--rpath,/usr',
+    '-Wl,--warn-common'
+  )
+
+  executable('demo', 'main.c',
+            c_args: compile_args,
+            link_args: link_args)
+  ```
+
+  ![alt text](/assets/BuildSystem/Meson/12_Executable/image/image.png)
+
+
+## 4 executable()举例
+
+### 4.1 示例一
 
 ```python
 app2_resources = gnome.compile_resources('exampleapp2_resources',
@@ -82,7 +107,7 @@ executable('exampleapp2',
   c_args: common_cflags)
 ```
 
-### 3.2 示例二
+### 4.2 示例二
 
 ```python
 project('simple', 'c')
@@ -91,7 +116,7 @@ executable('myexe', src)
 ```
 
 
-### 3.3 示例三
+### 4.3 示例三
 
 ```python
 executable(`test_name`, [extra_sources, file_name],
@@ -105,7 +130,7 @@ executable(`test_name`, [extra_sources, file_name],
 ```
 
 
-### 3.4 示例四
+### 4.4 示例四
 
 ```python
 executable(exe_name,

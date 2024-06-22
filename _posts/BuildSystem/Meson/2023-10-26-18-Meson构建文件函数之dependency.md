@@ -13,7 +13,7 @@ Meson本质上是用 `Python` 编写的，所以这些函数也都是Python函�
 
 - dependency 返回的是 `dep` 对象，该对象一共有以下六种方式创建：
   
-  ![alt text](image-1.png)
+  ![alt text](/assets/BuildSystem/Meson/18_Dependency/image/image-1.png)
 
 
 ## 2 dependency()定义
@@ -90,7 +90,7 @@ str get_pkgconfig_variable(
 
 下面图片表示获取 `libdir` 变量路径，同时修改 `prefix` 变量
 
-![alt text](image.png)
+![alt text](/assets/BuildSystem/Meson/18_Dependency/image/image.png)
 
 也可以使用 `get_variable` 函数，获取其他方式 `method` 中配置文件的值。例如：
 
