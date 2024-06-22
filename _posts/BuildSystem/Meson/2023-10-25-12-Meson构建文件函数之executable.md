@@ -25,7 +25,7 @@ exe executable(
   <lang>_args                  : list[str]                                                               # compiler flags to use for the given language;
   <lang>_pch                   : str                                                                     # precompiled header file to use for the given language
   build_by_default             : bool                                                                    # Causes, when set to `true`, to have this target be built by default
-  build_rpath                  : str                                                                     # A string to add to target's rpath definition in the build dir,
+  build_rpath                  : str       # A string to add to target's rpath definition in the build dir,
   d_debug                      : list[str]                                                               # The [D version identifiers](https://dlang
   d_import_dirs                : list[str]                                                               # List of directories to look in for string imports used in the D programming language
   d_module_versions            : list[str | int]                                                         # List of module version identifiers set when compiling D sources

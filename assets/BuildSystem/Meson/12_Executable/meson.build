@@ -13,5 +13,6 @@ link_args = cc.get_supported_link_arguments(
 
 executable('demo', 'main.c',
            c_args: compile_args,
-           link_args: link_args
+           link_args: link_args,
+           build_rpath: '/test/path'
 )
