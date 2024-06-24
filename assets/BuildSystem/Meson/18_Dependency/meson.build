@@ -18,16 +18,6 @@ else
 endif
 
 
-
-
-
-
-
-
-
-
-
-
 gstreamer_dep_prefix = gstreamer_dep.get_pkgconfig_variable('libdir',  default: 'not fount @var_name', define_variable: ['prefix', '/tmp'])
 
 message ('GStreamer前缀：', gstreamer_dep_prefix)

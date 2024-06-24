@@ -9,4 +9,4 @@ patch_hash = a7abea3ad65dc2c291ad5fbbf5355d0585a7f7b8c935d4a74335b8fe18684506
 wrapdb_version = 1.2.13-2
 
 [provide]
-zlib = zlib_dep
+dependency_names = zlib-1.0

@@ -9,7 +9,7 @@ Meson本质上是用 `Python` 编写的，所以这些函数也都是Python函�
 
 ## 1 static_library()
 
-使用给定的源代码构建静态库。
+- 使用给定的源代码构建静态库，返回lib对象。
 
 ## 2 static_library()定义
 
