@@ -74,8 +74,6 @@ zlib_dep = declare_dependency(
   include_directories: depinc,
 )
 
-meson.override_dependency('zlib-1.0', zlib_dep)
-
 install_headers(headers)
 
 pkg = import('pkgconfig')

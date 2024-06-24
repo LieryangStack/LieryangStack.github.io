@@ -86,7 +86,7 @@ executable('demo',
 
 ```
 
-![alt text](image.png)
+![alt text](/assets/BuildSystem/Meson/16_subproject/image/image.png)
 
 - pkg-config搜索的是`libsimple1`,这跟子项目目录中的文件名名称没有关系
 

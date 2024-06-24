@@ -73,6 +73,15 @@ zlib_dep = declare_dependency(
   link_with: zlib,
   include_directories: depinc,
 )
-meson.override_dependency('zlib-1.0', zlib_dep)
 
 install_headers(headers)
+
+pkg = import('pkgconfig')
+
+pkg.generate(
+  zlib,
+  name: 'zlib',
+  description: 'zlib compression library',
+)
+
+subdir('test')
