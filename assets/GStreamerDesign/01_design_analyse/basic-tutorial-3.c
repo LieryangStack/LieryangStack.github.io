@@ -152,6 +152,7 @@ pad_added_handler (GstElement *src, GstPad *new_pad, CustomData *data){
   GstStructure *new_pad_struct = NULL;
   const gchar *new_pad_type = NULL;
 
+
   g_print ("Received new pad '%s' from '%s':\n", GST_PAD_NAME (new_pad), GST_ELEMENT_NAME (src));
 
   new_pad_caps = gst_pad_get_current_caps (new_pad);
