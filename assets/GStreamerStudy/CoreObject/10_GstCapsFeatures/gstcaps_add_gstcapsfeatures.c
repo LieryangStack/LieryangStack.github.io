@@ -46,7 +46,8 @@ main (){
   gst_caps_unref (caps2);
 
 
-  GstStructure *structure = gst_structure_from_string ("video/x-raw, width=(int)[1, 0x7fffffff]", NULL);
+  GstStructure *structure = 
+    gst_structure_from_string ("video/x-raw, width=(int)[1, 0x7fffffff]", NULL);
 
   return 0;
 }
