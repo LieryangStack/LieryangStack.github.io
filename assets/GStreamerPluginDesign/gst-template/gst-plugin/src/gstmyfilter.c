@@ -35,9 +35,10 @@ enum
   PROP_SILENT
 };
 
-/* the capabilities of the inputs and outputs.
- *
- * describe the real formats here.
+
+/**
+ * GstStaticPadTemplate是通过G_DEFINE_POINTER_TYPE进行注册的
+ * 
  */
 static GstStaticPadTemplate sink_factory = GST_STATIC_PAD_TEMPLATE ("sink",
     GST_PAD_SINK,
