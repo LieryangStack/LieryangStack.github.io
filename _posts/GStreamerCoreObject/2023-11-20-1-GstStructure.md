@@ -19,7 +19,7 @@ tags: [GStreamer]
 
 - 可以使用 gst_structure_remove_field 或 gst_structure_remove_fields 来删除字段。
 
-![alt text](GstStructure.png)
+  ![alt text](/assets/GStreamerStudy/CoreObject/01_GstStrucure/image/GstStructure.png)
 
 ### 1.1 序列化格式
 

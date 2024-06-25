@@ -13,8 +13,8 @@ GST_DEBUG_CATEGORY_STATIC (gst_caps_features_debug);
 struct _GstCapsFeatures
 {
   GType type;
-  gint *parent_refcount;
-  GArray *array; /* 存储GQuark */
+  gint *parent_refcount; /* 等于 GstCaps 引用，也就说该对象内存释放跟父对象同步 */
+  GArray *array; /* 存储GQuark，feature字符串就存储在该数组中 */
   gboolean is_any; /* 表示ANY类型的GstCapsFeatures */
 };
 
