@@ -118,3 +118,14 @@ executable(exe_name,
     )
 ```
 
+### link_args
+
+```python
+link_args = cc.get_supported_link_arguments(
+  '-Wl,--version-script,@0@/zlib.map'.format(meson.current_source_dir()),
+)
+```
+
+![alt text](image-2.png)
+
+-D
