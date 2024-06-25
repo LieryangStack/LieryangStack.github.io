@@ -7,23 +7,19 @@ tags: [GStreamer]
 
 ## 1 GstStructure 基本概念
 
-GstStructure 是一组键/值对的集合。键用 GQuarks 表示（GQuarks其实就是字符串，但是字符串和数字一一映射起来，为了字符串使用起来便利），而值可以是任何 GType 类型。
+- GstStructure 是由一个结构体名称（用GQuarks表示）和一组键/值对组成的对象。键用 GQuarks 表示（GQuarks其实就是字符串，但是字符串和数字一一映射起来，为了字符串使用起来便利），而值可以是任何 GType 类型。结构体名称以字母开头，可以由字母、数字以及"/-_.:"中的任何字符组成。
 
-除了键/值对，GstStructure 还有一个名称。名称以字母开头，可以由字母、数字以及"/-_.:"中的任何字符组成。
+- GstStructure 没有引用计数，因为它通常是更高级对象的一部分，例如 GstCaps、GstMessage、GstEvent、GstQuery。它提供了一种通过父级的引用计数来实施可变性的方法，可以使用 gst_structure_set_parent_refcount 方法。
 
-GstStructure 被用于各种 GStreamer 子系统中，以一种灵活且可扩展的方式存储信息。
+- 可以使用 gst_structure_new_empty 或 gst_structure_new 创建 GstStructure。这两者都需要一个名称以及一组可选的键/值对和值的类型。
 
-GstStructure 没有引用计数，因为它通常是更高级对象的一部分，例如 GstCaps、GstMessage、GstEvent、GstQuery。它提供了一种通过父级的引用计数来实施可变性的方法，可以使用 gst_structure_set_parent_refcount 方法。
+- 可以使用 gst_structure_set_value 或 gst_structure_set 来更改字段值。
 
-可以使用 gst_structure_new_empty 或 gst_structure_new 创建 GstStructure。这两者都需要一个名称以及一组可选的键/值对和值的类型。
+- 可以使用 gst_structure_get_value 或更方便的 gst_structure_get_*() 函数来检索字段值。
 
-可以使用 gst_structure_set_value 或 gst_structure_set 来更改字段值。
+- 可以使用 gst_structure_remove_field 或 gst_structure_remove_fields 来删除字段。
 
-可以使用 gst_structure_get_value 或更方便的 gst_structure_get_*() 函数来检索字段值。
-
-可以使用 gst_structure_remove_field 或 gst_structure_remove_fields 来删除字段。
-
-结构中的字符串必须是 ASCII 或 UTF-8 编码的。不允许使用其他编码。但字符串可以为 NULL。
+![alt text](GstStructure.png)
 
 ### 1.1 序列化格式
 

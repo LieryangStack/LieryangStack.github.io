@@ -49,7 +49,7 @@ inc include_directories(
 
 ### 3.1 示例一
 
-可以同时传入多个目录，此时会返回四个路径：
+可以同时传入多个目录，此时会返回四个路径，<font color="red">系统会检查保留存在的路径</font>，不存在的路径就不会保留。
 
 - /project_path
 
@@ -61,12 +61,6 @@ inc include_directories(
 
 ```python
 rtspserver_incs = include_directories('gst/rtsp-server', '.')
-```
-
-### 3.2 示例二
-
-```python
-
 ```
 
 ## 参考

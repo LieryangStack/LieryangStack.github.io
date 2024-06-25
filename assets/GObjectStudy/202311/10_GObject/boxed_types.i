@@ -17352,11 +17352,64 @@ MyStruct * my_struct_new (void);
 void my_struct_free (MyStruct *self);
 MyStruct * my_struct_copy (MyStruct *self);
 
-static GType my_struct_get_type_once (void); GType my_struct_get_type (void) { static gsize static_g_define_type_id = 0; if ((__extension__ ({ _Static_assert (sizeof *(&static_g_define_type_id) == sizeof (gpointer), "Expression evaluates to false"); (void) (0 ? (gpointer) *(&static_g_define_type_id) : 
-# 17 "/home/lieryang/Desktop/gobject-study/section-two/sec10/boxed_types.c" 3 4
-((void *)0)
-# 17 "/home/lieryang/Desktop/gobject-study/section-two/sec10/boxed_types.c"
-); (!(__extension__ ({ _Static_assert (sizeof *(&static_g_define_type_id) == sizeof (gpointer), "Expression evaluates to false"); __typeof__ (*(&static_g_define_type_id)) gapg_temp_newval; __typeof__ ((&static_g_define_type_id)) gapg_temp_atomic = (&static_g_define_type_id); __atomic_load (gapg_temp_atomic, &gapg_temp_newval, 5); gapg_temp_newval; })) && g_once_init_enter (&static_g_define_type_id)); }))) { GType g_define_type_id = my_struct_get_type_once (); (__extension__ ({ _Static_assert (sizeof *(&static_g_define_type_id) == sizeof (gpointer), "Expression evaluates to false"); 0 ? (void) (*(&static_g_define_type_id) = (g_define_type_id)) : (void) 0; g_once_init_leave ((&static_g_define_type_id), (gsize) (g_define_type_id)); })); } return static_g_define_type_id; } __attribute__ ((__noinline__)) static GType my_struct_get_type_once (void) { GType (* _g_register_boxed) (const gchar *, union { MyStruct * (*do_copy_type) (MyStruct *); MyStruct * (*do_const_copy_type) (const MyStruct *); GBoxedCopyFunc do_copy_boxed; } __attribute__((__transparent_union__)), union { void (* do_free_type) (MyStruct *); GBoxedFreeFunc do_free_boxed; } __attribute__((__transparent_union__)) ) = g_boxed_type_register_static; GType g_define_type_id = _g_register_boxed (g_intern_static_string ("MyStruct"), my_struct_copy, my_struct_free); { {g_print("hello\n");} } return g_define_type_id; };
+/**********************************G_DEFINE_BOXED_TYPE_WITH_CODE (MyStruct, my_struct, my_struct_copy, my_struct_free, g_print("hello\n"))展开***************************************** */
+
+static GType my_struct_get_type_once (void); 
+
+GType 
+my_struct_get_type (void) { 
+  static gsize static_g_define_type_id = 0; 
+  if ((__extension__ ({ 
+    _Static_assert (sizeof *(&static_g_define_type_id) == sizeof (gpointer), "Expression evaluates to false"); 
+    (void) (0 ? (gpointer) *(&static_g_define_type_id) : ((void *)0)); 
+    (!(__extension__ ({ 
+      _Static_assert (sizeof *(&static_g_define_type_id) == sizeof (gpointer), "Expression evaluates to false"); 
+      __typeof__ (*(&static_g_define_type_id)) gapg_temp_newval; 
+      __typeof__ ((&static_g_define_type_id)) gapg_temp_atomic = (&static_g_define_type_id); 
+      __atomic_load (gapg_temp_atomic, &gapg_temp_newval, 5); 
+      gapg_temp_newval; 
+      })) && g_once_init_enter (&static_g_define_type_id)); 
+  }))) { 
+    
+    GType g_define_type_id = my_struct_get_type_once (); 
+    
+    (__extension__ ({ _Static_assert (sizeof *(&static_g_define_type_id) == sizeof (gpointer), "Expression evaluates to false"); 
+      0 ? (void) (*(&static_g_define_type_id) = (g_define_type_id)) : (void) 0; 
+      g_once_init_leave ((&static_g_define_type_id), (gsize) (g_define_type_id)); 
+      })
+    );
+  } 
+  
+  return static_g_define_type_id; 
+
+} 
+
+__attribute__ ((__noinline__)) static GType 
+my_struct_get_type_once (void) { 
+  GType (* _g_register_boxed) (const gchar *, 
+                               union { MyStruct * (*do_copy_type) (MyStruct *); 
+                                       MyStruct * (*do_const_copy_type) (const MyStruct *); 
+                                       GBoxedCopyFunc do_copy_boxed; 
+                                     } __attribute__((__transparent_union__)), 
+                               union { void (* do_free_type) (MyStruct *); 
+                                       GBoxedFreeFunc do_free_boxed; 
+                                     } __attribute__((__transparent_union__)) )  
+                                     
+                             = g_boxed_type_register_static; 
+                             
+  GType g_define_type_id = _g_register_boxed (g_intern_static_string ("MyStruct"), my_struct_copy, my_struct_free); 
+  
+  { {
+    
+    g_print("hello\n");
+    
+  } } 
+  
+  return g_define_type_id; 
+  
+};
+
+/**********************************G_DEFINE_BOXED_TYPE_WITH_CODE (MyStruct, my_struct, my_struct_copy, my_struct_free, g_print("hello\n"))展开结束***************************************** */
 
 MyStruct *
 my_struct_new (void) {
