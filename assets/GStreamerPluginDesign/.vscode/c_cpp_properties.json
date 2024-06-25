@@ -7,14 +7,15 @@
         "/usr/include/gstreamer-1.0",
         "/usr/include/glib-2.0",
         "/usr/lib/x86_64-linux-gnu/glib-2.0/include",
-        "/home/lieryang/Downloads/gstreamer-1.22.6"
+        "/home/lieryang/Downloads/gstreamer-1.22.6",
+        "/home/lieryang/Downloads/glib-2.80.2"
       ],
       "compilerPath": "/usr/bin/gcc",
       "cStandard": "${default}",
       "cppStandard": "${default}",
       "intelliSenseMode": "linux-gcc-x64",
       "browse": {
-        "path": ["/home/lieryang/Downloads/gstreamer-1.22.6", "${workspaceFolder}"]
+        "path": ["/home/lieryang/Downloads/gstreamer-1.22.6", "/home/lieryang/Downloads/glib-2.80.2", "${workspaceFolder}"]
       },
       "compilerArgs": [
         ""

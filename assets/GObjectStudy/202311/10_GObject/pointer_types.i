@@ -1,11 +1,9 @@
-# 1 "/home/lieryang/Desktop/gobject-study/section-two/sec10/boxed_types.c"
-# 1 "/home/lieryang/Desktop/gobject-study/section-two/sec10//"
-# 1 "<built-in>"
-# 1 "<command-line>"
-# 31 "<command-line>"
+# 0 "pointer_types.c"
+# 0 "<built-in>"
+# 0 "<command-line>"
 # 1 "/usr/include/stdc-predef.h" 1 3 4
-# 32 "<command-line>" 2
-# 1 "/home/lieryang/Desktop/gobject-study/section-two/sec10/boxed_types.c"
+# 0 "<command-line>" 2
+# 1 "pointer_types.c"
 # 1 "/usr/include/glib-2.0/glib-object.h" 1
 # 24 "/usr/include/glib-2.0/glib-object.h"
 # 1 "/usr/include/glib-2.0/gobject/gbinding.h" 1
@@ -20,57 +18,68 @@
 # 9 "/usr/lib/x86_64-linux-gnu/glib-2.0/include/glibconfig.h"
 # 1 "/usr/include/glib-2.0/glib/gmacros.h" 1
 # 40 "/usr/include/glib-2.0/glib/gmacros.h"
-# 1 "/usr/lib/gcc/x86_64-linux-gnu/9/include/stddef.h" 1 3 4
-# 143 "/usr/lib/gcc/x86_64-linux-gnu/9/include/stddef.h" 3 4
+# 1 "/usr/lib/gcc/x86_64-linux-gnu/11/include/stddef.h" 1 3 4
+# 143 "/usr/lib/gcc/x86_64-linux-gnu/11/include/stddef.h" 3 4
 
-# 143 "/usr/lib/gcc/x86_64-linux-gnu/9/include/stddef.h" 3 4
+# 143 "/usr/lib/gcc/x86_64-linux-gnu/11/include/stddef.h" 3 4
 typedef long int ptrdiff_t;
-# 209 "/usr/lib/gcc/x86_64-linux-gnu/9/include/stddef.h" 3 4
+# 209 "/usr/lib/gcc/x86_64-linux-gnu/11/include/stddef.h" 3 4
 typedef long unsigned int size_t;
-# 321 "/usr/lib/gcc/x86_64-linux-gnu/9/include/stddef.h" 3 4
+# 321 "/usr/lib/gcc/x86_64-linux-gnu/11/include/stddef.h" 3 4
 typedef int wchar_t;
-# 415 "/usr/lib/gcc/x86_64-linux-gnu/9/include/stddef.h" 3 4
+# 415 "/usr/lib/gcc/x86_64-linux-gnu/11/include/stddef.h" 3 4
 typedef struct {
   long long __max_align_ll __attribute__((__aligned__(__alignof__(long long))));
   long double __max_align_ld __attribute__((__aligned__(__alignof__(long double))));
-# 426 "/usr/lib/gcc/x86_64-linux-gnu/9/include/stddef.h" 3 4
+# 426 "/usr/lib/gcc/x86_64-linux-gnu/11/include/stddef.h" 3 4
 } max_align_t;
 # 41 "/usr/include/glib-2.0/glib/gmacros.h" 2
 # 10 "/usr/lib/x86_64-linux-gnu/glib-2.0/include/glibconfig.h" 2
 
-# 1 "/usr/lib/gcc/x86_64-linux-gnu/9/include/limits.h" 1 3 4
-# 34 "/usr/lib/gcc/x86_64-linux-gnu/9/include/limits.h" 3 4
-# 1 "/usr/lib/gcc/x86_64-linux-gnu/9/include/syslimits.h" 1 3 4
+# 1 "/usr/lib/gcc/x86_64-linux-gnu/11/include/limits.h" 1 3 4
+# 34 "/usr/lib/gcc/x86_64-linux-gnu/11/include/limits.h" 3 4
+# 1 "/usr/lib/gcc/x86_64-linux-gnu/11/include/syslimits.h" 1 3 4
 
 
 
 
 
 
-# 1 "/usr/lib/gcc/x86_64-linux-gnu/9/include/limits.h" 1 3 4
-# 194 "/usr/lib/gcc/x86_64-linux-gnu/9/include/limits.h" 3 4
+# 1 "/usr/lib/gcc/x86_64-linux-gnu/11/include/limits.h" 1 3 4
+# 203 "/usr/lib/gcc/x86_64-linux-gnu/11/include/limits.h" 3 4
 # 1 "/usr/include/limits.h" 1 3 4
 # 26 "/usr/include/limits.h" 3 4
 # 1 "/usr/include/x86_64-linux-gnu/bits/libc-header-start.h" 1 3 4
 # 33 "/usr/include/x86_64-linux-gnu/bits/libc-header-start.h" 3 4
 # 1 "/usr/include/features.h" 1 3 4
-# 461 "/usr/include/features.h" 3 4
-# 1 "/usr/include/x86_64-linux-gnu/sys/cdefs.h" 1 3 4
-# 452 "/usr/include/x86_64-linux-gnu/sys/cdefs.h" 3 4
+# 392 "/usr/include/features.h" 3 4
+# 1 "/usr/include/features-time64.h" 1 3 4
+# 20 "/usr/include/features-time64.h" 3 4
 # 1 "/usr/include/x86_64-linux-gnu/bits/wordsize.h" 1 3 4
-# 453 "/usr/include/x86_64-linux-gnu/sys/cdefs.h" 2 3 4
+# 21 "/usr/include/features-time64.h" 2 3 4
+# 1 "/usr/include/x86_64-linux-gnu/bits/timesize.h" 1 3 4
+# 19 "/usr/include/x86_64-linux-gnu/bits/timesize.h" 3 4
+# 1 "/usr/include/x86_64-linux-gnu/bits/wordsize.h" 1 3 4
+# 20 "/usr/include/x86_64-linux-gnu/bits/timesize.h" 2 3 4
+# 22 "/usr/include/features-time64.h" 2 3 4
+# 393 "/usr/include/features.h" 2 3 4
+# 486 "/usr/include/features.h" 3 4
+# 1 "/usr/include/x86_64-linux-gnu/sys/cdefs.h" 1 3 4
+# 559 "/usr/include/x86_64-linux-gnu/sys/cdefs.h" 3 4
+# 1 "/usr/include/x86_64-linux-gnu/bits/wordsize.h" 1 3 4
+# 560 "/usr/include/x86_64-linux-gnu/sys/cdefs.h" 2 3 4
 # 1 "/usr/include/x86_64-linux-gnu/bits/long-double.h" 1 3 4
-# 454 "/usr/include/x86_64-linux-gnu/sys/cdefs.h" 2 3 4
-# 462 "/usr/include/features.h" 2 3 4
-# 485 "/usr/include/features.h" 3 4
+# 561 "/usr/include/x86_64-linux-gnu/sys/cdefs.h" 2 3 4
+# 487 "/usr/include/features.h" 2 3 4
+# 510 "/usr/include/features.h" 3 4
 # 1 "/usr/include/x86_64-linux-gnu/gnu/stubs.h" 1 3 4
 # 10 "/usr/include/x86_64-linux-gnu/gnu/stubs.h" 3 4
 # 1 "/usr/include/x86_64-linux-gnu/gnu/stubs-64.h" 1 3 4
 # 11 "/usr/include/x86_64-linux-gnu/gnu/stubs.h" 2 3 4
-# 486 "/usr/include/features.h" 2 3 4
+# 511 "/usr/include/features.h" 2 3 4
 # 34 "/usr/include/x86_64-linux-gnu/bits/libc-header-start.h" 2 3 4
 # 27 "/usr/include/limits.h" 2 3 4
-# 183 "/usr/include/limits.h" 3 4
+# 195 "/usr/include/limits.h" 3 4
 # 1 "/usr/include/x86_64-linux-gnu/bits/posix1_lim.h" 1 3 4
 # 27 "/usr/include/x86_64-linux-gnu/bits/posix1_lim.h" 3 4
 # 1 "/usr/include/x86_64-linux-gnu/bits/wordsize.h" 1 3 4
@@ -80,24 +89,30 @@ typedef struct {
 # 38 "/usr/include/x86_64-linux-gnu/bits/local_lim.h" 3 4
 # 1 "/usr/include/linux/limits.h" 1 3 4
 # 39 "/usr/include/x86_64-linux-gnu/bits/local_lim.h" 2 3 4
+# 81 "/usr/include/x86_64-linux-gnu/bits/local_lim.h" 3 4
+# 1 "/usr/include/x86_64-linux-gnu/bits/pthread_stack_min-dynamic.h" 1 3 4
+# 29 "/usr/include/x86_64-linux-gnu/bits/pthread_stack_min-dynamic.h" 3 4
+# 1 "/usr/include/x86_64-linux-gnu/bits/pthread_stack_min.h" 1 3 4
+# 30 "/usr/include/x86_64-linux-gnu/bits/pthread_stack_min-dynamic.h" 2 3 4
+# 82 "/usr/include/x86_64-linux-gnu/bits/local_lim.h" 2 3 4
 # 162 "/usr/include/x86_64-linux-gnu/bits/posix1_lim.h" 2 3 4
-# 184 "/usr/include/limits.h" 2 3 4
+# 196 "/usr/include/limits.h" 2 3 4
 
 
 
 # 1 "/usr/include/x86_64-linux-gnu/bits/posix2_lim.h" 1 3 4
-# 188 "/usr/include/limits.h" 2 3 4
-# 195 "/usr/lib/gcc/x86_64-linux-gnu/9/include/limits.h" 2 3 4
-# 8 "/usr/lib/gcc/x86_64-linux-gnu/9/include/syslimits.h" 2 3 4
-# 35 "/usr/lib/gcc/x86_64-linux-gnu/9/include/limits.h" 2 3 4
+# 200 "/usr/include/limits.h" 2 3 4
+# 204 "/usr/lib/gcc/x86_64-linux-gnu/11/include/limits.h" 2 3 4
+# 8 "/usr/lib/gcc/x86_64-linux-gnu/11/include/syslimits.h" 2 3 4
+# 35 "/usr/lib/gcc/x86_64-linux-gnu/11/include/limits.h" 2 3 4
 # 12 "/usr/lib/x86_64-linux-gnu/glib-2.0/include/glibconfig.h" 2
-# 1 "/usr/lib/gcc/x86_64-linux-gnu/9/include/float.h" 1 3 4
+# 1 "/usr/lib/gcc/x86_64-linux-gnu/11/include/float.h" 1 3 4
 # 13 "/usr/lib/x86_64-linux-gnu/glib-2.0/include/glibconfig.h" 2
-# 28 "/usr/lib/x86_64-linux-gnu/glib-2.0/include/glibconfig.h"
+# 29 "/usr/lib/x86_64-linux-gnu/glib-2.0/include/glibconfig.h"
 
-# 44 "/usr/lib/x86_64-linux-gnu/glib-2.0/include/glibconfig.h"
+# 45 "/usr/lib/x86_64-linux-gnu/glib-2.0/include/glibconfig.h"
 
-# 44 "/usr/lib/x86_64-linux-gnu/glib-2.0/include/glibconfig.h"
+# 45 "/usr/lib/x86_64-linux-gnu/glib-2.0/include/glibconfig.h"
 typedef signed char gint8;
 typedef unsigned char guint8;
 
@@ -111,20 +126,20 @@ typedef unsigned short guint16;
 
 typedef signed int gint32;
 typedef unsigned int guint32;
-# 65 "/usr/lib/x86_64-linux-gnu/glib-2.0/include/glibconfig.h"
+# 66 "/usr/lib/x86_64-linux-gnu/glib-2.0/include/glibconfig.h"
 typedef signed long gint64;
 typedef unsigned long guint64;
-# 81 "/usr/lib/x86_64-linux-gnu/glib-2.0/include/glibconfig.h"
+# 82 "/usr/lib/x86_64-linux-gnu/glib-2.0/include/glibconfig.h"
 typedef signed long gssize;
 typedef unsigned long gsize;
-# 92 "/usr/lib/x86_64-linux-gnu/glib-2.0/include/glibconfig.h"
+# 93 "/usr/lib/x86_64-linux-gnu/glib-2.0/include/glibconfig.h"
 typedef gint64 goffset;
-# 108 "/usr/lib/x86_64-linux-gnu/glib-2.0/include/glibconfig.h"
+# 109 "/usr/lib/x86_64-linux-gnu/glib-2.0/include/glibconfig.h"
 typedef signed long gintptr;
 typedef unsigned long guintptr;
-# 200 "/usr/lib/x86_64-linux-gnu/glib-2.0/include/glibconfig.h"
+# 201 "/usr/lib/x86_64-linux-gnu/glib-2.0/include/glibconfig.h"
 typedef int GPid;
-# 216 "/usr/lib/x86_64-linux-gnu/glib-2.0/include/glibconfig.h"
+# 219 "/usr/lib/x86_64-linux-gnu/glib-2.0/include/glibconfig.h"
 
 # 35 "/usr/include/glib-2.0/glib/gtypes.h" 2
 
@@ -138,7 +153,7 @@ typedef int GPid;
 
 # 1 "/usr/include/time.h" 1 3 4
 # 29 "/usr/include/time.h" 3 4
-# 1 "/usr/lib/gcc/x86_64-linux-gnu/9/include/stddef.h" 1 3 4
+# 1 "/usr/lib/gcc/x86_64-linux-gnu/11/include/stddef.h" 1 3 4
 # 30 "/usr/include/time.h" 2 3 4
 
 
@@ -150,6 +165,9 @@ typedef int GPid;
 # 1 "/usr/include/x86_64-linux-gnu/bits/wordsize.h" 1 3 4
 # 28 "/usr/include/x86_64-linux-gnu/bits/types.h" 2 3 4
 # 1 "/usr/include/x86_64-linux-gnu/bits/timesize.h" 1 3 4
+# 19 "/usr/include/x86_64-linux-gnu/bits/timesize.h" 3 4
+# 1 "/usr/include/x86_64-linux-gnu/bits/wordsize.h" 1 3 4
+# 20 "/usr/include/x86_64-linux-gnu/bits/timesize.h" 2 3 4
 # 29 "/usr/include/x86_64-linux-gnu/bits/types.h" 2 3 4
 
 
@@ -223,6 +241,7 @@ typedef unsigned int __id_t;
 typedef long int __time_t;
 typedef unsigned int __useconds_t;
 typedef long int __suseconds_t;
+typedef long int __suseconds64_t;
 
 typedef int __daddr_t;
 typedef int __key_t;
@@ -290,12 +309,7 @@ typedef int __sig_atomic_t;
 typedef __clock_t clock_t;
 # 38 "/usr/include/time.h" 2 3 4
 # 1 "/usr/include/x86_64-linux-gnu/bits/types/time_t.h" 1 3 4
-
-
-
-
-
-
+# 10 "/usr/include/x86_64-linux-gnu/bits/types/time_t.h" 3 4
 typedef __time_t time_t;
 # 39 "/usr/include/time.h" 2 3 4
 # 1 "/usr/include/x86_64-linux-gnu/bits/types/struct_tm.h" 1 3 4
@@ -342,14 +356,19 @@ struct tm
 
 
 
+
 struct timespec
 {
+
+
+
   __time_t tv_sec;
 
 
 
+
   __syscall_slong_t tv_nsec;
-# 26 "/usr/include/x86_64-linux-gnu/bits/types/struct_timespec.h" 3 4
+# 31 "/usr/include/x86_64-linux-gnu/bits/types/struct_timespec.h" 3 4
 };
 # 43 "/usr/include/time.h" 2 3 4
 
@@ -401,7 +420,7 @@ typedef __pid_t pid_t;
 # 1 "/usr/include/x86_64-linux-gnu/bits/types/locale_t.h" 1 3 4
 # 22 "/usr/include/x86_64-linux-gnu/bits/types/locale_t.h" 3 4
 # 1 "/usr/include/x86_64-linux-gnu/bits/types/__locale_t.h" 1 3 4
-# 28 "/usr/include/x86_64-linux-gnu/bits/types/__locale_t.h" 3 4
+# 27 "/usr/include/x86_64-linux-gnu/bits/types/__locale_t.h" 3 4
 struct __locale_struct
 {
 
@@ -435,6 +454,7 @@ typedef __locale_t locale_t;
 extern clock_t clock (void) __attribute__ ((__nothrow__ , __leaf__));
 
 
+
 extern time_t time (time_t *__timer) __attribute__ ((__nothrow__ , __leaf__));
 
 
@@ -443,29 +463,22 @@ extern double difftime (time_t __time1, time_t __time0)
 
 
 extern time_t mktime (struct tm *__tp) __attribute__ ((__nothrow__ , __leaf__));
-
-
-
-
-
+# 100 "/usr/include/time.h" 3 4
 extern size_t strftime (char *__restrict __s, size_t __maxsize,
    const char *__restrict __format,
    const struct tm *__restrict __tp) __attribute__ ((__nothrow__ , __leaf__));
-# 104 "/usr/include/time.h" 3 4
+# 116 "/usr/include/time.h" 3 4
 extern size_t strftime_l (char *__restrict __s, size_t __maxsize,
      const char *__restrict __format,
      const struct tm *__restrict __tp,
      locale_t __loc) __attribute__ ((__nothrow__ , __leaf__));
-# 119 "/usr/include/time.h" 3 4
+# 132 "/usr/include/time.h" 3 4
 extern struct tm *gmtime (const time_t *__timer) __attribute__ ((__nothrow__ , __leaf__));
 
 
 
 extern struct tm *localtime (const time_t *__timer) __attribute__ ((__nothrow__ , __leaf__));
-
-
-
-
+# 154 "/usr/include/time.h" 3 4
 extern struct tm *gmtime_r (const time_t *__restrict __timer,
        struct tm *__restrict __tp) __attribute__ ((__nothrow__ , __leaf__));
 
@@ -473,30 +486,21 @@ extern struct tm *gmtime_r (const time_t *__restrict __timer,
 
 extern struct tm *localtime_r (const time_t *__restrict __timer,
           struct tm *__restrict __tp) __attribute__ ((__nothrow__ , __leaf__));
-
-
-
-
+# 179 "/usr/include/time.h" 3 4
 extern char *asctime (const struct tm *__tp) __attribute__ ((__nothrow__ , __leaf__));
 
 
+
 extern char *ctime (const time_t *__timer) __attribute__ ((__nothrow__ , __leaf__));
-
-
-
-
-
-
+# 197 "/usr/include/time.h" 3 4
 extern char *asctime_r (const struct tm *__restrict __tp,
    char *__restrict __buf) __attribute__ ((__nothrow__ , __leaf__));
 
 
+
 extern char *ctime_r (const time_t *__restrict __timer,
         char *__restrict __buf) __attribute__ ((__nothrow__ , __leaf__));
-
-
-
-
+# 217 "/usr/include/time.h" 3 4
 extern char *__tzname[2];
 extern int __daylight;
 extern long int __timezone;
@@ -514,18 +518,15 @@ extern void tzset (void) __attribute__ ((__nothrow__ , __leaf__));
 
 extern int daylight;
 extern long int timezone;
-# 190 "/usr/include/time.h" 3 4
+# 249 "/usr/include/time.h" 3 4
 extern time_t timegm (struct tm *__tp) __attribute__ ((__nothrow__ , __leaf__));
 
-
 extern time_t timelocal (struct tm *__tp) __attribute__ ((__nothrow__ , __leaf__));
-
-
+# 262 "/usr/include/time.h" 3 4
 extern int dysize (int __year) __attribute__ ((__nothrow__ , __leaf__)) __attribute__ ((__const__));
-# 205 "/usr/include/time.h" 3 4
+# 272 "/usr/include/time.h" 3 4
 extern int nanosleep (const struct timespec *__requested_time,
         struct timespec *__remaining);
-
 
 
 extern int clock_getres (clockid_t __clock_id, struct timespec *__res) __attribute__ ((__nothrow__ , __leaf__));
@@ -536,17 +537,11 @@ extern int clock_gettime (clockid_t __clock_id, struct timespec *__tp) __attribu
 
 extern int clock_settime (clockid_t __clock_id, const struct timespec *__tp)
      __attribute__ ((__nothrow__ , __leaf__));
-
-
-
-
-
-
+# 311 "/usr/include/time.h" 3 4
 extern int clock_nanosleep (clockid_t __clock_id, int __flags,
        const struct timespec *__req,
        struct timespec *__rem);
-
-
+# 326 "/usr/include/time.h" 3 4
 extern int clock_getcpuclockid (pid_t __pid, clockid_t *__clock_id) __attribute__ ((__nothrow__ , __leaf__));
 
 
@@ -560,6 +555,7 @@ extern int timer_create (clockid_t __clock_id,
 extern int timer_delete (timer_t __timerid) __attribute__ ((__nothrow__ , __leaf__));
 
 
+
 extern int timer_settime (timer_t __timerid, int __flags,
      const struct itimerspec *__restrict __value,
      struct itimerspec *__restrict __ovalue) __attribute__ ((__nothrow__ , __leaf__));
@@ -567,9 +563,9 @@ extern int timer_settime (timer_t __timerid, int __flags,
 
 extern int timer_gettime (timer_t __timerid, struct itimerspec *__value)
      __attribute__ ((__nothrow__ , __leaf__));
-
-
+# 364 "/usr/include/time.h" 3 4
 extern int timer_getoverrun (timer_t __timerid) __attribute__ ((__nothrow__ , __leaf__));
+
 
 
 
@@ -577,7 +573,7 @@ extern int timer_getoverrun (timer_t __timerid) __attribute__ ((__nothrow__ , __
 
 extern int timespec_get (struct timespec *__ts, int __base)
      __attribute__ ((__nothrow__ , __leaf__)) __attribute__ ((__nonnull__ (1)));
-# 301 "/usr/include/time.h" 3 4
+# 440 "/usr/include/time.h" 3 4
 
 # 42 "/usr/include/glib-2.0/glib/gtypes.h" 2
 
@@ -680,7 +676,7 @@ typedef gint gatomicrefcount;
 
 
 
-# 1 "/usr/lib/gcc/x86_64-linux-gnu/9/include/stddef.h" 1 3 4
+# 1 "/usr/lib/gcc/x86_64-linux-gnu/11/include/stddef.h" 1 3 4
 # 34 "/usr/include/string.h" 2 3 4
 # 43 "/usr/include/string.h" 3 4
 
@@ -698,7 +694,7 @@ extern void *memmove (void *__dest, const void *__src, size_t __n)
 
 extern void *memccpy (void *__restrict __dest, const void *__restrict __src,
         int __c, size_t __n)
-     __attribute__ ((__nothrow__ , __leaf__)) __attribute__ ((__nonnull__ (1, 2)));
+    __attribute__ ((__nothrow__ , __leaf__)) __attribute__ ((__nonnull__ (1, 2))) __attribute__ ((__access__ (__write_only__, 1, 4)));
 
 
 
@@ -708,10 +704,13 @@ extern void *memset (void *__s, int __c, size_t __n) __attribute__ ((__nothrow__
 
 extern int memcmp (const void *__s1, const void *__s2, size_t __n)
      __attribute__ ((__nothrow__ , __leaf__)) __attribute__ ((__pure__)) __attribute__ ((__nonnull__ (1, 2)));
-# 91 "/usr/include/string.h" 3 4
+# 80 "/usr/include/string.h" 3 4
+extern int __memcmpeq (const void *__s1, const void *__s2, size_t __n)
+     __attribute__ ((__nothrow__ , __leaf__)) __attribute__ ((__pure__)) __attribute__ ((__nonnull__ (1, 2)));
+# 107 "/usr/include/string.h" 3 4
 extern void *memchr (const void *__s, int __c, size_t __n)
       __attribute__ ((__nothrow__ , __leaf__)) __attribute__ ((__pure__)) __attribute__ ((__nonnull__ (1)));
-# 122 "/usr/include/string.h" 3 4
+# 141 "/usr/include/string.h" 3 4
 extern char *strcpy (char *__restrict __dest, const char *__restrict __src)
      __attribute__ ((__nothrow__ , __leaf__)) __attribute__ ((__nonnull__ (1, 2)));
 
@@ -739,7 +738,7 @@ extern int strcoll (const char *__s1, const char *__s2)
 
 extern size_t strxfrm (char *__restrict __dest,
          const char *__restrict __src, size_t __n)
-     __attribute__ ((__nothrow__ , __leaf__)) __attribute__ ((__nonnull__ (2)));
+    __attribute__ ((__nothrow__ , __leaf__)) __attribute__ ((__nonnull__ (2))) __attribute__ ((__access__ (__write_only__, 1, 3)));
 
 
 
@@ -751,7 +750,8 @@ extern int strcoll_l (const char *__s1, const char *__s2, locale_t __l)
 
 
 extern size_t strxfrm_l (char *__dest, const char *__src, size_t __n,
-    locale_t __l) __attribute__ ((__nothrow__ , __leaf__)) __attribute__ ((__nonnull__ (2, 4)));
+    locale_t __l) __attribute__ ((__nothrow__ , __leaf__)) __attribute__ ((__nonnull__ (2, 4)))
+     __attribute__ ((__access__ (__write_only__, 1, 3)));
 
 
 
@@ -767,23 +767,23 @@ extern char *strdup (const char *__s)
 
 extern char *strndup (const char *__string, size_t __n)
      __attribute__ ((__nothrow__ , __leaf__)) __attribute__ ((__malloc__)) __attribute__ ((__nonnull__ (1)));
-# 226 "/usr/include/string.h" 3 4
+# 246 "/usr/include/string.h" 3 4
 extern char *strchr (const char *__s, int __c)
      __attribute__ ((__nothrow__ , __leaf__)) __attribute__ ((__pure__)) __attribute__ ((__nonnull__ (1)));
-# 253 "/usr/include/string.h" 3 4
+# 273 "/usr/include/string.h" 3 4
 extern char *strrchr (const char *__s, int __c)
      __attribute__ ((__nothrow__ , __leaf__)) __attribute__ ((__pure__)) __attribute__ ((__nonnull__ (1)));
-# 273 "/usr/include/string.h" 3 4
+# 293 "/usr/include/string.h" 3 4
 extern size_t strcspn (const char *__s, const char *__reject)
      __attribute__ ((__nothrow__ , __leaf__)) __attribute__ ((__pure__)) __attribute__ ((__nonnull__ (1, 2)));
 
 
 extern size_t strspn (const char *__s, const char *__accept)
      __attribute__ ((__nothrow__ , __leaf__)) __attribute__ ((__pure__)) __attribute__ ((__nonnull__ (1, 2)));
-# 303 "/usr/include/string.h" 3 4
+# 323 "/usr/include/string.h" 3 4
 extern char *strpbrk (const char *__s, const char *__accept)
      __attribute__ ((__nothrow__ , __leaf__)) __attribute__ ((__pure__)) __attribute__ ((__nonnull__ (1, 2)));
-# 330 "/usr/include/string.h" 3 4
+# 350 "/usr/include/string.h" 3 4
 extern char *strstr (const char *__haystack, const char *__needle)
      __attribute__ ((__nothrow__ , __leaf__)) __attribute__ ((__pure__)) __attribute__ ((__nonnull__ (1, 2)));
 
@@ -803,7 +803,7 @@ extern char *__strtok_r (char *__restrict __s,
 extern char *strtok_r (char *__restrict __s, const char *__restrict __delim,
          char **__restrict __save_ptr)
      __attribute__ ((__nothrow__ , __leaf__)) __attribute__ ((__nonnull__ (2, 3)));
-# 385 "/usr/include/string.h" 3 4
+# 407 "/usr/include/string.h" 3 4
 extern size_t strlen (const char *__s)
      __attribute__ ((__nothrow__ , __leaf__)) __attribute__ ((__pure__)) __attribute__ ((__nonnull__ (1)));
 
@@ -817,18 +817,19 @@ extern size_t strnlen (const char *__string, size_t __maxlen)
 
 
 extern char *strerror (int __errnum) __attribute__ ((__nothrow__ , __leaf__));
-# 410 "/usr/include/string.h" 3 4
+# 432 "/usr/include/string.h" 3 4
 extern int strerror_r (int __errnum, char *__buf, size_t __buflen) __asm__ ("" "__xpg_strerror_r") __attribute__ ((__nothrow__ , __leaf__))
 
-                        __attribute__ ((__nonnull__ (2)));
-# 428 "/usr/include/string.h" 3 4
+                        __attribute__ ((__nonnull__ (2)))
+    __attribute__ ((__access__ (__write_only__, 2, 3)));
+# 458 "/usr/include/string.h" 3 4
 extern char *strerror_l (int __errnum, locale_t __l) __attribute__ ((__nothrow__ , __leaf__));
 
 
 
 # 1 "/usr/include/strings.h" 1 3 4
 # 23 "/usr/include/strings.h" 3 4
-# 1 "/usr/lib/gcc/x86_64-linux-gnu/9/include/stddef.h" 1 3 4
+# 1 "/usr/lib/gcc/x86_64-linux-gnu/11/include/stddef.h" 1 3 4
 # 24 "/usr/include/strings.h" 2 3 4
 
 
@@ -896,11 +897,12 @@ extern int strncasecmp_l (const char *__s1, const char *__s2,
 
 
 
-# 433 "/usr/include/string.h" 2 3 4
+# 463 "/usr/include/string.h" 2 3 4
 
 
 
-extern void explicit_bzero (void *__s, size_t __n) __attribute__ ((__nothrow__ , __leaf__)) __attribute__ ((__nonnull__ (1)));
+extern void explicit_bzero (void *__s, size_t __n) __attribute__ ((__nothrow__ , __leaf__)) __attribute__ ((__nonnull__ (1)))
+    __attribute__ ((__access__ (__write_only__, 1, 2)));
 
 
 
@@ -912,8 +914,7 @@ extern char *strsep (char **__restrict __stringp,
 
 
 extern char *strsignal (int __sig) __attribute__ ((__nothrow__ , __leaf__));
-
-
+# 489 "/usr/include/string.h" 3 4
 extern char *__stpcpy (char *__restrict __dest, const char *__restrict __src)
      __attribute__ ((__nothrow__ , __leaf__)) __attribute__ ((__nonnull__ (1, 2)));
 extern char *stpcpy (char *__restrict __dest, const char *__restrict __src)
@@ -927,7 +928,7 @@ extern char *__stpncpy (char *__restrict __dest,
 extern char *stpncpy (char *__restrict __dest,
         const char *__restrict __src, size_t __n)
      __attribute__ ((__nothrow__ , __leaf__)) __attribute__ ((__nonnull__ (1, 2)));
-# 499 "/usr/include/string.h" 3 4
+# 539 "/usr/include/string.h" 3 4
 
 # 36 "/usr/include/glib-2.0/glib/galloca.h" 2
 # 33 "/usr/include/glib-2.0/glib.h" 2
@@ -1275,16 +1276,16 @@ gboolean g_atomic_pointer_compare_and_exchange_full (void *atomic,
 gpointer g_atomic_pointer_exchange (void *atomic,
                                                                gpointer newval);
  extern
-gssize g_atomic_pointer_add (volatile void *atomic,
+gintptr g_atomic_pointer_add (volatile void *atomic,
                                                                gssize val);
  extern
-gsize g_atomic_pointer_and (volatile void *atomic,
+guintptr g_atomic_pointer_and (volatile void *atomic,
                                                                gsize val);
  extern
-gsize g_atomic_pointer_or (volatile void *atomic,
+guintptr g_atomic_pointer_or (volatile void *atomic,
                                                                gsize val);
  extern
-gsize g_atomic_pointer_xor (volatile void *atomic,
+guintptr g_atomic_pointer_xor (volatile void *atomic,
                                                                gsize val);
 
 __attribute__((__deprecated__("Use '" "g_atomic_int_add" "' instead"))) extern
@@ -1295,12 +1296,12 @@ gint g_atomic_int_exchange_and_add (volatile gint *atomic,
 # 35 "/usr/include/glib-2.0/glib/gthread.h" 2
 # 1 "/usr/include/glib-2.0/glib/gerror.h" 1
 # 28 "/usr/include/glib-2.0/glib/gerror.h"
-# 1 "/usr/lib/gcc/x86_64-linux-gnu/9/include/stdarg.h" 1 3 4
-# 40 "/usr/lib/gcc/x86_64-linux-gnu/9/include/stdarg.h" 3 4
+# 1 "/usr/lib/gcc/x86_64-linux-gnu/11/include/stdarg.h" 1 3 4
+# 40 "/usr/lib/gcc/x86_64-linux-gnu/11/include/stdarg.h" 3 4
 
-# 40 "/usr/lib/gcc/x86_64-linux-gnu/9/include/stdarg.h" 3 4
+# 40 "/usr/lib/gcc/x86_64-linux-gnu/11/include/stdarg.h" 3 4
 typedef __builtin_va_list __gnuc_va_list;
-# 99 "/usr/lib/gcc/x86_64-linux-gnu/9/include/stdarg.h" 3 4
+# 99 "/usr/lib/gcc/x86_64-linux-gnu/11/include/stdarg.h" 3 4
 typedef __gnuc_va_list va_list;
 # 29 "/usr/include/glib-2.0/glib/gerror.h" 2
 
@@ -1627,16 +1628,16 @@ g_bit_storage_impl (gulong number)
 
 
 # 1 "/usr/include/stdlib.h" 1 3 4
-# 25 "/usr/include/stdlib.h" 3 4
+# 26 "/usr/include/stdlib.h" 3 4
 # 1 "/usr/include/x86_64-linux-gnu/bits/libc-header-start.h" 1 3 4
-# 26 "/usr/include/stdlib.h" 2 3 4
+# 27 "/usr/include/stdlib.h" 2 3 4
 
 
 
 
 
-# 1 "/usr/lib/gcc/x86_64-linux-gnu/9/include/stddef.h" 1 3 4
-# 32 "/usr/include/stdlib.h" 2 3 4
+# 1 "/usr/lib/gcc/x86_64-linux-gnu/11/include/stddef.h" 1 3 4
+# 33 "/usr/include/stdlib.h" 2 3 4
 
 
 
@@ -1645,29 +1646,22 @@ g_bit_storage_impl (gulong number)
 
 
 # 1 "/usr/include/x86_64-linux-gnu/bits/waitflags.h" 1 3 4
-# 52 "/usr/include/x86_64-linux-gnu/bits/waitflags.h" 3 4
-
-# 52 "/usr/include/x86_64-linux-gnu/bits/waitflags.h" 3 4
-typedef enum
-{
-  P_ALL,
-  P_PID,
-  P_PGID
-} idtype_t;
-# 40 "/usr/include/stdlib.h" 2 3 4
-# 1 "/usr/include/x86_64-linux-gnu/bits/waitstatus.h" 1 3 4
 # 41 "/usr/include/stdlib.h" 2 3 4
-# 55 "/usr/include/stdlib.h" 3 4
+# 1 "/usr/include/x86_64-linux-gnu/bits/waitstatus.h" 1 3 4
+# 42 "/usr/include/stdlib.h" 2 3 4
+# 56 "/usr/include/stdlib.h" 3 4
 # 1 "/usr/include/x86_64-linux-gnu/bits/floatn.h" 1 3 4
-# 120 "/usr/include/x86_64-linux-gnu/bits/floatn.h" 3 4
+# 119 "/usr/include/x86_64-linux-gnu/bits/floatn.h" 3 4
 # 1 "/usr/include/x86_64-linux-gnu/bits/floatn-common.h" 1 3 4
 # 24 "/usr/include/x86_64-linux-gnu/bits/floatn-common.h" 3 4
 # 1 "/usr/include/x86_64-linux-gnu/bits/long-double.h" 1 3 4
 # 25 "/usr/include/x86_64-linux-gnu/bits/floatn-common.h" 2 3 4
-# 121 "/usr/include/x86_64-linux-gnu/bits/floatn.h" 2 3 4
-# 56 "/usr/include/stdlib.h" 2 3 4
+# 120 "/usr/include/x86_64-linux-gnu/bits/floatn.h" 2 3 4
+# 57 "/usr/include/stdlib.h" 2 3 4
 
 
+
+# 59 "/usr/include/stdlib.h" 3 4
 typedef struct
   {
     int quot;
@@ -1691,7 +1685,7 @@ __extension__ typedef struct
     long long int quot;
     long long int rem;
   } lldiv_t;
-# 97 "/usr/include/stdlib.h" 3 4
+# 98 "/usr/include/stdlib.h" 3 4
 extern size_t __ctype_get_mb_cur_max (void) __attribute__ ((__nothrow__ , __leaf__)) ;
 
 
@@ -1724,7 +1718,7 @@ extern float strtof (const char *__restrict __nptr,
 extern long double strtold (const char *__restrict __nptr,
        char **__restrict __endptr)
      __attribute__ ((__nothrow__ , __leaf__)) __attribute__ ((__nonnull__ (1)));
-# 176 "/usr/include/stdlib.h" 3 4
+# 177 "/usr/include/stdlib.h" 3 4
 extern long int strtol (const char *__restrict __nptr,
    char **__restrict __endptr, int __base)
      __attribute__ ((__nothrow__ , __leaf__)) __attribute__ ((__nonnull__ (1)));
@@ -1757,7 +1751,7 @@ __extension__
 extern unsigned long long int strtoull (const char *__restrict __nptr,
      char **__restrict __endptr, int __base)
      __attribute__ ((__nothrow__ , __leaf__)) __attribute__ ((__nonnull__ (1)));
-# 385 "/usr/include/stdlib.h" 3 4
+# 386 "/usr/include/stdlib.h" 3 4
 extern char *l64a (long int __n) __attribute__ ((__nothrow__ , __leaf__)) ;
 
 
@@ -1839,7 +1833,7 @@ typedef __caddr_t caddr_t;
 
 typedef __key_t key_t;
 # 144 "/usr/include/x86_64-linux-gnu/sys/types.h" 3 4
-# 1 "/usr/lib/gcc/x86_64-linux-gnu/9/include/stddef.h" 1 3 4
+# 1 "/usr/lib/gcc/x86_64-linux-gnu/11/include/stddef.h" 1 3 4
 # 145 "/usr/include/x86_64-linux-gnu/sys/types.h" 2 3 4
 
 
@@ -1933,9 +1927,6 @@ __uint64_identity (__uint64_t __x)
 # 1 "/usr/include/x86_64-linux-gnu/sys/select.h" 1 3 4
 # 30 "/usr/include/x86_64-linux-gnu/sys/select.h" 3 4
 # 1 "/usr/include/x86_64-linux-gnu/bits/select.h" 1 3 4
-# 22 "/usr/include/x86_64-linux-gnu/bits/select.h" 3 4
-# 1 "/usr/include/x86_64-linux-gnu/bits/wordsize.h" 1 3 4
-# 23 "/usr/include/x86_64-linux-gnu/bits/select.h" 2 3 4
 # 31 "/usr/include/x86_64-linux-gnu/sys/select.h" 2 3 4
 
 
@@ -1970,8 +1961,13 @@ typedef __sigset_t sigset_t;
 
 struct timeval
 {
+
+
+
+
   __time_t tv_sec;
   __suseconds_t tv_usec;
+
 };
 # 38 "/usr/include/x86_64-linux-gnu/sys/select.h" 2 3 4
 
@@ -2008,18 +2004,18 @@ typedef struct
 typedef __fd_mask fd_mask;
 # 91 "/usr/include/x86_64-linux-gnu/sys/select.h" 3 4
 
-# 101 "/usr/include/x86_64-linux-gnu/sys/select.h" 3 4
+# 102 "/usr/include/x86_64-linux-gnu/sys/select.h" 3 4
 extern int select (int __nfds, fd_set *__restrict __readfds,
      fd_set *__restrict __writefds,
      fd_set *__restrict __exceptfds,
      struct timeval *__restrict __timeout);
-# 113 "/usr/include/x86_64-linux-gnu/sys/select.h" 3 4
+# 127 "/usr/include/x86_64-linux-gnu/sys/select.h" 3 4
 extern int pselect (int __nfds, fd_set *__restrict __readfds,
       fd_set *__restrict __writefds,
       fd_set *__restrict __exceptfds,
       const struct timespec *__restrict __timeout,
       const __sigset_t *__restrict __sigmask);
-# 126 "/usr/include/x86_64-linux-gnu/sys/select.h" 3 4
+# 153 "/usr/include/x86_64-linux-gnu/sys/select.h" 3 4
 
 # 180 "/usr/include/x86_64-linux-gnu/sys/types.h" 2 3 4
 
@@ -2054,6 +2050,19 @@ typedef __fsfilcnt_t fsfilcnt_t;
 # 22 "/usr/include/x86_64-linux-gnu/bits/pthreadtypes-arch.h" 2 3 4
 # 45 "/usr/include/x86_64-linux-gnu/bits/thread-shared-types.h" 2 3 4
 
+# 1 "/usr/include/x86_64-linux-gnu/bits/atomic_wide_counter.h" 1 3 4
+# 25 "/usr/include/x86_64-linux-gnu/bits/atomic_wide_counter.h" 3 4
+typedef union
+{
+  __extension__ unsigned long long int __value64;
+  struct
+  {
+    unsigned int __low;
+    unsigned int __high;
+  } __value32;
+} __atomic_wide_counter;
+# 47 "/usr/include/x86_64-linux-gnu/bits/thread-shared-types.h" 2 3 4
+
 
 
 
@@ -2067,7 +2076,7 @@ typedef struct __pthread_internal_slist
 {
   struct __pthread_internal_slist *__next;
 } __pthread_slist_t;
-# 74 "/usr/include/x86_64-linux-gnu/bits/thread-shared-types.h" 3 4
+# 76 "/usr/include/x86_64-linux-gnu/bits/thread-shared-types.h" 3 4
 # 1 "/usr/include/x86_64-linux-gnu/bits/struct_mutex.h" 1 3 4
 # 22 "/usr/include/x86_64-linux-gnu/bits/struct_mutex.h" 3 4
 struct __pthread_mutex_s
@@ -2087,8 +2096,8 @@ struct __pthread_mutex_s
   __pthread_list_t __list;
 # 53 "/usr/include/x86_64-linux-gnu/bits/struct_mutex.h" 3 4
 };
-# 75 "/usr/include/x86_64-linux-gnu/bits/thread-shared-types.h" 2 3 4
-# 87 "/usr/include/x86_64-linux-gnu/bits/thread-shared-types.h" 3 4
+# 77 "/usr/include/x86_64-linux-gnu/bits/thread-shared-types.h" 2 3 4
+# 89 "/usr/include/x86_64-linux-gnu/bits/thread-shared-types.h" 3 4
 # 1 "/usr/include/x86_64-linux-gnu/bits/struct_rwlock.h" 1 3 4
 # 23 "/usr/include/x86_64-linux-gnu/bits/struct_rwlock.h" 3 4
 struct __pthread_rwlock_arch_t
@@ -2116,37 +2125,29 @@ struct __pthread_rwlock_arch_t
   unsigned int __flags;
 # 55 "/usr/include/x86_64-linux-gnu/bits/struct_rwlock.h" 3 4
 };
-# 88 "/usr/include/x86_64-linux-gnu/bits/thread-shared-types.h" 2 3 4
+# 90 "/usr/include/x86_64-linux-gnu/bits/thread-shared-types.h" 2 3 4
 
 
 
 
 struct __pthread_cond_s
 {
-  __extension__ union
-  {
-    __extension__ unsigned long long int __wseq;
-    struct
-    {
-      unsigned int __low;
-      unsigned int __high;
-    } __wseq32;
-  };
-  __extension__ union
-  {
-    __extension__ unsigned long long int __g1_start;
-    struct
-    {
-      unsigned int __low;
-      unsigned int __high;
-    } __g1_start32;
-  };
+  __atomic_wide_counter __wseq;
+  __atomic_wide_counter __g1_start;
   unsigned int __g_refs[2] ;
   unsigned int __g_size[2];
   unsigned int __g1_orig_size;
   unsigned int __wrefs;
   unsigned int __g_signals[2];
 };
+
+typedef unsigned int __tss_t;
+typedef unsigned long int __thrd_t;
+
+typedef struct
+{
+  int __data ;
+} __once_flag;
 # 24 "/usr/include/x86_64-linux-gnu/bits/pthreadtypes.h" 2 3 4
 
 
@@ -2247,7 +2248,7 @@ typedef union
 
 
 
-# 395 "/usr/include/stdlib.h" 2 3 4
+# 396 "/usr/include/stdlib.h" 2 3 4
 
 
 
@@ -2407,6 +2408,9 @@ extern void *realloc (void *__ptr, size_t __size)
      __attribute__ ((__nothrow__ , __leaf__)) __attribute__ ((__warn_unused_result__)) __attribute__ ((__alloc_size__ (2)));
 
 
+extern void free (void *__ptr) __attribute__ ((__nothrow__ , __leaf__));
+
+
 
 
 
@@ -2414,16 +2418,18 @@ extern void *realloc (void *__ptr, size_t __size)
 
 extern void *reallocarray (void *__ptr, size_t __nmemb, size_t __size)
      __attribute__ ((__nothrow__ , __leaf__)) __attribute__ ((__warn_unused_result__))
-     __attribute__ ((__alloc_size__ (2, 3)));
+     __attribute__ ((__alloc_size__ (2, 3)))
+    __attribute__ ((__malloc__ (__builtin_free, 1)));
 
 
+extern void *reallocarray (void *__ptr, size_t __nmemb, size_t __size)
+     __attribute__ ((__nothrow__ , __leaf__)) __attribute__ ((__malloc__ (reallocarray, 1)));
 
-extern void free (void *__ptr) __attribute__ ((__nothrow__ , __leaf__));
 
 
 # 1 "/usr/include/alloca.h" 1 3 4
 # 24 "/usr/include/alloca.h" 3 4
-# 1 "/usr/lib/gcc/x86_64-linux-gnu/9/include/stddef.h" 1 3 4
+# 1 "/usr/lib/gcc/x86_64-linux-gnu/11/include/stddef.h" 1 3 4
 # 25 "/usr/include/alloca.h" 2 3 4
 
 
@@ -2439,7 +2445,7 @@ extern void *alloca (size_t __size) __attribute__ ((__nothrow__ , __leaf__));
 
 
 
-# 569 "/usr/include/stdlib.h" 2 3 4
+# 575 "/usr/include/stdlib.h" 2 3 4
 
 
 
@@ -2458,7 +2464,8 @@ extern int posix_memalign (void **__memptr, size_t __alignment, size_t __size)
 
 
 extern void *aligned_alloc (size_t __alignment, size_t __size)
-     __attribute__ ((__nothrow__ , __leaf__)) __attribute__ ((__malloc__)) __attribute__ ((__alloc_size__ (2))) ;
+     __attribute__ ((__nothrow__ , __leaf__)) __attribute__ ((__malloc__)) __attribute__ ((__alloc_align__ (1)))
+     __attribute__ ((__alloc_size__ (2))) ;
 
 
 
@@ -2506,7 +2513,7 @@ extern void _Exit (int __status) __attribute__ ((__nothrow__ , __leaf__)) __attr
 
 
 extern char *getenv (const char *__name) __attribute__ ((__nothrow__ , __leaf__)) __attribute__ ((__nonnull__ (1))) ;
-# 647 "/usr/include/stdlib.h" 3 4
+# 654 "/usr/include/stdlib.h" 3 4
 extern int putenv (char *__string) __attribute__ ((__nothrow__ , __leaf__)) __attribute__ ((__nonnull__ (1)));
 
 
@@ -2525,17 +2532,17 @@ extern int unsetenv (const char *__name) __attribute__ ((__nothrow__ , __leaf__)
 
 
 extern int clearenv (void) __attribute__ ((__nothrow__ , __leaf__));
-# 675 "/usr/include/stdlib.h" 3 4
+# 682 "/usr/include/stdlib.h" 3 4
 extern char *mktemp (char *__template) __attribute__ ((__nothrow__ , __leaf__)) __attribute__ ((__nonnull__ (1)));
-# 688 "/usr/include/stdlib.h" 3 4
+# 695 "/usr/include/stdlib.h" 3 4
 extern int mkstemp (char *__template) __attribute__ ((__nonnull__ (1))) ;
-# 710 "/usr/include/stdlib.h" 3 4
+# 717 "/usr/include/stdlib.h" 3 4
 extern int mkstemps (char *__template, int __suffixlen) __attribute__ ((__nonnull__ (1))) ;
-# 731 "/usr/include/stdlib.h" 3 4
+# 738 "/usr/include/stdlib.h" 3 4
 extern char *mkdtemp (char *__template) __attribute__ ((__nothrow__ , __leaf__)) __attribute__ ((__nonnull__ (1))) ;
-# 784 "/usr/include/stdlib.h" 3 4
+# 791 "/usr/include/stdlib.h" 3 4
 extern int system (const char *__command) ;
-# 800 "/usr/include/stdlib.h" 3 4
+# 808 "/usr/include/stdlib.h" 3 4
 extern char *realpath (const char *__restrict __name,
          char *__restrict __resolved) __attribute__ ((__nothrow__ , __leaf__)) ;
 
@@ -2545,7 +2552,7 @@ extern char *realpath (const char *__restrict __name,
 
 
 typedef int (*__compar_fn_t) (const void *, const void *);
-# 820 "/usr/include/stdlib.h" 3 4
+# 828 "/usr/include/stdlib.h" 3 4
 extern void *bsearch (const void *__key, const void *__base,
         size_t __nmemb, size_t __size, __compar_fn_t __compar)
      __attribute__ ((__nonnull__ (1, 2, 5))) ;
@@ -2558,7 +2565,7 @@ extern void *bsearch (const void *__key, const void *__base,
 
 extern void qsort (void *__base, size_t __nmemb, size_t __size,
      __compar_fn_t __compar) __attribute__ ((__nonnull__ (1, 4)));
-# 840 "/usr/include/stdlib.h" 3 4
+# 848 "/usr/include/stdlib.h" 3 4
 extern int abs (int __x) __attribute__ ((__nothrow__ , __leaf__)) __attribute__ ((__const__)) ;
 extern long int labs (long int __x) __attribute__ ((__nothrow__ , __leaf__)) __attribute__ ((__const__)) ;
 
@@ -2580,7 +2587,7 @@ extern ldiv_t ldiv (long int __numer, long int __denom)
 __extension__ extern lldiv_t lldiv (long long int __numer,
         long long int __denom)
      __attribute__ ((__nothrow__ , __leaf__)) __attribute__ ((__const__)) ;
-# 872 "/usr/include/stdlib.h" 3 4
+# 880 "/usr/include/stdlib.h" 3 4
 extern char *ecvt (double __value, int __ndigit, int *__restrict __decpt,
      int *__restrict __sign) __attribute__ ((__nothrow__ , __leaf__)) __attribute__ ((__nonnull__ (3, 4))) ;
 
@@ -2643,12 +2650,14 @@ extern int wctomb (char *__s, wchar_t __wchar) __attribute__ ((__nothrow__ , __l
 
 
 extern size_t mbstowcs (wchar_t *__restrict __pwcs,
-   const char *__restrict __s, size_t __n) __attribute__ ((__nothrow__ , __leaf__));
+   const char *__restrict __s, size_t __n) __attribute__ ((__nothrow__ , __leaf__))
+    __attribute__ ((__access__ (__read_only__, 2)));
 
 extern size_t wcstombs (char *__restrict __s,
    const wchar_t *__restrict __pwcs, size_t __n)
-     __attribute__ ((__nothrow__ , __leaf__));
-
+     __attribute__ ((__nothrow__ , __leaf__))
+  __attribute__ ((__access__ (__write_only__, 1, 3)))
+  __attribute__ ((__access__ (__read_only__, 2)));
 
 
 
@@ -2656,18 +2665,18 @@ extern size_t wcstombs (char *__restrict __s,
 
 
 extern int rpmatch (const char *__response) __attribute__ ((__nothrow__ , __leaf__)) __attribute__ ((__nonnull__ (1))) ;
-# 957 "/usr/include/stdlib.h" 3 4
+# 967 "/usr/include/stdlib.h" 3 4
 extern int getsubopt (char **__restrict __optionp,
         char *const *__restrict __tokens,
         char **__restrict __valuep)
      __attribute__ ((__nothrow__ , __leaf__)) __attribute__ ((__nonnull__ (1, 2, 3))) ;
-# 1003 "/usr/include/stdlib.h" 3 4
+# 1013 "/usr/include/stdlib.h" 3 4
 extern int getloadavg (double __loadavg[], int __nelem)
      __attribute__ ((__nothrow__ , __leaf__)) __attribute__ ((__nonnull__ (1)));
-# 1013 "/usr/include/stdlib.h" 3 4
-# 1 "/usr/include/x86_64-linux-gnu/bits/stdlib-float.h" 1 3 4
-# 1014 "/usr/include/stdlib.h" 2 3 4
 # 1023 "/usr/include/stdlib.h" 3 4
+# 1 "/usr/include/x86_64-linux-gnu/bits/stdlib-float.h" 1 3 4
+# 1024 "/usr/include/stdlib.h" 2 3 4
+# 1035 "/usr/include/stdlib.h" 3 4
 
 # 427 "/usr/include/glib-2.0/glib/gutils.h" 2
 # 477 "/usr/include/glib-2.0/glib/gutils.h"
@@ -2748,7 +2757,7 @@ struct _GOnce
   volatile GOnceStatus status;
   volatile gpointer retval;
 };
-# 142 "/usr/include/glib-2.0/glib/gthread.h"
+# 146 "/usr/include/glib-2.0/glib/gthread.h"
  extern
 GThread * g_thread_ref (GThread *thread);
  extern
@@ -2764,7 +2773,7 @@ GThread * g_thread_try_new (const gchar *name,
                                                  GError **error);
  extern
 GThread * g_thread_self (void);
- extern
+__attribute__ ((__noreturn__)) extern
 void g_thread_exit (gpointer retval);
  extern
 gpointer g_thread_join (GThread *thread);
@@ -2845,7 +2854,13 @@ gboolean g_once_init_enter (volatile void *location);
  extern
 void g_once_init_leave (volatile void *location,
                                                  gsize result);
-# 278 "/usr/include/glib-2.0/glib/gthread.h"
+
+ extern
+gboolean g_once_init_enter_pointer (void *location);
+ extern
+void g_once_init_leave_pointer (void *location,
+                                                 gpointer result);
+# 307 "/usr/include/glib-2.0/glib/gthread.h"
  extern
 guint g_get_num_processors (void);
 
@@ -2856,7 +2871,7 @@ guint g_get_num_processors (void);
 
 
 typedef void GMutexLocker;
-# 331 "/usr/include/glib-2.0/glib/gthread.h"
+# 364 "/usr/include/glib-2.0/glib/gthread.h"
 
 static inline GMutexLocker *
 g_mutex_locker_new (GMutex *mutex)
@@ -2864,30 +2879,24 @@ g_mutex_locker_new (GMutex *mutex)
   g_mutex_lock (mutex);
   return (GMutexLocker *) mutex;
 }
-# 349 "/usr/include/glib-2.0/glib/gthread.h"
+# 382 "/usr/include/glib-2.0/glib/gthread.h"
 
 static inline void
 g_mutex_locker_free (GMutexLocker *locker)
 {
   g_mutex_unlock ((GMutex *) locker);
 }
-
-
-
-
-
-
-
+# 438 "/usr/include/glib-2.0/glib/gthread.h"
 typedef void GRecMutexLocker;
-# 406 "/usr/include/glib-2.0/glib/gthread.h"
+# 486 "/usr/include/glib-2.0/glib/gthread.h"
 
-# 406 "/usr/include/glib-2.0/glib/gthread.h"
+# 486 "/usr/include/glib-2.0/glib/gthread.h"
 #pragma GCC diagnostic push
-# 406 "/usr/include/glib-2.0/glib/gthread.h"
+# 486 "/usr/include/glib-2.0/glib/gthread.h"
 
-# 406 "/usr/include/glib-2.0/glib/gthread.h"
+# 486 "/usr/include/glib-2.0/glib/gthread.h"
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-# 406 "/usr/include/glib-2.0/glib/gthread.h"
+# 486 "/usr/include/glib-2.0/glib/gthread.h"
 
 
 static inline GRecMutexLocker *
@@ -2897,19 +2906,19 @@ g_rec_mutex_locker_new (GRecMutex *rec_mutex)
   return (GRecMutexLocker *) rec_mutex;
 }
 
-# 414 "/usr/include/glib-2.0/glib/gthread.h"
+# 494 "/usr/include/glib-2.0/glib/gthread.h"
 #pragma GCC diagnostic pop
-# 414 "/usr/include/glib-2.0/glib/gthread.h"
+# 494 "/usr/include/glib-2.0/glib/gthread.h"
 
-# 426 "/usr/include/glib-2.0/glib/gthread.h"
+# 506 "/usr/include/glib-2.0/glib/gthread.h"
 
-# 426 "/usr/include/glib-2.0/glib/gthread.h"
+# 506 "/usr/include/glib-2.0/glib/gthread.h"
 #pragma GCC diagnostic push
-# 426 "/usr/include/glib-2.0/glib/gthread.h"
+# 506 "/usr/include/glib-2.0/glib/gthread.h"
 
-# 426 "/usr/include/glib-2.0/glib/gthread.h"
+# 506 "/usr/include/glib-2.0/glib/gthread.h"
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-# 426 "/usr/include/glib-2.0/glib/gthread.h"
+# 506 "/usr/include/glib-2.0/glib/gthread.h"
 
 
 static inline void
@@ -2918,27 +2927,21 @@ g_rec_mutex_locker_free (GRecMutexLocker *locker)
   g_rec_mutex_unlock ((GRecMutex *) locker);
 }
 
-# 433 "/usr/include/glib-2.0/glib/gthread.h"
+# 513 "/usr/include/glib-2.0/glib/gthread.h"
 #pragma GCC diagnostic pop
-# 433 "/usr/include/glib-2.0/glib/gthread.h"
+# 513 "/usr/include/glib-2.0/glib/gthread.h"
 
-
-
-
-
-
-
-
+# 564 "/usr/include/glib-2.0/glib/gthread.h"
 typedef void GRWLockWriterLocker;
-# 516 "/usr/include/glib-2.0/glib/gthread.h"
+# 643 "/usr/include/glib-2.0/glib/gthread.h"
 
-# 516 "/usr/include/glib-2.0/glib/gthread.h"
+# 643 "/usr/include/glib-2.0/glib/gthread.h"
 #pragma GCC diagnostic push
-# 516 "/usr/include/glib-2.0/glib/gthread.h"
+# 643 "/usr/include/glib-2.0/glib/gthread.h"
 
-# 516 "/usr/include/glib-2.0/glib/gthread.h"
+# 643 "/usr/include/glib-2.0/glib/gthread.h"
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-# 516 "/usr/include/glib-2.0/glib/gthread.h"
+# 643 "/usr/include/glib-2.0/glib/gthread.h"
 
 
 static inline GRWLockWriterLocker *
@@ -2948,19 +2951,19 @@ g_rw_lock_writer_locker_new (GRWLock *rw_lock)
   return (GRWLockWriterLocker *) rw_lock;
 }
 
-# 524 "/usr/include/glib-2.0/glib/gthread.h"
+# 651 "/usr/include/glib-2.0/glib/gthread.h"
 #pragma GCC diagnostic pop
-# 524 "/usr/include/glib-2.0/glib/gthread.h"
+# 651 "/usr/include/glib-2.0/glib/gthread.h"
 
-# 537 "/usr/include/glib-2.0/glib/gthread.h"
+# 664 "/usr/include/glib-2.0/glib/gthread.h"
 
-# 537 "/usr/include/glib-2.0/glib/gthread.h"
+# 664 "/usr/include/glib-2.0/glib/gthread.h"
 #pragma GCC diagnostic push
-# 537 "/usr/include/glib-2.0/glib/gthread.h"
+# 664 "/usr/include/glib-2.0/glib/gthread.h"
 
-# 537 "/usr/include/glib-2.0/glib/gthread.h"
+# 664 "/usr/include/glib-2.0/glib/gthread.h"
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-# 537 "/usr/include/glib-2.0/glib/gthread.h"
+# 664 "/usr/include/glib-2.0/glib/gthread.h"
 
 
 static inline void
@@ -2969,27 +2972,21 @@ g_rw_lock_writer_locker_free (GRWLockWriterLocker *locker)
   g_rw_lock_writer_unlock ((GRWLock *) locker);
 }
 
-# 544 "/usr/include/glib-2.0/glib/gthread.h"
+# 671 "/usr/include/glib-2.0/glib/gthread.h"
 #pragma GCC diagnostic pop
-# 544 "/usr/include/glib-2.0/glib/gthread.h"
+# 671 "/usr/include/glib-2.0/glib/gthread.h"
 
-
-
-
-
-
-
-
+# 722 "/usr/include/glib-2.0/glib/gthread.h"
 typedef void GRWLockReaderLocker;
-# 571 "/usr/include/glib-2.0/glib/gthread.h"
+# 741 "/usr/include/glib-2.0/glib/gthread.h"
 
-# 571 "/usr/include/glib-2.0/glib/gthread.h"
+# 741 "/usr/include/glib-2.0/glib/gthread.h"
 #pragma GCC diagnostic push
-# 571 "/usr/include/glib-2.0/glib/gthread.h"
+# 741 "/usr/include/glib-2.0/glib/gthread.h"
 
-# 571 "/usr/include/glib-2.0/glib/gthread.h"
+# 741 "/usr/include/glib-2.0/glib/gthread.h"
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-# 571 "/usr/include/glib-2.0/glib/gthread.h"
+# 741 "/usr/include/glib-2.0/glib/gthread.h"
 
 
 static inline GRWLockReaderLocker *
@@ -2999,19 +2996,19 @@ g_rw_lock_reader_locker_new (GRWLock *rw_lock)
   return (GRWLockReaderLocker *) rw_lock;
 }
 
-# 579 "/usr/include/glib-2.0/glib/gthread.h"
+# 749 "/usr/include/glib-2.0/glib/gthread.h"
 #pragma GCC diagnostic pop
-# 579 "/usr/include/glib-2.0/glib/gthread.h"
+# 749 "/usr/include/glib-2.0/glib/gthread.h"
 
-# 592 "/usr/include/glib-2.0/glib/gthread.h"
+# 762 "/usr/include/glib-2.0/glib/gthread.h"
 
-# 592 "/usr/include/glib-2.0/glib/gthread.h"
+# 762 "/usr/include/glib-2.0/glib/gthread.h"
 #pragma GCC diagnostic push
-# 592 "/usr/include/glib-2.0/glib/gthread.h"
+# 762 "/usr/include/glib-2.0/glib/gthread.h"
 
-# 592 "/usr/include/glib-2.0/glib/gthread.h"
+# 762 "/usr/include/glib-2.0/glib/gthread.h"
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-# 592 "/usr/include/glib-2.0/glib/gthread.h"
+# 762 "/usr/include/glib-2.0/glib/gthread.h"
 
 
 static inline void
@@ -3020,11 +3017,11 @@ g_rw_lock_reader_locker_free (GRWLockReaderLocker *locker)
   g_rw_lock_reader_unlock ((GRWLock *) locker);
 }
 
-# 599 "/usr/include/glib-2.0/glib/gthread.h"
+# 769 "/usr/include/glib-2.0/glib/gthread.h"
 #pragma GCC diagnostic pop
-# 599 "/usr/include/glib-2.0/glib/gthread.h"
+# 769 "/usr/include/glib-2.0/glib/gthread.h"
 
-
+# 814 "/usr/include/glib-2.0/glib/gthread.h"
 
 # 35 "/usr/include/glib-2.0/glib/gasyncqueue.h" 2
 
@@ -3138,10 +3135,10 @@ gpointer g_async_queue_timed_pop_unlocked (GAsyncQueue *queue,
 
 
 
-# 1 "/usr/include/x86_64-linux-gnu/bits/signum.h" 1 3 4
-# 26 "/usr/include/x86_64-linux-gnu/bits/signum.h" 3 4
 # 1 "/usr/include/x86_64-linux-gnu/bits/signum-generic.h" 1 3 4
-# 27 "/usr/include/x86_64-linux-gnu/bits/signum.h" 2 3 4
+# 76 "/usr/include/x86_64-linux-gnu/bits/signum-generic.h" 3 4
+# 1 "/usr/include/x86_64-linux-gnu/bits/signum-arch.h" 1 3 4
+# 77 "/usr/include/x86_64-linux-gnu/bits/signum-generic.h" 2 3 4
 # 31 "/usr/include/signal.h" 2 3 4
 
 # 1 "/usr/include/x86_64-linux-gnu/bits/types/sig_atomic_t.h" 1 3 4
@@ -3357,7 +3354,11 @@ enum
 
   SEGV_ADIDERR,
 
-  SEGV_ADIPERR
+  SEGV_ADIPERR,
+
+  SEGV_MTEAERR,
+
+  SEGV_MTESERR
 
 };
 
@@ -3375,7 +3376,7 @@ enum
   BUS_MCEERR_AO
 
 };
-# 172 "/usr/include/x86_64-linux-gnu/bits/siginfo-consts.h" 3 4
+# 176 "/usr/include/x86_64-linux-gnu/bits/siginfo-consts.h" 3 4
 enum
 {
   CLD_EXITED = 1,
@@ -3505,7 +3506,7 @@ extern void psignal (int __sig, const char *__s);
 
 
 extern void psiginfo (const siginfo_t *__pinfo, const char *__s);
-# 170 "/usr/include/signal.h" 3 4
+# 173 "/usr/include/signal.h" 3 4
 extern int sigblock (int __mask) __attribute__ ((__nothrow__ , __leaf__)) __attribute__ ((__deprecated__));
 
 
@@ -3513,7 +3514,7 @@ extern int sigsetmask (int __mask) __attribute__ ((__nothrow__ , __leaf__)) __at
 
 
 extern int siggetmask (void) __attribute__ ((__nothrow__ , __leaf__)) __attribute__ ((__deprecated__));
-# 190 "/usr/include/signal.h" 3 4
+# 193 "/usr/include/signal.h" 3 4
 typedef __sighandler_t sig_t;
 
 
@@ -3534,7 +3535,7 @@ extern int sigdelset (sigset_t *__set, int __signo) __attribute__ ((__nothrow__ 
 
 extern int sigismember (const sigset_t *__set, int __signo)
      __attribute__ ((__nothrow__ , __leaf__)) __attribute__ ((__nonnull__ (1)));
-# 226 "/usr/include/signal.h" 3 4
+# 229 "/usr/include/signal.h" 3 4
 # 1 "/usr/include/x86_64-linux-gnu/bits/sigaction.h" 1 3 4
 # 27 "/usr/include/x86_64-linux-gnu/bits/sigaction.h" 3 4
 struct sigaction
@@ -3564,7 +3565,7 @@ struct sigaction
 
     void (*sa_restorer) (void);
   };
-# 227 "/usr/include/signal.h" 2 3 4
+# 230 "/usr/include/signal.h" 2 3 4
 
 
 extern int sigprocmask (int __how, const sigset_t *__restrict __set,
@@ -3607,18 +3608,18 @@ extern int sigwaitinfo (const sigset_t *__restrict __set,
 
 
 
+
 extern int sigtimedwait (const sigset_t *__restrict __set,
     siginfo_t *__restrict __info,
     const struct timespec *__restrict __timeout)
      __attribute__ ((__nonnull__ (1)));
-
-
-
+# 292 "/usr/include/signal.h" 3 4
 extern int sigqueue (__pid_t __pid, int __sig, const union sigval __val)
      __attribute__ ((__nothrow__ , __leaf__));
-# 286 "/usr/include/signal.h" 3 4
-extern const char *const _sys_siglist[(64 + 1)];
-extern const char *const sys_siglist[(64 + 1)];
+
+
+
+
 
 
 
@@ -3723,7 +3724,7 @@ struct _xstate
   struct _xsave_hdr xstate_hdr;
   struct _ymmh_state ymmh;
 };
-# 292 "/usr/include/signal.h" 2 3 4
+# 302 "/usr/include/signal.h" 2 3 4
 
 
 extern int sigreturn (struct sigcontext *__scp) __attribute__ ((__nothrow__ , __leaf__));
@@ -3733,12 +3734,12 @@ extern int sigreturn (struct sigcontext *__scp) __attribute__ ((__nothrow__ , __
 
 
 
-# 1 "/usr/lib/gcc/x86_64-linux-gnu/9/include/stddef.h" 1 3 4
-# 302 "/usr/include/signal.h" 2 3 4
+# 1 "/usr/lib/gcc/x86_64-linux-gnu/11/include/stddef.h" 1 3 4
+# 312 "/usr/include/signal.h" 2 3 4
 
 # 1 "/usr/include/x86_64-linux-gnu/bits/types/stack_t.h" 1 3 4
 # 23 "/usr/include/x86_64-linux-gnu/bits/types/stack_t.h" 3 4
-# 1 "/usr/lib/gcc/x86_64-linux-gnu/9/include/stddef.h" 1 3 4
+# 1 "/usr/lib/gcc/x86_64-linux-gnu/11/include/stddef.h" 1 3 4
 # 24 "/usr/include/x86_64-linux-gnu/bits/types/stack_t.h" 2 3 4
 
 
@@ -3748,7 +3749,7 @@ typedef struct
     int ss_flags;
     size_t ss_size;
   } stack_t;
-# 304 "/usr/include/signal.h" 2 3 4
+# 314 "/usr/include/signal.h" 2 3 4
 
 
 # 1 "/usr/include/x86_64-linux-gnu/sys/ucontext.h" 1 3 4
@@ -3808,7 +3809,7 @@ typedef struct ucontext_t
     struct _libc_fpstate __fpregs_mem;
     __extension__ unsigned long long int __ssp[4];
   } ucontext_t;
-# 307 "/usr/include/signal.h" 2 3 4
+# 317 "/usr/include/signal.h" 2 3 4
 
 
 
@@ -3816,10 +3817,13 @@ typedef struct ucontext_t
 
 
 
-extern int siginterrupt (int __sig, int __interrupt) __attribute__ ((__nothrow__ , __leaf__));
+extern int siginterrupt (int __sig, int __interrupt) __attribute__ ((__nothrow__ , __leaf__))
+  __attribute__ ((__deprecated__ ("Use sigaction with SA_RESTART instead")));
 
 # 1 "/usr/include/x86_64-linux-gnu/bits/sigstack.h" 1 3 4
-# 317 "/usr/include/signal.h" 2 3 4
+# 328 "/usr/include/signal.h" 2 3 4
+# 1 "/usr/include/x86_64-linux-gnu/bits/sigstksz.h" 1 3 4
+# 329 "/usr/include/signal.h" 2 3 4
 # 1 "/usr/include/x86_64-linux-gnu/bits/ss_flags.h" 1 3 4
 # 27 "/usr/include/x86_64-linux-gnu/bits/ss_flags.h" 3 4
 enum
@@ -3829,7 +3833,7 @@ enum
   SS_DISABLE
 
 };
-# 318 "/usr/include/signal.h" 2 3 4
+# 330 "/usr/include/signal.h" 2 3 4
 
 
 
@@ -3846,7 +3850,7 @@ struct sigstack
     void *ss_sp;
     int ss_onstack;
   };
-# 328 "/usr/include/signal.h" 2 3 4
+# 340 "/usr/include/signal.h" 2 3 4
 
 
 
@@ -3856,7 +3860,7 @@ struct sigstack
 
 extern int sigstack (struct sigstack *__ss, struct sigstack *__oss)
      __attribute__ ((__nothrow__ , __leaf__)) __attribute__ ((__deprecated__));
-# 359 "/usr/include/signal.h" 3 4
+# 376 "/usr/include/signal.h" 3 4
 # 1 "/usr/include/x86_64-linux-gnu/bits/sigthread.h" 1 3 4
 # 31 "/usr/include/x86_64-linux-gnu/bits/sigthread.h" 3 4
 extern int pthread_sigmask (int __how,
@@ -3865,7 +3869,7 @@ extern int pthread_sigmask (int __how,
 
 
 extern int pthread_kill (pthread_t __threadid, int __signo) __attribute__ ((__nothrow__ , __leaf__));
-# 360 "/usr/include/signal.h" 2 3 4
+# 377 "/usr/include/signal.h" 2 3 4
 
 
 
@@ -3881,7 +3885,7 @@ extern int __libc_current_sigrtmax (void) __attribute__ ((__nothrow__ , __leaf__
 
 
 # 1 "/usr/include/x86_64-linux-gnu/bits/signal_ext.h" 1 3 4
-# 375 "/usr/include/signal.h" 2 3 4
+# 392 "/usr/include/signal.h" 2 3 4
 
 
 # 39 "/usr/include/glib-2.0/glib/gbacktrace.h" 2
@@ -3949,13 +3953,32 @@ void g_bit_unlock (volatile gint *address,
  extern
 void g_pointer_bit_lock (volatile void *address,
                                            gint lock_bit);
+
+ extern
+void g_pointer_bit_lock_and_get (gpointer address,
+                                           guint lock_bit,
+                                           guintptr *out_ptr);
+
  extern
 gboolean g_pointer_bit_trylock (volatile void *address,
                                            gint lock_bit);
  extern
 void g_pointer_bit_unlock (volatile void *address,
                                            gint lock_bit);
-# 76 "/usr/include/glib-2.0/glib/gbitlock.h"
+
+ extern
+gpointer g_pointer_bit_lock_mask_ptr (gpointer ptr,
+                                           guint lock_bit,
+                                           gboolean set,
+                                           guintptr preserve_mask,
+                                           gpointer preserve_ptr);
+
+ extern
+void g_pointer_bit_unlock_and_set (void *address,
+                                           guint lock_bit,
+                                           gpointer ptr,
+                                           guintptr preserve_mask);
+# 107 "/usr/include/glib-2.0/glib/gbitlock.h"
 
 # 39 "/usr/include/glib-2.0/glib.h" 2
 # 1 "/usr/include/glib-2.0/glib/gbookmarkfile.h" 1
@@ -4019,7 +4042,7 @@ const gchar * g_time_zone_get_identifier (GTimeZone *tz);
 
 # 89 "/usr/include/glib-2.0/glib/gdatetime.h"
 typedef gint64 GTimeSpan;
-# 98 "/usr/include/glib-2.0/glib/gdatetime.h"
+# 122 "/usr/include/glib-2.0/glib/gdatetime.h"
 typedef struct _GDateTime GDateTime;
 
  extern
@@ -4039,23 +4062,28 @@ GDateTime * g_date_time_new_from_unix_local (gint64 t);
  extern
 GDateTime * g_date_time_new_from_unix_utc (gint64 t);
 
+ extern
+GDateTime * g_date_time_new_from_unix_local_usec (gint64 usecs);
+ extern
+GDateTime * g_date_time_new_from_unix_utc_usec (gint64 usecs);
 
-# 117 "/usr/include/glib-2.0/glib/gdatetime.h"
+
+# 146 "/usr/include/glib-2.0/glib/gdatetime.h"
 #pragma GCC diagnostic push
-# 117 "/usr/include/glib-2.0/glib/gdatetime.h"
+# 146 "/usr/include/glib-2.0/glib/gdatetime.h"
 
-# 117 "/usr/include/glib-2.0/glib/gdatetime.h"
+# 146 "/usr/include/glib-2.0/glib/gdatetime.h"
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-# 117 "/usr/include/glib-2.0/glib/gdatetime.h"
+# 146 "/usr/include/glib-2.0/glib/gdatetime.h"
 
 __attribute__((__deprecated__("Use '" "g_date_time_new_from_unix_local" "' instead"))) extern
 GDateTime * g_date_time_new_from_timeval_local (const GTimeVal *tv);
 __attribute__((__deprecated__("Use '" "g_date_time_new_from_unix_utc" "' instead"))) extern
 GDateTime * g_date_time_new_from_timeval_utc (const GTimeVal *tv);
 
-# 122 "/usr/include/glib-2.0/glib/gdatetime.h"
+# 151 "/usr/include/glib-2.0/glib/gdatetime.h"
 #pragma GCC diagnostic pop
-# 122 "/usr/include/glib-2.0/glib/gdatetime.h"
+# 151 "/usr/include/glib-2.0/glib/gdatetime.h"
 
 
  extern
@@ -4178,22 +4206,25 @@ gdouble g_date_time_get_seconds (GDateTime *datetime);
 
  extern
 gint64 g_date_time_to_unix (GDateTime *datetime);
+ extern
+gint64 g_date_time_to_unix_usec (GDateTime *datetime);
 
-# 244 "/usr/include/glib-2.0/glib/gdatetime.h"
+
+# 276 "/usr/include/glib-2.0/glib/gdatetime.h"
 #pragma GCC diagnostic push
-# 244 "/usr/include/glib-2.0/glib/gdatetime.h"
+# 276 "/usr/include/glib-2.0/glib/gdatetime.h"
 
-# 244 "/usr/include/glib-2.0/glib/gdatetime.h"
+# 276 "/usr/include/glib-2.0/glib/gdatetime.h"
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-# 244 "/usr/include/glib-2.0/glib/gdatetime.h"
+# 276 "/usr/include/glib-2.0/glib/gdatetime.h"
 
 __attribute__((__deprecated__("Use '" "g_date_time_to_unix" "' instead"))) extern
 gboolean g_date_time_to_timeval (GDateTime *datetime,
                                                                          GTimeVal *tv);
 
-# 248 "/usr/include/glib-2.0/glib/gdatetime.h"
+# 280 "/usr/include/glib-2.0/glib/gdatetime.h"
 #pragma GCC diagnostic pop
-# 248 "/usr/include/glib-2.0/glib/gdatetime.h"
+# 280 "/usr/include/glib-2.0/glib/gdatetime.h"
 
 
  extern
@@ -4240,12 +4271,7 @@ typedef enum
 
  extern
 GQuark g_bookmark_file_error_quark (void);
-
-
-
-
-
-
+# 118 "/usr/include/glib-2.0/glib/gbookmarkfile.h"
 typedef struct _GBookmarkFile GBookmarkFile;
 
  extern
@@ -4565,7 +4591,7 @@ typedef enum {
   G_CHECKSUM_SHA512,
   G_CHECKSUM_SHA384
 } GChecksumType;
-# 67 "/usr/include/glib-2.0/glib/gchecksum.h"
+
 typedef struct _GChecksum GChecksum;
 
  extern
@@ -4811,7 +4837,7 @@ void g_dataset_foreach (gconstpointer dataset_location,
 # 1 "/usr/include/glib-2.0/glib/gdate.h" 1
 # 39 "/usr/include/glib-2.0/glib/gdate.h"
 
-# 50 "/usr/include/glib-2.0/glib/gdate.h"
+
 typedef gint32 GTime __attribute__((__deprecated__("Use '" "GDateTime" "' instead")));
 typedef guint16 GDateYear;
 typedef guint8 GDateDay;
@@ -4853,7 +4879,7 @@ typedef enum
   G_DATE_NOVEMBER = 11,
   G_DATE_DECEMBER = 12
 } GDateMonth;
-# 101 "/usr/include/glib-2.0/glib/gdate.h"
+# 92 "/usr/include/glib-2.0/glib/gdate.h"
 struct _GDate
 {
   guint julian_days : 32;
@@ -4954,13 +4980,13 @@ void g_date_set_parse (GDate *date,
 void g_date_set_time_t (GDate *date,
         time_t timet);
 
-# 200 "/usr/include/glib-2.0/glib/gdate.h"
+# 191 "/usr/include/glib-2.0/glib/gdate.h"
 #pragma GCC diagnostic push
-# 200 "/usr/include/glib-2.0/glib/gdate.h"
+# 191 "/usr/include/glib-2.0/glib/gdate.h"
 
-# 200 "/usr/include/glib-2.0/glib/gdate.h"
+# 191 "/usr/include/glib-2.0/glib/gdate.h"
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-# 200 "/usr/include/glib-2.0/glib/gdate.h"
+# 191 "/usr/include/glib-2.0/glib/gdate.h"
 
 __attribute__((__deprecated__("Use '" "g_date_set_time_t" "' instead"))) extern
 void g_date_set_time_val (GDate *date,
@@ -4969,9 +4995,9 @@ __attribute__((__deprecated__("Use '" "g_date_set_time_t" "' instead"))) extern
 void g_date_set_time (GDate *date,
                                            GTime time_);
 
-# 207 "/usr/include/glib-2.0/glib/gdate.h"
+# 198 "/usr/include/glib-2.0/glib/gdate.h"
 #pragma GCC diagnostic pop
-# 207 "/usr/include/glib-2.0/glib/gdate.h"
+# 198 "/usr/include/glib-2.0/glib/gdate.h"
 
  extern
 void g_date_set_month (GDate *date,
@@ -5059,7 +5085,7 @@ gsize g_date_strftime (gchar *s,
                                            gsize slen,
                                            const gchar *format,
                                            const GDate *date);
-# 307 "/usr/include/glib-2.0/glib/gdate.h"
+# 298 "/usr/include/glib-2.0/glib/gdate.h"
 
 # 46 "/usr/include/glib-2.0/glib.h" 2
 
@@ -5158,7 +5184,7 @@ extern long int telldir (DIR *__dirp) __attribute__ ((__nothrow__ , __leaf__)) _
 
 extern int dirfd (DIR *__dirp) __attribute__ ((__nothrow__ , __leaf__)) __attribute__ ((__nonnull__ (1)));
 # 245 "/usr/include/dirent.h" 3 4
-# 1 "/usr/lib/gcc/x86_64-linux-gnu/9/include/stddef.h" 1 3 4
+# 1 "/usr/lib/gcc/x86_64-linux-gnu/11/include/stddef.h" 1 3 4
 # 246 "/usr/include/dirent.h" 2 3 4
 # 255 "/usr/include/dirent.h" 3 4
 extern int scandir (const char *__restrict __dir,
@@ -5204,6 +5230,11 @@ const gchar * g_dir_read_name (GDir *dir);
 void g_dir_rewind (GDir *dir);
  extern
 void g_dir_close (GDir *dir);
+
+ extern
+GDir * g_dir_ref (GDir *dir);
+ extern
+void g_dir_unref (GDir *dir);
 
 
 # 48 "/usr/include/glib-2.0/glib.h" 2
@@ -5449,7 +5480,7 @@ const gchar *g_dpgettext2 (const gchar *domain,
 typedef struct _GMemVTable GMemVTable;
 # 73 "/usr/include/glib-2.0/glib/gmem.h"
  extern
-void g_free (gpointer mem);
+void (g_free) (gpointer mem);
  extern
 void g_free_sized (gpointer mem,
                            size_t size);
@@ -5508,7 +5539,7 @@ void g_aligned_free (gpointer mem);
 void g_aligned_free_sized (gpointer mem,
                                size_t alignment,
                                size_t size);
-# 223 "/usr/include/glib-2.0/glib/gmem.h"
+# 232 "/usr/include/glib-2.0/glib/gmem.h"
 
 static inline gpointer
 g_steal_pointer (gpointer pp)
@@ -5518,14 +5549,14 @@ g_steal_pointer (gpointer pp)
 
   ref = *ptr;
   *ptr = 
-# 231 "/usr/include/glib-2.0/glib/gmem.h" 3 4
+# 240 "/usr/include/glib-2.0/glib/gmem.h" 3 4
         ((void *)0)
-# 231 "/usr/include/glib-2.0/glib/gmem.h"
+# 240 "/usr/include/glib-2.0/glib/gmem.h"
             ;
 
   return ref;
 }
-# 389 "/usr/include/glib-2.0/glib/gmem.h"
+# 398 "/usr/include/glib-2.0/glib/gmem.h"
 struct _GMemVTable {
   gpointer (*malloc) (gsize n_bytes);
   gpointer (*realloc) (gpointer mem,
@@ -5983,7 +6014,7 @@ gboolean g_direct_equal (gconstpointer v1,
 # 30 "/usr/include/glib-2.0/glib/ghmac.h" 2
 
 
-# 42 "/usr/include/glib-2.0/glib/ghmac.h"
+
 typedef struct _GHmac GHmac;
 
  extern
@@ -6847,6 +6878,10 @@ guint g_timeout_add_seconds (guint interval,
                                      GSourceFunc function,
                                      gpointer data);
  extern
+guint g_timeout_add_seconds_once (guint interval,
+                                     GSourceOnceFunc function,
+                                     gpointer data);
+ extern
 guint g_child_watch_add_full (gint priority,
                                      GPid pid,
                                      GChildWatchFunc function,
@@ -6944,7 +6979,7 @@ typedef enum
   G_UNICODE_PARAGRAPH_SEPARATOR,
   G_UNICODE_SPACE_SEPARATOR
 } GUnicodeType;
-# 215 "/usr/include/glib-2.0/glib/gunicode.h"
+# 220 "/usr/include/glib-2.0/glib/gunicode.h"
 typedef enum
 {
   G_UNICODE_BREAK_MANDATORY,
@@ -6990,9 +7025,14 @@ typedef enum
   G_UNICODE_BREAK_REGIONAL_INDICATOR,
   G_UNICODE_BREAK_EMOJI_BASE,
   G_UNICODE_BREAK_EMOJI_MODIFIER,
-  G_UNICODE_BREAK_ZERO_WIDTH_JOINER
+  G_UNICODE_BREAK_ZERO_WIDTH_JOINER,
+  G_UNICODE_BREAK_AKSARA,
+  G_UNICODE_BREAK_AKSARA_PRE_BASE,
+  G_UNICODE_BREAK_AKSARA_START,
+  G_UNICODE_BREAK_VIRAMA_FINAL,
+  G_UNICODE_BREAK_VIRAMA
 } GUnicodeBreakType;
-# 453 "/usr/include/glib-2.0/glib/gunicode.h"
+# 463 "/usr/include/glib-2.0/glib/gunicode.h"
 typedef enum
 {
   G_UNICODE_SCRIPT_INVALID_CODE = -1,
@@ -7294,7 +7334,7 @@ gsize g_unichar_fully_decompose (gunichar ch,
                                  gboolean compat,
                                  gunichar *result,
                                  gsize result_len);
-# 770 "/usr/include/glib-2.0/glib/gunicode.h"
+# 780 "/usr/include/glib-2.0/glib/gunicode.h"
  extern
 void g_unicode_canonical_ordering (gunichar *string,
                                    gsize len);
@@ -7307,7 +7347,7 @@ gunichar *g_unicode_canonical_decomposition (gunichar ch,
 
 
  extern const gchar * const g_utf8_skip;
-# 801 "/usr/include/glib-2.0/glib/gunicode.h"
+# 811 "/usr/include/glib-2.0/glib/gunicode.h"
  extern
 gunichar g_utf8_get_char (const gchar *p) __attribute__((__pure__));
  extern
@@ -7342,6 +7382,10 @@ gchar *g_utf8_substring (const gchar *str,
 gchar *g_utf8_strncpy (gchar *dest,
                                    const gchar *src,
                                    gsize n);
+
+ extern
+gchar *g_utf8_truncate_middle (const gchar *string,
+                                   gsize truncate_length);
 
 
 
@@ -7420,7 +7464,7 @@ gchar *g_utf8_strdown (const gchar *str,
  extern
 gchar *g_utf8_casefold (const gchar *str,
                         gssize len) __attribute__ ((__malloc__));
-# 938 "/usr/include/glib-2.0/glib/gunicode.h"
+# 952 "/usr/include/glib-2.0/glib/gunicode.h"
 typedef enum {
   G_NORMALIZE_DEFAULT,
   G_NORMALIZE_NFD = G_NORMALIZE_DEFAULT,
@@ -7729,7 +7773,7 @@ gboolean g_ascii_string_to_unsigned (const gchar *str,
                                                     guint64 max,
                                                     guint64 *out_num,
                                                     GError **error);
-# 484 "/usr/include/glib-2.0/glib/gstrfuncs.h"
+# 490 "/usr/include/glib-2.0/glib/gstrfuncs.h"
 
 static inline gboolean
 g_set_str (char **str_pointer,
@@ -7767,6 +7811,8 @@ struct _GString
  extern
 GString* g_string_new (const gchar *init);
  extern
+GString* g_string_new_take (gchar *init);
+ extern
 GString* g_string_new_len (const gchar *init,
                                          gssize len);
  extern
@@ -7776,7 +7822,7 @@ gchar* (g_string_free) (GString *string,
                                          gboolean free_segment);
  extern
 gchar* g_string_free_and_steal (GString *string) __attribute__((warn_unused_result));
-# 77 "/usr/include/glib-2.0/glib/gstring.h"
+# 79 "/usr/include/glib-2.0/glib/gstring.h"
  extern
 GBytes* g_string_free_to_bytes (GString *string);
  extern
@@ -7881,16 +7927,16 @@ GString* g_string_append_uri_escaped (GString *string,
                                           const gchar *unescaped,
                                           const gchar *reserved_chars_allowed,
                                           gboolean allow_utf8);
-# 191 "/usr/include/glib-2.0/glib/gstring.h"
+# 193 "/usr/include/glib-2.0/glib/gstring.h"
 __attribute__ ((__always_inline__))
 static inline GString*
 g_string_append_c_inline (GString *gstring,
                           gchar c)
 {
   if ((gstring != 
-# 196 "/usr/include/glib-2.0/glib/gstring.h" 3 4
+# 198 "/usr/include/glib-2.0/glib/gstring.h" 3 4
      ((void *)0) 
-# 196 "/usr/include/glib-2.0/glib/gstring.h"
+# 198 "/usr/include/glib-2.0/glib/gstring.h"
      && gstring->len + 1 < gstring->allocated_len)
                                                           )
     {
@@ -7914,16 +7960,16 @@ g_string_append_len_inline (GString *gstring,
   gsize len_unsigned;
 
   if (gstring == 
-# 218 "/usr/include/glib-2.0/glib/gstring.h" 3 4
+# 220 "/usr/include/glib-2.0/glib/gstring.h" 3 4
     ((void *)0)
-# 218 "/usr/include/glib-2.0/glib/gstring.h"
+# 220 "/usr/include/glib-2.0/glib/gstring.h"
     )
     return g_string_append_len (gstring, val, len);
 
   if (val == 
-# 221 "/usr/include/glib-2.0/glib/gstring.h" 3 4
+# 223 "/usr/include/glib-2.0/glib/gstring.h" 3 4
     ((void *)0)
-# 221 "/usr/include/glib-2.0/glib/gstring.h"
+# 223 "/usr/include/glib-2.0/glib/gstring.h"
     )
     return (len != 0) ? g_string_append_len (gstring, val, len) : gstring;
 
@@ -7959,7 +8005,7 @@ g_string_truncate_inline (GString *gstring,
   gstring->str[gstring->len] = '\0';
   return gstring;
 }
-# 284 "/usr/include/glib-2.0/glib/gstring.h"
+# 286 "/usr/include/glib-2.0/glib/gstring.h"
 __attribute__((__deprecated__)) extern
 GString *g_string_down (GString *string);
 __attribute__((__deprecated__)) extern
@@ -8713,9 +8759,9 @@ gboolean g_markup_collect_attributes (const gchar *element_name,
 # 1 "/usr/include/glib-2.0/glib/gvarianttype.h" 1
 # 32 "/usr/include/glib-2.0/glib/gvarianttype.h"
 
-# 43 "/usr/include/glib-2.0/glib/gvarianttype.h"
+
 typedef struct _GVariantType GVariantType;
-# 297 "/usr/include/glib-2.0/glib/gvarianttype.h"
+# 288 "/usr/include/glib-2.0/glib/gvarianttype.h"
  extern
 gboolean g_variant_type_string_is_valid (const gchar *type_string);
  extern
@@ -8797,7 +8843,7 @@ GVariantType * g_variant_type_new_dict_entry (const GVariantType *key,
 
 
  extern
-const GVariantType * g_variant_type_checked_ (const gchar *);
+const GVariantType * g_variant_type_checked_ (const gchar *type_string);
  extern
 gsize g_variant_type_string_get_depth_ (const gchar *type_string);
 
@@ -9045,7 +9091,7 @@ GVariant * g_variant_new_from_data (const GVariantType *type,
 typedef struct _GVariantIter GVariantIter;
 struct _GVariantIter {
 
-  gsize x[16];
+  guintptr x[16];
 };
 
  extern
@@ -9079,9 +9125,9 @@ struct _GVariantBuilder {
     struct {
       gsize partial_magic;
       const GVariantType *type;
-      gsize y[14];
+      guintptr y[14];
     } s;
-    gsize x[16];
+    guintptr x[16];
   } u;
 };
 
@@ -9195,9 +9241,9 @@ struct _GVariantDict {
     struct {
       GVariant *asv;
       gsize partial_magic;
-      gsize y[14];
+      guintptr y[14];
     } s;
-    gsize x[16];
+    guintptr x[16];
   } u;
 };
 # 499 "/usr/include/glib-2.0/glib/gvariant.h"
@@ -9367,6 +9413,11 @@ gchar *g_log_writer_format_fields (GLogLevelFlags log_level,
                                                 gboolean use_color);
 
  extern
+GLogWriterOutput g_log_writer_syslog (GLogLevelFlags log_level,
+                                                const GLogField *fields,
+                                                gsize n_fields,
+                                                gpointer user_data);
+ extern
 GLogWriterOutput g_log_writer_journald (GLogLevelFlags log_level,
                                                 const GLogField *fields,
                                                 gsize n_fields,
@@ -9387,13 +9438,16 @@ void g_log_writer_default_set_use_stderr (gboolean use_stderr);
  extern
 gboolean g_log_writer_default_would_drop (GLogLevelFlags log_level,
                                                  const char *log_domain);
+ extern
+void g_log_writer_default_set_debug_domains (const gchar * const *domains);
+
 
 
  extern
 gboolean g_log_get_debug_enabled (void);
  extern
 void g_log_set_debug_enabled (gboolean enabled);
-# 278 "/usr/include/glib-2.0/glib/gmessages.h"
+# 286 "/usr/include/glib-2.0/glib/gmessages.h"
 void _g_log_fallback_handler (const gchar *log_domain,
        GLogLevelFlags log_level,
        const gchar *message,
@@ -9426,7 +9480,7 @@ void g_log_structured_standard (const gchar *log_domain,
                                 const gchar *func,
                                 const gchar *message_format,
                                 ...) __attribute__((__format__ (gnu_printf, 6, 7)));
-# 517 "/usr/include/glib-2.0/glib/gmessages.h"
+# 525 "/usr/include/glib-2.0/glib/gmessages.h"
 typedef void (*GPrintFunc) (const gchar *string);
  extern
 void g_print (const gchar *format,
@@ -9438,7 +9492,7 @@ void g_printerr (const gchar *format,
                                          ...) __attribute__((__format__ (gnu_printf, 1, 2)));
  extern
 GPrintFunc g_set_printerr_handler (GPrintFunc func);
-# 688 "/usr/include/glib-2.0/glib/gmessages.h"
+# 699 "/usr/include/glib-2.0/glib/gmessages.h"
 
 # 65 "/usr/include/glib-2.0/glib.h" 2
 
@@ -9631,13 +9685,13 @@ void g_option_group_set_translation_domain (GOptionGroup *group,
 
 
 typedef struct _GPathBuf GPathBuf;
-# 26 "/usr/include/glib-2.0/glib/gpathbuf.h"
+
 struct _GPathBuf
 {
 
   gpointer dummy[8];
 };
-# 50 "/usr/include/glib-2.0/glib/gpathbuf.h"
+# 43 "/usr/include/glib-2.0/glib/gpathbuf.h"
  extern
 GPathBuf * g_path_buf_new (void);
  extern
@@ -10011,7 +10065,7 @@ gboolean g_atomic_ref_count_dec (gatomicrefcount *arc);
  extern
 gboolean g_atomic_ref_count_compare (gatomicrefcount *arc,
                                                  gint val);
-# 123 "/usr/include/glib-2.0/glib/grefcount.h"
+# 177 "/usr/include/glib-2.0/glib/grefcount.h"
 
 # 77 "/usr/include/glib-2.0/glib.h" 2
 # 1 "/usr/include/glib-2.0/glib/grefstring.h" 1
@@ -10157,11 +10211,11 @@ typedef enum
   G_REGEX_MATCH_PARTIAL_HARD = 1 << 27,
   G_REGEX_MATCH_NOTEMPTY_ATSTART = 1 << 28
 } GRegexMatchFlags;
-# 424 "/usr/include/glib-2.0/glib/gregex.h"
+
 typedef struct _GRegex GRegex;
-# 433 "/usr/include/glib-2.0/glib/gregex.h"
+# 425 "/usr/include/glib-2.0/glib/gregex.h"
 typedef struct _GMatchInfo GMatchInfo;
-# 452 "/usr/include/glib-2.0/glib/gregex.h"
+# 444 "/usr/include/glib-2.0/glib/gregex.h"
 typedef gboolean (*GRegexEvalCallback) (const GMatchInfo *match_info,
        GString *result,
        gpointer user_data);
@@ -10777,12 +10831,7 @@ __attribute__((__deprecated__)) extern
 gint64 g_slice_get_config (GSliceConfig ckey);
 __attribute__((__deprecated__)) extern
 gint64* g_slice_get_config_state (GSliceConfig ckey, gint64 address, guint *n_values);
-
-
-
-
-
-
+# 117 "/usr/include/glib-2.0/glib/gslice.h"
 
 # 83 "/usr/include/glib-2.0/glib.h" 2
 
@@ -10975,7 +11024,7 @@ gchar* g_string_chunk_insert_const (GStringChunk *chunk,
 # 1 "/usr/include/glib-2.0/glib/gstrvbuilder.h" 1
 # 31 "/usr/include/glib-2.0/glib/gstrvbuilder.h"
 
-# 41 "/usr/include/glib-2.0/glib/gstrvbuilder.h"
+
 typedef struct _GStrvBuilder GStrvBuilder;
 
  extern
@@ -11000,6 +11049,10 @@ void g_strv_builder_add_many (GStrvBuilder *builder,
                               ...) __attribute__((__sentinel__));
 
  extern
+void g_strv_builder_take (GStrvBuilder *builder,
+                          char *value);
+
+ extern
 GStrv g_strv_builder_end (GStrvBuilder *builder);
 
 
@@ -11019,8 +11072,8 @@ GStrv g_strv_builder_end (GStrvBuilder *builder);
 
 # 1 "/usr/include/asm-generic/errno-base.h" 1 3 4
 # 6 "/usr/include/asm-generic/errno.h" 2 3 4
-# 1 "/usr/include/x86_64-linux-gnu/asm/errno.h" 2 3 4
-# 1 "/usr/include/linux/errno.h" 2 3 4
+# 2 "/usr/include/x86_64-linux-gnu/asm/errno.h" 2 3 4
+# 2 "/usr/include/linux/errno.h" 2 3 4
 # 27 "/usr/include/x86_64-linux-gnu/bits/errno.h" 2 3 4
 # 29 "/usr/include/errno.h" 2 3 4
 
@@ -11050,7 +11103,7 @@ typedef void (*GTestFunc) (void);
 typedef void (*GTestDataFunc) (gconstpointer user_data);
 typedef void (*GTestFixtureFunc) (gpointer fixture,
                                   gconstpointer user_data);
-# 241 "/usr/include/glib-2.0/glib/gtestutils.h"
+# 282 "/usr/include/glib-2.0/glib/gtestutils.h"
  extern
 int g_strcmp0 (const char *str1,
                                          const char *str2);
@@ -11070,7 +11123,7 @@ void g_test_maximized_result (double maximized_quantity,
 void g_test_init (int *argc,
                                          char ***argv,
                                          ...) __attribute__((__sentinel__));
-# 323 "/usr/include/glib-2.0/glib/gtestutils.h"
+# 364 "/usr/include/glib-2.0/glib/gtestutils.h"
  extern
 gboolean g_test_subprocess (void);
 
@@ -11117,7 +11170,9 @@ void g_test_skip_printf (const char *format,
 gboolean g_test_failed (void);
  extern
 void g_test_set_nonfatal_assertions (void);
-# 402 "/usr/include/glib-2.0/glib/gtestutils.h"
+ extern
+void g_test_disable_crash_reporting (void);
+# 445 "/usr/include/glib-2.0/glib/gtestutils.h"
  extern
 void g_test_message (const char *format,
                                          ...) __attribute__((__format__ (gnu_printf, 1, 2)));
@@ -11141,7 +11196,7 @@ void g_test_queue_free (gpointer gfree_pointer);
  extern
 void g_test_queue_destroy (GDestroyNotify destroy_func,
                                          gpointer destroy_data);
-# 449 "/usr/include/glib-2.0/glib/gtestutils.h"
+# 492 "/usr/include/glib-2.0/glib/gtestutils.h"
 typedef enum {
   G_TEST_TRAP_DEFAULT = 0,
   G_TEST_TRAP_SILENCE_STDOUT = 1 << 7,
@@ -11150,13 +11205,13 @@ typedef enum {
 } GTestTrapFlags __attribute__((__deprecated__("Use '" "GTestSubprocessFlags" "' instead")));
 
 
-# 456 "/usr/include/glib-2.0/glib/gtestutils.h"
+# 499 "/usr/include/glib-2.0/glib/gtestutils.h"
 #pragma GCC diagnostic push
-# 456 "/usr/include/glib-2.0/glib/gtestutils.h"
+# 499 "/usr/include/glib-2.0/glib/gtestutils.h"
 
-# 456 "/usr/include/glib-2.0/glib/gtestutils.h"
+# 499 "/usr/include/glib-2.0/glib/gtestutils.h"
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-# 456 "/usr/include/glib-2.0/glib/gtestutils.h"
+# 499 "/usr/include/glib-2.0/glib/gtestutils.h"
 
 
 __attribute__((__deprecated__("Use '" "g_test_trap_subprocess" "' instead"))) extern
@@ -11164,9 +11219,9 @@ gboolean g_test_trap_fork (guint64 usec_timeout,
                                          GTestTrapFlags test_trap_flags);
 
 
-# 462 "/usr/include/glib-2.0/glib/gtestutils.h"
+# 505 "/usr/include/glib-2.0/glib/gtestutils.h"
 #pragma GCC diagnostic pop
-# 462 "/usr/include/glib-2.0/glib/gtestutils.h"
+# 505 "/usr/include/glib-2.0/glib/gtestutils.h"
 
 
 typedef enum {
@@ -11180,12 +11235,17 @@ typedef enum {
 void g_test_trap_subprocess (const char *test_path,
                                          guint64 usec_timeout,
                                          GTestSubprocessFlags test_flags);
+ extern
+void g_test_trap_subprocess_with_envp (const char *test_path,
+                                           const char * const *envp,
+                                           guint64 usec_timeout,
+                                           GTestSubprocessFlags test_flags);
 
  extern
 gboolean g_test_trap_has_passed (void);
  extern
 gboolean g_test_trap_reached_timeout (void);
-# 489 "/usr/include/glib-2.0/glib/gtestutils.h"
+# 537 "/usr/include/glib-2.0/glib/gtestutils.h"
  extern
 gint32 g_test_rand_int (void);
  extern
@@ -11267,6 +11327,16 @@ void g_assertion_message_cmpstrv (const char *domain,
                                          const char * const *arg1,
                                          const char * const *arg2,
                                          gsize first_wrong_idx) ;
+ extern
+void g_assertion_message_cmpint (const char *domain,
+                                         const char *file,
+                                         int line,
+                                         const char *func,
+                                         const char *expr,
+                                         guint64 arg1,
+                                         const char *cmp,
+                                         guint64 arg2,
+                                         char numtype) ;
  extern
 void g_assertion_message_cmpnum (const char *domain,
                                          const char *file,
@@ -11353,7 +11423,7 @@ void g_test_log_buffer_push (GTestLogBuffer *tbuffer,
 GTestLogMsg* g_test_log_buffer_pop (GTestLogBuffer *tbuffer);
  extern
 void g_test_log_msg_free (GTestLogMsg *tmsg);
-# 670 "/usr/include/glib-2.0/glib/gtestutils.h"
+# 728 "/usr/include/glib-2.0/glib/gtestutils.h"
 typedef gboolean (*GTestLogFatalFunc) (const gchar *log_domain,
                                                  GLogLevelFlags log_level,
                                                  const gchar *message,
@@ -12112,7 +12182,7 @@ void g_cache_value_foreach (GCache *cache,
 
 typedef struct _GCompletion GCompletion;
 
-typedef gchar* (*GCompletionFunc) (gpointer);
+typedef gchar* (*GCompletionFunc) (gpointer item);
 
 
 
@@ -12174,7 +12244,7 @@ struct _GTuples
 {
   guint len;
 };
-# 69 "/usr/include/glib-2.0/glib/deprecated/grel.h"
+
 __attribute__((__deprecated__)) extern
 GRelation* g_relation_new (gint fields);
 __attribute__((__deprecated__)) extern
@@ -12317,7 +12387,7 @@ void g_thread_foreach (GFunc thread_func,
 # 22 "/usr/include/pthread.h" 3 4
 # 1 "/usr/include/sched.h" 1 3 4
 # 29 "/usr/include/sched.h" 3 4
-# 1 "/usr/lib/gcc/x86_64-linux-gnu/9/include/stddef.h" 1 3 4
+# 1 "/usr/lib/gcc/x86_64-linux-gnu/11/include/stddef.h" 1 3 4
 # 30 "/usr/include/sched.h" 2 3 4
 # 43 "/usr/include/sched.h" 3 4
 # 1 "/usr/include/x86_64-linux-gnu/bits/sched.h" 1 3 4
@@ -12391,8 +12461,9 @@ extern int sched_get_priority_max (int __algorithm) __attribute__ ((__nothrow__ 
 extern int sched_get_priority_min (int __algorithm) __attribute__ ((__nothrow__ , __leaf__));
 
 
+
 extern int sched_rr_get_interval (__pid_t __pid, struct timespec *__t) __attribute__ ((__nothrow__ , __leaf__));
-# 129 "/usr/include/sched.h" 3 4
+# 138 "/usr/include/sched.h" 3 4
 
 # 23 "/usr/include/pthread.h" 2 3 4
 
@@ -12411,6 +12482,22 @@ typedef long int __jmp_buf[8];
 # 28 "/usr/include/pthread.h" 2 3 4
 # 1 "/usr/include/x86_64-linux-gnu/bits/wordsize.h" 1 3 4
 # 29 "/usr/include/pthread.h" 2 3 4
+
+
+# 1 "/usr/include/x86_64-linux-gnu/bits/types/struct___jmp_buf_tag.h" 1 3 4
+# 26 "/usr/include/x86_64-linux-gnu/bits/types/struct___jmp_buf_tag.h" 3 4
+struct __jmp_buf_tag
+  {
+
+
+
+
+    __jmp_buf __jmpbuf;
+    int __mask_was_saved;
+    __sigset_t __saved_mask;
+  };
+# 32 "/usr/include/pthread.h" 2 3 4
+
 
 
 
@@ -12465,7 +12552,7 @@ enum
   PTHREAD_PRIO_INHERIT,
   PTHREAD_PRIO_PROTECT
 };
-# 100 "/usr/include/pthread.h" 3 4
+# 104 "/usr/include/pthread.h" 3 4
 enum
 {
   PTHREAD_RWLOCK_PREFER_READER_NP,
@@ -12473,7 +12560,7 @@ enum
   PTHREAD_RWLOCK_PREFER_WRITER_NONRECURSIVE_NP,
   PTHREAD_RWLOCK_DEFAULT_NP = PTHREAD_RWLOCK_PREFER_READER_NP
 };
-# 120 "/usr/include/pthread.h" 3 4
+# 124 "/usr/include/pthread.h" 3 4
 enum
 {
   PTHREAD_INHERIT_SCHED,
@@ -12501,7 +12588,7 @@ enum
   PTHREAD_PROCESS_SHARED
 
 };
-# 155 "/usr/include/pthread.h" 3 4
+# 159 "/usr/include/pthread.h" 3 4
 struct _pthread_cleanup_buffer
 {
   void (*__routine) (void *);
@@ -12525,7 +12612,7 @@ enum
   PTHREAD_CANCEL_ASYNCHRONOUS
 
 };
-# 193 "/usr/include/pthread.h" 3 4
+# 197 "/usr/include/pthread.h" 3 4
 
 
 
@@ -12549,7 +12636,7 @@ extern void pthread_exit (void *__retval) __attribute__ ((__noreturn__));
 
 
 extern int pthread_join (pthread_t __th, void **__thread_return);
-# 247 "/usr/include/pthread.h" 3 4
+# 269 "/usr/include/pthread.h" 3 4
 extern int pthread_detach (pthread_t __th) __attribute__ ((__nothrow__ , __leaf__));
 
 
@@ -12670,7 +12757,7 @@ extern int pthread_attr_getstack (const pthread_attr_t *__restrict __attr,
 
 extern int pthread_attr_setstack (pthread_attr_t *__attr, void *__stackaddr,
       size_t __stacksize) __attribute__ ((__nothrow__ , __leaf__)) __attribute__ ((__nonnull__ (1)));
-# 405 "/usr/include/pthread.h" 3 4
+# 441 "/usr/include/pthread.h" 3 4
 extern int pthread_setschedparam (pthread_t __target_thread, int __policy,
       const struct sched_param *__param)
      __attribute__ ((__nothrow__ , __leaf__)) __attribute__ ((__nonnull__ (3)));
@@ -12684,10 +12771,10 @@ extern int pthread_getschedparam (pthread_t __target_thread,
 
 extern int pthread_setschedprio (pthread_t __target_thread, int __prio)
      __attribute__ ((__nothrow__ , __leaf__));
-# 470 "/usr/include/pthread.h" 3 4
+# 509 "/usr/include/pthread.h" 3 4
 extern int pthread_once (pthread_once_t *__once_control,
     void (*__init_routine) (void)) __attribute__ ((__nonnull__ (1, 2)));
-# 482 "/usr/include/pthread.h" 3 4
+# 521 "/usr/include/pthread.h" 3 4
 extern int pthread_setcancelstate (int __state, int *__oldstate);
 
 
@@ -12705,16 +12792,18 @@ extern void pthread_testcancel (void);
 
 
 
+struct __cancel_jmp_buf_tag
+{
+  __jmp_buf __cancel_jmp_buf;
+  int __mask_was_saved;
+};
+
 typedef struct
 {
-  struct
-  {
-    __jmp_buf __cancel_jmp_buf;
-    int __mask_was_saved;
-  } __cancel_jmp_buf[1];
+  struct __cancel_jmp_buf_tag __cancel_jmp_buf[1];
   void *__pad[4];
 } __pthread_unwind_buf_t __attribute__ ((__aligned__));
-# 516 "/usr/include/pthread.h" 3 4
+# 557 "/usr/include/pthread.h" 3 4
 struct __pthread_cleanup_frame
 {
   void (*__cancel_routine) (void *);
@@ -12722,29 +12811,25 @@ struct __pthread_cleanup_frame
   int __do_it;
   int __cancel_type;
 };
-# 656 "/usr/include/pthread.h" 3 4
+# 697 "/usr/include/pthread.h" 3 4
 extern void __pthread_register_cancel (__pthread_unwind_buf_t *__buf)
      ;
-# 668 "/usr/include/pthread.h" 3 4
+# 709 "/usr/include/pthread.h" 3 4
 extern void __pthread_unregister_cancel (__pthread_unwind_buf_t *__buf)
   ;
-# 709 "/usr/include/pthread.h" 3 4
+# 750 "/usr/include/pthread.h" 3 4
 extern void __pthread_unwind_next (__pthread_unwind_buf_t *__buf)
      __attribute__ ((__noreturn__))
 
      __attribute__ ((__weak__))
 
      ;
+# 766 "/usr/include/pthread.h" 3 4
+extern int __sigsetjmp_cancel (struct __cancel_jmp_buf_tag __env[1], int __savemask) __asm__ ("" "__sigsetjmp") __attribute__ ((__nothrow__))
 
 
-
-struct __jmp_buf_tag;
-extern int __sigsetjmp (struct __jmp_buf_tag *__env, int __savemask) __attribute__ ((__nothrow__));
-
-
-
-
-
+                     __attribute__ ((__returns_twice__));
+# 781 "/usr/include/pthread.h" 3 4
 extern int pthread_mutex_init (pthread_mutex_t *__mutex,
           const pthread_mutexattr_t *__mutexattr)
      __attribute__ ((__nothrow__ , __leaf__)) __attribute__ ((__nonnull__ (1)));
@@ -12763,10 +12848,11 @@ extern int pthread_mutex_lock (pthread_mutex_t *__mutex)
 
 
 
+
 extern int pthread_mutex_timedlock (pthread_mutex_t *__restrict __mutex,
         const struct timespec *__restrict
         __abstime) __attribute__ ((__nothrow__)) __attribute__ ((__nonnull__ (1, 2)));
-# 756 "/usr/include/pthread.h" 3 4
+# 835 "/usr/include/pthread.h" 3 4
 extern int pthread_mutex_unlock (pthread_mutex_t *__mutex)
      __attribute__ ((__nothrow__)) __attribute__ ((__nonnull__ (1)));
 
@@ -12789,7 +12875,7 @@ extern int pthread_mutex_setprioceiling (pthread_mutex_t *__restrict __mutex,
 
 extern int pthread_mutex_consistent (pthread_mutex_t *__mutex)
      __attribute__ ((__nothrow__ , __leaf__)) __attribute__ ((__nonnull__ (1)));
-# 789 "/usr/include/pthread.h" 3 4
+# 874 "/usr/include/pthread.h" 3 4
 extern int pthread_mutexattr_init (pthread_mutexattr_t *__attr)
      __attribute__ ((__nothrow__ , __leaf__)) __attribute__ ((__nonnull__ (1)));
 
@@ -12849,17 +12935,11 @@ extern int pthread_mutexattr_setprioceiling (pthread_mutexattr_t *__attr,
 extern int pthread_mutexattr_getrobust (const pthread_mutexattr_t *__attr,
      int *__robustness)
      __attribute__ ((__nothrow__ , __leaf__)) __attribute__ ((__nonnull__ (1, 2)));
-
-
-
-
-
-
-
+# 946 "/usr/include/pthread.h" 3 4
 extern int pthread_mutexattr_setrobust (pthread_mutexattr_t *__attr,
      int __robustness)
      __attribute__ ((__nothrow__ , __leaf__)) __attribute__ ((__nonnull__ (1)));
-# 871 "/usr/include/pthread.h" 3 4
+# 967 "/usr/include/pthread.h" 3 4
 extern int pthread_rwlock_init (pthread_rwlock_t *__restrict __rwlock,
     const pthread_rwlockattr_t *__restrict
     __attr) __attribute__ ((__nothrow__ , __leaf__)) __attribute__ ((__nonnull__ (1)));
@@ -12878,10 +12958,11 @@ extern int pthread_rwlock_tryrdlock (pthread_rwlock_t *__rwlock)
 
 
 
+
 extern int pthread_rwlock_timedrdlock (pthread_rwlock_t *__restrict __rwlock,
            const struct timespec *__restrict
            __abstime) __attribute__ ((__nothrow__)) __attribute__ ((__nonnull__ (1, 2)));
-# 902 "/usr/include/pthread.h" 3 4
+# 1023 "/usr/include/pthread.h" 3 4
 extern int pthread_rwlock_wrlock (pthread_rwlock_t *__rwlock)
      __attribute__ ((__nothrow__)) __attribute__ ((__nonnull__ (1)));
 
@@ -12891,10 +12972,11 @@ extern int pthread_rwlock_trywrlock (pthread_rwlock_t *__rwlock)
 
 
 
+
 extern int pthread_rwlock_timedwrlock (pthread_rwlock_t *__restrict __rwlock,
            const struct timespec *__restrict
            __abstime) __attribute__ ((__nothrow__)) __attribute__ ((__nonnull__ (1, 2)));
-# 924 "/usr/include/pthread.h" 3 4
+# 1071 "/usr/include/pthread.h" 3 4
 extern int pthread_rwlock_unlock (pthread_rwlock_t *__rwlock)
      __attribute__ ((__nothrow__)) __attribute__ ((__nonnull__ (1)));
 
@@ -12960,12 +13042,12 @@ extern int pthread_cond_broadcast (pthread_cond_t *__cond)
 extern int pthread_cond_wait (pthread_cond_t *__restrict __cond,
          pthread_mutex_t *__restrict __mutex)
      __attribute__ ((__nonnull__ (1, 2)));
-# 997 "/usr/include/pthread.h" 3 4
+# 1145 "/usr/include/pthread.h" 3 4
 extern int pthread_cond_timedwait (pthread_cond_t *__restrict __cond,
        pthread_mutex_t *__restrict __mutex,
        const struct timespec *__restrict __abstime)
      __attribute__ ((__nonnull__ (1, 2, 3)));
-# 1020 "/usr/include/pthread.h" 3 4
+# 1194 "/usr/include/pthread.h" 3 4
 extern int pthread_condattr_init (pthread_condattr_t *__attr)
      __attribute__ ((__nothrow__ , __leaf__)) __attribute__ ((__nonnull__ (1)));
 
@@ -12994,7 +13076,7 @@ extern int pthread_condattr_getclock (const pthread_condattr_t *
 extern int pthread_condattr_setclock (pthread_condattr_t *__attr,
           __clockid_t __clock_id)
      __attribute__ ((__nothrow__ , __leaf__)) __attribute__ ((__nonnull__ (1)));
-# 1056 "/usr/include/pthread.h" 3 4
+# 1230 "/usr/include/pthread.h" 3 4
 extern int pthread_spin_init (pthread_spinlock_t *__lock, int __pshared)
      __attribute__ ((__nothrow__ , __leaf__)) __attribute__ ((__nonnull__ (1)));
 
@@ -13051,7 +13133,7 @@ extern int pthread_barrierattr_getpshared (const pthread_barrierattr_t *
 extern int pthread_barrierattr_setpshared (pthread_barrierattr_t *__attr,
         int __pshared)
      __attribute__ ((__nothrow__ , __leaf__)) __attribute__ ((__nonnull__ (1)));
-# 1123 "/usr/include/pthread.h" 3 4
+# 1297 "/usr/include/pthread.h" 3 4
 extern int pthread_key_create (pthread_key_t *__key,
           void (*__destr_function) (void *))
      __attribute__ ((__nothrow__ , __leaf__)) __attribute__ ((__nonnull__ (1)));
@@ -13064,7 +13146,8 @@ extern void *pthread_getspecific (pthread_key_t __key) __attribute__ ((__nothrow
 
 
 extern int pthread_setspecific (pthread_key_t __key,
-    const void *__pointer) __attribute__ ((__nothrow__ , __leaf__)) ;
+    const void *__pointer)
+  __attribute__ ((__nothrow__ , __leaf__)) __attribute__ ((__access__ (__none__, 2)));
 
 
 
@@ -13072,11 +13155,11 @@ extern int pthread_setspecific (pthread_key_t __key,
 extern int pthread_getcpuclockid (pthread_t __thread_id,
       __clockid_t *__clock_id)
      __attribute__ ((__nothrow__ , __leaf__)) __attribute__ ((__nonnull__ (2)));
-# 1157 "/usr/include/pthread.h" 3 4
+# 1332 "/usr/include/pthread.h" 3 4
 extern int pthread_atfork (void (*__prepare) (void),
       void (*__parent) (void),
       void (*__child) (void)) __attribute__ ((__nothrow__ , __leaf__));
-# 1171 "/usr/include/pthread.h" 3 4
+# 1346 "/usr/include/pthread.h" 3 4
 
 # 127 "/usr/include/glib-2.0/glib/deprecated/gthread.h" 2
 # 135 "/usr/include/glib-2.0/glib/deprecated/gthread.h"
@@ -13087,10 +13170,12 @@ typedef struct
   GMutex *mutex;
 
 
+
   pthread_mutex_t unused;
 
+
 } GStaticMutex __attribute__((__deprecated__("Use '" "GMutex" "' instead")));
-# 151 "/usr/include/glib-2.0/glib/deprecated/gthread.h"
+# 153 "/usr/include/glib-2.0/glib/deprecated/gthread.h"
 __attribute__((__deprecated__("Use '" "g_mutex_init" "' instead"))) extern
 void g_static_mutex_init (GStaticMutex *mutex);
 __attribute__((__deprecated__("Use '" "g_mutex_clear" "' instead"))) extern
@@ -13106,6 +13191,7 @@ struct _GStaticRecMutex
   guint depth;
 
 
+
   union {
 
 
@@ -13114,6 +13200,7 @@ struct _GStaticRecMutex
 
     gdouble dummy;
   } unused;
+
 } __attribute__((__deprecated__("Use '" "GRecMutex" "' instead")));
 
 
@@ -13229,19 +13316,19 @@ void g_cond_free (GCond *cond);
 __attribute__((__deprecated__)) extern
 gboolean g_cond_timed_wait (GCond *cond,
                                          GMutex *mutex,
-                                         GTimeVal *timeval);
+                                         GTimeVal *abs_time);
 
 
-# 291 "/usr/include/glib-2.0/glib/deprecated/gthread.h"
+# 295 "/usr/include/glib-2.0/glib/deprecated/gthread.h"
 #pragma GCC diagnostic pop
-# 291 "/usr/include/glib-2.0/glib/deprecated/gthread.h"
+# 295 "/usr/include/glib-2.0/glib/deprecated/gthread.h"
 
 
 
 # 116 "/usr/include/glib-2.0/glib.h" 2
 
 # 1 "/usr/include/glib-2.0/glib/glib-autocleanups.h" 1
-# 26 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 28 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 static inline void
 g_autoptr_cleanup_generic_gfree (void *p)
 {
@@ -13259,794 +13346,794 @@ g_autoptr_cleanup_gstring_free (GString *string)
 
 
 
-# 42 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 44 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic push
-# 42 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 44 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 
-# 42 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 44 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-# 42 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 44 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 
 
 
 
 
 typedef GAsyncQueue *GAsyncQueue_autoptr; typedef GList *GAsyncQueue_listautoptr; typedef GSList *GAsyncQueue_slistautoptr; typedef GQueue *GAsyncQueue_queueautoptr;
-# 47 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 49 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic push
-# 47 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 49 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 
-# 47 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 49 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-# 47 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 49 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
  static __attribute__ ((__unused__)) inline void glib_autoptr_clear_GAsyncQueue (GAsyncQueue *_ptr) { if (_ptr) (g_async_queue_unref) ((GAsyncQueue *) _ptr); } static __attribute__ ((__unused__)) inline void glib_autoptr_cleanup_GAsyncQueue (GAsyncQueue **_ptr) { glib_autoptr_clear_GAsyncQueue (*_ptr); } static __attribute__ ((__unused__)) inline void glib_listautoptr_cleanup_GAsyncQueue (GList **_l) { g_list_free_full (*_l, (GDestroyNotify) (void(*)(void)) g_async_queue_unref); } static __attribute__ ((__unused__)) inline void glib_slistautoptr_cleanup_GAsyncQueue (GSList **_l) { g_slist_free_full (*_l, (GDestroyNotify) (void(*)(void)) g_async_queue_unref); } static __attribute__ ((__unused__)) inline void glib_queueautoptr_cleanup_GAsyncQueue (GQueue **_q) { if (*_q) g_queue_free_full (*_q, (GDestroyNotify) (void(*)(void)) g_async_queue_unref); }
-# 47 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 49 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic pop
-# 47 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 49 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 
 typedef GBookmarkFile *GBookmarkFile_autoptr; typedef GList *GBookmarkFile_listautoptr; typedef GSList *GBookmarkFile_slistautoptr; typedef GQueue *GBookmarkFile_queueautoptr;
-# 48 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 50 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic push
-# 48 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 50 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 
-# 48 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 50 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-# 48 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 50 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
  static __attribute__ ((__unused__)) inline void glib_autoptr_clear_GBookmarkFile (GBookmarkFile *_ptr) { if (_ptr) (g_bookmark_file_free) ((GBookmarkFile *) _ptr); } static __attribute__ ((__unused__)) inline void glib_autoptr_cleanup_GBookmarkFile (GBookmarkFile **_ptr) { glib_autoptr_clear_GBookmarkFile (*_ptr); } static __attribute__ ((__unused__)) inline void glib_listautoptr_cleanup_GBookmarkFile (GList **_l) { g_list_free_full (*_l, (GDestroyNotify) (void(*)(void)) g_bookmark_file_free); } static __attribute__ ((__unused__)) inline void glib_slistautoptr_cleanup_GBookmarkFile (GSList **_l) { g_slist_free_full (*_l, (GDestroyNotify) (void(*)(void)) g_bookmark_file_free); } static __attribute__ ((__unused__)) inline void glib_queueautoptr_cleanup_GBookmarkFile (GQueue **_q) { if (*_q) g_queue_free_full (*_q, (GDestroyNotify) (void(*)(void)) g_bookmark_file_free); }
-# 48 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 50 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic pop
-# 48 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 50 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 
 typedef GBytes *GBytes_autoptr; typedef GList *GBytes_listautoptr; typedef GSList *GBytes_slistautoptr; typedef GQueue *GBytes_queueautoptr;
-# 49 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 51 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic push
-# 49 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 51 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 
-# 49 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 51 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-# 49 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 51 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
  static __attribute__ ((__unused__)) inline void glib_autoptr_clear_GBytes (GBytes *_ptr) { if (_ptr) (g_bytes_unref) ((GBytes *) _ptr); } static __attribute__ ((__unused__)) inline void glib_autoptr_cleanup_GBytes (GBytes **_ptr) { glib_autoptr_clear_GBytes (*_ptr); } static __attribute__ ((__unused__)) inline void glib_listautoptr_cleanup_GBytes (GList **_l) { g_list_free_full (*_l, (GDestroyNotify) (void(*)(void)) g_bytes_unref); } static __attribute__ ((__unused__)) inline void glib_slistautoptr_cleanup_GBytes (GSList **_l) { g_slist_free_full (*_l, (GDestroyNotify) (void(*)(void)) g_bytes_unref); } static __attribute__ ((__unused__)) inline void glib_queueautoptr_cleanup_GBytes (GQueue **_q) { if (*_q) g_queue_free_full (*_q, (GDestroyNotify) (void(*)(void)) g_bytes_unref); }
-# 49 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 51 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic pop
-# 49 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 51 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 
 typedef GChecksum *GChecksum_autoptr; typedef GList *GChecksum_listautoptr; typedef GSList *GChecksum_slistautoptr; typedef GQueue *GChecksum_queueautoptr;
-# 50 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 52 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic push
-# 50 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 52 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 
-# 50 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 52 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-# 50 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 52 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
  static __attribute__ ((__unused__)) inline void glib_autoptr_clear_GChecksum (GChecksum *_ptr) { if (_ptr) (g_checksum_free) ((GChecksum *) _ptr); } static __attribute__ ((__unused__)) inline void glib_autoptr_cleanup_GChecksum (GChecksum **_ptr) { glib_autoptr_clear_GChecksum (*_ptr); } static __attribute__ ((__unused__)) inline void glib_listautoptr_cleanup_GChecksum (GList **_l) { g_list_free_full (*_l, (GDestroyNotify) (void(*)(void)) g_checksum_free); } static __attribute__ ((__unused__)) inline void glib_slistautoptr_cleanup_GChecksum (GSList **_l) { g_slist_free_full (*_l, (GDestroyNotify) (void(*)(void)) g_checksum_free); } static __attribute__ ((__unused__)) inline void glib_queueautoptr_cleanup_GChecksum (GQueue **_q) { if (*_q) g_queue_free_full (*_q, (GDestroyNotify) (void(*)(void)) g_checksum_free); }
-# 50 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 52 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic pop
-# 50 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 52 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 
 typedef GDateTime *GDateTime_autoptr; typedef GList *GDateTime_listautoptr; typedef GSList *GDateTime_slistautoptr; typedef GQueue *GDateTime_queueautoptr;
-# 51 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 53 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic push
-# 51 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 53 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 
-# 51 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 53 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-# 51 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 53 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
  static __attribute__ ((__unused__)) inline void glib_autoptr_clear_GDateTime (GDateTime *_ptr) { if (_ptr) (g_date_time_unref) ((GDateTime *) _ptr); } static __attribute__ ((__unused__)) inline void glib_autoptr_cleanup_GDateTime (GDateTime **_ptr) { glib_autoptr_clear_GDateTime (*_ptr); } static __attribute__ ((__unused__)) inline void glib_listautoptr_cleanup_GDateTime (GList **_l) { g_list_free_full (*_l, (GDestroyNotify) (void(*)(void)) g_date_time_unref); } static __attribute__ ((__unused__)) inline void glib_slistautoptr_cleanup_GDateTime (GSList **_l) { g_slist_free_full (*_l, (GDestroyNotify) (void(*)(void)) g_date_time_unref); } static __attribute__ ((__unused__)) inline void glib_queueautoptr_cleanup_GDateTime (GQueue **_q) { if (*_q) g_queue_free_full (*_q, (GDestroyNotify) (void(*)(void)) g_date_time_unref); }
-# 51 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 53 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic pop
-# 51 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 53 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 
 typedef GDate *GDate_autoptr; typedef GList *GDate_listautoptr; typedef GSList *GDate_slistautoptr; typedef GQueue *GDate_queueautoptr;
-# 52 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 54 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic push
-# 52 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 54 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 
-# 52 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 54 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-# 52 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 54 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
  static __attribute__ ((__unused__)) inline void glib_autoptr_clear_GDate (GDate *_ptr) { if (_ptr) (g_date_free) ((GDate *) _ptr); } static __attribute__ ((__unused__)) inline void glib_autoptr_cleanup_GDate (GDate **_ptr) { glib_autoptr_clear_GDate (*_ptr); } static __attribute__ ((__unused__)) inline void glib_listautoptr_cleanup_GDate (GList **_l) { g_list_free_full (*_l, (GDestroyNotify) (void(*)(void)) g_date_free); } static __attribute__ ((__unused__)) inline void glib_slistautoptr_cleanup_GDate (GSList **_l) { g_slist_free_full (*_l, (GDestroyNotify) (void(*)(void)) g_date_free); } static __attribute__ ((__unused__)) inline void glib_queueautoptr_cleanup_GDate (GQueue **_q) { if (*_q) g_queue_free_full (*_q, (GDestroyNotify) (void(*)(void)) g_date_free); }
-# 52 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 54 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic pop
-# 52 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 54 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 
 typedef GDir *GDir_autoptr; typedef GList *GDir_listautoptr; typedef GSList *GDir_slistautoptr; typedef GQueue *GDir_queueautoptr;
-# 53 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 55 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic push
-# 53 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 55 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 
-# 53 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 55 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-# 53 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 55 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
  static __attribute__ ((__unused__)) inline void glib_autoptr_clear_GDir (GDir *_ptr) { if (_ptr) (g_dir_close) ((GDir *) _ptr); } static __attribute__ ((__unused__)) inline void glib_autoptr_cleanup_GDir (GDir **_ptr) { glib_autoptr_clear_GDir (*_ptr); } static __attribute__ ((__unused__)) inline void glib_listautoptr_cleanup_GDir (GList **_l) { g_list_free_full (*_l, (GDestroyNotify) (void(*)(void)) g_dir_close); } static __attribute__ ((__unused__)) inline void glib_slistautoptr_cleanup_GDir (GSList **_l) { g_slist_free_full (*_l, (GDestroyNotify) (void(*)(void)) g_dir_close); } static __attribute__ ((__unused__)) inline void glib_queueautoptr_cleanup_GDir (GQueue **_q) { if (*_q) g_queue_free_full (*_q, (GDestroyNotify) (void(*)(void)) g_dir_close); }
-# 53 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 55 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic pop
-# 53 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 55 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 
 typedef GError *GError_autoptr; typedef GList *GError_listautoptr; typedef GSList *GError_slistautoptr; typedef GQueue *GError_queueautoptr;
-# 54 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 56 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic push
-# 54 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 56 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 
-# 54 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 56 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-# 54 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 56 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
  static __attribute__ ((__unused__)) inline void glib_autoptr_clear_GError (GError *_ptr) { if (_ptr) (g_error_free) ((GError *) _ptr); } static __attribute__ ((__unused__)) inline void glib_autoptr_cleanup_GError (GError **_ptr) { glib_autoptr_clear_GError (*_ptr); } static __attribute__ ((__unused__)) inline void glib_listautoptr_cleanup_GError (GList **_l) { g_list_free_full (*_l, (GDestroyNotify) (void(*)(void)) g_error_free); } static __attribute__ ((__unused__)) inline void glib_slistautoptr_cleanup_GError (GSList **_l) { g_slist_free_full (*_l, (GDestroyNotify) (void(*)(void)) g_error_free); } static __attribute__ ((__unused__)) inline void glib_queueautoptr_cleanup_GError (GQueue **_q) { if (*_q) g_queue_free_full (*_q, (GDestroyNotify) (void(*)(void)) g_error_free); }
-# 54 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 56 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic pop
-# 54 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 56 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 
 typedef GHashTable *GHashTable_autoptr; typedef GList *GHashTable_listautoptr; typedef GSList *GHashTable_slistautoptr; typedef GQueue *GHashTable_queueautoptr;
-# 55 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 57 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic push
-# 55 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 57 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 
-# 55 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 57 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-# 55 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 57 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
  static __attribute__ ((__unused__)) inline void glib_autoptr_clear_GHashTable (GHashTable *_ptr) { if (_ptr) (g_hash_table_unref) ((GHashTable *) _ptr); } static __attribute__ ((__unused__)) inline void glib_autoptr_cleanup_GHashTable (GHashTable **_ptr) { glib_autoptr_clear_GHashTable (*_ptr); } static __attribute__ ((__unused__)) inline void glib_listautoptr_cleanup_GHashTable (GList **_l) { g_list_free_full (*_l, (GDestroyNotify) (void(*)(void)) g_hash_table_unref); } static __attribute__ ((__unused__)) inline void glib_slistautoptr_cleanup_GHashTable (GSList **_l) { g_slist_free_full (*_l, (GDestroyNotify) (void(*)(void)) g_hash_table_unref); } static __attribute__ ((__unused__)) inline void glib_queueautoptr_cleanup_GHashTable (GQueue **_q) { if (*_q) g_queue_free_full (*_q, (GDestroyNotify) (void(*)(void)) g_hash_table_unref); }
-# 55 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 57 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic pop
-# 55 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 57 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 
 typedef GHmac *GHmac_autoptr; typedef GList *GHmac_listautoptr; typedef GSList *GHmac_slistautoptr; typedef GQueue *GHmac_queueautoptr;
-# 56 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 58 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic push
-# 56 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 58 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 
-# 56 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 58 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-# 56 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 58 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
  static __attribute__ ((__unused__)) inline void glib_autoptr_clear_GHmac (GHmac *_ptr) { if (_ptr) (g_hmac_unref) ((GHmac *) _ptr); } static __attribute__ ((__unused__)) inline void glib_autoptr_cleanup_GHmac (GHmac **_ptr) { glib_autoptr_clear_GHmac (*_ptr); } static __attribute__ ((__unused__)) inline void glib_listautoptr_cleanup_GHmac (GList **_l) { g_list_free_full (*_l, (GDestroyNotify) (void(*)(void)) g_hmac_unref); } static __attribute__ ((__unused__)) inline void glib_slistautoptr_cleanup_GHmac (GSList **_l) { g_slist_free_full (*_l, (GDestroyNotify) (void(*)(void)) g_hmac_unref); } static __attribute__ ((__unused__)) inline void glib_queueautoptr_cleanup_GHmac (GQueue **_q) { if (*_q) g_queue_free_full (*_q, (GDestroyNotify) (void(*)(void)) g_hmac_unref); }
-# 56 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 58 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic pop
-# 56 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 58 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 
 typedef GIOChannel *GIOChannel_autoptr; typedef GList *GIOChannel_listautoptr; typedef GSList *GIOChannel_slistautoptr; typedef GQueue *GIOChannel_queueautoptr;
-# 57 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 59 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic push
-# 57 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 59 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 
-# 57 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 59 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-# 57 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 59 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
  static __attribute__ ((__unused__)) inline void glib_autoptr_clear_GIOChannel (GIOChannel *_ptr) { if (_ptr) (g_io_channel_unref) ((GIOChannel *) _ptr); } static __attribute__ ((__unused__)) inline void glib_autoptr_cleanup_GIOChannel (GIOChannel **_ptr) { glib_autoptr_clear_GIOChannel (*_ptr); } static __attribute__ ((__unused__)) inline void glib_listautoptr_cleanup_GIOChannel (GList **_l) { g_list_free_full (*_l, (GDestroyNotify) (void(*)(void)) g_io_channel_unref); } static __attribute__ ((__unused__)) inline void glib_slistautoptr_cleanup_GIOChannel (GSList **_l) { g_slist_free_full (*_l, (GDestroyNotify) (void(*)(void)) g_io_channel_unref); } static __attribute__ ((__unused__)) inline void glib_queueautoptr_cleanup_GIOChannel (GQueue **_q) { if (*_q) g_queue_free_full (*_q, (GDestroyNotify) (void(*)(void)) g_io_channel_unref); }
-# 57 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 59 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic pop
-# 57 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 59 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 
 typedef GKeyFile *GKeyFile_autoptr; typedef GList *GKeyFile_listautoptr; typedef GSList *GKeyFile_slistautoptr; typedef GQueue *GKeyFile_queueautoptr;
-# 58 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 60 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic push
-# 58 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 60 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 
-# 58 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 60 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-# 58 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 60 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
  static __attribute__ ((__unused__)) inline void glib_autoptr_clear_GKeyFile (GKeyFile *_ptr) { if (_ptr) (g_key_file_unref) ((GKeyFile *) _ptr); } static __attribute__ ((__unused__)) inline void glib_autoptr_cleanup_GKeyFile (GKeyFile **_ptr) { glib_autoptr_clear_GKeyFile (*_ptr); } static __attribute__ ((__unused__)) inline void glib_listautoptr_cleanup_GKeyFile (GList **_l) { g_list_free_full (*_l, (GDestroyNotify) (void(*)(void)) g_key_file_unref); } static __attribute__ ((__unused__)) inline void glib_slistautoptr_cleanup_GKeyFile (GSList **_l) { g_slist_free_full (*_l, (GDestroyNotify) (void(*)(void)) g_key_file_unref); } static __attribute__ ((__unused__)) inline void glib_queueautoptr_cleanup_GKeyFile (GQueue **_q) { if (*_q) g_queue_free_full (*_q, (GDestroyNotify) (void(*)(void)) g_key_file_unref); }
-# 58 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 60 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic pop
-# 58 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 60 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 
 typedef GList *GList_autoptr; typedef GList *GList_listautoptr; typedef GSList *GList_slistautoptr; typedef GQueue *GList_queueautoptr;
-# 59 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 61 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic push
-# 59 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 61 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 
-# 59 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 61 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-# 59 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 61 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
  static __attribute__ ((__unused__)) inline void glib_autoptr_clear_GList (GList *_ptr) { if (_ptr) (g_list_free) ((GList *) _ptr); } static __attribute__ ((__unused__)) inline void glib_autoptr_cleanup_GList (GList **_ptr) { glib_autoptr_clear_GList (*_ptr); } static __attribute__ ((__unused__)) inline void glib_listautoptr_cleanup_GList (GList **_l) { g_list_free_full (*_l, (GDestroyNotify) (void(*)(void)) g_list_free); } static __attribute__ ((__unused__)) inline void glib_slistautoptr_cleanup_GList (GSList **_l) { g_slist_free_full (*_l, (GDestroyNotify) (void(*)(void)) g_list_free); } static __attribute__ ((__unused__)) inline void glib_queueautoptr_cleanup_GList (GQueue **_q) { if (*_q) g_queue_free_full (*_q, (GDestroyNotify) (void(*)(void)) g_list_free); }
-# 59 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 61 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic pop
-# 59 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 61 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 
 typedef GArray *GArray_autoptr; typedef GList *GArray_listautoptr; typedef GSList *GArray_slistautoptr; typedef GQueue *GArray_queueautoptr;
-# 60 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 62 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic push
-# 60 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 62 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 
-# 60 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 62 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-# 60 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 62 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
  static __attribute__ ((__unused__)) inline void glib_autoptr_clear_GArray (GArray *_ptr) { if (_ptr) (g_array_unref) ((GArray *) _ptr); } static __attribute__ ((__unused__)) inline void glib_autoptr_cleanup_GArray (GArray **_ptr) { glib_autoptr_clear_GArray (*_ptr); } static __attribute__ ((__unused__)) inline void glib_listautoptr_cleanup_GArray (GList **_l) { g_list_free_full (*_l, (GDestroyNotify) (void(*)(void)) g_array_unref); } static __attribute__ ((__unused__)) inline void glib_slistautoptr_cleanup_GArray (GSList **_l) { g_slist_free_full (*_l, (GDestroyNotify) (void(*)(void)) g_array_unref); } static __attribute__ ((__unused__)) inline void glib_queueautoptr_cleanup_GArray (GQueue **_q) { if (*_q) g_queue_free_full (*_q, (GDestroyNotify) (void(*)(void)) g_array_unref); }
-# 60 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 62 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic pop
-# 60 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 62 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 
 typedef GPtrArray *GPtrArray_autoptr; typedef GList *GPtrArray_listautoptr; typedef GSList *GPtrArray_slistautoptr; typedef GQueue *GPtrArray_queueautoptr;
-# 61 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 63 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic push
-# 61 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 63 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 
-# 61 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 63 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-# 61 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 63 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
  static __attribute__ ((__unused__)) inline void glib_autoptr_clear_GPtrArray (GPtrArray *_ptr) { if (_ptr) (g_ptr_array_unref) ((GPtrArray *) _ptr); } static __attribute__ ((__unused__)) inline void glib_autoptr_cleanup_GPtrArray (GPtrArray **_ptr) { glib_autoptr_clear_GPtrArray (*_ptr); } static __attribute__ ((__unused__)) inline void glib_listautoptr_cleanup_GPtrArray (GList **_l) { g_list_free_full (*_l, (GDestroyNotify) (void(*)(void)) g_ptr_array_unref); } static __attribute__ ((__unused__)) inline void glib_slistautoptr_cleanup_GPtrArray (GSList **_l) { g_slist_free_full (*_l, (GDestroyNotify) (void(*)(void)) g_ptr_array_unref); } static __attribute__ ((__unused__)) inline void glib_queueautoptr_cleanup_GPtrArray (GQueue **_q) { if (*_q) g_queue_free_full (*_q, (GDestroyNotify) (void(*)(void)) g_ptr_array_unref); }
-# 61 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 63 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic pop
-# 61 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 63 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 
 typedef GByteArray *GByteArray_autoptr; typedef GList *GByteArray_listautoptr; typedef GSList *GByteArray_slistautoptr; typedef GQueue *GByteArray_queueautoptr;
-# 62 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 64 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic push
-# 62 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 64 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 
-# 62 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 64 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-# 62 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 64 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
  static __attribute__ ((__unused__)) inline void glib_autoptr_clear_GByteArray (GByteArray *_ptr) { if (_ptr) (g_byte_array_unref) ((GByteArray *) _ptr); } static __attribute__ ((__unused__)) inline void glib_autoptr_cleanup_GByteArray (GByteArray **_ptr) { glib_autoptr_clear_GByteArray (*_ptr); } static __attribute__ ((__unused__)) inline void glib_listautoptr_cleanup_GByteArray (GList **_l) { g_list_free_full (*_l, (GDestroyNotify) (void(*)(void)) g_byte_array_unref); } static __attribute__ ((__unused__)) inline void glib_slistautoptr_cleanup_GByteArray (GSList **_l) { g_slist_free_full (*_l, (GDestroyNotify) (void(*)(void)) g_byte_array_unref); } static __attribute__ ((__unused__)) inline void glib_queueautoptr_cleanup_GByteArray (GQueue **_q) { if (*_q) g_queue_free_full (*_q, (GDestroyNotify) (void(*)(void)) g_byte_array_unref); }
-# 62 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 64 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic pop
-# 62 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 64 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 
 typedef GMainContext *GMainContext_autoptr; typedef GList *GMainContext_listautoptr; typedef GSList *GMainContext_slistautoptr; typedef GQueue *GMainContext_queueautoptr;
-# 63 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 65 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic push
-# 63 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 65 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 
-# 63 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 65 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-# 63 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 65 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
  static __attribute__ ((__unused__)) inline void glib_autoptr_clear_GMainContext (GMainContext *_ptr) { if (_ptr) (g_main_context_unref) ((GMainContext *) _ptr); } static __attribute__ ((__unused__)) inline void glib_autoptr_cleanup_GMainContext (GMainContext **_ptr) { glib_autoptr_clear_GMainContext (*_ptr); } static __attribute__ ((__unused__)) inline void glib_listautoptr_cleanup_GMainContext (GList **_l) { g_list_free_full (*_l, (GDestroyNotify) (void(*)(void)) g_main_context_unref); } static __attribute__ ((__unused__)) inline void glib_slistautoptr_cleanup_GMainContext (GSList **_l) { g_slist_free_full (*_l, (GDestroyNotify) (void(*)(void)) g_main_context_unref); } static __attribute__ ((__unused__)) inline void glib_queueautoptr_cleanup_GMainContext (GQueue **_q) { if (*_q) g_queue_free_full (*_q, (GDestroyNotify) (void(*)(void)) g_main_context_unref); }
-# 63 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 65 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic pop
-# 63 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 65 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 
 typedef GMainContextPusher *GMainContextPusher_autoptr; typedef GList *GMainContextPusher_listautoptr; typedef GSList *GMainContextPusher_slistautoptr; typedef GQueue *GMainContextPusher_queueautoptr;
-# 64 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 66 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic push
-# 64 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 66 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 
-# 64 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 66 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-# 64 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 66 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
  static __attribute__ ((__unused__)) inline void glib_autoptr_clear_GMainContextPusher (GMainContextPusher *_ptr) { if (_ptr) (g_main_context_pusher_free) ((GMainContextPusher *) _ptr); } static __attribute__ ((__unused__)) inline void glib_autoptr_cleanup_GMainContextPusher (GMainContextPusher **_ptr) { glib_autoptr_clear_GMainContextPusher (*_ptr); } static __attribute__ ((__unused__)) inline void glib_listautoptr_cleanup_GMainContextPusher (GList **_l) { g_list_free_full (*_l, (GDestroyNotify) (void(*)(void)) g_main_context_pusher_free); } static __attribute__ ((__unused__)) inline void glib_slistautoptr_cleanup_GMainContextPusher (GSList **_l) { g_slist_free_full (*_l, (GDestroyNotify) (void(*)(void)) g_main_context_pusher_free); } static __attribute__ ((__unused__)) inline void glib_queueautoptr_cleanup_GMainContextPusher (GQueue **_q) { if (*_q) g_queue_free_full (*_q, (GDestroyNotify) (void(*)(void)) g_main_context_pusher_free); }
-# 64 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 66 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic pop
-# 64 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 66 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 
 typedef GMainLoop *GMainLoop_autoptr; typedef GList *GMainLoop_listautoptr; typedef GSList *GMainLoop_slistautoptr; typedef GQueue *GMainLoop_queueautoptr;
-# 65 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 67 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic push
-# 65 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 67 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 
-# 65 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 67 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-# 65 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 67 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
  static __attribute__ ((__unused__)) inline void glib_autoptr_clear_GMainLoop (GMainLoop *_ptr) { if (_ptr) (g_main_loop_unref) ((GMainLoop *) _ptr); } static __attribute__ ((__unused__)) inline void glib_autoptr_cleanup_GMainLoop (GMainLoop **_ptr) { glib_autoptr_clear_GMainLoop (*_ptr); } static __attribute__ ((__unused__)) inline void glib_listautoptr_cleanup_GMainLoop (GList **_l) { g_list_free_full (*_l, (GDestroyNotify) (void(*)(void)) g_main_loop_unref); } static __attribute__ ((__unused__)) inline void glib_slistautoptr_cleanup_GMainLoop (GSList **_l) { g_slist_free_full (*_l, (GDestroyNotify) (void(*)(void)) g_main_loop_unref); } static __attribute__ ((__unused__)) inline void glib_queueautoptr_cleanup_GMainLoop (GQueue **_q) { if (*_q) g_queue_free_full (*_q, (GDestroyNotify) (void(*)(void)) g_main_loop_unref); }
-# 65 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 67 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic pop
-# 65 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 67 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 
 typedef GSource *GSource_autoptr; typedef GList *GSource_listautoptr; typedef GSList *GSource_slistautoptr; typedef GQueue *GSource_queueautoptr;
-# 66 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 68 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic push
-# 66 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 68 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 
-# 66 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 68 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-# 66 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 68 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
  static __attribute__ ((__unused__)) inline void glib_autoptr_clear_GSource (GSource *_ptr) { if (_ptr) (g_source_unref) ((GSource *) _ptr); } static __attribute__ ((__unused__)) inline void glib_autoptr_cleanup_GSource (GSource **_ptr) { glib_autoptr_clear_GSource (*_ptr); } static __attribute__ ((__unused__)) inline void glib_listautoptr_cleanup_GSource (GList **_l) { g_list_free_full (*_l, (GDestroyNotify) (void(*)(void)) g_source_unref); } static __attribute__ ((__unused__)) inline void glib_slistautoptr_cleanup_GSource (GSList **_l) { g_slist_free_full (*_l, (GDestroyNotify) (void(*)(void)) g_source_unref); } static __attribute__ ((__unused__)) inline void glib_queueautoptr_cleanup_GSource (GQueue **_q) { if (*_q) g_queue_free_full (*_q, (GDestroyNotify) (void(*)(void)) g_source_unref); }
-# 66 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 68 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic pop
-# 66 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 68 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 
 typedef GMappedFile *GMappedFile_autoptr; typedef GList *GMappedFile_listautoptr; typedef GSList *GMappedFile_slistautoptr; typedef GQueue *GMappedFile_queueautoptr;
-# 67 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 69 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic push
-# 67 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 69 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 
-# 67 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 69 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-# 67 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 69 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
  static __attribute__ ((__unused__)) inline void glib_autoptr_clear_GMappedFile (GMappedFile *_ptr) { if (_ptr) (g_mapped_file_unref) ((GMappedFile *) _ptr); } static __attribute__ ((__unused__)) inline void glib_autoptr_cleanup_GMappedFile (GMappedFile **_ptr) { glib_autoptr_clear_GMappedFile (*_ptr); } static __attribute__ ((__unused__)) inline void glib_listautoptr_cleanup_GMappedFile (GList **_l) { g_list_free_full (*_l, (GDestroyNotify) (void(*)(void)) g_mapped_file_unref); } static __attribute__ ((__unused__)) inline void glib_slistautoptr_cleanup_GMappedFile (GSList **_l) { g_slist_free_full (*_l, (GDestroyNotify) (void(*)(void)) g_mapped_file_unref); } static __attribute__ ((__unused__)) inline void glib_queueautoptr_cleanup_GMappedFile (GQueue **_q) { if (*_q) g_queue_free_full (*_q, (GDestroyNotify) (void(*)(void)) g_mapped_file_unref); }
-# 67 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 69 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic pop
-# 67 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 69 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 
 typedef GMarkupParseContext *GMarkupParseContext_autoptr; typedef GList *GMarkupParseContext_listautoptr; typedef GSList *GMarkupParseContext_slistautoptr; typedef GQueue *GMarkupParseContext_queueautoptr;
-# 68 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 70 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic push
-# 68 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 70 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 
-# 68 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 70 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-# 68 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 70 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
  static __attribute__ ((__unused__)) inline void glib_autoptr_clear_GMarkupParseContext (GMarkupParseContext *_ptr) { if (_ptr) (g_markup_parse_context_unref) ((GMarkupParseContext *) _ptr); } static __attribute__ ((__unused__)) inline void glib_autoptr_cleanup_GMarkupParseContext (GMarkupParseContext **_ptr) { glib_autoptr_clear_GMarkupParseContext (*_ptr); } static __attribute__ ((__unused__)) inline void glib_listautoptr_cleanup_GMarkupParseContext (GList **_l) { g_list_free_full (*_l, (GDestroyNotify) (void(*)(void)) g_markup_parse_context_unref); } static __attribute__ ((__unused__)) inline void glib_slistautoptr_cleanup_GMarkupParseContext (GSList **_l) { g_slist_free_full (*_l, (GDestroyNotify) (void(*)(void)) g_markup_parse_context_unref); } static __attribute__ ((__unused__)) inline void glib_queueautoptr_cleanup_GMarkupParseContext (GQueue **_q) { if (*_q) g_queue_free_full (*_q, (GDestroyNotify) (void(*)(void)) g_markup_parse_context_unref); }
-# 68 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 70 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic pop
-# 68 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 70 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 
 typedef GNode *GNode_autoptr; typedef GList *GNode_listautoptr; typedef GSList *GNode_slistautoptr; typedef GQueue *GNode_queueautoptr;
-# 69 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 71 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic push
-# 69 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 71 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 
-# 69 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 71 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-# 69 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 71 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
  static __attribute__ ((__unused__)) inline void glib_autoptr_clear_GNode (GNode *_ptr) { if (_ptr) (g_node_destroy) ((GNode *) _ptr); } static __attribute__ ((__unused__)) inline void glib_autoptr_cleanup_GNode (GNode **_ptr) { glib_autoptr_clear_GNode (*_ptr); } static __attribute__ ((__unused__)) inline void glib_listautoptr_cleanup_GNode (GList **_l) { g_list_free_full (*_l, (GDestroyNotify) (void(*)(void)) g_node_destroy); } static __attribute__ ((__unused__)) inline void glib_slistautoptr_cleanup_GNode (GSList **_l) { g_slist_free_full (*_l, (GDestroyNotify) (void(*)(void)) g_node_destroy); } static __attribute__ ((__unused__)) inline void glib_queueautoptr_cleanup_GNode (GQueue **_q) { if (*_q) g_queue_free_full (*_q, (GDestroyNotify) (void(*)(void)) g_node_destroy); }
-# 69 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 71 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic pop
-# 69 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 71 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 
 typedef GOptionContext *GOptionContext_autoptr; typedef GList *GOptionContext_listautoptr; typedef GSList *GOptionContext_slistautoptr; typedef GQueue *GOptionContext_queueautoptr;
-# 70 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 72 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic push
-# 70 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 72 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 
-# 70 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 72 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-# 70 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 72 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
  static __attribute__ ((__unused__)) inline void glib_autoptr_clear_GOptionContext (GOptionContext *_ptr) { if (_ptr) (g_option_context_free) ((GOptionContext *) _ptr); } static __attribute__ ((__unused__)) inline void glib_autoptr_cleanup_GOptionContext (GOptionContext **_ptr) { glib_autoptr_clear_GOptionContext (*_ptr); } static __attribute__ ((__unused__)) inline void glib_listautoptr_cleanup_GOptionContext (GList **_l) { g_list_free_full (*_l, (GDestroyNotify) (void(*)(void)) g_option_context_free); } static __attribute__ ((__unused__)) inline void glib_slistautoptr_cleanup_GOptionContext (GSList **_l) { g_slist_free_full (*_l, (GDestroyNotify) (void(*)(void)) g_option_context_free); } static __attribute__ ((__unused__)) inline void glib_queueautoptr_cleanup_GOptionContext (GQueue **_q) { if (*_q) g_queue_free_full (*_q, (GDestroyNotify) (void(*)(void)) g_option_context_free); }
-# 70 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 72 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic pop
-# 70 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 72 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 
 typedef GOptionGroup *GOptionGroup_autoptr; typedef GList *GOptionGroup_listautoptr; typedef GSList *GOptionGroup_slistautoptr; typedef GQueue *GOptionGroup_queueautoptr;
-# 71 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 73 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic push
-# 71 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 73 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 
-# 71 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 73 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-# 71 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 73 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
  static __attribute__ ((__unused__)) inline void glib_autoptr_clear_GOptionGroup (GOptionGroup *_ptr) { if (_ptr) (g_option_group_unref) ((GOptionGroup *) _ptr); } static __attribute__ ((__unused__)) inline void glib_autoptr_cleanup_GOptionGroup (GOptionGroup **_ptr) { glib_autoptr_clear_GOptionGroup (*_ptr); } static __attribute__ ((__unused__)) inline void glib_listautoptr_cleanup_GOptionGroup (GList **_l) { g_list_free_full (*_l, (GDestroyNotify) (void(*)(void)) g_option_group_unref); } static __attribute__ ((__unused__)) inline void glib_slistautoptr_cleanup_GOptionGroup (GSList **_l) { g_slist_free_full (*_l, (GDestroyNotify) (void(*)(void)) g_option_group_unref); } static __attribute__ ((__unused__)) inline void glib_queueautoptr_cleanup_GOptionGroup (GQueue **_q) { if (*_q) g_queue_free_full (*_q, (GDestroyNotify) (void(*)(void)) g_option_group_unref); }
-# 71 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 73 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic pop
-# 71 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 73 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 
 typedef GPatternSpec *GPatternSpec_autoptr; typedef GList *GPatternSpec_listautoptr; typedef GSList *GPatternSpec_slistautoptr; typedef GQueue *GPatternSpec_queueautoptr;
-# 72 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 74 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic push
-# 72 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 74 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 
-# 72 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 74 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-# 72 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 74 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
  static __attribute__ ((__unused__)) inline void glib_autoptr_clear_GPatternSpec (GPatternSpec *_ptr) { if (_ptr) (g_pattern_spec_free) ((GPatternSpec *) _ptr); } static __attribute__ ((__unused__)) inline void glib_autoptr_cleanup_GPatternSpec (GPatternSpec **_ptr) { glib_autoptr_clear_GPatternSpec (*_ptr); } static __attribute__ ((__unused__)) inline void glib_listautoptr_cleanup_GPatternSpec (GList **_l) { g_list_free_full (*_l, (GDestroyNotify) (void(*)(void)) g_pattern_spec_free); } static __attribute__ ((__unused__)) inline void glib_slistautoptr_cleanup_GPatternSpec (GSList **_l) { g_slist_free_full (*_l, (GDestroyNotify) (void(*)(void)) g_pattern_spec_free); } static __attribute__ ((__unused__)) inline void glib_queueautoptr_cleanup_GPatternSpec (GQueue **_q) { if (*_q) g_queue_free_full (*_q, (GDestroyNotify) (void(*)(void)) g_pattern_spec_free); }
-# 72 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 74 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic pop
-# 72 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 74 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 
 typedef GQueue *GQueue_autoptr; typedef GList *GQueue_listautoptr; typedef GSList *GQueue_slistautoptr; typedef GQueue *GQueue_queueautoptr;
-# 73 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 75 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic push
-# 73 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 75 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 
-# 73 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 75 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-# 73 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 75 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
  static __attribute__ ((__unused__)) inline void glib_autoptr_clear_GQueue (GQueue *_ptr) { if (_ptr) (g_queue_free) ((GQueue *) _ptr); } static __attribute__ ((__unused__)) inline void glib_autoptr_cleanup_GQueue (GQueue **_ptr) { glib_autoptr_clear_GQueue (*_ptr); } static __attribute__ ((__unused__)) inline void glib_listautoptr_cleanup_GQueue (GList **_l) { g_list_free_full (*_l, (GDestroyNotify) (void(*)(void)) g_queue_free); } static __attribute__ ((__unused__)) inline void glib_slistautoptr_cleanup_GQueue (GSList **_l) { g_slist_free_full (*_l, (GDestroyNotify) (void(*)(void)) g_queue_free); } static __attribute__ ((__unused__)) inline void glib_queueautoptr_cleanup_GQueue (GQueue **_q) { if (*_q) g_queue_free_full (*_q, (GDestroyNotify) (void(*)(void)) g_queue_free); }
-# 73 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 75 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic pop
-# 73 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 75 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 
 
-# 74 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 76 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic push
-# 74 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 76 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 
-# 74 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 76 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-# 74 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 76 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
  static __attribute__ ((__unused__)) inline void glib_auto_cleanup_GQueue (GQueue *_ptr) { (g_queue_clear) (_ptr); }
-# 74 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 76 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic pop
-# 74 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 76 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 
 typedef GRand *GRand_autoptr; typedef GList *GRand_listautoptr; typedef GSList *GRand_slistautoptr; typedef GQueue *GRand_queueautoptr;
-# 75 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 77 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic push
-# 75 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 77 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 
-# 75 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 77 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-# 75 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 77 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
  static __attribute__ ((__unused__)) inline void glib_autoptr_clear_GRand (GRand *_ptr) { if (_ptr) (g_rand_free) ((GRand *) _ptr); } static __attribute__ ((__unused__)) inline void glib_autoptr_cleanup_GRand (GRand **_ptr) { glib_autoptr_clear_GRand (*_ptr); } static __attribute__ ((__unused__)) inline void glib_listautoptr_cleanup_GRand (GList **_l) { g_list_free_full (*_l, (GDestroyNotify) (void(*)(void)) g_rand_free); } static __attribute__ ((__unused__)) inline void glib_slistautoptr_cleanup_GRand (GSList **_l) { g_slist_free_full (*_l, (GDestroyNotify) (void(*)(void)) g_rand_free); } static __attribute__ ((__unused__)) inline void glib_queueautoptr_cleanup_GRand (GQueue **_q) { if (*_q) g_queue_free_full (*_q, (GDestroyNotify) (void(*)(void)) g_rand_free); }
-# 75 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 77 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic pop
-# 75 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 77 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 
 typedef GRegex *GRegex_autoptr; typedef GList *GRegex_listautoptr; typedef GSList *GRegex_slistautoptr; typedef GQueue *GRegex_queueautoptr;
-# 76 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 78 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic push
-# 76 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 78 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 
-# 76 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 78 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-# 76 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 78 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
  static __attribute__ ((__unused__)) inline void glib_autoptr_clear_GRegex (GRegex *_ptr) { if (_ptr) (g_regex_unref) ((GRegex *) _ptr); } static __attribute__ ((__unused__)) inline void glib_autoptr_cleanup_GRegex (GRegex **_ptr) { glib_autoptr_clear_GRegex (*_ptr); } static __attribute__ ((__unused__)) inline void glib_listautoptr_cleanup_GRegex (GList **_l) { g_list_free_full (*_l, (GDestroyNotify) (void(*)(void)) g_regex_unref); } static __attribute__ ((__unused__)) inline void glib_slistautoptr_cleanup_GRegex (GSList **_l) { g_slist_free_full (*_l, (GDestroyNotify) (void(*)(void)) g_regex_unref); } static __attribute__ ((__unused__)) inline void glib_queueautoptr_cleanup_GRegex (GQueue **_q) { if (*_q) g_queue_free_full (*_q, (GDestroyNotify) (void(*)(void)) g_regex_unref); }
-# 76 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 78 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic pop
-# 76 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 78 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 
 typedef GMatchInfo *GMatchInfo_autoptr; typedef GList *GMatchInfo_listautoptr; typedef GSList *GMatchInfo_slistautoptr; typedef GQueue *GMatchInfo_queueautoptr;
-# 77 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 79 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic push
-# 77 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 79 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 
-# 77 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 79 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-# 77 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 79 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
  static __attribute__ ((__unused__)) inline void glib_autoptr_clear_GMatchInfo (GMatchInfo *_ptr) { if (_ptr) (g_match_info_unref) ((GMatchInfo *) _ptr); } static __attribute__ ((__unused__)) inline void glib_autoptr_cleanup_GMatchInfo (GMatchInfo **_ptr) { glib_autoptr_clear_GMatchInfo (*_ptr); } static __attribute__ ((__unused__)) inline void glib_listautoptr_cleanup_GMatchInfo (GList **_l) { g_list_free_full (*_l, (GDestroyNotify) (void(*)(void)) g_match_info_unref); } static __attribute__ ((__unused__)) inline void glib_slistautoptr_cleanup_GMatchInfo (GSList **_l) { g_slist_free_full (*_l, (GDestroyNotify) (void(*)(void)) g_match_info_unref); } static __attribute__ ((__unused__)) inline void glib_queueautoptr_cleanup_GMatchInfo (GQueue **_q) { if (*_q) g_queue_free_full (*_q, (GDestroyNotify) (void(*)(void)) g_match_info_unref); }
-# 77 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 79 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic pop
-# 77 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 79 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 
 typedef GScanner *GScanner_autoptr; typedef GList *GScanner_listautoptr; typedef GSList *GScanner_slistautoptr; typedef GQueue *GScanner_queueautoptr;
-# 78 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 80 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic push
-# 78 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 80 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 
-# 78 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 80 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-# 78 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 80 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
  static __attribute__ ((__unused__)) inline void glib_autoptr_clear_GScanner (GScanner *_ptr) { if (_ptr) (g_scanner_destroy) ((GScanner *) _ptr); } static __attribute__ ((__unused__)) inline void glib_autoptr_cleanup_GScanner (GScanner **_ptr) { glib_autoptr_clear_GScanner (*_ptr); } static __attribute__ ((__unused__)) inline void glib_listautoptr_cleanup_GScanner (GList **_l) { g_list_free_full (*_l, (GDestroyNotify) (void(*)(void)) g_scanner_destroy); } static __attribute__ ((__unused__)) inline void glib_slistautoptr_cleanup_GScanner (GSList **_l) { g_slist_free_full (*_l, (GDestroyNotify) (void(*)(void)) g_scanner_destroy); } static __attribute__ ((__unused__)) inline void glib_queueautoptr_cleanup_GScanner (GQueue **_q) { if (*_q) g_queue_free_full (*_q, (GDestroyNotify) (void(*)(void)) g_scanner_destroy); }
-# 78 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 80 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic pop
-# 78 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 80 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 
 typedef GSequence *GSequence_autoptr; typedef GList *GSequence_listautoptr; typedef GSList *GSequence_slistautoptr; typedef GQueue *GSequence_queueautoptr;
-# 79 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 81 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic push
-# 79 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 81 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 
-# 79 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 81 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-# 79 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 81 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
  static __attribute__ ((__unused__)) inline void glib_autoptr_clear_GSequence (GSequence *_ptr) { if (_ptr) (g_sequence_free) ((GSequence *) _ptr); } static __attribute__ ((__unused__)) inline void glib_autoptr_cleanup_GSequence (GSequence **_ptr) { glib_autoptr_clear_GSequence (*_ptr); } static __attribute__ ((__unused__)) inline void glib_listautoptr_cleanup_GSequence (GList **_l) { g_list_free_full (*_l, (GDestroyNotify) (void(*)(void)) g_sequence_free); } static __attribute__ ((__unused__)) inline void glib_slistautoptr_cleanup_GSequence (GSList **_l) { g_slist_free_full (*_l, (GDestroyNotify) (void(*)(void)) g_sequence_free); } static __attribute__ ((__unused__)) inline void glib_queueautoptr_cleanup_GSequence (GQueue **_q) { if (*_q) g_queue_free_full (*_q, (GDestroyNotify) (void(*)(void)) g_sequence_free); }
-# 79 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 81 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic pop
-# 79 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 81 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 
 typedef GSList *GSList_autoptr; typedef GList *GSList_listautoptr; typedef GSList *GSList_slistautoptr; typedef GQueue *GSList_queueautoptr;
-# 80 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 82 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic push
-# 80 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 82 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 
-# 80 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 82 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-# 80 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 82 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
  static __attribute__ ((__unused__)) inline void glib_autoptr_clear_GSList (GSList *_ptr) { if (_ptr) (g_slist_free) ((GSList *) _ptr); } static __attribute__ ((__unused__)) inline void glib_autoptr_cleanup_GSList (GSList **_ptr) { glib_autoptr_clear_GSList (*_ptr); } static __attribute__ ((__unused__)) inline void glib_listautoptr_cleanup_GSList (GList **_l) { g_list_free_full (*_l, (GDestroyNotify) (void(*)(void)) g_slist_free); } static __attribute__ ((__unused__)) inline void glib_slistautoptr_cleanup_GSList (GSList **_l) { g_slist_free_full (*_l, (GDestroyNotify) (void(*)(void)) g_slist_free); } static __attribute__ ((__unused__)) inline void glib_queueautoptr_cleanup_GSList (GQueue **_q) { if (*_q) g_queue_free_full (*_q, (GDestroyNotify) (void(*)(void)) g_slist_free); }
-# 80 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 82 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic pop
-# 80 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 82 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 
 typedef GString *GString_autoptr; typedef GList *GString_listautoptr; typedef GSList *GString_slistautoptr; typedef GQueue *GString_queueautoptr;
-# 81 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 83 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic push
-# 81 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 83 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 
-# 81 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 83 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-# 81 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 83 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
  static __attribute__ ((__unused__)) inline void glib_autoptr_clear_GString (GString *_ptr) { if (_ptr) (g_autoptr_cleanup_gstring_free) ((GString *) _ptr); } static __attribute__ ((__unused__)) inline void glib_autoptr_cleanup_GString (GString **_ptr) { glib_autoptr_clear_GString (*_ptr); } static __attribute__ ((__unused__)) inline void glib_listautoptr_cleanup_GString (GList **_l) { g_list_free_full (*_l, (GDestroyNotify) (void(*)(void)) g_autoptr_cleanup_gstring_free); } static __attribute__ ((__unused__)) inline void glib_slistautoptr_cleanup_GString (GSList **_l) { g_slist_free_full (*_l, (GDestroyNotify) (void(*)(void)) g_autoptr_cleanup_gstring_free); } static __attribute__ ((__unused__)) inline void glib_queueautoptr_cleanup_GString (GQueue **_q) { if (*_q) g_queue_free_full (*_q, (GDestroyNotify) (void(*)(void)) g_autoptr_cleanup_gstring_free); }
-# 81 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 83 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic pop
-# 81 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 83 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 
 typedef GStringChunk *GStringChunk_autoptr; typedef GList *GStringChunk_listautoptr; typedef GSList *GStringChunk_slistautoptr; typedef GQueue *GStringChunk_queueautoptr;
-# 82 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 84 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic push
-# 82 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 84 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 
-# 82 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 84 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-# 82 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 84 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
  static __attribute__ ((__unused__)) inline void glib_autoptr_clear_GStringChunk (GStringChunk *_ptr) { if (_ptr) (g_string_chunk_free) ((GStringChunk *) _ptr); } static __attribute__ ((__unused__)) inline void glib_autoptr_cleanup_GStringChunk (GStringChunk **_ptr) { glib_autoptr_clear_GStringChunk (*_ptr); } static __attribute__ ((__unused__)) inline void glib_listautoptr_cleanup_GStringChunk (GList **_l) { g_list_free_full (*_l, (GDestroyNotify) (void(*)(void)) g_string_chunk_free); } static __attribute__ ((__unused__)) inline void glib_slistautoptr_cleanup_GStringChunk (GSList **_l) { g_slist_free_full (*_l, (GDestroyNotify) (void(*)(void)) g_string_chunk_free); } static __attribute__ ((__unused__)) inline void glib_queueautoptr_cleanup_GStringChunk (GQueue **_q) { if (*_q) g_queue_free_full (*_q, (GDestroyNotify) (void(*)(void)) g_string_chunk_free); }
-# 82 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 84 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic pop
-# 82 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 84 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 
 typedef GStrvBuilder *GStrvBuilder_autoptr; typedef GList *GStrvBuilder_listautoptr; typedef GSList *GStrvBuilder_slistautoptr; typedef GQueue *GStrvBuilder_queueautoptr;
-# 83 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 85 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic push
-# 83 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 85 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 
-# 83 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 85 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-# 83 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 85 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
  static __attribute__ ((__unused__)) inline void glib_autoptr_clear_GStrvBuilder (GStrvBuilder *_ptr) { if (_ptr) (g_strv_builder_unref) ((GStrvBuilder *) _ptr); } static __attribute__ ((__unused__)) inline void glib_autoptr_cleanup_GStrvBuilder (GStrvBuilder **_ptr) { glib_autoptr_clear_GStrvBuilder (*_ptr); } static __attribute__ ((__unused__)) inline void glib_listautoptr_cleanup_GStrvBuilder (GList **_l) { g_list_free_full (*_l, (GDestroyNotify) (void(*)(void)) g_strv_builder_unref); } static __attribute__ ((__unused__)) inline void glib_slistautoptr_cleanup_GStrvBuilder (GSList **_l) { g_slist_free_full (*_l, (GDestroyNotify) (void(*)(void)) g_strv_builder_unref); } static __attribute__ ((__unused__)) inline void glib_queueautoptr_cleanup_GStrvBuilder (GQueue **_q) { if (*_q) g_queue_free_full (*_q, (GDestroyNotify) (void(*)(void)) g_strv_builder_unref); }
-# 83 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 85 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic pop
-# 83 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 85 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 
 typedef GThread *GThread_autoptr; typedef GList *GThread_listautoptr; typedef GSList *GThread_slistautoptr; typedef GQueue *GThread_queueautoptr;
-# 84 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 86 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic push
-# 84 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 86 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 
-# 84 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 86 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-# 84 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 86 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
  static __attribute__ ((__unused__)) inline void glib_autoptr_clear_GThread (GThread *_ptr) { if (_ptr) (g_thread_unref) ((GThread *) _ptr); } static __attribute__ ((__unused__)) inline void glib_autoptr_cleanup_GThread (GThread **_ptr) { glib_autoptr_clear_GThread (*_ptr); } static __attribute__ ((__unused__)) inline void glib_listautoptr_cleanup_GThread (GList **_l) { g_list_free_full (*_l, (GDestroyNotify) (void(*)(void)) g_thread_unref); } static __attribute__ ((__unused__)) inline void glib_slistautoptr_cleanup_GThread (GSList **_l) { g_slist_free_full (*_l, (GDestroyNotify) (void(*)(void)) g_thread_unref); } static __attribute__ ((__unused__)) inline void glib_queueautoptr_cleanup_GThread (GQueue **_q) { if (*_q) g_queue_free_full (*_q, (GDestroyNotify) (void(*)(void)) g_thread_unref); }
-# 84 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 86 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic pop
-# 84 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 86 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 
 
-# 85 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 87 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic push
-# 85 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 87 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 
-# 85 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 87 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-# 85 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 87 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
  static __attribute__ ((__unused__)) inline void glib_auto_cleanup_GMutex (GMutex *_ptr) { (g_mutex_clear) (_ptr); }
-# 85 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 87 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic pop
-# 85 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 87 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 
 typedef GMutexLocker *GMutexLocker_autoptr; typedef GList *GMutexLocker_listautoptr; typedef GSList *GMutexLocker_slistautoptr; typedef GQueue *GMutexLocker_queueautoptr;
-# 86 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 88 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic push
-# 86 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 88 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 
-# 86 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 88 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-# 86 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 88 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
  static __attribute__ ((__unused__)) inline void glib_autoptr_clear_GMutexLocker (GMutexLocker *_ptr) { if (_ptr) (g_mutex_locker_free) ((GMutexLocker *) _ptr); } static __attribute__ ((__unused__)) inline void glib_autoptr_cleanup_GMutexLocker (GMutexLocker **_ptr) { glib_autoptr_clear_GMutexLocker (*_ptr); } static __attribute__ ((__unused__)) inline void glib_listautoptr_cleanup_GMutexLocker (GList **_l) { g_list_free_full (*_l, (GDestroyNotify) (void(*)(void)) g_mutex_locker_free); } static __attribute__ ((__unused__)) inline void glib_slistautoptr_cleanup_GMutexLocker (GSList **_l) { g_slist_free_full (*_l, (GDestroyNotify) (void(*)(void)) g_mutex_locker_free); } static __attribute__ ((__unused__)) inline void glib_queueautoptr_cleanup_GMutexLocker (GQueue **_q) { if (*_q) g_queue_free_full (*_q, (GDestroyNotify) (void(*)(void)) g_mutex_locker_free); }
-# 86 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 88 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic pop
-# 86 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 88 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 
 typedef GRecMutexLocker *GRecMutexLocker_autoptr; typedef GList *GRecMutexLocker_listautoptr; typedef GSList *GRecMutexLocker_slistautoptr; typedef GQueue *GRecMutexLocker_queueautoptr;
-# 87 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 89 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic push
-# 87 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 89 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 
-# 87 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 89 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-# 87 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 89 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
  static __attribute__ ((__unused__)) inline void glib_autoptr_clear_GRecMutexLocker (GRecMutexLocker *_ptr) { if (_ptr) (g_rec_mutex_locker_free) ((GRecMutexLocker *) _ptr); } static __attribute__ ((__unused__)) inline void glib_autoptr_cleanup_GRecMutexLocker (GRecMutexLocker **_ptr) { glib_autoptr_clear_GRecMutexLocker (*_ptr); } static __attribute__ ((__unused__)) inline void glib_listautoptr_cleanup_GRecMutexLocker (GList **_l) { g_list_free_full (*_l, (GDestroyNotify) (void(*)(void)) g_rec_mutex_locker_free); } static __attribute__ ((__unused__)) inline void glib_slistautoptr_cleanup_GRecMutexLocker (GSList **_l) { g_slist_free_full (*_l, (GDestroyNotify) (void(*)(void)) g_rec_mutex_locker_free); } static __attribute__ ((__unused__)) inline void glib_queueautoptr_cleanup_GRecMutexLocker (GQueue **_q) { if (*_q) g_queue_free_full (*_q, (GDestroyNotify) (void(*)(void)) g_rec_mutex_locker_free); }
-# 87 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 89 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic pop
-# 87 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 89 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 
 typedef GRWLockWriterLocker *GRWLockWriterLocker_autoptr; typedef GList *GRWLockWriterLocker_listautoptr; typedef GSList *GRWLockWriterLocker_slistautoptr; typedef GQueue *GRWLockWriterLocker_queueautoptr;
-# 88 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 90 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic push
-# 88 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 90 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 
-# 88 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 90 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-# 88 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 90 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
  static __attribute__ ((__unused__)) inline void glib_autoptr_clear_GRWLockWriterLocker (GRWLockWriterLocker *_ptr) { if (_ptr) (g_rw_lock_writer_locker_free) ((GRWLockWriterLocker *) _ptr); } static __attribute__ ((__unused__)) inline void glib_autoptr_cleanup_GRWLockWriterLocker (GRWLockWriterLocker **_ptr) { glib_autoptr_clear_GRWLockWriterLocker (*_ptr); } static __attribute__ ((__unused__)) inline void glib_listautoptr_cleanup_GRWLockWriterLocker (GList **_l) { g_list_free_full (*_l, (GDestroyNotify) (void(*)(void)) g_rw_lock_writer_locker_free); } static __attribute__ ((__unused__)) inline void glib_slistautoptr_cleanup_GRWLockWriterLocker (GSList **_l) { g_slist_free_full (*_l, (GDestroyNotify) (void(*)(void)) g_rw_lock_writer_locker_free); } static __attribute__ ((__unused__)) inline void glib_queueautoptr_cleanup_GRWLockWriterLocker (GQueue **_q) { if (*_q) g_queue_free_full (*_q, (GDestroyNotify) (void(*)(void)) g_rw_lock_writer_locker_free); }
-# 88 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 90 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic pop
-# 88 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 90 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 
 typedef GRWLockReaderLocker *GRWLockReaderLocker_autoptr; typedef GList *GRWLockReaderLocker_listautoptr; typedef GSList *GRWLockReaderLocker_slistautoptr; typedef GQueue *GRWLockReaderLocker_queueautoptr;
-# 89 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 91 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic push
-# 89 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 91 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 
-# 89 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 91 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-# 89 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 91 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
  static __attribute__ ((__unused__)) inline void glib_autoptr_clear_GRWLockReaderLocker (GRWLockReaderLocker *_ptr) { if (_ptr) (g_rw_lock_reader_locker_free) ((GRWLockReaderLocker *) _ptr); } static __attribute__ ((__unused__)) inline void glib_autoptr_cleanup_GRWLockReaderLocker (GRWLockReaderLocker **_ptr) { glib_autoptr_clear_GRWLockReaderLocker (*_ptr); } static __attribute__ ((__unused__)) inline void glib_listautoptr_cleanup_GRWLockReaderLocker (GList **_l) { g_list_free_full (*_l, (GDestroyNotify) (void(*)(void)) g_rw_lock_reader_locker_free); } static __attribute__ ((__unused__)) inline void glib_slistautoptr_cleanup_GRWLockReaderLocker (GSList **_l) { g_slist_free_full (*_l, (GDestroyNotify) (void(*)(void)) g_rw_lock_reader_locker_free); } static __attribute__ ((__unused__)) inline void glib_queueautoptr_cleanup_GRWLockReaderLocker (GQueue **_q) { if (*_q) g_queue_free_full (*_q, (GDestroyNotify) (void(*)(void)) g_rw_lock_reader_locker_free); }
-# 89 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 91 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic pop
-# 89 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 91 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 
 
-# 90 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 92 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic push
-# 90 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 92 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 
-# 90 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 92 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-# 90 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 92 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
  static __attribute__ ((__unused__)) inline void glib_auto_cleanup_GCond (GCond *_ptr) { (g_cond_clear) (_ptr); }
-# 90 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 92 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic pop
-# 90 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 92 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 
 typedef GTimer *GTimer_autoptr; typedef GList *GTimer_listautoptr; typedef GSList *GTimer_slistautoptr; typedef GQueue *GTimer_queueautoptr;
-# 91 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 93 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic push
-# 91 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 93 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 
-# 91 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 93 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-# 91 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 93 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
  static __attribute__ ((__unused__)) inline void glib_autoptr_clear_GTimer (GTimer *_ptr) { if (_ptr) (g_timer_destroy) ((GTimer *) _ptr); } static __attribute__ ((__unused__)) inline void glib_autoptr_cleanup_GTimer (GTimer **_ptr) { glib_autoptr_clear_GTimer (*_ptr); } static __attribute__ ((__unused__)) inline void glib_listautoptr_cleanup_GTimer (GList **_l) { g_list_free_full (*_l, (GDestroyNotify) (void(*)(void)) g_timer_destroy); } static __attribute__ ((__unused__)) inline void glib_slistautoptr_cleanup_GTimer (GSList **_l) { g_slist_free_full (*_l, (GDestroyNotify) (void(*)(void)) g_timer_destroy); } static __attribute__ ((__unused__)) inline void glib_queueautoptr_cleanup_GTimer (GQueue **_q) { if (*_q) g_queue_free_full (*_q, (GDestroyNotify) (void(*)(void)) g_timer_destroy); }
-# 91 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 93 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic pop
-# 91 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 93 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 
 typedef GTimeZone *GTimeZone_autoptr; typedef GList *GTimeZone_listautoptr; typedef GSList *GTimeZone_slistautoptr; typedef GQueue *GTimeZone_queueautoptr;
-# 92 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 94 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic push
-# 92 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 94 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 
-# 92 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 94 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-# 92 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 94 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
  static __attribute__ ((__unused__)) inline void glib_autoptr_clear_GTimeZone (GTimeZone *_ptr) { if (_ptr) (g_time_zone_unref) ((GTimeZone *) _ptr); } static __attribute__ ((__unused__)) inline void glib_autoptr_cleanup_GTimeZone (GTimeZone **_ptr) { glib_autoptr_clear_GTimeZone (*_ptr); } static __attribute__ ((__unused__)) inline void glib_listautoptr_cleanup_GTimeZone (GList **_l) { g_list_free_full (*_l, (GDestroyNotify) (void(*)(void)) g_time_zone_unref); } static __attribute__ ((__unused__)) inline void glib_slistautoptr_cleanup_GTimeZone (GSList **_l) { g_slist_free_full (*_l, (GDestroyNotify) (void(*)(void)) g_time_zone_unref); } static __attribute__ ((__unused__)) inline void glib_queueautoptr_cleanup_GTimeZone (GQueue **_q) { if (*_q) g_queue_free_full (*_q, (GDestroyNotify) (void(*)(void)) g_time_zone_unref); }
-# 92 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 94 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic pop
-# 92 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 94 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 
 typedef GTree *GTree_autoptr; typedef GList *GTree_listautoptr; typedef GSList *GTree_slistautoptr; typedef GQueue *GTree_queueautoptr;
-# 93 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 95 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic push
-# 93 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 95 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 
-# 93 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 95 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-# 93 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 95 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
  static __attribute__ ((__unused__)) inline void glib_autoptr_clear_GTree (GTree *_ptr) { if (_ptr) (g_tree_unref) ((GTree *) _ptr); } static __attribute__ ((__unused__)) inline void glib_autoptr_cleanup_GTree (GTree **_ptr) { glib_autoptr_clear_GTree (*_ptr); } static __attribute__ ((__unused__)) inline void glib_listautoptr_cleanup_GTree (GList **_l) { g_list_free_full (*_l, (GDestroyNotify) (void(*)(void)) g_tree_unref); } static __attribute__ ((__unused__)) inline void glib_slistautoptr_cleanup_GTree (GSList **_l) { g_slist_free_full (*_l, (GDestroyNotify) (void(*)(void)) g_tree_unref); } static __attribute__ ((__unused__)) inline void glib_queueautoptr_cleanup_GTree (GQueue **_q) { if (*_q) g_queue_free_full (*_q, (GDestroyNotify) (void(*)(void)) g_tree_unref); }
-# 93 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 95 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic pop
-# 93 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 95 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 
 typedef GVariant *GVariant_autoptr; typedef GList *GVariant_listautoptr; typedef GSList *GVariant_slistautoptr; typedef GQueue *GVariant_queueautoptr;
-# 94 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 96 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic push
-# 94 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 96 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 
-# 94 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 96 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-# 94 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 96 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
  static __attribute__ ((__unused__)) inline void glib_autoptr_clear_GVariant (GVariant *_ptr) { if (_ptr) (g_variant_unref) ((GVariant *) _ptr); } static __attribute__ ((__unused__)) inline void glib_autoptr_cleanup_GVariant (GVariant **_ptr) { glib_autoptr_clear_GVariant (*_ptr); } static __attribute__ ((__unused__)) inline void glib_listautoptr_cleanup_GVariant (GList **_l) { g_list_free_full (*_l, (GDestroyNotify) (void(*)(void)) g_variant_unref); } static __attribute__ ((__unused__)) inline void glib_slistautoptr_cleanup_GVariant (GSList **_l) { g_slist_free_full (*_l, (GDestroyNotify) (void(*)(void)) g_variant_unref); } static __attribute__ ((__unused__)) inline void glib_queueautoptr_cleanup_GVariant (GQueue **_q) { if (*_q) g_queue_free_full (*_q, (GDestroyNotify) (void(*)(void)) g_variant_unref); }
-# 94 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 96 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic pop
-# 94 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 96 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 
 typedef GVariantBuilder *GVariantBuilder_autoptr; typedef GList *GVariantBuilder_listautoptr; typedef GSList *GVariantBuilder_slistautoptr; typedef GQueue *GVariantBuilder_queueautoptr;
-# 95 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 97 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic push
-# 95 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 97 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 
-# 95 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 97 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-# 95 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 97 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
  static __attribute__ ((__unused__)) inline void glib_autoptr_clear_GVariantBuilder (GVariantBuilder *_ptr) { if (_ptr) (g_variant_builder_unref) ((GVariantBuilder *) _ptr); } static __attribute__ ((__unused__)) inline void glib_autoptr_cleanup_GVariantBuilder (GVariantBuilder **_ptr) { glib_autoptr_clear_GVariantBuilder (*_ptr); } static __attribute__ ((__unused__)) inline void glib_listautoptr_cleanup_GVariantBuilder (GList **_l) { g_list_free_full (*_l, (GDestroyNotify) (void(*)(void)) g_variant_builder_unref); } static __attribute__ ((__unused__)) inline void glib_slistautoptr_cleanup_GVariantBuilder (GSList **_l) { g_slist_free_full (*_l, (GDestroyNotify) (void(*)(void)) g_variant_builder_unref); } static __attribute__ ((__unused__)) inline void glib_queueautoptr_cleanup_GVariantBuilder (GQueue **_q) { if (*_q) g_queue_free_full (*_q, (GDestroyNotify) (void(*)(void)) g_variant_builder_unref); }
-# 95 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 97 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic pop
-# 95 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 97 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 
 
-# 96 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 98 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic push
-# 96 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 98 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 
-# 96 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 98 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-# 96 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 98 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
  static __attribute__ ((__unused__)) inline void glib_auto_cleanup_GVariantBuilder (GVariantBuilder *_ptr) { (g_variant_builder_clear) (_ptr); }
-# 96 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 98 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic pop
-# 96 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 98 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 
 typedef GVariantIter *GVariantIter_autoptr; typedef GList *GVariantIter_listautoptr; typedef GSList *GVariantIter_slistautoptr; typedef GQueue *GVariantIter_queueautoptr;
-# 97 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 99 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic push
-# 97 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 99 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 
-# 97 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 99 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-# 97 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 99 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
  static __attribute__ ((__unused__)) inline void glib_autoptr_clear_GVariantIter (GVariantIter *_ptr) { if (_ptr) (g_variant_iter_free) ((GVariantIter *) _ptr); } static __attribute__ ((__unused__)) inline void glib_autoptr_cleanup_GVariantIter (GVariantIter **_ptr) { glib_autoptr_clear_GVariantIter (*_ptr); } static __attribute__ ((__unused__)) inline void glib_listautoptr_cleanup_GVariantIter (GList **_l) { g_list_free_full (*_l, (GDestroyNotify) (void(*)(void)) g_variant_iter_free); } static __attribute__ ((__unused__)) inline void glib_slistautoptr_cleanup_GVariantIter (GSList **_l) { g_slist_free_full (*_l, (GDestroyNotify) (void(*)(void)) g_variant_iter_free); } static __attribute__ ((__unused__)) inline void glib_queueautoptr_cleanup_GVariantIter (GQueue **_q) { if (*_q) g_queue_free_full (*_q, (GDestroyNotify) (void(*)(void)) g_variant_iter_free); }
-# 97 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 99 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic pop
-# 97 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 99 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 
 typedef GVariantDict *GVariantDict_autoptr; typedef GList *GVariantDict_listautoptr; typedef GSList *GVariantDict_slistautoptr; typedef GQueue *GVariantDict_queueautoptr;
-# 98 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 100 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic push
-# 98 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 100 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 
-# 98 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 100 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-# 98 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 100 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
  static __attribute__ ((__unused__)) inline void glib_autoptr_clear_GVariantDict (GVariantDict *_ptr) { if (_ptr) (g_variant_dict_unref) ((GVariantDict *) _ptr); } static __attribute__ ((__unused__)) inline void glib_autoptr_cleanup_GVariantDict (GVariantDict **_ptr) { glib_autoptr_clear_GVariantDict (*_ptr); } static __attribute__ ((__unused__)) inline void glib_listautoptr_cleanup_GVariantDict (GList **_l) { g_list_free_full (*_l, (GDestroyNotify) (void(*)(void)) g_variant_dict_unref); } static __attribute__ ((__unused__)) inline void glib_slistautoptr_cleanup_GVariantDict (GSList **_l) { g_slist_free_full (*_l, (GDestroyNotify) (void(*)(void)) g_variant_dict_unref); } static __attribute__ ((__unused__)) inline void glib_queueautoptr_cleanup_GVariantDict (GQueue **_q) { if (*_q) g_queue_free_full (*_q, (GDestroyNotify) (void(*)(void)) g_variant_dict_unref); }
-# 98 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 100 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic pop
-# 98 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 100 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 
 
-# 99 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 101 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic push
-# 99 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 101 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 
-# 99 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 101 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-# 99 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 101 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
  static __attribute__ ((__unused__)) inline void glib_auto_cleanup_GVariantDict (GVariantDict *_ptr) { (g_variant_dict_clear) (_ptr); }
-# 99 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 101 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic pop
-# 99 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 101 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 
 typedef GVariantType *GVariantType_autoptr; typedef GList *GVariantType_listautoptr; typedef GSList *GVariantType_slistautoptr; typedef GQueue *GVariantType_queueautoptr;
-# 100 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 102 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic push
-# 100 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 102 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 
-# 100 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 102 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-# 100 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 102 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
  static __attribute__ ((__unused__)) inline void glib_autoptr_clear_GVariantType (GVariantType *_ptr) { if (_ptr) (g_variant_type_free) ((GVariantType *) _ptr); } static __attribute__ ((__unused__)) inline void glib_autoptr_cleanup_GVariantType (GVariantType **_ptr) { glib_autoptr_clear_GVariantType (*_ptr); } static __attribute__ ((__unused__)) inline void glib_listautoptr_cleanup_GVariantType (GList **_l) { g_list_free_full (*_l, (GDestroyNotify) (void(*)(void)) g_variant_type_free); } static __attribute__ ((__unused__)) inline void glib_slistautoptr_cleanup_GVariantType (GSList **_l) { g_slist_free_full (*_l, (GDestroyNotify) (void(*)(void)) g_variant_type_free); } static __attribute__ ((__unused__)) inline void glib_queueautoptr_cleanup_GVariantType (GQueue **_q) { if (*_q) g_queue_free_full (*_q, (GDestroyNotify) (void(*)(void)) g_variant_type_free); }
-# 100 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 102 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic pop
-# 100 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 102 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 
 
-# 101 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 103 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic push
-# 101 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 103 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 
-# 101 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 103 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-# 101 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 103 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
  static __attribute__ ((__unused__)) inline void glib_auto_cleanup_GStrv (GStrv *_ptr) { if (*_ptr != 
-# 101 "/usr/include/glib-2.0/glib/glib-autocleanups.h" 3 4
+# 103 "/usr/include/glib-2.0/glib/glib-autocleanups.h" 3 4
 ((void *)0)
-# 101 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 103 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 ) (g_strfreev) (*_ptr); }
-# 101 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 103 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic pop
-# 101 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 103 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 
 typedef GRefString *GRefString_autoptr; typedef GList *GRefString_listautoptr; typedef GSList *GRefString_slistautoptr; typedef GQueue *GRefString_queueautoptr;
-# 102 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 104 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic push
-# 102 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 104 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 
-# 102 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 104 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-# 102 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 104 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
  static __attribute__ ((__unused__)) inline void glib_autoptr_clear_GRefString (GRefString *_ptr) { if (_ptr) (g_ref_string_release) ((GRefString *) _ptr); } static __attribute__ ((__unused__)) inline void glib_autoptr_cleanup_GRefString (GRefString **_ptr) { glib_autoptr_clear_GRefString (*_ptr); } static __attribute__ ((__unused__)) inline void glib_listautoptr_cleanup_GRefString (GList **_l) { g_list_free_full (*_l, (GDestroyNotify) (void(*)(void)) g_ref_string_release); } static __attribute__ ((__unused__)) inline void glib_slistautoptr_cleanup_GRefString (GSList **_l) { g_slist_free_full (*_l, (GDestroyNotify) (void(*)(void)) g_ref_string_release); } static __attribute__ ((__unused__)) inline void glib_queueautoptr_cleanup_GRefString (GQueue **_q) { if (*_q) g_queue_free_full (*_q, (GDestroyNotify) (void(*)(void)) g_ref_string_release); }
-# 102 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 104 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic pop
-# 102 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 104 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 
 typedef GUri *GUri_autoptr; typedef GList *GUri_listautoptr; typedef GSList *GUri_slistautoptr; typedef GQueue *GUri_queueautoptr;
-# 103 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 105 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic push
-# 103 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 105 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 
-# 103 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 105 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-# 103 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 105 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
  static __attribute__ ((__unused__)) inline void glib_autoptr_clear_GUri (GUri *_ptr) { if (_ptr) (g_uri_unref) ((GUri *) _ptr); } static __attribute__ ((__unused__)) inline void glib_autoptr_cleanup_GUri (GUri **_ptr) { glib_autoptr_clear_GUri (*_ptr); } static __attribute__ ((__unused__)) inline void glib_listautoptr_cleanup_GUri (GList **_l) { g_list_free_full (*_l, (GDestroyNotify) (void(*)(void)) g_uri_unref); } static __attribute__ ((__unused__)) inline void glib_slistautoptr_cleanup_GUri (GSList **_l) { g_slist_free_full (*_l, (GDestroyNotify) (void(*)(void)) g_uri_unref); } static __attribute__ ((__unused__)) inline void glib_queueautoptr_cleanup_GUri (GQueue **_q) { if (*_q) g_queue_free_full (*_q, (GDestroyNotify) (void(*)(void)) g_uri_unref); }
-# 103 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 105 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic pop
-# 103 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 105 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 
 typedef GPathBuf *GPathBuf_autoptr; typedef GList *GPathBuf_listautoptr; typedef GSList *GPathBuf_slistautoptr; typedef GQueue *GPathBuf_queueautoptr;
-# 104 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 106 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic push
-# 104 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 106 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 
-# 104 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 106 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-# 104 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 106 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
  static __attribute__ ((__unused__)) inline void glib_autoptr_clear_GPathBuf (GPathBuf *_ptr) { if (_ptr) (g_path_buf_free) ((GPathBuf *) _ptr); } static __attribute__ ((__unused__)) inline void glib_autoptr_cleanup_GPathBuf (GPathBuf **_ptr) { glib_autoptr_clear_GPathBuf (*_ptr); } static __attribute__ ((__unused__)) inline void glib_listautoptr_cleanup_GPathBuf (GList **_l) { g_list_free_full (*_l, (GDestroyNotify) (void(*)(void)) g_path_buf_free); } static __attribute__ ((__unused__)) inline void glib_slistautoptr_cleanup_GPathBuf (GSList **_l) { g_slist_free_full (*_l, (GDestroyNotify) (void(*)(void)) g_path_buf_free); } static __attribute__ ((__unused__)) inline void glib_queueautoptr_cleanup_GPathBuf (GQueue **_q) { if (*_q) g_queue_free_full (*_q, (GDestroyNotify) (void(*)(void)) g_path_buf_free); }
-# 104 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 106 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic pop
-# 104 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 106 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 
 
-# 105 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 107 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic push
-# 105 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 107 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 
-# 105 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 107 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-# 105 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+# 107 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
  static __attribute__ ((__unused__)) inline void glib_auto_cleanup_GPathBuf (GPathBuf *_ptr) { (g_path_buf_clear) (_ptr); }
-# 105 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
-#pragma GCC diagnostic pop
-# 105 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
-
-
-
 # 107 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 #pragma GCC diagnostic pop
 # 107 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+
+
+
+# 109 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
+#pragma GCC diagnostic pop
+# 109 "/usr/include/glib-2.0/glib/glib-autocleanups.h"
 
 # 118 "/usr/include/glib-2.0/glib.h" 2
 # 31 "/usr/include/glib-2.0/gobject/gbinding.h" 2
@@ -14059,7 +14146,7 @@ typedef GPathBuf *GPathBuf_autoptr; typedef GList *GPathBuf_listautoptr; typedef
 # 28 "/usr/include/glib-2.0/gobject/gtype.h" 2
 
 
-# 425 "/usr/include/glib-2.0/gobject/gtype.h"
+# 427 "/usr/include/glib-2.0/gobject/gtype.h"
 typedef gsize GType;
 
 
@@ -14075,7 +14162,7 @@ typedef struct _GTypeFundamentalInfo GTypeFundamentalInfo;
 typedef struct _GInterfaceInfo GInterfaceInfo;
 typedef struct _GTypeValueTable GTypeValueTable;
 typedef struct _GTypeQuery GTypeQuery;
-# 449 "/usr/include/glib-2.0/gobject/gtype.h"
+# 451 "/usr/include/glib-2.0/gobject/gtype.h"
 struct _GTypeClass
 {
 
@@ -14102,7 +14189,7 @@ struct _GTypeInterface
   GType g_type;
   GType g_instance_type;
 };
-# 486 "/usr/include/glib-2.0/gobject/gtype.h"
+# 488 "/usr/include/glib-2.0/gobject/gtype.h"
 struct _GTypeQuery
 {
   GType type;
@@ -14110,7 +14197,7 @@ struct _GTypeQuery
   guint class_size;
   guint instance_size;
 };
-# 722 "/usr/include/glib-2.0/gobject/gtype.h"
+# 724 "/usr/include/glib-2.0/gobject/gtype.h"
 typedef enum
 {
   G_TYPE_DEBUG_NONE = 0,
@@ -14123,22 +14210,22 @@ typedef enum
 
 
 
-# 733 "/usr/include/glib-2.0/gobject/gtype.h"
+# 735 "/usr/include/glib-2.0/gobject/gtype.h"
 #pragma GCC diagnostic push
-# 733 "/usr/include/glib-2.0/gobject/gtype.h"
+# 735 "/usr/include/glib-2.0/gobject/gtype.h"
 
-# 733 "/usr/include/glib-2.0/gobject/gtype.h"
+# 735 "/usr/include/glib-2.0/gobject/gtype.h"
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-# 733 "/usr/include/glib-2.0/gobject/gtype.h"
+# 735 "/usr/include/glib-2.0/gobject/gtype.h"
 
 __attribute__((__deprecated__)) extern
 void g_type_init (void);
 __attribute__((__deprecated__)) extern
 void g_type_init_with_debug_flags (GTypeDebugFlags debug_flags);
 
-# 738 "/usr/include/glib-2.0/gobject/gtype.h"
+# 740 "/usr/include/glib-2.0/gobject/gtype.h"
 #pragma GCC diagnostic pop
-# 738 "/usr/include/glib-2.0/gobject/gtype.h"
+# 740 "/usr/include/glib-2.0/gobject/gtype.h"
 
 
  extern
@@ -14206,32 +14293,32 @@ void g_type_query (GType type,
 
  extern
 int g_type_get_instance_count (GType type);
-# 823 "/usr/include/glib-2.0/gobject/gtype.h"
+# 825 "/usr/include/glib-2.0/gobject/gtype.h"
 typedef void (*GBaseInitFunc) (gpointer g_class);
-# 837 "/usr/include/glib-2.0/gobject/gtype.h"
+# 839 "/usr/include/glib-2.0/gobject/gtype.h"
 typedef void (*GBaseFinalizeFunc) (gpointer g_class);
-# 941 "/usr/include/glib-2.0/gobject/gtype.h"
+# 943 "/usr/include/glib-2.0/gobject/gtype.h"
 typedef void (*GClassInitFunc) (gpointer g_class,
            gpointer class_data);
-# 958 "/usr/include/glib-2.0/gobject/gtype.h"
+# 960 "/usr/include/glib-2.0/gobject/gtype.h"
 typedef void (*GClassFinalizeFunc) (gpointer g_class,
            gpointer class_data);
-# 980 "/usr/include/glib-2.0/gobject/gtype.h"
+# 982 "/usr/include/glib-2.0/gobject/gtype.h"
 typedef void (*GInstanceInitFunc) (GTypeInstance *instance,
            gpointer g_class);
-# 996 "/usr/include/glib-2.0/gobject/gtype.h"
+# 998 "/usr/include/glib-2.0/gobject/gtype.h"
 typedef void (*GInterfaceInitFunc) (gpointer g_iface,
            gpointer iface_data);
-# 1008 "/usr/include/glib-2.0/gobject/gtype.h"
+# 1010 "/usr/include/glib-2.0/gobject/gtype.h"
 typedef void (*GInterfaceFinalizeFunc) (gpointer g_iface,
            gpointer iface_data);
-# 1030 "/usr/include/glib-2.0/gobject/gtype.h"
+# 1032 "/usr/include/glib-2.0/gobject/gtype.h"
 typedef gboolean (*GTypeClassCacheFunc) (gpointer cache_data,
            GTypeClass *g_class);
-# 1044 "/usr/include/glib-2.0/gobject/gtype.h"
+# 1046 "/usr/include/glib-2.0/gobject/gtype.h"
 typedef void (*GTypeInterfaceCheckFunc) (gpointer check_data,
            gpointer g_iface);
-# 1056 "/usr/include/glib-2.0/gobject/gtype.h"
+# 1058 "/usr/include/glib-2.0/gobject/gtype.h"
 typedef enum
 {
 
@@ -14241,7 +14328,7 @@ typedef enum
   G_TYPE_FLAG_DERIVABLE = (1 << 2),
   G_TYPE_FLAG_DEEP_DERIVABLE = (1 << 3)
 } GTypeFundamentalFlags;
-# 1081 "/usr/include/glib-2.0/gobject/gtype.h"
+# 1083 "/usr/include/glib-2.0/gobject/gtype.h"
 typedef enum
 {
   G_TYPE_FLAG_NONE = 0,
@@ -14250,7 +14337,7 @@ typedef enum
   G_TYPE_FLAG_FINAL = (1 << 6),
   G_TYPE_FLAG_DEPRECATED = (1 << 7)
 } GTypeFlags;
-# 1120 "/usr/include/glib-2.0/gobject/gtype.h"
+# 1122 "/usr/include/glib-2.0/gobject/gtype.h"
 struct _GTypeInfo
 {
 
@@ -14283,33 +14370,67 @@ struct _GTypeFundamentalInfo
 {
   GTypeFundamentalFlags type_flags;
 };
-# 1161 "/usr/include/glib-2.0/gobject/gtype.h"
+# 1163 "/usr/include/glib-2.0/gobject/gtype.h"
 struct _GInterfaceInfo
 {
   GInterfaceInitFunc interface_init;
   GInterfaceFinalizeFunc interface_finalize;
   gpointer interface_data;
 };
-# 1321 "/usr/include/glib-2.0/gobject/gtype.h"
+# 1188 "/usr/include/glib-2.0/gobject/gtype.h"
+
+typedef void (* GTypeValueInitFunc) (GValue *value);
+# 1209 "/usr/include/glib-2.0/gobject/gtype.h"
+
+typedef void (* GTypeValueFreeFunc) (GValue *value);
+# 1232 "/usr/include/glib-2.0/gobject/gtype.h"
+
+typedef void (* GTypeValueCopyFunc) (const GValue *src_value,
+                                     GValue *dest_value);
+# 1253 "/usr/include/glib-2.0/gobject/gtype.h"
+
+typedef gpointer (* GTypeValuePeekPointerFunc) (const GValue *value);
+# 1340 "/usr/include/glib-2.0/gobject/gtype.h"
+
+typedef gchar * (* GTypeValueCollectFunc) (GValue *value,
+                                           guint n_collect_values,
+                                           GTypeCValue *collect_values,
+                                           guint collect_flags);
+# 1402 "/usr/include/glib-2.0/gobject/gtype.h"
+
+typedef gchar * (* GTypeValueLCopyFunc) (const GValue *value,
+                                         guint n_collect_values,
+                                         GTypeCValue *collect_values,
+                                         guint collect_flags);
+# 1438 "/usr/include/glib-2.0/gobject/gtype.h"
+
+# 1438 "/usr/include/glib-2.0/gobject/gtype.h"
+#pragma GCC diagnostic push
+# 1438 "/usr/include/glib-2.0/gobject/gtype.h"
+
+# 1438 "/usr/include/glib-2.0/gobject/gtype.h"
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+# 1438 "/usr/include/glib-2.0/gobject/gtype.h"
+
 struct _GTypeValueTable
 {
-  void (*value_init) (GValue *value);
-  void (*value_free) (GValue *value);
-  void (*value_copy) (const GValue *src_value,
-      GValue *dest_value);
+  GTypeValueInitFunc value_init;
+  GTypeValueFreeFunc value_free;
+  GTypeValueCopyFunc value_copy;
+  GTypeValuePeekPointerFunc value_peek_pointer;
 
-  gpointer (*value_peek_pointer) (const GValue *value);
   const gchar *collect_format;
-  gchar* (*collect_value) (GValue *value,
-      guint n_collect_values,
-      GTypeCValue *collect_values,
-      guint collect_flags);
+  GTypeValueCollectFunc collect_value;
+
   const gchar *lcopy_format;
-  gchar* (*lcopy_value) (const GValue *value,
-      guint n_collect_values,
-      GTypeCValue *collect_values,
-      guint collect_flags);
+  GTypeValueLCopyFunc lcopy_value;
 };
+
+# 1452 "/usr/include/glib-2.0/gobject/gtype.h"
+#pragma GCC diagnostic pop
+# 1452 "/usr/include/glib-2.0/gobject/gtype.h"
+
+
  extern
 GType g_type_register_static (GType parent_type,
       const gchar *type_name,
@@ -14378,7 +14499,7 @@ gint g_type_class_get_instance_private_offset (gpointer g_class);
 void g_type_ensure (GType type);
  extern
 guint g_type_get_type_registration_serial (void);
-# 2459 "/usr/include/glib-2.0/gobject/gtype.h"
+# 2583 "/usr/include/glib-2.0/gobject/gtype.h"
  extern
 GTypePlugin* g_type_get_plugin (GType type);
  extern
@@ -14448,7 +14569,7 @@ gboolean g_type_test_flags (GType type,
 const gchar * g_type_name_from_instance (GTypeInstance *instance);
  extern
 const gchar * g_type_name_from_class (GTypeClass *g_class);
-# 2589 "/usr/include/glib-2.0/gobject/gtype.h"
+# 2734 "/usr/include/glib-2.0/gobject/gtype.h"
 
 # 27 "/usr/include/glib-2.0/gobject/gobject.h" 2
 # 1 "/usr/include/glib-2.0/gobject/gvalue.h" 1
@@ -14547,7 +14668,7 @@ typedef struct _GParamSpec GParamSpec;
 typedef struct _GParamSpecClass GParamSpecClass;
 typedef struct _GParameter GParameter __attribute__((__deprecated__));
 typedef struct _GParamSpecPool GParamSpecPool;
-# 217 "/usr/include/glib-2.0/gobject/gparam.h"
+
 struct _GParamSpec
 {
   GTypeInstance g_type_instance;
@@ -14564,7 +14685,7 @@ struct _GParamSpec
   guint ref_count;
   guint param_id;
 };
-# 255 "/usr/include/glib-2.0/gobject/gparam.h"
+# 245 "/usr/include/glib-2.0/gobject/gparam.h"
 struct _GParamSpecClass
 {
   GTypeClass g_type_class;
@@ -14588,7 +14709,7 @@ struct _GParamSpecClass
 
   gpointer dummy[3];
 };
-# 288 "/usr/include/glib-2.0/gobject/gparam.h"
+# 278 "/usr/include/glib-2.0/gobject/gparam.h"
 struct _GParameter
 {
   const gchar *name;
@@ -14673,7 +14794,7 @@ GQuark g_param_spec_get_name_quark (GParamSpec *pspec);
 
 
 typedef struct _GParamSpecTypeInfo GParamSpecTypeInfo;
-# 397 "/usr/include/glib-2.0/gobject/gparam.h"
+# 387 "/usr/include/glib-2.0/gobject/gparam.h"
 struct _GParamSpecTypeInfo
 {
 
@@ -14733,7 +14854,9 @@ GList* g_param_spec_pool_list_owned (GParamSpecPool *pool,
 GParamSpec** g_param_spec_pool_list (GParamSpecPool *pool,
        GType owner_type,
        guint *n_pspecs_p);
-# 474 "/usr/include/glib-2.0/gobject/gparam.h"
+ extern
+void g_param_spec_pool_free (GParamSpecPool *pool);
+# 465 "/usr/include/glib-2.0/gobject/gparam.h"
 
 # 29 "/usr/include/glib-2.0/gobject/gobject.h" 2
 # 1 "/usr/include/glib-2.0/gobject/gclosure.h" 1
@@ -14772,7 +14895,7 @@ struct _GClosureNotifyData
   gpointer data;
   GClosureNotify notify;
 };
-# 181 "/usr/include/glib-2.0/gobject/gclosure.h"
+
 struct _GClosure
 {
 
@@ -14800,7 +14923,7 @@ struct _GClosure
                     gpointer data;
 
                   GClosureNotifyData *notifiers;
-# 219 "/usr/include/glib-2.0/gobject/gclosure.h"
+# 211 "/usr/include/glib-2.0/gobject/gclosure.h"
 };
 
 
@@ -14873,7 +14996,7 @@ void g_closure_invoke (GClosure *closure,
        guint n_param_values,
        const GValue *param_values,
        gpointer invocation_hint);
-# 303 "/usr/include/glib-2.0/gobject/gclosure.h"
+# 295 "/usr/include/glib-2.0/gobject/gclosure.h"
  extern
 void g_cclosure_marshal_generic (GClosure *closure,
                                  GValue *return_gvalue,
@@ -15551,7 +15674,7 @@ void g_signal_chain_from_overridden (const GValue *instance_and_params,
  extern
 void g_signal_chain_from_overridden_handler (gpointer instance,
                                                ...);
-# 628 "/usr/include/glib-2.0/gobject/gsignal.h"
+# 638 "/usr/include/glib-2.0/gobject/gsignal.h"
  extern
 gboolean g_signal_accumulator_true_handled (GSignalInvocationHint *ihint,
          GValue *return_accu,
@@ -15576,7 +15699,7 @@ void _g_signals_destroy (GType itype);
 # 1 "/usr/include/glib-2.0/gobject/glib-types.h" 1
 # 29 "/usr/include/glib-2.0/gobject/glib-types.h"
 
-# 339 "/usr/include/glib-2.0/gobject/glib-types.h"
+# 375 "/usr/include/glib-2.0/gobject/glib-types.h"
  extern
 GType g_date_get_type (void) __attribute__ ((__const__));
  extern
@@ -15641,6 +15764,14 @@ GType g_tree_get_type (void) __attribute__ ((__const__));
 GType g_pattern_spec_get_type (void) __attribute__ ((__const__));
  extern
 GType g_bookmark_file_get_type (void) __attribute__ ((__const__));
+ extern
+GType g_hmac_get_type (void) __attribute__ ((__const__));
+ extern
+GType g_dir_get_type (void) __attribute__ ((__const__));
+ extern
+GType g_rand_get_type (void) __attribute__ ((__const__));
+ extern
+GType g_strv_builder_get_type (void) __attribute__ ((__const__));
 
 __attribute__((__deprecated__("Use '" "'G_TYPE_VARIANT'" "' instead"))) extern
 GType g_variant_get_gtype (void) __attribute__ ((__const__));
@@ -15722,7 +15853,7 @@ typedef void (*GObjectFinalizeFunc) (GObject *object);
 # 249 "/usr/include/glib-2.0/gobject/gobject.h"
 typedef void (*GWeakNotify) (gpointer data,
       GObject *where_the_object_was);
-# 267 "/usr/include/glib-2.0/gobject/gobject.h"
+
 struct _GObject
 {
   GTypeInstance g_type_instance;
@@ -15731,7 +15862,7 @@ struct _GObject
   guint ref_count;
   GData *qdata;
 };
-# 337 "/usr/include/glib-2.0/gobject/gobject.h"
+# 322 "/usr/include/glib-2.0/gobject/gobject.h"
 struct _GObjectClass
 {
   GTypeClass g_type_class;
@@ -15777,13 +15908,13 @@ struct _GObjectClass
 
   gpointer pdummy[3];
 };
-# 391 "/usr/include/glib-2.0/gobject/gobject.h"
+# 376 "/usr/include/glib-2.0/gobject/gobject.h"
 struct _GObjectConstructParam
 {
   GParamSpec *pspec;
   GValue *value;
 };
-# 413 "/usr/include/glib-2.0/gobject/gobject.h"
+# 398 "/usr/include/glib-2.0/gobject/gobject.h"
  extern
 GType g_initially_unowned_get_type (void);
  extern
@@ -15828,13 +15959,13 @@ GObject* g_object_new_with_properties (GType object_type,
                                                const GValue values[]);
 
 
-# 456 "/usr/include/glib-2.0/gobject/gobject.h"
+# 441 "/usr/include/glib-2.0/gobject/gobject.h"
 #pragma GCC diagnostic push
-# 456 "/usr/include/glib-2.0/gobject/gobject.h"
+# 441 "/usr/include/glib-2.0/gobject/gobject.h"
 
-# 456 "/usr/include/glib-2.0/gobject/gobject.h"
+# 441 "/usr/include/glib-2.0/gobject/gobject.h"
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-# 456 "/usr/include/glib-2.0/gobject/gobject.h"
+# 441 "/usr/include/glib-2.0/gobject/gobject.h"
 
 
 __attribute__((__deprecated__("Use '" "g_object_new_with_properties" "' instead"))) extern
@@ -15843,9 +15974,9 @@ gpointer g_object_newv (GType object_type,
             GParameter *parameters);
 
 
-# 463 "/usr/include/glib-2.0/gobject/gobject.h"
+# 448 "/usr/include/glib-2.0/gobject/gobject.h"
 #pragma GCC diagnostic pop
-# 463 "/usr/include/glib-2.0/gobject/gobject.h"
+# 448 "/usr/include/glib-2.0/gobject/gobject.h"
 
 
  extern
@@ -15928,7 +16059,7 @@ void g_object_add_weak_pointer (GObject *object,
  extern
 void g_object_remove_weak_pointer (GObject *object,
                                                gpointer *weak_pointer_location);
-# 566 "/usr/include/glib-2.0/gobject/gobject.h"
+# 551 "/usr/include/glib-2.0/gobject/gobject.h"
 typedef void (*GToggleNotify) (gpointer data,
           GObject *object,
           gboolean is_last_ref);
@@ -16044,10 +16175,10 @@ void g_value_set_object_take_ownership (GValue *value,
 __attribute__((__deprecated__)) extern
 gsize g_object_compat_control (gsize what,
             gpointer data);
-# 708 "/usr/include/glib-2.0/gobject/gobject.h"
+# 693 "/usr/include/glib-2.0/gobject/gobject.h"
  extern
 void g_clear_object (GObject **object_ptr);
-# 748 "/usr/include/glib-2.0/gobject/gobject.h"
+# 733 "/usr/include/glib-2.0/gobject/gobject.h"
 static inline gboolean
 (g_set_object) (GObject **object_ptr,
                 GObject *new_object)
@@ -16064,59 +16195,59 @@ static inline gboolean
     return (0);
 
   if (new_object != 
-# 763 "/usr/include/glib-2.0/gobject/gobject.h" 3 4
+# 748 "/usr/include/glib-2.0/gobject/gobject.h" 3 4
                    ((void *)0)
-# 763 "/usr/include/glib-2.0/gobject/gobject.h"
+# 748 "/usr/include/glib-2.0/gobject/gobject.h"
                        )
     ((__typeof__ (new_object)) (g_object_ref) (new_object));
 
   *object_ptr = new_object;
 
   if (old_object != 
-# 768 "/usr/include/glib-2.0/gobject/gobject.h" 3 4
+# 753 "/usr/include/glib-2.0/gobject/gobject.h" 3 4
                    ((void *)0)
-# 768 "/usr/include/glib-2.0/gobject/gobject.h"
+# 753 "/usr/include/glib-2.0/gobject/gobject.h"
                        )
     g_object_unref (old_object);
 
   return (!(0));
 }
-# 814 "/usr/include/glib-2.0/gobject/gobject.h"
+# 799 "/usr/include/glib-2.0/gobject/gobject.h"
 static inline void
 (g_assert_finalize_object) (GObject *object)
 {
   gpointer weak_pointer = object;
 
-  do { if ((((g_type_check_instance_is_fundamentally_a ((GTypeInstance*) ((weak_pointer)), (((GType) ((20) << (2))))))))) ; else g_assertion_message (((gchar*) 0), "/usr/include/glib-2.0/gobject/gobject.h", 819, ((const char*) (__func__)), "'" "G_IS_OBJECT (weak_pointer)" "' should be TRUE"); } while (0);
+  do { if ((((g_type_check_instance_is_fundamentally_a ((GTypeInstance*) ((weak_pointer)), (((GType) ((20) << (2))))))))) ; else g_assertion_message (((gchar*) 0), "/usr/include/glib-2.0/gobject/gobject.h", 804, ((const char*) (__func__)), "'" "G_IS_OBJECT (weak_pointer)" "' should be TRUE"); } while (0);
   g_object_add_weak_pointer (object, &weak_pointer);
   g_object_unref (weak_pointer);
   do { if ((weak_pointer) == 
-# 822 "/usr/include/glib-2.0/gobject/gobject.h" 3 4
+# 807 "/usr/include/glib-2.0/gobject/gobject.h" 3 4
  ((void *)0)
-# 822 "/usr/include/glib-2.0/gobject/gobject.h"
- ) ; else g_assertion_message (((gchar*) 0), "/usr/include/glib-2.0/gobject/gobject.h", 822, ((const char*) (__func__)), "'" "weak_pointer" "' should be NULL"); } while (0);
+# 807 "/usr/include/glib-2.0/gobject/gobject.h"
+ ) ; else g_assertion_message (((gchar*) 0), "/usr/include/glib-2.0/gobject/gobject.h", 807, ((const char*) (__func__)), "'" "weak_pointer" "' should be NULL"); } while (0);
 }
-# 849 "/usr/include/glib-2.0/gobject/gobject.h"
+# 834 "/usr/include/glib-2.0/gobject/gobject.h"
 static inline void
 (g_clear_weak_pointer) (gpointer *weak_pointer_location)
 {
   GObject *object = (GObject *) *weak_pointer_location;
 
   if (object != 
-# 854 "/usr/include/glib-2.0/gobject/gobject.h" 3 4
+# 839 "/usr/include/glib-2.0/gobject/gobject.h" 3 4
                ((void *)0)
-# 854 "/usr/include/glib-2.0/gobject/gobject.h"
+# 839 "/usr/include/glib-2.0/gobject/gobject.h"
                    )
     {
       g_object_remove_weak_pointer (object, weak_pointer_location);
       *weak_pointer_location = 
-# 857 "/usr/include/glib-2.0/gobject/gobject.h" 3 4
+# 842 "/usr/include/glib-2.0/gobject/gobject.h" 3 4
                               ((void *)0)
-# 857 "/usr/include/glib-2.0/gobject/gobject.h"
+# 842 "/usr/include/glib-2.0/gobject/gobject.h"
                                   ;
     }
 }
-# 904 "/usr/include/glib-2.0/gobject/gobject.h"
+# 889 "/usr/include/glib-2.0/gobject/gobject.h"
 static inline gboolean
 (g_set_weak_pointer) (gpointer *weak_pointer_location,
                       GObject *new_object)
@@ -16132,18 +16263,18 @@ static inline gboolean
     return (0);
 
   if (old_object != 
-# 918 "/usr/include/glib-2.0/gobject/gobject.h" 3 4
+# 903 "/usr/include/glib-2.0/gobject/gobject.h" 3 4
                    ((void *)0)
-# 918 "/usr/include/glib-2.0/gobject/gobject.h"
+# 903 "/usr/include/glib-2.0/gobject/gobject.h"
                        )
     g_object_remove_weak_pointer (old_object, weak_pointer_location);
 
   *weak_pointer_location = new_object;
 
   if (new_object != 
-# 923 "/usr/include/glib-2.0/gobject/gobject.h" 3 4
+# 908 "/usr/include/glib-2.0/gobject/gobject.h" 3 4
                    ((void *)0)
-# 923 "/usr/include/glib-2.0/gobject/gobject.h"
+# 908 "/usr/include/glib-2.0/gobject/gobject.h"
                        )
     g_object_add_weak_pointer (new_object, weak_pointer_location);
 
@@ -16176,14 +16307,20 @@ void g_weak_ref_set (GWeakRef *weak_ref,
 # 32 "/usr/include/glib-2.0/gobject/gbinding.h" 2
 
 
-# 49 "/usr/include/glib-2.0/gobject/gbinding.h"
+
+
+
+
+
+
+
 typedef struct _GBinding GBinding;
-# 71 "/usr/include/glib-2.0/gobject/gbinding.h"
+# 63 "/usr/include/glib-2.0/gobject/gbinding.h"
 typedef gboolean (* GBindingTransformFunc) (GBinding *binding,
                                             const GValue *from_value,
                                             GValue *to_value,
                                             gpointer user_data);
-# 99 "/usr/include/glib-2.0/gobject/gbinding.h"
+# 91 "/usr/include/glib-2.0/gobject/gbinding.h"
 typedef enum {
   G_BINDING_DEFAULT = 0,
 
@@ -16244,7 +16381,11 @@ GBinding *g_object_bind_property_with_closures (gpointer source,
 # 1 "/usr/include/glib-2.0/gobject/gbindinggroup.h" 1
 # 33 "/usr/include/glib-2.0/gobject/gbindinggroup.h"
 
-# 47 "/usr/include/glib-2.0/gobject/gbindinggroup.h"
+
+
+
+
+
 typedef struct _GBindingGroup GBindingGroup;
 
  extern
@@ -16828,7 +16969,11 @@ GParamSpec* g_param_spec_variant (const gchar *name,
 # 1 "/usr/include/glib-2.0/gobject/gsignalgroup.h" 1
 # 33 "/usr/include/glib-2.0/gobject/gsignalgroup.h"
 
-# 47 "/usr/include/glib-2.0/gobject/gsignalgroup.h"
+
+
+
+
+
 typedef struct _GSignalGroup GSignalGroup;
 
  extern
@@ -16914,7 +17059,7 @@ typedef GTypeModule *GTypeModule_autoptr; typedef GList *GTypeModule_listautoptr
 #pragma GCC diagnostic pop
 # 41 "/usr/include/glib-2.0/gobject/gtypemodule.h"
 
-# 50 "/usr/include/glib-2.0/gobject/gtypemodule.h"
+
 struct _GTypeModule
 {
   GObject parent_instance;
@@ -16926,7 +17071,7 @@ struct _GTypeModule
 
   gchar *name;
 };
-# 72 "/usr/include/glib-2.0/gobject/gtypemodule.h"
+# 65 "/usr/include/glib-2.0/gobject/gtypemodule.h"
 struct _GTypeModuleClass
 {
   GObjectClass parent_class;
@@ -16942,7 +17087,7 @@ struct _GTypeModuleClass
   void (*reserved3) (void);
   void (*reserved4) (void);
 };
-# 271 "/usr/include/glib-2.0/gobject/gtypemodule.h"
+# 264 "/usr/include/glib-2.0/gobject/gtypemodule.h"
  extern
 GType g_type_module_get_type (void) __attribute__ ((__const__));
  extern
@@ -17004,7 +17149,7 @@ typedef void (*GTypePluginCompleteInterfaceInfo) (GTypePlugin *plugin,
          GType instance_type,
          GType interface_type,
          GInterfaceInfo *info);
-# 103 "/usr/include/glib-2.0/gobject/gtypeplugin.h"
+# 97 "/usr/include/glib-2.0/gobject/gtypeplugin.h"
 struct _GTypePluginClass
 {
 
@@ -17043,13 +17188,6 @@ void g_type_plugin_complete_interface_info (GTypePlugin *plugin,
 
 # 43 "/usr/include/glib-2.0/gobject/gvaluearray.h"
 typedef struct _GValueArray GValueArray;
-
-
-
-
-
-
-
 struct _GValueArray
 {
   guint n_values;
@@ -17184,6 +17322,8 @@ const gchar * g_value_get_string (const GValue *value);
  extern
 gchar* g_value_dup_string (const GValue *value);
  extern
+gchar* g_value_steal_string (GValue *value);
+ extern
 void g_value_set_pointer (GValue *value,
        gpointer v_pointer);
  extern
@@ -17222,7 +17362,7 @@ void g_value_take_string (GValue *value,
 __attribute__((__deprecated__("Use '" "g_value_take_string" "' instead"))) extern
 void g_value_set_string_take_ownership (GValue *value,
                                                  gchar *v_string);
-# 313 "/usr/include/glib-2.0/gobject/gvaluetypes.h"
+# 315 "/usr/include/glib-2.0/gobject/gvaluetypes.h"
 typedef gchar* gchararray;
 
 
@@ -17230,227 +17370,160 @@ typedef gchar* gchararray;
 # 41 "/usr/include/glib-2.0/glib-object.h" 2
 
 # 1 "/usr/include/glib-2.0/gobject/gobject-autocleanups.h" 1
-# 26 "/usr/include/glib-2.0/gobject/gobject-autocleanups.h"
+# 28 "/usr/include/glib-2.0/gobject/gobject-autocleanups.h"
 typedef GClosure *GClosure_autoptr; typedef GList *GClosure_listautoptr; typedef GSList *GClosure_slistautoptr; typedef GQueue *GClosure_queueautoptr;
-# 26 "/usr/include/glib-2.0/gobject/gobject-autocleanups.h"
+# 28 "/usr/include/glib-2.0/gobject/gobject-autocleanups.h"
 #pragma GCC diagnostic push
-# 26 "/usr/include/glib-2.0/gobject/gobject-autocleanups.h"
+# 28 "/usr/include/glib-2.0/gobject/gobject-autocleanups.h"
 
-# 26 "/usr/include/glib-2.0/gobject/gobject-autocleanups.h"
+# 28 "/usr/include/glib-2.0/gobject/gobject-autocleanups.h"
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-# 26 "/usr/include/glib-2.0/gobject/gobject-autocleanups.h"
+# 28 "/usr/include/glib-2.0/gobject/gobject-autocleanups.h"
  static __attribute__ ((__unused__)) inline void glib_autoptr_clear_GClosure (GClosure *_ptr) { if (_ptr) (g_closure_unref) ((GClosure *) _ptr); } static __attribute__ ((__unused__)) inline void glib_autoptr_cleanup_GClosure (GClosure **_ptr) { glib_autoptr_clear_GClosure (*_ptr); } static __attribute__ ((__unused__)) inline void glib_listautoptr_cleanup_GClosure (GList **_l) { g_list_free_full (*_l, (GDestroyNotify) (void(*)(void)) g_closure_unref); } static __attribute__ ((__unused__)) inline void glib_slistautoptr_cleanup_GClosure (GSList **_l) { g_slist_free_full (*_l, (GDestroyNotify) (void(*)(void)) g_closure_unref); } static __attribute__ ((__unused__)) inline void glib_queueautoptr_cleanup_GClosure (GQueue **_q) { if (*_q) g_queue_free_full (*_q, (GDestroyNotify) (void(*)(void)) g_closure_unref); }
-# 26 "/usr/include/glib-2.0/gobject/gobject-autocleanups.h"
+# 28 "/usr/include/glib-2.0/gobject/gobject-autocleanups.h"
 #pragma GCC diagnostic pop
-# 26 "/usr/include/glib-2.0/gobject/gobject-autocleanups.h"
+# 28 "/usr/include/glib-2.0/gobject/gobject-autocleanups.h"
 
 typedef GEnumClass *GEnumClass_autoptr; typedef GList *GEnumClass_listautoptr; typedef GSList *GEnumClass_slistautoptr; typedef GQueue *GEnumClass_queueautoptr;
-# 27 "/usr/include/glib-2.0/gobject/gobject-autocleanups.h"
+# 29 "/usr/include/glib-2.0/gobject/gobject-autocleanups.h"
 #pragma GCC diagnostic push
-# 27 "/usr/include/glib-2.0/gobject/gobject-autocleanups.h"
+# 29 "/usr/include/glib-2.0/gobject/gobject-autocleanups.h"
 
-# 27 "/usr/include/glib-2.0/gobject/gobject-autocleanups.h"
+# 29 "/usr/include/glib-2.0/gobject/gobject-autocleanups.h"
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-# 27 "/usr/include/glib-2.0/gobject/gobject-autocleanups.h"
+# 29 "/usr/include/glib-2.0/gobject/gobject-autocleanups.h"
  static __attribute__ ((__unused__)) inline void glib_autoptr_clear_GEnumClass (GEnumClass *_ptr) { if (_ptr) (g_type_class_unref) ((GEnumClass *) _ptr); } static __attribute__ ((__unused__)) inline void glib_autoptr_cleanup_GEnumClass (GEnumClass **_ptr) { glib_autoptr_clear_GEnumClass (*_ptr); } static __attribute__ ((__unused__)) inline void glib_listautoptr_cleanup_GEnumClass (GList **_l) { g_list_free_full (*_l, (GDestroyNotify) (void(*)(void)) g_type_class_unref); } static __attribute__ ((__unused__)) inline void glib_slistautoptr_cleanup_GEnumClass (GSList **_l) { g_slist_free_full (*_l, (GDestroyNotify) (void(*)(void)) g_type_class_unref); } static __attribute__ ((__unused__)) inline void glib_queueautoptr_cleanup_GEnumClass (GQueue **_q) { if (*_q) g_queue_free_full (*_q, (GDestroyNotify) (void(*)(void)) g_type_class_unref); }
-# 27 "/usr/include/glib-2.0/gobject/gobject-autocleanups.h"
+# 29 "/usr/include/glib-2.0/gobject/gobject-autocleanups.h"
 #pragma GCC diagnostic pop
-# 27 "/usr/include/glib-2.0/gobject/gobject-autocleanups.h"
+# 29 "/usr/include/glib-2.0/gobject/gobject-autocleanups.h"
 
 typedef GFlagsClass *GFlagsClass_autoptr; typedef GList *GFlagsClass_listautoptr; typedef GSList *GFlagsClass_slistautoptr; typedef GQueue *GFlagsClass_queueautoptr;
-# 28 "/usr/include/glib-2.0/gobject/gobject-autocleanups.h"
+# 30 "/usr/include/glib-2.0/gobject/gobject-autocleanups.h"
 #pragma GCC diagnostic push
-# 28 "/usr/include/glib-2.0/gobject/gobject-autocleanups.h"
+# 30 "/usr/include/glib-2.0/gobject/gobject-autocleanups.h"
 
-# 28 "/usr/include/glib-2.0/gobject/gobject-autocleanups.h"
+# 30 "/usr/include/glib-2.0/gobject/gobject-autocleanups.h"
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-# 28 "/usr/include/glib-2.0/gobject/gobject-autocleanups.h"
+# 30 "/usr/include/glib-2.0/gobject/gobject-autocleanups.h"
  static __attribute__ ((__unused__)) inline void glib_autoptr_clear_GFlagsClass (GFlagsClass *_ptr) { if (_ptr) (g_type_class_unref) ((GFlagsClass *) _ptr); } static __attribute__ ((__unused__)) inline void glib_autoptr_cleanup_GFlagsClass (GFlagsClass **_ptr) { glib_autoptr_clear_GFlagsClass (*_ptr); } static __attribute__ ((__unused__)) inline void glib_listautoptr_cleanup_GFlagsClass (GList **_l) { g_list_free_full (*_l, (GDestroyNotify) (void(*)(void)) g_type_class_unref); } static __attribute__ ((__unused__)) inline void glib_slistautoptr_cleanup_GFlagsClass (GSList **_l) { g_slist_free_full (*_l, (GDestroyNotify) (void(*)(void)) g_type_class_unref); } static __attribute__ ((__unused__)) inline void glib_queueautoptr_cleanup_GFlagsClass (GQueue **_q) { if (*_q) g_queue_free_full (*_q, (GDestroyNotify) (void(*)(void)) g_type_class_unref); }
-# 28 "/usr/include/glib-2.0/gobject/gobject-autocleanups.h"
+# 30 "/usr/include/glib-2.0/gobject/gobject-autocleanups.h"
 #pragma GCC diagnostic pop
-# 28 "/usr/include/glib-2.0/gobject/gobject-autocleanups.h"
+# 30 "/usr/include/glib-2.0/gobject/gobject-autocleanups.h"
 
 typedef GObject *GObject_autoptr; typedef GList *GObject_listautoptr; typedef GSList *GObject_slistautoptr; typedef GQueue *GObject_queueautoptr;
-# 29 "/usr/include/glib-2.0/gobject/gobject-autocleanups.h"
+# 31 "/usr/include/glib-2.0/gobject/gobject-autocleanups.h"
 #pragma GCC diagnostic push
-# 29 "/usr/include/glib-2.0/gobject/gobject-autocleanups.h"
+# 31 "/usr/include/glib-2.0/gobject/gobject-autocleanups.h"
 
-# 29 "/usr/include/glib-2.0/gobject/gobject-autocleanups.h"
+# 31 "/usr/include/glib-2.0/gobject/gobject-autocleanups.h"
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-# 29 "/usr/include/glib-2.0/gobject/gobject-autocleanups.h"
+# 31 "/usr/include/glib-2.0/gobject/gobject-autocleanups.h"
  static __attribute__ ((__unused__)) inline void glib_autoptr_clear_GObject (GObject *_ptr) { if (_ptr) (g_object_unref) ((GObject *) _ptr); } static __attribute__ ((__unused__)) inline void glib_autoptr_cleanup_GObject (GObject **_ptr) { glib_autoptr_clear_GObject (*_ptr); } static __attribute__ ((__unused__)) inline void glib_listautoptr_cleanup_GObject (GList **_l) { g_list_free_full (*_l, (GDestroyNotify) (void(*)(void)) g_object_unref); } static __attribute__ ((__unused__)) inline void glib_slistautoptr_cleanup_GObject (GSList **_l) { g_slist_free_full (*_l, (GDestroyNotify) (void(*)(void)) g_object_unref); } static __attribute__ ((__unused__)) inline void glib_queueautoptr_cleanup_GObject (GQueue **_q) { if (*_q) g_queue_free_full (*_q, (GDestroyNotify) (void(*)(void)) g_object_unref); }
-# 29 "/usr/include/glib-2.0/gobject/gobject-autocleanups.h"
+# 31 "/usr/include/glib-2.0/gobject/gobject-autocleanups.h"
 #pragma GCC diagnostic pop
-# 29 "/usr/include/glib-2.0/gobject/gobject-autocleanups.h"
+# 31 "/usr/include/glib-2.0/gobject/gobject-autocleanups.h"
 
 typedef GInitiallyUnowned *GInitiallyUnowned_autoptr; typedef GList *GInitiallyUnowned_listautoptr; typedef GSList *GInitiallyUnowned_slistautoptr; typedef GQueue *GInitiallyUnowned_queueautoptr;
-# 30 "/usr/include/glib-2.0/gobject/gobject-autocleanups.h"
+# 32 "/usr/include/glib-2.0/gobject/gobject-autocleanups.h"
 #pragma GCC diagnostic push
-# 30 "/usr/include/glib-2.0/gobject/gobject-autocleanups.h"
+# 32 "/usr/include/glib-2.0/gobject/gobject-autocleanups.h"
 
-# 30 "/usr/include/glib-2.0/gobject/gobject-autocleanups.h"
+# 32 "/usr/include/glib-2.0/gobject/gobject-autocleanups.h"
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-# 30 "/usr/include/glib-2.0/gobject/gobject-autocleanups.h"
+# 32 "/usr/include/glib-2.0/gobject/gobject-autocleanups.h"
  static __attribute__ ((__unused__)) inline void glib_autoptr_clear_GInitiallyUnowned (GInitiallyUnowned *_ptr) { if (_ptr) (g_object_unref) ((GInitiallyUnowned *) _ptr); } static __attribute__ ((__unused__)) inline void glib_autoptr_cleanup_GInitiallyUnowned (GInitiallyUnowned **_ptr) { glib_autoptr_clear_GInitiallyUnowned (*_ptr); } static __attribute__ ((__unused__)) inline void glib_listautoptr_cleanup_GInitiallyUnowned (GList **_l) { g_list_free_full (*_l, (GDestroyNotify) (void(*)(void)) g_object_unref); } static __attribute__ ((__unused__)) inline void glib_slistautoptr_cleanup_GInitiallyUnowned (GSList **_l) { g_slist_free_full (*_l, (GDestroyNotify) (void(*)(void)) g_object_unref); } static __attribute__ ((__unused__)) inline void glib_queueautoptr_cleanup_GInitiallyUnowned (GQueue **_q) { if (*_q) g_queue_free_full (*_q, (GDestroyNotify) (void(*)(void)) g_object_unref); }
-# 30 "/usr/include/glib-2.0/gobject/gobject-autocleanups.h"
+# 32 "/usr/include/glib-2.0/gobject/gobject-autocleanups.h"
 #pragma GCC diagnostic pop
-# 30 "/usr/include/glib-2.0/gobject/gobject-autocleanups.h"
+# 32 "/usr/include/glib-2.0/gobject/gobject-autocleanups.h"
 
 typedef GParamSpec *GParamSpec_autoptr; typedef GList *GParamSpec_listautoptr; typedef GSList *GParamSpec_slistautoptr; typedef GQueue *GParamSpec_queueautoptr;
-# 31 "/usr/include/glib-2.0/gobject/gobject-autocleanups.h"
+# 33 "/usr/include/glib-2.0/gobject/gobject-autocleanups.h"
 #pragma GCC diagnostic push
-# 31 "/usr/include/glib-2.0/gobject/gobject-autocleanups.h"
+# 33 "/usr/include/glib-2.0/gobject/gobject-autocleanups.h"
 
-# 31 "/usr/include/glib-2.0/gobject/gobject-autocleanups.h"
+# 33 "/usr/include/glib-2.0/gobject/gobject-autocleanups.h"
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-# 31 "/usr/include/glib-2.0/gobject/gobject-autocleanups.h"
+# 33 "/usr/include/glib-2.0/gobject/gobject-autocleanups.h"
  static __attribute__ ((__unused__)) inline void glib_autoptr_clear_GParamSpec (GParamSpec *_ptr) { if (_ptr) (g_param_spec_unref) ((GParamSpec *) _ptr); } static __attribute__ ((__unused__)) inline void glib_autoptr_cleanup_GParamSpec (GParamSpec **_ptr) { glib_autoptr_clear_GParamSpec (*_ptr); } static __attribute__ ((__unused__)) inline void glib_listautoptr_cleanup_GParamSpec (GList **_l) { g_list_free_full (*_l, (GDestroyNotify) (void(*)(void)) g_param_spec_unref); } static __attribute__ ((__unused__)) inline void glib_slistautoptr_cleanup_GParamSpec (GSList **_l) { g_slist_free_full (*_l, (GDestroyNotify) (void(*)(void)) g_param_spec_unref); } static __attribute__ ((__unused__)) inline void glib_queueautoptr_cleanup_GParamSpec (GQueue **_q) { if (*_q) g_queue_free_full (*_q, (GDestroyNotify) (void(*)(void)) g_param_spec_unref); }
-# 31 "/usr/include/glib-2.0/gobject/gobject-autocleanups.h"
+# 33 "/usr/include/glib-2.0/gobject/gobject-autocleanups.h"
 #pragma GCC diagnostic pop
-# 31 "/usr/include/glib-2.0/gobject/gobject-autocleanups.h"
+# 33 "/usr/include/glib-2.0/gobject/gobject-autocleanups.h"
 
 typedef GTypeClass *GTypeClass_autoptr; typedef GList *GTypeClass_listautoptr; typedef GSList *GTypeClass_slistautoptr; typedef GQueue *GTypeClass_queueautoptr;
-# 32 "/usr/include/glib-2.0/gobject/gobject-autocleanups.h"
+# 34 "/usr/include/glib-2.0/gobject/gobject-autocleanups.h"
 #pragma GCC diagnostic push
-# 32 "/usr/include/glib-2.0/gobject/gobject-autocleanups.h"
+# 34 "/usr/include/glib-2.0/gobject/gobject-autocleanups.h"
 
-# 32 "/usr/include/glib-2.0/gobject/gobject-autocleanups.h"
+# 34 "/usr/include/glib-2.0/gobject/gobject-autocleanups.h"
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-# 32 "/usr/include/glib-2.0/gobject/gobject-autocleanups.h"
+# 34 "/usr/include/glib-2.0/gobject/gobject-autocleanups.h"
  static __attribute__ ((__unused__)) inline void glib_autoptr_clear_GTypeClass (GTypeClass *_ptr) { if (_ptr) (g_type_class_unref) ((GTypeClass *) _ptr); } static __attribute__ ((__unused__)) inline void glib_autoptr_cleanup_GTypeClass (GTypeClass **_ptr) { glib_autoptr_clear_GTypeClass (*_ptr); } static __attribute__ ((__unused__)) inline void glib_listautoptr_cleanup_GTypeClass (GList **_l) { g_list_free_full (*_l, (GDestroyNotify) (void(*)(void)) g_type_class_unref); } static __attribute__ ((__unused__)) inline void glib_slistautoptr_cleanup_GTypeClass (GSList **_l) { g_slist_free_full (*_l, (GDestroyNotify) (void(*)(void)) g_type_class_unref); } static __attribute__ ((__unused__)) inline void glib_queueautoptr_cleanup_GTypeClass (GQueue **_q) { if (*_q) g_queue_free_full (*_q, (GDestroyNotify) (void(*)(void)) g_type_class_unref); }
-# 32 "/usr/include/glib-2.0/gobject/gobject-autocleanups.h"
+# 34 "/usr/include/glib-2.0/gobject/gobject-autocleanups.h"
 #pragma GCC diagnostic pop
-# 32 "/usr/include/glib-2.0/gobject/gobject-autocleanups.h"
+# 34 "/usr/include/glib-2.0/gobject/gobject-autocleanups.h"
 
 
-# 33 "/usr/include/glib-2.0/gobject/gobject-autocleanups.h"
+# 35 "/usr/include/glib-2.0/gobject/gobject-autocleanups.h"
 #pragma GCC diagnostic push
-# 33 "/usr/include/glib-2.0/gobject/gobject-autocleanups.h"
+# 35 "/usr/include/glib-2.0/gobject/gobject-autocleanups.h"
 
-# 33 "/usr/include/glib-2.0/gobject/gobject-autocleanups.h"
+# 35 "/usr/include/glib-2.0/gobject/gobject-autocleanups.h"
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-# 33 "/usr/include/glib-2.0/gobject/gobject-autocleanups.h"
+# 35 "/usr/include/glib-2.0/gobject/gobject-autocleanups.h"
  static __attribute__ ((__unused__)) inline void glib_auto_cleanup_GValue (GValue *_ptr) { (g_value_unset) (_ptr); }
-# 33 "/usr/include/glib-2.0/gobject/gobject-autocleanups.h"
+# 35 "/usr/include/glib-2.0/gobject/gobject-autocleanups.h"
 #pragma GCC diagnostic pop
-# 33 "/usr/include/glib-2.0/gobject/gobject-autocleanups.h"
+# 35 "/usr/include/glib-2.0/gobject/gobject-autocleanups.h"
 
 # 43 "/usr/include/glib-2.0/glib-object.h" 2
-# 2 "/home/lieryang/Desktop/gobject-study/section-two/sec10/boxed_types.c" 2
+# 2 "pointer_types.c" 2
 
+typedef struct _GstStaticPadTemplate GstStaticPadTemplate;
 
-GType my_struct_get_type (void) __attribute__ ((__const__));
-
-typedef struct _MyStruct MyStruct;
-
-struct _MyStruct {
-  char *name;
-  int id;
+struct _GstStaticPadTemplate
+{
+  gint a;
 };
 
-MyStruct * my_struct_new (void);
-void my_struct_free (MyStruct *self);
-MyStruct * my_struct_copy (MyStruct *self);
 
-/**********************************G_DEFINE_BOXED_TYPE_WITH_CODE (MyStruct, my_struct, my_struct_copy, my_struct_free, g_print("hello\n"))展开***************************************** */
+/******************G_DEFINE_POINTER_TYPE (GstStaticPadTemplate, gst_static_pad_template)展开******************* */
 
-static GType my_struct_get_type_once (void); 
+static GType gst_static_pad_template_get_type_once (void); 
 
-GType 
-my_struct_get_type (void) { 
-  static gsize static_g_define_type_id = 0; 
+GType gst_static_pad_template_get_type (void) { 
+  static GType static_g_define_type_id = 0;
   if ((__extension__ ({ 
     _Static_assert (sizeof *(&static_g_define_type_id) == sizeof (gpointer), "Expression evaluates to false"); 
-    (void) (0 ? (gpointer) *(&static_g_define_type_id) : ((void *)0)); 
+    (void) (0 ? (gpointer) * (&static_g_define_type_id) : ((void *)0)); 
     (!(__extension__ ({ 
-      _Static_assert (sizeof *(&static_g_define_type_id) == sizeof (gpointer), "Expression evaluates to false"); 
-      __typeof__ (*(&static_g_define_type_id)) gapg_temp_newval; 
-      __typeof__ ((&static_g_define_type_id)) gapg_temp_atomic = (&static_g_define_type_id); 
-      __atomic_load (gapg_temp_atomic, &gapg_temp_newval, 5); 
-      gapg_temp_newval; 
-      })) && g_once_init_enter (&static_g_define_type_id)); 
-  }))) { 
-    
-    GType g_define_type_id = my_struct_get_type_once (); 
-    
-    (__extension__ ({ _Static_assert (sizeof *(&static_g_define_type_id) == sizeof (gpointer), "Expression evaluates to false"); 
-      0 ? (void) (*(&static_g_define_type_id) = (g_define_type_id)) : (void) 0; 
-      g_once_init_leave ((&static_g_define_type_id), (gsize) (g_define_type_id)); 
-      })
-    );
-  } 
-  
+                        _Static_assert (sizeof *(&static_g_define_type_id) == sizeof (gpointer), "Expression evaluates to false"); 
+                        __typeof__ (*(&static_g_define_type_id)) gapg_temp_newval; 
+                        __typeof__ ((&static_g_define_type_id)) gapg_temp_atomic = (&static_g_define_type_id); 
+                        __atomic_load (gapg_temp_atomic, &gapg_temp_newval, 5); gapg_temp_newval; 
+                      })) && g_once_init_enter_pointer (&static_g_define_type_id)); 
+    })) ) { 
+      GType g_define_type_id = gst_static_pad_template_get_type_once (); 
+      (__extension__ ({ 
+        _Static_assert (sizeof *(&static_g_define_type_id) == sizeof (gpointer), "Expression evaluates to false"); 0 ? (void) (*(&static_g_define_type_id) = (g_define_type_id)) : (void) 0; 
+        g_once_init_leave_pointer ((&static_g_define_type_id), (gpointer) (guintptr) (g_define_type_id)); })) ; 
+    } 
+        
   return static_g_define_type_id; 
-
 } 
 
 __attribute__ ((__noinline__)) static GType 
-my_struct_get_type_once (void) { 
-  GType (* _g_register_boxed) (const gchar *, 
-                               union { MyStruct * (*do_copy_type) (MyStruct *); 
-                                       MyStruct * (*do_const_copy_type) (const MyStruct *); 
-                                       GBoxedCopyFunc do_copy_boxed; 
-                                     } __attribute__((__transparent_union__)), 
-                               union { void (* do_free_type) (MyStruct *); 
-                                       GBoxedFreeFunc do_free_boxed; 
-                                     } __attribute__((__transparent_union__)) )  
-                                     
-                             = g_boxed_type_register_static; 
-                             
-  GType g_define_type_id = _g_register_boxed (g_intern_static_string ("MyStruct"), my_struct_copy, my_struct_free); 
-  
-  { {
-    
-    g_print("hello\n");
-    
-  } } 
-  
-  return g_define_type_id; 
-  
+gst_static_pad_template_get_type_once (void) {
+   
+   GType g_define_type_id = g_pointer_type_register_static (g_intern_static_string ("GstStaticPadTemplate")); 
+   
+   { {{};} } 
+   
+   return g_define_type_id; 
 };
 
-/**********************************G_DEFINE_BOXED_TYPE_WITH_CODE (MyStruct, my_struct, my_struct_copy, my_struct_free, g_print("hello\n"))展开结束***************************************** */
-
-MyStruct *
-my_struct_new (void) {
-  MyStruct *mystrcut = ((MyStruct *) g_malloc_n ((1), sizeof (MyStruct)));
-  mystrcut->name = g_malloc0 (50);
-  return mystrcut;
-}
-
-MyStruct *
-my_struct_new_with_name (char *name) {
-  MyStruct *mystrcut = ((MyStruct *) g_malloc_n ((1), sizeof (MyStruct)));
-  mystrcut->name = g_malloc0 (50);
-  memcpy (mystrcut->name, name, sizeof(name));
-  return mystrcut;
-}
-
-void
-my_struct_free (MyStruct *self){
-  g_free (self->name);
-  g_free (self);
-  g_print ("%s\n", __func__);
-}
-
-MyStruct *
-my_struct_copy (MyStruct *self){
-
-}
+/******************G_DEFINE_POINTER_TYPE (GstStaticPadTemplate, gst_static_pad_template)展开结束******************* */
 
 int
-main (int argc, char* argv[]) {
+main () {
 
-  g_print ("%d\n", my_struct_get_type());
-
-  MyStruct *myS1 = my_struct_new_with_name ("Xiaoli\n");
-
-  g_print ("%s", myS1->name);
-
-
-  my_struct_free (myS1);
-
-
-
-  return 0;
 }
