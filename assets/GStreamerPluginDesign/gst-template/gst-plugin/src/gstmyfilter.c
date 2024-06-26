@@ -46,25 +46,25 @@ static GstStaticPadTemplate sink_factory = GST_STATIC_PAD_TEMPLATE ("sink",
     GST_STATIC_CAPS ("ANY")
     );
 
-static GstStaticPadTemplate src_factory = 
+static GstStaticPadTemplate src_factory =  GST_STATIC_PAD_TEMPLATE ("src",
+    GST_PAD_SRC,
+    GST_PAD_ALWAYS,
+    GST_STATIC_CAPS ("ANY")
+    );
+
 // GST_STATIC_PAD_TEMPLATE ("src",
 //     GST_PAD_SRC,
 //     GST_PAD_ALWAYS,
-//     GST_STATIC_CAPS ("ANY")
+//     GST_STATIC_CAPS
+//     ( "audio/x-adpcm, layout = (string) swf, channels = (int) { 1, 2 }, rate = (int) { 5512, 11025, 22050, 44100 }; "
+//       "audio/mpeg, mpegversion = (int) 1, layer = (int) 3, channels = (int) { 1, 2 }, rate = (int) { 5512, 8000, 11025, 22050, 44100 }, parsed = (boolean) TRUE; "
+//       "audio/mpeg, mpegversion = (int) { 4, 2 }, stream-format = (string) raw; "
+//       "audio/x-nellymoser, channels = (int) { 1, 2 }, rate = (int) { 5512, 8000, 11025, 16000, 22050, 44100 }; "
+//       "audio/x-raw, format = (string) { U8, S16LE}, layout = (string) interleaved, channels = (int) { 1, 2 }, rate = (int) { 5512, 11025, 22050, 44100 }; "
+//       "audio/x-alaw, channels = (int) { 1, 2 }, rate = (int) 8000; "
+//       "audio/x-mulaw, channels = (int) { 1, 2 }, rate = (int) 8000; "
+//       "audio/x-speex, channels = (int) 1, rate = (int) 16000;")
 //     );
-GST_STATIC_PAD_TEMPLATE ("src",
-    GST_PAD_SRC,
-    GST_PAD_ALWAYS,
-    GST_STATIC_CAPS
-    ( "audio/x-adpcm, layout = (string) swf, channels = (int) { 1, 2 }, rate = (int) { 5512, 11025, 22050, 44100 }; "
-      "audio/mpeg, mpegversion = (int) 1, layer = (int) 3, channels = (int) { 1, 2 }, rate = (int) { 5512, 8000, 11025, 22050, 44100 }, parsed = (boolean) TRUE; "
-      "audio/mpeg, mpegversion = (int) { 4, 2 }, stream-format = (string) raw; "
-      "audio/x-nellymoser, channels = (int) { 1, 2 }, rate = (int) { 5512, 8000, 11025, 16000, 22050, 44100 }; "
-      "audio/x-raw, format = (string) { U8, S16LE}, layout = (string) interleaved, channels = (int) { 1, 2 }, rate = (int) { 5512, 11025, 22050, 44100 }; "
-      "audio/x-alaw, channels = (int) { 1, 2 }, rate = (int) 8000; "
-      "audio/x-mulaw, channels = (int) { 1, 2 }, rate = (int) 8000; "
-      "audio/x-speex, channels = (int) 1, rate = (int) 16000;")
-    );
 
 
 #define gst_my_filter_parent_class parent_class
@@ -113,24 +113,31 @@ gst_my_filter_class_init (GstMyFilterClass * klass)
       gst_static_pad_template_get (&sink_factory));
 }
 
-/* initialize the new element
- * instantiate pads and add them to element
- * set pad callback functions
- * initialize instance structure
- */
+
 static void
 gst_my_filter_init (GstMyFilter * filter)
 {
+  /* 从 GstStaticPadTemplate 创建 sink GstPad */
   filter->sinkpad = gst_pad_new_from_static_template (&sink_factory, "sink");
+
+  /* 给GstPad设定事件处理函数 */
   gst_pad_set_event_function (filter->sinkpad,
       GST_DEBUG_FUNCPTR (gst_my_filter_sink_event));
+  
+  /* 给GstPad设定链函数 */
   gst_pad_set_chain_function (filter->sinkpad,
       GST_DEBUG_FUNCPTR (gst_my_filter_chain));
+  
+  /* 所有caps或者pad接受到的事件能够传给链接的节点，而不是丢弃 */
   GST_PAD_SET_PROXY_CAPS (filter->sinkpad);
+  
   gst_element_add_pad (GST_ELEMENT (filter), filter->sinkpad);
 
+  /*  从 GstStaticPadTemplate 创建 src GstPad */
   filter->srcpad = gst_pad_new_from_static_template (&src_factory, "src");
+  
   GST_PAD_SET_PROXY_CAPS (filter->srcpad);
+  
   gst_element_add_pad (GST_ELEMENT (filter), filter->srcpad);
 
   filter->silent = FALSE;
@@ -233,7 +240,6 @@ myfilter_init (GstPlugin * myfilter)
    */
   GST_DEBUG_CATEGORY_INIT (gst_my_filter_debug, "myfilter",
       0, "Template myfilter");
-  g_print ("test\n");
   return GST_ELEMENT_REGISTER (my_filter, myfilter);
 }
 

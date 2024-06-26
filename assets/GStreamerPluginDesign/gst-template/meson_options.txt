@@ -1,0 +1,1 @@
+option('path', type : 'string', value : '/usr/lib/x86_64-linux-gnu')

@@ -63,6 +63,8 @@
     "string_view": "c",
     "cmath": "c",
     "chrono": "c",
-    "variant": "c"
+    "variant": "c",
+    "typeindex": "c",
+    "typeinfo": "c"
   }
 }
