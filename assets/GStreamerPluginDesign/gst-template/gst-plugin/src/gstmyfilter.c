@@ -6,7 +6,7 @@
  * <refsect2>
  * <title>Example launch line</title>
  * |[
- * gst-launch -v -m fakesrc ! myfilter ! fakesink silent=TRUE
+ * gst-launch-1.0 -v -m fakesrc ! my_filter ! fakesink silent=TRUE
  * ]|
  * </refsect2>
  */
@@ -16,6 +16,8 @@
 #include <gst/gst.h>
 
 #include "gstmyfilter.h"
+
+#include <stdio.h>
 
 GST_DEBUG_CATEGORY_STATIC (gst_my_filter_debug);
 #define GST_CAT_DEFAULT gst_my_filter_debug
@@ -100,7 +102,7 @@ gst_my_filter_class_init (GstMyFilterClass * klass)
 
   g_object_class_install_property (gobject_class, PROP_SILENT,
       g_param_spec_boolean ("silent", "Silent", "Produce verbose output ?",
-          FALSE, G_PARAM_READWRITE));
+          TRUE, G_PARAM_READWRITE));
 
   gst_element_class_set_details_simple (gstelement_class,
       "MyFilter",
@@ -115,8 +117,8 @@ gst_my_filter_class_init (GstMyFilterClass * klass)
 
 
 static void
-gst_my_filter_init (GstMyFilter * filter)
-{
+gst_my_filter_init (GstMyFilter * filter) {
+
   /* 从 GstStaticPadTemplate 创建 sink GstPad */
   filter->sinkpad = gst_pad_new_from_static_template (&sink_factory, "sink");
 
@@ -140,7 +142,7 @@ gst_my_filter_init (GstMyFilter * filter)
   
   gst_element_add_pad (GST_ELEMENT (filter), filter->srcpad);
 
-  filter->silent = FALSE;
+  filter->silent = TRUE;
 }
 
 static void
@@ -189,6 +191,9 @@ gst_my_filter_sink_event (GstPad * pad, GstObject * parent,
 
   GST_LOG_OBJECT (filter, "Received %s event: %" GST_PTR_FORMAT,
       GST_EVENT_TYPE_NAME (event), event);
+
+  printf ("@event@: %s Received %s event: \n", \
+          gst_object_get_name (parent), GST_EVENT_TYPE_NAME (event));
 
   switch (GST_EVENT_TYPE (event)) {
     case GST_EVENT_CAPS:
