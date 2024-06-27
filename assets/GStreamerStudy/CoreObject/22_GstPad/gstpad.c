@@ -855,7 +855,6 @@ gst_pad_get_direction (GstPad * pad)
 }
 
 /**
- * @name: gst_pad_activate_default
  * @param pad: #GstPad
  * @param parent: @pad父对象
  * @calledby: pad->activatefunc = gst_pad_activate_default;
