@@ -8,7 +8,8 @@
         "/opt/glib-2.80.2/include/glib-2.0",
         "/home/lieryang/Downloads/gstreamer-1.22.6",
         "/home/lieryang/Downloads/glib-2.80.2",
-        "/home/lieryang/Downloads/glibc-2.35"
+        "/home/lieryang/Downloads/glibc-2.35",
+        "/usr/src/glibc/glibc-2.35"
       ],
       "compilerPath": "/usr/bin/gcc",
       "cStandard": "${default}",
@@ -18,6 +19,7 @@
         "path": ["/home/lieryang/Downloads/gstreamer-1.22.6", 
                  "/home/lieryang/Downloads/glib-2.80.2", 
                  "/home/lieryang/Downloads/glibc-2.35",
+                 "/usr/src/glibc/glibc-2.35",
                  "${workspaceFolder}"]
       },
       "compilerArgs": [

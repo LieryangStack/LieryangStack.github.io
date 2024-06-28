@@ -17,6 +17,10 @@
           "description": "Enable pretty-printing for gdb",
           "text": "-enable-pretty-printing",
           "ignoreFailures": true
+        },
+        {
+          "description": "Set source file substitution path",
+          "text": "set substitute-path ./ /usr/src/glibc/glibc-2.35"
         }
       ],
       "preLaunchTask": "C/C++: gcc build active file",
