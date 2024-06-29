@@ -15,8 +15,7 @@
 				"--cflags",
 				"--libs",
 				"gstreamer-1.0`",
-				"-lX11",
-				"-Wl,-rpath,/opt/glib-2.80.2/lib/x86_64-linux-gnu:/opt/gstreamer-1.22.6/lib/x86_64-linux-gnu"
+				"-lX11"
 			],
 			"options": {
 				"cwd": "${fileDirname}"
