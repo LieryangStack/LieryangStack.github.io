@@ -1,0 +1,3 @@
+[submodule "assets/BuildSystem/Meson/16_subproject_wrap/subprojects/simple"]
+    path = assets/BuildSystem/Meson/16_subproject_wrap/subprojects/simple
+    url = <submodule-url>
