@@ -1,6 +1,0 @@
-[wrap-git]
-directory=simple
-url=https://github.com/LieryangStack/libsimple.git
-
-[provide]
-simple=libsimple_dep
