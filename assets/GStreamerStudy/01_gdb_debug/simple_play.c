@@ -12,7 +12,7 @@ int main(int argc, char *argv[]) {
   /* Create the elements */
   source = gst_element_factory_make("videotestsrc", "source");
   convert = gst_element_factory_make("videoconvert", "convert");
-  sink = gst_element_factory_make("autovideosink", "sink");
+  sink = gst_element_factory_make("ximagesink", "sink");
 
   /* Create the empty pipeline */
   pipeline = gst_pipeline_new("test-pipeline");

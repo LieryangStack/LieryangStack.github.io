@@ -209,6 +209,10 @@ export PATH=$PATH:/usr/local/TensorRT-8.6.1.6/bin
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/TensorRT-8.6.1.6/lib
 # 保存后刷新环境变量
 source ~/.bashrc
+
+# 设定软连接
+cd /usr/local
+sudo ln -s TensorRT-8.6.1.6 TensorRT
 ```
 
 ### 4.3 测试TensorRt是否安装成功
@@ -216,8 +220,13 @@ source ~/.bashrc
 ```sh
 # 进入到 TensorRT-8.6.1.6/samples/sampleOnnxMNIST
 cd TensorRT-8.6.1.6/samples/sampleOnnxMNIST
+# 设定环境变量
+export CUDA_INSTALL_DIR=/usr/local/cuda
+export CUDNN_INSTALL_DIR=/usr/local/cuda
+export TRT_LIB_DIR=/usr/local/TensorRT/lib
+export PROTOBUF_INSTALL_DIR=/usr/lib/x86_64-linux-gnu
 # 编译
-make -j 10
+sudo make -j 10
 # 进入到bin文件夹测试运行
 cd TensorRT-8.6.1.6/bin
 ```

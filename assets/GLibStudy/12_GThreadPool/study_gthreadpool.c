@@ -19,9 +19,11 @@ pool_func (gpointer data, gpointer user_data) {
   // {
   //   /* code */
   // }
+
+  g_usleep (G_USEC_PER_SEC * 1);
   
-  g_print ("unprocessed = %d\n", unprocessed);
-  g_print ("num_threads_runing = %d\n", num_threads_runing);
+  // g_print ("unprocessed = %d\n", unprocessed);
+  // g_print ("num_threads_runing = %d\n", num_threads_runing);
 }
 
 /**
@@ -29,6 +31,7 @@ pool_func (gpointer data, gpointer user_data) {
 */
 static void
 test_exclusive_true () {
+
   GThreadPool *pool = g_thread_pool_new (pool_func, NULL, 2, FALSE, NULL);
 
   gint unprocessed = g_thread_pool_unprocessed (pool);
@@ -40,8 +43,6 @@ test_exclusive_true () {
   g_print ("max_threads = %d\n", max_threads);
 
   g_thread_pool_push (pool, pool, NULL);
-
-  g_usleep (G_USEC_PER_SEC * 1);
 
   g_thread_pool_push (pool, pool, NULL);
   // g_thread_pool_push (pool, pool, NULL);
