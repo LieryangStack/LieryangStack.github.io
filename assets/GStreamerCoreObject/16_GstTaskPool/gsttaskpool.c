@@ -27,7 +27,7 @@ typedef struct
 /**
  * @brief: 线程池默认执行函数
  * @param tdata: push函数传入的数据
- * @param pool: new新建线程池的时候传入的数据
+ * @param pool: 任务池对象
 */
 static void
 default_func (TaskData * tdata, GstTaskPool * pool)

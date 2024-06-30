@@ -10,7 +10,9 @@
     "array": "c",
     "string": "c",
     "string_view": "c",
-    "system_error": "c"
+    "system_error": "c",
+    "mutex": "c",
+    "typeinfo": "c"
   },
   "C_Cpp_Runner.msvcBatchPath": "",
   "C_Cpp_Runner.cCompilerPath": "gcc",

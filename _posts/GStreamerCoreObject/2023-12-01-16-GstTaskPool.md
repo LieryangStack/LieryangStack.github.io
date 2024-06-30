@@ -7,85 +7,74 @@ tags: [GStreamer]
 
 ## 1 GstTaskPool基本概念
 
-- 此对象提供了创建线程的抽象。默认实现使用常规的 GThreadPool 来启动任务。
+- GstTaskPool中提供了两种对象，`GstTaskPool` 和 `GstSharedTaskPool`，其中共享任务池仅仅在线程池中创建了一个线程（最大可执行线程数是1），而 `GstTaskPool` 没有同时最大可执行线程数量限制。
 
-- 子类可以创建自定义线程。
-
+- 创建GstTaskPool对象后，必须要使用 `gst_task_pool_prepare` 函数创建线程池，否则，没有线程池执行任务函数。
 
 ## 2 GstTaskPool类型结构
 
-### 2.1 GstTaskPool类型注册宏定义
+![alt text](/assets/GStreamerCoreObject/16_GstTaskPool/image/image-3.png)
+
+### 2.1 GstTaskPool结构分析
+
+![alt text](/assets/GStreamerCoreObject/16_GstTaskPool/image/image-1.png)
+
+### 2.2 GstTaskPool相关函数总结
 
 ```c
-/* filename: gsttaskpool.h */
-#define GST_TYPE_TASK_POOL             (gst_task_pool_get_type ())
-
-/* filename: gsttaskpool.c */
-G_DEFINE_TYPE_WITH_CODE (GstTaskPool, gst_task_pool, GST_TYPE_OBJECT, _do_init);
-```
-
-### 2.2 GstTaskPool相关结构体
-
-#### 2.2.1 GstTaskPool
-
-```c
-/* filename: gsttaskpool.h */
 /**
- * GstTaskPool:
- *
- * The #GstTaskPool object.
- */
-struct _GstTaskPool {
-  GstObject      object;
+ * @brief: 创建一个GstTaskPool对象
+ * @note: 此时并没有创建 GstTaskPool->pool 的GThreadPool对象，必须要调用prepare函数
+*/
+GstTaskPool *
+gst_task_pool_new (void);
 
-  /*< private >*/
-  GThreadPool   *pool;
 
-  gpointer _gst_reserved[GST_PADDING];
-};
+/**
+ * @brief: 创建了 GstTaskPool->pool 的GThreadPool对象
+ * @note: 此时才可以调用 gst_task_pool_push 函数，使用线程池处理线程任务
+ *        使用完毕后，必须使用 gst_task_pool_cleanup 释放线程池
+*/
+void
+gst_task_pool_prepare (GstTaskPool * pool, GError ** error);
+
+
+/**
+ * @name: gst_task_pool_push
+ * @param pool: 一个 #GstTaskPool
+ * @param func: 异步调用的函数，该函数会在线程池中被调用
+ * @param user_data: 传递给 @func 的数据
+ * @param error: 用于返回发生错误的位置
+ * @brief: 从@pool中开始执行一个新线程
+ * @return: 一个指针，应该用于 gst_task_pool_join 函数（但是系统默认没有实现join函数）
+*/
+gpointer
+gst_task_pool_push (GstTaskPool * pool, GstTaskPoolFunction func,
+    gpointer user_data, GError ** error);
+
+
+/**
+ * @name: gst_task_pool_cleanup
+ * @brief: 释放 GstTaskPool->pool 的GThreadPool对象
+*/
+void
+gst_task_pool_cleanup (GstTaskPool * pool);
 ```
 
-#### 2.2.2 GstTaskPoolClass
+## 3 GstTaskPool示例程序
 
-```c
-struct _GstTaskPoolClass {
-  GstObjectClass parent_class;
+![alt text](/assets/GStreamerCoreObject/16_GstTaskPool/image/image-2.png)
 
-  /*< public >*/
-  /* 默认的prepare函数就是创建一个GThreadPool对象，准备一个线程池对象 
-   * 使用 gst_task_pool_prepare 函数调用此虚函数
-   */
-  void      (*prepare)  (GstTaskPool *pool, GError **error);
-  
-  /* 默认的cleanup函数就是释放GThreadPool对象 
-   * 使用 gst_task_pool_cleanup 函数调用此虚函数
-   */
-  void      (*cleanup)  (GstTaskPool *pool);
+### 3.1 线程数量分析
 
-  /* 从线程池中执行@func */
-  gpointer  (*push)     (GstTaskPool *pool, GstTaskPoolFunction func,
-                         gpointer user_data, GError **error);
+下图中，一共有三个线程。其中：
 
-  /* 检查@func是否完成之类的操作，默认的join什么都没有做 */
-  void      (*join)     (GstTaskPool *pool, gpointer id);
+1. `GstTaskPoolStud` 应用程序主线程 main 函数线程是每个程序都会有的。
 
-  /* 用来释放 GstTaskPoolClass::push 的返回值*/
-  void      (*dispose_handle) (GstTaskPool *pool, gpointer id);
+2. `pool-spawner` 这是线程池的调度线程，用于调用线程处理push传入的任务。只要使用线程池就会有该函数。
 
-  /*< private >*/
-  gpointer _gst_reserved[GST_PADDING - 1];
-};
-```
+3. `pool-GstTaskpoo` 这是线程池中执行任务的线程，该线程的数量跟同时要处理的任务数量有关。如果同时push多少个任务，就能同时新建多少个线程处理任务。（最大同时处理线程数量在线程池中设定）
 
-#### 2.2.3 TaskData
-```c
-/* filename: gsttaskpool.c */
-typedef struct
-{
-  GstTaskPoolFunction func;
-  gpointer user_data;
-} TaskData;
-```
+![alt text](/assets/GStreamerCoreObject/16_GstTaskPool/image/image-4.png)
 
 
-## 3 GstTaskPool对象相关函数
