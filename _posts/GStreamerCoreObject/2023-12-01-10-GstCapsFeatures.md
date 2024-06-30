@@ -13,4 +13,4 @@ tags: [GStreamer]
 
 - 特性的示例可能包括对特定 GstMemory 类型的要求，或对缓冲区上必须有特定 GstMeta 的要求。特性以字符串形式给出，格式为 memory:GstMemoryTypeName 或 meta:GstMetaAPIName。
 
-  ![alt text](/assets/GStreamerStudy/CoreObject/10_GstCapsFeatures/image/image.png)
+  ![alt text](/assets/GStreamerCoreObject/10_GstCapsFeatures/image/image.png)
