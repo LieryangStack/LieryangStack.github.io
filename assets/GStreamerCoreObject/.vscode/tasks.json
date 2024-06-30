@@ -14,10 +14,6 @@
 				"`pkg-config",
 				"--cflags",
 				"--libs",
-				"gstreamer-video-1.0",
-				"gstreamer-audio-1.0",
-				"gstreamer-pbutils-1.0",
-				"gstreamer-gl-1.0",
 				"gstreamer-1.0`",
 				"-lX11"
 			],
