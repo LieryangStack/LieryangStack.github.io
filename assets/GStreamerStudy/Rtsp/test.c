@@ -59,8 +59,8 @@ main (int argc, char *argv[])
 
   data.h264depay = gst_element_factory_make ("rtph264depay", "rtph264depay");
   data.h264parse = gst_element_factory_make ("h264parse", "h264parse");
-  data.decode = gst_element_factory_make ("nvv4l2decoder", "nvv4l2decoder"); // nvv4l2decoder avdec_h264
-  data.convert = gst_element_factory_make ("nvvideoconvert", "videoconvert");
+  data.decode = gst_element_factory_make ("avdec_h264", "nvv4l2decoder"); // nvv4l2decoder avdec_h264
+  data.convert = gst_element_factory_make ("videoconvert", "videoconvert");
   data.sink = gst_element_factory_make ("autovideosink", "sink"); //nv3dsink
 
   /* Create the empty pipeline */
@@ -86,13 +86,13 @@ main (int argc, char *argv[])
   }
 
   /* Set the URI to play */
-  // g_object_set(data.source, "location", "rtsp://admin:YEERBA@192.168.10.11:554/Streaming/Channels/101", \
-  //                           "latency", 300, "protocols", 0x04, NULL);
+  g_object_set(data.source, "location", "rtsp://admin:YEERBA@192.168.10.11:554/Streaming/Channels/101", \
+                            "latency", 100, "protocols", 0x04, NULL);
   
   // g_object_set(data.source, "location", "rtsp://admin:yangquan321@192.168.2.3:554/Streaming/Channels/101", NULL);
 
-  g_object_set(data.source, "location", "rtsp://admin:LHLQLW@192.168.2.18:554/Streaming/Channels/101", \
-                            "latency", 300, "protocols", 0x04, NULL);
+  // g_object_set(data.source, "location", "rtsp://admin:LHLQLW@192.168.2.18:554/Streaming/Channels/101", \
+  //                           "latency", 300, "protocols", 0x04, NULL);
 
   /* Connect to the pad-added signal */
   /* 在这里把回调函数的src data变量指定参数*/
