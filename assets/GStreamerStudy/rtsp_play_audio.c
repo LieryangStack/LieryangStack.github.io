@@ -9,9 +9,15 @@ typedef struct _CustomData
 
   GstElement *h264depay;
   GstElement *h264parse;
-  GstElement *decode;
-  GstElement *convert;
-  GstElement *sink;
+  GstElement *h264decode;
+  GstElement *video_convert;
+  GstElement *video_sink;
+
+  GstElement *rtpmp4gdepay;
+  GstElement *aacparse;
+  GstElement *avdec_aac;
+  GstElement *audio_convert;
+  GstElement *audio_sink;
 
 } CustomData;
 
@@ -57,42 +63,59 @@ main (int argc, char *argv[])
   /* Create the elements */
   data.source = gst_element_factory_make ("rtspsrc", "source");
 
-  data.h264depay = gst_element_factory_make ("rtpmp4adepay", "rtph264depay");
-  data.h264parse = gst_element_factory_make ("aacparse", "h264parse");
-  data.decode = gst_element_factory_make ("avdec_aac", "nvv4l2decoder"); // nvv4l2decoder avdec_h264
-  data.convert = gst_element_factory_make ("queue", "videoconvert");
-  data.sink = gst_element_factory_make ("autoaudiosink", "sink"); //nv3dsink
+  /* 视频 */
+  data.h264depay = gst_element_factory_make ("rtph264depay", "rtph264depay");
+  data.h264parse = gst_element_factory_make ("h264parse", "h264parse");
+  data.h264decode = gst_element_factory_make ("avdec_h264", "nvv4l2decoder"); // nvv4l2decoder avdec_h264
+  data.video_convert = gst_element_factory_make ("videoconvert", "videoconvert");
+  data.video_sink = gst_element_factory_make ("autovideosink", "video_sink"); //nv3dsink
+
+  /* 音频 */
+  data.rtpmp4gdepay = gst_element_factory_make ("rtpmp4gdepay", "rtpmp4gdepay");
+  data.aacparse = gst_element_factory_make ("aacparse", "aacparse");
+  data.avdec_aac = gst_element_factory_make ("avdec_aac", "avdec_aac");
+  data.audio_convert = gst_element_factory_make ("audioconvert", "audioconvert");
+  data.audio_sink = gst_element_factory_make ("autoaudiosink", "audio_sink"); 
 
   /* Create the empty pipeline */
   data.pipeline = gst_pipeline_new ("test-pipeline");
 
   if (!data.pipeline || !data.source || !data.h264depay || !data.h264parse \
-      || !data.decode || !data.convert || !data.sink) {
+      || !data.h264decode || !data.video_convert || !data.video_sink \
+      || !data.rtpmp4gdepay || !data.aacparse || !data.avdec_aac \
+      || !data.audio_convert || !data.audio_sink) {
     g_printerr ("Not all elements could be created.\n");
     return -1;
   }
 
-  /* Build the pipeline. Note that we are NOT linking the source at this
-   * point. We will do it later. */
-  gst_bin_add_many (GST_BIN (data.pipeline), data.source, data.h264depay, \
-      data.h264parse, data.decode, data.convert, data.sink, NULL);
+  gst_bin_add_many (GST_BIN (data.pipeline), data.source, 
+      data.h264depay, data.h264parse, data.h264decode, data.video_convert, data.video_sink, \
+      data.rtpmp4gdepay, data.aacparse, data.avdec_aac, data.audio_convert, data.audio_sink, NULL);
 
 
   if (!gst_element_link_many (data.h264depay, data.h264parse, \
-                              data.decode, data.convert, data.sink, NULL)) {
-    g_printerr ("Elements could not be linked.\n");
+                              data.h264decode, data.video_convert, data.video_sink, NULL)) {
+    g_printerr ("Video Elements could not be linked.\n");
+    gst_object_unref (data.pipeline);
+    return -1;
+  }
+
+  if (!gst_element_link_many (data.rtpmp4gdepay, data.aacparse, \
+                              data.avdec_aac, data.audio_convert, data.audio_sink, NULL)) {
+    g_printerr ("Audio Elements could not be linked.\n");
     gst_object_unref (data.pipeline);
     return -1;
   }
 
   /* Set the URI to play */
-  g_object_set(data.source, "location", "rtsp://admin:EIOHDC@192.168.10.13:554/Streaming/Channels/101", \
-                            "latency", 100, "protocols", 0x04, NULL);
+  // g_object_set(data.source, "location", "rtsp://admin:EIOHDC@192.168.10.13:554/Streaming/Channels/101", \
+  //                           "latency", 100, "protocols", 0x04, NULL);
   
-  // g_object_set(data.source, "location", "rtsp://admin:yangquan321@192.168.2.3:554/Streaming/Channels/101", NULL);
+  g_object_set(data.source, "location", "rtsp://admin:yangquan321@192.168.2.17:554/Streaming/Channels/101", 
+                            "latency", 0, NULL);
 
   // g_object_set(data.source, "location", "rtsp://admin:LHLQLW@192.168.2.18:554/Streaming/Channels/101", \
-  //                           "latency", 300, "protocols", 0x04, NULL);
+  //                           "latency", 100, "protocols", 0x04, NULL);
 
   /* Connect to the pad-added signal */
   /* 在这里把回调函数的src data变量指定参数*/
@@ -106,9 +129,6 @@ main (int argc, char *argv[])
     gst_object_unref (data.pipeline);
     return -1;
   }
-
-  /*GstPad* pad = gst_element_get_static_pad (data.convert, "sink");
-  gst_pad_set_event_function(pad,gst_event_callback);*/
   
   /* Listen to the bus */
   bus = gst_element_get_bus (data.pipeline);
@@ -166,7 +186,7 @@ main (int argc, char *argv[])
   return 0;
 }
 
-/* This function will be called by the pad-added signal */
+
 static void
 pad_added_handler (GstElement * src, GstPad * new_pad, CustomData * data)
 {
@@ -177,27 +197,35 @@ pad_added_handler (GstElement * src, GstPad * new_pad, CustomData * data)
   const gchar *new_pad_type = NULL;  
   
   new_pad_caps = gst_pad_get_current_caps (new_pad);
-  /* 通过gst_caps_get_size函数可以的出Caps中有几个GstStructure */
-  new_pad_struct = gst_caps_get_structure (new_pad_caps, 0);
-  new_pad_type = gst_structure_get_name (new_pad_struct);
+  gint new_pad_caps_size = gst_caps_get_size (new_pad_caps);
 
-  g_message("%s type is %s\n", GST_PAD_NAME (new_pad), new_pad_type);
-  gst_structure_foreach (new_pad_struct, print_pad_structure, NULL);
+  for (int i = 0; i < new_pad_caps_size; i++) {
+    new_pad_struct = gst_caps_get_structure (new_pad_caps, i);
+    gchar *str = gst_structure_to_string (new_pad_struct);
+    g_print ("%s\n\n", str);
+    g_free (str);
 
-  static gint count = 0;
-  if (count == 0) {
-    count++;
-    goto exit;
+    const gchar *name = gst_structure_get_name (new_pad_struct);
+
+    if (!g_strcmp0 (name, "application/x-rtp")) {
+      const gchar* media_type = gst_structure_get_string (new_pad_struct, "media");
+      
+      if (!g_strcmp0 (media_type, "audio")) {
+
+        sink_pad = gst_element_get_static_pad (data->rtpmp4gdepay, "sink");
+        
+        g_print ("sink_pad = %p\n", sink_pad);
+
+      } else if (!g_strcmp0 (media_type, "video")) {
+        sink_pad = gst_element_get_static_pad (data->h264depay, "sink");
+        
+        g_print ("sink_pad = %p\n", sink_pad);
+      }
+
+
+    }
+
   }
-  
-
-  sink_pad = gst_element_get_static_pad (data->h264depay, "sink");
-
-  // static int i = 0;
-  // if (i++ == 0)
-  //   sink_pad = gst_element_get_static_pad (data->h264depay, "sink");
-  // else 
-  //   sink_pad = gst_element_get_static_pad (data->h264depay_t, "sink");
 
   /* If our converter is already linked, we have nothing to do here */
   if (gst_pad_is_linked (sink_pad)) {
@@ -218,6 +246,6 @@ exit:
   if (new_pad_caps != NULL)
     gst_caps_unref (new_pad_caps);
 
-  /* Unreference the sink pad */
-  gst_object_unref (sink_pad);
+  if (sink_pad != NULL)
+    gst_object_unref (sink_pad);
 }
