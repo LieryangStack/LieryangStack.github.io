@@ -12,7 +12,8 @@
     "string_view": "c",
     "system_error": "c",
     "mutex": "c",
-    "typeinfo": "c"
+    "typeinfo": "c",
+    "gst.h": "c"
   },
   "C_Cpp_Runner.msvcBatchPath": "",
   "C_Cpp_Runner.cCompilerPath": "gcc",
