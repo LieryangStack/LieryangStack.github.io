@@ -86,7 +86,7 @@ main (int argc, char *argv[])
   }
 
   /* Set the URI to play */
-  g_object_set(data.source, "location", "rtsp://admin:YEERBA@192.168.10.11:554/Streaming/Channels/101", \
+  g_object_set(data.source, "location", "rtsp://admin:EIOHDC@192.168.10.13:554/Streaming/Channels/101", \
                             "latency", 100, "protocols", 0x04, NULL);
   
   // g_object_set(data.source, "location", "rtsp://admin:yangquan321@192.168.2.3:554/Streaming/Channels/101", NULL);
@@ -184,7 +184,12 @@ pad_added_handler (GstElement * src, GstPad * new_pad, CustomData * data)
   g_message("%s type is %s\n", GST_PAD_NAME (new_pad), new_pad_type);
   gst_structure_foreach (new_pad_struct, print_pad_structure, NULL);
 
-  goto exit;
+  static gint count = 0;
+  if (count == 0) {
+    count++;
+    goto exit;
+  }
+  
 
   sink_pad = gst_element_get_static_pad (data->h264depay, "sink");
 
