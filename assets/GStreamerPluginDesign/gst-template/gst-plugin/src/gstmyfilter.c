@@ -72,6 +72,12 @@ static GstStaticPadTemplate src_factory =  GST_STATIC_PAD_TEMPLATE ("src",
 #define gst_my_filter_parent_class parent_class
 G_DEFINE_TYPE (GstMyFilter, gst_my_filter, GST_TYPE_ELEMENT);
 
+/**
+ * @param e: 元素的名称（小写）, 需要跟注册元素的时候 GST_ELEMENT_REGISTER 的第一个参数相同
+ * @param e_n: 元素的名称，用于元素创建 gst_element_factory_make 函数中使用
+ * @param r: 元素的等级
+ * @param t: Gtype类型系统中已经被注册的类型
+ */
 GST_ELEMENT_REGISTER_DEFINE (my_filter, "my_filter", GST_RANK_NONE,
     GST_TYPE_MYFILTER);
 
@@ -85,9 +91,7 @@ static gboolean gst_my_filter_sink_event (GstPad * pad,
 static GstFlowReturn gst_my_filter_chain (GstPad * pad,
     GstObject * parent, GstBuffer * buf);
 
-/* GObject vmethod implementations */
 
-/* initialize the myfilter's class */
 static void
 gst_my_filter_class_init (GstMyFilterClass * klass)
 {
@@ -177,9 +181,7 @@ gst_my_filter_get_property (GObject * object, guint prop_id,
   }
 }
 
-/* GstElement vmethod implementations */
 
-/* this function handles sink events */
 static gboolean
 gst_my_filter_sink_event (GstPad * pad, GstObject * parent,
     GstEvent * event)
@@ -214,9 +216,7 @@ gst_my_filter_sink_event (GstPad * pad, GstObject * parent,
   return ret;
 }
 
-/* chain function
- * this function does the actual processing
- */
+
 static GstFlowReturn
 gst_my_filter_chain (GstPad * pad, GstObject * parent, GstBuffer * buf)
 {
@@ -232,38 +232,43 @@ gst_my_filter_chain (GstPad * pad, GstObject * parent, GstBuffer * buf)
 }
 
 
-/* entry point to initialize the plug-in
- * initialize the plug-in itself
- * register the element factories and other features
+/**
+ * @brief: 注册插件的时候，会调用该初始化函数，用于注册element
  */
 static gboolean
-myfilter_init (GstPlugin * myfilter)
+myfilter_init (GstPlugin * plugin)
 {
-  /* debug category for filtering log messages
-   *
-   * exchange the string 'Template myfilter' with your description
-   */
+  
   GST_DEBUG_CATEGORY_INIT (gst_my_filter_debug, "myfilter",
-      0, "Template myfilter");
-  return GST_ELEMENT_REGISTER (my_filter, myfilter);
+      0, "Debug相关的详细描述要写在这里");
+
+  /**
+   * @param element: 元素的名称，需要跟 GST_ELEMENT_REGISTER_DEFINE 的第一个参数相同
+   * @param plugin: 插件对象的地址
+   */
+  return GST_ELEMENT_REGISTER (my_filter, plugin);
 }
 
-/* PACKAGE: this is usually set by meson depending on some _INIT macro
- * in meson.build and then written into and defined in config.h, but we can
- * just set it ourselves here in case someone doesn't use meson to
- * compile this code. GST_PLUGIN_DEFINE needs PACKAGE to be defined.
- */
+/* 属于那类型的插件，比如： gst-plugins-base， gst-plugins-good */
 #ifndef PACKAGE
 #define PACKAGE "myfirstmyfilter"
 #endif
 
-/* gstreamer looks for this structure to register myfilters
- *
- * exchange the string 'Template myfilter' with your myfilter description
+/**
+ * @brief: 在GStreamer系统中注册一个插件
+ * @param major: 插件的主版本号
+ * @param minor: 插件的次版本号
+ * @param namen: 插件的名称，gst-inspect-1.0 可以使用@name 搜索到该插件
+ * @param description: 该插件的相关描述
+ * @param init: 插件的初始化函数
+ * @param version: 插件的版本号
+ * @param license: 插件的许可证
+ * @param package: 插件包所在的包名
+ * @param orign: 插件的来源
  */
 GST_PLUGIN_DEFINE (GST_VERSION_MAJOR,
     GST_VERSION_MINOR,
     myfilter,
-    "my_filter",
+    "学习如何编写插件",
     myfilter_init,
     PACKAGE_VERSION, GST_LICENSE, GST_PACKAGE_NAME, GST_PACKAGE_ORIGIN)

@@ -65,6 +65,9 @@
     "chrono": "c",
     "variant": "c",
     "typeindex": "c",
-    "typeinfo": "c"
-  }
+    "typeinfo": "c",
+    "gst.h": "c",
+    "*.tcc": "c"
+  },
+  "C_Cpp.errorSquiggles": "disabled"
 }

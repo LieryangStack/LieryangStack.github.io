@@ -6,7 +6,7 @@ int main(int argc, char *argv[]) {
   GstElement *pipeline, *source, *convert, *sink;
   GstBus *bus;
   GstMessage *msg;
-
+    
   /* Initialize GStreamer */
   gst_init(&argc, &argv);
 

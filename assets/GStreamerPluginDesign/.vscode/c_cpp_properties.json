@@ -4,18 +4,21 @@
       "name": "linux-gcc-x64",
       "includePath": [
         "${workspaceFolder}/**",
-        "/usr/include/gstreamer-1.0",
-        "/usr/include/glib-2.0",
-        "/usr/lib/x86_64-linux-gnu/glib-2.0/include",
+        "/opt/gstreamer/include/gstreamer-1.0",
+        "/opt/glib/include/glib-2.0",
         "/home/lieryang/Downloads/gstreamer-1.22.6",
-        "/home/lieryang/Downloads/glib-2.80.2"
+        "/home/lieryang/Downloads/glib-2.80.2",
+        "/usr/src/glibc/glibc-2.35"
       ],
       "compilerPath": "/usr/bin/gcc",
       "cStandard": "${default}",
       "cppStandard": "${default}",
       "intelliSenseMode": "linux-gcc-x64",
       "browse": {
-        "path": ["/home/lieryang/Downloads/gstreamer-1.22.6", "/home/lieryang/Downloads/glib-2.80.2", "${workspaceFolder}"]
+        "path": ["/home/lieryang/Downloads/gstreamer-1.22.6", 
+                 "/home/lieryang/Downloads/glib-2.80.2", 
+                 "/usr/src/glibc/glibc-2.35",
+                 "${workspaceFolder}"]
       },
       "compilerArgs": [
         ""
