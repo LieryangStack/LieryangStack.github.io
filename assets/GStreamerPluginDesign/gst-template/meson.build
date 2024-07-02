@@ -1,6 +1,9 @@
-project('gst-template', 'c', version : '1.22.6', license : 'LGPL')
+project('gst-template', 'c', 
+  version : '1.22.6', 
+  license : 'LGPL',
+  default_options : ['buildtype=debug'])
 
-plugins_install_dir = join_paths(get_option('path'), 'gstreamer-1.0')
+plugins_install_dir = '/opt/gstreamer/lib/x86_64-linux-gnu/gstreamer-1.0'
 
 cc = meson.get_compiler('c')
 
