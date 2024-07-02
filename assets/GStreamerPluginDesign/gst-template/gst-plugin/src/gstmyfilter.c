@@ -39,7 +39,8 @@ enum
 
 
 /**
- * GstStaticPadTemplate是通过G_DEFINE_POINTER_TYPE进行注册的
+ * @brief: 这是每个元素的 GstStaticPadTemplate
+ * @note: GstStaticPadTemplate 是通过 G_DEFINE_POINTER_TYPE 进行注册的
  * 
  */
 static GstStaticPadTemplate sink_factory = GST_STATIC_PAD_TEMPLATE ("sink",
@@ -88,6 +89,8 @@ static void gst_my_filter_get_property (GObject * object,
 
 static gboolean gst_my_filter_sink_event (GstPad * pad,
     GstObject * parent, GstEvent * event);
+static gboolean gst_my_filter_src_event (GstPad * pad,
+    GstObject * parent, GstEvent * event);
 static GstFlowReturn gst_my_filter_chain (GstPad * pad,
     GstObject * parent, GstBuffer * buf);
 
@@ -113,6 +116,7 @@ gst_my_filter_class_init (GstMyFilterClass * klass)
       "FIXME:Generic",
       "FIXME:Generic Template Element", "lieryang <<user@hostname.org>>");
 
+  /* 从 GstStaticPadTemplate 获取到 GstPadTemplate，最后存储到 GstElementClass->padtemplates  */
   gst_element_class_add_pad_template (gstelement_class,
       gst_static_pad_template_get (&src_factory));
   gst_element_class_add_pad_template (gstelement_class,
@@ -123,10 +127,13 @@ gst_my_filter_class_init (GstMyFilterClass * klass)
 static void
 gst_my_filter_init (GstMyFilter * filter) {
 
-  /* 从 GstStaticPadTemplate 创建 sink GstPad */
+
+  /**
+   * 从 GstStaticPadTemplate 创建 sink GstPad
+   */
   filter->sinkpad = gst_pad_new_from_static_template (&sink_factory, "sink");
 
-  /* 给GstPad设定事件处理函数 */
+  /* 给 sink pad 设定事件处理函数 */
   gst_pad_set_event_function (filter->sinkpad,
       GST_DEBUG_FUNCPTR (gst_my_filter_sink_event));
   
@@ -139,12 +146,22 @@ gst_my_filter_init (GstMyFilter * filter) {
   
   gst_element_add_pad (GST_ELEMENT (filter), filter->sinkpad);
 
-  /*  从 GstStaticPadTemplate 创建 src GstPad */
+
+
+  /**
+   * 从 GstStaticPadTemplate 创建 src GstPad
+   */
   filter->srcpad = gst_pad_new_from_static_template (&src_factory, "src");
-  
+
+  /* 给 src pad 设定事件处理函数 */
+  gst_pad_set_event_function (filter->srcpad,
+      GST_DEBUG_FUNCPTR (gst_my_filter_src_event));
+
   GST_PAD_SET_PROXY_CAPS (filter->srcpad);
   
   gst_element_add_pad (GST_ELEMENT (filter), filter->srcpad);
+
+
 
   filter->silent = TRUE;
 }
@@ -184,8 +201,8 @@ gst_my_filter_get_property (GObject * object, guint prop_id,
 
 static gboolean
 gst_my_filter_sink_event (GstPad * pad, GstObject * parent,
-    GstEvent * event)
-{
+    GstEvent * event) {
+  
   GstMyFilter *filter;
   gboolean ret;
 
@@ -194,8 +211,43 @@ gst_my_filter_sink_event (GstPad * pad, GstObject * parent,
   GST_LOG_OBJECT (filter, "Received %s event: %" GST_PTR_FORMAT,
       GST_EVENT_TYPE_NAME (event), event);
 
-  printf ("@event@: %s Received %s event: \n", \
-          gst_object_get_name (parent), GST_EVENT_TYPE_NAME (event));
+  printf ("%s Received %s event: \n", \
+          __func__, GST_EVENT_TYPE_NAME (event));
+
+  switch (GST_EVENT_TYPE (event)) {
+    case GST_EVENT_CAPS:
+    {
+      GstCaps *caps;
+
+      gst_event_parse_caps (event, &caps);
+      /* do something with the caps */
+
+      /* and forward */
+      ret = gst_pad_event_default (pad, parent, event);
+      break;
+    }
+    default:
+      ret = gst_pad_event_default (pad, parent, event);
+      break;
+  }
+  return ret;
+}
+
+
+static gboolean
+gst_my_filter_src_event (GstPad * pad, GstObject * parent,
+    GstEvent * event) {
+  
+  GstMyFilter *filter;
+  gboolean ret;
+
+  filter = GST_MYFILTER (parent);
+
+  GST_LOG_OBJECT (filter, "Received %s event: %" GST_PTR_FORMAT,
+      GST_EVENT_TYPE_NAME (event), event);
+
+  printf ("%s Received %s event: \n", \
+          __func__, GST_EVENT_TYPE_NAME (event));
 
   switch (GST_EVENT_TYPE (event)) {
     case GST_EVENT_CAPS:
@@ -239,7 +291,7 @@ static gboolean
 myfilter_init (GstPlugin * plugin)
 {
   
-  GST_DEBUG_CATEGORY_INIT (gst_my_filter_debug, "myfilter",
+  GST_DEBUG_CATEGORY_INIT (gst_my_filter_debug, "my_filter",
       0, "Debug相关的详细描述要写在这里");
 
   /**
