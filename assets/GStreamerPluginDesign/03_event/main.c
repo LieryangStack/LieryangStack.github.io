@@ -1,16 +1,17 @@
 #include <gst/gst.h>
 
+
 static gboolean
 bus_call (GstBus     *bus,
-      GstMessage *msg,
-      gpointer    data)
-{
+          GstMessage *msg,
+          gpointer    data) {
+
   GMainLoop *loop = data;
 
   switch (GST_MESSAGE_TYPE (msg)) {
     case GST_MESSAGE_EOS:
       g_print ("End-of-stream\n");
-      g_main_loop_quit (loop);
+      // g_main_loop_quit (loop);
       break;
     case GST_MESSAGE_ERROR: {
       gchar *debug = NULL;
@@ -36,16 +37,24 @@ bus_call (GstBus     *bus,
   return TRUE;
 }
 
+
 static gboolean
 timeout_cb (gpointer user_data) {
 
+  GstEvent *event = NULL;
   GstElement *pipeline = GST_ELEMENT (user_data);
   
-  GstEvent *event = gst_event_new_flush_start ();
+  // event = gst_event_new_eos ();
+
+  // gst_element_send_event (pipeline, event);
+
+  // g_usleep (G_USEC_PER_SEC * 1);
+
+  event = gst_event_new_flush_start ();
 
   gst_element_send_event (pipeline, event);
 
-  g_usleep (G_USEC_PER_SEC * 1);
+  g_usleep (G_USEC_PER_SEC * 10);
 
   event = gst_event_new_flush_stop (TRUE);
 
@@ -53,6 +62,7 @@ timeout_cb (gpointer user_data) {
 
   return FALSE;
 }
+
 
 gint
 main (gint argc, gchar *argv[]) {
