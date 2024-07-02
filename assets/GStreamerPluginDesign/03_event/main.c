@@ -40,7 +40,7 @@ static gboolean
 timeout_cb (gpointer user_data) {
 
   GstElement *pipeline = GST_ELEMENT (user_data);
-
+  
   GstEvent *event = gst_event_new_flush_start ();
 
   gst_element_send_event (pipeline, event);
