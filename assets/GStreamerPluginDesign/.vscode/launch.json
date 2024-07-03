@@ -33,8 +33,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": false,
-      "cwd": "/home/lieryang/Desktop/LieryangStack.github.io/assets/GStreamerPluginDesign/01_design_analyse",
-      "program": "/home/lieryang/Desktop/LieryangStack.github.io/assets/GStreamerPluginDesign/01_design_analyse/build/Debug/outDebug",
+      "cwd": "/home/lieryang/Desktop/LieryangStack.github.io/assets/GStreamerProject/Rtsp",
+      "program": "/home/lieryang/Desktop/LieryangStack.github.io/assets/GStreamerProject/Rtsp/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
