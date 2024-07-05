@@ -28,9 +28,9 @@ tags: [计算机网络]
 
 ## 2 ARP协议基础概念
 
-arp协议，也称地址解析协议，是根据IP地址获取物理地址的一个TCP/IP协议。它可以解决同一个局域网内主机或路由器的IP地址和MAC地址的映射问题。arp协议在TCP/IP模型中属于IP层（网络层），在OSI模型中属于链路层。
+arp（Address Resolution Protocol）协议，也称地址解析协议，是根据IP地址获取物理地址的一个TCP/IP协议。它可以解决<font color="red">同一个局域网内</font>主机或路由器的IP地址和MAC地址的映射问题。arp协议在TCP/IP模型中属于IP层（网络层），在OSI模型中属于链路层。
 
-<font color=#ff0000>APR协议是用在一个链路（局域网）里面查询MAC地址，每个设备（比如：电脑）和路由器都会有ARP缓冲</font>
+<font color="red">APR协议是用在一个链路（局域网）里面查询MAC地址，每个设备（比如：电脑）和路由器都会有ARP缓冲</font>
 
 我的理解：比如数据从A链路通过路由A发送到B链路的路由B，B链路里面的路由会根据目标MAC发送到相应端口。（MAC地址是在链路层使用，也就是一个链路里面传输使用MAC地址）
 
@@ -42,7 +42,7 @@ arp协议，也称地址解析协议，是根据IP地址获取物理地址的一
 
 ### 3.1 手机链接局域网
 
-![Alt text](手机链接局域网.jpg)
+![Alt text](/assets/ComputerNetwork/2024010901ARP/手机链接局域网.jpg)
 
 - IP地址： `192.168.10.67`
 - MAC地址： `B6:EF:91:87:DC:83`
