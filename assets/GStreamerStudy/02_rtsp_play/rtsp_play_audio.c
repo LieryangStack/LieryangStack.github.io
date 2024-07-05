@@ -108,8 +108,8 @@ main (int argc, char *argv[])
   }
 
   /* Set the URI to play */
-  // g_object_set(data.source, "location", "rtsp://admin:EIOHDC@192.168.10.13:554/Streaming/Channels/101", 
-  //                           "latency", 50, "protocols", 0x04, NULL);
+  g_object_set(data.source, "location", "rtsp://admin:EIOHDC@192.168.10.13:554/Streaming/Channels/101", 
+                            "latency", 50, "protocols", 0x04, NULL);
   
   // g_object_set(data.source, "location", "rtsp://admin:yangquan321@192.168.2.17:554/Streaming/Channels/101", 
   //                           "latency", 0, NULL);
@@ -120,8 +120,8 @@ main (int argc, char *argv[])
   // g_object_set(data.source, "location", "rtsp://admin:LHLQLW@192.168.2.18:554/Streaming/Channels/101", 
   //                           "latency", 50, "protocols", 0x04, NULL); // 无线
 
-  g_object_set(data.source, "location", "rtsp://admin:LHLQLW@192.168.2.5:554/Streaming/Channels/101", 
-                            "latency", 50, "protocols", 0x04, NULL); // 有线
+  // g_object_set(data.source, "location", "rtsp://admin:LHLQLW@192.168.2.5:554/Streaming/Channels/101", 
+  //                           "latency", 50, "protocols", 0x04, NULL); // 有线
 
   /* Connect to the pad-added signal */
   /* 在这里把回调函数的src data变量指定参数*/

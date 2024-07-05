@@ -15,26 +15,59 @@ tags: [计算机网络]
 
 ![Alt text](/assets/ComputerNetwork/2024010901ARP/image-1.png)
 
-数据单元（data unit）：指许多信息单元。常用的数据单元有服务数据单元（SDU）、协议数据单元（PDU）。SDU是在同一机器上的两层之间传送信息。PDU是发送机器上每层的信息发送到接收机器上的相应层（同等层间交流用的）。
-
-1. 每一层对数据的称呼是不一样的，都是本质上都是数据。 <font color=#ff0000>下面对特殊和没有提到的情况说明：</font>
-
-    数据报（Datagram）：面向无连接的数据传输（UDP），其工作过程类似于报文交换。采用数据报方式传输时，被传输的分组称为数据报。
-    有的书为了把OSI中的传输层里的TCP和UDP区别开来，将上层传下来的数据（也叫数据流）进行分段。用TCP的就叫报文段，用UDP的就叫用户数据报，亦可称它们为数据段
-
-    数据单元（data unit）：指许多信息单元。常用的数据单元有服务数据单元（SDU）、协议数据单元（PDU）。SDU是在同一机器上的两层之间传送信息。PDU是发送机器上每层的信息发送到接收机器上的相应层（同等层间交流用的）。
-
-2. OSI模型传输层和网络层可以是任意协议，但是TCP/IP模型，网络层是IP协议，传输层是TCP协议。
-
 ## 2 ARP协议基础概念
 
-arp（Address Resolution Protocol）协议，也称地址解析协议，是根据IP地址获取物理地址的一个TCP/IP协议。它可以解决<font color="red">同一个局域网内</font>主机或路由器的IP地址和MAC地址的映射问题。arp协议在TCP/IP模型中属于IP层（网络层），在OSI模型中属于链路层。
+- arp（Address Resolution Protocol）协议，也称地址解析协议，是根据IP地址获取物理地址的一个TCP/IP协议。它可以解决<font color="red">同一个局域网内</font>主机或路由器的IP地址和MAC地址的映射问题。
+
+- arp协议属于网路层协议。
 
 <font color="red">APR协议是用在一个链路（局域网）里面查询MAC地址，每个设备（比如：电脑）和路由器都会有ARP缓冲</font>
 
-我的理解：比如数据从A链路通过路由A发送到B链路的路由B，B链路里面的路由会根据目标MAC发送到相应端口。（MAC地址是在链路层使用，也就是一个链路里面传输使用MAC地址）
-
 ![Alt text](/assets/ComputerNetwork/2024010901ARP/image-4.png)
+
+## 3 ARP协议的流程
+
+![alt text](/assets/ComputerNetwork/2024010901ARP/image-10.png)
+
+ARP高速缓存表
+
+![alt text](/assets/ComputerNetwork/2024010901ARP/image-11.png)
+
+当主机B要给主机C发送数据包时，会首先在自己的ARP高速缓存表中查找主机C的IP地址所对应的MAC地址，但未找到，因此，主机B需要发送ARP请求报文，来获取主机C的MAC地址
+
+![alt text](/assets/ComputerNetwork/2024010901ARP/image-12.png)
+
+ARP请求报文有具体的格式，上图的只是简单描述
+
+ARP请求报文被封装在MAC帧中发送，目的地址为广播地址
+
+主机B发送封装有ARP请求报文的广播帧，总线上的其他主机都能收到该广播帧
+
+![alt text](/assets/ComputerNetwork/2024010901ARP/image-13.png)
+
+收到ARP请求报文的主机A和主机C会把ARP请求报文交给上层的ARP进程
+
+主机A发现所询问的IP地址不是自己的IP地址，因此不用理会
+
+主机C的发现所询问的IP地址是自己的IP地址，需要进行相应
+
+![alt text](/assets/ComputerNetwork/2024010901ARP/image-14.png)
+
+![alt text](/assets/ComputerNetwork/2024010901ARP/image-15.png)
+
+![alt text](/assets/ComputerNetwork/2024010901ARP/image-16.png)
+
+动态与静态的区别
+
+![alt text](/assets/ComputerNetwork/2024010901ARP/image-17.png)
+
+<font color="red">ARP协议只能在一段链路或一个网络上使用，而不能跨网络使用</font>
+
+![alt text](/assets/ComputerNetwork/2024010901ARP/image-18.png)
+
+**总结**
+
+![alt text](/assets/ComputerNetwork/2024010901ARP/image-19.png)
 
 ## 3 ARP协议抓包
 
@@ -44,10 +77,25 @@ arp（Address Resolution Protocol）协议，也称地址解析协议，是根�
 
 ![Alt text](/assets/ComputerNetwork/2024010901ARP/手机链接局域网.jpg)
 
+**手机：**
+
 - IP地址： `192.168.10.67`
+
 - MAC地址： `B6:EF:91:87:DC:83`
 
-DCHP应该会先发送一个ARP查询信息，查看`192.168.10.67`IP是否有客户使用
+**路由器LAN：**
+
+- IP地址：`192.168.10.1`
+
+- MAC地址：`0C:11:7F:00:B1:94`
+
+**电脑端：**
+
+- IP地址：`192.168.10.67`
+
+- MAC地址：`08:BF:B8:1C:25:D6`
+
+DCHP（路由器的LAN）会先发送一个ARP广播查询信息，查看`192.168.10.67`IP是否有客户使用
 
 #### 3.2 电脑pign 192.168.10.67
 
@@ -61,3 +109,4 @@ DCHP应该会先发送一个ARP查询信息，查看`192.168.10.67`IP是否有�
 ## 参考
 
 [参考1：OSI模型中各层单位-报文、报文段、数据报（Datagram）、数据包（Packet）和分组、帧的概念区别](https://blog.csdn.net/dianqicyuyan/article/details/121798895)
+
