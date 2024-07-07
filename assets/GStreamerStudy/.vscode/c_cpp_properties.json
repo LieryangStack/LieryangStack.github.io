@@ -7,7 +7,8 @@
         "/opt/gstreamer/include/gstreamer-1.0",
         "/opt/glib/include/glib-2.0",
         "/opt/src",
-        "/usr/src/glibc/glibc-2.35"
+        "/usr/src/glibc/glibc-2.35",
+        "/opt/src/gtk-4.15.3/build/"
       ],
       "compilerPath": "/usr/bin/gcc",
       "cStandard": "${default}",

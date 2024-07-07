@@ -35,7 +35,8 @@
     "chrono": "c",
     "random": "c",
     "glib_trace.h": "c",
-    "cstdio": "c"
+    "cstdio": "c",
+    "gtkgstmediafileprivate.h": "c"
   },
   "C_Cpp.errorSquiggles": "disabled",
   "C_Cpp_Runner.msvcBatchPath": "",

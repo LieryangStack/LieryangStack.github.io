@@ -66,9 +66,9 @@ main (int argc, char *argv[])
   /* 视频 */
   data.h264depay = gst_element_factory_make ("rtph264depay", "rtph264depay");
   data.h264parse = gst_element_factory_make ("h264parse", "h264parse");
-  data.h264decode = gst_element_factory_make ("avdec_h264", "nvv4l2decoder"); // nvv4l2decoder avdec_h264
-  data.video_convert = gst_element_factory_make ("videoconvert", "videoconvert");
-  data.video_sink = gst_element_factory_make ("autovideosink", "video_sink"); //nv3dsink
+  data.h264decode = gst_element_factory_make ("nvv4l2decoder", "nvv4l2decoder"); // nvv4l2decoder avdec_h264
+  data.video_convert = gst_element_factory_make ("nvvideoconvert", "videoconvert");
+  data.video_sink = gst_element_factory_make ("ximagesink", "video_sink"); //nv3dsink
 
   /* 音频 */
   data.rtpmp4gdepay = gst_element_factory_make ("rtpmp4gdepay", "rtpmp4gdepay");
