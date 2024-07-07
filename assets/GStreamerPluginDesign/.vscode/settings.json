@@ -36,7 +36,8 @@
     "random": "c",
     "glib_trace.h": "c",
     "cstdio": "c",
-    "string": "c"
+    "string": "c",
+    "gstvpf.h": "c"
   },
   "C_Cpp.errorSquiggles": "disabled",
   "C_Cpp_Runner.msvcBatchPath": "",
@@ -96,5 +97,7 @@
   "C_Cpp_Runner.showCompilationTime": false,
   "C_Cpp_Runner.useLinkTimeOptimization": false,
   "C_Cpp_Runner.msvcSecureNoWarnings": false,
-  "mesonbuild.configureOnOpen": true
+  "mesonbuild.configureOnOpen": true,
+  "C_Cpp.default.compileCommands": "/home/lieryang/Desktop/LieryangStack.github.io/assets/GStreamerPluginDesign/gst-template/builddir/compile_commands.json",
+  "C_Cpp.default.configurationProvider": "mesonbuild.mesonbuild"
 }

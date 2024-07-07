@@ -70,6 +70,9 @@
     "utility": "c",
     "variant": "c",
     "gtklistitem.h": "c",
-    "adwaita.h": "c"
+    "adwaita.h": "c",
+    "gtk.h": "c",
+    "gtkgstmediafileprivate.h": "c",
+    "gstplayer-video-renderer.h": "c"
   }
 }

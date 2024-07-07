@@ -320,7 +320,7 @@ myfilter_init (GstPlugin * plugin)
  */
 GST_PLUGIN_DEFINE (GST_VERSION_MAJOR,
     GST_VERSION_MINOR,
-    myfilter,
+    myfilter1,
     "学习如何编写插件",
     myfilter_init,
     PACKAGE_VERSION, GST_LICENSE, GST_PACKAGE_NAME, GST_PACKAGE_ORIGIN)

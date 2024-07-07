@@ -50,3 +50,12 @@ gstmyfilterexample = library('gstmyfilter',
   install : true,
   install_dir : plugins_install_dir,
 )
+
+
+# vpftest = library('gstvpf',
+#   'src/gstvpf.c',
+#   c_args: plugin_c_args,
+#   dependencies : [gst_dep, gstbase_dep],
+#   install : true,
+#   install_dir : plugins_install_dir,
+# )

@@ -6,8 +6,7 @@
         "${workspaceFolder}/**",
         "/opt/gstreamer/include/gstreamer-1.0",
         "/opt/glib/include/glib-2.0",
-        "/home/lieryang/Downloads/gstreamer-1.22.6",
-        "/home/lieryang/Downloads/glib-2.80.2",
+        "/opt/src",
         "/usr/src/glibc/glibc-2.35"
       ],
       "compilerPath": "/usr/bin/gcc",
@@ -15,8 +14,7 @@
       "cppStandard": "${default}",
       "intelliSenseMode": "linux-gcc-x64",
       "browse": {
-        "path": ["/home/lieryang/Downloads/gstreamer-1.22.6", 
-                 "/home/lieryang/Downloads/glib-2.80.2", 
+        "path": ["/opt/src", 
                  "/usr/src/glibc/glibc-2.35",
                  "${workspaceFolder}"]
       },
