@@ -94,21 +94,19 @@ Sun Dec 17 21:27:42 2023
 
 我安装的驱动版本是 `535.146.02`，对应 `CUDA Version: 12.2`。
 
-### 2.2 下载安装CUDA
+### 2.2 runfile安装CUDA
 
 [下载CUDA Toolkit链接：https://developer.nvidia.com/cuda-toolkit-archive](https://developer.nvidia.com/cuda-toolkit-archive)
 
-我下载安装 `CUDA 12.2.1`，推荐使用runfile安装，具体为什么推荐，我也不清楚呀。
+我下载安装 `CUDA 12.2.1`。
 
-![Alt text](/assets/rizhimanlu/20231110/CUDA下载.png)
+![Alt text](/assets/NVIDIA/01_Install_ENV/CUDA下载.png)
 
 ```sh
 # 安装方式
 sudo sh cuda_12.2.1_535.86.10_linux.run
 # 卸载方式
 sudo /usr/local/cuda-12.2/bin/cuda-uninstaller
-# apt安装cuda卸载方式
-sudo apt-get autoremove --purge cuda*
 ```
 
 安装完成后会提示：
@@ -122,16 +120,16 @@ Please make sure that
  -   LD_LIBRARY_PATH includes /usr/local/cuda-12.2/lib64, or, add /usr/local/cuda-12.2/lib64 to /etc/ld.so.conf and run ldconfig as root
 ```
 
-### 2.3 添加CUDA环境变量
+#### 2.2.1 添加CUDA环境变量
 
 ```sh
 gedit ~/.bashrc # 添加CUD的PATH和LD_LIBRARY_PATH路径
 source ~/.bashrc # 更新环境变量
 ```
 
-![Alt text](/assets/rizhimanlu/20231110/CUDA环境变量添加.png)
+![Alt text](/assets/NVIDIA/01_Install_ENV/CUDA环境变量添加.png)
 
-### 2.4 测试CUDA是否安装成功
+#### 2.2.2 测试CUDA是否安装成功
 
 ```sh
 lieryang@lieryang-B760M-AORUS-ELITE-AX:~$ nvcc -V
@@ -142,8 +140,25 @@ Cuda compilation tools, release 12.2, V12.2.128
 Build cuda_12.2.r12.2/compiler.33053471_0
 ```
 
-### 2.5 多版本 CUDA 切换方式
+#### 2.2.3 CUDA卸载
+
+```sh
+cd /usr/local/cuda-12.2/bin
+sudo ./cuda-uninstaller
+```
+
+![alt text](/assets/NVIDIA/01_Install_ENV/image.png)
+
+### 2.3 deb(network)安装CUDA
+
+暂时没有研究
+
+
+#### 2.5 多版本 CUDA 切换方式
+
 Ubuntu中多版本CUDA切换：[https://blog.csdn.net/sinat_40245632/article/details/109330182](https://blog.csdn.net/sinat_40245632/article/details/109330182)
+
+
 
 ## 3 cuDNN安装
 
@@ -155,9 +170,23 @@ cuDNN是NVIDIA推出的用于自家GPU进行神经网络训练和推理的加速
 
 我选择下载 `Local Installer for Linux x86_64 (Tar)`
 
-![Alt text](/assets/rizhimanlu/20231110/cuDNN下载.png)
+![Alt text](/assets/NVIDIA/01_Install_ENV/cuDNN下载.png)
 
-### 3.2 cuDNN安装
+<font color="red">cuDNN最好使用deb方式安装，以免出现动态库软件链接报错</font>
+
+### 3.2 deb方式安装cuDNN
+
+```sh
+sudo dpkg -i cudnn-local-repo-ubuntu2204-8.9.7.29_1.0-1_amd64.deb
+sudo cp 根据提示拷贝一个key
+sudo apt update
+sudo apt install libcudnn8 # 这时候cudnn相关文件时安装到了 /usr/lib/x86_64-linux-gnu
+```
+
+![alt text](/assets/NVIDIA/01_Install_ENV/image-1.png)
+
+
+### 3.3 tar方式安装cuDNN
 
 ```sh
 # 解压cuDNN文件
@@ -169,7 +198,7 @@ sudo cp -p lib/libcudnn* /usr/local/cuda/lib64
 sudo chmod a+r /usr/local/cuda/include/cudnn*.h /usr/local/cuda/lib64/libcudnn*
 ```
 
-### 3.3 测试cuDNN是否安装成功
+### 3.4 tar测试cuDNN是否安装成功
 
 ```sh
 lieryang@lieryang-B760M-AORUS-ELITE-AX:~/Downloads/cudnn-linux-x86_64-8.9.6.50_cuda12-archive$ cat /usr/local/cuda/include/cudnn_version.h | grep CUDNN_MAJOR -A 2
@@ -192,7 +221,7 @@ TensorRt其实跟cuDNN有点类似，也是NVIDIA推出的针对自家GPU进行�
 
 这里选择 `TensorRT 8.6 GA for Linux x86_64 and CUDA 12.0 and 12.1 TAR Package` 进行下载安装
 
-![Alt text](/assets/rizhimanlu/20231110/TensorRt下载.png)
+![Alt text](/assets/NVIDIA/01_Install_ENV/TensorRt下载.png)
 
 ### 4.2 TensorRt安装
 
@@ -231,6 +260,6 @@ sudo make -j 10
 cd TensorRT-8.6.1.6/bin
 ```
 
-![Alt text](/assets/rizhimanlu/20231110/TensorRt运行.png)
+![Alt text](/assets/NVIDIA/01_Install_ENV/TensorRt运行.png)
 
 
