@@ -1,0 +1,4 @@
+sudo apt install -y libcurl4-openssl-dev libyaml-dev libzstd-dev
+sudo apt install -y gperf gettext itstool xsltproc docbook-xsl
+sudo apt install -y libgirepository1.0-dev
+
