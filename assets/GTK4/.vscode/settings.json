@@ -73,6 +73,8 @@
     "adwaita.h": "c",
     "gtk.h": "c",
     "gtkgstmediafileprivate.h": "c",
-    "gstplayer-video-renderer.h": "c"
+    "gstplayer-video-renderer.h": "c",
+    "gtkrecentmanager.h": "c",
+    "gtkaccessibletext.h": "c"
   }
 }
