@@ -4,17 +4,28 @@
       "name": "linux-gcc-x64",
       "includePath": [
         "${workspaceFolder}/**",
-        "/opt/gstreamer/include/gstreamer-1.0",
+        "/opt/libadwaita/include/libadwaita-1",
+        "/opt/libadwaita/include/appstream",
         "/opt/gtk4/include/gtk-4.0",
         "/opt/gtk4/include/pango-1.0",
         "/opt/gtk4/include/harfbuzz",
         "/opt/gtk4/include/pango-1.0",
+        "/opt/gtk4/include/fribidi",
         "/opt/gtk4/include/harfbuzz",
+        "/opt/gtk4/include/gdk-pixbuf-2.0",
+        "/opt/gtk4/include",
         "/opt/gtk4/include/cairo",
-        "/opt/gstreamer/lib/x86_64-linux-gnu/graphene-1.0/include",
+        "/opt/gtk4/include/graphene-1.0",
+        "/opt/gtk4/lib/x86_64-linux-gnu/graphene-1.0/include",
         "/opt/glib/include",
         "/opt/glib/include/glib-2.0",
         "/opt/glib/lib/x86_64-linux-gnu/glib-2.0/include",
+        "/usr/include/uuid",
+        "/usr/include/freetype2",
+        "/usr/include/libpng16",
+        "/usr/include/pixman-1",
+        "/usr/include/libmount",
+        "/usr/include/blkid",
         "/opt/src",
         "/usr/src/glibc/glibc-2.35"
       ],
@@ -34,3 +45,4 @@
   ],
   "version": 4
 }
+
