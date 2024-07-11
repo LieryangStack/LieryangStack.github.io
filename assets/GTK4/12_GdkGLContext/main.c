@@ -27,6 +27,12 @@ app_activate (GApplication *app, gpointer *user_data) {
   GdkDisplay *diplay = gdk_display_get_default ();
 
   GdkSurface *surface = gtk_native_get_surface (gtk_widget_get_native (win));
+
+  GdkGLContext *gl_context = gdk_gl_context_get_current ();
+
+  g_print ("gl_context = %p\n", gl_context);
+
+  
   
 }
 
