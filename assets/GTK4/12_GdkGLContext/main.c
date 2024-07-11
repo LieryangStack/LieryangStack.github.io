@@ -30,10 +30,8 @@ app_activate (GApplication *app, gpointer *user_data) {
 
   GdkGLContext *gl_context = gdk_gl_context_get_current ();
 
-  g_print ("gl_context = %p\n", gl_context);
+  // g_print ("gl_context = %p\n", gl_context);
 
-  
-  
 }
 
 int
