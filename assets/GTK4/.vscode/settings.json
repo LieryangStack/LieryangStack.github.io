@@ -75,6 +75,7 @@
     "gtkgstmediafileprivate.h": "c",
     "gstplayer-video-renderer.h": "c",
     "gtkrecentmanager.h": "c",
-    "gtkaccessibletext.h": "c"
+    "gtkaccessibletext.h": "c",
+    "gdksnapshot.h": "c"
   }
 }
