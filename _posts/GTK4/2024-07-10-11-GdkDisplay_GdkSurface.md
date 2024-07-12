@@ -44,6 +44,8 @@ tags: [GTK4]
 
 3. 通过 `gtk_native_get_renderer()` 函数，可以获取到 `GskRenderer` 
 
+意味着实现 `GtkNative` 接口，也必须有 `GdkSurface` 和 `GskRenderer` 成员。
+
 ![alt text](/assets/GTK4/11_GdkDisplay_GdkSurface/image/image-2.png)
 
 ## 2.1.2 那些Widget实现了GtkNative接口
