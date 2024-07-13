@@ -72,7 +72,4 @@ gtk_window_present(win) 函数中调用执行的内容:
 
 
 
-## GskRenderer
-
-有哪几种渲染方式可选
 

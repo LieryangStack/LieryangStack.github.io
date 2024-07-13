@@ -24,11 +24,18 @@ app_activate (GApplication *app, gpointer *user_data) {
 
   gtk_window_present (GTK_WINDOW (win));
 
-  GdkDisplay *diplay = gdk_display_get_default ();
+  GdkDisplay *display = gdk_display_get_default ();
 
   GdkSurface *surface = gtk_native_get_surface (gtk_widget_get_native (win));
 
   GdkGLContext *gl_context = gdk_gl_context_get_current ();
+
+  /**
+   * 这里创建的 上下文 好像
+   */
+  GdkGLContext *context = gdk_display_create_gl_context (display, NULL);
+  /* realize 才会 创建 egl_context */
+  gdk_gl_context_realize (context, NULL);
 
   // g_print ("gl_context = %p\n", gl_context);
 
