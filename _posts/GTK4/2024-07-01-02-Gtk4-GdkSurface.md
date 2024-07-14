@@ -37,6 +37,10 @@ tags: [GTK4核心对象]
 
     ![alt text](/assets/GTK4/GTK4Core/02_Surface/image/image-3.png)
 
+
+3. GdkSurface中的egl_surface，还有其中GdkGLContext的egl_context，是在渲染阶段才会创建
+    ![alt text](/assets/GTK4/GTK4Core/02_Surface/image/image-6.png)
+
 <font color="red">
 注意：
 </font>
