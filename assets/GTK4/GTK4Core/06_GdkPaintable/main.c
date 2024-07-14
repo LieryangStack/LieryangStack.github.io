@@ -49,6 +49,7 @@ gtk_nuclear_snapshot (GtkSnapshot   *snapshot,
   gtk_snapshot_scale (snapshot, size, size);
   gtk_snapshot_rotate (snapshot, rotation);
 
+  /* 画圆心 */
   builder = gsk_path_builder_new ();
   gsk_path_builder_add_circle (builder, graphene_point_zero (), 0.1);
   path = gsk_path_builder_free_to_path (builder);
