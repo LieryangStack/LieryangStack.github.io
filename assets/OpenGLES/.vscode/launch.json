@@ -1,39 +1,30 @@
-/*gcc编译设置*/
 {
-	"version": "2.0.0",
-	"tasks": [
-		{
-			"type": "cppbuild",
-			"label": "C/C++: gcc build active file",
-			"command": "/usr/bin/g++", /*使用Gcc命令编译*/
-			"args": [
-				"-g",
-				"${file}",
-				"-o",
-				"${fileDirname}/${fileBasenameNoExtension}",
-				"${workspaceFolder}/src/glad.c",
-				"-lglfw",
-				"-lGL", 
-				"-lX11", 
-				"-lpthread", 
-				"-lXrandr", 
-				"-lXi", 
-				"-ldl", 
-				"-I${workspaceFolder}",
-				"-I${workspaceFolder}/include",
-				"-I${workspaceFolder}/03_着色器"
-			],
-			"options": {
-				"cwd": "${fileDirname}"
-			},
-			"problemMatcher": [
-				"$g++"
-			],
-			"group": {
-				"kind": "build",
-				"isDefault": true /*Ctrl+Shift+B快捷键是否启用*/
-			},
-			"detail": "compiler: /usr/bin/g++"
-		}
-	]
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "gcc - Build and debug active file",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${fileDirname}/${fileBasenameNoExtension}",
+      "args": [],
+      "stopAtEntry": false,
+      "cwd": "${fileDirname}",
+      "environment": [],
+      "externalConsole": false,
+      "MIMode": "gdb",
+      "setupCommands": [
+        {
+          "description": "Enable pretty-printing for gdb",
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": true
+        },
+        {
+          "description": "Set source file substitution path",
+          "text": "set substitute-path ./ /usr/src/glibc/glibc-2.35"
+        }
+      ],
+      "preLaunchTask": "C/C++: gcc build active file",
+      "miDebuggerPath": "/usr/bin/gdb"
+    }
+  ]
 }

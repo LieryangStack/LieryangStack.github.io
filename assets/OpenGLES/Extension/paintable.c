@@ -1,5 +1,13 @@
-#include <gtk/gtk.h>
+#define STB_IMAGE_IMPLEMENTATION
 
+#include <gtk/gtk.h>
+#include <GLES3/gl32.h>
+#include <GLES2/gl2ext.h>
+#include <EGL/egl.h>
+#include <EGL/eglext.h>
+
+
+#include "stb_image.h"
 static GtkWidget *window = NULL;
 
 
@@ -31,15 +39,15 @@ gtk_nuclear_snapshot (GtkSnapshot   *snapshot,
                       double         rotation)
 {
 #define RADIUS 0.3
-  GskPathBuilder *builder;
+  // GskPathBuilder *builder;
   GskPath *path;
   GskStroke *stroke;
   double size;
 
   /* 将一个矩形区域（从 (0, 0) 到 (width, height)）填充为 background 颜色，并附加到 snapshot */
-  gtk_snapshot_append_color (snapshot,
-                             background,
-                             &GRAPHENE_RECT_INIT (0, 0, width, height));
+  // gtk_snapshot_append_color (snapshot,
+  //                            background,
+  //                            &GRAPHENE_RECT_INIT (0, 0, width, height));
 
   size = MIN (width, height);
 
@@ -47,33 +55,51 @@ gtk_nuclear_snapshot (GtkSnapshot   *snapshot,
 
   /* 绘制坐标变化到中心位置 */
   // gtk_snapshot_translate (snapshot, &GRAPHENE_POINT_INIT (width / 2.0, height / 2.0));
-  gtk_snapshot_scale (snapshot, size, size);
-  gtk_snapshot_rotate (snapshot, rotation);
+  // gtk_snapshot_scale (snapshot, size, size);
+  // gtk_snapshot_rotate (snapshot, rotation);
 
-  /* 画圆心 */
-  // builder = gsk_path_builder_new ();
-  // gsk_path_builder_add_circle (builder, graphene_point_zero (), 0.5);
-  // path = gsk_path_builder_free_to_path (builder);
-  // gtk_snapshot_append_fill (snapshot, path, GSK_FILL_RULE_WINDING, foreground);
-  // gsk_path_unref (path);
-
+  gint texture_id;
+  glGenTextures(1, &texture_id);
+  glBindTexture(GL_TEXTURE_2D, texture_id);
+  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+  glTexParameteri (GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+  glTexParameteri (GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
   
-  stroke = gsk_stroke_new (0.01);
-  
-  gsk_stroke_set_dash (stroke, (float[1]) { RADIUS * G_PI }, 1); 
-  builder = gsk_path_builder_new ();
-  // gsk_path_builder_add_circle (builder, graphene_point_zero(), RADIUS);
-  gsk_path_builder_move_to (builder, 0, 0);
-  gsk_path_builder_line_to (builder, 0.1, 0.2);
-  gsk_path_builder_line_to (builder, 0.2, 0.3);
-  gsk_path_builder_line_to (builder, 0.3, 0.4);
-  gsk_path_builder_line_to (builder, 0.4, 0.1);
-  gsk_path_builder_line_to (builder, 0.5, 0.5);
+  // // 在加载图像之前设置翻转Y轴
+  // stbi_set_flip_vertically_on_load(true); 已经在着色器中修改纹理坐标了
+  int img_width, img_height, nrChannels;
+  // The FileSystem::getPath(...) is part of the GitHub repository so we can find files on any IDE/platform; replace it with your own image path.
+  unsigned char *img_data = stbi_load("image/one.png", \
+                                  &img_width, &img_height, &nrChannels, 0);
+  if (img_data) {
+      glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, img_width, img_height, 0, GL_RGB, GL_UNSIGNED_BYTE, img_data);
+      glGenerateMipmap(GL_TEXTURE_2D);
+  } else {
+      g_print ("Failed to load texture\n");
+  }
 
-  path = gsk_path_builder_free_to_path (builder);
-  gtk_snapshot_append_stroke (snapshot, path, stroke, &(GdkRGBA) { 0.3, 0.4, 0.7, 1.0 });
-  gsk_path_unref (path);
-  gsk_stroke_free (stroke);
+  glBindTexture(GL_TEXTURE_2D, 0); 
+
+
+  GdkGLContext *context = gdk_gl_context_get_current ();
+  
+
+  GdkGLTextureBuilder *builder = gdk_gl_texture_builder_new ();
+  gdk_gl_texture_builder_set_context (builder, context);
+  gdk_gl_texture_builder_set_id (builder, texture_id);
+  gdk_gl_texture_builder_set_width (builder, img_width);
+  gdk_gl_texture_builder_set_height (builder, img_height);
+
+  GdkTexture *texture = gdk_gl_texture_builder_build (builder,NULL, NULL);
+
+  gtk_snapshot_append_texture (snapshot, texture, &GRAPHENE_RECT_INIT(
+                                     0, 0,
+                                     img_width,
+                                     img_height
+                                   ));
+
+  g_object_unref (builder);
 
   gtk_snapshot_restore (snapshot);
 }
@@ -207,7 +233,7 @@ app_activate (GApplication *app, gpointer *user_data) {
 
   GtkWidget *box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
   GtkWidget *button = gtk_button_new_with_label ("按钮");
-  GtkWidget *label = gtk_label_new ("标签");
+  GtkWidget *label = gtk_label_new ("小标签");
 
   GtkWidget *popover = gtk_popover_new ();
 

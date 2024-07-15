@@ -1,5 +1,6 @@
 {
   "files.associations": {
-    "cairo-reference-count-private.h": "c"
+    "cairo-reference-count-private.h": "c",
+    "stb_image.h": "c"
   }
 }
