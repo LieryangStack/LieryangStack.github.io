@@ -45,6 +45,7 @@ gtk_nuclear_snapshot (GtkSnapshot   *snapshot,
 
   gtk_snapshot_save (snapshot);
 
+  /* 绘制坐标变化到中心位置 */
   gtk_snapshot_translate (snapshot, &GRAPHENE_POINT_INIT (width / 2.0, height / 2.0));
   gtk_snapshot_scale (snapshot, size, size);
   gtk_snapshot_rotate (snapshot, rotation);
