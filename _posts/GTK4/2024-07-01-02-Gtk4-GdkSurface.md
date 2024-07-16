@@ -27,15 +27,29 @@ tags: [GTK4核心对象]
 
 ### 1.1 X11实现GdkSurface
 
+- **GdkX11DragSurface**：默认显示会创建该surface，这个surface（也就是这个窗口）是在拖拽的时候是用。
+
+- **GdkX11Toplevel**：
+
+- **GdkX11Popup**：
+
 ![alt text](/assets/GTK4/GTK4Core/02_Surface/image/image-1.png)
+
+#### 1.1.1 GdkX11DragSurface
 
 1. 默认显示 `GdkX11Display` 中创建了一个 `GdkX11DragSurface`。
 
     ![alt text](/assets/GTK4/GTK4Core/02_Surface/image/image-2.png)
 
+#### 1.1.2 GdkX11Toplevel
+
 2. `GtkWindow` 中创建了一个 `GdkX11Toplevel`。
 
     ![alt text](/assets/GTK4/GTK4Core/02_Surface/image/image-3.png)
+
+#### 1.1.3 GdkX11Popup
+
+
 
 
 3. GdkSurface中的egl_surface，还有其中GdkGLContext的egl_context，是在渲染阶段才会创建
