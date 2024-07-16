@@ -29,6 +29,8 @@ tags: [GTK4核心对象]
 
 - **GdkX11DragSurface**：默认显示会创建该surface，这个surface（也就是这个窗口）是在拖拽的时候是用。
 
+参考： Clipboard
+
 - **GdkX11Toplevel**：
 
 - **GdkX11Popup**：
