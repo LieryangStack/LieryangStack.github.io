@@ -19,42 +19,53 @@ tags: [GTK4核心对象]
 
 ![alt text](/assets/GTK4/GTK4Core/02_Surface/image/image-4.png)
 
+#### 1.1.1 成员GdkGLContext和EGLSurface
+
 `gl_paint_context` 一般都是通过默认显示里面的glx_contxt，通过 `gdk_surface_create_gl_context` 创建一个共享的 gl_paint_context。
 
 ![alt text](/assets/GTK4/GTK4Core/02_Surface/image/image-5.png)
 
+#### 1.1.2 成员GdkFrameClock
 
 
-### 1.1 X11实现GdkSurface
 
-- **GdkX11DragSurface**：默认显示会创建该surface，这个surface（也就是这个窗口）是在拖拽的时候是用。
+### 1.2 X11实现GdkSurface
 
-参考： Clipboard
+- **GdkX11DragSurface**：默认显示GdkX11Display会创建该surface（这个surface也就是一个X窗口），该窗口是在拖拽的时候是使用。
 
-- **GdkX11Toplevel**：
+    参考： gtk4-demo 中的 Clipboard 示例。拖拽浮动的颜色控件其实就是DragSurface窗口。
 
-- **GdkX11Popup**：
+    ![alt text](/assets/GTK4/GTK4Core/02_Surface/image/image-7.png)
+
+- **GdkX11Toplevel**：GtkWindow会创建该surface，这就是程序的主窗口（可以创建多个）。
+
+- **GdkX11Popup**：右击窗口、菜单弹出窗口、工具窗口、下拉弹出窗口等都是popup类的surface窗口。
+    ![alt text](/assets/GTK4/GTK4Core/02_Surface/image/image-8.png)
 
 ![alt text](/assets/GTK4/GTK4Core/02_Surface/image/image-1.png)
 
-#### 1.1.1 GdkX11DragSurface
+#### 1.2.1 GdkX11DragSurface
 
-1. 默认显示 `GdkX11Display` 中创建了一个 `GdkX11DragSurface`。
+默认显示 `GdkX11Display` 中创建了一个 `GdkX11DragSurface`。也就是拖拽Widget的时候被拖拽的那个窗口。
 
-    ![alt text](/assets/GTK4/GTK4Core/02_Surface/image/image-2.png)
+![alt text](/assets/GTK4/GTK4Core/02_Surface/image/image-2.png)
 
-#### 1.1.2 GdkX11Toplevel
+#### 1.2.2 GdkX11Toplevel
 
-2. `GtkWindow` 中创建了一个 `GdkX11Toplevel`。
+`GtkWindow` 中创建了一个 `GdkX11Toplevel`。也就是GtkWindow那个窗口。
 
-    ![alt text](/assets/GTK4/GTK4Core/02_Surface/image/image-3.png)
+![alt text](/assets/GTK4/GTK4Core/02_Surface/image/image-3.png)
 
-#### 1.1.3 GdkX11Popup
+#### 1.2.3 GdkX11Popup
+
+`GtkPopover` 、 `GtkTextHandle` 、 `GtkTooltipWindow` 都会创建该surface，其实就是那个下拉、菜单或者右击的弹出窗口。
+
+![alt text](/assets/GTK4/GTK4Core/02_Surface/image/image-9.png)
 
 
+## 2 GdkSurface程序分析
 
-
-3. GdkSurface中的egl_surface，还有其中GdkGLContext的egl_context，是在渲染阶段才会创建
+GdkSurface中的egl_surface，还有其中GdkGLContext的egl_context，是在渲染阶段才会创建
     ![alt text](/assets/GTK4/GTK4Core/02_Surface/image/image-6.png)
 
 <font color="red">
