@@ -177,6 +177,11 @@ do_paintable (GtkWidget *do_widget)
 
       nuclear = gtk_nuclear_icon_new (0.0);
       image = gtk_image_new_from_paintable (nuclear);
+
+      // GtkWidget *label = gtk_label_new ("测试标签");
+      // GtkWidget *box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 10);
+      // gtk_box_append (GTK_BOX(box), label);
+      // gtk_box_append (GTK_BOX(box), image);
       gtk_window_set_child (GTK_WINDOW (window), image);
       g_object_unref (nuclear);
     }
