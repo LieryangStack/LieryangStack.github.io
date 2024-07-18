@@ -161,51 +161,11 @@ gtk_nuclear_animation_step (gpointer data)
   return G_SOURCE_CONTINUE;
 }
 
-GtkWidget *
-do_paintable (GtkWidget *do_widget)
-{
-  GdkPaintable *nuclear;
-  GtkWidget *image;
-
-  if (!window)
-    {
-      window = gtk_window_new ();
-      gtk_window_set_display (GTK_WINDOW (window),
-                              gtk_widget_get_display (do_widget));
-      gtk_window_set_title (GTK_WINDOW (window), "Nuclear Icon");
-      gtk_window_set_default_size (GTK_WINDOW (window), 300, 200);
-      g_object_add_weak_pointer (G_OBJECT (window), (gpointer *)&window);
-
-      nuclear = gtk_nuclear_icon_new (0.0);
-      image = gtk_image_new_from_paintable (nuclear);
-
-      // GtkWidget *label = gtk_label_new ("测试标签");
-      // GtkWidget *box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 10);
-      // gtk_box_append (GTK_BOX(box), label);
-      // gtk_box_append (GTK_BOX(box), image);
-      gtk_window_set_child (GTK_WINDOW (window), image);
-      g_object_unref (nuclear);
-    }
-
-    g_timeout_add (1,
-                                      gtk_nuclear_animation_step,
-                                      nuclear);
-
-  if (!gtk_widget_get_visible (window))
-    gtk_widget_set_visible (window, TRUE);
-  else
-    gtk_window_destroy (GTK_WINDOW (window));
-
-  return window;
-}
-
-
-GtkWidget *win;
 
 static void 
 app_activate (GApplication *app, gpointer *user_data) {
 
-  win = gtk_application_window_new (GTK_APPLICATION (app));
+  GtkWidget *win = gtk_application_window_new (GTK_APPLICATION (app));
 
   gtk_window_set_application (GTK_WINDOW (win), GTK_APPLICATION (app));
 
@@ -215,10 +175,20 @@ app_activate (GApplication *app, gpointer *user_data) {
   GtkWidget *button = gtk_button_new_with_label ("按钮");
   GtkWidget *label = gtk_label_new ("标签");
 
-  GtkWidget *popover = gtk_popover_new ();
+  GdkPaintable *nuclear = gtk_nuclear_icon_new (0.0);
+  GtkWidget *image = gtk_image_new_from_paintable (nuclear);
+  GtkWidget *picture = gtk_picture_new_for_paintable (nuclear);
+
+  gtk_widget_set_hexpand (image, TRUE);
+  gtk_widget_set_vexpand (image, TRUE);
+
+  gtk_widget_set_hexpand (picture, TRUE);
+  gtk_widget_set_vexpand (picture, TRUE);
 
   gtk_box_append (GTK_BOX(box), label);
   gtk_box_append (GTK_BOX(box), button);
+  gtk_box_append (GTK_BOX(box), image);
+  gtk_box_append (GTK_BOX(box), picture);
 
   gtk_window_set_child (GTK_WINDOW(win), GTK_WIDGET(box));
 
@@ -230,8 +200,11 @@ app_activate (GApplication *app, gpointer *user_data) {
 
   GdkGLContext *gl_context = gdk_gl_context_get_current ();
 
+  g_timeout_add (1,
+                  gtk_nuclear_animation_step,
+                  nuclear);
+
   // g_print ("gl_context = %p\n", gl_context);
-  do_paintable (win);
 }
 
 int

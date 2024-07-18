@@ -33,6 +33,9 @@
                 "/opt/src/gtk-4.15.3",
                 "/opt/src/libadwaita-1.6.alpha",
                 "/usr/src/glibc/glibc-2.35",
+                "/usr/include/x86_64-linux-gnu",
+                "/usr/include/sysprof-4",
+                "/opt/gstreamer/include/graphene-1.0",
                 "/opt/src/gtk-4.15.3/builddir"
             ],
             "compilerPath": "/usr/bin/gcc",
