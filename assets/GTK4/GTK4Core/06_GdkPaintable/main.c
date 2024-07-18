@@ -43,6 +43,7 @@ gtk_nuclear_snapshot (GtkSnapshot   *snapshot,
 
   size = MIN (width, height);
 
+  /* 将之前的绘图操作保存在堆栈中，避免新的绘图操作影响之前的绘图内容 */
   gtk_snapshot_save (snapshot);
 
   /* 绘制坐标变化到中心位置 */
@@ -57,7 +58,6 @@ gtk_nuclear_snapshot (GtkSnapshot   *snapshot,
   // gtk_snapshot_append_fill (snapshot, path, GSK_FILL_RULE_WINDING, foreground);
   // gsk_path_unref (path);
 
-  
   stroke = gsk_stroke_new (0.01);
   
   gsk_stroke_set_dash (stroke, (float[1]) { RADIUS * G_PI }, 1); 
@@ -75,6 +75,7 @@ gtk_nuclear_snapshot (GtkSnapshot   *snapshot,
   gsk_path_unref (path);
   gsk_stroke_free (stroke);
 
+  /* 用于将之前保存的状态从堆栈中恢复 */
   gtk_snapshot_restore (snapshot);
 }
 

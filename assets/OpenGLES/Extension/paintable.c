@@ -44,42 +44,51 @@ gtk_nuclear_snapshot (GtkSnapshot   *snapshot,
   GskStroke *stroke;
   double size;
 
+  gtk_snapshot_save (snapshot);
+
   /* 将一个矩形区域（从 (0, 0) 到 (width, height)）填充为 background 颜色，并附加到 snapshot */
-  // gtk_snapshot_append_color (snapshot,
-  //                            background,
-  //                            &GRAPHENE_RECT_INIT (0, 0, width, height));
+  gtk_snapshot_append_color (snapshot,
+                             background,
+                             &GRAPHENE_RECT_INIT (0, 0, width, height));
 
   size = MIN (width, height);
 
-  gtk_snapshot_save (snapshot);
-
   /* 绘制坐标变化到中心位置 */
   // gtk_snapshot_translate (snapshot, &GRAPHENE_POINT_INIT (width / 2.0, height / 2.0));
-  // gtk_snapshot_scale (snapshot, size, size);
+  gtk_snapshot_scale (snapshot, size, size);
   // gtk_snapshot_rotate (snapshot, rotation);
 
-  gint texture_id;
-  glGenTextures(1, &texture_id);
-  glBindTexture(GL_TEXTURE_2D, texture_id);
-  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-  glTexParameteri (GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-  glTexParameteri (GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-  
-  // // 在加载图像之前设置翻转Y轴
-  // stbi_set_flip_vertically_on_load(true); 已经在着色器中修改纹理坐标了
-  int img_width, img_height, nrChannels;
-  // The FileSystem::getPath(...) is part of the GitHub repository so we can find files on any IDE/platform; replace it with your own image path.
-  unsigned char *img_data = stbi_load("image/one.png", \
-                                  &img_width, &img_height, &nrChannels, 0);
-  if (img_data) {
-      glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, img_width, img_height, 0, GL_RGB, GL_UNSIGNED_BYTE, img_data);
-      glGenerateMipmap(GL_TEXTURE_2D);
-  } else {
-      g_print ("Failed to load texture\n");
-  }
+  static gboolean flag = FALSE;
 
-  glBindTexture(GL_TEXTURE_2D, 0); 
+  static gint texture_id;
+
+  if (flag == FALSE) {
+
+    glGenTextures(1, &texture_id);
+    glBindTexture(GL_TEXTURE_2D, texture_id);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexParameteri (GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+    glTexParameteri (GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+    
+    // // 在加载图像之前设置翻转Y轴
+    // stbi_set_flip_vertically_on_load(true); 已经在着色器中修改纹理坐标了
+    int img_width, img_height, nrChannels;
+    // The FileSystem::getPath(...) is part of the GitHub repository so we can find files on any IDE/platform; replace it with your own image path.
+    unsigned char *img_data = stbi_load("image/test.jpg", \
+                                    &img_width, &img_height, &nrChannels, 0);
+    if (img_data) {
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, img_width, img_height, 0, GL_RGB, GL_UNSIGNED_BYTE, img_data);
+        glGenerateMipmap(GL_TEXTURE_2D);
+    } else {
+        g_print ("Failed to load texture\n");
+    }
+
+    glBindTexture(GL_TEXTURE_2D, 0); 
+
+    flag = TRUE;
+
+  }
 
 
   GdkGLContext *context = gdk_gl_context_get_current ();
@@ -88,18 +97,36 @@ gtk_nuclear_snapshot (GtkSnapshot   *snapshot,
   GdkGLTextureBuilder *builder = gdk_gl_texture_builder_new ();
   gdk_gl_texture_builder_set_context (builder, context);
   gdk_gl_texture_builder_set_id (builder, texture_id);
-  gdk_gl_texture_builder_set_width (builder, img_width);
-  gdk_gl_texture_builder_set_height (builder, img_height);
+  gdk_gl_texture_builder_set_width (builder, 1);
+  gdk_gl_texture_builder_set_height (builder, 1);
 
   GdkTexture *texture = gdk_gl_texture_builder_build (builder,NULL, NULL);
 
   gtk_snapshot_append_texture (snapshot, texture, &GRAPHENE_RECT_INIT(
                                      0, 0,
-                                     img_width,
-                                     img_height
+                                     1,
+                                     1
                                    ));
 
   g_object_unref (builder);
+
+
+  stroke = gsk_stroke_new (0.01);
+  
+  gsk_stroke_set_dash (stroke, (float[1]) { RADIUS * G_PI }, 1); 
+  GskPathBuilder *path_builder = gsk_path_builder_new ();
+  // gsk_path_builder_add_circle (builder, graphene_point_zero(), RADIUS);
+  gsk_path_builder_move_to (path_builder, 0, 0);
+  gsk_path_builder_line_to (path_builder, 0.1, 0.2);
+  gsk_path_builder_line_to (path_builder, 0.2, 0.3);
+  gsk_path_builder_line_to (path_builder, 0.3, 0.4);
+  gsk_path_builder_line_to (path_builder, 0.4, 0.1);
+  gsk_path_builder_line_to (path_builder, 0.5, 0.5);
+
+  path = gsk_path_builder_free_to_path (path_builder);
+  gtk_snapshot_append_stroke (snapshot, path, stroke, &(GdkRGBA) { 0.3, 0.4, 0.7, 1.0 });
+  gsk_path_unref (path);
+  gsk_stroke_free (stroke);
 
   gtk_snapshot_restore (snapshot);
 }
