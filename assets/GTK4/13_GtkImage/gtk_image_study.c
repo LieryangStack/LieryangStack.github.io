@@ -38,7 +38,7 @@ app_activate (GApplication *app, gpointer *user_data) {
   gtk_box_append (GTK_BOX(box), inherit_image);
   gtk_box_append (GTK_BOX(box), normal_image);
   gtk_box_append (GTK_BOX(box), large_image);  
-  // gtk_box_append (GTK_BOX(box), picture);
+  gtk_box_append (GTK_BOX(box), picture);
 
   gtk_window_set_child (GTK_WINDOW(win), GTK_WIDGET(box));
 
