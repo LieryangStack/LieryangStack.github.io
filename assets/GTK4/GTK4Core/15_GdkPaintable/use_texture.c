@@ -31,11 +31,15 @@ thread_create_texture (gpointer data) {
   PFNEGLDESTROYIMAGEKHRPROC eglDestroyImageKHR = (PFNEGLDESTROYIMAGEKHRPROC) eglGetProcAddress ("eglDestroyImageKHR");
   PFNGLEGLIMAGETARGETTEXTURE2DOESPROC glEGLImageTargetTexture2DOES = (PFNGLEGLIMAGETARGETTEXTURE2DOESPROC)eglGetProcAddress ("glEGLImageTargetTexture2DOES");
 
-  EGLDisplay egl_display = gdk_display_get_egl_display (gdk_display_get_default());
   GdkGLContext *gdk_gl_context = gdk_display_create_gl_context(gdk_display_get_default(), NULL);
+
   gdk_gl_context_make_current (gdk_gl_context);
-  
+
+  EGLDisplay egl_display = eglGetCurrentDisplay ();
   EGLContext egl_context = eglGetCurrentContext ();
+  EGLSurface egl_surface = eglGetCurrentSurface (EGL_DRAW);
+  EGLint egl_config_id;
+  eglQueryContext(egl_display, egl_context, EGL_CONFIG_ID, &egl_config_id);
 
   const EGLint imageAttributes[] = {
     EGL_IMAGE_PRESERVED_KHR, EGL_TRUE,
@@ -58,30 +62,18 @@ thread_create_texture (gpointer data) {
 
   glBindTexture(GL_TEXTURE_2D, texture_id[1]); 
 
-  if (eglGetError() != EGL_SUCCESS) {
-    g_print ("error = %X\n", eglGetError());
-  }
-
   /**
    * GL_TEXTURE_2D
    * GL_TEXTURE_EXTERNAL_OES
   */
   glEGLImageTargetTexture2DOES(GL_TEXTURE_2D, image);
 
-  if (eglGetError() != EGL_SUCCESS) {
-    g_print ("error = %X\n", eglGetError());
-  }
-
   eglDestroyImageKHR (egl_display, image);
+  glBindTexture(GL_TEXTURE_2D, 0); 
 
   glFinish ();
-
-  gint m_width;
-  glGetTexLevelParameteriv (GL_TEXTURE_2D, 0, GL_TEXTURE_WIDTH, &m_width);
-  g_print ("m_width = %d\n", m_width);
-
-  glBindTexture(GL_TEXTURE_2D, 0); 
 }
+
 
 /**
  * @brief: 图标的实际绘制函数
@@ -152,8 +144,6 @@ gtk_nuclear_snapshot (GtkSnapshot   *snapshot,
 
     GThread *thread = g_thread_try_new ("create-texture", thread_create_texture, NULL, NULL);
     g_thread_join (thread);
-
-    gdk_display_get_egl_display
 
     flag = TRUE;
   }
