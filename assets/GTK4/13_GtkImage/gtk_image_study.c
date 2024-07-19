@@ -12,10 +12,10 @@ app_activate (GApplication *app, gpointer *user_data) {
   GtkWidget *button = gtk_button_new_with_label ("按钮");
   GtkWidget *label = gtk_label_new ("标签");
 
-  GtkWidget *large_image = gtk_image_new_from_file ("/home/lieryang/Desktop/LieryangStack.github.io/assets/GTK4/13_GtkImage/image/image.png");
-  GtkWidget *inherit_image = gtk_image_new_from_icon_name ("camera-web");
-  GtkWidget *normal_image = gtk_image_new_from_icon_name ("camera-web");
-  // GtkWidget *large_image = gtk_image_new_from_icon_name ("camera-web");
+  GtkWidget *large_image = gtk_image_new_from_file ("/home/lieryang/Desktop/LieryangStack.github.io/assets/GTK4/13_GtkImage/image/width_image.png");
+  GtkWidget *inherit_image = gtk_image_new_from_icon_name ("mail-unread");
+  GtkWidget *normal_image = gtk_image_new_from_icon_name ("mail-unread");
+  // GtkWidget *large_image = gtk_image_new_from_icon_name ("mail-unread);
 
   GtkWidget *picture = gtk_picture_new_for_filename ("/home/lieryang/Desktop/LieryangStack.github.io/assets/GTK4/13_GtkImage/image/bird.jpg");
 
@@ -25,7 +25,7 @@ app_activate (GApplication *app, gpointer *user_data) {
   gtk_image_set_icon_size (GTK_IMAGE(large_image), GTK_ICON_SIZE_LARGE);
 
   /* MIN {width, height} 设定为 @pixel_size */
-  gtk_image_set_pixel_size (GTK_IMAGE(large_image), 100);
+  gtk_image_set_pixel_size (GTK_IMAGE(large_image), 200);
 
   // gtk_widget_set_hexpand (image, TRUE);
   // gtk_widget_set_vexpand (image, TRUE);

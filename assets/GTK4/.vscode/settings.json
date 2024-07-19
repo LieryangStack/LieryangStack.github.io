@@ -3,7 +3,8 @@
     "cairo-reference-count-private.h": "c",
     "stb_image.h": "c",
     "gtk.h": "c",
-    "gtkaccessibletext.h": "c"
+    "gtkaccessibletext.h": "c",
+    "random": "c"
   },
   "C_Cpp.errorSquiggles": "disabled"
 }

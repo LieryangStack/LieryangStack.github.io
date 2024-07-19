@@ -1,8 +1,5 @@
 #include <gtk/gtk.h>
 
-static GtkWidget *window = NULL;
-
-
 #define GTK_TYPE_NUCLEAR_ICON (gtk_nuclear_icon_get_type ())
 G_DECLARE_FINAL_TYPE (GtkNuclearIcon, gtk_nuclear_icon, GTK, NUCLEAR_ICON, GObject)
 
@@ -28,28 +25,42 @@ gtk_nuclear_snapshot (GtkSnapshot   *snapshot,
                       const GdkRGBA *background,
                       double         width,
                       double         height,
-                      double         rotation)
-{
-#define RADIUS 0.3
-  GskPathBuilder *builder;
-  GskPath *path;
-  GskStroke *stroke;
-  double size;
+                      double         rotation) {
 
   /* 将一个矩形区域（从 (0, 0) 到 (width, height)）填充为 background 颜色，并附加到 snapshot */
-  gtk_snapshot_append_color (snapshot,
-                             background,
-                             &GRAPHENE_RECT_INIT (0, 0, width, height));
+  // gtk_snapshot_append_color (snapshot,
+  //                            &(GdkRGBA) { 0xEF/(float)0xFF, 0x96/(float)0xFF, 0xC5/(float)0xFF, 1 },
+  //                            &GRAPHENE_RECT_INIT (0, 0, width, height));
 
-  size = MIN (width, height);
+  /* 使用渐变色填充背景色 */
+  // GskColorStop stops[2];
+  // stops[0].color = (GdkRGBA) { 0xCC/(float)0xFF, 0xFB/(float)0xFF, 0xFF/(float)0xFF, 1 };
+  // stops[0].offset = 0.1;
+  
+  // stops[1].color = (GdkRGBA) { 0xEF/(float)0xFF, 0x96/(float)0xFF, 0xC5/(float)0xFF, 1 };
+  // stops[1].offset = 0.5;
+
+  // gtk_snapshot_append_linear_gradient (snapshot,
+  //                                     &GRAPHENE_RECT_INIT (0, 0, width, height),
+  //                                     &GRAPHENE_POINT_INIT (0, 0),
+  //                                     &GRAPHENE_POINT_INIT (width, height),
+  //                                     stops,
+  //                                     2);
+
 
   /* 将之前的绘图操作保存在堆栈中，避免新的绘图操作影响之前的绘图内容 */
   gtk_snapshot_save (snapshot);
 
-  /* 绘制坐标变化到中心位置 */
+  /* 移动原点（起始点）到控件的中心 */
   // gtk_snapshot_translate (snapshot, &GRAPHENE_POINT_INIT (width / 2.0, height / 2.0));
-  gtk_snapshot_scale (snapshot, size, size);
-  gtk_snapshot_rotate (snapshot, rotation);
+  gtk_snapshot_scale (snapshot, width, -height);
+  /* 移动原点到 @point */
+  gtk_snapshot_translate (snapshot, &GRAPHENE_POINT_INIT(0.0,  -1.0));
+  // gtk_snapshot_rotate (snapshot, rotation);
+
+
+
+
 
   /* 画圆心 */
   // builder = gsk_path_builder_new ();
@@ -58,25 +69,32 @@ gtk_nuclear_snapshot (GtkSnapshot   *snapshot,
   // gtk_snapshot_append_fill (snapshot, path, GSK_FILL_RULE_WINDING, foreground);
   // gsk_path_unref (path);
 
-  stroke = gsk_stroke_new (0.01);
+  GskStroke *stroke = gsk_stroke_new (0.005);
+  gsk_stroke_set_line_join (stroke, GSK_LINE_JOIN_BEVEL);
   
-  gsk_stroke_set_dash (stroke, (float[1]) { RADIUS * G_PI }, 1); 
-  builder = gsk_path_builder_new ();
+  // gsk_stroke_set_dash (stroke, (float[1]) { RADIUS * G_PI }, 1); 
+  GskPathBuilder *builder = gsk_path_builder_new ();
   // gsk_path_builder_add_circle (builder, graphene_point_zero(), RADIUS);
-  gsk_path_builder_move_to (builder, 0, 0);
+  // gsk_path_builder_move_to (builder, -1.0, 0.0);
   gsk_path_builder_line_to (builder, 0.1, 0.2);
   gsk_path_builder_line_to (builder, 0.2, 0.3);
   gsk_path_builder_line_to (builder, 0.3, 0.4);
-  gsk_path_builder_line_to (builder, 0.4, 0.1);
-  gsk_path_builder_line_to (builder, 0.5, 0.5);
+  gsk_path_builder_line_to (builder, 0.4, 0.5);
+  gsk_path_builder_line_to (builder, 0.5, 0.3);
+  gsk_path_builder_line_to (builder, 0.8, 0.7);
+  gsk_path_builder_line_to (builder, 1.0, 0.3);
+  // gsk_path_builder_line_to (builder, 1.2, 0.0);
 
-  path = gsk_path_builder_free_to_path (builder);
+  GskPath *path = gsk_path_builder_free_to_path (builder);
   gtk_snapshot_append_stroke (snapshot, path, stroke, &(GdkRGBA) { 0.3, 0.4, 0.7, 1.0 });
+  gtk_snapshot_append_fill (snapshot, path, GSK_FILL_RULE_WINDING, &(GdkRGBA) { 0.8, 0.984, 1.0, 1 });
   gsk_path_unref (path);
   gsk_stroke_free (stroke);
 
+
   /* 用于将之前保存的状态从堆栈中恢复 */
   gtk_snapshot_restore (snapshot);
+
 }
 
 
@@ -141,23 +159,12 @@ gtk_nuclear_animation_step (gpointer data)
 {
   GtkNuclearIcon *nuclear = data;
 
-  /* Add 1 to the progress and reset it when we've reached
-   * the maximum value.
-   * The animation will rotate by 360 degrees at MAX_PROGRESS
-   * so it will be identical to the original unrotated one.
-   */
   nuclear->rotation = (nuclear->rotation + 0.1f) ;
 
-  /* Now we need to tell all listeners that we've changed out contents
-   * so that they can redraw this paintable.
-   */
+  /* 重新绘制 */
   gdk_paintable_invalidate_contents (GDK_PAINTABLE (nuclear));
 
-  /* We want this timeout function to be called repeatedly,
-   * so we return this value here.
-   * If this was a single-shot timeout, we could also
-   * return G_SOURCE_REMOVE here to get rid of it.
-   */
+  /* 下次循环继续迭代该事件源 */
   return G_SOURCE_CONTINUE;
 }
 
@@ -176,21 +183,19 @@ app_activate (GApplication *app, gpointer *user_data) {
   GtkWidget *label = gtk_label_new ("标签");
 
   GdkPaintable *nuclear = gtk_nuclear_icon_new (0.0);
-  GtkWidget *image = gtk_image_new_from_paintable (nuclear);
+  // GtkWidget *image = gtk_image_new_from_paintable (nuclear); picture可以不受长宽比拉伸
   GtkWidget *picture = gtk_picture_new_for_paintable (nuclear);
-
-  gtk_widget_set_hexpand (image, TRUE);
-  gtk_widget_set_vexpand (image, TRUE);
 
   gtk_widget_set_hexpand (picture, TRUE);
   gtk_widget_set_vexpand (picture, TRUE);
 
-  gtk_box_append (GTK_BOX(box), label);
-  gtk_box_append (GTK_BOX(box), button);
-  gtk_box_append (GTK_BOX(box), image);
+  // gtk_box_append (GTK_BOX(box), label);
   gtk_box_append (GTK_BOX(box), picture);
+  // gtk_box_append (GTK_BOX(box), button);
 
   gtk_window_set_child (GTK_WINDOW(win), GTK_WIDGET(box));
+
+  gtk_widget_set_opacity (win, 0.75);
 
   gtk_window_present (GTK_WINDOW (win));
 
@@ -211,6 +216,7 @@ int
 main (int argc, char *argv[]) {
 
   GtkApplication *app = gtk_application_new ("test.application.Paintable", G_APPLICATION_DEFAULT_FLAGS);
+  
   g_signal_connect (app, "activate", G_CALLBACK (app_activate), NULL);
   g_application_run (G_APPLICATION (app), argc, argv);
 

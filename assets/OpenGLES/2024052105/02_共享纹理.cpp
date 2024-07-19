@@ -164,9 +164,15 @@ egl_thread_test_func (gpointer data) {
 
   eglDestroyImageKHR (egl_display, image);
 
+      gint m_width;
+    glGetTexLevelParameteriv (GL_TEXTURE_EXTERNAL_OES, 0, GL_TEXTURE_WIDTH, &m_width);
+    g_print ("m_width = %d\n", m_width);
+
   glBindTexture(GL_TEXTURE_EXTERNAL_OES, 0); 
 
   glFinish ();
+
+
   // glFlush ();
 
   /* 这个必须要有，我也不明白为什么，好像有 glFinish 或者 glFlush 就可以了 */
