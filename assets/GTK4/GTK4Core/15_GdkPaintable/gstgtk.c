@@ -1,5 +1,3 @@
-#define STB_IMAGE_IMPLEMENTATION
-
 #include <gtk/gtk.h>
 #include <gst/gst.h>
 
@@ -95,7 +93,7 @@ play_video (gpointer use_data) {
   data.filter = gst_element_factory_make("capsfilter", "filter");
   data.convert = gst_element_factory_make ("nvvideoconvert", "videoconvert");
 
-  data.sink = gst_element_factory_make ("nveglglessink", "sink"); //nv3dsink
+  data.sink = gst_element_factory_make ("vpfeglglessink", "sink"); //nv3dsink
 
   g_signal_connect (data.sink, "paintable", G_CALLBACK(ui_render_cb), NULL);
 
@@ -132,14 +130,12 @@ play_video (gpointer use_data) {
   }
 
   /* Set the URI to play */
-  // g_object_set(data.source, "location", "rtsp://admin:YEERBA@192.168.10.11:554/Streaming/Channels/101", \
-  //                           "latency", 200, "protocols", 0x04, NULL);
+  g_object_set(data.source, "location", "rtsp://admin:YEERBA@192.168.10.11:554/Streaming/Channels/101", \
+                            "latency", 200, "protocols", 0x04, NULL);
   
-  // g_object_set(data.source, "location", "rtsp://admin:yangquan321@192.168.2.3:554/Streaming/Channels/101", \
-  //                           "latency", 300, "protocols", 0x04, NULL);
 
-  g_object_set(data.source, "location", "rtsp://admin:LHLQLW@192.168.10.199:554/Streaming/Channels/101", 
-                            "latency", 200, "protocols", 0x04, NULL); // 家客厅
+  // g_object_set(data.source, "location", "rtsp://admin:LHLQLW@192.168.10.199:554/Streaming/Channels/101", 
+  //                           "latency", 200, "protocols", 0x04, NULL); // 家客厅
 
   /* Connect to the pad-added signal */
   /* 在这里把回调函数的src data变量指定参数*/
