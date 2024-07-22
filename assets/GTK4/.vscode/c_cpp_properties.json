@@ -36,6 +36,8 @@
                 "/usr/include/x86_64-linux-gnu",
                 "/usr/include/sysprof-4",
                 "/opt/gstreamer/include/graphene-1.0",
+                "/opt/gstreamer/include/gstreamer-1.0",
+                
                 "/opt/src/gtk-4.15.3/builddir"
             ],
             "compilerPath": "/usr/bin/gcc",

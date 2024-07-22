@@ -99,7 +99,7 @@ gtk_nuclear_snapshot (GtkSnapshot   *snapshot,
   gtk_snapshot_scale (snapshot, width, height);
   /* 移动原点到 @point */
   // gtk_snapshot_translate (snapshot, &GRAPHENE_POINT_INIT(0.0,  -1.0));
-  // gtk_snapshot_rotate (snapshot, rotation);
+  gtk_snapshot_rotate (snapshot, rotation);
 
 
   static gboolean flag = FALSE;
@@ -159,6 +159,7 @@ gtk_nuclear_snapshot (GtkSnapshot   *snapshot,
 
   gtk_snapshot_append_texture (snapshot, texture, &GRAPHENE_RECT_INIT(0, 0, 1, 1));
 
+  g_object_unref (texture);
   g_object_unref (builder);
 
 
@@ -275,9 +276,9 @@ app_activate (GApplication *app, gpointer *user_data) {
 
   GdkGLContext *gl_context = gdk_gl_context_get_current ();
 
-  // g_timeout_add (1,
-  //                 gtk_nuclear_animation_step,
-  //                 nuclear);
+  g_timeout_add (1,
+                  gtk_nuclear_animation_step,
+                  nuclear);
 
   // g_print ("gl_context = %p\n", gl_context);
 }

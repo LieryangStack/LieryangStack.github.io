@@ -26,6 +26,8 @@ gtk_nuclear_snapshot (GtkSnapshot   *snapshot,
                       double         width,
                       double         height,
                       double         rotation) {
+          
+  g_print ("snapshot = %p\n", snapshot);
 
   /* 将一个矩形区域（从 (0, 0) 到 (width, height)）填充为 background 颜色，并附加到 snapshot */
   // gtk_snapshot_append_color (snapshot,
@@ -56,7 +58,7 @@ gtk_nuclear_snapshot (GtkSnapshot   *snapshot,
   gtk_snapshot_scale (snapshot, width, -height);
   /* 移动原点到 @point */
   gtk_snapshot_translate (snapshot, &GRAPHENE_POINT_INIT(0.0,  -1.0));
-  // gtk_snapshot_rotate (snapshot, rotation);
+  gtk_snapshot_rotate (snapshot, rotation);
 
 
 
@@ -215,7 +217,7 @@ app_activate (GApplication *app, gpointer *user_data) {
 int
 main (int argc, char *argv[]) {
 
-  GtkApplication *app = gtk_application_new ("test.application.Paintable", G_APPLICATION_DEFAULT_FLAGS);
+  GtkApplication *app = gtk_application_new ("test.application.draw.graph", G_APPLICATION_DEFAULT_FLAGS);
   
   g_signal_connect (app, "activate", G_CALLBACK (app_activate), NULL);
   g_application_run (G_APPLICATION (app), argc, argv);

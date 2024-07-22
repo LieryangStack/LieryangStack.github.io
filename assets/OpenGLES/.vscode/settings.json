@@ -73,6 +73,7 @@
     "variant": "cpp",
     "gl.h": "c",
     "gtk.h": "c",
-    "gtkcss.h": "c"
+    "gtkcss.h": "c",
+    "stb_image.h": "c"
   }
 }
