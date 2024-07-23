@@ -4,7 +4,10 @@
     "stb_image.h": "c",
     "gtk.h": "c",
     "gtkaccessibletext.h": "c",
-    "random": "c"
+    "random": "c",
+    "*.inc": "c",
+    "any": "c",
+    "typeinfo": "c"
   },
   "C_Cpp.errorSquiggles": "disabled"
 }

@@ -1,5 +1,6 @@
 #include <gtk/gtk.h>
 #include <gst/gst.h>
+#include <gst/rtsp/gstrtspmessage.h>
 
 GdkPaintable *picture_paintable = NULL;
 GtkWidget *picture = NULL;
@@ -24,6 +25,7 @@ typedef struct _CustomData
 
 } CustomData;
 
+
 static void
 pad_added_handler (GstElement * src, GstPad * new_pad, CustomData * data)
 {
@@ -43,13 +45,16 @@ pad_added_handler (GstElement * src, GstPad * new_pad, CustomData * data)
 
   sink_pad = gst_element_get_static_pad (data->h264depay, "sink");
 
-  // static int i = 0;
-  // if (i++ == 0)
-  //   sink_pad = gst_element_get_static_pad (data->h264depay, "sink");
-  // else 
-  //   sink_pad = gst_element_get_static_pad (data->h264depay_t, "sink");
+  guint size = gst_caps_get_size (new_pad_caps);
+  g_print ("size = %d\n", size);
+  GstStructure *structure = gst_caps_get_structure (new_pad_caps, 0);
+  gchar *str = gst_structure_to_string (structure);
+  g_print ("str = %s\n", str);
+  const gchar *media_str = gst_structure_get_string (structure, "media");
 
-  /* If our converter is already linked, we have nothing to do here */
+  if (g_strcmp0("video", media_str))
+    goto exit;
+
   if (gst_pad_is_linked (sink_pad)) {
     g_message ("We are already linked. Ignoring.\n");
     goto exit;
@@ -70,6 +75,50 @@ exit:
 
   /* Unreference the sink pad */
   gst_object_unref (sink_pad);
+}
+
+GstPadProbeReturn  
+sink_pad_probe_cb   (GstPad *pad, 
+                     GstPadProbeInfo *info,
+                     gpointer user_data) {
+                      
+  GstEvent *event = gst_pad_probe_info_get_event (info);
+
+  g_print ("name = %s\n", GST_EVENT_TYPE_NAME(event));
+
+  if (GST_EVENT_TYPE (event) == GST_EVENT_CAPS) {
+     GstCaps *caps;
+     gst_event_parse_caps (event, &caps);
+     GstStructure *structure = gst_caps_get_structure (caps, 0);
+     gst_structure_remove_field (structure, "seqnum-base");
+    //  gst_structure_set (structure, "seqnum-base", 50, NULL);
+  }
+
+  return GST_PAD_PROBE_OK;
+}
+
+
+static void
+get_jitterbuffer (GstElement * object,
+                  GstElement * jitterbuffer,
+                  gpointer user_data) {
+  g_print ("jitterbuffer = %s\n", G_OBJECT_TYPE_NAME(jitterbuffer));
+  GstPad *sinkpad = gst_element_get_static_pad (jitterbuffer, "sink");
+
+  gst_pad_add_probe (sinkpad, GST_PAD_PROBE_TYPE_EVENT_DOWNSTREAM, sink_pad_probe_cb, NULL, NULL);
+
+  gst_object_unref (sinkpad);
+  
+}
+
+static void 
+select_stream_cb (GstElement * object,
+                  GstElement * manager,
+                  gpointer user_data) {
+  
+  g_print ("object = %s\n", G_OBJECT_TYPE_NAME(object));
+  g_print ("manager = %s\n", G_OBJECT_TYPE_NAME(manager));
+  g_signal_connect(manager, "new-jitterbuffer", G_CALLBACK(get_jitterbuffer), NULL);
 }
 
 static gpointer
@@ -95,7 +144,9 @@ play_video (gpointer use_data) {
 
   data.sink = gst_element_factory_make ("vpfeglglessink", "sink"); //nv3dsink
 
+  g_signal_connect (data.source, "new-manager", G_CALLBACK(select_stream_cb), NULL);
   g_signal_connect (data.sink, "paintable", G_CALLBACK(ui_render_cb), NULL);
+
 
   GstCaps *caps = gst_caps_new_simple("video/x-raw",
                                       "format", G_TYPE_STRING, "RGBA",
