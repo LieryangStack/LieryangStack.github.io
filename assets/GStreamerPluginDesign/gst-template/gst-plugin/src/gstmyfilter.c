@@ -310,7 +310,7 @@ myfilter_init (GstPlugin * plugin)
  * @brief: 在GStreamer系统中注册一个插件
  * @param major: 插件的主版本号
  * @param minor: 插件的次版本号
- * @param namen: 插件的名称，gst-inspect-1.0 可以使用@name 搜索到该插件
+ * @param name: 插件的名称，gst-inspect-1.0 可以使用@name 搜索到该插件(库名称是该lib + name，否则搜不到)
  * @param description: 该插件的相关描述
  * @param init: 插件的初始化函数
  * @param version: 插件的版本号
