@@ -26,8 +26,6 @@ gtk_nuclear_snapshot (GtkSnapshot   *snapshot,
                       double         width,
                       double         height,
                       double         rotation) {
-          
-  g_print ("snapshot = %p\n", snapshot);
 
   /* 将一个矩形区域（从 (0, 0) 到 (width, height)）填充为 background 颜色，并附加到 snapshot */
   // gtk_snapshot_append_color (snapshot,
@@ -59,10 +57,6 @@ gtk_nuclear_snapshot (GtkSnapshot   *snapshot,
   /* 移动原点到 @point */
   gtk_snapshot_translate (snapshot, &GRAPHENE_POINT_INIT(0.0,  -1.0));
   gtk_snapshot_rotate (snapshot, rotation);
-
-
-
-
 
   /* 画圆心 */
   // builder = gsk_path_builder_new ();
