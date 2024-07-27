@@ -4,8 +4,13 @@
             "name": "linux-gcc-x64",
             "includePath": [
                 "${workspaceFolder}/**",
+<<<<<<< HEAD
                 "/opt/vpf/include",
                 "/opt/vpf/include/gstreamer-1.0",
+=======
+                "/opt/vpf/include/gstreamer-1.0",
+                "/opt/vpf/include",
+>>>>>>> f6fb240374dbba8abb35dd4246524d8f2c8a4b25
                 "/opt/vpf/include/libadwaita-1",
                 "/opt/vpf/include/appstream",
                 "/opt/vpf/include/gtk-4.0",
@@ -16,7 +21,10 @@
                 "/opt/vpf/include/harfbuzz",
                 "/opt/vpf/include/gdk-pixbuf-2.0",
                 "/opt/vpf/include/cairo",
+<<<<<<< HEAD
                 "/opt/vpf/include/pixman-1",
+=======
+>>>>>>> f6fb240374dbba8abb35dd4246524d8f2c8a4b25
                 "/opt/vpf/include/graphene-1.0",
                 "/opt/vpf/lib/x86_64-linux-gnu/graphene-1.0/include",
                 "/opt/vpf/include",
@@ -27,7 +35,12 @@
                 "/usr/include/freetype2",
                 "/usr/include/libpng16",
                 "/usr/include/libmount",
+<<<<<<< HEAD
                 "/usr/include/blkid"
+=======
+                "/usr/include/blkid",
+                "/usr/include/sysprof-4"
+>>>>>>> f6fb240374dbba8abb35dd4246524d8f2c8a4b25
             ],
             "compilerPath": "/usr/bin/gcc",
             "cStandard": "${default}",
@@ -35,10 +48,16 @@
             "intelliSenseMode": "linux-gcc-x64",
             "browse": {
                 "path": [
+<<<<<<< HEAD
                     "/opt/src/glib-2.81.0",
                     "/opt/src/gstreamer-1.20.3",
                     "/opt/src/gtk-4.15.3",
                     "/opt/src/libadwaita-1.6.alpha",
+=======
+                    "/home/lieryang/Desktop/glib-2.81.0",
+                    "/home/lieryang/Desktop/gstreamer-1.20.3",
+                    "/home/lieryang/Desktop/gtk-4.15.3",
+>>>>>>> f6fb240374dbba8abb35dd4246524d8f2c8a4b25
                     "/usr/src/glibc/glibc-2.35",
                     "${workspaceFolder}"
                 ]
