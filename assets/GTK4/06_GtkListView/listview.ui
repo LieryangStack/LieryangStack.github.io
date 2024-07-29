@@ -19,7 +19,7 @@
     &lt;property name="child"&gt;
   	  &lt;object class="GtkBox"&gt;
     	  &lt;child&gt;
-      		&lt;object class="GtkCheckButton"/&gt;
+      		&lt;object class="GtkButton"/&gt;
     	  &lt;/child&gt;
     	  &lt;child&gt;
       		&lt;object class="GtkEditableLabel"&gt;
