@@ -9,7 +9,7 @@
 			"args": [
 				"-g",
 				"${file}",
-				"resources.c",
+				// "resources.c",
 				"-o",
 				"${fileDirname}/${fileBasenameNoExtension}",
 				"-lEGL",
