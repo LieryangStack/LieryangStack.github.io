@@ -1,17 +1,66 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<!-- Created with Cambalache 0.90.2 -->
+<!-- Created with Cambalache 0.90.4 -->
 <interface>
   <!-- interface-name listview.ui -->
   <requires lib="gtk" version="4.12"/>
   <requires lib="libadwaita" version="1.0"/>
   <object class="AdwApplicationWindow" id="win">
     <property name="content">
-      <object class="GtkScrolledWindow" id="scrolled_win">
-        <property name="child">
-          <object class="GtkListView" id="list_view">
+      <object class="GtkBox">
+        <property name="orientation">vertical</property>
+        <child>
+          <object class="GtkScrolledWindow" id="scrolled_win_4">
+            <property name="child">
+              <object class="GtkListView" id="list_view2">
+                <property name="factory">
+                  <object class="GtkBuilderListItemFactory">
+                    <property name="bytes">
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;interface&gt;
+  &lt;template class="GtkListItem"&gt;
+    &lt;property name="child"&gt;
+  	  &lt;object class="GtkBox"&gt;
+    	  &lt;child&gt;
+      		&lt;object class="GtkCheckButton"/&gt;
+    	  &lt;/child&gt;
+    	  &lt;child&gt;
+      		&lt;object class="GtkEditableLabel"&gt;
+        		&lt;binding name="text"&gt;
+          			&lt;lookup name="string" type="GtkStringObject"&gt;
+            		  	&lt;lookup name="item"&gt;GtkListItem&lt;/lookup&gt;
+         		    &lt;/lookup&gt;
+        		&lt;/binding&gt;
+		      &lt;/object&gt;
+   	    &lt;/child&gt;
+ 	    &lt;/object&gt;
+    &lt;/property&gt;
+  &lt;/template&gt;
+&lt;/interface&gt;
+</property>
+                  </object>
+                </property>
+                <property name="model">
+                  <object class="GtkSingleSelection" id="single_selection2">
+                    <property name="model">
+                      <object class="GtkStringList">
+                        <items>
+                          <item>one</item>
+                          <item>two</item>
+                          <item>three</item>
+                        </items>
+                      </object>
+                    </property>
+                  </object>
+                </property>
+              </object>
+            </property>
+            <property name="vexpand">True</property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkListView" id="list_view1">
             <property name="factory">
               <object class="GtkBuilderListItemFactory">
-                <!-- Custom object fragments -->
                 <property name="bytes">
 &lt;?xml version="1.0" encoding="UTF-8"?&gt;
 &lt;interface&gt;
@@ -19,7 +68,7 @@
     &lt;property name="child"&gt;
   	  &lt;object class="GtkBox"&gt;
     	  &lt;child&gt;
-      		&lt;object class="GtkButton"/&gt;
+      		&lt;object class="GtkCheckButton"/&gt;
     	  &lt;/child&gt;
     	  &lt;child&gt;
       		&lt;object class="GtkEditableLabel"&gt;
@@ -38,22 +87,21 @@
               </object>
             </property>
             <property name="model">
-              <object class="GtkSingleSelection" id="single_selection">
+              <object class="GtkSingleSelection" id="single_selection1">
                 <property name="model">
                   <object class="GtkStringList">
                     <items>
-                      <item>test1</item>
-                      <item>test2</item>
-                      <item>test3</item>
-                      <item>test4</item>
-                      <item>close</item>
+                      <item>one</item>
+                      <item>two</item>
+                      <item>three</item>
                     </items>
                   </object>
                 </property>
               </object>
             </property>
+            <property name="vexpand">True</property>
           </object>
-        </property>
+        </child>
       </object>
     </property>
     <property name="height-request">500</property>
