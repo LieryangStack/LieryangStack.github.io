@@ -9,38 +9,44 @@
       <object class="GtkBox">
         <property name="orientation">vertical</property>
         <child>
+          <object class="AdwHeaderBar">
+            <property name="overflow">hidden</property>
+          </object>
+        </child>
+        <child>
           <object class="GtkScrolledWindow" id="scrolled_win_4">
             <property name="child">
               <object class="GtkListView" id="list_view2">
                 <property name="factory">
                   <object class="GtkBuilderListItemFactory">
+                    <!-- Custom object fragments -->
                     <property name="bytes">
 &lt;?xml version="1.0" encoding="UTF-8"?&gt;
 &lt;interface&gt;
   &lt;template class="GtkListItem"&gt;
     &lt;property name="child"&gt;
-  	  &lt;object class="GtkBox"&gt;
-    	  &lt;child&gt;
-      		&lt;object class="GtkCheckButton"/&gt;
-    	  &lt;/child&gt;
-    	  &lt;child&gt;
-      		&lt;object class="GtkEditableLabel"&gt;
-        		&lt;binding name="text"&gt;
-          			&lt;lookup name="string" type="GtkStringObject"&gt;
-            		  	&lt;lookup name="item"&gt;GtkListItem&lt;/lookup&gt;
-         		    &lt;/lookup&gt;
-        		&lt;/binding&gt;
-		      &lt;/object&gt;
-   	    &lt;/child&gt;
- 	    &lt;/object&gt;
+      &lt;object class="GtkBox"&gt;
+        &lt;child&gt;
+	  &lt;object class="GtkCheckButton"/&gt;
+	&lt;/child&gt;
+        &lt;child&gt;
+      	  &lt;object class="GtkEditableLabel"&gt;
+            &lt;binding name="text"&gt;
+              &lt;lookup name="string" type="GtkStringObject"&gt;
+                &lt;lookup name="item"&gt;GtkListItem&lt;/lookup&gt;
+              &lt;/lookup&gt;
+       	    &lt;/binding&gt;
+      	  &lt;/object&gt;
+	&lt;/child&gt;
+      &lt;/object&gt;
     &lt;/property&gt;
   &lt;/template&gt;
-&lt;/interface&gt;
-</property>
+&lt;/interface&gt; </property>
                   </object>
                 </property>
                 <property name="model">
                   <object class="GtkSingleSelection" id="single_selection2">
+                    <property name="autoselect">False</property>
                     <property name="model">
                       <object class="GtkStringList">
                         <items>
@@ -61,29 +67,29 @@
           <object class="GtkListView" id="list_view1">
             <property name="factory">
               <object class="GtkBuilderListItemFactory">
+                <!-- Custom object fragments -->
                 <property name="bytes">
 &lt;?xml version="1.0" encoding="UTF-8"?&gt;
 &lt;interface&gt;
   &lt;template class="GtkListItem"&gt;
     &lt;property name="child"&gt;
-  	  &lt;object class="GtkBox"&gt;
-    	  &lt;child&gt;
-      		&lt;object class="GtkCheckButton"/&gt;
-    	  &lt;/child&gt;
-    	  &lt;child&gt;
-      		&lt;object class="GtkEditableLabel"&gt;
-        		&lt;binding name="text"&gt;
-          			&lt;lookup name="string" type="GtkStringObject"&gt;
-            		  	&lt;lookup name="item"&gt;GtkListItem&lt;/lookup&gt;
-         		    &lt;/lookup&gt;
-        		&lt;/binding&gt;
-		      &lt;/object&gt;
-   	    &lt;/child&gt;
- 	    &lt;/object&gt;
+      &lt;object class="GtkBox"&gt;
+        &lt;child&gt;
+	  &lt;object class="GtkCheckButton"/&gt;
+	&lt;/child&gt;
+        &lt;child&gt;
+      	  &lt;object class="GtkEditableLabel"&gt;
+            &lt;binding name="text"&gt;
+              &lt;lookup name="string" type="GtkStringObject"&gt;
+                &lt;lookup name="item"&gt;GtkListItem&lt;/lookup&gt;
+              &lt;/lookup&gt;
+       	    &lt;/binding&gt;
+      	  &lt;/object&gt;
+	&lt;/child&gt;
+      &lt;/object&gt;
     &lt;/property&gt;
   &lt;/template&gt;
-&lt;/interface&gt;
-</property>
+&lt;/interface&gt; </property>
               </object>
             </property>
             <property name="model">
@@ -105,6 +111,7 @@
       </object>
     </property>
     <property name="height-request">500</property>
+    <property name="icon-name">document-page-setup-symbolic</property>
     <property name="width-request">300</property>
   </object>
 </interface>

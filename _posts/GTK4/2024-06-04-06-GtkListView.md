@@ -59,7 +59,7 @@ gtk_string_list_take (GtkStringList *self, char *string);
     G_DECLARE_INTERFACE (GtkSelectionModel, gtk_selection_model, GTK, SELECTION_MODEL, GListModel)
     ```
 
-2. GtkSelectionModel是一个支持选择的接口。有了这个模型，用户可以通过点击来选择项目。它由GtkMultiSelection、GtkNoSelection和GtkSingleSelection对象实现。这三个对象通常足以构建应用程序。它们是用GListModel创建的。你也可以单独创建它们，然后添加一个GListModel。
+2. GtkSelectionModel是一个支持选择的接口。有了这个模型，用户可以通过点击来选择项目。它由GtkMultiSelection、GtkNoSelection和GtkSingleSelection对象实现。这三个对象通常足以构建应用程序。它们是用GListModel创建的。你也可以单独创建它们，然后添加一个GListModel
 
     - `GtkNoSelection`不支持选择。当需要GtkSelectionModel时，它是GListModel的包装器
   
@@ -74,7 +74,12 @@ gtk_string_list_take (GtkStringList *self, char *string);
 
 ### 2.3 GtkMultiSelection
 
+
 ## 3 GtkListItemFactory
+
+从GListModel中获取Item，根据Factory创建Widget
+
+
 
 ### 3.1 GtkSignalListItemFactory
 
