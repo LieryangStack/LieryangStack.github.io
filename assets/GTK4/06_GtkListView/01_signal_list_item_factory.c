@@ -1,3 +1,9 @@
+/***
+ * @brief: 通过 GtkSignalListItemFactory 创建列表的项所显示的GtkWidget
+ *  
+ * 
+ */
+
 #include <gtk/gtk.h>
 
 static void
@@ -50,8 +56,10 @@ app_activate (GApplication *application) {
   g_signal_connect (factory, "teardown", G_CALLBACK (teardown_cb), NULL);
 
   GtkWidget *lv = gtk_list_view_new (GTK_SELECTION_MODEL (ns), factory);
+  gtk_list_view_set_show_separators (GTK_LIST_VIEW (lv), TRUE);
   gtk_scrolled_window_set_child (GTK_SCROLLED_WINDOW (scr), lv);
   gtk_window_present (GTK_WINDOW (win));
+  
 }
 
 /* ----- main ----- */

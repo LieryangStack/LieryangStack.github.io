@@ -2,6 +2,7 @@
 <!-- Created with Cambalache 0.90.4 -->
 <interface>
   <!-- interface-name listview.ui -->
+  <!-- interface-description 通过GtkBuilderListItemFactory创建每一项GtkListItem的GtkWidget -->
   <requires lib="gtk" version="4.12"/>
   <requires lib="libadwaita" version="1.0"/>
   <object class="AdwApplicationWindow" id="win">
