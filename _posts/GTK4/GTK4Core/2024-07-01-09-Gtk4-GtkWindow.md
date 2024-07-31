@@ -19,7 +19,7 @@ tags: [GTK4核心对象]
 
 4. 通过环境变量 `GDK_BACKEND` ，可以选择打开不同的显示后端。
 
-   ![alt text](/assets/GTK4/GTK4Core/05_GtkWindow/image/image.png)
+   ![alt text](/assets/GTK4/GTK4Core/09_GtkWindow/image/image.png)
 
 
 ### 1.2 GdkDisplay
@@ -32,7 +32,7 @@ tags: [GTK4核心对象]
 
 4. `gdk_display_open (NULL)` 调用了 `XOpenDisplay(NULL)` 函数，并且创建了 `GdkX11Display` 对象。
 
-    ![alt text](/assets/GTK4/GTK4Core/05_GtkWindow/image/image-1.png)
+    ![alt text](/assets/GTK4/GTK4Core/09_GtkWindow/image/image-1.png)
 
 ## 2 GtkWindow窗口（每个窗口都会创建，但是窗口内只有一个种该对象）
 
@@ -46,7 +46,7 @@ tags: [GTK4核心对象]
 
 意味着实现 `GtkNative` 接口，也必须有 `GdkSurface` 和 `GskRenderer` 成员。
 
-![alt text](/assets/GTK4/GTK4Core/05_GtkWindow/image/image-2.png)
+![alt text](/assets/GTK4/GTK4Core/09_GtkWindow/image/image-2.png)
 
 ## 2.1.2 那些Widget实现了GtkNative接口
 
@@ -62,17 +62,17 @@ tags: [GTK4核心对象]
 
 3. GdkSurface显示窗口，`gdk_x11_surface_show ()` 函数，调用 `XMapWindow()` 来显示窗口。
  
-  ![alt text](/assets/GTK4/GTK4Core/05_GtkWindow/image/image-3.png)
+  ![alt text](/assets/GTK4/GTK4Core/09_GtkWindow/image/image-3.png)
 
 ## 3 分析程序
 
-![alt text](/assets/GTK4/GTK4Core/05_GtkWindow/image/image-4.png)
+![alt text](/assets/GTK4/GTK4Core/09_GtkWindow/image/image-4.png)
 
 1. gtk_init() 函数创建显示、连接到显示服务器。
 
 2. gtk_window_present (win) 显示窗口。
 
-    ![alt text](/assets/GTK4/GTK4Core/05_GtkWindow/image/image-5.png)
+    ![alt text](/assets/GTK4/GTK4Core/09_GtkWindow/image/image-5.png)
 
 <font color="red">
 注意：
