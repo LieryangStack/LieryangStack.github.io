@@ -25,25 +25,44 @@ typedef struct _CustomData
 static void pad_added_handler (GstElement * src, GstPad * pad,
     CustomData * data);
 
-gboolean
-print_pad_structure(GQuark   field_id,
-                    const GValue * value,
-                    gpointer user_data){
 
-  g_print("****foreach****\n");
-  g_print("%s\n", G_VALUE_TYPE_NAME(value));
-  if( g_type_is_a(value->g_type, G_TYPE_INT))
-    g_print("%d, %d\n",field_id,g_value_get_int(value));
-  else
-    g_print("%d, %s\n",field_id,g_value_get_string(value));
+/**
+ * @brief: 修改jitterbuffer元素往后的所有元素接受到的Caps
+ *         删除 "seqnum-base"
+ */
+GstPadProbeReturn  
+cb_jitterbuffer_sink_pad_probe_cb (GstPad *pad, 
+                                   GstPadProbeInfo *info,
+                                   gpointer user_data) {
+                      
+  GstEvent *event = gst_pad_probe_info_get_event (info);
 
-  return TRUE;
+  if (GST_EVENT_TYPE (event) == GST_EVENT_CAPS) {
+     GstCaps *caps;
+     gst_event_parse_caps (event, &caps);
+     GstStructure *structure = gst_caps_get_structure (caps, 0);
+     gst_structure_remove_field (structure, "seqnum-base");
+    //  gst_structure_set (structure, "seqnum-base", 50, NULL);
+  }
+
+  return GST_PAD_PROBE_OK;
 }
 
-gboolean
-gst_event_callback(GstPad *pad, GstObject *parent, GstEvent *event){
-  g_print("***Event\n");
-  return TRUE;
+
+static void
+cb_rtspsrc_get_jitterbuffer (GstElement * object,
+                             GstElement * jitterbuffer,
+                             gpointer user_data) {
+  GstPad *sinkpad = gst_element_get_static_pad (jitterbuffer, "sink");
+  gst_pad_add_probe (sinkpad, GST_PAD_PROBE_TYPE_EVENT_DOWNSTREAM, cb_jitterbuffer_sink_pad_probe_cb, NULL, NULL);
+  gst_object_unref (sinkpad);
+}
+
+static void 
+cb_rtspsrc_new_manager (GstElement * object,
+                        GstElement * manager,
+                        gpointer user_data) {
+  g_signal_connect(manager, "new-jitterbuffer", G_CALLBACK(cb_rtspsrc_get_jitterbuffer), NULL);
 }
 
 int
@@ -107,21 +126,14 @@ main (int argc, char *argv[])
     return -1;
   }
 
-  /* Set the URI to play */
-  g_object_set(data.source, "location", "rtsp://admin:EIOHDC@192.168.10.13:554/Streaming/Channels/101", 
-                            "latency", 50, "protocols", 0x04, NULL);
+  g_signal_connect (data.source, "new-manager", G_CALLBACK(cb_rtspsrc_new_manager), NULL);
+
+  /* 延迟设小了会卡，跟nvv4l2decoder有关 */
+  // g_object_set(data.source, "location", "rtsp://admin:YEERBA@192.168.10.11:554/Streaming/Channels/101", \
+  //                         "latency", 300, "protocols", 0x04, NULL);
   
-  // g_object_set(data.source, "location", "rtsp://admin:yangquan321@192.168.2.17:554/Streaming/Channels/101", 
-  //                           "latency", 0, NULL);
-
-  // g_object_set(data.source, "location", "rtsp://admin:yangquan123@192.168.11.221:554/Streaming/Channels/101", 
-  //                           "latency", 0, NULL);
-
-  // g_object_set(data.source, "location", "rtsp://admin:LHLQLW@192.168.2.18:554/Streaming/Channels/101", 
-  //                           "latency", 50, "protocols", 0x04, NULL); // 无线
-
-  // g_object_set(data.source, "location", "rtsp://admin:LHLQLW@192.168.2.5:554/Streaming/Channels/101", 
-  //                           "latency", 50, "protocols", 0x04, NULL); // 有线
+  g_object_set(data.source, "location", "rtsp://admin:LHLQLW@192.168.10.199:554/Streaming/Channels/101", 
+                            "latency", 200, "protocols", 0x04, NULL); // 家客厅
 
   /* Connect to the pad-added signal */
   /* 在这里把回调函数的src data变量指定参数*/
@@ -230,7 +242,6 @@ pad_added_handler (GstElement * src, GstPad * new_pad, CustomData * data)
 
 
     }
-
   }
 
   /* If our converter is already linked, we have nothing to do here */
