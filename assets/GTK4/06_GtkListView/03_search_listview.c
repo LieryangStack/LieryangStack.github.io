@@ -1,3 +1,9 @@
+/***
+ * @brief: 通过 GtkSignalListItemFactory 创建列表的项所显示的GtkWidget
+ *  
+ * 
+ */
+
 #include <adwaita.h>
 
 static void
@@ -7,7 +13,11 @@ selection_cb (GtkSingleSelection *sel,
   
   gint position = gtk_single_selection_get_selected (sel);
   g_print ("position = %d\n", position);
-  // GtkListItem *item = GTK_LIST_ITEM (gtk_single_selection_get_selected_item (sel));
+
+  /* 得到的是GListModel对象，被选择的位置所对应的数据对象，比如：GtkStringList对象的数据对象就是GtkStringObject，并不是GtkListItem */
+  gpointer object = gtk_single_selection_get_selected_item (sel);
+
+  g_print ("%s\n", G_OBJECT_TYPE_NAME (object));
 
   // GtkStringList* list = GTK_STRING_LIST(gtk_single_selection_get_model (sel));
   // gtk_string_list_remove (list, position);
@@ -16,7 +26,7 @@ selection_cb (GtkSingleSelection *sel,
 
 static void 
 app_activate (GApplication *app, gpointer *user_data) {
-  GtkBuilder *build = gtk_builder_new_from_file ("listview.ui");
+  GtkBuilder *build = gtk_builder_new_from_file ("03_search_listview.ui");
   GtkWidget *win = GTK_WIDGET (gtk_builder_get_object (build, "win"));
   GtkWidget *list_view = GTK_WIDGET (gtk_builder_get_object (build, "list_view"));
   GtkSingleSelection *single_selection = GTK_SINGLE_SELECTION (gtk_builder_get_object (build, "single_selection"));
@@ -27,7 +37,6 @@ app_activate (GApplication *app, gpointer *user_data) {
 
   gtk_window_set_application (GTK_WINDOW (win), GTK_APPLICATION (app));
   gtk_window_present (GTK_WINDOW (win));
-  
 }
 
 int

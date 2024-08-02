@@ -2,7 +2,8 @@
 <!DOCTYPE cambalache-project SYSTEM "cambalache-project.dtd">
 <cambalache-project version="0.17.3" target_tk="gtk-4.0">
   <ui>
-	(1,None,"listview.ui","listview.ui",None,None,None,None,None,None,None)
+	(1,None,"listview.ui","02_builder_listview.ui","通过GtkBuilderListItemFactory创建每一项GtkListItem的GtkWidget",None,None,None,None,None,None),
+	(2,None,None,"03_search_listview.ui","添加搜索功能",None,None,None,None,None,None)
   </ui>
   <object>
 	(1,1,"AdwApplicationWindow","win",None,None,None,None,-1,None,None),
@@ -10,13 +11,22 @@
 	(1,27,"GtkScrolledWindow","scrolled_win_4",2,None,None,None,1,None,None),
 	(1,28,"GtkListView","list_view2",27,None,None,None,None,None,None),
 	(1,29,"GtkBuilderListItemFactory",None,28,None,None,None,None,"&lt;property name=\"bytes\"&gt;&lt;![CDATA[\n&lt;?xml version=\"1.0\" encoding=\"UTF-8\"?&gt;\n&lt;interface&gt;\n  &lt;template class=\"GtkListItem\"&gt;\n    &lt;property name=\"child\"&gt;\n      &lt;object class=\"GtkBox\"&gt;\n        &lt;child&gt;\n	  &lt;object class=\"GtkCheckButton\"/&gt;\n	&lt;/child&gt;\n        &lt;child&gt;\n      	  &lt;object class=\"GtkEditableLabel\"&gt;\n            &lt;binding name=\"text\"&gt;\n              &lt;lookup name=\"string\" type=\"GtkStringObject\"&gt;\n                &lt;lookup name=\"item\"&gt;GtkListItem&lt;/lookup&gt;\n              &lt;/lookup&gt;\n       	    &lt;/binding&gt;\n      	  &lt;/object&gt;\n	&lt;/child&gt;\n      &lt;/object&gt;\n    &lt;/property&gt;\n  &lt;/template&gt;\n&lt;/interface&gt; ]]&gt;&lt;/property&gt;",None),
-	(1,30,"GtkSingleSelection","single_selection2",28,None,None,None,None,None,None),
+	(1,30,"GtkSingleSelection","single_selection",28,None,None,None,None,None,None),
 	(1,31,"GtkStringList",None,30,None,None,None,None,None,None),
 	(1,36,"AdwHeaderBar",None,2,None,None,None,None,None,None),
 	(1,37,"GtkListView","list_view1",2,None,None,None,2,None,None),
 	(1,38,"GtkBuilderListItemFactory",None,37,None,None,None,None,None,None),
 	(1,39,"GtkSingleSelection","single_selection1",37,None,None,None,None,None,None),
-	(1,40,"GtkStringList",None,39,None,None,None,None,None,None)
+	(1,40,"GtkStringList",None,39,None,None,None,None,None,None),
+	(2,1,"AdwApplicationWindow","win",None,None,None,None,None,None,None),
+	(2,2,"GtkBox",None,1,None,None,None,None,None,None),
+	(2,3,"AdwHeaderBar",None,2,None,None,None,None,None,None),
+	(2,4,"GtkListView","list_view",2,None,None,None,1,None,None),
+	(2,5,"GtkBuilderListItemFactory",None,4,None,None,None,None,None,None),
+	(2,6,"GtkSingleSelection","single_selection",4,None,None,None,None,None,None),
+	(2,7,"GtkFilterListModel",None,6,None,None,None,-1,None,None),
+	(2,8,"GtkStringList",None,7,None,None,None,-1,None,None),
+	(2,9,"GtkFilter","filter",7,None,None,None,-1,None,None)
   </object>
   <object_property>
 	(1,1,"AdwApplicationWindow","content",None,None,None,None,None,2,None,None,None,None),
@@ -35,7 +45,20 @@
 	(1,37,"GtkListView","model",None,None,None,None,None,39,None,None,None,None),
 	(1,37,"GtkWidget","vexpand","True",None,None,None,None,None,None,None,None,None),
 	(1,38,"GtkBuilderListItemFactory","bytes","\n&lt;?xml version=\"1.0\" encoding=\"UTF-8\"?&gt;\n&lt;interface&gt;\n  &lt;template class=\"GtkListItem\"&gt;\n    &lt;property name=\"child\"&gt;\n      &lt;object class=\"GtkBox\"&gt;\n        &lt;child&gt;\n	  &lt;object class=\"GtkCheckButton\"/&gt;\n	&lt;/child&gt;\n        &lt;child&gt;\n      	  &lt;object class=\"GtkEditableLabel\"&gt;\n            &lt;binding name=\"text\"&gt;\n              &lt;lookup name=\"string\" type=\"GtkStringObject\"&gt;\n                &lt;lookup name=\"item\"&gt;GtkListItem&lt;/lookup&gt;\n              &lt;/lookup&gt;\n       	    &lt;/binding&gt;\n      	  &lt;/object&gt;\n	&lt;/child&gt;\n      &lt;/object&gt;\n    &lt;/property&gt;\n  &lt;/template&gt;\n&lt;/interface&gt; ",None," Custom object fragments ",None,None,None,None,None,None,None),
-	(1,39,"GtkSingleSelection","model",None,None,None,None,None,40,None,None,None,None)
+	(1,39,"GtkSingleSelection","model",None,None,None,None,None,40,None,None,None,None),
+	(2,1,"AdwApplicationWindow","content",None,None,None,None,None,2,None,None,None,None),
+	(2,1,"GtkWidget","height-request","500",None,None,None,None,None,None,None,None,None),
+	(2,1,"GtkWidget","width-request","300",None,None,None,None,None,None,None,None,None),
+	(2,1,"GtkWindow","icon-name","document-page-setup-symbolic",None,None,None,None,None,None,None,None,None),
+	(2,2,"GtkOrientable","orientation","vertical",None,None,None,None,None,None,None,None,None),
+	(2,3,"GtkWidget","overflow","hidden",None,None,None,None,None,None,None,None,None),
+	(2,4,"GtkListView","factory",None,None,None,None,None,5,None,None,None,None),
+	(2,4,"GtkListView","model",None,None,None,None,None,6,None,None,None,None),
+	(2,5,"GtkBuilderListItemFactory","bytes","\n&lt;?xml version=\"1.0\" encoding=\"UTF-8\"?&gt;\n&lt;interface&gt;\n  &lt;template class=\"GtkListItem\"&gt;\n    &lt;property name=\"child\"&gt;\n      &lt;object class=\"GtkBox\"&gt;\n        &lt;child&gt;\n	  &lt;object class=\"GtkCheckButton\"/&gt;\n	&lt;/child&gt;\n        &lt;child&gt;\n      	  &lt;object class=\"GtkEditableLabel\"&gt;\n            &lt;binding name=\"text\"&gt;\n              &lt;lookup name=\"string\" type=\"GtkStringObject\"&gt;\n                &lt;lookup name=\"item\"&gt;GtkListItem&lt;/lookup&gt;\n              &lt;/lookup&gt;\n       	    &lt;/binding&gt;\n      	  &lt;/object&gt;\n	&lt;/child&gt;\n      &lt;/object&gt;\n    &lt;/property&gt;\n  &lt;/template&gt;\n&lt;/interface&gt; ",None," Custom object fragments ",None,None,None,None,None,None,None),
+	(2,6,"GtkSingleSelection","autoselect","False",None,None,None,None,None,None,None,None,None),
+	(2,6,"GtkSingleSelection","model",None,None,None,None,None,7,None,None,None,None),
+	(2,7,"GtkFilterListModel","filter",None,None,None,None,None,9,None,None,None,None),
+	(2,7,"GtkFilterListModel","model",None,None,None,None,None,8,None,None,None,None)
   </object_property>
   <object_data>
 	(1,40,"GtkStringList",2,4,"three",1,None,None,None,None),
@@ -45,6 +68,15 @@
 	(1,31,"GtkStringList",2,4,"three",1,None,None,None,None),
 	(1,31,"GtkStringList",2,3,"two",1,None,None,None,None),
 	(1,31,"GtkStringList",2,2,"one",1,None,None,None,None),
-	(1,31,"GtkStringList",1,1,None,None,None,None,None,None)
+	(1,31,"GtkStringList",1,1,None,None,None,None,None,None),
+	(2,8,"GtkStringList",2,2,"one",1,None,None,None,None),
+	(2,8,"GtkStringList",2,3,"two",1,None,None,None,None),
+	(2,8,"GtkStringList",2,4,"three",1,None,None,None,None),
+	(2,8,"GtkStringList",2,5,"four",1,None,None,None,None),
+	(2,8,"GtkStringList",2,6,"zhangsan",1,None,None,None,None),
+	(2,8,"GtkStringList",1,1,None,None,None,None,None,None),
+	(2,8,"GtkStringList",2,7,"lisi",1,None,None,None,None),
+	(2,8,"GtkStringList",2,8,"xiaoli",1,None,None,None,None),
+	(2,8,"GtkStringList",2,9,"xiaozhang",1,None,None,None,None)
   </object_data>
 </cambalache-project>
