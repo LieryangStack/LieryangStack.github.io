@@ -68,6 +68,8 @@ void
 idle_source_cb(gpointer data){
 
   g_print("%s\n",__func__);
+
+  return FALSE;
 }
 
 
@@ -118,7 +120,7 @@ main(int argc, char *argv[]){
     /* source关联特定的GMainContext对象 */
     g_source_attach(idle_source, context);
     g_source_unref(idle_source);
-
+    
     
     // g_timeout_add_seconds (1, (GSourceFunc)g_main_loop_quit, loop);
 

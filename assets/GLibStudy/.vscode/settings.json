@@ -12,7 +12,8 @@
     "*.tcc": "c",
     "system_error": "c",
     "eventfd.h": "c",
-    "random": "c"
+    "random": "c",
+    "sstream": "c"
   },
   "C_Cpp_Runner.msvcBatchPath": "",
   "C_Cpp_Runner.cCompilerPath": "gcc",

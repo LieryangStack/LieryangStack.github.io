@@ -187,11 +187,11 @@ app_activate (GApplication *app, gpointer *user_data) {
 
   // gtk_box_append (GTK_BOX(box), label);
   gtk_box_append (GTK_BOX(box), picture);
-  // gtk_box_append (GTK_BOX(box), button);
+  gtk_box_append (GTK_BOX(box), button);
 
   gtk_window_set_child (GTK_WINDOW(win), GTK_WIDGET(box));
 
-  gtk_widget_set_opacity (win, 0.75);
+  // gtk_widget_set_opacity (win, 0.75);
 
   gtk_window_present (GTK_WINDOW (win));
 
