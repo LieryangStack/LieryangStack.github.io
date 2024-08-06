@@ -89,6 +89,7 @@ main (int argc, char *argv[])
   data.video_convert = gst_element_factory_make ("nvvideoconvert", "videoconvert");
   data.video_sink = gst_element_factory_make ("nveglglessink", "video_sink"); //nv3dsink
 
+  
   data.qtmux = gst_element_factory_make ("qtmux", "qtmux");
   data.filesink = gst_element_factory_make ("filesink", "filesink");
 
