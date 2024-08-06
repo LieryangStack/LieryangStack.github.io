@@ -33,7 +33,6 @@
                     "/home/lieryang/Desktop/glib-2.81.0",
                     "/home/lieryang/Desktop/gstreamer-1.20.3",
                     "/home/lieryang/Desktop/gtk-4.15.3",
-                    // "/usr/src/glibc/glibc-2.35",
                     "${workspaceFolder}"
                 ]
             },

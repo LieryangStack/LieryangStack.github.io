@@ -15,8 +15,7 @@
 				"--cflags",
 				"--libs",
 				"gtk+-3.0",
-				"/usr/local/opencv-4.9.0/lib/pkgconfig/opencv4.pc`",
-				"-Wl,-rpath,/usr/local/opencv-4.9.0/lib",
+				"opencv4`"
 			],
 			"options": {
 				"cwd": "${fileDirname}"

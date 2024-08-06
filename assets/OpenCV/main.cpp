@@ -136,8 +136,8 @@ Mat face_feature[100];
 
 static void 
 read_face_data () {
+
   /* 找到图片路径 */
-  
   DIR *dir;
   struct dirent *entry;
   const char *path = "/home/lieryang/Desktop/LieryangStack.github.io/assets/OpenCV";
@@ -186,85 +186,80 @@ read_face_data () {
 
 int main(int argc, char** argv) {
 
-    // Instantiate YuNet
-    // YuNet model(model_path, cv::Size(320, 320), 0.9, 0.3, 500, backend_id, target_id);
+  // Instantiate YuNet
+  // YuNet model(model_path, cv::Size(320, 320), 0.9, 0.3, 500, backend_id, target_id);
 
-    ft2 = cv::freetype::createFreeType2();
-    ft2->loadFontData("SimHei.ttf", 0);
+  ft2 = cv::freetype::createFreeType2();
+  ft2->loadFontData("SimHei.ttf", 0);
 
-    faceRecognizer = cv::FaceRecognizerSF::create("face_recognition_sface_2021dec.onnx", "");
+  faceRecognizer = cv::FaceRecognizerSF::create("face_recognition_sface_2021dec.onnx", "");
 
-    double cosine_similar_thresh = 0.363;
-    double l2norm_similar_thresh = 1.128;
+  double cosine_similar_thresh = 0.363;
+  double l2norm_similar_thresh = 1.128;
 
-    int device_id = 0;
-    auto cap = cv::VideoCapture(device_id);
+  auto cap = cv::VideoCapture(0);
 
-    w = static_cast<int>(cap.get(cv::CAP_PROP_FRAME_WIDTH));
-    h = static_cast<int>(cap.get(cv::CAP_PROP_FRAME_HEIGHT));
-    if (w != 640) w = 640;
-    if (h != 480) h = 480;
-    model.setInputSize(cv::Size(w, h));
-    
+  w = static_cast<int>(cap.get(cv::CAP_PROP_FRAME_WIDTH));
+  h = static_cast<int>(cap.get(cv::CAP_PROP_FRAME_HEIGHT));
 
-    read_face_data();
+  if (w != 640) w = 640;
+  if (h != 480) h = 480;
+  model.setInputSize(cv::Size(w, h));
 
-    auto tick_meter = cv::TickMeter();
+  read_face_data();
 
+  auto tick_meter = cv::TickMeter();
 
-    while (cv::waitKey(1) < 0)
+  while (cv::waitKey(1) < 0)
+  {
+    cv::Mat raw_frame;
+    cv::Mat frame;
+    bool has_frame = cap.read(raw_frame);
+    cv::resize(raw_frame, frame, cv::Size(640, 480));
+    if (!has_frame)
     {
-        cv::Mat raw_frame;
-        cv::Mat frame;
-        bool has_frame = cap.read(raw_frame);
-        cv::resize(raw_frame, frame, cv::Size(640, 480));
-        if (!has_frame)
-        {
-            std::cout << "No frames grabbed! Exiting ...\n";
-            break;
-        }
-
-        const char *name = NULL;
-
-        // Inference
-        tick_meter.start();
-        cv::Mat faces = model.infer(frame);
-        static long int count = 0;
-        if (faces.rows < 1) {
-          std::cerr << "Cannot find a face in Frame : " << count++ << std::endl; 
-        } else if (faces.rows == 1) {
-          Mat feature2, aligned_face2;
-          faceRecognizer->alignCrop(frame, faces.row(0), aligned_face2);
-          faceRecognizer->feature(aligned_face2, feature2);
-          feature2 = feature2.clone();
-
-          for (int i = 0; i < employee_count; i++) {
-
-            //! [match]
-            double cos_score = faceRecognizer->match(face_feature[i], feature2, FaceRecognizerSF::DisType::FR_COSINE);
-            double L2_score = faceRecognizer->match(face_feature[i], feature2, FaceRecognizerSF::DisType::FR_NORM_L2);
-
-            if (cos_score >= cosine_similar_thresh && (L2_score <= l2norm_similar_thresh) ) {
-                // std::cout << "cos_score = " << cos_score << ", L2_score = " << L2_score;
-                // std::cout << "They have the same identity;" << std::endl;
-                name = employee_name[i];
-            }
-
-          }
-
-
-          
-        }
-        tick_meter.stop();
-
-        // Draw results on the input image
-        auto res_image = visualize(frame, faces, (float)tick_meter.getFPS(), name);
-        // Visualize in a new window
-        cv::imshow("YuNet Demo", res_image);
-
-        tick_meter.reset();
+        std::cout << "No frames grabbed! Exiting ...\n";
+        break;
     }
 
-    return 0;
+    const char *name = NULL;
+
+    // Inference
+    tick_meter.start();
+    cv::Mat faces = model.infer(frame);
+    static long int count = 0;
+    if (faces.rows < 1) {
+      std::cerr << "Cannot find a face in Frame : " << count++ << std::endl; 
+    } else if (faces.rows == 1) {
+      Mat feature2, aligned_face2;
+      faceRecognizer->alignCrop(frame, faces.row(0), aligned_face2);
+      faceRecognizer->feature(aligned_face2, feature2);
+      feature2 = feature2.clone();
+
+      for (int i = 0; i < employee_count; i++) {
+
+        //! [match]
+        double cos_score = faceRecognizer->match(face_feature[i], feature2, FaceRecognizerSF::DisType::FR_COSINE);
+        double L2_score = faceRecognizer->match(face_feature[i], feature2, FaceRecognizerSF::DisType::FR_NORM_L2);
+
+        if (cos_score >= cosine_similar_thresh && (L2_score <= l2norm_similar_thresh) ) {
+            // std::cout << "cos_score = " << cos_score << ", L2_score = " << L2_score;
+            // std::cout << "They have the same identity;" << std::endl;
+            name = employee_name[i];
+        }
+
+      }          
+    }
+    tick_meter.stop();
+
+    // Draw results on the input image
+    auto res_image = visualize(frame, faces, (float)tick_meter.getFPS(), name);
+    // Visualize in a new window
+    cv::imshow("YuNet Demo", res_image);
+
+    tick_meter.reset();
+  }
+
+  return 0;
 }
 
