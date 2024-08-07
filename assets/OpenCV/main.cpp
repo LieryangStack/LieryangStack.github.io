@@ -194,8 +194,8 @@ int main(int argc, char** argv) {
 
   faceRecognizer = cv::FaceRecognizerSF::create("face_recognition_sface_2021dec.onnx", "");
 
-  double cosine_similar_thresh = 0.363;
-  double l2norm_similar_thresh = 1.128;
+  double cosine_similar_thresh = 0.563;
+  double l2norm_similar_thresh = 0.9;
 
   auto cap = cv::VideoCapture(0);
 
@@ -231,21 +231,29 @@ int main(int argc, char** argv) {
     if (faces.rows < 1) {
       std::cerr << "Cannot find a face in Frame : " << count++ << std::endl; 
     } else if (faces.rows == 1) {
-      Mat feature2, aligned_face2;
-      faceRecognizer->alignCrop(frame, faces.row(0), aligned_face2);
-      faceRecognizer->feature(aligned_face2, feature2);
-      feature2 = feature2.clone();
+      Mat feature, aligned_face;
+
+      /* 对齐人脸 */
+      faceRecognizer->alignCrop(frame, faces.row(0), aligned_face);
+
+      /* 提前人脸特征向量 */
+      faceRecognizer->feature(aligned_face, feature);
+
+      /* 复制一份人脸特征向量 */
+      feature = feature.clone();
 
       for (int i = 0; i < employee_count; i++) {
 
         //! [match]
-        double cos_score = faceRecognizer->match(face_feature[i], feature2, FaceRecognizerSF::DisType::FR_COSINE);
-        double L2_score = faceRecognizer->match(face_feature[i], feature2, FaceRecognizerSF::DisType::FR_NORM_L2);
+        double cos_score = faceRecognizer->match(face_feature[i], feature, FaceRecognizerSF::DisType::FR_COSINE);
+        double L2_score = faceRecognizer->match(face_feature[i], feature, FaceRecognizerSF::DisType::FR_NORM_L2);
 
         if (cos_score >= cosine_similar_thresh && (L2_score <= l2norm_similar_thresh) ) {
-            // std::cout << "cos_score = " << cos_score << ", L2_score = " << L2_score;
+            std::cout << "cos_score = " << cos_score << ", L2_score = " << L2_score << std::endl;
             // std::cout << "They have the same identity;" << std::endl;
             name = employee_name[i];
+
+            std::cout << feature.size << std::endl;
         }
 
       }          
