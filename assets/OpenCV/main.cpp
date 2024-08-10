@@ -189,22 +189,30 @@ int main(int argc, char** argv) {
   // Instantiate YuNet
   // YuNet model(model_path, cv::Size(320, 320), 0.9, 0.3, 500, backend_id, target_id);
 
+  std::string gst_pipeline = "v4l2src device=/dev/video0 ! "
+                              "video/x-raw, format=YUY2, width=640, height=480, framerate=30/1 ! "
+                              "videoconvert ! "
+                              "appsink";
+
   ft2 = cv::freetype::createFreeType2();
   ft2->loadFontData("SimHei.ttf", 0);
 
-  faceRecognizer = cv::FaceRecognizerSF::create("face_recognition_sface_2021dec.onnx", "");
+  faceRecognizer = cv::FaceRecognizerSF::create("face_recognition_sface_2021dec.onnx", "", 
+                                                cv::dnn::dnn4_v20240521::DNN_BACKEND_CUDA, 
+                                                cv::dnn::dnn4_v20240521::DNN_TARGET_CUDA_FP16);
 
   double cosine_similar_thresh = 0.563;
   double l2norm_similar_thresh = 0.9;
 
-  auto cap = cv::VideoCapture(0);
+  auto cap = cv::VideoCapture(gst_pipeline, cv::CAP_GSTREAMER);
 
   w = static_cast<int>(cap.get(cv::CAP_PROP_FRAME_WIDTH));
   h = static_cast<int>(cap.get(cv::CAP_PROP_FRAME_HEIGHT));
 
   if (w != 640) w = 640;
   if (h != 480) h = 480;
-  model.setInputSize(cv::Size(w, h));
+
+  model.setInputSize(cv::Size(640, 480));
 
   read_face_data();
 
@@ -233,8 +241,12 @@ int main(int argc, char** argv) {
     } else if (faces.rows == 1) {
       Mat feature, aligned_face;
 
+      cout << faces.size << endl;
+
       /* 对齐人脸 */
       faceRecognizer->alignCrop(frame, faces.row(0), aligned_face);
+
+      cout << faces.row(0) << endl;
 
       /* 提前人脸特征向量 */
       faceRecognizer->feature(aligned_face, feature);
