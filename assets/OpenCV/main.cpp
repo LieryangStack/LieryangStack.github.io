@@ -170,6 +170,7 @@ read_face_data () {
         faceRecognizer->feature(aligned_face, face_feature[employee_count]);
         face_feature[employee_count] = face_feature[employee_count].clone();
 
+
         // printf("%s/%s %s\n", path, filename, filename);
         // printf ("name = %s\n", employee_name[employee_count]);
 
@@ -198,8 +199,8 @@ int main(int argc, char** argv) {
   ft2->loadFontData("SimHei.ttf", 0);
 
   faceRecognizer = cv::FaceRecognizerSF::create("face_recognition_sface_2021dec.onnx", "", 
-                                                cv::dnn::dnn4_v20240521::DNN_BACKEND_CUDA, 
-                                                cv::dnn::dnn4_v20240521::DNN_TARGET_CUDA_FP16);
+                                                cv::dnn::DNN_BACKEND_CUDA, 
+                                                cv::dnn::DNN_TARGET_CUDA_FP16);
 
   double cosine_similar_thresh = 0.563;
   double l2norm_similar_thresh = 0.9;
@@ -223,7 +224,7 @@ int main(int argc, char** argv) {
     cv::Mat raw_frame;
     cv::Mat frame;
     bool has_frame = cap.read(raw_frame);
-    cv::resize(raw_frame, frame, cv::Size(640, 480));
+    cv::resize(raw_frame, frame, cv::Size(640, 480)); /* frame 类型  CV_8UC3 */
     if (!has_frame)
     {
         std::cout << "No frames grabbed! Exiting ...\n";
@@ -241,18 +242,18 @@ int main(int argc, char** argv) {
     } else if (faces.rows == 1) {
       Mat feature, aligned_face;
 
-      cout << faces.size << endl;
+      // cout << faces.row(0) << endl;
 
       /* 对齐人脸 */
       faceRecognizer->alignCrop(frame, faces.row(0), aligned_face);
-
-      cout << faces.row(0) << endl;
 
       /* 提前人脸特征向量 */
       faceRecognizer->feature(aligned_face, feature);
 
       /* 复制一份人脸特征向量 */
       feature = feature.clone();
+
+      cout << feature << endl;
 
       for (int i = 0; i < employee_count; i++) {
 

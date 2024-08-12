@@ -5,6 +5,7 @@
       "includePath": [
         "${workspaceFolder}/**",
         "/opt/opencv4/include/opencv4",
+        "/usr/include/opencv4",
         "/usr/include/gtk-3.0",
         "/usr/include/pango-1.0",
         "/usr/include/harfbuzz",
