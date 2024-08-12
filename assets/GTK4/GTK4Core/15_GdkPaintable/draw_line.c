@@ -15,6 +15,17 @@ struct _GtkNuclearIconClass
   GObjectClass parent_class;
 };
 
+typedef struct _LineParams LineParams;
+struct _LineParams {
+  guint x1;
+  guint y1;
+  guint x2;
+  guint y2;
+};
+
+LineParams line_params[16];
+guint line_count= 0;
+gboolean draw_line = TRUE;
 
 /**
  * @brief: 图标的实际绘制函数
@@ -27,66 +38,33 @@ gtk_nuclear_snapshot (GtkSnapshot   *snapshot,
                       double         height,
                       double         rotation) {
 
-  /* 将一个矩形区域（从 (0, 0) 到 (width, height)）填充为 background 颜色，并附加到 snapshot */
-  // gtk_snapshot_append_color (snapshot,
-  //                            &(GdkRGBA) { 0xEF/(float)0xFF, 0x96/(float)0xFF, 0xC5/(float)0xFF, 1 },
-  //                            &GRAPHENE_RECT_INIT (0, 0, width, height));
-
-  /* 使用渐变色填充背景色 */
-  // GskColorStop stops[2];
-  // stops[0].color = (GdkRGBA) { 0xCC/(float)0xFF, 0xFB/(float)0xFF, 0xFF/(float)0xFF, 1 };
-  // stops[0].offset = 0.1;
-  
-  // stops[1].color = (GdkRGBA) { 0xEF/(float)0xFF, 0x96/(float)0xFF, 0xC5/(float)0xFF, 1 };
-  // stops[1].offset = 0.5;
-
-  // gtk_snapshot_append_linear_gradient (snapshot,
-  //                                     &GRAPHENE_RECT_INIT (0, 0, width, height),
-  //                                     &GRAPHENE_POINT_INIT (0, 0),
-  //                                     &GRAPHENE_POINT_INIT (width, height),
-  //                                     stops,
-  //                                     2);
-
-
   /* 将之前的绘图操作保存在堆栈中，避免新的绘图操作影响之前的绘图内容 */
   gtk_snapshot_save (snapshot);
 
   /* 移动原点（起始点）到控件的中心 */
   // gtk_snapshot_translate (snapshot, &GRAPHENE_POINT_INIT (width / 2.0, height / 2.0));
-  gtk_snapshot_scale (snapshot, width, -height);
+  gtk_snapshot_scale (snapshot, width/1920, height/1080);
   /* 移动原点到 @point */
-  gtk_snapshot_translate (snapshot, &GRAPHENE_POINT_INIT(0.0,  -1.0));
-  gtk_snapshot_rotate (snapshot, rotation);
+  gtk_snapshot_translate (snapshot, &GRAPHENE_POINT_INIT(0.0,  0.0));
+  // gtk_snapshot_rotate (snapshot, rotation);
 
   GdkTexture *texture = gdk_texture_new_from_filename ("/home/lieryang/Desktop/截屏/摄像头0/2024-08-12CST10_53_21.jpg", NULL);
-  gtk_snapshot_append_texture (snapshot, texture, &GRAPHENE_RECT_INIT(0, 0, 1, 1));
+  gtk_snapshot_append_texture (snapshot, texture, &GRAPHENE_RECT_INIT(0, 0, 1920, 1080));
 
-  /* 画圆心 */
-  // builder = gsk_path_builder_new ();
-  // gsk_path_builder_add_circle (builder, graphene_point_zero (), 0.5);
-  // path = gsk_path_builder_free_to_path (builder);
-  // gtk_snapshot_append_fill (snapshot, path, GSK_FILL_RULE_WINDING, foreground);
-  // gsk_path_unref (path);
-
-  GskStroke *stroke = gsk_stroke_new (0.005);
-  gsk_stroke_set_line_join (stroke, GSK_LINE_JOIN_BEVEL);
+  GskStroke *stroke = gsk_stroke_new (5);
+  gsk_stroke_set_line_join (stroke, GSK_LINE_JOIN_ROUND);
   
   // gsk_stroke_set_dash (stroke, (float[1]) { RADIUS * G_PI }, 1); 
   GskPathBuilder *builder = gsk_path_builder_new ();
-  // gsk_path_builder_add_circle (builder, graphene_point_zero(), RADIUS);
-  // gsk_path_builder_move_to (builder, -1.0, 0.0);
-  gsk_path_builder_line_to (builder, 0.1, 0.2);
-  gsk_path_builder_line_to (builder, 0.2, 0.3);
-  gsk_path_builder_line_to (builder, 0.3, 0.4);
-  gsk_path_builder_line_to (builder, 0.4, 0.5);
-  gsk_path_builder_line_to (builder, 0.5, 0.3);
-  gsk_path_builder_line_to (builder, 0.8, 0.7);
-  gsk_path_builder_line_to (builder, 1.0, 0.3);
-  // gsk_path_builder_line_to (builder, 1.2, 0.0);
+
+  for (guint i = 0; i < line_count; i++) {
+    gsk_path_builder_move_to (builder, line_params[i].x1, line_params[i].y1);
+    gsk_path_builder_line_to (builder, line_params[i].x2, line_params[i].y2);
+  }
 
   GskPath *path = gsk_path_builder_free_to_path (builder);
-  gtk_snapshot_append_stroke (snapshot, path, stroke, &(GdkRGBA) { 0.3, 0.4, 0.7, 1.0 });
-  gtk_snapshot_append_fill (snapshot, path, GSK_FILL_RULE_WINDING, &(GdkRGBA) { 0.8, 0.984, 1.0, 1 });
+  gtk_snapshot_append_stroke (snapshot, path, stroke, &(GdkRGBA) { 1.0, 0.0, 0.0, 1.0 });
+  // gtk_snapshot_append_fill (snapshot, path, GSK_FILL_RULE_WINDING, &(GdkRGBA) { 0.8, 0.984, 1.0, 1 });
   gsk_path_unref (path);
   gsk_stroke_free (stroke);
 
@@ -153,18 +131,74 @@ gtk_nuclear_icon_new (double rotation)
   return GDK_PAINTABLE (nuclear);
 }
 
-static gboolean
-gtk_nuclear_animation_step (gpointer data)
-{
-  GtkNuclearIcon *nuclear = data;
 
-  nuclear->rotation = (nuclear->rotation + 0.1f) ;
+/**
+ * @brief: 判断两个点之间的距离是否小于 50
+ */
+static gboolean 
+isDistanceLessThan50(gdouble x, gdouble y, gdouble x1, gdouble y1) {
+  /* 计算两个点之间的平方距离 */
+  float dx = x1 - x;
+  float dy = y1 - y;
+  float distanceSquared = dx * dx + dy * dy;
+
+  /* 判断平方距离是否小于 50 的平方 */
+  return distanceSquared < 2500.0f;
+}
+
+
+void
+picture_area_pressed_cb (GtkGestureClick* self,
+                         gint n_press,
+                         gdouble x,
+                         gdouble y,
+                         gpointer user_data){
+  GtkWidget *picture = gtk_event_controller_get_widget (GTK_EVENT_CONTROLLER (self));
+
+  x = (x / gtk_widget_get_width (picture) * 1920);
+  y = (y / gtk_widget_get_height (picture) * 1080);
+  
+  g_print ("pressed: (%0.2f, %0.2f)\n", x, y);
+
+  if ((draw_line == FALSE && line_count > 2 ) || line_count == 16) {
+    line_count = 0;
+    draw_line = TRUE;
+  }
+
+  if (line_count > 2 && isDistanceLessThan50 (x, y, line_params[0].x1, line_params[0].y1)) {
+    line_params[line_count- 1].x2 = (gint)line_params[0].x1;
+    line_params[line_count- 1].y2 = (gint)line_params[0].y1;
+    draw_line = FALSE;
+  } else {
+    line_params[line_count].x1 = x;
+    line_params[line_count].y1 = y;
+    line_params[line_count].x2 = x;
+    line_params[line_count].y2 = y;
+    line_count++;
+  }
 
   /* 重新绘制 */
-  gdk_paintable_invalidate_contents (GDK_PAINTABLE (nuclear));
+  gdk_paintable_invalidate_contents (GDK_PAINTABLE (user_data));
+}
 
-  /* 下次循环继续迭代该事件源 */
-  return G_SOURCE_CONTINUE;
+void
+picture_area_motion_cb (GtkEventControllerMotion* self,
+                        gdouble x,
+                        gdouble y,
+                        gpointer user_data ) {
+  GtkWidget *picture = gtk_event_controller_get_widget (GTK_EVENT_CONTROLLER (self));
+
+  x = (x / gtk_widget_get_width (picture) * 1920);
+  y = (y / gtk_widget_get_height (picture) * 1080);
+
+  g_print ("motion: (%0.2f, %0.2f)\n", x, y);
+
+  if (line_count > 0 && draw_line == TRUE) {
+    line_params[line_count- 1].x2 = x;
+    line_params[line_count- 1].y2 = y;
+  }
+   /* 重新绘制 */
+  gdk_paintable_invalidate_contents (GDK_PAINTABLE (user_data));
 }
 
 
@@ -181,9 +215,19 @@ app_activate (GApplication *app, gpointer *user_data) {
   GtkWidget *button = gtk_button_new_with_label ("按钮");
   GtkWidget *label = gtk_label_new ("标签");
 
+
+
   GdkPaintable *nuclear = gtk_nuclear_icon_new (0.0);
   // GtkWidget *image = gtk_image_new_from_paintable (nuclear); picture可以不受长宽比拉伸
   GtkWidget *picture = gtk_picture_new_for_paintable (nuclear);
+
+  GtkEventController *motion = gtk_event_controller_motion_new ();
+  GtkGesture *gesture = gtk_gesture_click_new ();
+  gtk_widget_add_controller (picture, motion);
+  gtk_widget_add_controller (picture, GTK_EVENT_CONTROLLER(gesture));
+
+  g_signal_connect(gesture, "pressed", G_CALLBACK(picture_area_pressed_cb), nuclear);
+  g_signal_connect(motion, "motion", G_CALLBACK(picture_area_motion_cb), nuclear);
 
   gtk_widget_set_hexpand (picture, TRUE);
   gtk_widget_set_vexpand (picture, TRUE);
@@ -204,11 +248,6 @@ app_activate (GApplication *app, gpointer *user_data) {
 
   GdkGLContext *gl_context = gdk_gl_context_get_current ();
 
-  // g_timeout_add (1,
-  //                 gtk_nuclear_animation_step,
-  //                 nuclear);
-
-  // g_print ("gl_context = %p\n", gl_context);
 }
 
 int
