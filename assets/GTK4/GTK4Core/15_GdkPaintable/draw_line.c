@@ -27,34 +27,29 @@ LineParams line_params[16];
 guint line_count= 0;
 gboolean draw_line = TRUE;
 
-/**
- * @brief: 图标的实际绘制函数
- */
-void
-gtk_nuclear_snapshot (GtkSnapshot   *snapshot,
-                      const GdkRGBA *foreground,
-                      const GdkRGBA *background,
-                      double         width,
-                      double         height,
-                      double         rotation) {
+static void
+gtk_nuclear_icon_snapshot (GdkPaintable *paintable,
+                           GdkSnapshot  *snapshot,
+                           double        width,
+                           double        height) {
+                      
+  GtkNuclearIcon *nuclear = GTK_NUCLEAR_ICON (paintable);
 
   /* 将之前的绘图操作保存在堆栈中，避免新的绘图操作影响之前的绘图内容 */
   gtk_snapshot_save (snapshot);
 
-  /* 移动原点（起始点）到控件的中心 */
-  // gtk_snapshot_translate (snapshot, &GRAPHENE_POINT_INIT (width / 2.0, height / 2.0));
+  /* 调整快照长宽范围到(1920, 1080) */
   gtk_snapshot_scale (snapshot, width/1920, height/1080);
   /* 移动原点到 @point */
   gtk_snapshot_translate (snapshot, &GRAPHENE_POINT_INIT(0.0,  0.0));
-  // gtk_snapshot_rotate (snapshot, rotation);
 
-  GdkTexture *texture = gdk_texture_new_from_filename ("/home/lieryang/Desktop/截屏/摄像头0/2024-08-12CST10_53_21.jpg", NULL);
+
+  GdkTexture *texture = gdk_texture_new_from_filename ("/home/lieryang/Desktop/截屏/摄像头0/2024-08-12CST20_13_04.jpg", NULL);
   gtk_snapshot_append_texture (snapshot, texture, &GRAPHENE_RECT_INIT(0, 0, 1920, 1080));
 
   GskStroke *stroke = gsk_stroke_new (5);
   gsk_stroke_set_line_join (stroke, GSK_LINE_JOIN_ROUND);
   
-  // gsk_stroke_set_dash (stroke, (float[1]) { RADIUS * G_PI }, 1); 
   GskPathBuilder *builder = gsk_path_builder_new ();
 
   for (guint i = 0; i < line_count; i++) {
@@ -64,31 +59,11 @@ gtk_nuclear_snapshot (GtkSnapshot   *snapshot,
 
   GskPath *path = gsk_path_builder_free_to_path (builder);
   gtk_snapshot_append_stroke (snapshot, path, stroke, &(GdkRGBA) { 1.0, 0.0, 0.0, 1.0 });
-  // gtk_snapshot_append_fill (snapshot, path, GSK_FILL_RULE_WINDING, &(GdkRGBA) { 0.8, 0.984, 1.0, 1 });
   gsk_path_unref (path);
   gsk_stroke_free (stroke);
 
-
   /* 用于将之前保存的状态从堆栈中恢复 */
   gtk_snapshot_restore (snapshot);
-
-}
-
-
-static void
-gtk_nuclear_icon_snapshot (GdkPaintable *paintable,
-                           GdkSnapshot  *snapshot,
-                           double        width,
-                           double        height)
-{
-  GtkNuclearIcon *nuclear = GTK_NUCLEAR_ICON (paintable);
-
-  /* 实际去绘制图标的函数 */
-  gtk_nuclear_snapshot (snapshot,
-                        &(GdkRGBA) { 0, 0, 0, 1 }, /* black */
-                        &(GdkRGBA) { 0.9, 0.75, 0.15, 1.0 }, /* yellow */
-                        width, height,
-                        nuclear->rotation);
 }
 
 static GdkPaintableFlags
@@ -153,12 +128,13 @@ picture_area_pressed_cb (GtkGestureClick* self,
                          gdouble x,
                          gdouble y,
                          gpointer user_data){
+  
   GtkWidget *picture = gtk_event_controller_get_widget (GTK_EVENT_CONTROLLER (self));
 
   x = (x / gtk_widget_get_width (picture) * 1920);
   y = (y / gtk_widget_get_height (picture) * 1080);
   
-  g_print ("pressed: (%0.2f, %0.2f)\n", x, y);
+  // g_print ("pressed: (%0.2f, %0.2f)\n", x, y);
 
   if ((draw_line == FALSE && line_count > 2 ) || line_count == 16) {
     line_count = 0;
@@ -186,12 +162,13 @@ picture_area_motion_cb (GtkEventControllerMotion* self,
                         gdouble x,
                         gdouble y,
                         gpointer user_data ) {
+  
   GtkWidget *picture = gtk_event_controller_get_widget (GTK_EVENT_CONTROLLER (self));
 
   x = (x / gtk_widget_get_width (picture) * 1920);
   y = (y / gtk_widget_get_height (picture) * 1080);
 
-  g_print ("motion: (%0.2f, %0.2f)\n", x, y);
+  // g_print ("motion: (%0.2f, %0.2f)\n", x, y);
 
   if (line_count > 0 && draw_line == TRUE) {
     line_params[line_count- 1].x2 = x;
@@ -209,12 +186,11 @@ app_activate (GApplication *app, gpointer *user_data) {
 
   gtk_window_set_application (GTK_WINDOW (win), GTK_APPLICATION (app));
 
-  gtk_widget_set_size_request (win, 500, 400);
+  gtk_widget_set_size_request (win, 1280, 720);
 
   GtkWidget *box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
   GtkWidget *button = gtk_button_new_with_label ("按钮");
   GtkWidget *label = gtk_label_new ("标签");
-
 
 
   GdkPaintable *nuclear = gtk_nuclear_icon_new (0.0);
