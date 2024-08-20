@@ -76,7 +76,11 @@
     "gtkcss.h": "c",
     "*.ipp": "cpp",
     "unordered_set": "cpp",
-    "source_location": "cpp"
+    "source_location": "cpp",
+    "charconv": "cpp",
+    "codecvt": "cpp",
+    "format": "cpp",
+    "span": "cpp"
   },
   "C_Cpp_Runner.msvcBatchPath": ""
 }
