@@ -39,7 +39,7 @@ t. ! queue ! matroskamux ! filesink location=received_h264.mkv
 
 #### 使用nvv4l2decoder解码
 
-gst-launch-1.0 -e rtspsrc location=rtsp://admin:YEERBA@192.168.10.11:554/Streaming/Channels/101 protocols=0x04 latency=300 ! \
-rtph264depay ! tee name=t \
-t. ! h264parse ! video/x-h264,stream-format=byte-stream,alignment=au ! nvv4l2decoder ! nvvideoconvert ! nveglglessink \
-t. ! h264parse ! video/x-h264,stream-format=avc,alignment=au ! matroskamux ! filesink location=received_h264.mkv
+gst-launch-1.0 -e rtspsrc location=rtsp://admin:yangquan123@192.168.10.11:554/Streaming/Channels/101 protocols=0x04 latency=300 ! \
+rtph265depay ! tee name=t \
+t. ! h265parse ! video/x-h265,stream-format=byte-stream,alignment=au ! nvv4l2decoder ! nvvideoconvert ! nveglglessink \
+t. ! h265parse ! video/x-h265,stream-format=hvc1,alignment=au ! qtmux ! filesink location=received_h265.mkv

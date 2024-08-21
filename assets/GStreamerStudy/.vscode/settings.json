@@ -37,7 +37,8 @@
     "glib_trace.h": "c",
     "cstdio": "c",
     "gtkgstmediafileprivate.h": "c",
-    "gstelement.h": "c"
+    "gstelement.h": "c",
+    "gstrtspmessage.h": "c"
   },
   "C_Cpp.errorSquiggles": "disabled",
   "C_Cpp_Runner.msvcBatchPath": "",
