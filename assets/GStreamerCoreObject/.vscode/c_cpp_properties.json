@@ -1,29 +1,45 @@
 {
-    "configurations": [
+  "configurations": [
       {
-        "name": "linux-gcc-x64",
-        "includePath": [
-          "${workspaceFolder}/**",
-          "/opt/gstreamer/include/gstreamer-1.0",
-          "/opt/glib/include/glib-2.0",
-          "/home/lieryang/Downloads/gstreamer-1.22.6",
-          "/home/lieryang/Downloads/glib-2.80.2",
-          "/usr/src/glibc/glibc-2.35"
-        ],
-        "compilerPath": "/usr/bin/gcc",
-        "cStandard": "${default}",
-        "cppStandard": "${default}",
-        "intelliSenseMode": "linux-gcc-x64",
-        "browse": {
-          "path": ["/home/lieryang/Downloads/gstreamer-1.22.6", 
-                   "/home/lieryang/Downloads/glib-2.80.2", 
-                   "/usr/src/glibc/glibc-2.35",
-                   "${workspaceFolder}"]
-        },
-        "compilerArgs": [
-          ""
-        ]
+          "name": "linux-gcc-x64",
+          "includePath": [
+              "${workspaceFolder}/**",
+              "/usr/include/gstreamer-1.0",
+              "/usr/include/glib-2.0",
+              "/usr/lib/x86_64-linux-gnu/glib-2.0/include",
+              "/usr/include/x86_64-linux-gnu",
+              "/usr/include/libadwaita-1",
+              "/usr/include/gtk-4.0",
+              "/usr/include/pango-1.0",
+              "/usr/include/harfbuzz",
+              "/usr/include/freetype2",
+              "/usr/include/libpng16",
+              "/usr/include/fribidi",
+              "/usr/include/cairo",
+              "/usr/include/pixman-1",
+              "/usr/include/libmount",
+              "/usr/include/blkid",
+              "/usr/include/gdk-pixbuf-2.0",
+              "/usr/include/graphene-1.0",
+              "/usr/lib/x86_64-linux-gnu/graphene-1.0/include",
+              "/usr/include/appstream"
+          ],
+          "compilerPath": "/usr/bin/gcc",
+          "cStandard": "${default}",
+          "cppStandard": "${default}",
+          "intelliSenseMode": "linux-gcc-x64",
+          "browse": {
+              "path": [
+                  "/home/lieryang/Desktop/glib-2.81.0",
+                  "/home/lieryang/Desktop/gstreamer-1.20.3",
+                  "/home/lieryang/Desktop/gtk-4.15.3",
+                  "${workspaceFolder}"
+              ]
+          },
+          "compilerArgs": [
+              ""
+          ]
       }
-    ],
-    "version": 4
-  }
+  ],
+  "version": 4
+}

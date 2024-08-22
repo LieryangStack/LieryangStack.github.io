@@ -304,6 +304,12 @@ main (int argc, char *argv[]) {
 
   g_object_set (data.splitmuxsink, "location", "video%02d.mkv", NULL);
 
+  GstStructure *structure = gst_structure_new_from_string ("properties,sync=false,async=false");
+
+  /* 如果不设定bin异步处理状态，如果在读取流失败的状态下，设定管道为运行状态，则会阻塞整个管道 */
+  // g_object_set (G_OBJECT (data.splitmuxsink), "max-size-time", GST_SECOND * 60, "max-files", 20, "sink-properties", structure,\
+  //     "async-finalize", TRUE, "async-handling", TRUE, "message-forward", TRUE, NULL);
+
   /* 在这里把回调函数的src data变量指定参数*/
   g_signal_connect (data.source, "pad-added", G_CALLBACK (pad_added_handler), &data);
   g_signal_connect (data.source, "new-manager", G_CALLBACK(cb_rtspsrc_new_manager), NULL);
@@ -346,17 +352,17 @@ main (int argc, char *argv[]) {
   }
 
   /* 连接录像 */
-  if (!gst_element_link_pads(data.h265parse_tee, "src_%u", data.record_h265_parse, "sink")) {
-    g_printerr ("h265parse_tee and record_h265_parse Elements could not be linked.\n");
-    gst_object_unref (data.pipeline);
-    return -1;
-  }
+  // if (!gst_element_link_pads(data.h265parse_tee, "src_%u", data.record_h265_parse, "sink")) {
+  //   g_printerr ("h265parse_tee and record_h265_parse Elements could not be linked.\n");
+  //   gst_object_unref (data.pipeline);
+  //   return -1;
+  // }
 
-  if (!gst_element_link_pads(data.record_h265_parse, "src", data.splitmuxsink, "video")) {
-    g_printerr ("record_h265_parse and splitmuxsink Elements could not be linked.\n");
-    gst_object_unref (data.pipeline);
-    return -1;
-  }
+  // if (!gst_element_link_pads(data.record_h265_parse, "src", data.splitmuxsink, "video")) {
+  //   g_printerr ("record_h265_parse and splitmuxsink Elements could not be linked.\n");
+  //   gst_object_unref (data.pipeline);
+  //   return -1;
+  // }
 
   // if (!gst_element_link_pads(data.aacparse_tee, "src_%u", data.splitmuxsink, "audio_%u")) {
   //   g_printerr ("aacparse_tee and avdec_aac Elements could not be linked.\n");
