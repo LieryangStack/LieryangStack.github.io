@@ -249,7 +249,7 @@ gst_pad_class_init (GstPadClass * klass)
   gst_pad_signals[PAD_LINKED] =
       g_signal_new ("linked", G_TYPE_FROM_CLASS (klass), G_SIGNAL_RUN_LAST,
       G_STRUCT_OFFSET (GstPadClass, linked), NULL, NULL,
-      NULL, G_TYPE_NONE, 1, GST_TYPE_PAD); /* G_STRUCT_OFFSET (GstPadClass, linked)表示默认的信号连接函数 */
+      NULL, G_TYPE_NONE, 1, GST_TYPE_PAD); /* G_STRUCT_OFFSET (GstPadClass, linked)表示默认的信号连接处理函数 */
 
   /**
    * Pad被解除链接后，会发射该信号。
@@ -261,7 +261,7 @@ gst_pad_class_init (GstPadClass * klass)
   gst_pad_signals[PAD_UNLINKED] =
       g_signal_new ("unlinked", G_TYPE_FROM_CLASS (klass), G_SIGNAL_RUN_LAST,
       G_STRUCT_OFFSET (GstPadClass, unlinked), NULL, NULL,
-      NULL, G_TYPE_NONE, 1, GST_TYPE_PAD); /* G_STRUCT_OFFSET (GstPadClass, unlinked)表示默认的信号连接函数 */
+      NULL, G_TYPE_NONE, 1, GST_TYPE_PAD); /* G_STRUCT_OFFSET (GstPadClass, unlinked)表示默认的信号连处理接函数 */
 
   pspec_caps = g_param_spec_boxed ("caps", "Caps",
       "The capabilities of the pad", GST_TYPE_CAPS,
