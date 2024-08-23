@@ -1,0 +1,12 @@
+** Message: 17:34:45.484: Pipeline state changed from NULL to READY:
+
+** Message: 17:34:45.484: Pipeline state changed from READY to PAUSED:
+
+application/x-rtp, media=(string)video, payload=(int)96, clock-rate=(int)90000, encoding-name=(string)H265, profile-level-id=(string)420029, packetization-mode=(string)1, sprop-parameter-sets=(string)"QgEBAWAAAAMAAAMAAAMAAAMAlqABICAFEWNrkk5TNwEAAAAAAAAAAAAAAAA\=\,RAHA8vAiQA\=\=", ssrc=(uint)1023766368, clock-base=(uint)1411978793, seqnum-base=(uint)16161, npt-start=(guint64)0, play-speed=(double)1, play-scale=(double)1, onvif-mode=(boolean)false;
+
+
+(03_GstBaseSink:87943): GStreamer-CRITICAL **: 17:34:45.934: gst_debug_log_valist: assertion 'category != NULL' failed
+
+(03_GstBaseSink:87943): GStreamer-CRITICAL **: 17:34:45.934: gst_debug_log_valist: assertion 'category != NULL' failed
+application/x-rtp, media=(string)audio, payload=(int)104, clock-rate=(int)16000, encoding-name=(string)MPEG4-GENERIC, encoding-params=(string)1, profile-level-id=(string)15, streamtype=(string)5, mode=(string)AAC-hbr, config=(string)1408, sizelength=(string)13, indexlength=(string)3, indexdeltalength=(string)3, profile=(string)1, a-Media_header=(string)"MEDIAINFO\=494D4B48010100000400050001200110803E0000007D000000000000000000000000000000000000\;", a-appversion=(string)1.0, ssrc=(uint)1671642257, clock-base=(uint)591899284, seqnum-base=(uint)60139, npt-start=(guint64)0, play-speed=(double)1, play-scale=(double)1, onvif-mode=(boolean)false;
+

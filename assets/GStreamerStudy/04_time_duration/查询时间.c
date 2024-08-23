@@ -63,7 +63,7 @@ on_pad_probe(GstPad *pad, GstPadProbeInfo *info, gpointer user_data) {
       case GST_EVENT_SEGMENT: {
         const GstSegment *segment;
         gst_event_parse_segment (event, &segment);
-        g_print("Current running time: %" GST_TIME_FORMAT "\n", GST_TIME_ARGS(segment->stop));
+        // g_print("Current running time: %" GST_TIME_FORMAT "\n", GST_TIME_ARGS(segment->stop));
 
         g_print(" flags=\"%d\" rate=\"%f\" applied-rate=\"%f\""
               " format=\"%d\" base=\"%" G_GUINT64_FORMAT "\" offset=\"%"
@@ -90,6 +90,14 @@ timeout_cb (gpointer data) {
   gint64 position = GST_CLOCK_TIME_NONE;
   gint64 duration = GST_CLOCK_TIME_NONE;
 
+  gst_element_set_state(pipeline, GST_STATE_PAUSED);
+
+  g_usleep (100);
+
+  g_print("pipeline->base_time: %" GST_TIME_FORMAT "\n", GST_TIME_ARGS(pipeline->base_time));
+  g_print("pipeline->start_time: %" GST_TIME_FORMAT "\n", GST_TIME_ARGS(pipeline->start_time));
+   
+
   if (gst_element_query_position(pipeline, GST_FORMAT_TIME, &position)) {
       g_print("current running time: %" GST_TIME_FORMAT "\n", GST_TIME_ARGS(position));
   }
@@ -97,6 +105,24 @@ timeout_cb (gpointer data) {
   if (gst_element_query_duration(pipeline, GST_FORMAT_TIME, &duration)) {
       g_print("duration time: %" GST_TIME_FORMAT "\n", GST_TIME_ARGS(duration));
   }
+
+  // GstPad *src_pad = gst_element_get_static_pad (pipeline, "src");
+  // GstQuery *query = gst_query_new_duration (GST_FORMAT_TIME);
+
+  // gboolean ret = gst_pad_query (src_pad, query);
+
+  // if (ret) {
+  //   gst_query_parse_duration (query, NULL, &duration);
+  //   g_print("duration time: %" GST_TIME_FORMAT "\n", GST_TIME_ARGS(duration));
+  // }
+  
+  // if (query)
+  //   gst_query_unref (query);
+
+  
+  // ret = gst_element_query_convert (pipeline, GST_FORMAT_BYTES, 14759548, GST_FORMAT_TIME, &duration);
+  // if (ret)
+  //   g_print("duration time: %" GST_TIME_FORMAT "\n", GST_TIME_ARGS(duration));
 
   return FALSE;
 }
@@ -128,7 +154,7 @@ main(int argc, char *argv[]) {
   // gst_object_unref(src_pad);
 
   // 设置源文件路径
-  g_object_set(G_OBJECT(source), "location", "/opt/nvidia/deepstream/deepstream-6.4/samples/streams/sample_720p.h264", NULL);
+  g_object_set(G_OBJECT(source), "location", "video/sample_720p.h264", NULL);
 
   // 将元素添加到管道
   gst_bin_add_many(GST_BIN(pipeline), source, parser, decoder, video_sink, NULL);
@@ -149,7 +175,7 @@ main(int argc, char *argv[]) {
   // 开始播放
   gst_element_set_state(pipeline, GST_STATE_PLAYING);
 
-  g_timeout_add_seconds (1, G_SOURCE_FUNC(timeout_cb), parser);
+  g_timeout_add_seconds (1, G_SOURCE_FUNC(timeout_cb), pipeline);
 
   g_main_loop_run (loop);
 

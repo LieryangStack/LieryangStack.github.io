@@ -1,0 +1,109 @@
+查询position
+
+
+0:00:01.724354969 [31m18138[00m 0x5bb0a770d360 [37mDEBUG  [00m [00;01;37;41m    GST_ELEMENT_PADS gstelement.c:2088:gst_element_query:[00m send query on element sink
+0:00:01.724360204 [31m18138[00m 0x5bb0a770d360 [37mDEBUG  [00m [00m            basesink gstbasesink.c:5419:default_element_query:<sink>[00m position query in format time
+0:00:01.724365723 [31m18138[00m 0x5bb0a770d360 [37mDEBUG  [00m [00m            basesink gstbasesink.c:5211:gst_base_sink_get_position:<sink>[00m using clock and base time 1:30:27.913999863
+0:00:01.724369504 [31m18138[00m 0x5bb0a770d360 [37mDEBUG  [00m [00m            basesink gstbasesink.c:5246:gst_base_sink_get_position:<sink>[00m in PLAYING using last 0:00:01.333333320
+0:00:01.724373927 [31m18138[00m 0x5bb0a770d360 [37mDEBUG  [00m [00;01;33m           GST_CLOCK gstclock.c:1128:gst_clock_get_internal_time:<GstSystemClock>[00m internal time 1:30:29.210875736
+0:00:01.724377940 [31m18138[00m 0x5bb0a770d360 [37mDEBUG  [00m [00;01;33m           GST_CLOCK gstclock.c:1171:gst_clock_get_time:<GstSystemClock>[00m adjusted time 1:30:29.210875736
+0:00:01.724397510 [31m18138[00m 0x5bb0a770d360 [37mDEBUG  [00m [00m            basesink gstbasesink.c:5325:gst_base_sink_get_position:<sink>[00m now 1:30:29.210875736 - base_time 1:30:27.913999863 - base 0:00:00.000000000 + time 0:00:00.000000000  last 0:00:01.333333320
+0:00:01.724402834 [31m18138[00m 0x5bb0a770d360 [37mDEBUG  [00m [00m            basesink gstbasesink.c:5341:gst_base_sink_get_position:<sink>[00m res: 1, POSITION: 0:00:01.296875873
+0:00:01.724407249 [31m18138[00m 0x5bb0a770d360 [37mDEBUG  [00m [00m            basesink gstbasesink.c:5538:default_element_query:<sink>[00m query position returns 1
+
+current running time: 0:00:01.296875873
+
+查询duration
+0:00:01.724475461 [31m18138[00m 0x5bb0a770d360 [37mDEBUG  [00m [00m               query gstquery.c:679:gst_query_new_custom:[00m creating new query 0x5bb0a7a268a0 duration
+0:00:01.724478514 [31m18138[00m 0x5bb0a770d360 [37mDEBUG  [00m [00;01;37;41m    GST_ELEMENT_PADS gstelement.c:2088:gst_element_query:[00m send query on element video-player
+0:00:01.724482190 [31m18138[00m 0x5bb0a770d360 [37mDEBUG  [00m [00;01m                 bin gstbin.c:4288:gst_bin_query:<video-player>[00m Sending query 0x5bb0a7a268a0 (type duration) to sink children
+0:00:01.724486810 [31m18138[00m 0x5bb0a770d360 [37mDEBUG  [00m [00;01;31m          GST_STATES gstbin.c:1956:bin_element_is_sink:<video-player>[00m child video-output is sink
+0:00:01.724490046 [31m18138[00m 0x5bb0a770d360 [37mDEBUG  [00m [00;01;37;41m    GST_ELEMENT_PADS gstelement.c:2088:gst_element_query:[00m send query on element video-output
+0:00:01.724493573 [31m18138[00m 0x5bb0a770d360 [37mDEBUG  [00m [00;01m                 bin gstbin.c:4288:gst_bin_query:<video-output>[00m Sending query 0x5bb0a7a268a0 (type duration) to sink children
+0:00:01.724501900 [31m18138[00m 0x5bb0a770d360 [37mDEBUG  [00m [00;01;31m          GST_STATES gstbin.c:1956:bin_element_is_sink:<video-output>[00m child video-output-actual-sink-glimage is sink
+0:00:01.724505867 [31m18138[00m 0x5bb0a770d360 [37mDEBUG  [00m [00;01;37;41m    GST_ELEMENT_PADS gstelement.c:2088:gst_element_query:[00m send query on element video-output-actual-sink-glimage
+0:00:01.724509586 [31m18138[00m 0x5bb0a770d360 [37mDEBUG  [00m [00;01m                 bin gstbin.c:4288:gst_bin_query:<video-output-actual-sink-glimage>[00m Sending query 0x5bb0a7a268a0 (type duration) to sink children
+0:00:01.724512828 [31m18138[00m 0x5bb0a770d360 [37mDEBUG  [00m [00;01;31m          GST_STATES gstbin.c:1956:bin_element_is_sink:<video-output-actual-sink-glimage>[00m child sink is sink
+0:00:01.724515955 [31m18138[00m 0x5bb0a770d360 [37mDEBUG  [00m [00;01;37;41m    GST_ELEMENT_PADS gstelement.c:2088:gst_element_query:[00m send query on element sink
+0:00:01.724519155 [31m18138[00m 0x5bb0a770d360 [37mDEBUG  [00m [00m            basesink gstbasesink.c:5470:default_element_query:<sink>[00m duration query in format time
+0:00:01.724522894 [31m18138[00m 0x5bb0a770d360 [37mDEBUG  [00m [00;01;31;44m            GST_PADS gstpad.c:4349:gst_pad_peer_query:<sink:sink>[00m peer query 0x5bb0a7a268a0 (duration)
+0:00:01.724526802 [31m18138[00m 0x5bb0a770d360 [37mDEBUG  [00m [00;01;31;44m            GST_PADS gstpad.c:4222:gst_pad_query:<glcolorbalance0:src>[00m doing query 0x5bb0a7a268a0 (duration)
+0:00:01.724531023 [31m18138[00m 0x5bb0a770d360 [37mDEBUG  [00m [00;01;31;44m            GST_PADS gstpad.c:4349:gst_pad_peer_query:<glcolorbalance0:sink>[00m peer query 0x5bb0a7a268a0 (duration)
+0:00:01.724534359 [31m18138[00m 0x5bb0a770d360 [37mDEBUG  [00m [00;01;31;44m            GST_PADS gstpad.c:4222:gst_pad_query:<glcolorconvertelement0:src>[00m doing query 0x5bb0a7a268a0 (duration)
+0:00:01.724537614 [31m18138[00m 0x5bb0a770d360 [37mDEBUG  [00m [00;01;31;44m            GST_PADS gstpad.c:4349:gst_pad_peer_query:<glcolorconvertelement0:sink>[00m peer query 0x5bb0a7a268a0 (duration)
+0:00:01.724540829 [31m18138[00m 0x5bb0a770d360 [37mDEBUG  [00m [00;01;31;44m            GST_PADS gstpad.c:4222:gst_pad_query:<gluploadelement0:src>[00m doing query 0x5bb0a7a268a0 (duration)
+0:00:01.724544238 [31m18138[00m 0x5bb0a770d360 [37mDEBUG  [00m [00;01;31;44m            GST_PADS gstpad.c:4349:gst_pad_peer_query:<gluploadelement0:sink>[00m peer query 0x5bb0a7a268a0 (duration)
+0:00:01.724548074 [31m18138[00m 0x5bb0a770d360 [37mDEBUG  [00m [00;01;31;44m            GST_PADS gstpad.c:4222:gst_pad_query:<sink:proxypad1>[00m doing query 0x5bb0a7a268a0 (duration)
+0:00:01.724551882 [31m18138[00m 0x5bb0a770d360 [37mDEBUG  [00m [00;01;31;44m            GST_PADS gstpad.c:3551:gst_pad_query_default:<sink:proxypad1>[00m forwarding 0x5bb0a7a268a0 (duration) query
+0:00:01.724556399 [31m18138[00m 0x5bb0a770d360 [33;01mLOG    [00m [00;01;31;44m            GST_PADS gstpad.c:3114:gst_pad_forward:<sink:proxypad1>[00m calling forward function on pad video-output-actual-sink-glimage:sink
+0:00:01.724560899 [31m18138[00m 0x5bb0a770d360 [33;01mLOG    [00m [00;01;31;44m            GST_PADS gstpad.c:3487:query_forward_func:<video-output-actual-sink-glimage:sink>[00m query peer 0x5bb0a7a268a0 (duration) of video-output-actual-sink-glimage:sink
+0:00:01.724565428 [31m18138[00m 0x5bb0a770d360 [37mDEBUG  [00m [00;01;31;44m            GST_PADS gstpad.c:4349:gst_pad_peer_query:<video-output-actual-sink-glimage:sink>[00m peer query 0x5bb0a7a268a0 (duration)
+0:00:01.724570356 [31m18138[00m 0x5bb0a770d360 [37mDEBUG  [00m [00;01;31;44m            GST_PADS gstpad.c:4222:gst_pad_query:<sink:proxypad0>[00m doing query 0x5bb0a7a268a0 (duration)
+0:00:01.724573665 [31m18138[00m 0x5bb0a770d360 [37mDEBUG  [00m [00;01;31;44m            GST_PADS gstpad.c:3551:gst_pad_query_default:<sink:proxypad0>[00m forwarding 0x5bb0a7a268a0 (duration) query
+0:00:01.724577334 [31m18138[00m 0x5bb0a770d360 [33;01mLOG    [00m [00;01;31;44m            GST_PADS gstpad.c:3114:gst_pad_forward:<sink:proxypad0>[00m calling forward function on pad video-output:sink
+0:00:01.724581247 [31m18138[00m 0x5bb0a770d360 [33;01mLOG    [00m [00;01;31;44m            GST_PADS gstpad.c:3487:query_forward_func:<video-output:sink>[00m query peer 0x5bb0a7a268a0 (duration) of video-output:sink
+0:00:01.724584728 [31m18138[00m 0x5bb0a770d360 [37mDEBUG  [00m [00;01;31;44m            GST_PADS gstpad.c:4349:gst_pad_peer_query:<video-output:sink>[00m peer query 0x5bb0a7a268a0 (duration)
+0:00:01.724587781 [31m18138[00m 0x5bb0a770d360 [33;01mLOG    [00m [00;01;35m      GST_SCHEDULING gstpad.c:3890:do_probe_callbacks:<video-output:sink>[00m do probes
+0:00:01.724592240 [31m18138[00m 0x5bb0a770d360 [33;01mLOG    [00m [00;01;35m      GST_SCHEDULING gstpad.c:3760:probe_hook_marshal:<video-output:sink>[00m hook 1 with flags 0x00003050 does not match 00001402
+0:00:01.724596072 [31m18138[00m 0x5bb0a770d360 [37mDEBUG  [00m [00;01;31;44m            GST_PADS gstpad.c:3984:do_probe_callbacks:<video-output:sink>[00m data is passed
+0:00:01.724598953 [31m18138[00m 0x5bb0a770d360 [33;01mLOG    [00m [00;01;35m      GST_SCHEDULING gstpad.c:3890:do_probe_callbacks:<video-output:sink>[00m do probes
+0:00:01.724602161 [31m18138[00m 0x5bb0a770d360 [33;01mLOG    [00m [00;01;35m      GST_SCHEDULING gstpad.c:3760:probe_hook_marshal:<video-output:sink>[00m hook 1 with flags 0x00003050 does not match 00001400
+0:00:01.724605711 [31m18138[00m 0x5bb0a770d360 [37mDEBUG  [00m [00;01;31;44m            GST_PADS gstpad.c:4222:gst_pad_query:<decoder:src>[00m doing query 0x5bb0a7a268a0 (duration)
+0:00:01.724610113 [31m18138[00m 0x5bb0a770d360 [37mDEBUG  [00m [00m        videodecoder gstvideodecoder.c:2027:gst_video_decoder_src_query:<decoder>[00m received query 5123, duration
+0:00:01.724621329 [31m18138[00m 0x5bb0a770d360 [33;01mLOG    [00m [00m        videodecoder gstvideodecoder.c:1893:gst_video_decoder_src_query_default:<decoder>[00m handling query: duration query: 0x5bb0a7a268a0, GstQueryDuration, format=(GstFormat)time, duration=(gint64)-1;
+0:00:01.724626038 [31m18138[00m 0x5bb0a770d360 [37mDEBUG  [00m [00;01;31;44m            GST_PADS gstpad.c:3551:gst_pad_query_default:<decoder:src>[00m forwarding 0x5bb0a7a268a0 (duration) query
+0:00:01.724629093 [31m18138[00m 0x5bb0a770d360 [37mDEBUG  [00m [00;01;31;44m            GST_PADS gstpad.c:3005:gst_pad_iterate_internal_links_default:<decoder:src>[00m Making iterator
+0:00:01.724632969 [31m18138[00m 0x5bb0a770d360 [33;01mLOG    [00m [00;01;31;44m            GST_PADS gstpad.c:3114:gst_pad_forward:<decoder:src>[00m calling forward function on pad decoder:sink
+0:00:01.724636552 [31m18138[00m 0x5bb0a770d360 [33;01mLOG    [00m [00;01;31;44m            GST_PADS gstpad.c:3487:query_forward_func:<decoder:sink>[00m query peer 0x5bb0a7a268a0 (duration) of decoder:sink
+0:00:01.724639949 [31m18138[00m 0x5bb0a770d360 [37mDEBUG  [00m [00;01;31;44m            GST_PADS gstpad.c:4349:gst_pad_peer_query:<decoder:sink>[00m peer query 0x5bb0a7a268a0 (duration)
+0:00:01.724643505 [31m18138[00m 0x5bb0a770d360 [37mDEBUG  [00m [00;01;31;44m            GST_PADS gstpad.c:4222:gst_pad_query:<parser:src>[00m doing query 0x5bb0a7a268a0 (duration)
+0:00:01.724648613 [31m18138[00m 0x5bb0a770d360 [37mDEBUG  [00m [00m           baseparse gstbaseparse.c:1660:gst_base_parse_src_query:<parser>[00m duration query: duration query: 0x5bb0a7a268a0, GstQueryDuration, format=(GstFormat)time, duration=(gint64)-1;
+0:00:01.724654423 [31m18138[00m 0x5bb0a770d360 [37mDEBUG  [00m [00m           baseparse gstbaseparse.c:4175:gst_base_parse_src_query_default:<parser>[00m duration query
+0:00:01.724657981 [31m18138[00m 0x5bb0a770d360 [37mDEBUG  [00m [00;01;31;44m            GST_PADS gstpad.c:3551:gst_pad_query_default:<parser:src>[00m forwarding 0x5bb0a7a268a0 (duration) query
+0:00:01.724660952 [31m18138[00m 0x5bb0a770d360 [37mDEBUG  [00m [00;01;31;44m            GST_PADS gstpad.c:3005:gst_pad_iterate_internal_links_default:<parser:src>[00m Making iterator
+0:00:01.724664775 [31m18138[00m 0x5bb0a770d360 [33;01mLOG    [00m [00;01;31;44m            GST_PADS gstpad.c:3114:gst_pad_forward:<parser:src>[00m calling forward function on pad parser:sink
+0:00:01.724668387 [31m18138[00m 0x5bb0a770d360 [33;01mLOG    [00m [00;01;31;44m            GST_PADS gstpad.c:3487:query_forward_func:<parser:sink>[00m query peer 0x5bb0a7a268a0 (duration) of parser:sink
+0:00:01.724671580 [31m18138[00m 0x5bb0a770d360 [37mDEBUG  [00m [00;01;31;44m            GST_PADS gstpad.c:4349:gst_pad_peer_query:<parser:sink>[00m peer query 0x5bb0a7a268a0 (duration)
+0:00:01.724674910 [31m18138[00m 0x5bb0a770d360 [37mDEBUG  [00m [00;01;31;44m            GST_PADS gstpad.c:4222:gst_pad_query:<file-source:src>[00m doing query 0x5bb0a7a268a0 (duration)
+0:00:01.724678671 [31m18138[00m 0x5bb0a770d360 [37mDEBUG  [00m [00m             basesrc gstbasesrc.c:1141:gst_base_src_default_query:<file-source>[00m duration query in format time
+0:00:01.724682883 [31m18138[00m 0x5bb0a770d360 [37mDEBUG  [00m [00m             basesrc gstbasesrc.c:2471:gst_base_src_update_length:<file-source>[00m reading offset 0, length 0, size 14759548, segment.stop -1, maxsize 14759548
+0:00:01.724688550 [31m18138[00m 0x5bb0a770d360 [33;01mLOG    [00m [00m             basesrc gstbasesrc.c:1166:gst_base_src_default_query:<file-source>[00m duration 14759548, format bytes
+0:00:01.724692607 [31m18138[00m 0x5bb0a770d360 [37mDEBUG  [00m [00m               query gstquery.c:679:gst_query_new_custom:[00m creating new query 0x5bb0a7a57da0 convert
+0:00:01.724695718 [31m18138[00m 0x5bb0a770d360 [37mDEBUG  [00m [00;01;31;44m            GST_PADS gstpad.c:4222:gst_pad_query:<file-source:src>[00m doing query 0x5bb0a7a57da0 (convert)
+0:00:01.724699415 [31m18138[00m 0x5bb0a770d360 [37mDEBUG  [00m [00m             basesrc gstbasesrc.c:1381:gst_base_src_default_query:<file-source>[00m query convert returns 0
+0:00:01.724702602 [31m18138[00m 0x5bb0a770d360 [37mDEBUG  [00m [00;01;31;44m            GST_PADS gstpad.c:4245:gst_pad_query:<file-source:src>[00m sent query 0x5bb0a7a57da0 (convert), result 0
+0:00:01.724705654 [31m18138[00m 0x5bb0a770d360 [37mDEBUG  [00m [00;01;31;44m            GST_PADS gstpad.c:4291:gst_pad_query:<file-source:src>[00m query failed
+0:00:01.724709034 [31m18138[00m 0x5bb0a770d360 [37mDEBUG  [00m [00m             basesrc gstbasesrc.c:1381:gst_base_src_default_query:<file-source>[00m query duration returns 0
+0:00:01.724712156 [31m18138[00m 0x5bb0a770d360 [37mDEBUG  [00m [00;01;31;44m            GST_PADS gstpad.c:4245:gst_pad_query:<file-source:src>[00m sent query 0x5bb0a7a268a0 (duration), result 0
+0:00:01.724714940 [31m18138[00m 0x5bb0a770d360 [37mDEBUG  [00m [00;01;31;44m            GST_PADS gstpad.c:4291:gst_pad_query:<file-source:src>[00m query failed
+0:00:01.724717788 [31m18138[00m 0x5bb0a770d360 [37mDEBUG  [00m [00;01;31;44m            GST_PADS gstpad.c:4412:gst_pad_peer_query:<parser:sink>[00m query failed
+0:00:01.724721455 [31m18138[00m 0x5bb0a770d360 [33;01mLOG    [00m [00m           baseparse gstbaseparse.c:4111:gst_base_parse_get_duration:<parser>[00m using estimated duration
+0:00:01.724725397 [31m18138[00m 0x5bb0a770d360 [33;01mLOG    [00m [00m           baseparse gstbaseparse.c:4118:gst_base_parse_get_duration:<parser>[00m res: 1, duration 0:00:40.102781067
+0:00:01.724731142 [31m18138[00m 0x5bb0a770d360 [33;01mLOG    [00m [00m           baseparse gstbaseparse.c:1668:gst_base_parse_src_query:<parser>[00m duration query result: 1 duration query: 0x5bb0a7a268a0, GstQueryDuration, format=(GstFormat)time, duration=(gint64)40102781067;
+0:00:01.724735526 [31m18138[00m 0x5bb0a770d360 [37mDEBUG  [00m [00;01;31;44m            GST_PADS gstpad.c:4245:gst_pad_query:<parser:src>[00m sent query 0x5bb0a7a268a0 (duration), result 1
+0:00:01.724739000 [31m18138[00m 0x5bb0a770d360 [37mDEBUG  [00m [00;01;31;44m            GST_PADS gstpad.c:4245:gst_pad_query:<decoder:src>[00m sent query 0x5bb0a7a268a0 (duration), result 1
+0:00:01.724742169 [31m18138[00m 0x5bb0a770d360 [33;01mLOG    [00m [00;01;35m      GST_SCHEDULING gstpad.c:3890:do_probe_callbacks:<video-output:sink>[00m do probes
+0:00:01.724745590 [31m18138[00m 0x5bb0a770d360 [33;01mLOG    [00m [00;01;35m      GST_SCHEDULING gstpad.c:3760:probe_hook_marshal:<video-output:sink>[00m hook 1 with flags 0x00003050 does not match 00002400
+0:00:01.724748893 [31m18138[00m 0x5bb0a770d360 [37mDEBUG  [00m [00;01;31;44m            GST_PADS gstpad.c:4245:gst_pad_query:<sink:proxypad0>[00m sent query 0x5bb0a7a268a0 (duration), result 1
+0:00:01.724752260 [31m18138[00m 0x5bb0a770d360 [37mDEBUG  [00m [00;01;31;44m            GST_PADS gstpad.c:4245:gst_pad_query:<sink:proxypad1>[00m sent query 0x5bb0a7a268a0 (duration), result 1
+0:00:01.724755436 [31m18138[00m 0x5bb0a770d360 [37mDEBUG  [00m [00;01;31;44m            GST_PADS gstpad.c:4245:gst_pad_query:<gluploadelement0:src>[00m sent query 0x5bb0a7a268a0 (duration), result 1
+0:00:01.724758738 [31m18138[00m 0x5bb0a770d360 [37mDEBUG  [00m [00;01;31;44m            GST_PADS gstpad.c:4245:gst_pad_query:<glcolorconvertelement0:src>[00m sent query 0x5bb0a7a268a0 (duration), result 1
+0:00:01.724761903 [31m18138[00m 0x5bb0a770d360 [37mDEBUG  [00m [00;01;31;44m            GST_PADS gstpad.c:4245:gst_pad_query:<glcolorbalance0:src>[00m sent query 0x5bb0a7a268a0 (duration), result 1
+0:00:01.724765138 [31m18138[00m 0x5bb0a770d360 [37mDEBUG  [00m [00m            basesink gstbasesink.c:5538:default_element_query:<sink>[00m query duration returns 1
+0:00:01.724768150 [31m18138[00m 0x5bb0a770d360 [37mDEBUG  [00m [00;01m                 bin gstbin.c:4067:bin_query_duration_fold:<sink>[00m got duration 40102781067
+0:00:01.724771643 [31m18138[00m 0x5bb0a770d360 [37mDEBUG  [00m [00;01;31m          GST_STATES gstbin.c:1956:bin_element_is_sink:<video-output-actual-sink-glimage>[00m child glcolorbalance0 is not sink
+0:00:01.724775387 [31m18138[00m 0x5bb0a770d360 [37mDEBUG  [00m [00;01;31m          GST_STATES gstbin.c:1956:bin_element_is_sink:<video-output-actual-sink-glimage>[00m child glcolorconvertelement0 is not sink
+0:00:01.724778742 [31m18138[00m 0x5bb0a770d360 [37mDEBUG  [00m [00;01;31m          GST_STATES gstbin.c:1956:bin_element_is_sink:<video-output-actual-sink-glimage>[00m child gluploadelement0 is not sink
+0:00:01.724782212 [31m18138[00m 0x5bb0a770d360 [37mDEBUG  [00m [00;01m                 bin gstbin.c:4091:bin_query_duration_done:<video-output-actual-sink-glimage>[00m max duration 40102781067
+0:00:01.724785371 [31m18138[00m 0x5bb0a770d360 [37mDEBUG  [00m [00;01m                 bin gstbin.c:4311:gst_bin_query:<video-output-actual-sink-glimage>[00m query 0x5bb0a7a268a0 result 1
+0:00:01.724788259 [31m18138[00m 0x5bb0a770d360 [37mDEBUG  [00m [00;01m                 bin gstbin.c:4067:bin_query_duration_fold:<video-output-actual-sink-glimage>[00m got duration 40102781067
+0:00:01.724791382 [31m18138[00m 0x5bb0a770d360 [37mDEBUG  [00m [00;01m                 bin gstbin.c:4091:bin_query_duration_done:<video-output>[00m max duration 40102781067
+0:00:01.724794488 [31m18138[00m 0x5bb0a770d360 [37mDEBUG  [00m [00;01m                 bin gstbin.c:4311:gst_bin_query:<video-output>[00m query 0x5bb0a7a268a0 result 1
+0:00:01.724797377 [31m18138[00m 0x5bb0a770d360 [37mDEBUG  [00m [00;01m                 bin gstbin.c:4067:bin_query_duration_fold:<video-output>[00m got duration 40102781067
+0:00:01.724801622 [31m18138[00m 0x5bb0a770d360 [37mDEBUG  [00m [00;01;31m          GST_STATES gstbin.c:1956:bin_element_is_sink:<video-player>[00m child decoder is not sink
+0:00:01.724804931 [31m18138[00m 0x5bb0a770d360 [37mDEBUG  [00m [00;01;31m          GST_STATES gstbin.c:1956:bin_element_is_sink:<video-player>[00m child parser is not sink
+0:00:01.724808158 [31m18138[00m 0x5bb0a770d360 [37mDEBUG  [00m [00;01;31m          GST_STATES gstbin.c:1956:bin_element_is_sink:<video-player>[00m child file-source is not sink
+0:00:01.724815941 [31m18138[00m 0x5bb0a770d360 [37mDEBUG  [00m [00;01m                 bin gstbin.c:4091:bin_query_duration_done:<video-player>[00m max duration 40102781067
+0:00:01.724819060 [31m18138[00m 0x5bb0a770d360 [37mDEBUG  [00m [00;01m                 bin gstbin.c:4311:gst_bin_query:<video-player>[00m query 0x5bb0a7a268a0 result 1
+duration time: 0:00:40.102781067
+
