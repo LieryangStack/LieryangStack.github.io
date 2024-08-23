@@ -1,5 +1,56 @@
 #include <gst/gst.h>
 
+GMainLoop *loop = NULL;
+
+static gboolean
+my_bus_callback (GstBus * bus, GstMessage * message, gpointer user_data) {
+
+  GstElement *pipeline = (GstElement *)user_data;
+
+  switch (GST_MESSAGE_TYPE (message)) {
+    case GST_MESSAGE_ERROR:{
+      GError *err;
+      gchar *debug;
+
+      gst_message_parse_error (message, &err, &debug);
+      g_print ("%s Error: %s\n",GST_OBJECT_NAME (message->src), err->message);
+      g_error_free (err);
+      g_free (debug);
+      GST_DEBUG_BIN_TO_DOT_FILE_WITH_TS(GST_BIN(pipeline), GST_DEBUG_GRAPH_SHOW_ALL, "error");
+
+      // g_main_loop_quit (data->loop);
+      break;
+    }
+    case GST_MESSAGE_EOS:
+      /* end-of-stream */
+      g_print ("receive EOS\n");
+      g_main_loop_quit (loop);
+      break;
+    case GST_MESSAGE_STATE_CHANGED:
+      /* We are only interested in state-changed messages from the pipeline */
+      if (GST_MESSAGE_SRC (message) == GST_OBJECT (pipeline)) {
+        GstState old_state, new_state, pending_state;
+        gst_message_parse_state_changed (message, &old_state, &new_state,
+            &pending_state);
+        g_message ("Pipeline state changed from %s to %s:\n",
+            gst_element_state_get_name (old_state),
+            gst_element_state_get_name (new_state));
+        char state_name[100];
+        g_snprintf (state_name, 100, "%s", gst_element_state_get_name (new_state));
+        GST_DEBUG_BIN_TO_DOT_FILE_WITH_TS(GST_BIN(pipeline), GST_DEBUG_GRAPH_SHOW_ALL, state_name);
+      }
+      break;
+    default:
+      /* We should not reach here */
+      // g_print ("Got %s message\n", GST_MESSAGE_TYPE_NAME (message));
+      // g_printerr ("Unexpected message received.\n");
+      break;
+  }
+
+  return TRUE;
+}
+
+
 // 处理所有事件的函数
 static GstPadProbeReturn 
 on_pad_probe(GstPad *pad, GstPadProbeInfo *info, gpointer user_data) {
@@ -19,7 +70,7 @@ on_pad_probe(GstPad *pad, GstPadProbeInfo *info, gpointer user_data) {
               G_GUINT64_FORMAT "\" start=\"%" G_GUINT64_FORMAT "\""
               " stop=\"%" G_GUINT64_FORMAT "\" time=\"%" G_GUINT64_FORMAT
               "\" position=\"%" G_GUINT64_FORMAT "\" duration=\"%"
-              G_GUINT64_FORMAT "\"/>",
+              G_GUINT64_FORMAT "\"\n",
               segment->flags, segment->rate, segment->applied_rate,
               segment->format, segment->base, segment->offset, segment->start,
               segment->stop, segment->time, segment->position,
@@ -32,96 +83,80 @@ on_pad_probe(GstPad *pad, GstPadProbeInfo *info, gpointer user_data) {
   return GST_PAD_PROBE_OK;
 }
 
-int main(int argc, char *argv[]) {
-GstElement *pipeline, *source, *parser, *decoder, *video_sink;
-GstBus *bus;
-GstMessage *msg;
-gboolean terminate = FALSE;
+static gboolean
+timeout_cb (gpointer data) {
 
-gst_init(&argc, &argv);
+  GstElement *pipeline = (GstElement *)data;
+  gint64 position = GST_CLOCK_TIME_NONE;
+  gint64 duration = GST_CLOCK_TIME_NONE;
 
-// 创建GStreamer元素
-pipeline = gst_pipeline_new("video-player");
-source = gst_element_factory_make("filesrc", "file-source");
-parser = gst_element_factory_make("h264parse", "parser");
-decoder = gst_element_factory_make("avdec_h264", "decoder");
-video_sink = gst_element_factory_make("autovideosink", "video-output");
-
-if (!pipeline || !source || !parser || !decoder || !video_sink) {
-    g_printerr("Not all elements could be created.\n");
-    return -1;
-}
-
-GstPad *sink_pad = gst_element_get_static_pad(video_sink, "sink");
-gst_pad_add_probe(sink_pad, GST_PAD_PROBE_TYPE_EVENT_DOWNSTREAM | GST_PAD_PROBE_TYPE_BUFFER, on_pad_probe, NULL, NULL);
-gst_object_unref(sink_pad);
-
-// GstPad *src_pad = gst_element_get_static_pad(parser, "src");
-// gst_pad_add_probe(src_pad, GST_PAD_PROBE_TYPE_EVENT_DOWNSTREAM | GST_PAD_PROBE_TYPE_BUFFER, on_pad_probe, NULL, NULL);
-// gst_object_unref(src_pad);
-
-// 设置源文件路径
-g_object_set(G_OBJECT(source), "location", "/opt/nvidia/deepstream/deepstream-6.4/samples/streams/sample_720p.h264", NULL);
-
-// 将元素添加到管道
-gst_bin_add_many(GST_BIN(pipeline), source, parser, decoder, video_sink, NULL);
-
-// 链接元素
-if (!gst_element_link_many(source, parser, decoder, video_sink, NULL)) {
-    g_printerr("Elements could not be linked.\n");
-    gst_object_unref(pipeline);
-    return -1;
-}
-
-// 开始播放
-gst_element_set_state(pipeline, GST_STATE_PLAYING);
-
-
-
-
-// 监听消息总线
-bus = gst_element_get_bus(pipeline);
-do {
-  msg = gst_bus_timed_pop_filtered(bus, GST_CLOCK_TIME_NONE, GST_MESSAGE_STATE_CHANGED | GST_MESSAGE_ERROR | GST_MESSAGE_EOS);
-
-  if (msg != NULL) {
-    GError *err;
-    gchar *debug_info;
-
-    switch (GST_MESSAGE_TYPE(msg)) {
-      case GST_MESSAGE_ERROR:
-      GstFormat format = GST_FORMAT_TIME;
-        gst_message_parse_error(msg, &err, &debug_info);
-        g_printerr("Error received from element %s: %s\n", GST_OBJECT_NAME(msg->src), err->message);
-        g_printerr("Debugging information: %s\n", debug_info ? debug_info : "none");
-        g_clear_error(&err);
-        g_free(debug_info);
-        terminate = TRUE;
-        break;
-      case GST_MESSAGE_EOS:
-        g_print("End-Of-Stream reached.\n");
-        terminate = TRUE;
-        break;
-      case GST_MESSAGE_STATE_CHANGED:
-        if (GST_MESSAGE_SRC(msg) == GST_OBJECT(pipeline)) {
-            GstState old_state, new_state, pending_state;
-            gst_message_parse_state_changed(msg, &old_state, &new_state, &pending_state);
-            g_print("Pipeline state changed from %s to %s:\n",
-                    gst_element_state_get_name(old_state), gst_element_state_get_name(new_state));
-        }
-        break;
-      default:
-        // Unhandled message
-        break;
-    }
-    gst_message_unref(msg);
+  if (gst_element_query_position(pipeline, GST_FORMAT_TIME, &position)) {
+      g_print("current running time: %" GST_TIME_FORMAT "\n", GST_TIME_ARGS(position));
   }
-} while (!terminate);
 
-// 清理
-gst_object_unref(bus);
-gst_element_set_state(pipeline, GST_STATE_NULL);
-gst_object_unref(pipeline);
+  if (gst_element_query_duration(pipeline, GST_FORMAT_TIME, &duration)) {
+      g_print("duration time: %" GST_TIME_FORMAT "\n", GST_TIME_ARGS(duration));
+  }
 
-return 0;
+  return FALSE;
+}
+
+int 
+main(int argc, char *argv[]) {
+
+  GstElement *pipeline, *source, *parser, *decoder, *video_sink;
+  gst_init(&argc, &argv);
+
+  // 创建GStreamer元素
+  pipeline = gst_pipeline_new("video-player");
+  source = gst_element_factory_make("filesrc", "file-source");
+  parser = gst_element_factory_make("h264parse", "parser");
+  decoder = gst_element_factory_make("avdec_h264", "decoder");
+  video_sink = gst_element_factory_make("autovideosink", "video-output");
+
+  if (!pipeline || !source || !parser || !decoder || !video_sink) {
+      g_printerr("Not all elements could be created.\n");
+      return -1;
+  }
+
+  GstPad *sink_pad = gst_element_get_static_pad(video_sink, "sink");
+  gst_pad_add_probe(sink_pad, GST_PAD_PROBE_TYPE_EVENT_DOWNSTREAM | GST_PAD_PROBE_TYPE_BUFFER, on_pad_probe, NULL, NULL);
+  gst_object_unref(sink_pad);
+
+  // GstPad *src_pad = gst_element_get_static_pad(parser, "src");
+  // gst_pad_add_probe(src_pad, GST_PAD_PROBE_TYPE_EVENT_DOWNSTREAM | GST_PAD_PROBE_TYPE_BUFFER, on_pad_probe, NULL, NULL);
+  // gst_object_unref(src_pad);
+
+  // 设置源文件路径
+  g_object_set(G_OBJECT(source), "location", "/opt/nvidia/deepstream/deepstream-6.4/samples/streams/sample_720p.h264", NULL);
+
+  // 将元素添加到管道
+  gst_bin_add_many(GST_BIN(pipeline), source, parser, decoder, video_sink, NULL);
+
+  // 链接元素
+  if (!gst_element_link_many(source, parser, decoder, video_sink, NULL)) {
+      g_printerr("Elements could not be linked.\n");
+      gst_object_unref(pipeline);
+      return -1;
+  }
+
+  loop = g_main_loop_new (NULL, FALSE);
+
+  GstBus *bus = gst_element_get_bus (pipeline);
+  guint bus_watch_id = gst_bus_add_watch (bus, my_bus_callback, pipeline);
+  gst_object_unref (bus);
+
+  // 开始播放
+  gst_element_set_state(pipeline, GST_STATE_PLAYING);
+
+  g_timeout_add_seconds (1, G_SOURCE_FUNC(timeout_cb), parser);
+
+  g_main_loop_run (loop);
+
+  // 清理
+  gst_object_unref(bus);
+  gst_element_set_state(pipeline, GST_STATE_NULL);
+  gst_object_unref(pipeline);
+
+  return 0;
 }

@@ -13,7 +13,8 @@
     "system_error": "c",
     "mutex": "c",
     "typeinfo": "c",
-    "gst.h": "c"
+    "gst.h": "c",
+    "*.ipp": "c"
   },
   "C_Cpp_Runner.msvcBatchPath": "",
   "C_Cpp_Runner.cCompilerPath": "gcc",
