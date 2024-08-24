@@ -22,8 +22,6 @@ t. ! videoconvert ! nvvideoconvert ! nvv4l2h264enc ! h264parse ! mp4mux ! filesi
 nvv4l2h264enc 和 nvh264enc 区别
 
 
-
-
 ### 播放rtsp码流视频
 
 gst-launch-1.0 rtspsrc location=rtsp://admin:YEERBA@192.168.10.11:554/Streaming/Channels/101 protocols=0x04 latency=50 ! rtph264depay ! h264parse ! tee ! avdec_h264 ! nvvideoconvert ! nveglglessink
