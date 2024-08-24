@@ -72,6 +72,8 @@ timeout_cb (gpointer data) {
 
   gst_element_set_state(pipeline, GST_STATE_PLAYING);
 
+  
+
   return FALSE;
 }
 
