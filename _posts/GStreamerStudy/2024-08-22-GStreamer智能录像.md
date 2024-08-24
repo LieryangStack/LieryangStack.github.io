@@ -10,3 +10,7 @@ tags: [GStreamer项目]
 https://developer.ridgerun.com/wiki/index.php/GstInterpipe_-_GstInterpipe_Overviewf
 
 # 2 
+
+https://discourse.gstreamer.org/t/dynamically-adding-new-queue-to-a-tee-element/470
+
+https://blog.csdn.net/qq_41563600/article/details/121343927
