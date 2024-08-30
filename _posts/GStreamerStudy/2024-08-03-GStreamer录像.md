@@ -41,3 +41,6 @@ gst-launch-1.0 -e rtspsrc location=rtsp://admin:yangquan123@192.168.10.11:554/St
 rtph265depay ! tee name=t \
 t. ! h265parse ! video/x-h265,stream-format=byte-stream,alignment=au ! nvv4l2decoder ! nvvideoconvert ! nveglglessink \
 t. ! h265parse ! video/x-h265,stream-format=hvc1,alignment=au ! qtmux ! filesink location=received_h265.mkv
+
+gst-launch-1.0 -e rtspsrc location=rtsp://admin:yangquan123@192.168.10.11:554/Streaming/Channels/101 protocols=0x04 ! \
+rtph265depay ! h265parse ! qtmux ! filesink location=received_h265.mkv
