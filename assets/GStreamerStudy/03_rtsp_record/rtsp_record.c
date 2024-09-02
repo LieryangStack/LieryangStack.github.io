@@ -352,23 +352,23 @@ main (int argc, char *argv[]) {
   }
 
   /* 连接录像 */
-  // if (!gst_element_link_pads(data.h265parse_tee, "src_%u", data.record_h265_parse, "sink")) {
-  //   g_printerr ("h265parse_tee and record_h265_parse Elements could not be linked.\n");
-  //   gst_object_unref (data.pipeline);
-  //   return -1;
-  // }
+  if (!gst_element_link_pads(data.h265parse_tee, "src_%u", data.record_h265_parse, "sink")) {
+    g_printerr ("h265parse_tee and record_h265_parse Elements could not be linked.\n");
+    gst_object_unref (data.pipeline);
+    return -1;
+  }
 
-  // if (!gst_element_link_pads(data.record_h265_parse, "src", data.splitmuxsink, "video")) {
-  //   g_printerr ("record_h265_parse and splitmuxsink Elements could not be linked.\n");
-  //   gst_object_unref (data.pipeline);
-  //   return -1;
-  // }
+  if (!gst_element_link_pads(data.record_h265_parse, "src", data.splitmuxsink, "video")) {
+    g_printerr ("record_h265_parse and splitmuxsink Elements could not be linked.\n");
+    gst_object_unref (data.pipeline);
+    return -1;
+  }
 
-  // if (!gst_element_link_pads(data.aacparse_tee, "src_%u", data.splitmuxsink, "audio_%u")) {
-  //   g_printerr ("aacparse_tee and avdec_aac Elements could not be linked.\n");
-  //   gst_object_unref (data.pipeline);
-  //   return -1;
-  // }
+  if (!gst_element_link_pads(data.aacparse_tee, "src_%u", data.splitmuxsink, "audio_%u")) {
+    g_printerr ("aacparse_tee and avdec_aac Elements could not be linked.\n");
+    gst_object_unref (data.pipeline);
+    return -1;
+  }
 
   GstPad *sink_pad = gst_element_get_static_pad (data.record_h265_parse, "sink");
   gst_pad_add_probe (sink_pad, GST_PAD_PROBE_TYPE_BUFFER, _probe_handler, NULL, NULL);
