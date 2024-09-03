@@ -151,7 +151,7 @@ int main(int argc, char *argv[]) {
     g_signal_connect (rtspsrc, "new-manager", G_CALLBACK(cb_rtspsrc_new_manager), NULL);
 
     // Set the element properties
-    g_object_set(rtspsrc, "location", "rtsp://admin:yangquan123@192.168.10.14:554/Streaming/Channels/101", NULL);
+    g_object_set(rtspsrc, "location", "rtsp://admin:yangquan123@192.168.10.15:554/Streaming/Channels/101", NULL);
     g_object_set(rtspsrc, "protocols", 0x04, NULL);  // Set protocols to 0x04 (TCP)
     g_object_set(sink, "location", "received_h265.mkv", NULL);
 
