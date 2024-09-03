@@ -136,14 +136,14 @@ int main(int argc, char *argv[]) {
     rtspsrc = gst_element_factory_make("rtspsrc", "source");
     depay = gst_element_factory_make("rtph265depay", "depay");
     parse = gst_element_factory_make("h265parse", "parse");
-    h265timestamper = gst_element_factory_make("h265timestamper", "h265timestamper");
+    // h265timestamper = gst_element_factory_make("h265timestamper", "h265timestamper");
     mux = gst_element_factory_make("qtmux", "mux"); /* matroskamux */
     sink = gst_element_factory_make("filesink", "sink");
 
     // Create the empty pipeline
     pipeline = gst_pipeline_new("rtsp-pipeline");
 
-    if (!pipeline || !rtspsrc || !depay || !parse || !mux || !sink || !h265timestamper) {
+    if (!pipeline || !rtspsrc || !depay || !parse || !mux || !sink) {
         g_printerr("Not all elements could be created.\n");
         return -1;
     }
@@ -165,10 +165,10 @@ int main(int argc, char *argv[]) {
     gst_object_unref (sink_pad);
 
     // Build the pipeline
-    gst_bin_add_many(GST_BIN(pipeline), rtspsrc, depay, parse, h265timestamper, mux, sink, NULL);
+    gst_bin_add_many(GST_BIN(pipeline), rtspsrc, depay, parse, mux, sink, NULL);
 
     // Link the elements together. Note that rtspsrc has "pad-added" signal.
-    if (!gst_element_link_many(depay, parse, h265timestamper, mux, sink, NULL)) {
+    if (!gst_element_link_many(depay, parse, mux, sink, NULL)) {
         g_printerr("Elements could not be linked.\n");
         gst_object_unref(pipeline);
         return -1;
