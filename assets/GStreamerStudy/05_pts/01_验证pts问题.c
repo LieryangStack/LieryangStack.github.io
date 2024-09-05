@@ -51,6 +51,21 @@ static void on_eos(GstBus *bus, GstMessage *msg, GMainLoop *loop) {
     g_main_loop_quit(loop);
 }
 
+static GstPadProbeReturn
+sink_bin_buf_probe (GstPad * pad, GstPadProbeInfo * info, gpointer u_data) {
+
+  if ((info->type & GST_PAD_PROBE_TYPE_BUFFER) == GST_PAD_PROBE_TYPE_BUFFER) {
+    GstBuffer *buffer = GST_BUFFER (info->data);
+
+    g_print ("pts: %" GST_TIME_FORMAT "\n", GST_TIME_ARGS(buffer->pts));
+    g_print ("dts: %" GST_TIME_FORMAT "\n", GST_TIME_ARGS(buffer->dts));
+    g_print ("duration: %" GST_TIME_FORMAT "\n\n", GST_TIME_ARGS(buffer->duration));
+
+  }
+
+  return GST_PAD_PROBE_OK;
+}
+
 
 static GstPadProbeReturn
 src_bin_buf_probe (GstPad * pad, GstPadProbeInfo * info, gpointer u_data) {
@@ -136,14 +151,14 @@ int main(int argc, char *argv[]) {
     rtspsrc = gst_element_factory_make("rtspsrc", "source");
     depay = gst_element_factory_make("rtph265depay", "depay");
     parse = gst_element_factory_make("h265parse", "parse");
-    // h265timestamper = gst_element_factory_make("h265timestamper", "h265timestamper");
+    h265timestamper = gst_element_factory_make("h265timestamper", "h265timestamper");
     mux = gst_element_factory_make("qtmux", "mux"); /* matroskamux */
     sink = gst_element_factory_make("filesink", "sink");
 
     // Create the empty pipeline
     pipeline = gst_pipeline_new("rtsp-pipeline");
 
-    if (!pipeline || !rtspsrc || !depay || !parse || !mux || !sink) {
+    if (!pipeline || !rtspsrc || !depay || !parse || !mux || !sink || !h265timestamper) {
         g_printerr("Not all elements could be created.\n");
         return -1;
     }
@@ -153,22 +168,22 @@ int main(int argc, char *argv[]) {
     // Set the element properties
     g_object_set(rtspsrc, "location", "rtsp://admin:yangquan123@192.168.10.15:554/Streaming/Channels/101", NULL);
     g_object_set(rtspsrc, "protocols", 0x04, NULL);  // Set protocols to 0x04 (TCP)
-    g_object_set(sink, "location", "received_h265.mkv", NULL);
+    g_object_set(sink, "location", "received_h265.mp4", NULL);
 
     GstPad *src_pad = gst_element_get_static_pad (parse, "src");
     GstPad *sink_pad = gst_element_get_static_pad (parse, "sink");
+    gst_pad_add_probe (sink_pad, GST_PAD_PROBE_TYPE_BUFFER,
+        sink_bin_buf_probe, NULL, NULL);
     gst_pad_add_probe (src_pad, GST_PAD_PROBE_TYPE_BUFFER,
         src_bin_buf_probe, NULL, NULL);
-    // gst_pad_add_probe (sink_pad, GST_PAD_PROBE_TYPE_BUFFER,
-    //     sink_bin_buf_probe, g_strdup_printf ("camera 0%d(parser sink_pad)", bin->bin_id) , g_free);
     gst_object_unref (src_pad);
     gst_object_unref (sink_pad);
 
     // Build the pipeline
-    gst_bin_add_many(GST_BIN(pipeline), rtspsrc, depay, parse, mux, sink, NULL);
+    gst_bin_add_many(GST_BIN(pipeline), rtspsrc, depay, parse, h265timestamper, mux, sink, NULL);
 
     // Link the elements together. Note that rtspsrc has "pad-added" signal.
-    if (!gst_element_link_many(depay, parse, mux, sink, NULL)) {
+    if (!gst_element_link_many(depay, parse, h265timestamper, mux, sink, NULL)) {
         g_printerr("Elements could not be linked.\n");
         gst_object_unref(pipeline);
         return -1;

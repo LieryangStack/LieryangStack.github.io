@@ -38,7 +38,8 @@
     "cstdio": "c",
     "gtkgstmediafileprivate.h": "c",
     "gstelement.h": "c",
-    "gstrtspmessage.h": "c"
+    "gstrtspmessage.h": "c",
+    "format": "c"
   },
   "C_Cpp.errorSquiggles": "disabled",
   "C_Cpp_Runner.msvcBatchPath": "",
