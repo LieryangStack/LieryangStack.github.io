@@ -274,7 +274,7 @@ main (int argc, char *argv[]) {
   }
 
   /* 延迟设小了会卡，跟nvv4l2decoder有关 */
-  g_object_set(data.source, "location", "rtsp://admin:yangquan123@192.168.10.14:554/Streaming/Channels/101", \
+  g_object_set(data.source, "location", "rtsp://admin:yangquan123@192.168.10.11:554/Streaming/Channels/101", \
                           "latency", 300, "protocols", 0x04, NULL);
 
   g_object_set (data.video_sink, "window-width", 640, "window-height", 480, NULL);

@@ -261,7 +261,7 @@ main (int argc, char *argv[]) {
   data.h265depay = gst_element_factory_make ("rtph265depay", "rtph265depay");
   data.h265parse = gst_element_factory_make ("h265parse", "h265parse");
   data.h265parse_tee = gst_element_factory_make ("tee", "h265parse_tee");
-  data.h265decode = gst_element_factory_make ("nvv4l2decoder", "nvv4l2decoder"); // nvv4l2decoder avdec_h265
+  data.h265decode = gst_element_factory_make ("nvh265dec", "nvv4l2decoder"); // nvv4l2decoder avdec_h265
   data.video_convert = gst_element_factory_make ("nvvideoconvert", "videoconvert");
   data.video_sink = gst_element_factory_make ("nveglglessink", "video_sink"); //nv3dsink
 
@@ -297,7 +297,7 @@ main (int argc, char *argv[]) {
 
 
   /* 延迟设小了会卡，跟nvv4l2decoder有关 */
-  g_object_set(data.source, "location", "rtsp://admin:yangquan123@192.168.10.14:554/Streaming/Channels/101", \
+  g_object_set(data.source, "location", "rtsp://admin:yangquan123@192.168.10.11:554/Streaming/Channels/101", \
                           "latency", 300, "protocols", 0x04, NULL);
 
   g_object_set (data.video_sink, "window-width", 640, "window-height", 480, NULL);
