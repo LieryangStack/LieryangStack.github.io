@@ -214,6 +214,22 @@ cb_rtspsrc_new_manager (GstElement * object,
   g_signal_connect(manager, "new-jitterbuffer", G_CALLBACK(cb_rtspsrc_get_jitterbuffer), NULL);
 }
 
+static GstPadProbeReturn
+src_bin_buf_probe (GstPad * pad, GstPadProbeInfo * info, gpointer u_data) {
+
+  if ((info->type & GST_PAD_PROBE_TYPE_BUFFER) == GST_PAD_PROBE_TYPE_BUFFER) {
+    GstBuffer *buffer = GST_BUFFER (info->data);
+
+    g_print ("src pad\n");
+    g_print ("pts: %" GST_TIME_FORMAT "\n", GST_TIME_ARGS(buffer->pts));
+    g_print ("dts: %" GST_TIME_FORMAT "\n", GST_TIME_ARGS(buffer->dts));
+    g_print ("duration: %" GST_TIME_FORMAT "\n\n", GST_TIME_ARGS(buffer->duration));
+
+  }
+
+  return GST_PAD_PROBE_OK;
+}
+
 int
 main (int argc, char *argv[]) {
 
@@ -282,6 +298,15 @@ main (int argc, char *argv[]) {
   /* 在这里把回调函数的src data变量指定参数*/
   g_signal_connect (data.source, "pad-added", G_CALLBACK (pad_added_handler), &data);
   g_signal_connect (data.source, "new-manager", G_CALLBACK(cb_rtspsrc_new_manager), NULL);
+
+  // GstPad *src_pad = gst_element_get_static_pad (data.avdec_aac, "src");
+  // GstPad *sink_pad = gst_element_get_static_pad (data.avdec_aac, "sink");
+  // gst_pad_add_probe (sink_pad, GST_PAD_PROBE_TYPE_BUFFER,
+  //     sink_bin_buf_probe, NULL, NULL);
+  // gst_pad_add_probe (src_pad, GST_PAD_PROBE_TYPE_BUFFER,
+  //     src_bin_buf_probe, NULL, NULL);
+  // gst_object_unref (src_pad);
+  // gst_object_unref (sink_pad);
   
   /* Listen to the bus */
   GstBus *bus = gst_element_get_bus (data.pipeline);
