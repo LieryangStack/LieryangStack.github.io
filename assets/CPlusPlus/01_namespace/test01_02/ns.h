@@ -16,6 +16,9 @@ namespace Parent {
     void foo ();
   }
 
+  /**
+   * 使用 inline 命名空间，可以 Parent::foo() 直接就可以调用该函数。无需 Parent::V2::foo() 
+   */
   inline namespace V2 {
     void foo ();
   }
