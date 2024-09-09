@@ -25,3 +25,22 @@ https://www.cnblogs.com/breakpointlab/p/16618170.html
 https://www.cnblogs.com/breakpointlab/p/15828119.html
 
 https://zhuanlan.zhihu.com/p/431525275
+
+
+
+Edit -> Preferences 
+
+![alt text](image.png)
+
+![alt text](image-1.png)
+
+
+需要分析FU 
+
+https://blog.csdn.net/jinking01/article/details/120483496
+
+https://zhuanlan.zhihu.com/p/569915293
+
+https://blog.csdn.net/wangbuji/article/details/122443023
+
+需要补充H264 H265 Slice的分析

@@ -261,7 +261,7 @@ main (int argc, char *argv[]) {
   data.h265depay = gst_element_factory_make ("rtph265depay", "rtph265depay");
   data.h265parse = gst_element_factory_make ("h265parse", "h265parse");
   data.h265parse_tee = gst_element_factory_make ("tee", "h265parse_tee");
-  data.h265decode = gst_element_factory_make ("nvh265dec", "nvv4l2decoder"); // nvv4l2decoder avdec_h265
+  data.h265decode = gst_element_factory_make ("avdec_h265", "nvv4l2decoder"); // nvv4l2decoder avdec_h265
   data.video_convert = gst_element_factory_make ("nvvideoconvert", "videoconvert");
   data.video_sink = gst_element_factory_make ("nveglglessink", "video_sink"); //nv3dsink
 
@@ -307,8 +307,8 @@ main (int argc, char *argv[]) {
   GstStructure *structure = gst_structure_new_from_string ("properties,sync=false,async=false");
 
   /* 如果不设定bin异步处理状态，如果在读取流失败的状态下，设定管道为运行状态，则会阻塞整个管道 */
-  // g_object_set (G_OBJECT (data.splitmuxsink), "max-size-time", GST_SECOND * 60, "max-files", 20, "sink-properties", structure,\
-  //     "async-finalize", TRUE, "async-handling", TRUE, "message-forward", TRUE, NULL);
+  g_object_set (G_OBJECT (data.splitmuxsink), "max-size-time", GST_SECOND * 60, "max-files", 20, "sink-properties", structure,\
+      "async-finalize", TRUE, "async-handling", TRUE, "message-forward", TRUE, NULL);
 
   /* 在这里把回调函数的src data变量指定参数*/
   g_signal_connect (data.source, "pad-added", G_CALLBACK (pad_added_handler), &data);
