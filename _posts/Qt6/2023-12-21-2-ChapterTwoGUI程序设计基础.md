@@ -73,9 +73,17 @@ Qt 自带的开发工具集里有专门的 rcc 工具，用于将 .qrc 资源里
 
 ### 2.1.3 UI文件
 
-### 2.1.4 主程序文件
+双击 `Forms` 里面的 `widget.ui` 文件，即可打开，UI编辑页面。
 
-### 2.1.5 窗口相关文件
+1. 修改构建的对象名称
+
+    ![alt text](image-4.png)
+
+2. 按钮btnClose的 `clicked()` 信号连接窗口Widget的 `close()` 槽函数。
+
+    ![alt text](image-5.png)
+
+
 
 
 ## 2.2 可视化UI设计
