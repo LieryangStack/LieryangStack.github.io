@@ -7,9 +7,11 @@ tags: [Qt6开发学习]
 
 ## 2.1 GUI程序结构与运行机制
 
+本小节2.1对应的示例程序是 [samp1_1HelloWorld_qmake](/assets/Qt6/ChapterTwo/code/samp2_1/)
+
 ### 2.1.1 GUI项目文件组成
 
-![Alt text](/assets/Qt6/ChapterTwo/项目管理目录树.png)
+![Alt text](项目管理目录树.png)
 
 - **samp2_1.pro**: 是qmake构建系统的项目配置文件，其中存储了项目的各种设置内容。
 - **widget.ui**: 是UI文件，这是用于窗口界面可视化设计的文件。
@@ -84,9 +86,71 @@ Qt 自带的开发工具集里有专门的 rcc 工具，用于将 .qrc 资源里
     ![alt text](image-5.png)
 
 
+### 2.1.4 主程序文件
+
+![alt text](image-6.png)
+
+### 2.1.5 窗口相关的文件
+
+首先要区分两个类：
+
+1. 基于 `QWidget` 的窗口 `Widget` 类。继承自 QWidget 的类 Widget 的
+定义。Widget 类中包含创建窗口界面，实现窗口上界面组件的交互操作，以及其他业务逻辑。
+
+1. 基于 `Ui_Widget` 的 `Widget` 类。这个 `Ui::Widget *ui`其实是我们窗口类 `Widget` 的一个私有成员。用于描述窗口类`Widget`，我们在 UI 文件中界面组件的属性设置、布局以及信号与槽的关联等内容。
+
+![alt text](image-7.png)
 
 
 ## 2.2 可视化UI设计
+
+![alt text](image-8.png)
+
+**补充内容1：控件大小策略（QWidget Size Policy）**
+
+- **sizeIncrement**：它定义了窗口的大小调整增量，即用户在调整窗口大小时，窗口的宽度和高度如何按照特定的步长进行变化。
+
+    sizeIncrement 是一个 QSize 类型的值，它指定了宽度和高度的增量步长。例如，如果你设置 sizeIncrement 为 (10, 15)，那么在调整窗口大小时，窗口宽度将以 10 像素的增量变化，高度将以 15 像素的增量变化。
+
+- **baseSize**：它定义了窗口大小的基准尺寸。在这个基础上，窗口的大小按照 sizeIncrement 来变化。
+
+    baseSize 是一个 QSize 类型的值，表示窗口的初始宽度和高度。调整窗口大小时，每次增量都是基于这个基准值的。例如，设置 baseSize 为 (100, 150) 并设置 sizeIncrement 为 (10, 15)，那么窗口的宽度和高度将从 100 和 150 开始，按照 10 和 15 的步长增加。
+
+QSizePolicy::Fixed：控件将保持固定的尺寸，不会随父控件的大小改变而改变。
+
+QSizePolicy::Minimum：控件将尽可能小，但不会小于其最小尺寸。
+
+QSizePolicy::Maximum：控件将尽可能大，但不会超过其最大尺寸。
+
+QSizePolicy::Preferred：控件有一个首选尺寸，布局管理器会尽量遵循这个尺寸，但可以调整大小以适应布局需求。
+
+QSizePolicy::Expanding：控件将尽可能地扩展以填充可用的空间，适用于希望占据额外空间的控件。
+
+minimumSize：Widget最大尺寸
+
+maxmumSize：Widget最小尺寸
+
+![p](image-9.png)
+
+
+
+总结：
+
+1. 总结头文件声明的函数转到定义
+
+https://blog.csdn.net/qq_43341440/article/details/117824635
+
+https://blog.csdn.net/qq_39662022/article/details/136500671
+
+2. 转到槽的槽函数连接原理
+
+通过ui_widget.cpp 文件的信号名称跟槽函数名称规则， moc 文件的执行
+
+3. 伙伴关系
+
+
+4. Help -> about Plugins 中的 clang是个什么的，为什么会有错误不正常提升
+
 
 ### 2.2.1 窗口界面可视化设计
 

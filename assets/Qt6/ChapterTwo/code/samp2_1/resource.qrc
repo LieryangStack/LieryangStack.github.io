@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/icons">
+        <file>image/robot.png</file>
+        <file>image/syringe.png</file>
+    </qresource>
+</RCC>
