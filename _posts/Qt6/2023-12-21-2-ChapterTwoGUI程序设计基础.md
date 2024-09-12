@@ -106,7 +106,7 @@ Qt 自带的开发工具集里有专门的 rcc 工具，用于将 .qrc 资源里
 
 ![alt text](image-8.png)
 
-**补充内容1：控件大小策略（QWidget Size Policy）**
+**补充内容1：QWidget的一些属性**
 
 - **sizeIncrement**：它定义了窗口的大小调整增量，即用户在调整窗口大小时，窗口的宽度和高度如何按照特定的步长进行变化。
 
@@ -116,21 +116,51 @@ Qt 自带的开发工具集里有专门的 rcc 工具，用于将 .qrc 资源里
 
     baseSize 是一个 QSize 类型的值，表示窗口的初始宽度和高度。调整窗口大小时，每次增量都是基于这个基准值的。例如，设置 baseSize 为 (100, 150) 并设置 sizeIncrement 为 (10, 15)，那么窗口的宽度和高度将从 100 和 150 开始，按照 10 和 15 的步长增加。
 
-QSizePolicy::Fixed：控件将保持固定的尺寸，不会随父控件的大小改变而改变。
+- **minimumSize**：Widget最大尺寸
 
-QSizePolicy::Minimum：控件将尽可能小，但不会小于其最小尺寸。
+- **maxmumSize**：Widget最小尺寸
 
-QSizePolicy::Maximum：控件将尽可能大，但不会超过其最大尺寸。
+- **Size Policy（控件大小策略）**：
 
-QSizePolicy::Preferred：控件有一个首选尺寸，布局管理器会尽量遵循这个尺寸，但可以调整大小以适应布局需求。
+  - QSizePolicy::Fixed：控件将保持固定的尺寸，不会随父控件的大小改变而改变。
 
-QSizePolicy::Expanding：控件将尽可能地扩展以填充可用的空间，适用于希望占据额外空间的控件。
+  - QSizePolicy::Minimum：控件将尽可能小，但不会小于其最小尺寸。
 
-minimumSize：Widget最大尺寸
+  - QSizePolicy::Maximum：控件将尽可能大，但不会超过其最大尺寸。
 
-maxmumSize：Widget最小尺寸
+  - QSizePolicy::Preferred：控件有一个首选尺寸，布局管理器会尽量遵循这个尺寸，但可以调整大小以适应布局需求。
 
-![p](image-9.png)
+  - QSizePolicy::Expanding：控件将尽可能地扩展以填充可用的空间，适用于希望占据额外空间的控件。
+
+    ![alt text](image-9.png)
+
+**补充内容2：转到槽**
+
+右击控件 -> Go to slot
+
+![alt text](image-10.png)
+
+然后，就可以直接编写槽函数。
+
+**这里的信号与槽函数是通过对象名称连接起来的？**
+
+通过 `setupUi` 函数中调用 `QMetaObject::connectSlotsByName(Dialog);`
+
+![alt text](image-12.png)
+
+递归搜索给定对象的所有子对象，并将来自这些子对象的匹配信号连接到以下形式的对象插槽：
+
+```c++
+void on_<object name>_<signal name>(<signal parameters>);
+```
+
+比如我们的 `QPushButton` 对象的名称是 `btnClear`，我要关联该对象的 `clicked()`信号，所以槽函数就是：
+
+```c++
+void on_btnClear_clicked();
+```
+
+![alt text](image-11.png)
 
 
 
@@ -142,9 +172,7 @@ https://blog.csdn.net/qq_43341440/article/details/117824635
 
 https://blog.csdn.net/qq_39662022/article/details/136500671
 
-2. 转到槽的槽函数连接原理
 
-通过ui_widget.cpp 文件的信号名称跟槽函数名称规则， moc 文件的执行
 
 3. 伙伴关系
 

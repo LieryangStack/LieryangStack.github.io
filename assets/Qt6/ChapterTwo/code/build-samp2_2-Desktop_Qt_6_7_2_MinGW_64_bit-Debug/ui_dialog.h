@@ -174,6 +174,7 @@ public:
         QObject::connect(btnExit, &QPushButton::clicked, Dialog, qOverload<>(&QDialog::close));
         QObject::connect(btnOK, &QPushButton::clicked, Dialog, qOverload<>(&QDialog::accept));
 
+
         QMetaObject::connectSlotsByName(Dialog);
     } // setupUi
 
