@@ -12,6 +12,7 @@ using namespace std;
 class Interface {
 public:
   virtual void print() = 0;
+  virtual void test1(int) {};
 };
 
 class Parent : public Interface {
@@ -20,6 +21,12 @@ public:
   virtual void print () {
     printf ("a = %d\n", a);
   }
+
+  void test1(int a, int b) override {  /* 使用override关键字，表示这个函数是要重新虚函数 */
+    printf ("test a = %d\n", a);
+  }
+
+public:
   int a;
 };
 
