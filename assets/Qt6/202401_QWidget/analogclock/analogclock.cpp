@@ -41,14 +41,14 @@ AnalogClock::~AnalogClock()
 
 void
 AnalogClock::paintEvent (QPaintEvent *) {
+
+    /* 小时指针 */
     static const QPoint hourHand[4] = {
         QPoint (5, 14),
         QPoint (-5, 14),
         QPoint (-4, -71),
         QPoint (4, -71)
     };
-
-    const QColor hourColor(palette().color(QPalette::Text));
 
     int side = qMin(width(), height());
 
