@@ -71,3 +71,4 @@ Window {
     }
 }
 
+https://stackoverflow.com/questions/74155493/how-can-i-resize-frameless-window-in-qml
