@@ -9,7 +9,7 @@ tags: [Qt6开发学习]
 
 这部分内容参考： `Qt6 C++开发指南` （3.3.4 信号与槽章节）
 
-![alt text](/assets/Qt6/202402_Qt6笔记之信号与槽/image/image.png)
+![alt text](/assets\Qt6\qt6_02_Signal_Slot\image\image.png)
 
 查看代码源文件，可以发现有三种信号与槽连接函数声明。
 
