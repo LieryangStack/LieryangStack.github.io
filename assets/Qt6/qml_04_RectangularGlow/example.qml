@@ -2,8 +2,8 @@
  import Qt5Compat.GraphicalEffects
 
 Item {
-    width: 300
-    height: 300
+    width: 600
+    height: 400
 
     Rectangle {
         id: background
@@ -14,10 +14,10 @@ Item {
     RectangularGlow {
         id: effect
         anchors.fill: rect
-        glowRadius: 20
+        glowRadius: 50
         spread: 1
         color: "#5555ff"
-        cornerRadius: rect.radius + glowRadius
+        cornerRadius: rect.radius
     }
 
     Rectangle {
