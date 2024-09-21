@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 二、QML——ApplicationWindow
+title: 三、QML——ApplicationWindow
 categories: QML
 tags: [QML]
 ---
@@ -15,7 +15,7 @@ tags: [QML]
 
 - 不提供应用程序窗口的结构，需要自行定义窗口的外观和功能，如菜单栏、工具栏、页面视图等。
 
-  ![alt text](image-1.png)
+  ![alt text](/assets/Qt6/qml_03_ApplicationWindow/image/image-1.png)
 
 ### 1.2 ApplicationWindow
 
@@ -23,7 +23,7 @@ tags: [QML]
 
 - `ApplicationWindow` 继承 `Window` 类型，额外添加了标题栏、工具栏、页面视图等属性。
 
-  ![alt text](image.png)
+  ![alt text](/assets/Qt6/qml_03_ApplicationWindow/image/image.png)
 
 ## 2 QtQuick.Controls多种风格
 
@@ -39,8 +39,11 @@ tags: [QML]
 
 - Qt.labs.platform：支持常用对话框，如文件、颜色等，以及系统图标和标准路径。
 
-  ![alt text](image-2.png)
+  ![alt text](/assets/Qt6/qml_03_ApplicationWindow/image/image-2.png)
 
 ## 3 Qt创建qml程序分析
 
-https://blog.csdn.net/u010822106/article/details/136884048
+### 3.1 CMakeLists文件
+
+![alt text](/assets/Qt6/qml_03_ApplicationWindow/image/image-3.png)
+
