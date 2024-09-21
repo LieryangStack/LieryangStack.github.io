@@ -18,11 +18,11 @@
 	[
 		{
 			"backtrace" : 0,
-			"id" : "appStudyWindow_tooling::@6890427a1f51a3e7e1df"
+			"id" : "appStudyWindow_qmlimportscan::@6890427a1f51a3e7e1df"
 		},
 		{
 			"backtrace" : 0,
-			"id" : "appStudyWindow_qmlimportscan::@6890427a1f51a3e7e1df"
+			"id" : "appStudyWindow_tooling::@6890427a1f51a3e7e1df"
 		}
 	],
 	"folder" : 

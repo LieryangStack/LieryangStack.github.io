@@ -10,7 +10,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 
 # 先会查找 Qt6Config.camke 或者 FindQt6.cmake
-# 然后会在该文件中，查找 Quick 组件
+# 然后会在该文件中，查找 Quick 组件（Qt6QuickConfig.cmake 或者 FindQt6Quick.cmake）
 find_package(Qt6 6.5 REQUIRED COMPONENTS Quick)
 
 qt_standard_project_setup(REQUIRES 6.5)
@@ -19,6 +19,8 @@ qt_add_executable(appStudyWindow
     main.cpp
 )
 
+# URI 后面的名称我们会在加载组件的时候使用
+# 文件名称必须是大写开头，使用qml引擎加载Test的时候才可以直接调用
 qt_add_qml_module(appStudyWindow
     URI StudyWindow
     VERSION 1.0
@@ -37,6 +39,7 @@ set_target_properties(appStudyWindow PROPERTIES
     WIN32_EXECUTABLE TRUE
 )
 
+# 链接库
 target_link_libraries(appStudyWindow
     PRIVATE Qt6::Quick
 )

@@ -40,3 +40,7 @@ tags: [QML]
 - Qt.labs.platform：支持常用对话框，如文件、颜色等，以及系统图标和标准路径。
 
   ![alt text](image-2.png)
+
+## 3 Qt创建qml程序分析
+
+https://blog.csdn.net/u010822106/article/details/136884048

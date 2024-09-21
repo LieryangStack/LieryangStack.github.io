@@ -4,10 +4,11 @@
 	{
 		"commands" : 
 		[
-			"add_custom_target",
-			"_qt_internal_qml_type_registration",
+			"add_library",
+			"qt6_target_qml_sources",
 			"qt6_add_qml_module",
-			"qt_add_qml_module"
+			"qt_add_qml_module",
+			"target_sources"
 		],
 		"files" : 
 		[
@@ -22,7 +23,7 @@
 			{
 				"command" : 3,
 				"file" : 1,
-				"line" : 22,
+				"line" : 24,
 				"parent" : 0
 			},
 			{
@@ -34,13 +35,19 @@
 			{
 				"command" : 1,
 				"file" : 0,
-				"line" : 541,
+				"line" : 647,
 				"parent" : 2
 			},
 			{
 				"command" : 0,
 				"file" : 0,
-				"line" : 3039,
+				"line" : 2750,
+				"parent" : 3
+			},
+			{
+				"command" : 4,
+				"file" : 0,
+				"line" : 2753,
 				"parent" : 3
 			}
 		]
@@ -49,8 +56,8 @@
 	{
 		"name" : "QtInternalTargets"
 	},
-	"id" : "appStudyWindow_qmltyperegistration::@6890427a1f51a3e7e1df",
-	"name" : "appStudyWindow_qmltyperegistration",
+	"id" : "appStudyWindow_tooling::@6890427a1f51a3e7e1df",
+	"name" : "appStudyWindow_tooling",
 	"paths" : 
 	{
 		"build" : ".",
@@ -62,38 +69,45 @@
 			"name" : "",
 			"sourceIndexes" : 
 			[
-				0
+				0,
+				1
 			]
 		},
 		{
 			"name" : "CMake Rules",
 			"sourceIndexes" : 
 			[
-				1,
-				2
+				2,
+				3
 			]
 		}
 	],
 	"sources" : 
 	[
 		{
-			"backtrace" : 4,
+			"backtrace" : 5,
 			"isGenerated" : true,
-			"path" : "build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/CMakeFiles/appStudyWindow_qmltyperegistration",
+			"path" : "build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/StudyWindow/Test.qml",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 5,
+			"isGenerated" : true,
+			"path" : "build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/StudyWindow/WindowFrameLess.qml",
 			"sourceGroupIndex" : 0
 		},
 		{
 			"backtrace" : 0,
 			"isGenerated" : true,
-			"path" : "build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/CMakeFiles/appStudyWindow_qmltyperegistration.rule",
+			"path" : "build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/StudyWindow/Test.qml.rule",
 			"sourceGroupIndex" : 1
 		},
 		{
 			"backtrace" : 0,
 			"isGenerated" : true,
-			"path" : "build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/appstudywindow_qmltyperegistrations.cpp.rule",
+			"path" : "build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/StudyWindow/WindowFrameLess.qml.rule",
 			"sourceGroupIndex" : 1
 		}
 	],
-	"type" : "UTILITY"
+	"type" : "INTERFACE_LIBRARY"
 }

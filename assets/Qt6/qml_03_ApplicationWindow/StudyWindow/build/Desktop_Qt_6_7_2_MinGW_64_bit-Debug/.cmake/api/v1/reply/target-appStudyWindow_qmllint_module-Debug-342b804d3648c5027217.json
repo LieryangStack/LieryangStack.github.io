@@ -23,7 +23,7 @@
 			{
 				"command" : 4,
 				"file" : 1,
-				"line" : 22,
+				"line" : 24,
 				"parent" : 0
 			},
 			{
@@ -47,7 +47,7 @@
 			{
 				"command" : 0,
 				"file" : 0,
-				"line" : 971,
+				"line" : 1036,
 				"parent" : 4
 			}
 		]
@@ -62,8 +62,8 @@
 	{
 		"name" : "QtInternalTargets/QmlLinter"
 	},
-	"id" : "appStudyWindow_qmllint::@6890427a1f51a3e7e1df",
-	"name" : "appStudyWindow_qmllint",
+	"id" : "appStudyWindow_qmllint_module::@6890427a1f51a3e7e1df",
+	"name" : "appStudyWindow_qmllint_module",
 	"paths" : 
 	{
 		"build" : ".",
@@ -91,13 +91,13 @@
 		{
 			"backtrace" : 5,
 			"isGenerated" : true,
-			"path" : "build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/CMakeFiles/appStudyWindow_qmllint",
+			"path" : "build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/CMakeFiles/appStudyWindow_qmllint_module",
 			"sourceGroupIndex" : 0
 		},
 		{
 			"backtrace" : 0,
 			"isGenerated" : true,
-			"path" : "build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/CMakeFiles/appStudyWindow_qmllint.rule",
+			"path" : "build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/CMakeFiles/appStudyWindow_qmllint_module.rule",
 			"sourceGroupIndex" : 1
 		}
 	],
