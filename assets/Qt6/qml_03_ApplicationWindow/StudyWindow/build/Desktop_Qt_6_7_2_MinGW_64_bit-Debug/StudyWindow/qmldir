@@ -1,0 +1,6 @@
+module StudyWindow
+typeinfo appStudyWindow.qmltypes
+prefer :/qt/qml/StudyWindow/
+Test 1.0 Test.qml
+WindowFrameLess 1.0 WindowFrameLess.qml
+

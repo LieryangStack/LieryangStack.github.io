@@ -47,7 +47,7 @@ Window {
       GradientStop { position: 1.0; color: "#ef96c5" }
     }
 
-    
+
     MouseArea {
       anchors.fill: parent
       hoverEnabled: true
@@ -88,10 +88,10 @@ Window {
       /* 为窗口添加鼠标事件 */
       MouseArea {
         id: mouseArea
-        anchors.fill: parent 
+        anchors.fill: parent
         /* 只处理鼠标左击 */
         acceptedButtons: Qt.LeftButton
-        
+
         onPressed: mouse => handleMousePressed(mouse)
         onPositionChanged: mouse => handleMouseChanged(mouse)
         onDoubleClicked: {
@@ -105,7 +105,7 @@ Window {
 
     }
 
-    
+
 
     Button {
       id: button

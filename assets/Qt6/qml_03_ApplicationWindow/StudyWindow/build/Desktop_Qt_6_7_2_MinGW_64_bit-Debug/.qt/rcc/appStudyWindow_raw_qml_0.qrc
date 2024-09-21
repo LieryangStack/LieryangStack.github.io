@@ -1,0 +1,7 @@
+<RCC>
+  <qresource prefix="/qt/qml/StudyWindow/">
+    <file alias="Test.qml">C:/Users/lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_03_ApplicationWindow/StudyWindow/Test.qml</file>
+    <file alias="WindowFrameLess.qml">C:/Users/lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_03_ApplicationWindow/StudyWindow/WindowFrameLess.qml</file>
+  </qresource>
+</RCC>
+

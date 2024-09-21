@@ -1,0 +1,6 @@
+<RCC>
+  <qresource prefix="/qt/qml/StudyWindow">
+    <file alias="qmldir">C:/Users/lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_03_ApplicationWindow/StudyWindow/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/StudyWindow/qmldir</file>
+  </qresource>
+</RCC>
+

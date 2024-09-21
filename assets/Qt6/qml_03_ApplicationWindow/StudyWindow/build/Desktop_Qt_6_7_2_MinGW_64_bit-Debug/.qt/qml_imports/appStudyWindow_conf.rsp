@@ -1,0 +1,14 @@
+-rootPath
+C:/Users/lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_03_ApplicationWindow/StudyWindow
+-cmake-output
+-output-file
+C:/Users/lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_03_ApplicationWindow/StudyWindow/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/.qt/qml_imports/appStudyWindow_conf.cmake
+-importPath
+C:/Users/lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_03_ApplicationWindow/StudyWindow/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/StudyWindow
+-importPath
+C:/Users/lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_03_ApplicationWindow/StudyWindow/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug
+-importPath
+C:/Qt/6.7.2/mingw_64/./qml
+-qrcFiles
+C:/Users/lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_03_ApplicationWindow/StudyWindow/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/.qt/rcc/qmake_StudyWindow.qrc
+C:/Users/lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_03_ApplicationWindow/StudyWindow/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/.qt/rcc/appStudyWindow_raw_qml_0.qrc
