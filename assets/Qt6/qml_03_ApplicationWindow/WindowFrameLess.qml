@@ -11,15 +11,9 @@ Window {
     width: 840
     height: 500
 
-    property int default_window_border_with: 10
-    property int default_window_radius: 10
     property point clickPos: Qt.point(0, 0);
-    property int window_radius: default_window_radius /* 窗口边角半径 */
-    property int window_border_width: default_window_border_with /* 窗口边框宽度（这部分就是Window和Rectangle之间的间隔） */
-
-    onWindow_border_widthChanged: {
-        console.log("Rectangle clicked!")
-    }
+    property int window_radius: 10 /* 窗口边角半径 */
+    property int window_border_width: 2 /* 窗口边框宽度（这部分就是Window和Rectangle之间的间隔） */
 
     function handleMousePressed(mouse) {
         /* 如果处于全屏模式，直接返回 */
@@ -45,7 +39,7 @@ Window {
         id: effect
         anchors.fill: rect
         glowRadius: 1
-        spread: 0.5
+        spread: 0.8
         color: "gray"
         cornerRadius: rect.radius + glowRadius
     }
@@ -91,8 +85,8 @@ Window {
                 onDoubleClicked: {
                     if (window.visibility === Window.FullScreen) {
                         window.visibility = Window.Windowed;
-                        window.window_radius = default_window_radius;
-                        window.window_border_width = default_window_border_with;
+                        window.window_radius = 10;
+                        window.window_border_width = 4;
                     } else {
                         window.visibility = Window.FullScreen;
                         window.window_radius = 0;
@@ -127,7 +121,7 @@ Window {
             target: null
             onActiveChanged: if (active) {
                 const p = resizeHandler.centroid.position;
-                const b = window_radius + 100; /* 增加该值可以避免鼠标内移过多，无法正确是否位置 */
+                const b = window_radius + 100; // Increase the corner size slightly
                 let e = 0;
                 if (p.x < b) { e |= Qt.LeftEdge }
                 if (p.x >= width - b) { e |= Qt.RightEdge }

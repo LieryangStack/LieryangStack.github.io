@@ -563,7 +563,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "C:/Users/lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_03_ApplicationWindow/StudyWindow"
+			"value" : "C:/Users/Lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_03_ApplicationWindow/StudyWindow"
 		},
 		{
 			"name" : "CMAKE_INSTALL_BINDIR",
@@ -1063,7 +1063,7 @@
 				}
 			],
 			"type" : "FILEPATH",
-			"value" : "C:/Users/lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_03_ApplicationWindow/StudyWindow/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/.qtc/package-manager/auto-setup.cmake"
+			"value" : "C:/Users/Lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_03_ApplicationWindow/StudyWindow/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/.qtc/package-manager/auto-setup.cmake"
 		},
 		{
 			"name" : "CMAKE_PROJECT_NAME",
@@ -5980,18 +5980,6 @@
 			],
 			"type" : "PATH",
 			"value" : "C:/Qt/6.7.2/mingw_64/lib/cmake/Qt6"
-		},
-		{
-			"name" : "Qt7_DIR",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : "The directory containing a CMake configuration file for Qt7."
-				}
-			],
-			"type" : "PATH",
-			"value" : "Qt7_DIR-NOTFOUND"
 		},
 		{
 			"name" : "StudyWindow_BINARY_DIR",

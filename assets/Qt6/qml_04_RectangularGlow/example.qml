@@ -1,33 +1,42 @@
- import QtQuick
- import Qt5Compat.GraphicalEffects
+import QtQuick
+import QtQuick.Window
+import Qt5Compat.GraphicalEffects
+import QtQuick.Controls.Material
 
-Item {
-    width: 600
-    height: 400
+Window {
+    id: window
+    color: "black" //transparent
+    // flags: Qt.FramelessWindowHint | Qt.Window
+    visible: true
+    width: 840
+    height: 500
 
-    Rectangle {
-        id: background
-        anchors.fill: parent
-        color: "black"
-    }
+    // Rectangle {
+    //     id: background
+    //     anchors.fill: parent
+    //     color: "transparent"
+    // }
 
     RectangularGlow {
-        id: effect
-        anchors.fill: rect
-        glowRadius: 50
-        spread: 1
-        color: "#5555ff"
-        cornerRadius: rect.radius
-    }
+         id: effect
+         anchors.fill: rect
+         glowRadius: 1
+         spread: 0.1
+         color: "red"
+         cornerRadius: rect.radius + glowRadius
+     }
+
 
     Rectangle {
-        id: rect
-        color: "green"
-        anchors.centerIn: parent
-        width: Math.round(parent.width / 1.5)
-        height: Math.round(parent.height / 2)
-        radius: 25
-    }
+         id: rect
+         width: parent.width / 1.2
+         height: parent.height / 1.2
+         color: "green"
+         anchors.centerIn : parent
+         radius: 20
+     }
+
+
 
 
 }

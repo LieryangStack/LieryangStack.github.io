@@ -7,7 +7,7 @@
 				{
 					"build" : ".",
 					"hasInstallRule" : true,
-					"jsonFile" : "directory-.-Debug-f1aa65059fdcedc121aa.json",
+					"jsonFile" : "directory-.-Debug-3d87c67da5b20196f945.json",
 					"minimumCMakeVersion" : 
 					{
 						"string" : "3.16"
@@ -92,7 +92,7 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "appStudyWindow::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-appStudyWindow-Debug-d2122a6b321694b48a98.json",
+					"jsonFile" : "target-appStudyWindow-Debug-b8126569028689e4f080.json",
 					"name" : "appStudyWindow",
 					"projectIndex" : 0
 				},
@@ -106,7 +106,7 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "appStudyWindow_autogen_timestamp_deps::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-appStudyWindow_autogen_timestamp_deps-Debug-13aafeb13569729dffd7.json",
+					"jsonFile" : "target-appStudyWindow_autogen_timestamp_deps-Debug-20af2f64556718e42eb9.json",
 					"name" : "appStudyWindow_autogen_timestamp_deps",
 					"projectIndex" : 0
 				},
@@ -158,8 +158,8 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "C:/Users/lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_03_ApplicationWindow/StudyWindow/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug",
-		"source" : "C:/Users/lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_03_ApplicationWindow/StudyWindow"
+		"build" : "C:/Users/Lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_03_ApplicationWindow/StudyWindow/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug",
+		"source" : "C:/Users/Lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_03_ApplicationWindow/StudyWindow"
 	},
 	"version" : 
 	{
