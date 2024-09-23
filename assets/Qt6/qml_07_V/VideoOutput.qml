@@ -4,6 +4,7 @@ import QtMultimedia
 import QtQuick
 import QtQuick.Window
 import Qt5Compat.GraphicalEffects
+import QtQuick.Controls
 import QtQuick.Controls.Material 2.0
 
 Window {
@@ -11,8 +12,9 @@ Window {
     color: "transparent" //transparent
     flags: Qt.FramelessWindowHint | Qt.Window
     visible: true
-    width: 840
-    height: 500
+    x: 50; y:50
+    width: 1920
+    height: 1080
 
     property point clickPos: Qt.point(0, 0);
     property int window_radius: 10 /* 窗口边角半径 */
@@ -97,6 +99,38 @@ Window {
                     }
                 }
             }
+
+            RoundButton {
+                width: 30
+                height: 30
+                x: parent.width - 60; y: 20
+                // flat: true
+                
+                background: Rectangle {
+                    width: 40
+                    height: 40
+                    anchors.centerIn: parent
+                    radius: 30  // 圆角效果
+                    border.color: "white"
+                    border.width: 2
+                    color: "white"
+                    // visible: false
+                    opacity: 0.5  // 控制透明度，使背景部分可见
+
+                    FastBlur {
+                        anchors.fill: parent
+                        source: parent
+                        radius: 32
+                    }
+                }
+
+                icon.source: "close-icon.svg"
+                icon.color: "gray"
+                icon.height: 15
+                icon.width: 15
+
+                onPressed: window.close()
+            }
         }
 
 
@@ -157,7 +191,7 @@ Window {
         VideoOutput {
             id: videoOutput
             // fillMode: VideoOutput.PreserveAspectCrop
-            anchors.fill: parent
+            // anchors.fill: parent
             visible: false
         }
 
