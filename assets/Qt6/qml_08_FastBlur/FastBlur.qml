@@ -64,11 +64,11 @@ Window {
           GradientStop { position: 1.0; color: "#ef96c5" }
         }
 
-        Image {
-            id: image
-            anchors.fill: parent
-            source: "./image/city.jpg"
-        }
+        // Image {
+        //     id: image
+        //     anchors.fill: parent
+        //     source: "./image/city.jpg"
+        // }
 
         /* 窗口顶部区域（此区域可以拖动窗口，双击放大窗口） */
         Rectangle {
@@ -174,34 +174,27 @@ Window {
                     window.startSystemResize(e);
             }
         }
+    }
 
-        // 捕获窗口内容
+    // 捕获窗口内容
         ShaderEffectSource {
             id: windowSource
-            sourceItem: parent
-            live: true  // 确保实时更新
-            recursive: true
-            smooth: true
-            sourceRect: Qt.rect (blurRect.x, blurRect.y, blurRect.height, blurRect.width)
+            sourceItem: rect
+            anchors.fill: rect
+            sourceRect: Qt.rect (blurRect.x, blurRect.y, blurRect.width, blurRect.height)
             visible: false  // 不需要显示，直接捕捉背景内容
         }
 
         // 可移动的模糊区域
         Rectangle {
             id: blurRect
-            width: 300
-            height: 200
+            
+            anchors.fill: parent
+            
             radius: 10
             border.color: "white"
             border.width: 2
-
-
-            // 高斯模糊效果
-            FastBlur {
-                source: windowSource  // 模糊的内容为整个窗口背景
-                radius: 64  // 模糊半径
-                anchors.fill: parent  // 模糊区域填满矩形
-            }
+            visible: false
 
             // 可移动的功能
             MouseArea {
@@ -218,8 +211,16 @@ Window {
                 }
             }
         }
-     
-    }
+
+
+                // 高斯模糊效果
+        FastBlur {
+            source: windowSource  // 模糊的内容为整个窗口背景
+            radius: 50  // 模糊半径
+            x:300; y: 300
+            width: 300; height: 300
+        }
 }
 
 
+https://pixso.cn/designskills/course-of-ground-glass-effect-making/
