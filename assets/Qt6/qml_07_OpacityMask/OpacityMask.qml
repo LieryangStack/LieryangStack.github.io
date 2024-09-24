@@ -1,7 +1,4 @@
 import QtQuick
-import QtMultimedia
-
-import QtQuick
 import QtQuick.Window
 import Qt5Compat.GraphicalEffects
 import QtQuick.Controls
@@ -15,37 +12,33 @@ Window {
     color: "pink"
 
     Image {
+        x: 100; y: 100
         id: image
         width: 200
         height: 200
         source: "./image/city.jpg"
-        // fillMode: Image.PreserveAspectFit
         visible: false
     }
 
-    /* 遮罩Rectangle */
-    Rectangle {
-        id: maskRec
+    /* 遮罩 */
+    Item {
+        id: mask
         anchors.fill: image
-        
-        // color:"transparent"
-        // Rectangle {
-        //     anchors.centerIn: parent
-        //     width: image.paintedWidth
-        //     height: image.paintedHeight
-        //     color:"black"
-        //     radius: 10
-        // }
 
-        radius: 100
-        visible: false
+        Rectangle {
+            anchors.centerIn: parent
+            width: image.paintedWidth
+            height: image.paintedHeight
+            color:"black"
+            radius: 10
+        }
+        visible: false //因为显示的是OpacityMask需要false
     }
 
     OpacityMask {
-        id: mask
         anchors.fill: image
         source: image
-        maskSource: maskRec
+        maskSource: mask
     }
 
     MouseArea {
