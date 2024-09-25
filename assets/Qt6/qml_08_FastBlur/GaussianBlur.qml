@@ -64,11 +64,11 @@ Window {
           GradientStop { position: 1.0; color: "#ef96c5" }
         }
 
-        Image {
-            id: image
-            anchors.fill: parent
-            source: "./image/city.jpg"
-        }
+        // Image {
+        //     id: image
+        //     anchors.fill: parent
+        //     source: "./image/city.jpg"
+        // }
 
         /* 窗口顶部区域（此区域可以拖动窗口，双击放大窗口） */
         Rectangle {
@@ -189,8 +189,8 @@ Window {
     RectangularGlow {
         id: effect2
         anchors.fill: blurRect
-        glowRadius: 10
-        spread: 0.3
+        glowRadius: 5
+        spread: 0.05
         color: "gray"
         cornerRadius: blurRect.radius + glowRadius
     }
@@ -200,15 +200,17 @@ Window {
         id: blurRect
         
         x: 100; y: 100
-        width: 200; height: 500
+        width: 300; height: 150
         radius: 20
         // anchors.fill: parent
 
         /* 模糊 */
-        FastBlur {
-            source: windowSource  // 模糊的内容为整个窗口背景
-            radius: 100  // 模糊半径
+       GaussianBlur {
             anchors.fill: blurRect
+            source: windowSource
+            radius: 50
+            deviation: 500
+            samples: 100
         }
         visible: false //因为显示的是OpacityMask需要false
     }
@@ -227,6 +229,24 @@ Window {
         maskSource: mask
     }
 
+    Rectangle {
+      anchors.fill: mask
+      radius: 20
+      opacity: 0.2
+    }
+
+
+    Text {
+      anchors.fill: mask
+      
+      anchors.margins: 20
+      
+      text: "安装字体"
+      color: "#4D4D4D"
+
+      font.pointSize: 16
+    }
+
     // 可移动的功能
     MouseArea {
         id: dragArea
@@ -242,5 +262,4 @@ Window {
         }
     }
 }
-
 

@@ -64,12 +64,6 @@ Window {
           GradientStop { position: 1.0; color: "#ef96c5" }
         }
 
-        Image {
-            id: image
-            anchors.fill: parent
-            source: "./image/city.jpg"
-        }
-
         /* 窗口顶部区域（此区域可以拖动窗口，双击放大窗口） */
         Rectangle {
             id: title_bar
@@ -177,61 +171,58 @@ Window {
     }
 
     // 捕获窗口内容
-    ShaderEffectSource {
-        id: windowSource
-        sourceItem: rect
-        anchors.fill: rect
-        sourceRect: Qt.rect (blurRect.x, blurRect.y, blurRect.width, blurRect.height)
-        visible: false  // 不需要显示，直接捕捉背景内容
-    }
+    // ShaderEffectSource {
+    //     id: windowSource
+    //     sourceItem: rect
+    //     anchors.fill: rect
+    //     sourceRect: Qt.rect (blurRect.x, blurRect.y, blurRect.width, blurRect.height)
+    //     visible: false  // 不需要显示，直接捕捉背景内容
+    // }
 
     /* 边框的阴影区域 */
     RectangularGlow {
         id: effect2
-        anchors.fill: blurRect
-        glowRadius: 10
-        spread: 0.3
+        anchors.fill: blureRect
+        glowRadius: 1
+        spread: 0.8
         color: "gray"
-        cornerRadius: blurRect.radius + glowRadius
+        cornerRadius: blureRect.radius + glowRadius
     }
 
     /* 可移动的模糊区域 */
-    Rectangle {
-        id: blurRect
-        
+    Rectangle
+    {
+        id:blureRect
         x: 100; y: 100
-        width: 200; height: 500
-        radius: 20
-        // anchors.fill: parent
+        width: 200; height: 200
+        layer.smooth: true
+        layer.enabled: true
+        opacity: 0.2
+        border.width: 1
+        border.color: "gray"
+        radius: 10
 
-        /* 模糊 */
-        FastBlur {
-            source: windowSource  // 模糊的内容为整个窗口背景
-            radius: 100  // 模糊半径
-            anchors.fill: blurRect
+        layer.effect: ShaderEffect {
+            id: effectSource
+            width: 300; height: 200
+
+            FastBlur{
+                    id: blur
+                    anchors.fill: effectSource
+                    source: effectSource
+                    radius: 50
+                }
         }
-        visible: false //因为显示的是OpacityMask需要false
     }
 
-    /* 遮罩 */
-    Rectangle {
-        id: mask
-        anchors.fill: blurRect
-        radius: 20
-        visible: false //因为显示的是OpacityMask需要false
-    }
 
-    OpacityMask {
-        anchors.fill: blurRect
-        source: blurRect
-        maskSource: mask
-    }
+
 
     // 可移动的功能
     MouseArea {
         id: dragArea
-        anchors.fill: blurRect
-        drag.target: blurRect  // 使矩形可拖动
+        anchors.fill: blureRect
+        drag.target: blureRect  // 使矩形可拖动
         cursorShape: Qt.OpenHandCursor
 
         onPressed: {
