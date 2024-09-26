@@ -1,11 +1,9 @@
 import QtQuick
 import QtMultimedia
-
-import QtQuick
 import QtQuick.Window
 import Qt5Compat.GraphicalEffects
 import QtQuick.Controls
-import QtQuick.Controls.Material 2.0
+import QtQuick.Controls.Material
 
 Window {
     id: window
@@ -189,8 +187,8 @@ Window {
     RectangularGlow {
         id: effect2
         anchors.fill: blurRect
-        glowRadius: 5
-        spread: 0.05
+        glowRadius: 1
+        spread: 0.1
         color: "gray"
         cornerRadius: blurRect.radius + glowRadius
     }
@@ -229,11 +227,22 @@ Window {
         maskSource: mask
     }
 
+    /* 增加一层透明度为 0.2 的白色图层 */
     Rectangle {
-      anchors.fill: mask
-      radius: 20
-      opacity: 0.2
+        anchors.fill: mask
+        color: "white"
+        radius: 20
+        opacity: 0.2
     }
+
+    /* 增加边框 */
+    // Rectangle {
+    //     anchors.fill: mask
+    //     border.color: "white"
+    //     border.width: 1
+    //     color: "transparent"
+    //     radius: 20
+    // }
 
 
     Text {

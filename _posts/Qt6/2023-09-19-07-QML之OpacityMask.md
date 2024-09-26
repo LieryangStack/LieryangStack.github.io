@@ -9,7 +9,7 @@ tags: [QML]
 
 **OpacityMask**: 通过 `MaskSource` 提供的非透明区域跟 `Source` 区域进行与运算，保留 `MaskSource` 跟  `Source` 重叠的的非透明区域。
 
-![alt text](image-2.png)
+![alt text](/assets/Qt6/qml_07_OpacityMask/image/image-2.png)
 
 ### 1.1 属性
 
@@ -46,7 +46,7 @@ tags: [QML]
 
 如果图片保持长宽比，图片除了显示区域，还会有透明区域。
 
-![alt text](image.png)
+![alt text](/assets/Qt6/qml_07_OpacityMask/image/image.png)
 
 <font color="red">虽然官方没有要求说是要求 source 与 maskSource 长宽要一样，但是我发现，无论怎么修改maskSource的长宽（只要赋值长宽的情况下），还是跟source的长宽一样。所以最好还是设置相同的size</font>
 
@@ -59,7 +59,7 @@ tags: [QML]
 
 图片中白色区域，其实要改成透明区域，只不过是为了看到两个矩形的明显效果，而设置成白色。
 
-![alt text](image-1.png)
+![alt text](/assets/Qt6/qml_07_OpacityMask/image/image-1.png)
 
 ## 参考
 
