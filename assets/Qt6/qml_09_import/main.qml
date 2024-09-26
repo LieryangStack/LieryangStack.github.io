@@ -2,7 +2,7 @@ import QtQuick.Window
 import "VpfQuick"
 
 VpfWindow {
-    id: window
+    id: root
     x: 50; y:50
 }
 

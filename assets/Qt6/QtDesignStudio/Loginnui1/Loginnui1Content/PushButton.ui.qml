@@ -25,18 +25,16 @@ Button {
 
     text: "My Button"
     hoverEnabled: false
-    font.pointSize: 13
-    font.family: "Titillium Web ExtraLight"
 
     background: buttonBackground
     Rectangle {
         id: buttonBackground
-        color: "#28e7e7e7"
+        color: "#00000000"
         implicitWidth: 100
         implicitHeight: 40
         opacity: enabled ? 1 : 0.3
         radius: 23
-        border.color: "#ffffff"
+        border.color: "#41cd52"
     }
 
     contentItem: textItem
@@ -45,11 +43,12 @@ Button {
         text: control.text
 
         opacity: enabled ? 1.0 : 0.3
-        color: "#ffffff"
-        horizontalAlignment: Text.AlignLeft
+        color: "#41cd52"
+        horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignVCenter
+        font.bold: true
         font.pointSize: 13
-        leftPadding: 30
+        font.family: "Titillium Web ExtraLight"
     }
 
     states: [
@@ -59,12 +58,13 @@ Button {
 
             PropertyChanges {
                 target: buttonBackground
-                color: "#28e7e7e7"
+                color: "#00000000"
+                border.color: "#41cd52"
             }
 
             PropertyChanges {
                 target: textItem
-                color: "#ffffff"
+                color: "#41cd52"
             }
         },
         State {
@@ -77,8 +77,14 @@ Button {
 
             PropertyChanges {
                 target: buttonBackground
-                color: "#28e7e7e7"
+                color: "#41cd52"
             }
         }
     ]
 }
+
+/*##^##
+Designer {
+    D{i:0;formeditorColor:"#00000c"}
+}
+##^##*/

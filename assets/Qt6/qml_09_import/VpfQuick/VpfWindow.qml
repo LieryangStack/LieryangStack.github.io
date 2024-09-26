@@ -134,7 +134,7 @@ Window {
                 icon.source: "close-icon.svg"
                 icon.color: "white"
 
-                onPressed: framelessWindow.close()
+                onPressed: root.close()
             }
 
             RoundButton {

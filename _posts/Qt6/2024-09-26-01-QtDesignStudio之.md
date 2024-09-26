@@ -40,6 +40,9 @@ tags: [Qt Design Studio]
 
 ![alt text](image-4.png)
 
+
+为什么修改了原来组件的text，后来主界面的text就不能生效了
+
 ## 参考
 
-[参考1：Qt Design Studio Manual页面](Qt Design Studio Manual)
+[参考1：Qt Design Studio Manual页面]([Qt Design Studio Manual](https://doc.qt.io/qtdesignstudio/gstutorials.html))

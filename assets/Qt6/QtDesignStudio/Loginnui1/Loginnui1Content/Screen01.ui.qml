@@ -46,15 +46,31 @@ Rectangle {
         }
 
         EntryField {
-            id: entryField
-            x: 60
-            y: 263
-            text: "用户名或者邮箱"
+            id: username
+            y: 270
+            text: qsTr("用户名或邮箱")
+            anchors.horizontalCenter: parent.horizontalCenter
+        }
+
+        EntryField {
+            id: password
+            y: 340
+            text: qsTr("密码")
+            anchors.horizontalCenter: parent.horizontalCenter
+        }
+
+        PushButton {
+            id: login
+            y: 550
+            text: qsTr("登录")
+            anchors.horizontalCenter: parent.horizontalCenter
+        }
+
+        PushButton {
+            id: createAccount
+            y: 620
+            text: "创建账号"
+            anchors.horizontalCenter: parent.horizontalCenter
         }
     }
-    states: [
-        State {
-            name: "clicked"
-        }
-    ]
 }
