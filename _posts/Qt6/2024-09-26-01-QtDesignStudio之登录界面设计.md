@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 一、Qt Design Studio——QPainter
+title: 一、Qt Design Studio——登录界面设计
 categories: Qt Design Studio
 tags: [Qt Design Studio]
 ---
@@ -11,13 +11,13 @@ tags: [Qt Design Studio]
 
 按照**绿色**标准的序号，进行依次修改信息创建一个空项目。
 
-![alt text](image.png)
+![alt text](/assets/Qt6/QtDesignStudio/01_LogUI/image/image.png)
 
 创建成功之后，我们打开 `Loginnui1` 目录，看一下里面有哪些文件，作用分别是什么。
 
-![alt text](image-1.png)
+![alt text](/assets/Qt6/QtDesignStudio/01_LogUI/image/image-1.png)
 
-![alt text](image-2.png)
+![alt text](/assets/Qt6/QtDesignStudio/01_LogUI/image/image-2.png)
 
 - **Constants.qml**：QML文件，通常定义了常量值，如颜色、字体大小等，这些值在整个项目中共享使用。
 
@@ -34,73 +34,112 @@ tags: [Qt Design Studio]
 
 **`Loginnui1Content` 文件夹内容如下：**
 
-![alt text](image-3.png)
+![alt text](/assets/Qt6/QtDesignStudio/01_LogUI/image/image-3.png)
 
 将图片和字体相关文件拷贝到 `fonts` 或者 `images` 文件夹后，设计界面的资源项里面会自动显示所有文件。
 
-![alt text](image-4.png)
+![alt text](/assets/Qt6/QtDesignStudio/01_LogUI/image/image-4.png)
 
 在开始设计自定义按钮之前，需要先了解一下Qt Design Studio的view视图菜单栏，因为有几个视图是经常会用到的。
 
-![alt text](image-5.png)
+![alt text](/assets/Qt6/QtDesignStudio/01_LogUI/image/image-5.png)
 
-![alt text](image-6.png)
+![alt text](/assets/Qt6/QtDesignStudio/01_LogUI/image/image-6.png)
 
 <font color="red">以下只是简单描述以下教程，具体还是参考官网</font>
 
 1. 分别拖拽图片 `adventurePage.jpg` 和 `qt_logo_green_128x128.png` 到 `Screen01.ui.qml` 页面中。图片的长、宽以及位置可以自行设定。
 
-    ![alt text](image-7.png)
+    ![alt text](/assets/Qt6/QtDesignStudio/01_LogUI/image/image-7.png)
 
 2. 拖拽 `Text` 组件到区域中，设置字体属性参数。
 
-    ![alt text](image-8.png)
+    ![alt text](/assets/Qt6/QtDesignStudio/01_LogUI/image/image-8.png)
 
 3. 创建了一个名为 `EntryField` 的 `Custom Button`。
 
-    ![alt text](image-9.png)
+    ![alt text](/assets/Qt6/QtDesignStudio/01_LogUI/image/image-9.png)
   
     修改 `EntryField` 相关属性。<font color="red">注意：通过 `Navigator` 视图可以选择 `Button` 里面的背景矩形和文本组件的属性设置。</font>
 
-    ![alt text](image-10.png)
+    ![alt text](/assets/Qt6/QtDesignStudio/01_LogUI/image/image-10.png)
 
-    ![alt text](image-11.png)
+    ![alt text](/assets/Qt6/QtDesignStudio/01_LogUI/image/image-11.png)
 
-    ![alt text](image-12.png)
+    ![alt text](/assets/Qt6/QtDesignStudio/01_LogUI/image/image-12.png)
 
-    ![alt text](image-13.png)
+    ![alt text](/assets/Qt6/QtDesignStudio/01_LogUI/image/image-13.png)
 
     修改其他状态下无变化。
 
-    ![alt text](image-14.png)
+    ![alt text](/assets/Qt6/QtDesignStudio/01_LogUI/image/image-14.png)
 
 4. 创建一个名为 `PushButton` 的 `Custom Button`。
-    ![alt text](image-16.png)
+    ![alt text](/assets/Qt6/QtDesignStudio/01_LogUI/image/image-16.png)
 
-    ![alt text](image-15.png)
+    ![alt text](/assets/Qt6/QtDesignStudio/01_LogUI/image/image-15.png)
 
-    ![alt text](image-17.png)
+    ![alt text](/assets/Qt6/QtDesignStudio/01_LogUI/image/image-17.png)
 
     修改 `normal` 和 `down` 状态   
 
-    ![alt text](image-18.png)
+    ![alt text](/assets/Qt6/QtDesignStudio/01_LogUI/image/image-18.png)
 
 5. 分别拖拽 `EntryField` 和 `PushButton` 到 `Screen01.ui.qml` 中。如图所示：
     
-    ![alt text](image-19.png)
+    ![alt text](/assets/Qt6/QtDesignStudio/01_LogUI/image/image-19.png)
 
-    ![alt text](image-20.png)
+    ![alt text](/assets/Qt6/QtDesignStudio/01_LogUI/image/image-20.png)
 
 **为什么不能修改 `EntryField` 和 `PushButton` 中 `textItem` 的 `text` 属性?**
 
 答：因为外部不能直接修改 `EntryField` 组件内的 `textItem.text` ，通过 `Button.text` 绑定到组件内的 `textItem.text`。如果我们修改了  `textItem.text`,就不是绑定了，所以后来外部也修改不了 `text` 内容了。
 
-![alt text](image-21.png)
+![alt text](/assets/Qt6/QtDesignStudio/01_LogUI/image/image-21.png)
 
 ## 2 Log In UI - Positioning
 
+设置每个组件 `anchors` 相关值，具体参考：[https://doc.qt.io/qtdesignstudio/qtdesignstudio-loginui2-example.html](https://doc.qt.io/qtdesignstudio/qtdesignstudio-loginui2-example.html)
 
+## 3 Log In UI - States
 
+1. 创建 `确认密码` 按钮
+
+    ![alt text](/assets/Qt6/QtDesignStudio/01_LogUI/image/image-22.png)
+
+2. 在 `Base State` 上面创建 `login` 和 `createAccount` 页面。
+
+    ![alt text](/assets/Qt6/QtDesignStudio/01_LogUI/image/image-23.png)
+
+3. View -> Views -> Connections 打开 Connections 视图。
+
+    ![alt text](/assets/Qt6/QtDesignStudio/01_LogUI/image/image-24.png)
+
+## 4 Log In UI - Timeline
+
+![alt text](/assets/Qt6/QtDesignStudio/01_LogUI/image/image-25.png)
+
+![alt text](/assets/Qt6/QtDesignStudio/01_LogUI/image/image-27.png)
+
+![alt text](/assets/Qt6/QtDesignStudio/01_LogUI/image/image-26.png)
+
+![alt text](/assets/Qt6/QtDesignStudio/01_LogUI/image/image-28.png)
+
+点击`Per Property Recording`表示就可以在编辑位置自动添加关键帧， `playhead帧0` 和 `playhead帧100` 分别编辑属性值。
+
+![alt text](/assets/Qt6/QtDesignStudio/01_LogUI/image/image-29.png)
+
+![alt text](/assets/Qt6/QtDesignStudio/01_LogUI/image/image-30.png)
+
+依次添加 `CreateAccount` 的 `Opacity` 属性，还有 `repeatPassword` 的 `anchors.topMargin` 属性的时间轴动画。
+
+![alt text](/assets/Qt6/QtDesignStudio/01_LogUI/image/image-31.png)
+
+编辑后，就从菱形块变成图示一样
+
+![alt text](/assets/Qt6/QtDesignStudio/01_LogUI/image/image-32.png)
+
+![alt text](/assets/Qt6/QtDesignStudio/01_LogUI/image/image-33.png)
 
 ## 参考
 

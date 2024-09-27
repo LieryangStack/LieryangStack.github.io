@@ -17,6 +17,7 @@ Rectangle {
     height: 720
 
     color: Constants.backgroundColor
+    state: "login"
     /* 设置默认状态 */
     clip: false
 
@@ -73,36 +74,126 @@ Rectangle {
             id: repeatPassword
             width: 270
             height: 46
-            opacity: 1
+            opacity: 0
             text: qsTr("确认密码")
             anchors.top: password.bottom
             anchors.topMargin: 20
             anchors.horizontalCenter: parent.horizontalCenter
         }
 
-        PushButton {
-            id: login
-            width: 270
-            text: qsTr("登录")
-            anchors.bottom: createAccount.top
-            anchors.bottomMargin: 20
-            anchors.horizontalCenter: parent.horizontalCenter
-        }
-
-        PushButton {
-            id: createAccount
-            y: 728
-            width: 270
-            visible: true
-            text: "创建账号"
+        Column {
+            y: 578
             anchors.bottom: parent.bottom
-            anchors.bottomMargin: 30
+            anchors.bottomMargin: 35
             anchors.horizontalCenter: parent.horizontalCenter
+            spacing: 20
+            PushButton {
+                id: login
+                width: 270
+                text: qsTr("登录")
+            }
 
-            Connections {
-                target: createAccount
-                onClicked: rectangle.state = "createAccount"
+            PushButton {
+                id: createAccount
+                width: 270
+                visible: true
+                text: "创建账号"
+
+                Connections {
+                    target: createAccount
+                    onClicked: rectangle.state = "createAccount"
+                }
             }
         }
     }
+
+    Timeline {
+        id: timeline
+        animations: [
+            TimelineAnimation {
+                id: toCreateAccountState
+                running: false /* 动画运行状态 */
+                loops: 1
+                duration: 1000
+                to: 1000
+                from: 0
+            }
+        ]
+        startFrame: 0
+        endFrame: 1000
+        enabled: false /* 时间轴使能 */
+
+        KeyframeGroup {
+            target: repeatPassword
+            property: "opacity"
+            Keyframe {
+                value: 0
+                frame: 0
+            }
+
+            Keyframe {
+                value: 1
+                frame: 1000
+            }
+        }
+
+        KeyframeGroup {
+            target: createAccount
+            property: "opacity"
+            Keyframe {
+                value: 1
+                frame: 0
+            }
+
+            Keyframe {
+                value: 0
+                frame: 1000
+            }
+        }
+
+        KeyframeGroup {
+            target: repeatPassword
+            property: "anchors.topMargin"
+            Keyframe {
+                value: 20
+                easing.bezierCurve: [0.392, 0.623, 0.565, 1, 1, 1]
+
+                frame: 1000
+            }
+
+            Keyframe {
+                value: 0
+                frame: 0
+            }
+        }
+    }
+
+    states: [
+        State {
+            name: "login"
+
+            PropertyChanges {
+                target: timeline
+                enabled: false
+            }
+
+            PropertyChanges {
+                target: toCreateAccountState
+                running: false
+            }
+        },
+        State {
+            name: "createAccount"
+
+            PropertyChanges {
+                target: timeline
+                enabled: true
+            }
+
+            PropertyChanges {
+                target: toCreateAccountState
+                running: true
+            }
+        }
+    ]
 }
