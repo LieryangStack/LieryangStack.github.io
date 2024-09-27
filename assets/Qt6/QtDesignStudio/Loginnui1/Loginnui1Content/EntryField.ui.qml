@@ -14,6 +14,7 @@ Button {
     width: 270
     height: 46
 
+    /* 组件的推荐大小 */
     implicitWidth: Math.max(
                        buttonBackground ? buttonBackground.implicitWidth : 0,
                        textItem.implicitWidth + leftPadding + rightPadding)
@@ -28,6 +29,10 @@ Button {
     font.pointSize: 13
     font.family: "Titillium Web ExtraLight"
 
+
+    /* background是Control类型的属性 （属性类型是Item）
+     * 继承关系： Item -> Control -> AbstractButton -> Button
+     */
     background: buttonBackground
     Rectangle {
         id: buttonBackground
@@ -39,6 +44,10 @@ Button {
         border.color: "#ffffff"
     }
 
+
+    /* contentItem是Control类型的属性 （属性类型是Item）
+     * 继承关系： Item -> Control -> AbstractButton -> Button
+     */
     contentItem: textItem
     Text {
         id: textItem
@@ -48,13 +57,16 @@ Button {
         color: "#ffffff"
         horizontalAlignment: Text.AlignLeft
         verticalAlignment: Text.AlignVCenter
+        font.family: "Titillium Web ExtraLight"
         font.pointSize: 13
         leftPadding: 30
     }
 
     states: [
         State {
+            /* down是Button类型的属性，表示按钮是否按下 */
             name: "normal"
+            /* State的when属性，这个属性成立的时候，该状态会被执行 */
             when: !control.down
 
             PropertyChanges {

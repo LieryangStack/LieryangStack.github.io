@@ -40,9 +40,68 @@ tags: [Qt Design Studio]
 
 ![alt text](image-4.png)
 
+在开始设计自定义按钮之前，需要先了解一下Qt Design Studio的view视图菜单栏，因为有几个视图是经常会用到的。
 
-为什么修改了原来组件的text，后来主界面的text就不能生效了
+![alt text](image-5.png)
+
+![alt text](image-6.png)
+
+<font color="red">以下只是简单描述以下教程，具体还是参考官网</font>
+
+1. 分别拖拽图片 `adventurePage.jpg` 和 `qt_logo_green_128x128.png` 到 `Screen01.ui.qml` 页面中。图片的长、宽以及位置可以自行设定。
+
+    ![alt text](image-7.png)
+
+2. 拖拽 `Text` 组件到区域中，设置字体属性参数。
+
+    ![alt text](image-8.png)
+
+3. 创建了一个名为 `EntryField` 的 `Custom Button`。
+
+    ![alt text](image-9.png)
+  
+    修改 `EntryField` 相关属性。<font color="red">注意：通过 `Navigator` 视图可以选择 `Button` 里面的背景矩形和文本组件的属性设置。</font>
+
+    ![alt text](image-10.png)
+
+    ![alt text](image-11.png)
+
+    ![alt text](image-12.png)
+
+    ![alt text](image-13.png)
+
+    修改其他状态下无变化。
+
+    ![alt text](image-14.png)
+
+4. 创建一个名为 `PushButton` 的 `Custom Button`。
+    ![alt text](image-16.png)
+
+    ![alt text](image-15.png)
+
+    ![alt text](image-17.png)
+
+    修改 `normal` 和 `down` 状态   
+
+    ![alt text](image-18.png)
+
+5. 分别拖拽 `EntryField` 和 `PushButton` 到 `Screen01.ui.qml` 中。如图所示：
+    
+    ![alt text](image-19.png)
+
+    ![alt text](image-20.png)
+
+**为什么不能修改 `EntryField` 和 `PushButton` 中 `textItem` 的 `text` 属性?**
+
+答：因为外部不能直接修改 `EntryField` 组件内的 `textItem.text` ，通过 `Button.text` 绑定到组件内的 `textItem.text`。如果我们修改了  `textItem.text`,就不是绑定了，所以后来外部也修改不了 `text` 内容了。
+
+![alt text](image-21.png)
+
+## 2 Log In UI - Positioning
+
+
+
 
 ## 参考
 
-[参考1：Qt Design Studio Manual页面]([Qt Design Studio Manual](https://doc.qt.io/qtdesignstudio/gstutorials.html))
+[参考1：Qt Design Studio Manual页面](https://doc.qt.io/qtdesignstudio/gstutorials.html)

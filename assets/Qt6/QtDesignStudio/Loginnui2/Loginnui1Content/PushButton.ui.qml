@@ -54,7 +54,6 @@ Button {
     states: [
         State {
             name: "normal"
-            /* State的when属性，这个属性成立的时候，该状态会被执行 */
             when: !control.down
 
             PropertyChanges {
@@ -70,7 +69,6 @@ Button {
         },
         State {
             name: "down"
-            /* State的when属性，这个属性成立的时候，该状态会被执行 */
             when: control.down
             PropertyChanges {
                 target: textItem
@@ -90,4 +88,3 @@ Designer {
     D{i:0;formeditorColor:"#00000c"}
 }
 ##^##*/
-

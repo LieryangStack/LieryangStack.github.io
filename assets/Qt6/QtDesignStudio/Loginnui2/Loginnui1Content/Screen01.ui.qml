@@ -9,7 +9,6 @@ Check out https://doc.qt.io/qtcreator/creator-quick-ui-forms.html for details on
 import QtQuick 6.7
 import QtQuick.Controls 6.7
 import Loginnui1
-import QtQuick.Timeline 1.0
 
 Rectangle {
     id: rectangle
@@ -17,7 +16,6 @@ Rectangle {
     height: 720
 
     color: Constants.backgroundColor
-    /* 设置默认状态 */
     clip: false
 
     Image {
@@ -28,10 +26,9 @@ Rectangle {
 
         Image {
             id: qt_logo_green_128x128px
+            y: 34
             width: 96
             height: 72
-            anchors.top: parent.top
-            anchors.topMargin: 34
             source: "images/qt_logo_green_128x128px.png"
             anchors.horizontalCenter: parent.horizontalCenter
             fillMode: Image.PreserveAspectFit
@@ -39,10 +36,9 @@ Rectangle {
 
         Text {
             id: tagLine
+            y: 119
             color: "#eaeaea"
             text: qsTr("你准备好探索了吗？")
-            anchors.top: parent.top
-            anchors.topMargin: 119
             font.pixelSize: 30
             anchors.horizontalCenterOffset: 1
             anchors.horizontalCenter: parent.horizontalCenter
@@ -51,58 +47,30 @@ Rectangle {
 
         EntryField {
             id: username
-            width: 270
-            height: 46
+            y: 270
             text: qsTr("用户名或邮箱")
-            anchors.top: tagLine.bottom
-            anchors.topMargin: 100
             anchors.horizontalCenter: parent.horizontalCenter
         }
 
         EntryField {
             id: password
-            width: 270
-            height: 46
+            y: 340
             text: qsTr("密码")
-            anchors.top: username.bottom
-            anchors.topMargin: 20
-            anchors.horizontalCenter: tagLine.horizontalCenter
-        }
-
-        EntryField {
-            id: repeatPassword
-            width: 270
-            height: 46
-            opacity: 1
-            text: qsTr("确认密码")
-            anchors.top: password.bottom
-            anchors.topMargin: 20
             anchors.horizontalCenter: parent.horizontalCenter
         }
 
         PushButton {
             id: login
-            width: 270
+            y: 550
             text: qsTr("登录")
-            anchors.bottom: createAccount.top
-            anchors.bottomMargin: 20
             anchors.horizontalCenter: parent.horizontalCenter
         }
 
         PushButton {
             id: createAccount
-            y: 728
-            width: 270
-            visible: true
+            y: 620
             text: "创建账号"
-            anchors.bottom: parent.bottom
-            anchors.bottomMargin: 30
             anchors.horizontalCenter: parent.horizontalCenter
-
-            Connections {
-                target: createAccount
-                onClicked: rectangle.state = "createAccount"
-            }
         }
     }
 }

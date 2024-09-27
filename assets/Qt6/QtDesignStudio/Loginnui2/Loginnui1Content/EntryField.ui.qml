@@ -25,16 +25,18 @@ Button {
 
     text: "My Button"
     hoverEnabled: false
+    font.pointSize: 13
+    font.family: "Titillium Web ExtraLight"
 
     background: buttonBackground
     Rectangle {
         id: buttonBackground
-        color: "#00000000"
+        color: "#28e7e7e7"
         implicitWidth: 100
         implicitHeight: 40
         opacity: enabled ? 1 : 0.3
         radius: 23
-        border.color: "#41cd52"
+        border.color: "#ffffff"
     }
 
     contentItem: textItem
@@ -43,34 +45,30 @@ Button {
         text: control.text
 
         opacity: enabled ? 1.0 : 0.3
-        color: "#41cd52"
-        horizontalAlignment: Text.AlignHCenter
+        color: "#ffffff"
+        horizontalAlignment: Text.AlignLeft
         verticalAlignment: Text.AlignVCenter
-        font.bold: true
         font.pointSize: 13
-        font.family: "Titillium Web ExtraLight"
+        leftPadding: 30
     }
 
     states: [
         State {
             name: "normal"
-            /* State的when属性，这个属性成立的时候，该状态会被执行 */
             when: !control.down
 
             PropertyChanges {
                 target: buttonBackground
-                color: "#00000000"
-                border.color: "#41cd52"
+                color: "#28e7e7e7"
             }
 
             PropertyChanges {
                 target: textItem
-                color: "#41cd52"
+                color: "#ffffff"
             }
         },
         State {
             name: "down"
-            /* State的when属性，这个属性成立的时候，该状态会被执行 */
             when: control.down
             PropertyChanges {
                 target: textItem
@@ -79,15 +77,8 @@ Button {
 
             PropertyChanges {
                 target: buttonBackground
-                color: "#41cd52"
+                color: "#28e7e7e7"
             }
         }
     ]
 }
-
-/*##^##
-Designer {
-    D{i:0;formeditorColor:"#00000c"}
-}
-##^##*/
-
