@@ -49,7 +49,7 @@ Button {
      * 继承关系： Item -> Control -> AbstractButton -> Button
      */
     contentItem: textItem
-    Text {
+    TextEdit {
         id: textItem
         text: control.text
 

@@ -56,7 +56,7 @@ Rectangle {
             height: 46
             text: qsTr("用户名或邮箱")
             anchors.top: tagLine.bottom
-            anchors.topMargin: 100
+            anchors.topMargin: 40
             anchors.horizontalCenter: parent.horizontalCenter
         }
 
@@ -67,7 +67,7 @@ Rectangle {
             text: qsTr("密码")
             anchors.top: username.bottom
             anchors.topMargin: 20
-            anchors.horizontalCenter: tagLine.horizontalCenter
+            anchors.horizontalCenter: parent.horizontalCenter
         }
 
         EntryField {
