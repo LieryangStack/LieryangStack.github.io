@@ -5,6 +5,3 @@ categories: QML
 tags: [QML]
 ---
 
-![alt text](image.png)
-
-
