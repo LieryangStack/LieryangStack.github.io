@@ -10,6 +10,7 @@ Rectangle {
      * 通过绑定 hovered 属性是响应光标进入或离开父项的最简单方法
      */
     HoverHandler { id: hoverHandler }
+    
     TapHandler { id: tapHandler }
 
     Shape {

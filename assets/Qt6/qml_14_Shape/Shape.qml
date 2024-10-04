@@ -2,8 +2,8 @@ import QtQuick.Shapes
 import QtQuick
 
 Shape {
-    width: 200
-    height: 150
+    width: 600
+    height: 800
     anchors.centerIn: parent
     ShapePath {
         strokeWidth: 4

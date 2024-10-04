@@ -2,15 +2,21 @@ import QtQuick.Shapes
 import QtQuick
 
 Shape {
-    width: 200
-    height: 150
+    width: 800
+    height: 800
     anchors.centerIn: parent
-    Path {
-        startX: 100; startY: 0
+    antialiasing: true
+    smooth: true
+    /* 决定渲染 */
+    preferredRendererType: Shape.CurveRenderer
+    ShapePath {
+        strokeWidth: 5
+        strokeColor: "black"
+        startX: 20; startY: 20
 
         PathArc {
-            x: 0; y: 100
-            radiusX: 100; radiusY: 100
+            x: 20; y: 400
+            radiusX: 200; radiusY: 200
             useLargeArc: true
         }
     }
