@@ -1,0 +1,6 @@
+<RCC>
+  <qresource prefix="/">
+    <file alias="qml/qmlweather/main.qml">C:/Qt/Examples/Qt-6.7.2/charts/qmlweather/qml/qmlweather/main.qml</file>
+  </qresource>
+</RCC>
+

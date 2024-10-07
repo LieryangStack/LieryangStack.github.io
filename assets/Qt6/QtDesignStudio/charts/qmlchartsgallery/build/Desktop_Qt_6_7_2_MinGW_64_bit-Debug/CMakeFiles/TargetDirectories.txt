@@ -1,0 +1,10 @@
+C:/Qt/Examples/Qt-6.7.2/charts/qmlchartsgallery/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/CMakeFiles/qmlchartsgallery.dir
+C:/Qt/Examples/Qt-6.7.2/charts/qmlchartsgallery/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/CMakeFiles/qmlchartsgallery_qmlimportscan.dir
+C:/Qt/Examples/Qt-6.7.2/charts/qmlchartsgallery/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/CMakeFiles/edit_cache.dir
+C:/Qt/Examples/Qt-6.7.2/charts/qmlchartsgallery/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/CMakeFiles/rebuild_cache.dir
+C:/Qt/Examples/Qt-6.7.2/charts/qmlchartsgallery/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/CMakeFiles/list_install_components.dir
+C:/Qt/Examples/Qt-6.7.2/charts/qmlchartsgallery/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/CMakeFiles/install.dir
+C:/Qt/Examples/Qt-6.7.2/charts/qmlchartsgallery/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/CMakeFiles/install/local.dir
+C:/Qt/Examples/Qt-6.7.2/charts/qmlchartsgallery/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/CMakeFiles/install/strip.dir
+C:/Qt/Examples/Qt-6.7.2/charts/qmlchartsgallery/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/CMakeFiles/qmlchartsgallery_autogen_timestamp_deps.dir
+C:/Qt/Examples/Qt-6.7.2/charts/qmlchartsgallery/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/CMakeFiles/qmlchartsgallery_autogen.dir

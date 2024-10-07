@@ -1,0 +1,88 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-Debug-39afd6f1725461288fd2.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.16"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "qmlchartsgallery",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "qmlchartsgallery::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-qmlchartsgallery-Debug-324e96520460df801824.json",
+					"name" : "qmlchartsgallery",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "qmlchartsgallery_autogen::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-qmlchartsgallery_autogen-Debug-0f7f49b3b366c094ade1.json",
+					"name" : "qmlchartsgallery_autogen",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "qmlchartsgallery_autogen_timestamp_deps::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-qmlchartsgallery_autogen_timestamp_deps-Debug-bb8b986d8ec59a243b1e.json",
+					"name" : "qmlchartsgallery_autogen_timestamp_deps",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "qmlchartsgallery_qmlimportscan::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-qmlchartsgallery_qmlimportscan-Debug-f7ad3bf859ff63d378ec.json",
+					"name" : "qmlchartsgallery_qmlimportscan",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "C:/Qt/Examples/Qt-6.7.2/charts/qmlchartsgallery/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug",
+		"source" : "C:/Qt/Examples/Qt-6.7.2/charts/qmlchartsgallery"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 7
+	}
+}
