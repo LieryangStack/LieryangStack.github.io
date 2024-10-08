@@ -1,0 +1,6 @@
+module LineSeries
+typeinfo appLineSeries.qmltypes
+prefer :/qt/qml/LineSeries/
+Main 1.0 Main.qml
+SpeedsList 1.0 SpeedsList.qml
+

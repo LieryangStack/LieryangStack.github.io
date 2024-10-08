@@ -1,0 +1,7 @@
+<RCC>
+  <qresource prefix="/qt/qml/LineSeries/">
+    <file alias="Main.qml">C:/Users/lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_17_ChartView/LineSeries/Main.qml</file>
+    <file alias="SpeedsList.qml">C:/Users/lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_17_ChartView/LineSeries/SpeedsList.qml</file>
+  </qresource>
+</RCC>
+
