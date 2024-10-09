@@ -1,0 +1,20 @@
+# ninja log v6
+4	842	7501454609130839	build.ninja	5e469d444acb82c6
+11	53	7501454609912207	.qt/qml_imports/QQmlApplicationEngine_build.cmake	55aea9d845b45360
+11	53	7501454609912207	C:/Users/lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_18_CPlusPlus/QQmlApplicationEngine/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/.qt/qml_imports/QQmlApplicationEngine_build.cmake	55aea9d845b45360
+54	136	7501454610515337	QQmlApplicationEngine_autogen/timestamp	dbd474672dd5e6b6
+54	136	7501454610515337	QQmlApplicationEngine_autogen/mocs_compilation.cpp	dbd474672dd5e6b6
+54	136	7501454610515337	C:/Users/lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_18_CPlusPlus/QQmlApplicationEngine/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/QQmlApplicationEngine_autogen/timestamp	dbd474672dd5e6b6
+54	136	7501454610515337	C:/Users/lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_18_CPlusPlus/QQmlApplicationEngine/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/QQmlApplicationEngine_autogen/mocs_compilation.cpp	dbd474672dd5e6b6
+139	165	7501454611103191	QQmlApplicationEngine_autogen/EWIEGA46WW/qrc_qml.cpp	96609a067d23e7b8
+139	165	7501454611103191	C:/Users/lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_18_CPlusPlus/QQmlApplicationEngine/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/QQmlApplicationEngine_autogen/EWIEGA46WW/qrc_qml.cpp	96609a067d23e7b8
+165	198	7501454611155404	CMakeFiles/QQmlApplicationEngine.dir/QQmlApplicationEngine_autogen/mocs_compilation.cpp.obj	80ffdb2311a3e91e
+167	203	7501454611165441	CMakeFiles/QQmlApplicationEngine.dir/QQmlApplicationEngine_autogen/EWIEGA46WW/qrc_qml.cpp.obj	ba306ba118b0e0e
+166	1564	7501454611155404	CMakeFiles/QQmlApplicationEngine.dir/main.cpp.obj	f504c095c00cfbe2
+1565	1643	7501454625157278	QQmlApplicationEngine.exe	98da74e0854631da
+17	79	7501455147453185	QQmlApplicationEngine_autogen/timestamp	dbd474672dd5e6b6
+17	79	7501455147453185	QQmlApplicationEngine_autogen/mocs_compilation.cpp	dbd474672dd5e6b6
+17	79	7501455147453185	C:/Users/lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_18_CPlusPlus/QQmlApplicationEngine/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/QQmlApplicationEngine_autogen/timestamp	dbd474672dd5e6b6
+17	79	7501455147453185	C:/Users/lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_18_CPlusPlus/QQmlApplicationEngine/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/QQmlApplicationEngine_autogen/mocs_compilation.cpp	dbd474672dd5e6b6
+79	1368	7501455148074930	CMakeFiles/QQmlApplicationEngine.dir/main.cpp.obj	f504c095c00cfbe2
+1368	1443	7501455160970990	QQmlApplicationEngine.exe	98da74e0854631da

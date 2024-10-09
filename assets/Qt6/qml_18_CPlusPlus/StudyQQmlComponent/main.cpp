@@ -39,8 +39,5 @@ int main(int argc, char *argv[])
     // QQmlContext *context = engine->rootContext();
     // context->setContextProperty("buttonLabel_Context", "测试按钮1");
 
-
-
-
     return a.exec();
 }
