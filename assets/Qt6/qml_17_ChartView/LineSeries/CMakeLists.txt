@@ -6,6 +6,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(Qt6 6.5 REQUIRED COMPONENTS Quick)
 find_package(Qt6 REQUIRED COMPONENTS Widgets)
+find_package(Qt6 REQUIRED COMPONENTS Charts)
 
 qt_standard_project_setup(REQUIRES 6.5)
 
@@ -38,6 +39,10 @@ target_link_libraries(appLineSeries
 
 target_link_libraries(appLineSeries
   PRIVATE Qt6::Widgets
+)
+
+target_link_libraries(appLineSeries
+  PRIVATE Qt6::Charts
 )
 
 include(GNUInstallDirs)

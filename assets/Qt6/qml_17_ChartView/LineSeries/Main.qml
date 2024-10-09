@@ -47,6 +47,7 @@ Window {
                         chartView.axisY().max = 250;
                         chartView.axisY().tickCount = 6;
                         chartView.axisY().titleText = "speed (kph)";
+
                         chartView.axisX().titleText = "speed trap";
                         chartView.axisX().labelFormat = "%.0f";
                     }

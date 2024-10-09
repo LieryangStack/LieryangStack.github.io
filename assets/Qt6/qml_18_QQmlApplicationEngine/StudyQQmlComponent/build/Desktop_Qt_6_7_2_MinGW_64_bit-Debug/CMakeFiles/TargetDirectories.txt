@@ -1,0 +1,10 @@
+C:/Users/lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_18_QQmlApplicationEngine/StudyQQmlComponent/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/CMakeFiles/StudyQQmlComponent.dir
+C:/Users/lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_18_QQmlApplicationEngine/StudyQQmlComponent/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/CMakeFiles/StudyQQmlComponent_qmlimportscan.dir
+C:/Users/lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_18_QQmlApplicationEngine/StudyQQmlComponent/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/CMakeFiles/edit_cache.dir
+C:/Users/lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_18_QQmlApplicationEngine/StudyQQmlComponent/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/CMakeFiles/rebuild_cache.dir
+C:/Users/lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_18_QQmlApplicationEngine/StudyQQmlComponent/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/CMakeFiles/list_install_components.dir
+C:/Users/lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_18_QQmlApplicationEngine/StudyQQmlComponent/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/CMakeFiles/install.dir
+C:/Users/lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_18_QQmlApplicationEngine/StudyQQmlComponent/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/CMakeFiles/install/local.dir
+C:/Users/lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_18_QQmlApplicationEngine/StudyQQmlComponent/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/CMakeFiles/install/strip.dir
+C:/Users/lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_18_QQmlApplicationEngine/StudyQQmlComponent/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/CMakeFiles/StudyQQmlComponent_autogen_timestamp_deps.dir
+C:/Users/lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_18_QQmlApplicationEngine/StudyQQmlComponent/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/CMakeFiles/StudyQQmlComponent_autogen.dir

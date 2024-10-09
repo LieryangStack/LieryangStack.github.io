@@ -1,0 +1,169 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-Debug-64d70239c3c44731514a.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.16"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4,
+						5,
+						6,
+						7,
+						8,
+						9,
+						10,
+						11,
+						12
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "DataBind",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4,
+						5,
+						6,
+						7,
+						8,
+						9,
+						10,
+						11,
+						12
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "all_qmllint::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-all_qmllint-Debug-650fe44de042c3cfc216.json",
+					"name" : "all_qmllint",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "all_qmllint_json::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-all_qmllint_json-Debug-23caa73ecbc3884c74cb.json",
+					"name" : "all_qmllint_json",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "all_qmllint_module::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-all_qmllint_module-Debug-4a2936c2f6f5b36e29d3.json",
+					"name" : "all_qmllint_module",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "all_qmltyperegistrations::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-all_qmltyperegistrations-Debug-f8b458823dbbac17123a.json",
+					"name" : "all_qmltyperegistrations",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "appDataBind::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-appDataBind-Debug-9893dab2f503e67091f7.json",
+					"name" : "appDataBind",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "appDataBind_autogen::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-appDataBind_autogen-Debug-0221cd10b844f75a6a5e.json",
+					"name" : "appDataBind_autogen",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "appDataBind_autogen_timestamp_deps::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-appDataBind_autogen_timestamp_deps-Debug-ad0b39297fe2587cbbb9.json",
+					"name" : "appDataBind_autogen_timestamp_deps",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "appDataBind_qmlimportscan::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-appDataBind_qmlimportscan-Debug-75afb7f2d25e3b8cd746.json",
+					"name" : "appDataBind_qmlimportscan",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "appDataBind_qmllint::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-appDataBind_qmllint-Debug-4d7f902ae38ffee66ebf.json",
+					"name" : "appDataBind_qmllint",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "appDataBind_qmllint_json::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-appDataBind_qmllint_json-Debug-b607504b86d9f81d80df.json",
+					"name" : "appDataBind_qmllint_json",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "appDataBind_qmllint_module::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-appDataBind_qmllint_module-Debug-2177377d59fad61b8a49.json",
+					"name" : "appDataBind_qmllint_module",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "appDataBind_qmltyperegistration::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-appDataBind_qmltyperegistration-Debug-b8ec1daf16dec3fdf5da.json",
+					"name" : "appDataBind_qmltyperegistration",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "appDataBind_tooling::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-appDataBind_tooling-Debug-72a5966c6aadbaa1df21.json",
+					"name" : "appDataBind_tooling",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "C:/Users/lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_19_CPlusPlus/DataBind/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug",
+		"source" : "C:/Users/lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_19_CPlusPlus/DataBind"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 7
+	}
+}

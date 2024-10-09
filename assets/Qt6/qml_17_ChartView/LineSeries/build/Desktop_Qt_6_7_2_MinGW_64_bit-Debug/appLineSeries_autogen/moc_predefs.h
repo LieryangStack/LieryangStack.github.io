@@ -111,6 +111,7 @@
 #define __INT_WIDTH__ 32
 #define __SIZEOF_LONG__ 4
 #define __UINT16_C(c) c
+#define QT_CHARTS_LIB 1
 #define UNICODE 1
 #define __DECIMAL_DIG__ 21
 #define __FLT64_EPSILON__ 2.22044604925031308084726333618164062e-16F64
@@ -230,6 +231,7 @@
 #define __DEC64_EPSILON__ 1E-15DD
 #define __ORDER_PDP_ENDIAN__ 3412
 #define __DEC128_MIN_EXP__ (-6142)
+#define QT_OPENGLWIDGETS_LIB 1
 #define __INT_FAST32_TYPE__ int
 #define __UINT_LEAST16_TYPE__ short unsigned int
 #define __DBL_HAS_DENORM__ 1

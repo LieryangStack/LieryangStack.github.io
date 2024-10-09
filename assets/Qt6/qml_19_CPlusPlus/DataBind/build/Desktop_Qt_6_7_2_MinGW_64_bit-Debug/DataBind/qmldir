@@ -1,0 +1,5 @@
+module DataBind
+typeinfo appDataBind.qmltypes
+prefer :/qt/qml/DataBind/
+Main 1.0 Main.qml
+

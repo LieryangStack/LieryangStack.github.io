@@ -1,0 +1,14 @@
+-rootPath
+C:/Users/lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_19_CPlusPlus/DataBind
+-cmake-output
+-output-file
+C:/Users/lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_19_CPlusPlus/DataBind/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/.qt/qml_imports/appDataBind_build.cmake
+-importPath
+C:/Users/lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_19_CPlusPlus/DataBind/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/DataBind
+-importPath
+C:/Users/lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_19_CPlusPlus/DataBind/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug
+-importPath
+C:/Qt/6.7.2/mingw_64/./qml
+-qrcFiles
+C:/Users/lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_19_CPlusPlus/DataBind/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/.qt/rcc/qmake_DataBind.qrc
+C:/Users/lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_19_CPlusPlus/DataBind/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/.qt/rcc/appDataBind_raw_qml_0.qrc

@@ -1,0 +1,13 @@
+# ninja log v6
+12	55	7501583432213942	.qt/qml_imports/StudyQQmlComponent_build.cmake	a1d8c3f04cf4fa66
+12	55	7501583432213942	C:/Users/lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_18_QQmlApplicationEngine/StudyQQmlComponent/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/.qt/qml_imports/StudyQQmlComponent_build.cmake	a1d8c3f04cf4fa66
+55	148	7501583432833804	StudyQQmlComponent_autogen/timestamp	924af7f1b0cdf9cc
+55	148	7501583432833804	StudyQQmlComponent_autogen/mocs_compilation.cpp	924af7f1b0cdf9cc
+55	148	7501583432833804	C:/Users/lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_18_QQmlApplicationEngine/StudyQQmlComponent/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/StudyQQmlComponent_autogen/timestamp	924af7f1b0cdf9cc
+55	148	7501583432833804	C:/Users/lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_18_QQmlApplicationEngine/StudyQQmlComponent/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/StudyQQmlComponent_autogen/mocs_compilation.cpp	924af7f1b0cdf9cc
+152	177	7501583433511366	StudyQQmlComponent_autogen/EWIEGA46WW/qrc_qml.cpp	60b89b7c2bbe6a38
+152	177	7501583433511366	C:/Users/lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_18_QQmlApplicationEngine/StudyQQmlComponent/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/StudyQQmlComponent_autogen/EWIEGA46WW/qrc_qml.cpp	60b89b7c2bbe6a38
+177	200	7501583433561363	CMakeFiles/StudyQQmlComponent.dir/StudyQQmlComponent_autogen/mocs_compilation.cpp.obj	f716a20cf797f1f6
+179	205	7501583433581369	CMakeFiles/StudyQQmlComponent.dir/StudyQQmlComponent_autogen/EWIEGA46WW/qrc_qml.cpp.obj	e9aa50c8d701c08b
+178	1176	7501583433571447	CMakeFiles/StudyQQmlComponent.dir/main.cpp.obj	19003971f2673a05
+1177	1256	7501583443564134	StudyQQmlComponent.exe	1953fd1fb758f811

@@ -1,0 +1,6 @@
+<RCC>
+  <qresource prefix="/qt/qml/DataBind/">
+    <file alias="Main.qml">C:/Users/lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_19_CPlusPlus/DataBind/Main.qml</file>
+  </qresource>
+</RCC>
+

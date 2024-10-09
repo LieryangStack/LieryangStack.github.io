@@ -1,0 +1,6 @@
+<RCC>
+  <qresource prefix="/qt/qml/DataBind">
+    <file alias="qmldir">C:/Users/lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_19_CPlusPlus/DataBind/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/DataBind/qmldir</file>
+  </qresource>
+</RCC>
+
