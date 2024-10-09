@@ -1,0 +1,169 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-Debug-d4fb02afcf1d2f1bc7f0.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.16"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4,
+						5,
+						6,
+						7,
+						8,
+						9,
+						10,
+						11,
+						12
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "LineSeries",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4,
+						5,
+						6,
+						7,
+						8,
+						9,
+						10,
+						11,
+						12
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "all_qmllint::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-all_qmllint-Debug-01938d252faa584d956c.json",
+					"name" : "all_qmllint",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "all_qmllint_json::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-all_qmllint_json-Debug-bd5acdd3cfb0f9121998.json",
+					"name" : "all_qmllint_json",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "all_qmllint_module::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-all_qmllint_module-Debug-5b7a55e628477cea27ca.json",
+					"name" : "all_qmllint_module",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "all_qmltyperegistrations::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-all_qmltyperegistrations-Debug-d9deb9cd86bb71c6faf8.json",
+					"name" : "all_qmltyperegistrations",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "appLineSeries::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-appLineSeries-Debug-7d12e85eb4a98171fb17.json",
+					"name" : "appLineSeries",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "appLineSeries_autogen::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-appLineSeries_autogen-Debug-98ad1530e222d2de31f6.json",
+					"name" : "appLineSeries_autogen",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "appLineSeries_autogen_timestamp_deps::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-appLineSeries_autogen_timestamp_deps-Debug-ebee86c2ece0be80a144.json",
+					"name" : "appLineSeries_autogen_timestamp_deps",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "appLineSeries_qmlimportscan::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-appLineSeries_qmlimportscan-Debug-e15d75f3b1677a7ee153.json",
+					"name" : "appLineSeries_qmlimportscan",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "appLineSeries_qmllint::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-appLineSeries_qmllint-Debug-f74a70c2885e3fa1a95d.json",
+					"name" : "appLineSeries_qmllint",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "appLineSeries_qmllint_json::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-appLineSeries_qmllint_json-Debug-318732f867df240c06aa.json",
+					"name" : "appLineSeries_qmllint_json",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "appLineSeries_qmllint_module::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-appLineSeries_qmllint_module-Debug-32df06e56ef9c0168f47.json",
+					"name" : "appLineSeries_qmllint_module",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "appLineSeries_qmltyperegistration::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-appLineSeries_qmltyperegistration-Debug-235e7ee9bd5fb25fe5c0.json",
+					"name" : "appLineSeries_qmltyperegistration",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "appLineSeries_tooling::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-appLineSeries_tooling-Debug-2e3297e996b1a02a02c3.json",
+					"name" : "appLineSeries_tooling",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "C:/Users/Lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_17_ChartView/LineSeries/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug",
+		"source" : "C:/Users/Lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_17_ChartView/LineSeries"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 7
+	}
+}

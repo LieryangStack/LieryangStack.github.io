@@ -12,7 +12,7 @@ Window {
         anchors.fill: parent
         ChartView {
             id: chartView
-            title: "Driver Speeds, lap 1"
+            // title: "Driver Speeds, lap 1"
             anchors.fill: parent
             legend.alignment: Qt.AlignTop
             animationOptions: ChartView.SeriesAnimations
@@ -56,7 +56,7 @@ Window {
                     lineSeries.append(speedsList.get(root.currentIndex).speedTrap,
                                       speedsList.get(root.currentIndex).speed);
 
-                    /* 调整坐标轴 */
+                    /* 调整坐标轴的最大值和最小值（显示区间） */
                     if (speedsList.get(root.currentIndex).speedTrap > 3) {
                         chartView.axisX().max = Number(speedsList.get(root.currentIndex).speedTrap) + 1;
                         chartView.axisX().min = chartView.axisX().max - 5;

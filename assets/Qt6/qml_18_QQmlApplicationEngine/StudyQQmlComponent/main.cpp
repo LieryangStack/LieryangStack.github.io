@@ -25,7 +25,6 @@ int main(int argc, char *argv[])
     QObject *myObject1 = component.create();
 
 
-
     QQuickWindow *window = qobject_cast<QQuickWindow *>(myObject);
 
     /* 设定窗口对象的属性值 */
