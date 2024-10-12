@@ -6,6 +6,7 @@
 #include <QQmlContext>
 #include <QTimer>
 #include <iostream>
+#include <QQmlComponent>
 
 int main(int argc, char *argv[])
 {
@@ -18,30 +19,15 @@ int main(int argc, char *argv[])
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreationFailed,
                      &app, []() { QCoreApplication::exit(-1); },
     Qt::QueuedConnection);
-    engine.loadFromModule("LineSeries", "MyLineSeries");
 
-    // 获取根对象上下文
-    const QQmlContext *rootContext = engine.rootContext();
-    QObject *rootObject = engine.rootObjects().first();
+    QQmlComponent component(&engine, QUrl(QStringLiteral("../../MyLineSeries.qml")));
+    QObject *object = component.create(); /* 根对象 */
+    QObject *rect = object->findChild<QObject *>("rect");
 
-    printf("rootObject = %p\n", rootObject);
-
-    QObject *chartView = rootObject->findChild<QObject*>("chartView");
-
-    QWidget *lineSeries = rootObject->findChild<QWidget*>("lineSeries");
-
-    printf("lineSeries = %p\n", lineSeries);
-
-    std::cout << engine.rootObjects().size() << std::endl;
-
-    // if (lineSeries)
-    //     lineSeries->append(50, 10);
-
-    const QList<QObject*> children = rootObject->children();
+    const QList<QObject*> children = rect->children();
     for (QObject *child : children) {
-        qDebug() << "Child:" << child->objectName();
+        qDebug() << "rect下 Child:" << child->objectName();
     }
-
 
 
     return app.exec();

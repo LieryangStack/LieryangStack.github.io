@@ -50,4 +50,19 @@ Window {
        }
 
     }
+
+    Rectangle {
+        id: rect
+        objectName: "rect"
+
+        Rectangle {
+            id: rect1
+            objectName: "rect1"
+        }
+
+        Rectangle {
+            id: rect2
+            objectName: "rect2"
+        }
+    }
 }

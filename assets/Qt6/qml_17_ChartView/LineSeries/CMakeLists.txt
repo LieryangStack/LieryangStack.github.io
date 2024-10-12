@@ -21,6 +21,7 @@ qt_add_qml_module(appLineSeries
     QML_FILES SpeedsList.qml
     QML_FILES
     QML_FILES MyLineSeries.qml
+    RESOURCES qml.qrc
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
