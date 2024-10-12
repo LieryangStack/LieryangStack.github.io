@@ -48,20 +48,6 @@ Window {
             XYPoint { x: 3.4; y: 3.0 }
             XYPoint { x: 4.1; y: 3.3 }
        }
-    }
 
-    Rectangle {
-        id: rect
-        objectName: "rect"
-
-        Rectangle {
-            id: rect1
-            objectName: "rect1"
-        }
-
-        Rectangle {
-            id: rect2
-            objectName: "rect2"
-        }
     }
 }

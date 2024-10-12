@@ -1,0 +1,7 @@
+<RCC>
+  <qresource prefix="/">
+    <file alias="MyRect.qml">C:/Users/lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_17_ChartView/LineSeries/MyRect.qml</file>
+    <file alias="UI.qml">C:/Users/lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_17_ChartView/LineSeries/UI.qml</file>
+  </qresource>
+</RCC>
+

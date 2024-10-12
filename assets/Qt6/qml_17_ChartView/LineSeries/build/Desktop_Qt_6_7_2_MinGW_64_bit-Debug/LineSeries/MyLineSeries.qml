@@ -48,7 +48,6 @@ Window {
             XYPoint { x: 3.4; y: 3.0 }
             XYPoint { x: 4.1; y: 3.3 }
        }
-
     }
 
     Rectangle {
