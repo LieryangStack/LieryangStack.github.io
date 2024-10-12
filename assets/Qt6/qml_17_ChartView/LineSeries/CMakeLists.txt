@@ -3,7 +3,11 @@ cmake_minimum_required(VERSION 3.16)
 project(LineSeries VERSION 0.1 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+# 必须启用AUTORCC qt c++程序才可以使用资源
 set(CMAKE_AUTORCC ON)
+set(CMAKE_AUTOUIC ON)
+set(CMAKE_AUTOMOC ON)
 
 find_package(Qt6 6.5 REQUIRED COMPONENTS Quick)
 find_package(Qt6 REQUIRED COMPONENTS Widgets)
@@ -11,6 +15,7 @@ find_package(Qt6 REQUIRED COMPONENTS Charts)
 
 qt_standard_project_setup(REQUIRES 6.5)
 
+# 必须添加
 qt_add_executable(appLineSeries
   main.cpp
   qml.qrc
@@ -22,7 +27,7 @@ qt_add_qml_module(appLineSeries
     QML_FILES Main.qml
     QML_FILES SpeedsList.qml
     QML_FILES MyLineSeries.qml
-    RESOURCES qml.qrc
+    # RESOURCES qml.qrc
 )
 
 # qt_add_resources (appLineSeries "test"

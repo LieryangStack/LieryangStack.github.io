@@ -1,0 +1,12 @@
+# ninja log v6
+4	349	7504226521071406	untitled_autogen/timestamp	64b66cb26b8cf625
+4	349	7504226521071406	untitled_autogen/mocs_compilation.cpp	64b66cb26b8cf625
+4	349	7504226521071406	C:/Users/lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_17_ChartView/untitled/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/untitled_autogen/timestamp	64b66cb26b8cf625
+4	349	7504226521071406	C:/Users/lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_17_ChartView/untitled/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/untitled_autogen/mocs_compilation.cpp	64b66cb26b8cf625
+352	377	7504226521608878	untitled_autogen/EWIEGA46WW/qrc_qml.cpp	c8daa19a618b71eb
+352	377	7504226521608878	C:/Users/lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_17_ChartView/untitled/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/untitled_autogen/EWIEGA46WW/qrc_qml.cpp	c8daa19a618b71eb
+380	406	7504226521678887	CMakeFiles/untitled.dir/untitled_autogen/EWIEGA46WW/qrc_qml.cpp.obj	933ae4bc0017127d
+378	1224	7504226521658883	CMakeFiles/untitled.dir/main.cpp.obj	2d6bec7c273240bb
+379	1243	7504226521668883	CMakeFiles/untitled.dir/mainwindow.cpp.obj	f67ba11c1bfe7a7d
+377	1312	7504226521648877	CMakeFiles/untitled.dir/untitled_autogen/mocs_compilation.cpp.obj	5f8f1603c9316ce
+1312	1401	7504226531000742	untitled.exe	580a7ef891c3b4b5

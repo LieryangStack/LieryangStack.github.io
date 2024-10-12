@@ -200,7 +200,7 @@ build all_qmllint_module: phony appLineSeries_qmllint_module
 #############################################
 # Utility command for appLineSeries_tooling
 
-build appLineSeries_tooling: phony LineSeries/Main.qml LineSeries/SpeedsList.qml LineSeries/MyLineSeries.qml LineSeries/qml.qrc
+build appLineSeries_tooling: phony LineSeries/Main.qml LineSeries/SpeedsList.qml LineSeries/MyLineSeries.qml
 
 
 #############################################
@@ -353,7 +353,7 @@ build .rcc/qmlcache/appLineSeries_MyLineSeries_qml.cpp | ${cmake_ninja_workdir}.
 #############################################
 # Custom command for .qt\rcc\qrc_appLineSeries_raw_qml_0.cpp
 
-build .qt/rcc/qrc_appLineSeries_raw_qml_0.cpp | ${cmake_ninja_workdir}.qt/rcc/qrc_appLineSeries_raw_qml_0.cpp: CUSTOM_COMMAND C$:/Users/lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_17_ChartView/LineSeries/Main.qml C$:/Users/lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_17_ChartView/LineSeries/SpeedsList.qml C$:/Users/lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_17_ChartView/LineSeries/MyLineSeries.qml C$:/Users/lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_17_ChartView/LineSeries/qml.qrc .qt/rcc/appLineSeries_raw_qml_0.qrc C$:/Qt/6.7.2/mingw_64/./bin/rcc.exe || appLineSeries_autogen appLineSeries_autogen_timestamp_deps appLineSeries_qmlimportscan appLineSeries_tooling
+build .qt/rcc/qrc_appLineSeries_raw_qml_0.cpp | ${cmake_ninja_workdir}.qt/rcc/qrc_appLineSeries_raw_qml_0.cpp: CUSTOM_COMMAND C$:/Users/lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_17_ChartView/LineSeries/Main.qml C$:/Users/lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_17_ChartView/LineSeries/SpeedsList.qml C$:/Users/lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_17_ChartView/LineSeries/MyLineSeries.qml .qt/rcc/appLineSeries_raw_qml_0.qrc C$:/Qt/6.7.2/mingw_64/./bin/rcc.exe || appLineSeries_autogen appLineSeries_autogen_timestamp_deps appLineSeries_qmlimportscan appLineSeries_tooling
   COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\Users\lieryang\Desktop\LieryangStack.github.io\assets\Qt6\qml_17_ChartView\LineSeries\build\Desktop_Qt_6_7_2_MinGW_64_bit-Debug && C:\Qt\6.7.2\mingw_64\.\bin\rcc.exe --output C:/Users/lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_17_ChartView/LineSeries/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/.qt/rcc/qrc_appLineSeries_raw_qml_0.cpp --name appLineSeries_raw_qml_0 C:/Users/lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_17_ChartView/LineSeries/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/.qt/rcc/appLineSeries_raw_qml_0.qrc --no-zstd"
   DESC = Running rcc for resource appLineSeries_raw_qml_0
   restat = 1
@@ -439,15 +439,6 @@ build LineSeries/SpeedsList.qml | ${cmake_ninja_workdir}LineSeries/SpeedsList.qm
 build LineSeries/MyLineSeries.qml | ${cmake_ninja_workdir}LineSeries/MyLineSeries.qml: CUSTOM_COMMAND C$:/Users/lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_17_ChartView/LineSeries/MyLineSeries.qml
   COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\Users\lieryang\Desktop\LieryangStack.github.io\assets\Qt6\qml_17_ChartView\LineSeries && C:\Qt\Tools\CMake_64\bin\cmake.exe -E copy C:/Users/lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_17_ChartView/LineSeries/MyLineSeries.qml C:/Users/lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_17_ChartView/LineSeries/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/LineSeries/MyLineSeries.qml"
   DESC = Copying MyLineSeries.qml to C:/Users/lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_17_ChartView/LineSeries/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/LineSeries/MyLineSeries.qml
-  restat = 1
-
-
-#############################################
-# Custom command for LineSeries\qml.qrc
-
-build LineSeries/qml.qrc | ${cmake_ninja_workdir}LineSeries/qml.qrc: CUSTOM_COMMAND C$:/Users/lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_17_ChartView/LineSeries/qml.qrc
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\Users\lieryang\Desktop\LieryangStack.github.io\assets\Qt6\qml_17_ChartView\LineSeries && C:\Qt\Tools\CMake_64\bin\cmake.exe -E copy C:/Users/lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_17_ChartView/LineSeries/qml.qrc C:/Users/lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_17_ChartView/LineSeries/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/LineSeries/qml.qrc"
-  DESC = Copying qml.qrc to C:/Users/lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_17_ChartView/LineSeries/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/LineSeries/qml.qrc
   restat = 1
 
 
