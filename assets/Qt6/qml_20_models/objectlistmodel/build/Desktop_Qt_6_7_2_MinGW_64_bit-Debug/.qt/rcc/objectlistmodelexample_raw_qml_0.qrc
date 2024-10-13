@@ -1,0 +1,6 @@
+<RCC>
+  <qresource prefix="/qt/qml/objectlistmodel/">
+    <file alias="View.qml">C:/Users/Lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_20_models/objectlistmodel/View.qml</file>
+  </qresource>
+</RCC>
+

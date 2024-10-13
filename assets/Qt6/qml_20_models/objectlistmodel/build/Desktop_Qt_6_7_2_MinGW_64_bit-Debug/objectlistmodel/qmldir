@@ -1,0 +1,5 @@
+module objectlistmodel
+typeinfo objectlistmodelexample.qmltypes
+prefer :/qt/qml/objectlistmodel/
+View 254.0 View.qml
+

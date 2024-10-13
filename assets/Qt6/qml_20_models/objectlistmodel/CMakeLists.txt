@@ -24,7 +24,7 @@ target_link_libraries(objectlistmodelexample PRIVATE
 qt_add_qml_module(objectlistmodelexample
     URI objectlistmodel
     QML_FILES
-        "view.qml"
+    "View.qml"
 )
 
 install(TARGETS objectlistmodelexample

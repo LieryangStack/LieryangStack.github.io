@@ -27,8 +27,8 @@ Window {
         /* 分割线 */
         Rectangle {
             width: 2
-            height:  parent.height  // 设置分割线的高度
-            color: "gray"  // 设置分割线的颜色
+            height:  parent.height  /* 设置分割线的高度 */
+            color: "gray"  /* 设置分割线的颜色 */
         }
 
         ListView {

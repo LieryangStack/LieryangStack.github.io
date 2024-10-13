@@ -1,23 +1,15 @@
-// Copyright (C) 2021 The Qt Company Ltd.
-// SPDX-License-Identifier: LicenseRef-Qt-Commercial OR BSD-3-Clause
-
 #include <QGuiApplication>
-#include <QList>
-
-#include <qqmlengine.h>
-#include <qqmlcontext.h>
-#include <qqml.h>
-#include <QtQuick/qquickitem.h>
-#include <QtQuick/qquickview.h>
+#include <QStringList>
+#include <QQmlApplicationEngine>
+#include <QQmlContext>
+#include <QStringListModel>
+#include <QTimer>
+#include <QDebug>
 
 #include "dataobject.h"
-#include "QString"
-/*
-   This example illustrates exposing a QList<QObject*> as a
-   model in QML
-*/
+#include <QString>
 
-//![0]
+
 int main(int argc, char ** argv)
 {
     QGuiApplication app(argc, argv);
@@ -41,17 +33,26 @@ int main(int argc, char ** argv)
                                     "XML Patterns", "Charts", "Network Authorization",
                                     "Virtual Keyboard", "Quick 3D", "Quick WebGL"};
 
+
     QList<QObject *> dataList;
     for (const QString &module : moduleList)
         dataList.append(new DataObject("Qt " + module, colorList.at(rand() % colorList.length())));
 
-    QQuickView view;
-    view.setResizeMode(QQuickView::SizeRootObjectToView);
-    view.setInitialProperties({{ "model", QVariant::fromValue(dataList) }});
-//![0]
+    QQmlApplicationEngine engine;
+    QObject::connect(&engine, &QQmlApplicationEngine::objectCreationFailed,
+                     &app, []() { QCoreApplication::exit(-1); },
+                     Qt::QueuedConnection);
+    engine.rootContext()->setContextProperty("model1", QVariant::fromValue(dataList));
 
-    view.setSource(QUrl("qrc:/qt/qml/objectlistmodel/view.qml"));
-    view.show();
+    engine.loadFromModule("objectlistmodel", "View");
+
+    /* 创建定时器 1s 后触发 */
+    QTimer::singleShot(1000, [&]() {
+        qDebug() << "1s";
+        dataList.append(new DataObject("Qt Lieryang Lieryang Lieryang", "pink"));
+        dataList.insert(1, new DataObject("Qt Lieryang Lieryang Lieryang", "pink"));
+        engine.rootContext()->setContextProperty("model1", QVariant::fromValue(dataList));
+    });
 
     return app.exec();
 }
