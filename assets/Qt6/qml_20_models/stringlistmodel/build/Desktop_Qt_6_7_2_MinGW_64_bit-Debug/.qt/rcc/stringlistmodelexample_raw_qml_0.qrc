@@ -1,0 +1,6 @@
+<RCC>
+  <qresource prefix="/qt/qml/Stringlistmodel/">
+    <file alias="View.qml">C:/Users/Lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_20_models/stringlistmodel/View.qml</file>
+  </qresource>
+</RCC>
+

@@ -5,7 +5,6 @@
 #include <QMainWindow>
 #include <QQmlContext>
 #include <QTimer>
-#include <iostream>
 #include <QQmlComponent>
 #include <QFile>
 

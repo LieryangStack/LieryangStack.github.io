@@ -1,0 +1,10 @@
+--bare
+-I
+C:/Users/Lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_20_models/stringlistmodel/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug
+-I
+C:/Qt/6.7.2/mingw_64/./qml
+--resource
+C:/Users/Lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_20_models/stringlistmodel/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/.qt/rcc/qmake_Stringlistmodel.qrc
+--resource
+C:/Users/Lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_20_models/stringlistmodel/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/.qt/rcc/stringlistmodelexample_raw_qml_0.qrc
+C:/Users/Lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_20_models/stringlistmodel/View.qml

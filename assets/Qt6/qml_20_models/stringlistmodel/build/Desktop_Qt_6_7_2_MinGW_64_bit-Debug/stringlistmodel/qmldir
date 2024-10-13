@@ -1,0 +1,5 @@
+module Stringlistmodel
+typeinfo stringlistmodelexample.qmltypes
+prefer :/qt/qml/Stringlistmodel/
+View 254.0 View.qml
+
