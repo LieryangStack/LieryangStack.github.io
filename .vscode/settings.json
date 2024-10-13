@@ -56,5 +56,5 @@
   "C_Cpp_Runner.showCompilationTime": false,
   "C_Cpp_Runner.useLinkTimeOptimization": false,
   "C_Cpp_Runner.msvcSecureNoWarnings": false,
-  "cmake.sourceDirectory": "/home/lieryang/Desktop/LieryangStack.github.io/assets/OpenGL"
+  "cmake.sourceDirectory": "C:/Users/Lieryang/Desktop/LieryangStack.github.io/assets/OpenGL"
 }
