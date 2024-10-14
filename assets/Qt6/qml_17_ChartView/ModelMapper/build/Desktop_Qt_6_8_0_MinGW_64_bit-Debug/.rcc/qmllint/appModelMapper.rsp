@@ -1,0 +1,10 @@
+--bare
+-I
+C:/Users/Lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_17_ChartView/ModelMapper/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug
+-I
+C:/Qt/6.8.0/mingw_64/qml
+--resource
+C:/Users/Lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_17_ChartView/ModelMapper/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/.qt/rcc/qmake_ModelMapper.qrc
+--resource
+C:/Users/Lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_17_ChartView/ModelMapper/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/.qt/rcc/appModelMapper_raw_qml_0.qrc
+C:/Users/Lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_17_ChartView/ModelMapper/Main.qml

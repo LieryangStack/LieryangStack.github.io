@@ -1,0 +1,11 @@
+set(qml_import_scanner_imports_count 9)
+set(qml_import_scanner_import_0 "CLASSNAME;QtQuick2Plugin;LINKTARGET;Qt6::qtquick2plugin;NAME;QtQuick;PATH;C:/Qt/6.8.0/mingw_64/qml/QtQuick;PLUGIN;qtquick2plugin;PLUGINISOPTIONAL;;PREFER;:/qt-project.org/imports/QtQuick/;RELATIVEPATH;QtQuick;TYPE;module;")
+set(qml_import_scanner_import_1 "CLASSNAME;QtQmlPlugin;LINKTARGET;Qt6::qmlplugin;NAME;QtQml;PATH;C:/Qt/6.8.0/mingw_64/qml/QtQml;PLUGIN;qmlplugin;PLUGINISOPTIONAL;;PREFER;:/qt-project.org/imports/QtQml/;RELATIVEPATH;QtQml;TYPE;module;")
+set(qml_import_scanner_import_2 "NAME;QML;PATH;C:/Qt/6.8.0/mingw_64/qml/QML;PREFER;:/qt-project.org/imports/QML/;RELATIVEPATH;QML;TYPE;module;")
+set(qml_import_scanner_import_3 "CLASSNAME;QtQmlModelsPlugin;LINKTARGET;Qt6::modelsplugin;NAME;QtQml.Models;PATH;C:/Qt/6.8.0/mingw_64/qml/QtQml/Models;PLUGIN;modelsplugin;PLUGINISOPTIONAL;;PREFER;:/qt-project.org/imports/QtQml/Models/;RELATIVEPATH;QtQml/Models;TYPE;module;")
+set(qml_import_scanner_import_4 "CLASSNAME;QtQmlWorkerScriptPlugin;LINKTARGET;Qt6::workerscriptplugin;NAME;QtQml.WorkerScript;PATH;C:/Qt/6.8.0/mingw_64/qml/QtQml/WorkerScript;PLUGIN;workerscriptplugin;PLUGINISOPTIONAL;;PREFER;:/qt-project.org/imports/QtQml/WorkerScript/;RELATIVEPATH;QtQml/WorkerScript;TYPE;module;")
+set(qml_import_scanner_import_5 "CLASSNAME;QtQuick_WindowPlugin;LINKTARGET;Qt6::quickwindow;NAME;QtQuick.Window;PATH;C:/Qt/6.8.0/mingw_64/qml/QtQuick/Window;PLUGIN;quickwindowplugin;PREFER;:/qt-project.org/imports/QtQuick/Window/;RELATIVEPATH;QtQuick/Window;TYPE;module;")
+set(qml_import_scanner_import_6 "CLASSNAME;QtGraphsPlugin;LINKTARGET;Qt6::Graphsplugin;NAME;QtGraphs;PATH;C:/Qt/6.8.0/mingw_64/qml/QtGraphs;PLUGIN;graphsplugin;PLUGINISOPTIONAL;;PREFER;:/qt-project.org/imports/QtGraphs/;RELATIVEPATH;QtGraphs;TYPE;module;")
+set(qml_import_scanner_import_7 "CLASSNAME;QQuick3DPlugin;LINKTARGET;Qt6::qquick3dplugin;NAME;QtQuick3D;PATH;C:/Qt/6.8.0/mingw_64/qml/QtQuick3D;PLUGIN;qquick3dplugin;PREFER;:/qt-project.org/imports/QtQuick3D/;RELATIVEPATH;QtQuick3D;TYPE;module;")
+set(qml_import_scanner_import_8 "CLASSNAME;QtChartsQml2Plugin;LINKTARGET;Qt6::qtchartsqml2;NAME;QtCharts;PATH;C:/Qt/6.8.0/mingw_64/qml/QtCharts;PLUGIN;qtchartsqml2plugin;PLUGINISOPTIONAL;;PREFER;:/qt-project.org/imports/QtCharts/;RELATIVEPATH;QtCharts;TYPE;module;")
+

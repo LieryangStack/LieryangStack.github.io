@@ -4,8 +4,10 @@ project(ModelMapper VERSION 0.1 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+find_package(Qt6 6.5 REQUIRED COMPONENTS Core)
+find_package(Qt6 6.5 REQUIRED COMPONENTS Gui)
 find_package(Qt6 6.5 REQUIRED COMPONENTS Quick)
-find_package(Qt6 6.5 REQUIRED COMPONENTS Charts)
+find_package(Qt6 6.5 REQUIRED COMPONENTS Graphs)
 
 qt_standard_project_setup(REQUIRES 6.5)
 
@@ -36,7 +38,15 @@ target_link_libraries(appModelMapper
 )
 
 target_link_libraries(appModelMapper
-    PRIVATE Qt6::Charts
+    PRIVATE Qt6::Graphs
+)
+
+target_link_libraries(appModelMapper
+    PRIVATE Qt6::Core
+)
+
+target_link_libraries(appModelMapper
+    PRIVATE Qt6::Gui
 )
 
 include(GNUInstallDirs)
