@@ -1,0 +1,5 @@
+module abstractitemmodel
+typeinfo abstractitemmodelexample.qmltypes
+prefer :/qt/qml/abstractitemmodel/
+View 254.0 View.qml
+

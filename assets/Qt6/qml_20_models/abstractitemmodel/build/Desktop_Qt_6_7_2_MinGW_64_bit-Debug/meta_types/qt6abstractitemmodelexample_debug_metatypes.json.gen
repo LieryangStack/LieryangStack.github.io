@@ -1,0 +1,19 @@
+[
+    {
+        "classes": [
+            {
+                "className": "AnimalModel",
+                "object": true,
+                "qualifiedClassName": "AnimalModel",
+                "superClasses": [
+                    {
+                        "access": "public",
+                        "name": "QAbstractListModel"
+                    }
+                ]
+            }
+        ],
+        "inputFile": "model.h",
+        "outputRevision": 68
+    }
+]

@@ -24,7 +24,7 @@ target_link_libraries(abstractitemmodelexample PRIVATE
 qt_add_qml_module(abstractitemmodelexample
     URI abstractitemmodel
     QML_FILES
-        "view.qml"
+    "View.qml"
 )
 
 install(TARGETS abstractitemmodelexample

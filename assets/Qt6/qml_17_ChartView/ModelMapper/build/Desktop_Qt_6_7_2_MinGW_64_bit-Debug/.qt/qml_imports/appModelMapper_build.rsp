@@ -1,0 +1,14 @@
+-rootPath
+C:/Users/lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_17_ChartView/ModelMapper
+-cmake-output
+-output-file
+C:/Users/lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_17_ChartView/ModelMapper/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/.qt/qml_imports/appModelMapper_build.cmake
+-importPath
+C:/Users/lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_17_ChartView/ModelMapper/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/ModelMapper
+-importPath
+C:/Users/lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_17_ChartView/ModelMapper/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug
+-importPath
+C:/Qt/6.7.2/mingw_64/./qml
+-qrcFiles
+C:/Users/lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_17_ChartView/ModelMapper/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/.qt/rcc/qmake_ModelMapper.qrc
+C:/Users/lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_17_ChartView/ModelMapper/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/.qt/rcc/appModelMapper_raw_qml_0.qrc

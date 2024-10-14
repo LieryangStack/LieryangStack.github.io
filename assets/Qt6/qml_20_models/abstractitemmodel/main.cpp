@@ -1,13 +1,12 @@
-#include "model.h"
-
 #include <QGuiApplication>
-#include <qqmlengine.h>
-#include <qqmlcontext.h>
-#include <qqml.h>
-#include <QtQuick/qquickitem.h>
-#include <QtQuick/qquickview.h>
+#include <QStringList>
+#include <QQmlApplicationEngine>
+#include <QQmlContext>
+#include <QStringListModel>
 #include <QTimer>
+#include <QDebug>
 
+#include "model.h"
 
 int main(int argc, char ** argv)
 {
@@ -18,20 +17,22 @@ int main(int argc, char ** argv)
     model.addAnimal(Animal("Polar bear", "Large"));
     model.addAnimal(Animal("Quoll", "Small"));
 
-    // 创建定时器，5秒后添加 "猪" 到模型
-    QTimer::singleShot(2000, [&]() {
+    // 创建定时器，1秒后添加 "猪" 到模型
+    QTimer::singleShot(1000, [&]() {
         model.addAnimal(Animal("猪", "Large"));
         model.addAnimal(Animal("猪", "Large"));
         model.addAnimal(Animal("猪", "Large"));
         model.addAnimal(Animal("猪", "Large"));
     });
 
-    QQuickView view;
-    view.setResizeMode(QQuickView::SizeRootObjectToView);
-    view.setInitialProperties({{"model", QVariant::fromValue(&model)}});
+    QQmlApplicationEngine engine;
+    QObject::connect(&engine, &QQmlApplicationEngine::objectCreationFailed,
+                     &app, []() { QCoreApplication::exit(-1); },
+                     Qt::QueuedConnection);
+    engine.rootContext()->setContextProperty("model1", QVariant::fromValue(&model));
+    // engine.rootContext()->setContextProperty("model1", &model); /* 直接传入，或者 QVariant::fromValue(&model) 都可以  */
 
-    view.setSource(QUrl("qrc:/qt/qml/abstractitemmodel/view.qml"));
-    view.show();
+    engine.loadFromModule("abstractitemmodel", "View");
 
     return app.exec();
 }

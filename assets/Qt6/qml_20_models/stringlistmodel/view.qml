@@ -13,7 +13,7 @@ Window {
         ListView {
             width: 100
             height: 100
-            model: model1 // 使用 C++ 端传递的模型
+            model: model1 /* 使用 C++ 端传递的模型 */
 
             delegate: Rectangle {
                 height: 25
@@ -34,13 +34,13 @@ Window {
         ListView {
             width: 100
             height: 100
-            model: stringListModel  // 使用 C++ 端传递的模型
+            model: stringListModel  /* 使用 C++ 端传递的模型 */
 
             delegate: Rectangle {
                 height: 25
                 width: 100
                 Text {
-                    text: model.display
+                    text: model.display /* 关键 */
                 }
             }
         }

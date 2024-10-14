@@ -1,0 +1,6 @@
+<RCC>
+  <qresource prefix="/qt/qml/abstractitemmodel">
+    <file alias="qmldir">C:/Users/lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_20_models/abstractitemmodel/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/abstractitemmodel/qmldir</file>
+  </qresource>
+</RCC>
+

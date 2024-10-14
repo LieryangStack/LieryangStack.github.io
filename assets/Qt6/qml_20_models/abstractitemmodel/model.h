@@ -31,10 +31,13 @@ public:
 
     AnimalModel(QObject *parent = nullptr);
 
+    /* 自定义函数，添加新行 */
     void addAnimal(const Animal &animal);
 
+    /* QAbstractItemModel 虚函数rowCount，获取该模型现在有多少个项item（或者行row） */
     int rowCount(const QModelIndex & parent = QModelIndex()) const;
 
+    /* QAbstractItemModel 虚函数data，获取该 index位置的数据  */
     QVariant data(const QModelIndex & index, int role = Qt::DisplayRole) const;
 
 protected:

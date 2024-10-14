@@ -39,7 +39,8 @@ int main(int argc, char ** argv)
 
     /* 创建定时器 2s 后触发 */
     QTimer::singleShot(2000, [&]() {
-        qDebug() << "2s";
+
+        /* StringListModel 修改数据，就可以同步修改UI界面 */
         model.removeRows(0, 1);
         model.setData(model.index(0), "111");
     });

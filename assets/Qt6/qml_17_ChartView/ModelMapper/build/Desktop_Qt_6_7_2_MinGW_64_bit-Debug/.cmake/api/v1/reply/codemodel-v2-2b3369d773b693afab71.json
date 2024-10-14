@@ -1,0 +1,169 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-Debug-7fd6ea0ab5a67642a1ed.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.16"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4,
+						5,
+						6,
+						7,
+						8,
+						9,
+						10,
+						11,
+						12
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "ModelMapper",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4,
+						5,
+						6,
+						7,
+						8,
+						9,
+						10,
+						11,
+						12
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "all_qmllint::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-all_qmllint-Debug-6e47a3f3444095c56a53.json",
+					"name" : "all_qmllint",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "all_qmllint_json::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-all_qmllint_json-Debug-d7be3ac5bfcead2cd725.json",
+					"name" : "all_qmllint_json",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "all_qmllint_module::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-all_qmllint_module-Debug-9a08f3da5b2adf148acd.json",
+					"name" : "all_qmllint_module",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "all_qmltyperegistrations::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-all_qmltyperegistrations-Debug-b999890544e8f4aa063f.json",
+					"name" : "all_qmltyperegistrations",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "appModelMapper::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-appModelMapper-Debug-9372f56547f79778ed43.json",
+					"name" : "appModelMapper",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "appModelMapper_autogen::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-appModelMapper_autogen-Debug-bc592c092b1a4c576e58.json",
+					"name" : "appModelMapper_autogen",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "appModelMapper_autogen_timestamp_deps::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-appModelMapper_autogen_timestamp_deps-Debug-52e1571b2232ef6f7f8b.json",
+					"name" : "appModelMapper_autogen_timestamp_deps",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "appModelMapper_qmlimportscan::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-appModelMapper_qmlimportscan-Debug-e8b4c0acac7589015ba7.json",
+					"name" : "appModelMapper_qmlimportscan",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "appModelMapper_qmllint::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-appModelMapper_qmllint-Debug-37bc1a7f92205c93509b.json",
+					"name" : "appModelMapper_qmllint",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "appModelMapper_qmllint_json::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-appModelMapper_qmllint_json-Debug-d449b1ab1e4f18155962.json",
+					"name" : "appModelMapper_qmllint_json",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "appModelMapper_qmllint_module::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-appModelMapper_qmllint_module-Debug-b5a59e9c827d846083d7.json",
+					"name" : "appModelMapper_qmllint_module",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "appModelMapper_qmltyperegistration::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-appModelMapper_qmltyperegistration-Debug-9767a1bb2dbcc6491aab.json",
+					"name" : "appModelMapper_qmltyperegistration",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "appModelMapper_tooling::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-appModelMapper_tooling-Debug-5c84db57a2792a383b6e.json",
+					"name" : "appModelMapper_tooling",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "C:/Users/lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_17_ChartView/ModelMapper/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug",
+		"source" : "C:/Users/lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_17_ChartView/ModelMapper"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 7
+	}
+}

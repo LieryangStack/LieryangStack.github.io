@@ -2,7 +2,6 @@ import QtQuick
 import QtQuick.Controls
 
 
-
 Window {
     id: root
     objectName: "root"
@@ -20,7 +19,7 @@ Window {
             width: listview.width; height: 25
 
             required color /* 通过添加 required 要求现有属性，关联到model对象的color */
-            required property string name
+            property string name
 
             Text { text: parent.name }
         }

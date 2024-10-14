@@ -48,9 +48,8 @@ int main(int argc, char ** argv)
 
     /* 创建定时器 1s 后触发 */
     QTimer::singleShot(1000, [&]() {
-        qDebug() << "1s";
-        dataList.append(new DataObject("Qt Lieryang Lieryang Lieryang", "pink"));
-        dataList.insert(1, new DataObject("Qt Lieryang Lieryang Lieryang", "pink"));
+        dataList.insert(0, new DataObject("Qt Lieryang Lieryang Lieryang", "pink"));
+        /* 需要重新设置 model1 属性，使得ListView重新设置 */
         engine.rootContext()->setContextProperty("model1", QVariant::fromValue(dataList));
     });
 
