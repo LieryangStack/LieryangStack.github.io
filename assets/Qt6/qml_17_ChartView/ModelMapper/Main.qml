@@ -31,16 +31,16 @@ Window {
             max: 100
         }
 
-        LineSeries{
+        // LineSeries{
+        //     id: line
+        //     color: "blue"
+        // }
+
+        SplineSeries {
             id: line
+            width: 3
             color: "blue"
         }
-
-        // SplineSeries {
-        //     id: line
-        //     axisX: axisX
-        //     axisY: axisY
-        // }
 
         XYModelMapper {
             id: modelMapper

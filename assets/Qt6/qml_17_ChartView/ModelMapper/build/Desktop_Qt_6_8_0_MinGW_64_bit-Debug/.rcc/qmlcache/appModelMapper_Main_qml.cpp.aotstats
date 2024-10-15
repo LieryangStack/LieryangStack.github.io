@@ -6,7 +6,7 @@
                     {
                         "codegenSuccessfull": true,
                         "column": 23,
-                        "durationMicroseconds": 141,
+                        "durationMicroseconds": 139,
                         "errorMessage": "",
                         "functionName": "fill",
                         "line": 12
@@ -14,7 +14,7 @@
                     {
                         "codegenSuccessfull": false,
                         "column": 20,
-                        "durationMicroseconds": 55,
+                        "durationMicroseconds": 53,
                         "errorMessage": "Cannot access value for name lineModel",
                         "functionName": "model",
                         "line": 47
@@ -22,13 +22,13 @@
                     {
                         "codegenSuccessfull": true,
                         "column": 21,
-                        "durationMicroseconds": 54,
+                        "durationMicroseconds": 50,
                         "errorMessage": "",
                         "functionName": "series",
                         "line": 48
                     }
                 ],
-                "filepath": "C:/Users/Lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_17_ChartView/ModelMapper/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/Main.qml"
+                "filepath": "C:/Users/lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_17_ChartView/ModelMapper/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/Main.qml"
             }
         ],
         "moduleId": "ModelMapper(appModelMapper)"

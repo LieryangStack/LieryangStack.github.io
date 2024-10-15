@@ -43,7 +43,7 @@ int main(int argc, char *argv[])
         QStandardItem *item1 = new QStandardItem(QString::number(row));
         QDateTime time = QDateTime::currentDateTime().addSecs(row);
         QStandardItem *item2 = new QStandardItem(QString::number(time.toMSecsSinceEpoch()));
-        QStandardItem *item3 = new QStandardItem(QString::number(QRandomGenerator::global()->bounded(10)));
+        QStandardItem *item3 = new QStandardItem(QString::number(QRandomGenerator::global()->bounded(100)));
         lineModel.setItem(row, 0, item1);
         lineModel.setItem(row, 1, item2);
         lineModel.setItem(row, 2, item3);
