@@ -34,15 +34,6 @@ Window {
         window.setY(window.y + delta.y)
     }
 
-    /* 边框的阴影区域 */
-    RectangularGlow {
-        id: effect
-        anchors.fill: rect
-        glowRadius: 1
-        spread: 0.8
-        color: "gray"
-        cornerRadius: rect.radius + glowRadius
-    }
 
     /* 实际的窗口区域 */
     Rectangle {
@@ -55,8 +46,18 @@ Window {
         color : "#121212"
 
         gradient: Gradient {
+          orientation: Gradient.Vertical /*  Gradient.Horizontal 横向或者 Gradient.Vertical 纵向渐变（默认） */
           GradientStop { position: 0.0; color: "#ccfbff" }
           GradientStop { position: 1.0; color: "#ef96c5" }
+        }
+
+        layer.enabled: true
+        layer.effect: Glow {
+            samples: 15
+            radius: 5
+            spread: 0.1
+            color: "gray"
+            transparentBorder: true
         }
 
         /* 窗口顶部区域（此区域可以拖动窗口，双击放大窗口） */
@@ -149,4 +150,14 @@ Window {
             }
         }
     }
+
+    /* 边框的阴影区域 */
+    // RectangularGlow {
+    //     id: effect
+    //     anchors.fill: rect
+    //     glowRadius: 1
+    //     spread: 0.8
+    //     color: "gray"
+    //     cornerRadius: rect.radius + glowRadius
+    // }
 }

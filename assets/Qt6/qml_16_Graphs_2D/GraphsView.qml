@@ -18,17 +18,48 @@ Window {
 		radius: 20
 		color: "transparent"
 
+
+		GraphsView {
+			anchors.fill: parent
+		
+			theme: GraphsTheme {
+				colorScheme: GraphsTheme.ColorScheme.Automatic
+				// theme: GraphsTheme.Theme.OrangeSeries
+				plotAreaBackgroundColor: "transparent"
+				// colorStyle: GraphsTheme.ColorStyle.ObjectGradient
+				// baseGradients: [surfaceGradient]  /* 应该只有3D元素的时候起作用 */
+				// backgroundColor: "pink"
+				backgroundVisible: false
+				gridVisible: true
+			}
+
+			axisX: BarCategoryAxis {
+				categories: ["2023", "2024", "2025"]
+                lineVisible: false
+                gridVisible: false
+                subGridVisible: false
+                labelsVisible: false
+                visible: false
+			}
+
+			axisY: ValueAxis {
+				min: 0
+				max: 10
+				tickInterval: 1.5
+				lineVisible: false
+                gridVisible: true
+                subGridVisible: false
+                labelsVisible: false
+                visible: false
+			}
+		}
+
 		GraphsView {
 			id: graphsView
 			anchors.fill: parent
 		
-			// theme: GraphsTheme {
-			// 	backgroundVisible: false
-			// 	plotAreaBackgroundColor: "#11000000"
-			// }
-			
-			// layer.enabled: true
-			// layer.effect: Glow { color: "red";  transparentBorder: true; radius: 85; spread:.8 }
+			axisXSmoothing: 5
+			axisYSmoothing: 5
 
 			theme: GraphsTheme {
 				colorScheme: GraphsTheme.ColorScheme.Automatic
@@ -89,10 +120,33 @@ Window {
 			// 	}
 			// }
 
+			layer.enabled: true
+
+			/* 发光效果 */
+			// layer.effect: Glow {
+			// 	anchors.fill: graphsView
+			// 	radius: 20
+			// 	spread: 0.1
+			// 	samples: radius * 2 + 1
+			// 	color: "white"
+			// 	source: graphsView
+			// }
+
+			layer.effect: LinearGradient {
+				anchors.fill: parent
+				start: Qt.point(0, 0)
+				end: Qt.point(10, 10)
+				gradient: Gradient {
+					orientation: Gradient.Horizontal
+					GradientStop { position: 0.0; color: "#ccfbff" }
+					GradientStop { position: 1.0; color: "#ef96c5" }
+				}
+			}
+
 			SplineSeries {
 				id: line
 				// hoverable: true
-				width: 2
+				width: 5
 				color: "#00BFFF"
 
 				visible: true
@@ -119,65 +173,5 @@ Window {
 				}
 			}
 		}
-
-		GraphsView {
-			anchors.fill: parent
-		
-			// theme: GraphsTheme {
-			// 	backgroundVisible: false
-			// 	plotAreaBackgroundColor: "#11000000"
-			// }
-			
-			// layer.enabled: true
-			// layer.effect: Glow { color: "red";  transparentBorder: true; radius: 85; spread:.8 }
-
-			theme: GraphsTheme {
-				colorScheme: GraphsTheme.ColorScheme.Automatic
-				// theme: GraphsTheme.Theme.OrangeSeries
-				plotAreaBackgroundColor: "transparent"
-				// colorStyle: GraphsTheme.ColorStyle.ObjectGradient
-				// baseGradients: [surfaceGradient]  /* 应该只有3D元素的时候起作用 */
-				// backgroundColor: "pink"
-				backgroundVisible: false
-				gridVisible: true
-				// grid.mainColor: Qt.rgba(0.2,0.2,0.2,1)
-				// labelTextColor: "red"
-				// labelBackgroundColor: "black"
-				// labelFont.pointSize: 9
-				// labelFont.family: "Roboto"
-			}
-
-			axisX: BarCategoryAxis {
-				categories: ["2023", "2024", "2025"]
-                lineVisible: false
-                gridVisible: false
-                subGridVisible: false
-                labelsVisible: false
-                visible: false
-			}
-
-			axisY: ValueAxis {
-				min: 0
-				max: 10
-				lineVisible: false
-                gridVisible: true
-                subGridVisible: false
-                labelsVisible: false
-                visible: false
-			}
-		}
-
-		Glow {
-			anchors.fill: graphsView
-			radius: 20
-			spread: 1.1
-			samples: radius * 2 + 1
-			color: "white"
-			source: graphsView
-		}
-
-
-	}
-		
-	
+	}	
 }

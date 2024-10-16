@@ -21,7 +21,8 @@ Window {
 		theme: GraphsTheme {
 			// colorScheme: GraphsTheme.ColorScheme.Light
             // theme: GraphsTheme.Theme.OrangeSeries
-			
+			plotAreaBackgroundColor: "transparent"
+			backgroundVisible: false
 			colorStyle: GraphsTheme.ColorStyle.ObjectGradient
 			baseGradients: [surfaceGradient]
             // backgroundColor: "#101010"
@@ -51,6 +52,18 @@ Window {
 			subGridVisible: false
 			labelsVisible: true
 			visible: false
+		}
+
+		layer.enabled: true
+		layer.effect: LinearGradient {
+			anchors.fill: parent
+			start: Qt.point(0, 0)
+			end: Qt.point(10, 10)
+			gradient: Gradient {
+				orientation: Gradient.Horizontal
+				GradientStop { position: 0.0; color: "#ccfbff" }
+				GradientStop { position: 1.0; color: "#ef96c5" }
+			}
 		}
 
 		AreaSeries {
