@@ -19,47 +19,47 @@ Window {
 		color: "transparent"
 
 
-		GraphsView {
-			anchors.fill: parent
+		// GraphsView {
+		// 	anchors.fill: parent
 		
-			theme: GraphsTheme {
-				colorScheme: GraphsTheme.ColorScheme.Automatic
-				// theme: GraphsTheme.Theme.OrangeSeries
-				plotAreaBackgroundColor: "transparent"
-				// colorStyle: GraphsTheme.ColorStyle.ObjectGradient
-				// baseGradients: [surfaceGradient]  /* 应该只有3D元素的时候起作用 */
-				// backgroundColor: "pink"
-				backgroundVisible: false
-				gridVisible: true
-			}
+		// 	theme: GraphsTheme {
+		// 		colorScheme: GraphsTheme.ColorScheme.Automatic
+		// 		// theme: GraphsTheme.Theme.OrangeSeries
+		// 		plotAreaBackgroundColor: "transparent"
+		// 		// colorStyle: GraphsTheme.ColorStyle.ObjectGradient
+		// 		// baseGradients: [surfaceGradient]  /* 应该只有3D元素的时候起作用 */
+		// 		// backgroundColor: "pink"
+		// 		backgroundVisible: false
+		// 		gridVisible: true
+		// 	}
 
-			axisX: BarCategoryAxis {
-				categories: ["2023", "2024", "2025"]
-                lineVisible: false
-                gridVisible: false
-                subGridVisible: false
-                labelsVisible: false
-                visible: false
-			}
+		// 	axisX: BarCategoryAxis {
+		// 		categories: ["2023", "2024", "2025"]
+        //         lineVisible: false
+        //         gridVisible: false
+        //         subGridVisible: false
+        //         labelsVisible: false
+        //         visible: false
+		// 	}
 
-			axisY: ValueAxis {
-				min: 0
-				max: 10
-				tickInterval: 1.5
-				lineVisible: false
-                gridVisible: true
-                subGridVisible: false
-                labelsVisible: false
-                visible: false
-			}
-		}
+		// 	axisY: ValueAxis {
+		// 		min: 0
+		// 		max: 10
+		// 		tickInterval: 1.5
+		// 		lineVisible: false
+        //         gridVisible: true
+        //         subGridVisible: false
+        //         labelsVisible: false
+        //         visible: false
+		// 	}
+		// }
 
 		GraphsView {
 			id: graphsView
 			anchors.fill: parent
 		
-			axisXSmoothing: 5
-			axisYSmoothing: 5
+			// axisXSmoothing: 5
+			// axisYSmoothing: 5
 
 			theme: GraphsTheme {
 				colorScheme: GraphsTheme.ColorScheme.Automatic
@@ -77,9 +77,19 @@ Window {
 				// labelFont.family: "Roboto"
 			}
 
-			axisX: BarCategoryAxis {
-				categories: ["2023", "2024", "2025"]
-                lineVisible: false
+			// axisX: BarCategoryAxis {
+			// 	categories: ["2023", "2024", "2025"]
+			//           lineVisible: false
+			//           gridVisible: false
+			//           subGridVisible: false
+			//           labelsVisible: false
+			//           visible: false
+			// }
+
+			axisX: ValueAxis {
+				min: 0
+				max: 15
+				lineVisible: false
                 gridVisible: false
                 subGridVisible: false
                 labelsVisible: false
@@ -135,13 +145,23 @@ Window {
 			layer.effect: LinearGradient {
 				anchors.fill: parent
 				start: Qt.point(0, 0)
-				end: Qt.point(10, 10)
+				end: Qt.point(0, parent.height)
 				gradient: Gradient {
-					orientation: Gradient.Horizontal
-					GradientStop { position: 0.0; color: "#ccfbff" }
-					GradientStop { position: 1.0; color: "#ef96c5" }
+					// orientation: Gradient.Horizontal
+					GradientStop { position: 0.0; color: "#FC1CD5" }
+					GradientStop { position: 0.5; color: "#1371EF" }
+					GradientStop { position: 1.0; color: "#57EC99" }
 				}
 			}
+
+			// layer.effect: RadialGradient {
+			// 	anchors.fill: parent
+			// 	verticalOffset: -parent.height / 2
+			// 	gradient: Gradient {
+			// 		GradientStop { position: 0.0; color: "white" }
+			// 		GradientStop { position: 0.5; color: "purple" }
+			// 	}
+			// }
 
 			SplineSeries {
 				id: line
@@ -173,5 +193,27 @@ Window {
 				}
 			}
 		}
+
+		// LinearGradient {
+		// 	anchors.fill: graphsView
+		// 	start: Qt.point(0, 0)
+		// 	end: Qt.point(0, graphsView.height)
+		// 	gradient: Gradient {
+		// 		// orientation: Gradient.Horizontal
+		// 		GradientStop { position: 0.0; color: "#FC1CD5" }
+		// 		GradientStop { position: 0.5; color: "#1371EF" }
+		// 		GradientStop { position: 1.0; color: "#57EC99" }
+		// 	}
+		// 	source: graphsView
+		// }
+
+		// Glow {
+		// 	anchors.fill: graphsView
+		// 	radius: 20
+		// 	spread: 0.1
+		// 	samples: radius * 2 + 1
+		// 	color: "white"
+		// 	source: graphsView
+		// }
 	}	
 }

@@ -7,12 +7,13 @@ Item {
 
     LinearGradient {
         anchors.fill: parent
-        start: Qt.point(parent.width, parent.height)
-        end: Qt.point(0, 0)
+        start: Qt.point(0, 0)
+        end: Qt.point(0, parent.height)
         gradient: Gradient {
 			orientation: Gradient.Horizontal
-            GradientStop { position: 0.0; color: "pink" }
-            GradientStop { position: 1.0; color: "black" }
+            GradientStop { position: 0.0; color: "#FDAF42" } /* 黄橙 */
+            GradientStop { position: 0.5; color: "#FC51FA" } /* 粉红火烈鸟 */
+            GradientStop { position: 1.0; color: "#2CD4FF" } /* 蓝青色 */
         }
     }
 }
