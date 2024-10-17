@@ -16,7 +16,7 @@ Window {
 		x:100; y: 100
 		width: 800; height: 500
 		radius: 20
-		color: "transparent"
+		color: "pink"
 
 
 		// GraphsView {
@@ -142,17 +142,17 @@ Window {
 			// 	source: graphsView
 			// }
 
-			layer.effect: LinearGradient {
-				anchors.fill: parent
-				start: Qt.point(0, 0)
-				end: Qt.point(0, parent.height)
-				gradient: Gradient {
-					// orientation: Gradient.Horizontal
-					GradientStop { position: 0.0; color: "#FC1CD5" }
-					GradientStop { position: 0.5; color: "#1371EF" }
-					GradientStop { position: 1.0; color: "#57EC99" }
-				}
-			}
+			// layer.effect: LinearGradient {
+			// 	anchors.fill: parent
+			// 	start: Qt.point(0, 0)
+			// 	end: Qt.point(0, parent.height)
+			// 	gradient: Gradient {
+			// 		// orientation: Gradient.Horizontal
+			// 		GradientStop { position: 0.0; color: "#FC1CD5" }
+			// 		GradientStop { position: 0.5; color: "#1371EF" }
+			// 		GradientStop { position: 1.0; color: "#57EC99" }
+			// 	}
+			// }
 
 			// layer.effect: RadialGradient {
 			// 	anchors.fill: parent
