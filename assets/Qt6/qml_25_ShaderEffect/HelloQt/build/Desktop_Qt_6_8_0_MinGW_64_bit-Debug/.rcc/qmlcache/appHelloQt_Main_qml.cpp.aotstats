@@ -1,0 +1,28 @@
+[
+    {
+        "moduleFiles": [
+            {
+                "entries": [
+                    {
+                        "codegenSuccessfull": true,
+                        "column": 39,
+                        "durationMicroseconds": 142,
+                        "errorMessage": "",
+                        "functionName": "src",
+                        "line": 16
+                    },
+                    {
+                        "codegenSuccessfull": false,
+                        "column": 35,
+                        "durationMicroseconds": 33,
+                        "errorMessage": "Cannot access value for name img",
+                        "functionName": "src",
+                        "line": 32
+                    }
+                ],
+                "filepath": "C:/Users/lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_25_ShaderEffect/HelloQt/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/Main.qml"
+            }
+        ],
+        "moduleId": "HelloQt(appHelloQt)"
+    }
+]

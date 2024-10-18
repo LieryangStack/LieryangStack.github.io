@@ -16,7 +16,7 @@ Window {
 		x:100; y: 100
 		width: 800; height: 500
 		radius: 20
-		color: "pink"
+		color: "white"
 
 
 		// GraphsView {
@@ -142,6 +142,7 @@ Window {
 			// 	source: graphsView
 			// }
 
+			/* 线段渐变 */
 			// layer.effect: LinearGradient {
 			// 	anchors.fill: parent
 			// 	start: Qt.point(0, 0)
@@ -162,6 +163,17 @@ Window {
 			// 		GradientStop { position: 0.5; color: "purple" }
 			// 	}
 			// }
+
+			layer.effect: DropShadow {
+				anchors.fill: graphsView
+				// horizontalOffset: 3
+				verticalOffset: 10
+				radius: 50.0
+				samples: (radius *2) +1
+				color: "#4F00BFFF"
+				spread: 0.7
+				source: graphsView
+			}
 
 			SplineSeries {
 				id: line

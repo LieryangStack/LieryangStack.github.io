@@ -1,0 +1,5 @@
+module HelloQt
+typeinfo appHelloQt.qmltypes
+prefer :/qt/qml/HelloQt/
+Main 1.0 Main.qml
+

@@ -1,0 +1,7 @@
+<RCC>
+  <qresource prefix="/qt/qml/shadereffects">
+    <file alias="content/shaders/myeffect.vert.qsb">C:/Users/lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_25_ShaderEffect/HelloQt/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/.qsb/content/shaders/myeffect.vert.qsb</file>
+    <file alias="content/shaders/myeffect.frag.qsb">C:/Users/lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_25_ShaderEffect/HelloQt/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/.qsb/content/shaders/myeffect.frag.qsb</file>
+  </qresource>
+</RCC>
+

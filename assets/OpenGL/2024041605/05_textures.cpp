@@ -124,6 +124,7 @@ main (int argc, char **argv) {
     glfwTerminate();
     return -1;
   }
+  
   /* 通知GLFW将我们窗口的上下文设置为当前线程的主上下文 */
   glfwMakeContextCurrent(window);
   glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);

@@ -1,0 +1,7 @@
+<RCC>
+  <qresource prefix="/qt/qml/HelloQt/">
+    <file alias="Main.qml">C:/Users/lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_25_ShaderEffect/HelloQt/Main.qml</file>
+    <file alias="qml.qrc">C:/Users/lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_25_ShaderEffect/HelloQt/qml.qrc</file>
+  </qresource>
+</RCC>
+
