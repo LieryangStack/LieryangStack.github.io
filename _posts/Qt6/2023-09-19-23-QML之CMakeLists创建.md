@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 二十三、QML——CMake项目创建
+title: 二十三、QML——CMakeLists项目创建
 categories: QML
 tags: [QML]
 ---
@@ -23,3 +23,6 @@ CMakeLists.txt 文件中，
 添加哪些就可以使得 c++ 使用资源文件
 
 添加哪些就可以使得 qml 文件使用资源文件
+
+
+https://doc.qt.io/qtdesignstudio/studio-designer-developer-workflow.html
