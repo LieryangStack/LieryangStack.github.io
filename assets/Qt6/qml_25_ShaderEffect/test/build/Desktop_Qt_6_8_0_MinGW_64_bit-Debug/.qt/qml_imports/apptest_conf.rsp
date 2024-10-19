@@ -1,0 +1,14 @@
+-rootPath
+C:/Users/lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_25_ShaderEffect/test
+-cmake-output
+-output-file
+C:/Users/lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_25_ShaderEffect/test/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/.qt/qml_imports/apptest_conf.cmake
+-importPath
+C:/Users/lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_25_ShaderEffect/test/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/test
+-importPath
+C:/Users/lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_25_ShaderEffect/test/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug
+-importPath
+C:/Qt/6.8.0/mingw_64/qml
+-qrcFiles
+C:/Users/lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_25_ShaderEffect/test/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/.qt/rcc/qmake_test.qrc
+C:/Users/lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_25_ShaderEffect/test/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/.qt/rcc/apptest_raw_qml_0.qrc

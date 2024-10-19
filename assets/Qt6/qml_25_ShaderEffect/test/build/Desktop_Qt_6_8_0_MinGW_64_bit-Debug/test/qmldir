@@ -1,0 +1,5 @@
+module test
+typeinfo apptest.qmltypes
+prefer :/qt/qml/test/
+Main 1.0 Main.qml
+
