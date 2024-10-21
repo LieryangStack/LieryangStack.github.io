@@ -6,15 +6,17 @@ set_source_files_properties(Constants.qml
         QT_QML_SINGLETON_TYPE true
 )
 
+
+
 qt_add_library(StudyProject STATIC)
 qt6_add_qml_module(StudyProject
     URI "StudyProject"
     VERSION 1.0
     RESOURCE_PREFIX "/qt/qml"
     QML_FILES
+        "Constants.qml"
         "EventListModel.qml"
         "EventListSimulator.qml"
-        "Constants.qml"
 )
 
 
