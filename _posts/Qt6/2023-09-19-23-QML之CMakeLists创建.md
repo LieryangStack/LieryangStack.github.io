@@ -5,13 +5,13 @@ categories: QML
 tags: [QML]
 ---
 
-本章节记录，如何创建 `Qt Designer Studio` 和 `Qt Creator` 共同开发项目。
+本章节记录，如何创建 `Qt Design Studio` 和 `Qt Creator` 共同开发项目。
 
 ## 1 创建共同开发项目
 
-### 1.1 创建一个 `Qt Designer Studio` 项目
+### 1.1 创建一个 `Qt Design Studio` 项目
 
-创建一个 `Qt Designer Studio` 项目
+创建一个 `Qt Design Studio` 项目
 
 ![alt text](image.png)
 
@@ -50,8 +50,31 @@ tags: [QML]
 ![alt text](image-5.png)
 
 ## 2 项目CMakeLists分析
+主目录下的 `CMakeLists.txt` 会调用以下几个部分构建应用程序 `qds.cmake`、`App`、`cmake`、`StudyProject`、`StudyProjectContent` 里面的 `CMakeLists.txt` 或 `***.cmake` 文件。
 
+![alt text](image-7.png)
 
+![alt text](image-8.png)
+
+![alt text](image-9.png)
+
+### 2.1 关于qml库问题
+
+比如 `StudyProject` 目录里面定义了
+
+![alt text](image-10.png)
+
+`qds.cmake` 却只调用了 `libStudyProjectContentplugin.a` 静态库，但是看编译文件 `build.ninja` ，编译应用程序的时候也调用了 `libStudyProjectContent.a` 静态库。
+
+<font color="blue">我猜：`libStudyProjectContentplugin.a` 应该是依赖  `libStudyProjectContent.a` 静态库。</font>
+
+![alt text](image-11.png)
+
+### 2.2 关于 `qmlcomponents` 库
+
+这部分是 `Qt Design Studio` 定义的 qml组件，比如：`ArcItem`、`Glow` 、`QuickStudioApplication` 等等。
+
+![alt text](image-12.png)
 
 ## 参考
 

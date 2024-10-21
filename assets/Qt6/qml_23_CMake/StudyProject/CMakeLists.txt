@@ -1,7 +1,10 @@
 
 cmake_minimum_required(VERSION 3.21.1)
 
+# 是否链接跟踪调试、分析应用程序性能相关的库
 option(LINK_INSIGHT "Link Qt Insight Tracker library" ON)
+
+# 是否链接Qt Designer Studio定义的qml组件库
 option(BUILD_QDS_COMPONENTS "Build design studio components" ON)
 
 project(StudyProjectApp LANGUAGES CXX)
@@ -29,13 +32,15 @@ qt_add_resources(${CMAKE_PROJECT_NAME} "configuration"
 # 引入 qds.cmake 文件（该cmake文件会导入StudyProject StudyProjectContent App子目录）
 include(qds)
 
+# 调试、分析性能相关的库
 if (BUILD_QDS_COMPONENTS)
     include(qmlcomponents OPTIONAL)
 endif()
 
-# if (LINK_INSIGHT)
-#     include(insight OPTIONAL)
-# endif ()
+# Qt Designer Studio相关qml组件库
+if (LINK_INSIGHT)
+    include(insight OPTIONAL)
+endif ()
 
 include(GNUInstallDirs)
 install(TARGETS ${CMAKE_PROJECT_NAME}
