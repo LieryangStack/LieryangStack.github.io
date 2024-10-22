@@ -1,0 +1,8 @@
+module Test
+linktarget Testplugin
+optional plugin Testplugin
+classname TestPlugin
+typeinfo Test.qmltypes
+prefer :/Test/
+MyItemControls 1.0 MyItemControls.qml
+

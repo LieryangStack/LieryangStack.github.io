@@ -66,7 +66,7 @@ tags: [QML]
 
 `qds.cmake` 却只调用了 `libStudyProjectContentplugin.a` 静态库，但是看编译文件 `build.ninja` ，编译应用程序的时候也调用了 `libStudyProjectContent.a` 静态库。
 
-<font color="blue">我猜：`libStudyProjectContentplugin.a` 应该是依赖  `libStudyProjectContent.a` 静态库。</font>
+<font color="blue">因为 `libStudyProjectContentplugin.a` 编译的时候是依赖  `libStudyProjectContent.a` 静态库。</font>
 
 ![alt text](/assets/Qt6/qml_23_CMake/image/image-11.png)
 

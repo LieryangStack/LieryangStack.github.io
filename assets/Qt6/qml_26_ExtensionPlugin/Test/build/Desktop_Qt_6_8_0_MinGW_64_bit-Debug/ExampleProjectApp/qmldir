@@ -1,0 +1,4 @@
+module ExampleProjectApp
+typeinfo ExampleProject.qmltypes
+prefer :/ExampleProjectApp/
+

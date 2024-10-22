@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 二十四、QML——ShaderEffect
+title: 二十五、QML——ShaderEffect
 categories: QML
 tags: [QML]
 ---

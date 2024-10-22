@@ -1,0 +1,7 @@
+set(__QT_DEPLOY_TARGET_Test_FILE C:/Users/lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_26_ExtensionPlugin/Test/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/libTest.a)
+set(__QT_DEPLOY_TARGET_Test_TYPE STATIC_LIBRARY)
+set(__QT_DEPLOY_TARGET_Testplugin_FILE C:/Users/lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_26_ExtensionPlugin/Test/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/Test/libTestplugin.a)
+set(__QT_DEPLOY_TARGET_Testplugin_TYPE STATIC_LIBRARY)
+set(__QT_DEPLOY_TARGET_ExampleProject_FILE C:/Users/lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_26_ExtensionPlugin/Test/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/ExampleProject.exe)
+set(__QT_DEPLOY_TARGET_ExampleProject_TYPE EXECUTABLE)
+set(__QT_DEPLOY_TARGET_ExampleProject_RUNTIME_DLLS C:/Qt/6.8.0/mingw_64/bin/Qt6Quick.dll;C:/Qt/6.8.0/mingw_64/bin/Qt6QmlMeta.dll;C:/Qt/6.8.0/mingw_64/bin/Qt6QmlWorkerScript.dll;C:/Qt/6.8.0/mingw_64/bin/Qt6QmlModels.dll;C:/Qt/6.8.0/mingw_64/bin/Qt6Qml.dll;C:/Qt/6.8.0/mingw_64/bin/Qt6Network.dll;C:/Qt/6.8.0/mingw_64/bin/Qt6OpenGL.dll;C:/Qt/6.8.0/mingw_64/bin/Qt6Gui.dll;C:/Qt/6.8.0/mingw_64/bin/Qt6Core.dll)

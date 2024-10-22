@@ -1,0 +1,12 @@
+import QtQuick.tooling 1.2
+
+Module {
+    Component {
+        file: "myitem.h"
+        name: "MyItem"
+        accessSemantics: "reference"
+        prototype: "QQuickPaintedItem"
+        exports: ["Test/MyItem 1.0"]
+        exportMetaObjectRevisions: [256]
+    }
+}

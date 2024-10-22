@@ -1,0 +1,12 @@
+--bare
+-I
+C:/Users/lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_26_ExtensionPlugin/Test/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug
+-I
+C:/Users/lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_26_ExtensionPlugin/Test/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug
+-I
+C:/Qt/6.8.0/mingw_64/qml
+--resource
+C:/Users/lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_26_ExtensionPlugin/Test/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/.qt/rcc/qmake_ExampleProjectApp.qrc
+--resource
+C:/Users/lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_26_ExtensionPlugin/Test/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/.qt/rcc/ExampleProject_raw_qml_0.qrc
+C:/Users/lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_26_ExtensionPlugin/Test/example/example.qml

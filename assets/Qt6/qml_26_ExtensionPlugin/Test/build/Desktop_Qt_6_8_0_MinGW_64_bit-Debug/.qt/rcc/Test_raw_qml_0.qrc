@@ -1,0 +1,6 @@
+<RCC>
+  <qresource prefix="/Test/">
+    <file alias="MyItemControls.qml">C:/Users/lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_26_ExtensionPlugin/Test/MyItemControls.qml</file>
+  </qresource>
+</RCC>
+
