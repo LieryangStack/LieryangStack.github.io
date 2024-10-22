@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 二十三、QML——CMakeLists项目创建
+title: 二十三、QML——Qt Design Studio生成CMake
 categories: QML
 tags: [QML]
 ---
