@@ -1,1 +1,0 @@
-https://github.com/nghiapq77/face-recognition-deepstream

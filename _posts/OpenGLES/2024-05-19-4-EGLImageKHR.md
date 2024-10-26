@@ -1,8 +1,8 @@
 ---
 layout: post
 title: 四、OpenGL ES——EGLImageKHR
-categories: OpenGL ES
-tags: [OpenGL ES]
+categories: OpenGLES
+tags: [OpenGLES]
 ---
 
 这一节的内容其实讲的就是纹理，只不过 `EGLImageKHR` 是通过不同方式直接更新纹理信息。
