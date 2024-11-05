@@ -5,7 +5,7 @@ categories: QML
 tags: [QML]
 ---
 
-本章节记录，如何创建 `Qt Design Studio` 和 `Qt Creator` 共同开发项目。
+`qds` 就是`Qt Design Studio`，本章节记录，如何创建 `Qt Design Studio` 和 `Qt Creator` 共同开发项目。
 
 ## 1 创建共同开发项目
 

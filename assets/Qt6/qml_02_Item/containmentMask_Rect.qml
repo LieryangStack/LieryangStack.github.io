@@ -9,7 +9,7 @@ Rectangle {
 
     TapHandler { id: tapHandler }
     HoverHandler { id: hoverHandler }
-
+    
     containmentMask: Rectangle {
       x: 10; y: 10
       width: 50; height: 50
