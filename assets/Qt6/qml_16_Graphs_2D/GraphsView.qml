@@ -143,17 +143,17 @@ Window {
 			// }
 
 			/* 线段渐变 */
-			// layer.effect: LinearGradient {
-			// 	anchors.fill: parent
-			// 	start: Qt.point(0, 0)
-			// 	end: Qt.point(0, parent.height)
-			// 	gradient: Gradient {
-			// 		// orientation: Gradient.Horizontal
-			// 		GradientStop { position: 0.0; color: "#FC1CD5" }
-			// 		GradientStop { position: 0.5; color: "#1371EF" }
-			// 		GradientStop { position: 1.0; color: "#57EC99" }
-			// 	}
-			// }
+			layer.effect: LinearGradient {
+				anchors.fill: parent
+				start: Qt.point(0, 0)
+				end: Qt.point(0, parent.height)
+				gradient: Gradient {
+					// orientation: Gradient.Horizontal
+					GradientStop { position: 0.0; color: "#FC1CD5" }
+					GradientStop { position: 0.5; color: "#1371EF" }
+					GradientStop { position: 1.0; color: "#57EC99" }
+				}
+			}
 
 			// layer.effect: RadialGradient {
 			// 	anchors.fill: parent
@@ -164,16 +164,16 @@ Window {
 			// 	}
 			// }
 
-			layer.effect: DropShadow {
-				anchors.fill: graphsView
-				// horizontalOffset: 3
-				verticalOffset: 10
-				radius: 50.0
-				samples: (radius *2) +1
-				color: "#4F00BFFF"
-				spread: 0.7
-				source: graphsView
-			}
+			// layer.effect: DropShadow {
+			// 	anchors.fill: graphsView
+			// 	// horizontalOffset: 3
+			// 	verticalOffset: 10
+			// 	radius: 50.0
+			// 	samples: (radius *2) +1
+			// 	color: "#4F00BFFF"
+			// 	spread: 0.7
+			// 	source: graphsView
+			// }
 
 			SplineSeries {
 				id: line

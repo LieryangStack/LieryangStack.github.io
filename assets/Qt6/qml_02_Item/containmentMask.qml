@@ -10,6 +10,7 @@ Rectangle {
     TapHandler { id: tapHandler }
     HoverHandler { id: hoverHandler }
 
+    /* 设定可以响应鼠标事件的区域 */
     containmentMask: QtObject {
         property alias radius: circle.radius
         function contains(point: point) : bool {

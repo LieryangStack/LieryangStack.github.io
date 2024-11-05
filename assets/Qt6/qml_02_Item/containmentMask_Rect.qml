@@ -9,7 +9,8 @@ Rectangle {
 
     TapHandler { id: tapHandler }
     HoverHandler { id: hoverHandler }
-    
+
+    /* 设定可以响应鼠标事件的区域 */
     containmentMask: Rectangle {
       x: 10; y: 10
       width: 50; height: 50
