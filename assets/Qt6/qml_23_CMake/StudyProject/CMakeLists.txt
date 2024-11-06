@@ -26,8 +26,7 @@ qt_standard_project_setup()
 qt_add_executable(${CMAKE_PROJECT_NAME})
 qt_add_resources(${CMAKE_PROJECT_NAME} "configuration"
     PREFIX "/"
-    FILES
-        qtquickcontrols2.conf)
+    FILES qtquickcontrols2.conf)
 
 # 引入 qds.cmake 文件（该cmake文件会导入StudyProject StudyProjectContent App子目录）
 include(qds)

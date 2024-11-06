@@ -1,0 +1,213 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"jsonFile" : "directory-.-Release-d0094a50bb2071803777.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.16"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4,
+						5,
+						6,
+						7,
+						8,
+						9,
+						10,
+						11,
+						12,
+						13,
+						14,
+						15,
+						16,
+						17
+					]
+				}
+			],
+			"name" : "Release",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "Li",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4,
+						5,
+						6,
+						7,
+						8,
+						9,
+						10,
+						11,
+						12,
+						13,
+						14,
+						15,
+						16,
+						17
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "Li::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-Li-Release-d70374c0ae26340d32b5.json",
+					"name" : "Li",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "Li_autogen::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-Li_autogen-Release-92ff6ba3cd68fd3b1cb1.json",
+					"name" : "Li_autogen",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "Li_autogen_timestamp_deps::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-Li_autogen_timestamp_deps-Release-9b378fe87603efbb5a1b.json",
+					"name" : "Li_autogen_timestamp_deps",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "Li_qmllint::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-Li_qmllint-Release-7ffe492273bea3003c98.json",
+					"name" : "Li_qmllint",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "Li_qmllint_json::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-Li_qmllint_json-Release-1f43eaa3b6a09f78bd3a.json",
+					"name" : "Li_qmllint_json",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "Li_qmllint_module::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-Li_qmllint_module-Release-5518798248ad82da481a.json",
+					"name" : "Li_qmllint_module",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "Li_qmltyperegistration::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-Li_qmltyperegistration-Release-0367018343f050710861.json",
+					"name" : "Li_qmltyperegistration",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "Li_tooling::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-Li_tooling-Release-5e055984e82fd56a68e8.json",
+					"name" : "Li_tooling",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "Liplugin::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-Liplugin-Release-e90f4eb5b37837b3d7c1.json",
+					"name" : "Liplugin",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "Liplugin_autogen::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-Liplugin_autogen-Release-7e110a4dc730bbd3d893.json",
+					"name" : "Liplugin_autogen",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "Liplugin_autogen_timestamp_deps::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-Liplugin_autogen_timestamp_deps-Release-9eeef989f4a03423a1bf.json",
+					"name" : "Liplugin_autogen_timestamp_deps",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "all_aotstats::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-all_aotstats-Release-18f771e072444260c811.json",
+					"name" : "all_aotstats",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "all_qmllint::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-all_qmllint-Release-a2078b099c60131c4944.json",
+					"name" : "all_qmllint",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "all_qmllint_json::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-all_qmllint_json-Release-fca05fed7303e9d05d2a.json",
+					"name" : "all_qmllint_json",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "all_qmllint_module::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-all_qmllint_module-Release-f0018b984ee043e3960a.json",
+					"name" : "all_qmllint_module",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "all_qmltyperegistrations::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-all_qmltyperegistrations-Release-afd73da5595fcc5477c3.json",
+					"name" : "all_qmltyperegistrations",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "module_Li_aotstats_targets::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-module_Li_aotstats_targets-Release-3f14d8e76119837f17f9.json",
+					"name" : "module_Li_aotstats_targets",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "qt_internal_plugins::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-qt_internal_plugins-Release-774224023e5ef3d377a8.json",
+					"name" : "qt_internal_plugins",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "C:/ProgramData/QtCreator/Links/a0e6354a5aae50ef855e3f4b52149546",
+		"source" : "C:/ProgramData/QtCreator/Links/887026d6496b16e95f4e0c6e02b41768"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 7
+	}
+}

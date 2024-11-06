@@ -10,7 +10,8 @@ Project {
     enableCMakeGeneration: true
     enablePythonGeneration: false
     widgetApp: true
-    importPaths: [ "." ]
+
+    importPaths: [ "."]
 
     qdsVersion: "4.6"
     quickVersion: "6.7"

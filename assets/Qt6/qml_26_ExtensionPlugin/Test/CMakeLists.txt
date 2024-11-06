@@ -38,5 +38,6 @@ qt_add_qml_module(ExampleProject
     VERSION 1.0
     QML_FILES example/example.qml
 )
+
 target_link_libraries(ExampleProject PRIVATE Qt6::Quick Testplugin)
 target_compile_definitions(ExampleProject PRIVATE $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>)

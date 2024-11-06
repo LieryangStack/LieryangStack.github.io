@@ -1,0 +1,24 @@
+{
+    "classes": [
+        {
+            "classInfos": [
+                {
+                    "name": "QML.Element",
+                    "value": "auto"
+                }
+            ],
+            "className": "MyItem",
+            "lineNumber": 6,
+            "object": true,
+            "qualifiedClassName": "MyItem",
+            "superClasses": [
+                {
+                    "access": "public",
+                    "name": "QQuickPaintedItem"
+                }
+            ]
+        }
+    ],
+    "inputFile": "myitem.h",
+    "outputRevision": 68
+}

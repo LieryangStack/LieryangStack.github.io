@@ -6,6 +6,7 @@ import StudyProject
 import QtQuick.Studio.Effects
 import QtCharts
 
+
 Window {
     width: Constants.width
     height: Constants.height
@@ -18,5 +19,16 @@ Window {
         anchors.fill: parent
     }
 
+    MyItem {
+        x: 100; y: 100
+        width: 100
+        height: 100
+    }
+
+    MyItemControls {
+        x: 300; y: 100
+        width: 100
+        height: 100
+    }
 }
 

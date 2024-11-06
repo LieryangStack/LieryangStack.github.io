@@ -1,0 +1,14 @@
+-rootPath
+C:/ProgramData/QtCreator/Links/887026d6496b16e95f4e0c6e02b41768
+-cmake-output
+-output-file
+C:/ProgramData/QtCreator/Links/c0040ebbcd0f1b713be371408e974f06/.qt/qml_imports/ExampleProject_conf.cmake
+-importPath
+C:/ProgramData/QtCreator/Links/c0040ebbcd0f1b713be371408e974f06/ExampleProjectApp
+-importPath
+C:/ProgramData/QtCreator/Links/c0040ebbcd0f1b713be371408e974f06
+-importPath
+C:/Qt/6.8.0/mingw_64/qml
+-qrcFiles
+C:/ProgramData/QtCreator/Links/c0040ebbcd0f1b713be371408e974f06/.qt/rcc/qmake_ExampleProjectApp.qrc
+C:/ProgramData/QtCreator/Links/c0040ebbcd0f1b713be371408e974f06/.qt/rcc/ExampleProject_raw_qml_0.qrc

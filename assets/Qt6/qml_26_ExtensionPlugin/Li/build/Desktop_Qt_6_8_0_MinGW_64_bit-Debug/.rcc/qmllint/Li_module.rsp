@@ -1,0 +1,12 @@
+-I
+C:/ProgramData/QtCreator/Links/c0040ebbcd0f1b713be371408e974f06
+-I
+C:/ProgramData/QtCreator/Links/c0040ebbcd0f1b713be371408e974f06
+-I
+C:/Qt/6.8.0/mingw_64/qml
+--resource
+C:/ProgramData/QtCreator/Links/c0040ebbcd0f1b713be371408e974f06/.qt/rcc/qmake_Li.qrc
+--resource
+C:/ProgramData/QtCreator/Links/c0040ebbcd0f1b713be371408e974f06/.qt/rcc/Li_raw_qml_0.qrc
+--module
+Li

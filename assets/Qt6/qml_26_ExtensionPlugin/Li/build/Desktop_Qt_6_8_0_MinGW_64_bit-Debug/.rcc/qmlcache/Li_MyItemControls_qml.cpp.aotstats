@@ -1,0 +1,20 @@
+[
+    {
+        "moduleFiles": [
+            {
+                "entries": [
+                    {
+                        "codegenSuccessfull": true,
+                        "column": 23,
+                        "durationMicroseconds": 130,
+                        "errorMessage": "",
+                        "functionName": "fill",
+                        "line": 7
+                    }
+                ],
+                "filepath": "C:/ProgramData/QtCreator/Links/c0040ebbcd0f1b713be371408e974f06/MyItemControls.qml"
+            }
+        ],
+        "moduleId": "Li(Li)"
+    }
+]
