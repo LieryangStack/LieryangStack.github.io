@@ -7,6 +7,8 @@ tags: [QML]
 
 `qds` 就是`Qt Design Studio`，本章节记录，如何创建 `Qt Design Studio` 和 `Qt Creator` 共同开发项目。
 
+1. 这部分内容和[2023-09-19-26-QML之扩展插件Plugin](./2023-09-19-26-QML之扩展插件Plugin.md)有部分衔接，但是C++生成的插件，无法导入到 `Qt Design Studio` 显示，
+
 ## 1 创建共同开发项目
 
 ### 1.1 创建一个 `Qt Design Studio` 项目
