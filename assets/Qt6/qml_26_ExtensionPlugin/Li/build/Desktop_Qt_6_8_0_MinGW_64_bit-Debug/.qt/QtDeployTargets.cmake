@@ -1,6 +1,0 @@
-set(__QT_DEPLOY_TARGET_Li_FILE C:/ProgramData/QtCreator/Links/c0040ebbcd0f1b713be371408e974f06/Li.dll)
-set(__QT_DEPLOY_TARGET_Li_TYPE SHARED_LIBRARY)
-set(__QT_DEPLOY_TARGET_Li_RUNTIME_DLLS C:/Qt/6.8.0/mingw_64/bin/Qt6Quick.dll;C:/Qt/6.8.0/mingw_64/bin/Qt6QmlMeta.dll;C:/Qt/6.8.0/mingw_64/bin/Qt6QmlWorkerScript.dll;C:/Qt/6.8.0/mingw_64/bin/Qt6QmlModels.dll;C:/Qt/6.8.0/mingw_64/bin/Qt6Qml.dll;C:/Qt/6.8.0/mingw_64/bin/Qt6Network.dll;C:/Qt/6.8.0/mingw_64/bin/Qt6OpenGL.dll;C:/Qt/6.8.0/mingw_64/bin/Qt6Gui.dll;C:/Qt/6.8.0/mingw_64/bin/Qt6Core.dll)
-set(__QT_DEPLOY_TARGET_Liplugin_FILE C:/ProgramData/QtCreator/Links/c0040ebbcd0f1b713be371408e974f06/Li/Liplugin.dll)
-set(__QT_DEPLOY_TARGET_Liplugin_TYPE MODULE_LIBRARY)
-set(__QT_DEPLOY_TARGET_Liplugin_RUNTIME_DLLS C:/ProgramData/QtCreator/Links/c0040ebbcd0f1b713be371408e974f06/Li.dll;C:/Qt/6.8.0/mingw_64/bin/Qt6Quick.dll;C:/Qt/6.8.0/mingw_64/bin/Qt6QmlMeta.dll;C:/Qt/6.8.0/mingw_64/bin/Qt6QmlWorkerScript.dll;C:/Qt/6.8.0/mingw_64/bin/Qt6QmlModels.dll;C:/Qt/6.8.0/mingw_64/bin/Qt6Qml.dll;C:/Qt/6.8.0/mingw_64/bin/Qt6Network.dll;C:/Qt/6.8.0/mingw_64/bin/Qt6OpenGL.dll;C:/Qt/6.8.0/mingw_64/bin/Qt6Gui.dll;C:/Qt/6.8.0/mingw_64/bin/Qt6Core.dll)

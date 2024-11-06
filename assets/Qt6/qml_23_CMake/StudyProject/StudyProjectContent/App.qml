@@ -5,7 +5,7 @@ import QtQuick
 import StudyProject
 import QtQuick.Studio.Effects
 import QtCharts
-
+import Li1
 
 Window {
     width: Constants.width

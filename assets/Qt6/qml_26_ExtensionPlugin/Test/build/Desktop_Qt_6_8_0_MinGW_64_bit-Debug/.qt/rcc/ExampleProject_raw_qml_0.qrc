@@ -1,6 +1,0 @@
-<RCC>
-  <qresource prefix="/ExampleProjectApp/">
-    <file alias="example/example.qml">C:/Users/lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_26_ExtensionPlugin/Test/example/example.qml</file>
-  </qresource>
-</RCC>
-

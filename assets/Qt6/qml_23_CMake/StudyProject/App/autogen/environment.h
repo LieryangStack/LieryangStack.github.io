@@ -7,7 +7,7 @@
 #include "qqmlextensionplugin.h"
 
 Q_IMPORT_QML_PLUGIN(StudyProjectContentPlugin)
-Q_IMPORT_QML_PLUGIN(LiPlugin)
+Q_IMPORT_QML_PLUGIN(Li1Plugin)
 Q_IMPORT_QML_PLUGIN(StudyProjectPlugin)
 
 const char mainQmlFile[] = "qrc:/qt/qml/StudyProjectContent/App.qml";

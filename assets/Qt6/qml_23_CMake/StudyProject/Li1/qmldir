@@ -1,0 +1,8 @@
+module Li1
+linktarget Li1plugin
+optional plugin Li1plugin
+classname Li1Plugin
+typeinfo Li1.qmltypes
+prefer :/Li1/
+MyItemControls 1.0 MyItemControls.qml
+

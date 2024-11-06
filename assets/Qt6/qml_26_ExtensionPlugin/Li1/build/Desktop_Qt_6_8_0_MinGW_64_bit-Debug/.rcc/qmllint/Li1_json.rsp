@@ -1,0 +1,12 @@
+--bare
+-I
+C:/ProgramData/QtCreator/Links/a96ec6dacc370a47cf47628f38886f93
+-I
+C:/Qt/6.8.0/mingw_64/qml
+--resource
+C:/ProgramData/QtCreator/Links/a96ec6dacc370a47cf47628f38886f93/.qt/rcc/qmake_Li1.qrc
+--resource
+C:/ProgramData/QtCreator/Links/a96ec6dacc370a47cf47628f38886f93/.qt/rcc/Li1_raw_qml_0.qrc
+C:/ProgramData/QtCreator/Links/331027212a1869a6d07a657a99121073/MyItemControls.qml
+--json
+C:/ProgramData/QtCreator/Links/a96ec6dacc370a47cf47628f38886f93/Li1_qmllint.json

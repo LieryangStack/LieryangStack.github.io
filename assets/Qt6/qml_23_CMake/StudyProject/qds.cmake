@@ -2,11 +2,11 @@
 ### Do not change
 
 add_subdirectory(StudyProjectContent)
-add_subdirectory(Li)
+add_subdirectory(Li1)
 add_subdirectory(StudyProject)
 add_subdirectory(App)
 
 target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE
     StudyProjectContentplugin
-    Liplugin
+    Li1plugin
     StudyProjectplugin)
