@@ -12,34 +12,126 @@ import QtQuick.Studio.Effects
 import LiQML
 
 FramelessWindow {
+    id: framelessWindow
     anchors.fill: parent
 
-    Image {
-        id: closeIcon
-        x: 598
-        width: 20
-        height: 20
+    Row {
+        id: row
+        width: 152
+        height: 50
         anchors.right: parent.right
         anchors.top: parent.top
-        anchors.rightMargin: 20
-        anchors.topMargin: 20
-        source: "image/close-icon.svg"
-        layer.effect: ColorOverlayEffect {
-            id: colorOverlay
-            color: "#a6a0a0"
-        }
-        layer.enabled: true
-        fillMode: Image.PreserveAspectFit
+        anchors.rightMargin: 15
+        anchors.topMargin: 15
+        layoutDirection: Qt.RightToLeft
+        spacing: 20
 
-        MouseArea {
-            id: mouseArea
-            width: 100
-            height: 100
+        Image {
+            id: closeIcon
+            width: 19
+            height: 19
+            source: "image/close.svg"
+            property color mycolor: "#a6a0a0"
+            sourceSize.height: 32
+            sourceSize.width: 32
+
+            layer.effect: ColorOverlayEffect {
+                id: colorOverlay
+                color: closeIcon.mycolor
+            }
             layer.enabled: true
+            fillMode: Image.PreserveAspectFit
 
-            Connections {
-                target: mouseArea
-                onClicked: Qt.quit()
+            MouseArea {
+                id: mouseArea
+                anchors.fill: parent
+
+                hoverEnabled: true
+                cursorShape: Qt.PointingHandCursor
+                layer.enabled: true
+                Connections {
+                    target: mouseArea
+                    onClicked: Qt.quit()
+                }
+
+                Connections {
+                    target: mouseArea
+                    onEntered: {
+                        closeIcon.mycolor = "white"
+                    }
+                }
+
+                Connections {
+                    target: mouseArea
+                    onExited: {
+                        closeIcon.mycolor = "#a6a0a0"
+                    }
+                }
+            }
+        }
+
+        Image {
+            id: closeIcon1
+            width: 17
+            height: 17
+            source: "image/maximize-svgrepo-com.svg"
+            property color mycolor: "#a6a0a0"
+            sourceSize.height: 32
+            sourceSize.width: 32
+            layer.enabled: true
+            layer.effect: ColorOverlayEffect {
+                id: colorOverlay1
+                color: closeIcon1.mycolor
+            }
+            fillMode: Image.PreserveAspectFit
+            MouseArea {
+                id: mouseArea1
+                anchors.fill: parent
+                hoverEnabled: true
+                cursorShape: Qt.PointingHandCursor
+                layer.enabled: true
+                Connections {
+                    target: mouseArea1
+                    onClicked: window.Maximized
+                }
+                Connections {
+                    target: mouseArea1
+                    onEntered: {
+                        closeIcon1.mycolor = "white"
+                    }
+                }
+                Connections {
+                    target: mouseArea1
+                    onExited: {
+                        closeIcon1.mycolor = "#a6a0a0"
+                    }
+                }
+            }
+        }
+
+        Image {
+            id: closeIcon2
+            width: 25
+            height: 20
+            source: "image/icons8-minimize.svg"
+            scale: 1
+            sourceSize.height: 32
+            sourceSize.width: 32
+            layer.enabled: true
+            layer.effect: ColorOverlayEffect {
+                id: colorOverlay2
+                color: "#a6a0a0"
+            }
+            fillMode: Image.Stretch
+            MouseArea {
+                id: mouseArea2
+                anchors.fill: parent
+                cursorShape: Qt.PointingHandCursor
+                layer.enabled: true
+                Connections {
+                    target: mouseArea2
+                    onClicked: Qt.quit()
+                }
             }
         }
     }
