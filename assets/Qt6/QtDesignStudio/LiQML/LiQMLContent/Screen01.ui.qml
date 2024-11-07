@@ -8,8 +8,8 @@ Check out https://doc.qt.io/qtcreator/creator-quick-ui-forms.html for details on
 */
 import QtQuick
 import QtQuick.Controls
-import LiQML
 import QtQuick.Studio.Effects
+import LiQML
 
 FramelessWindow {
     anchors.fill: parent
