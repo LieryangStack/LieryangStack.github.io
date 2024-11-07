@@ -7,7 +7,11 @@ tags: [QML]
 
 `qds` 就是`Qt Design Studio`，本章节记录，如何创建 `Qt Design Studio` 和 `Qt Creator` 共同开发项目。
 
-1. 这部分内容和[2023-09-19-26-QML之扩展插件Plugin](./2023-09-19-26-QML之扩展插件Plugin.md)有部分衔接，但是C++生成的插件，无法导入到 `Qt Design Studio` 显示，
+1. 第一节实现了 `Qt Design Studio` 生成 CMakeList 文件，然后使用 `Qt Creator` 编辑。
+
+2. 第二节是对整个项目文件的分析
+
+3. 第三节想把C++对象封装成QML插件，然后使用 `Qt Design Studio` 访问，实例化创建对象，但是没有成功，可能是因为动态库的链接问题。
 
 ## 1 创建共同开发项目
 
@@ -77,6 +81,57 @@ tags: [QML]
 这部分是 `Qt Design Studio` 定义的 qml组件，比如：`ArcItem`、`Glow` 、`QuickStudioApplication` 等等。
 
 ![alt text](/assets/Qt6/qml_23_CMake/image/image-12.png)
+
+## 3 创建C++插件导入qds
+
+
+制作插件（或者说是动态库）是很常见的需求，其实也可以说是将qml文件或者c++文件封装成静态库或者动态库，提供moudle信息，然后给其他qml界面调用。
+
+1. 我认为这里的插件Plugin，可以等同认为是模组Moudle，因为可以在qml文件中直接调用该Plugin。
+
+2. C++编写的对象组件和qml编写的对象组件都可以一起封装成一个插件。
+
+3. CMake中使用 `qt_add_qml_module` 直接生成相关的文件和库。（一般情况下，`qt_add_qml_module` 等同于 `qt6_add_qml_module`）
+
+4. 存在问题：无法给 `Qt Design Studio` 使用，应该是由于动态库链接问题造成。
+
+### 3.1 生成Qt Quick扩展插件
+
+![alt text](/assets/Qt6/qml_23_CMake/extension_plugin_image/image.png)
+
+![alt text](/assets/Qt6/qml_23_CMake/extension_plugin_image/image-1.png)
+
+### 3.2 分析生成的扩展插件组成
+
+生成前只有三个文件，使用 `qt_add_qml_module` 生成相关静态库和类型描述文件：
+
+![alt text](/assets/Qt6/qml_23_CMake/extension_plugin_image/image-2.png)
+
+`qt_add_qml_module` 生成相关的文件分析：
+
+![alt text](/assets/Qt6/qml_23_CMake/extension_plugin_image/image-4.png)
+
+![alt text](/assets/Qt6/qml_23_CMake/extension_plugin_image/image-3.png)
+
+注意：`qmldir`文件和 `Test.qmltypes` 文件
+
+- **qmldir**： 是用来描述插件的相关信息。文件中的 `typeinfo` 指明当前插件对应的 .qmltypes 文件是什么。
+
+- **Test.qmltypes**：用于定义 QML 类型的元信息<font color="blue">（好像只是用来描述C++文件定义的对象信息）</font>
+
+- 如果使用该 `Test` 插件（模块），只需要调用 `libTestplugin.a` 库即可。也就是 `target_link_libraries(ExampleProject PRIVATE Qt6::Quick Testplugin)` 就可以。（因为 `libTestplugin.a` 库会链接 `libTest.a` 库）
+
+![alt text](/assets/Qt6/qml_23_CMake/extension_plugin_image/image-5.png)
+
+### 3.3 插件无法再qds中使用
+
+![alt text](/assets/Qt6/qml_23_CMake/extension_plugin_image/image-6.png)
+
+我分析可能得原因：
+
+1. 动态库 Liplugin.dll 链接其他库的问题。
+
+2. 我暂时不用这部分内容也可以，不是必须要解决的问题，所以暂时不做研究了。
 
 ## 参考
 
