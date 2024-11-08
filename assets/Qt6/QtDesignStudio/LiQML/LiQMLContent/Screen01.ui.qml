@@ -114,23 +114,36 @@ FramelessWindow {
             width: 25
             height: 20
             source: "image/icons8-minimize.svg"
-            scale: 1
+            property color mycolor: "#a6a0a0"
             sourceSize.height: 32
             sourceSize.width: 32
             layer.enabled: true
             layer.effect: ColorOverlayEffect {
                 id: colorOverlay2
-                color: "#a6a0a0"
+                color: closeIcon2.mycolor
             }
             fillMode: Image.Stretch
             MouseArea {
                 id: mouseArea2
                 anchors.fill: parent
+                hoverEnabled: true
                 cursorShape: Qt.PointingHandCursor
                 layer.enabled: true
                 Connections {
                     target: mouseArea2
                     onClicked: Qt.quit()
+                }
+                Connections {
+                    target: mouseArea2
+                    onEntered: {
+                        closeIcon2.mycolor = "white"
+                    }
+                }
+                Connections {
+                    target: mouseArea2
+                    onExited: {
+                        closeIcon2.mycolor = "#a6a0a0"
+                    }
                 }
             }
         }
