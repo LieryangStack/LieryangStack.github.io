@@ -1,0 +1,8 @@
+<RCC>
+  <qresource prefix="/qt-project.org/imports/QtQuick/Studio/MultiText/">
+    <file alias="MultiTextElement.qml">C:/ProgramData/QtCreator/Links/2cdf872ecbadb6d37613b6048fc5c678/_deps/ds-src/src/imports/multitext/MultiTextElement.qml</file>
+    <file alias="MultiTextItem.qml">C:/ProgramData/QtCreator/Links/2cdf872ecbadb6d37613b6048fc5c678/_deps/ds-src/src/imports/multitext/MultiTextItem.qml</file>
+    <file alias="MultiTextException.qml">C:/ProgramData/QtCreator/Links/2cdf872ecbadb6d37613b6048fc5c678/_deps/ds-src/src/imports/multitext/MultiTextException.qml</file>
+  </qresource>
+</RCC>
+

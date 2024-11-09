@@ -13,16 +13,20 @@ import LiQML
 
 FramelessWindow {
     id: framelessWindow
+
+    property int d: window_border_width + 10
+
     anchors.fill: parent
 
     Row {
+
         id: row
         width: 152
         height: 50
         anchors.right: parent.right
         anchors.top: parent.top
-        anchors.rightMargin: 15
-        anchors.topMargin: 15
+        anchors.rightMargin: d
+        anchors.topMargin: d
         layoutDirection: Qt.RightToLeft
         spacing: 20
 
@@ -92,7 +96,15 @@ FramelessWindow {
                 layer.enabled: true
                 Connections {
                     target: mouseArea1
-                    onClicked: window.Maximized
+                    onClicked: {
+                        if (framelessWindow.state !== "NormalWindow") {
+                            framelessWindow.state = "NormalWindow"
+                            window.color = "transparent"
+                            window.flags = Qt.FramelessWindowHint | Qt.Window
+                        } else {
+                            framelessWindow.state = "MaximizedWindow"
+                        }
+                    }
                 }
                 Connections {
                     target: mouseArea1
@@ -131,7 +143,7 @@ FramelessWindow {
                 layer.enabled: true
                 Connections {
                     target: mouseArea2
-                    onClicked: Qt.quit()
+                    onClicked: framelessWindow.windowRoot.visibility = Window.Minimized
                 }
                 Connections {
                     target: mouseArea2

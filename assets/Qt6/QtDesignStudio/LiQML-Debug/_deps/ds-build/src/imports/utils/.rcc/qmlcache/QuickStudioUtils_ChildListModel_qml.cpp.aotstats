@@ -1,0 +1,20 @@
+[
+    {
+        "moduleFiles": [
+            {
+                "entries": [
+                    {
+                        "codegenSuccessfull": false,
+                        "column": 26,
+                        "durationMicroseconds": 97,
+                        "errorMessage": "Cannot load property modelName from (component in C:/ProgramData/QtCreator/Links/2cdf872ecbadb6d37613b6048fc5c678/_deps/ds-build/src/imports/utils/ChildListModel.qml)::modelName with type QString.",
+                        "functionName": "onJsonObjectChanged",
+                        "line": 50
+                    }
+                ],
+                "filepath": "C:/ProgramData/QtCreator/Links/2cdf872ecbadb6d37613b6048fc5c678/_deps/ds-build/src/imports/utils/ChildListModel.qml"
+            }
+        ],
+        "moduleId": "QtQuick.Studio.Utils(QuickStudioUtils)"
+    }
+]

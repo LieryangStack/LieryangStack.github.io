@@ -1,0 +1,130 @@
+{
+	"backtrace" : 3,
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"add_custom_target",
+			"qt6_target_qml_sources",
+			"qt6_add_qml_module",
+			"add_dependencies"
+		],
+		"files" : 
+		[
+			"C:/Qt/6.8.0/mingw_64/lib/cmake/Qt6Qml/Qt6QmlMacros.cmake",
+			"LiQMLContent/CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 1
+			},
+			{
+				"command" : 2,
+				"file" : 1,
+				"line" : 7,
+				"parent" : 0
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 891,
+				"parent" : 1
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 3143,
+				"parent" : 2
+			},
+			{
+				"command" : 3,
+				"file" : 0,
+				"line" : 3147,
+				"parent" : 2
+			}
+		]
+	},
+	"dependencies" : 
+	[
+		{
+			"backtrace" : 4,
+			"id" : "LiQMLContent_qmltyperegistration::@fc70fccdda3e6ffa02a8"
+		}
+	],
+	"id" : "module_LiQMLContent_aotstats_targets::@fc70fccdda3e6ffa02a8",
+	"name" : "module_LiQMLContent_aotstats_targets",
+	"paths" : 
+	{
+		"build" : "LiQMLContent",
+		"source" : "LiQMLContent"
+	},
+	"sourceGroups" : 
+	[
+		{
+			"name" : "",
+			"sourceIndexes" : 
+			[
+				0
+			]
+		},
+		{
+			"name" : "CMake Rules",
+			"sourceIndexes" : 
+			[
+				1,
+				2,
+				3,
+				4,
+				5,
+				6
+			]
+		}
+	],
+	"sources" : 
+	[
+		{
+			"backtrace" : 3,
+			"isGenerated" : true,
+			"path" : "C:/ProgramData/QtCreator/Links/2cdf872ecbadb6d37613b6048fc5c678/LiQMLContent/CMakeFiles/module_LiQMLContent_aotstats_targets",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "C:/ProgramData/QtCreator/Links/2cdf872ecbadb6d37613b6048fc5c678/LiQMLContent/CMakeFiles/module_LiQMLContent_aotstats_targets.rule",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "C:/ProgramData/QtCreator/Links/2cdf872ecbadb6d37613b6048fc5c678/LiQMLContent/.rcc/qmlcache/module_LiQMLContent.aotstats.rule",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "C:/ProgramData/QtCreator/Links/2cdf872ecbadb6d37613b6048fc5c678/LiQMLContent/.rcc/qmlcache/LiQMLContent_App_qml.cpp.rule",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "C:/ProgramData/QtCreator/Links/2cdf872ecbadb6d37613b6048fc5c678/LiQMLContent/.rcc/qmlcache/LiQMLContent_FramelessWindow_qml.cpp.rule",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "C:/ProgramData/QtCreator/Links/2cdf872ecbadb6d37613b6048fc5c678/LiQMLContent/.rcc/qmlcache/LiQMLContent_Screen01.ui_qml.cpp.rule",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "C:/ProgramData/QtCreator/Links/2cdf872ecbadb6d37613b6048fc5c678/LiQMLContent/liqmlcontent_qmltyperegistrations.cpp.rule",
+			"sourceGroupIndex" : 1
+		}
+	],
+	"type" : "UTILITY"
+}

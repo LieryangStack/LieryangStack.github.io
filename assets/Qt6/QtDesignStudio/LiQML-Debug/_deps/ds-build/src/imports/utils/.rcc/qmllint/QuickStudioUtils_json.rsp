@@ -1,0 +1,16 @@
+--bare
+-I
+C:/ProgramData/QtCreator/Links/2cdf872ecbadb6d37613b6048fc5c678/qml
+-I
+C:/ProgramData/QtCreator/Links/2cdf872ecbadb6d37613b6048fc5c678/qml
+-I
+C:/Qt/6.8.0/mingw_64/qml
+--resource
+C:/ProgramData/QtCreator/Links/2cdf872ecbadb6d37613b6048fc5c678/_deps/ds-build/src/imports/utils/.qt/rcc/qmake_QtQuick_Studio_Utils.qrc
+--resource
+C:/ProgramData/QtCreator/Links/2cdf872ecbadb6d37613b6048fc5c678/_deps/ds-build/src/imports/utils/.qt/rcc/QuickStudioUtils_raw_qml_0.qrc
+C:/ProgramData/QtCreator/Links/2cdf872ecbadb6d37613b6048fc5c678/_deps/ds-src/src/imports/utils/JsonListModel.qml
+C:/ProgramData/QtCreator/Links/2cdf872ecbadb6d37613b6048fc5c678/_deps/ds-src/src/imports/utils/JsonBackend.qml
+C:/ProgramData/QtCreator/Links/2cdf872ecbadb6d37613b6048fc5c678/_deps/ds-src/src/imports/utils/ChildListModel.qml
+--json
+C:/ProgramData/QtCreator/Links/2cdf872ecbadb6d37613b6048fc5c678/QuickStudioUtils_qmllint.json

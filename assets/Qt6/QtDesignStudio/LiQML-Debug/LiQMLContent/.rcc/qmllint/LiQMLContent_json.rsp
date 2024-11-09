@@ -1,0 +1,16 @@
+--bare
+-I
+C:/ProgramData/QtCreator/Links/2cdf872ecbadb6d37613b6048fc5c678/qml
+-I
+C:/ProgramData/QtCreator/Links/2cdf872ecbadb6d37613b6048fc5c678/qml
+-I
+C:/Qt/6.8.0/mingw_64/qml
+--resource
+C:/ProgramData/QtCreator/Links/2cdf872ecbadb6d37613b6048fc5c678/LiQMLContent/.qt/rcc/qmake_LiQMLContent.qrc
+--resource
+C:/ProgramData/QtCreator/Links/2cdf872ecbadb6d37613b6048fc5c678/LiQMLContent/.qt/rcc/LiQMLContent_raw_qml_0.qrc
+C:/ProgramData/QtCreator/Links/dba204040e6740bccfabc70506ce7482/LiQMLContent/Screen01.ui.qml
+C:/ProgramData/QtCreator/Links/dba204040e6740bccfabc70506ce7482/LiQMLContent/FramelessWindow.qml
+C:/ProgramData/QtCreator/Links/dba204040e6740bccfabc70506ce7482/LiQMLContent/App.qml
+--json
+C:/ProgramData/QtCreator/Links/2cdf872ecbadb6d37613b6048fc5c678/LiQMLContent_qmllint.json

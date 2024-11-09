@@ -12,14 +12,27 @@ Window {
     flags: Qt.FramelessWindowHint | Qt.Window
 
     visible: true
-    color: "#00000000"
-    title: "LiQML"
+    color: "transparent"
+    title: "xiao"
 
     Screen01 {
         id: screen01
+        windowRoot: window
         anchors.fill: parent
     }
 
+    property bool isMinimized: false
+
+    /* 解决窗口最小化恢复后，左上角的标题阴影 */
+    onVisibilityChanged: {
+        if(window.visibility === Window.Minimized){
+            window.isMinimized = true
+            window.flags = Qt.Window
+        } else if(window.isMinimized === true){
+            window.flags = Qt.Window | Qt.FramelessWindowHint
+            window.isMinimized = false
+        }
+    }
 
 }
 

@@ -1,0 +1,21 @@
+<RCC>
+  <qresource prefix="/qt/qml/LiQMLContent/">
+    <file alias="Screen01.ui.qml">C:/ProgramData/QtCreator/Links/dba204040e6740bccfabc70506ce7482/LiQMLContent/Screen01.ui.qml</file>
+    <file alias="FramelessWindow.qml">C:/ProgramData/QtCreator/Links/dba204040e6740bccfabc70506ce7482/LiQMLContent/FramelessWindow.qml</file>
+    <file alias="App.qml">C:/ProgramData/QtCreator/Links/dba204040e6740bccfabc70506ce7482/LiQMLContent/App.qml</file>
+    <file alias="image/city.png">C:/ProgramData/QtCreator/Links/dba204040e6740bccfabc70506ce7482/LiQMLContent/image/city.png</file>
+    <file alias="image/icons8-minimize-long.svg">C:/ProgramData/QtCreator/Links/dba204040e6740bccfabc70506ce7482/LiQMLContent/image/icons8-minimize-long.svg</file>
+    <file alias="image/maximize-16-filled-svgrepo-com.svg">C:/ProgramData/QtCreator/Links/dba204040e6740bccfabc70506ce7482/LiQMLContent/image/maximize-16-filled-svgrepo-com.svg</file>
+    <file alias="image/window-close-symbolic.svg">C:/ProgramData/QtCreator/Links/dba204040e6740bccfabc70506ce7482/LiQMLContent/image/window-close-symbolic.svg</file>
+    <file alias="image/city-1.png">C:/ProgramData/QtCreator/Links/dba204040e6740bccfabc70506ce7482/LiQMLContent/image/city-1.png</file>
+    <file alias="image/maximize-svgrepo-com.svg">C:/ProgramData/QtCreator/Links/dba204040e6740bccfabc70506ce7482/LiQMLContent/image/maximize-svgrepo-com.svg</file>
+    <file alias="image/window-maximize-symbolic.svg">C:/ProgramData/QtCreator/Links/dba204040e6740bccfabc70506ce7482/LiQMLContent/image/window-maximize-symbolic.svg</file>
+    <file alias="image/close-icon.svg">C:/ProgramData/QtCreator/Links/dba204040e6740bccfabc70506ce7482/LiQMLContent/image/close-icon.svg</file>
+    <file alias="image/window-minimize-symbolic.svg">C:/ProgramData/QtCreator/Links/dba204040e6740bccfabc70506ce7482/LiQMLContent/image/window-minimize-symbolic.svg</file>
+    <file alias="image/window-restore-symbolic.svg">C:/ProgramData/QtCreator/Links/dba204040e6740bccfabc70506ce7482/LiQMLContent/image/window-restore-symbolic.svg</file>
+    <file alias="image/icons8-minimize.svg">C:/ProgramData/QtCreator/Links/dba204040e6740bccfabc70506ce7482/LiQMLContent/image/icons8-minimize.svg</file>
+    <file alias="image/window-new-symbolic.svg">C:/ProgramData/QtCreator/Links/dba204040e6740bccfabc70506ce7482/LiQMLContent/image/window-new-symbolic.svg</file>
+    <file alias="image/close.svg">C:/ProgramData/QtCreator/Links/dba204040e6740bccfabc70506ce7482/LiQMLContent/image/close.svg</file>
+  </qresource>
+</RCC>
+

@@ -1,0 +1,38 @@
+{
+	"backtrace" : 0,
+	"backtraceGraph" : 
+	{
+		"commands" : [],
+		"files" : 
+		[
+			"C:/ProgramData/QtCreator/Links/2cdf872ecbadb6d37613b6048fc5c678/_deps/ds-src/src/imports/components/CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 0
+			}
+		]
+	},
+	"dependencies" : 
+	[
+		{
+			"backtrace" : 0,
+			"id" : "QuickStudioComponents_tooling::@b8ea75ca72e9d0096cda"
+		}
+	],
+	"folder" : 
+	{
+		"name" : "QtInternalTargets"
+	},
+	"id" : "QuickStudioComponents_autogen_timestamp_deps::@b8ea75ca72e9d0096cda",
+	"isGeneratorProvided" : true,
+	"name" : "QuickStudioComponents_autogen_timestamp_deps",
+	"paths" : 
+	{
+		"build" : "_deps/ds-build/src/imports/components",
+		"source" : "C:/ProgramData/QtCreator/Links/2cdf872ecbadb6d37613b6048fc5c678/_deps/ds-src/src/imports/components"
+	},
+	"sources" : [],
+	"type" : "UTILITY"
+}
