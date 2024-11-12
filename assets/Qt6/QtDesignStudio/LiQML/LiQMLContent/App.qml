@@ -3,6 +3,7 @@
 
 import QtQuick
 import LiQML
+import QtQuick.Controls 6.8
 
 Window {
     id: window
@@ -13,9 +14,8 @@ Window {
 
     visible: true
     color: "transparent"
-    title: "xiao"
 
-    Screen01 {
+    FramelessWindow {
         id: screen01
         windowRoot: window
         anchors.fill: parent

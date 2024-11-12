@@ -9,23 +9,24 @@ qt6_add_qml_module(LiQMLContent
     VERSION 1.0
     RESOURCE_PREFIX "/qt/qml"
     QML_FILES
-        "Screen01.ui.qml"
-        "FramelessWindow.qml"
         "App.qml"
+        "FramelessWindow.qml"
+        "FramelessWindowForm.qml"
+        "FramelessWindowButton.qml"
     RESOURCES
-        "image/city.png"
-        "image/icons8-minimize-long.svg"
-        "image/maximize-16-filled-svgrepo-com.svg"
-        "image/window-close-symbolic.svg"
-        "image/city-1.png"
         "image/maximize-svgrepo-com.svg"
+        "image/maximize-16-filled-svgrepo-com.svg"
+        "image/city.png"
+        "image/close.svg"
         "image/window-maximize-symbolic.svg"
-        "image/close-icon.svg"
         "image/window-minimize-symbolic.svg"
+        "image/city-1.png"
+        "image/icons8-minimize-long.svg"
+        "image/window-close-symbolic.svg"
         "image/window-restore-symbolic.svg"
         "image/icons8-minimize.svg"
+        "image/close-icon.svg"
         "image/window-new-symbolic.svg"
-        "image/close.svg"
 )
 
 

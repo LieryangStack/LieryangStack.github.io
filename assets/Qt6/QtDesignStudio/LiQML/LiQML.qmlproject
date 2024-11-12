@@ -5,7 +5,7 @@ import QmlProject
 
 Project {
     mainFile: "LiQMLContent/App.qml"
-    mainUiFile: "LiQMLContent/Screen01.ui.qml"
+    mainUiFile: "LiQMLContent/FramelessWindow.qml"
     targetDirectory: "/opt/LiQML"
     enableCMakeGeneration: true
     enablePythonGeneration: false

@@ -4,52 +4,44 @@ import Qt5Compat.GraphicalEffects
 import QtQuick.Studio.Effects
 
 Item {
-    id: itemRoot
+    id: root
 
-    property int window_radius: 10 /* 窗口边角半径 */
-    property int window_border_width: 10 /* 窗口边框宽度（这部分就是Window和Rectangle之间的间隔） */
+    property int radius: 10 /* 窗口边角半径 */
     property Item source_obj_background: linear
-    property url image_background_path: "image/city-1.png"
-    property Window windowRoot
-    smooth: true
+    property url imagePath: "image/city-1.png"
 
+    required property Window windowRoot /* 该属性必须要被初始化，否则无法启动界面 */
+
+    anchors.margins: 10 /* 窗口边框宽度（这部分就是Window和Rectangle之间的间隔） */
     state: "NormalWindow"
 
     /* 边框的阴影区域 */
     RectangularGlow {
-        id: effect
-        anchors.fill: rect1
-        glowRadius: 2
-        spread: 0.1
+        id: rectRealeEffectGlow
+        anchors.fill: rectReal
+        glowRadius: 1
+        spread: 0.8
         color: "gray"
-        cornerRadius: itemRoot.window_radius + glowRadius
+        cornerRadius: root.radius + glowRadius
     }
 
     /* 实际的窗口区域 */
     Rectangle {
-        id: rect1
-        anchors.centerIn : parent
-        width: parent.width - (2 * window_border_width)
-        height: parent.height - (2 * window_border_width)
-        radius: window_radius
+        id: rectReal
+        radius: parent.radius
+        anchors.fill: parent
+        anchors.margins: parent.anchors.margins
 
-        layer.enabled: false
-
-        visible: true
 
         /* 设定颜色背景 */
-        color : "#121212"
-
-        gradient: Gradient {
-            GradientStop { position: 0.0; color: "#ccfbff" }
-            GradientStop { position: 1.0; color: "#ef96c5" }
-        }
+        color : "gray"
 
         /* 渐变色背景 */
         LinearGradient {
             id: linear
             visible: false
             anchors.fill: parent
+            source: parent
             start: Qt.point(0, 0);
             end: Qt.point(0, parent.height)
             gradient: Gradient {
@@ -58,14 +50,29 @@ Item {
             }
         }
 
+        /* 图片背景 */
+        Image {
+            id: image
+            visible: false
+            anchors.fill: parent
+            source: root.imagePath
+        }
+
+        /* 选择使用那个背景（渐变色、或者图片） */
+        OpacityMask {
+            anchors.fill: parent
+            source: source_obj_background
+            maskSource: parent
+        }
+
         /* 窗口顶部区域（此区域可以拖动窗口，双击放大窗口） */
         Rectangle {
             id: title_bar
             height: 50
-            width: rect1.width
-            anchors.horizontalCenter: rect1.horizontalCenter
-            topLeftRadius: rect1.radius
-            topRightRadius: rect1.radius
+            width: parent.width
+            anchors.horizontalCenter: parent.horizontalCenter
+            topLeftRadius: parent.radius
+            topRightRadius: parent.radius
 
             color: "transparent"
 
@@ -102,11 +109,12 @@ Item {
                     windowRoot.setY(windowRoot.y + delta.y)
                 }
 
+                /* 双击窗口 */
                 onDoubleClicked: {
-                    if (itemRoot.state !== "NormalWindow") {
-                        itemRoot.state = "NormalWindow"
+                    if (root.state !== "NormalWindow") {
+                        root.state = "NormalWindow"
                     } else {
-                        itemRoot.state = "FullWindow"
+                        root.state = "FullWindow"
                     }
                 }
             }
@@ -120,7 +128,7 @@ Item {
             /* 用于动态改变鼠标指针的形状，基于鼠标位置来决定显示的光标类型 */
             cursorShape: {
               const p = Qt.point(mouseX, mouseY);
-              const b = itemRoot.window_radius;
+              const b = root.radius;
               if (p.x < b && p.y < b) return Qt.SizeFDiagCursor; /* 窗口左上角（对角线光标） */
               if (p.x < b && p.y >= height - b) return Qt.SizeBDiagCursor; /* 窗口左下角（对角线光标） */
               if (p.x >= width - b && p.y < b) return Qt.SizeBDiagCursor; /* 窗口右上角（对角线光标） */
@@ -156,27 +164,28 @@ Item {
             name: "FullWindow"
 
             PropertyChanges {
-                itemRoot.windowRoot.visibility: Window.FullScreen
-                itemRoot.window_radius: 0
-                itemRoot.window_border_width: 0
+                root.windowRoot.visibility: Window.FullScreen
+                root.anchors.margins: 0
+                root.radius: 0
             }
         },
         State {
             name: "MaximizedWindow"
 
             PropertyChanges {
-                itemRoot.windowRoot.visibility: Window.Maximized
-                itemRoot.window_radius: 0
-                itemRoot.window_border_width: 0
+                //root.windowRoot.visibility: Window.Maximized
+                root.windowRoot.visibility: Window.FullScreen
+                root.anchors.margins: 0
+                root.radius: 0
             }
         },
         State {
             name: "NormalWindow"
 
             PropertyChanges {
-                itemRoot.windowRoot.visibility: Window.Windowed
-                itemRoot.window_radius: 10
-                itemRoot.window_border_width: 10
+                root.windowRoot.visibility: Window.Windowed
+                root.anchors.margins: 10
+                root.radius: 10
             }
         }
     ]
