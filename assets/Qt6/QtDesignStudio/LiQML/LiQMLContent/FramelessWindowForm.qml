@@ -7,12 +7,12 @@ Item {
     id: root
 
     property int radius: 10 /* 窗口边角半径 */
+    property int margins: 10 /* 窗口边框宽度（这部分就是Window和Rectangle之间的间隔） */
     property Item source_obj_background: linear
     property url imagePath: "image/city-1.png"
 
     required property Window windowRoot /* 该属性必须要被初始化，否则无法启动界面 */
 
-    anchors.margins: 10 /* 窗口边框宽度（这部分就是Window和Rectangle之间的间隔） */
     state: "NormalWindow"
 
     /* 边框的阴影区域 */
@@ -30,7 +30,7 @@ Item {
         id: rectReal
         radius: parent.radius
         anchors.fill: parent
-        anchors.margins: parent.anchors.margins
+        anchors.margins: root.margins
 
 
         /* 设定颜色背景 */
@@ -83,7 +83,7 @@ Item {
 
                 id: mouseArea
                 anchors.fill: parent
-                anchors.margins: 10
+                anchors.margins: 5
 
                 /* 只处理鼠标左击 */
                 acceptedButtons: Qt.LeftButton
@@ -120,6 +120,7 @@ Item {
             }
         }
 
+
         /* 改变鼠标的形状到缩放样式，表示可以进行窗口缩放 */
         MouseArea {
             anchors.fill: parent
@@ -128,7 +129,7 @@ Item {
             /* 用于动态改变鼠标指针的形状，基于鼠标位置来决定显示的光标类型 */
             cursorShape: {
               const p = Qt.point(mouseX, mouseY);
-              const b = root.radius;
+              const b = root.margins / 2;
               if (p.x < b && p.y < b) return Qt.SizeFDiagCursor; /* 窗口左上角（对角线光标） */
               if (p.x < b && p.y >= height - b) return Qt.SizeBDiagCursor; /* 窗口左下角（对角线光标） */
               if (p.x >= width - b && p.y < b) return Qt.SizeBDiagCursor; /* 窗口右上角（对角线光标） */
@@ -165,7 +166,7 @@ Item {
 
             PropertyChanges {
                 root.windowRoot.visibility: Window.FullScreen
-                root.anchors.margins: 0
+                root.margins: 0
                 root.radius: 0
             }
         },
@@ -184,7 +185,7 @@ Item {
 
             PropertyChanges {
                 root.windowRoot.visibility: Window.Windowed
-                root.anchors.margins: 10
+                root.margins: 10
                 root.radius: 10
             }
         }
