@@ -8,7 +8,7 @@ Item {
 
     property int radius: 10 /* 窗口边角半径 */
     property int margins: 10 /* 窗口边框宽度（这部分就是Window和Rectangle之间的间隔） */
-    property Item source_obj_background: linear
+    property Item source_obj_background: image
     property url imagePath: "image/city-1.png"
 
     required property Window windowRoot /* 该属性必须要被初始化，否则无法启动界面 */
@@ -45,6 +45,8 @@ Item {
             start: Qt.point(0, 0);
             end: Qt.point(0, parent.height)
             gradient: Gradient {
+                // GradientStop { position: 0.0; color: "#121212" }
+                // GradientStop { position: 1.0; color: "#121212" }
                 GradientStop { position: 0.0; color: "#ccfbff" }
                 GradientStop { position: 1.0; color: "#ef96c5" }
             }
