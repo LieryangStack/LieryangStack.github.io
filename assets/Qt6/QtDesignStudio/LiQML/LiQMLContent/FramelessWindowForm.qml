@@ -8,7 +8,7 @@ Item {
 
     property int radius: 10 /* 窗口边角半径 */
     property int margins: 10 /* 窗口边框宽度（这部分就是Window和Rectangle之间的间隔） */
-    property Item source_obj_background: image
+    property Item source_obj_background: linear
     property url imagePath: "image/city-1.png"
 
     required property Window windowRoot /* 该属性必须要被初始化，否则无法启动界面 */
@@ -178,7 +178,7 @@ Item {
             PropertyChanges {
                 //root.windowRoot.visibility: Window.Maximized
                 root.windowRoot.visibility: Window.FullScreen
-                root.anchors.margins: 0
+                root.margins: 0
                 root.radius: 0
             }
         },

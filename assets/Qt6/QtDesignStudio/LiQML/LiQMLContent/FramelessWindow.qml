@@ -34,7 +34,7 @@ FramelessWindowForm {
             width: 19
             height: 19
             cursorShape: Qt.PointingHandCursor
-            source: "image/close.svg"
+            source: "image/li-window-close.svg"
 
             onClicked: Qt.quit()
             onEntered: buttonColor = "#5a5a5a"
@@ -46,7 +46,7 @@ FramelessWindowForm {
             width: 17
             height: 17
             cursorShape: Qt.PointingHandCursor
-            source: "image/maximize-svgrepo-com.svg"
+            source: "image/li-window-maximize.svg"
 
 
             onEntered: buttonColor = "#5a5a5a"
@@ -70,7 +70,7 @@ FramelessWindowForm {
             width: 25
             height: 18
             cursorShape: Qt.PointingHandCursor
-            source: "image/icons8-minimize.svg"
+            source: "image/li-window-minimize.svg"
 
             onClicked: framelessWindow.windowRoot.visibility = Window.Minimized
             onEntered: buttonColor = "#5a5a5a"
