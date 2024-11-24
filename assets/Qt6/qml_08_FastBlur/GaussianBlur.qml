@@ -57,10 +57,10 @@ Window {
 
         color : "#121212"
 
-        gradient: Gradient {
-          GradientStop { position: 0.0; color: "#ccfbff" }
-          GradientStop { position: 1.0; color: "#ef96c5" }
-        }
+        // gradient: Gradient {
+        //   GradientStop { position: 0.0; color: "#ccfbff" }
+        //   GradientStop { position: 1.0; color: "#ef96c5" }
+        // }
 
         // Image {
         //     id: image

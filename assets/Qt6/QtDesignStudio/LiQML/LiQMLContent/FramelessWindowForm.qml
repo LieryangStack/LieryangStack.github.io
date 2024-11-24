@@ -45,10 +45,10 @@ Item {
             start: Qt.point(0, 0);
             end: Qt.point(0, parent.height)
             gradient: Gradient {
-                // GradientStop { position: 0.0; color: "#121212" }
-                // GradientStop { position: 1.0; color: "#121212" }
-                GradientStop { position: 0.0; color: "#ccfbff" }
-                GradientStop { position: 1.0; color: "#ef96c5" }
+                GradientStop { position: 0.0; color: "#121212" }
+                GradientStop { position: 1.0; color: "#121212" }
+                // GradientStop { position: 0.0; color: "#ccfbff" }
+                // GradientStop { position: 1.0; color: "#ef96c5" }
             }
         }
 

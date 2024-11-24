@@ -42,7 +42,7 @@ Window {
             id: comboBox
             x: 440
             y: 240
-            width: 111
+            width: 155
             height: 40
 
             model: ["人体识别", "姿态识别", "3D分割1111111", "张三", "李四", "王五"]
@@ -97,10 +97,11 @@ Window {
 
             background: Rectangle {
                 color: "transparent"
-                radius: 6
+                radius: 10
                 border.color: "gray"
                 border.width: 1
                 anchors.fill: parent
+                smooth: true
             }
 
             Layout.preferredWidth: 129
@@ -111,45 +112,66 @@ Window {
                 y: parent.height + 5
                 width: comboBox.width
                 height: 200
-                property int myRadius: 15
                 implicitHeight: listview1.contentHeight
-                property int d: 15
 
                 contentItem: ListView {
                     id: listview1
                     anchors.fill: parent
-                    anchors.leftMargin: 5
-                    anchors.rightMargin: 5
-                    anchors.topMargin: 5
-                    anchors.bottomMargin: 5
+                    anchors.margins: 5
                     model: comboBox.popup.visible ? comboBox.delegateModel : null
                     currentIndex: comboBox.highlightedIndex
                     clip: true
+
                     ScrollIndicator.vertical: ScrollIndicator {
                     }
                 }
 
-                ShaderEffectSource {
-                    id: windowSource
-                    visible: false
-                    anchors.fill: rectangle
-                    sourceRect: Qt.rect (comboBox.x + popup.x, comboBox.y + popup.y, popup.width, popup.height)
-                    sourceItem: screen01
-                }
-
                 background: Rectangle {
-                    id: rectangle
-                    color: "#75ffffff"
-                    anchors.fill: parent
-                    layer.enabled: true
-                    layer.effect: Glow {
-                        color: "#808080"
-                        radius: 8
+                    id: backgroundItem
+                    color: "transparent"
+
+                    ShaderEffectSource {
+                        id: windowSource
+                        visible: false
                         anchors.fill: parent
-                        spread: 0.1
-                        samples: 20
+                        sourceRect: Qt.rect (comboBox.x + popup.x, comboBox.y + popup.y, popup.width, popup.height)
+                        sourceItem: screen01
                     }
-                    radius: 5
+
+                    Rectangle {
+                        id: source1
+                        anchors.fill: parent
+                        anchors.margins: 50
+                        visible: false
+                        radius: 10
+                    }
+
+
+                    /* 模糊 */
+                   GaussianBlur {
+                       id: blur
+                        anchors.fill: source1
+                        source: windowSource
+                        radius: 15
+                        deviation: 500
+                        samples: 100
+                   }
+
+                    OpacityMask {
+                        visible: true
+                        anchors.fill: source1
+                        source: blur
+                        maskSource: source1
+                    }
+
+                    // Rectangle {
+                    //     id: source2
+                    //     opacity: 0.2
+                    //     anchors.fill: parent
+                    //     radius: 10
+                    // }
+
+
                 }
             }
         }
