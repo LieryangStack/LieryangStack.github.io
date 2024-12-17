@@ -30,9 +30,9 @@ https://zhuanlan.zhihu.com/p/431525275
 
 Edit -> Preferences 
 
-![alt text](image.png)
+![alt text](/assets/ComputerNetwork/2024010904RTSP/image.png)
 
-![alt text](image-1.png)
+![alt text](/assets/ComputerNetwork/2024010904RTSP/image-1.png)
 
 
 需要分析FU 
