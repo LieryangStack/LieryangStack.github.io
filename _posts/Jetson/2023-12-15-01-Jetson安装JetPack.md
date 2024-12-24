@@ -66,6 +66,14 @@ Bus 001 Device 011: ID 0955:7323 NVIDIA Corp. APX
 
 ### 2.1 无法自动连接虚拟机问题
 
+- 虚拟机（主机）Ubuntu系统版本：Ubuntu18.04
+
+- Jetson设备型号：Jetson Xavier Nx（开发者套件版本）
+
+- 安装JetPack系统版本：任何版本
+
+- 问题描述：等待设备启动过程中（也就是听到风扇全力运行），设备USB不会自动连接虚拟机，需要手动点击虚拟机的右下角USB设备，连接到虚拟机。
+
 ![Alt text](/assets/Jetson/01_JetPackInstall/image-6.png)
 
 ### 2.2 NVME问题
@@ -99,8 +107,18 @@ Re-flash the device
 
 ### 2.3 SSH等待连接问题
 
-![alt text](image.png)
+- 虚拟机（主机）Ubuntu系统版本：Ubuntu18.04、Ubuntu20.04
 
-![alt text](image-1.png)
+- Jetson设备型号：任何型号
 
-![alt text](image-2.png)
+- 安装JetPack系统版本：任何版本
+
+- 问题描述：由于我在虚拟机中开启了翻墙VPN，导致连接设备SSH识别
+
+![Alt text](/assets/Jetson/01_JetPackInstall/image-7.png)
+
+虚拟机设置成桥接网络，网络代理设置成主机ip和翻墙端口
+
+![Alt text](/assets/Jetson/01_JetPackInstall/image-8.png)
+
+![Alt text](/assets/Jetson/01_JetPackInstall/image-9.png)
