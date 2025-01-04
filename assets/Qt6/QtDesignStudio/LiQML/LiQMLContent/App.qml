@@ -4,6 +4,8 @@
 import QtQuick
 import LiQML
 import QtQuick.Controls.Material
+import QtQuick.Controls 6.8
+import QtQuick.Layouts
 
 Window {
     id: window
@@ -20,14 +22,31 @@ Window {
         anchors.fill: parent
         windowRoot: window
 
+        Drawer {
+            id: drawer
+            x: 100; y: 10
+            width: 0.3 * parent.width
+            height: parent.height - 20
+            bottomPadding: 10
+            leftPadding: 10
+            topPadding: 10
+
+            Label {
+                text: "Content goes here!"
+                anchors.centerIn: parent
+            }
+        }
+
         Item {
             id: rectangle
 
             // color: "#121212"
             anchors.fill: parent
             anchors.margins: 20
-            anchors.rightMargin: 120
-            anchors.topMargin: 37
+            anchors.leftMargin: 247
+            anchors.rightMargin: 38
+            anchors.topMargin: 157
+            anchors.bottomMargin: 30
             // color: "white"
             Material.theme: Material.Light
             Material.accent: Material.Cyan
@@ -73,6 +92,40 @@ Window {
                 height: 227
             }
         }
+
+        Label {
+            id: label
+            x: 69
+            y: 18
+            text: "Linux"
+            horizontalAlignment: Text.AlignHCenter
+            verticalAlignment: Text.AlignVCenter
+            font.family: "Arial"
+            font.pointSize: 20
+            Layout.preferredWidth: 92
+            Layout.preferredHeight: 39
+        }
+
+        Button {
+            id: button
+            x: 275
+            y: 175
+            text: qsTr("Button")
+
+            onClicked: drawer.open()
+        }
+
+        Image {
+            id: image
+            x: 20
+            y: 18
+            width: 60
+            height: 45
+            source: "image/icons8-linux-96.png"
+            fillMode: Image.PreserveAspectFit
+        }
+
+
     }
 
     property bool isMinimized: false

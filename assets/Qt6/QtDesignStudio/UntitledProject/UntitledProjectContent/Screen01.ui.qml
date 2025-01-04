@@ -21,101 +21,47 @@ Rectangle {
     Material.theme: Material.Dark
     Material.accent: Material.Cyan
 
-    Button {
-        id: button
-        x: 25
-        y: 14
-        text: qsTr("按钮")
-    }
 
-    CheckBox {
-        id: checkBox
-        x: 25
-        y: 84
-        text: qsTr("复选框")
-    }
 
-    ComboBox {
-        id: comboBox
-        x: 25
-        y: 151
-        width: 120
-        height: 37
-        flat: true
-        editable: true
-        model: ["First", "Second", "Third"]
-    }
+        SplitView {
+            id: idSplit
+            anchors.fill: parent
+            orientation: Qt.Horizontal //默认方向为水平方向
 
-    Switch {
-        id: _switch
-        x: 34
-        y: 240
-        text: qsTr("Switch")
-    }
+            //分裂器的组件，可以自定义，也可以使用默认
+            handle: Rectangle {
 
-    RoundButton {
-        id: roundButton
-        x: 89
-        y: 284
-        width: 79
-        height: 77
-        text: "测试"
-    }
+                id: handleDelegate
+                implicitWidth: 4
+                implicitHeight: 4
+                color: SplitHandle.pressed ? "#81e889" : (SplitHandle.hovered ? Qt.lighter("#c2f4c6", 1.1) : "#c2f4c6")
+            }
 
-    Slider {
-        id: slider
-        x: 34
-        y: 385
-        value: 0.5
-    }
+            Rectangle {
+                id: rec1
+                color: "blue"
 
-    RadioButton {
-        id: radioButton
-        x: 358
-        y: 284
-        text: qsTr("Radio Button")
-    }
+                //附加属性
+                SplitView.minimumWidth: 50 //在SplitView中最小宽度
+                SplitView.preferredWidth: 100 //item 默认显示宽度，范围在minimun和maximum之间，默认未设置，会使用item的implicitWidth(隐式宽度)
+                SplitView.maximumWidth: 200 //在SplitView中最大宽度
+            }
 
-    RadioButton {
-        id: radioButton1
-        x: 358
-        y: 338
-        text: qsTr("Radio Button")
-    }
+            //如果不指明implicitWidth 或者 minimumWidth/preferredWidth ,item可能会被其它的挤到最小
+            Rectangle {
+                id: rec2
+                color: "green"
 
-    SpinBox {
-        id: spinBox
-        x: 358
-        y: 193
-        width: 143
-        height: 31
-    }
+                SplitView.fillWidth: true //显示指明 占用剩余空间，如果不指定，默认最后可见的Item 占用 SplitView的剩余空间
+            }
 
-    Tumbler {
-        id: tumbler
-        x: 534
-        y: 84
-        model: 10
-    }
+            Rectangle {
+                id: rec3
+                color: "red"
 
-    ToolSeparator {
-        id: toolSeparator
-        x: 277
-        y: 193
-        width: 13
-        height: 227
-    }
+                SplitView.minimumWidth: 50
+            }
+        }
 
-    Label {
-        id: label
-        x: 218
-        y: 41
-        width: 298
-        height: 42
-        color: "#1c7ee1"
-        text: qsTr("import QtQuick.Controls.FluentWinUI3")
-        horizontalAlignment: Text.AlignHCenter
-        verticalAlignment: Text.AlignVCenter
-        font.pointSize: 15
-    }
+
 }
