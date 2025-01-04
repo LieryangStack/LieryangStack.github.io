@@ -7,7 +7,7 @@ this file manually, you might introduce QML code that is not supported by Qt Des
 Check out https://doc.qt.io/qtcreator/creator-quick-ui-forms.html for details on .ui.qml files.
 */
 import QtQuick
-import QtQuick.Controls.FluentWinUI3
+import QtQuick.Controls.Material
 import UntitledProject
 import QtQuick.Controls 6.8
 

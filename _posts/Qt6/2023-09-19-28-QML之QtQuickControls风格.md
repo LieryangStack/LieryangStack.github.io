@@ -42,3 +42,10 @@ FluentWinUI3 风格是一种现代的、原生的风格，专为运行 Windows 1
 ## 参考
 
 [参考1：Styling Qt Quick Controls](https://doc.qt.io/qt-6/qtquickcontrols-styles.html#universal-style)
+
+
+[参考2：Customizing Qt Quick Controls](https://doc.qt.io/qt-6/qtquickcontrols-customize.html#customizing-tabbar)
+
+[参考3：Imagine Style](https://doc.qt.io/qt-6/qtquickcontrols-imagine.html)
+
+[参考4：Material Style](https://doc.qt.io/qt-6/qtquickcontrols-material.html)
