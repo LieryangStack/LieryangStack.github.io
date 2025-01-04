@@ -32,7 +32,6 @@ Item {
         anchors.fill: parent
         anchors.margins: root.margins
 
-
         /* 设定颜色背景 */
         color : "gray"
 
@@ -45,8 +44,8 @@ Item {
             start: Qt.point(0, 0);
             end: Qt.point(0, parent.height)
             gradient: Gradient {
-                GradientStop { position: 0.0; color: "#121212" }
-                GradientStop { position: 1.0; color: "#121212" }
+                GradientStop { position: 0.0; color: "#F5F5F5" }
+                GradientStop { position: 1.0; color: "#F5F5F5" }
                 // GradientStop { position: 0.0; color: "#ccfbff" }
                 // GradientStop { position: 1.0; color: "#ef96c5" }
             }

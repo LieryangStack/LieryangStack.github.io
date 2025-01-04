@@ -16,12 +16,11 @@ Rectangle {
     width: Constants.width
     height: Constants.height
 
-    // color: "#121212"
-    color: "white"
+    color: "#121212"
+    // color: "white"
+    Material.theme: Material.Dark
+    Material.accent: Material.Cyan
 
-    // Material.theme: Material.Dark
-
-    // Material.accent: Material.Cyan
     Button {
         id: button
         x: 25
