@@ -7,7 +7,7 @@ this file manually, you might introduce QML code that is not supported by Qt Des
 Check out https://doc.qt.io/qtcreator/creator-quick-ui-forms.html for details on .ui.qml files.
 */
 import QtQuick
-import QtQuick.Controls.Material
+import QtQuick.Controls.FluentWinUI3
 import UntitledProject
 import QtQuick.Controls 6.8
 
@@ -114,7 +114,7 @@ Rectangle {
         width: 298
         height: 42
         color: "#1c7ee1"
-        text: qsTr("import QtQuick.Controls.Material")
+        text: qsTr("import QtQuick.Controls.FluentWinUI3")
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignVCenter
         font.pointSize: 15
