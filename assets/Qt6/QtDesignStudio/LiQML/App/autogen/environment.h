@@ -6,8 +6,8 @@
 #include <QGuiApplication>
 #include "qqmlextensionplugin.h"
 
-Q_IMPORT_QML_PLUGIN(LiQMLPlugin)
 Q_IMPORT_QML_PLUGIN(LiQMLContentPlugin)
+Q_IMPORT_QML_PLUGIN(LiQMLPlugin)
 
 const char mainQmlFile[] = "qrc:/qt/qml/LiQMLContent/App.qml";
 
