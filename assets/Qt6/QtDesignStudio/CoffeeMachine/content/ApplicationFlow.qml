@@ -58,16 +58,19 @@ ApplicationFlowForm {
 
     property int animationDuration: 400
 
+    /* 点击给我冲杯咖啡页面后，就会进入到选择设置咖啡牛奶、糖数量页面 */
     choosingCoffee.brewButtonSelection.onClicked: {
         applicationFlow.state = "to settings"
         applicationFlow.choosingCoffee.milkSlider.value = applicationFlow.choosingCoffee.sideBar.currentMilk
         applicationFlow.choosingCoffee.sugarSlider.value = 2
     }
 
+    /* 侧边栏选择某一种类型的咖啡 */
     choosingCoffee.sideBar.onCoffeeSelected: {
         applicationFlow.state = "selection"
     }
 
+    /* 冲咖啡页面可以选择返回 */
     choosingCoffee.backButton.onClicked: {
         applicationFlow.state = "back to selection"
     }

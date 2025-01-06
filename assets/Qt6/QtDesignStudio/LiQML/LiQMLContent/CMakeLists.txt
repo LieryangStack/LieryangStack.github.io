@@ -10,17 +10,17 @@ qt6_add_qml_module(LiQMLContent
     RESOURCE_PREFIX "/qt/qml"
     QML_FILES
         "FramelessWindowButton.qml"
+        "FramelessWindow.qml"
         "FramelessWindowForm.qml"
         "App.qml"
-        "FramelessWindow.qml"
     RESOURCES
-        "image/li-arrow-down.svg"
-        "image/li-window-close.svg"
-        "image/city-1.png"
         "image/li-window-minimize.svg"
-        "image/icons8-linux-96.png"
-        "image/li-window-maximize.svg"
+        "image/city-1.png"
+        "image/li-arrow-down.svg"
         "image/city.png"
+        "image/li-window-close.svg"
+        "image/li-window-maximize.svg"
+        "image/icons8-linux-96.png"
 )
 
 

@@ -7,6 +7,7 @@ import QtQuick.Controls.Material
 import QtQuick.Controls 6.8
 import QtQuick.Layouts
 
+
 Window {
     id: window
     width: Constants.width
@@ -91,19 +92,6 @@ Window {
                 width: 13
                 height: 227
             }
-        }
-
-        Label {
-            id: label
-            x: 69
-            y: 18
-            text: "Linux"
-            horizontalAlignment: Text.AlignHCenter
-            verticalAlignment: Text.AlignVCenter
-            font.family: "Arial"
-            font.pointSize: 20
-            Layout.preferredWidth: 92
-            Layout.preferredHeight: 39
         }
 
         Button {

@@ -71,12 +71,14 @@ Rectangle {
         y: 0
     }
 
+    /* 制作咖啡界面 */
     Brewing {
         id: brewing
         x: 2048
         y: 0
     }
 
+    /* 咖啡选择界面 */
     ChoosingCoffee {
         id: choosingCoffee
         x: -366

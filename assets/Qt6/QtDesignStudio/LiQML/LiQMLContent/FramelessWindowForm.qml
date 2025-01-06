@@ -13,6 +13,9 @@ Item {
 
     required property Window windowRoot /* 该属性必须要被初始化，否则无法启动界面 */
 
+    /* 暴露属性 */
+    property alias titleBarContent: titleBarContent
+
     state: "NormalWindow"
 
     /* 边框的阴影区域 */
@@ -68,7 +71,7 @@ Item {
 
         /* 窗口顶部区域（此区域可以拖动窗口，双击放大窗口） */
         Rectangle {
-            id: title_bar
+            id: titleBar
             height: 50
             width: parent.width
             anchors.horizontalCenter: parent.horizontalCenter
@@ -118,6 +121,12 @@ Item {
                         root.state = "FullWindow"
                     }
                 }
+            }
+
+            /* 子项容器 */
+            Item {
+                id: titleBarContent
+                anchors.fill: parent
             }
         }
 

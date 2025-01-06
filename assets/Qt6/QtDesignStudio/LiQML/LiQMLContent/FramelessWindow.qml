@@ -18,6 +18,14 @@ FramelessWindowForm {
 
     anchors.fill: parent
 
+    Component.onCompleted: {
+
+    }
+
+
+
+
+
     Row {
         id: row
         width: 152
