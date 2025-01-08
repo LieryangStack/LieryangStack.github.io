@@ -16,24 +16,12 @@ import LiQML
 FramelessWindowForm {
     id: framelessWindow
 
-    anchors.fill: parent
-
-    Component.onCompleted: {
-
-    }
-
-
-
-
-
     Row {
         id: row
         width: 152
         height: 50
-        anchors.right: parent.right
-        anchors.top: parent.top
-        anchors.rightMargin: parent.margins + 10
-        anchors.topMargin: parent.margins + 10
+        anchors.fill: framelessWindow.windowTitleBarContent
+        anchors.margins: 10
         layoutDirection: Qt.RightToLeft
         spacing: 20
 

@@ -8,15 +8,14 @@ set_source_files_properties(Constants.qml
 
 
 
-qt_add_library(LiQML STATIC)
-qt6_add_qml_module(LiQML
-    URI "LiQML"
+qt_add_library(CoffeeMachine STATIC)
+qt6_add_qml_module(CoffeeMachine
+    URI "CoffeeMachine"
     VERSION 1.0
-    RESOURCE_PREFIX "/qt/qml"
     QML_FILES
-        "EventListSimulator.qml"
-        "EventListModel.qml"
-        "Constants.qml"
+        Constants.qml
+        DirectoryFontLoader.qml
+        EventListModel.qml
+        EventListSimulator.qml
+
 )
-
-

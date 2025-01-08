@@ -8,20 +8,20 @@ Item {
 
     property int radius: 10 /* 窗口边角半径 */
     property int margins: 10 /* 窗口边框宽度（这部分就是Window和Rectangle之间的间隔） */
-    property Item source_obj_background: linear
     property url imagePath: "image/city-1.png"
 
     required property Window windowRoot /* 该属性必须要被初始化，否则无法启动界面 */
 
     /* 暴露属性 */
-    property alias titleBarContent: titleBarContent
+    property alias windowContent: windowContent
+    property alias windowTitleBarContent: windowTitleBarContent
 
     state: "NormalWindow"
 
     /* 边框的阴影区域 */
     RectangularGlow {
-        id: rectRealeEffectGlow
-        anchors.fill: rectReal
+        id: windowContentEffectGlow
+        anchors.fill: windowContent
         glowRadius: 1
         spread: 0.8
         color: "gray"
@@ -30,106 +30,42 @@ Item {
 
     /* 实际的窗口区域 */
     Rectangle {
-        id: rectReal
+        id: windowContent
         radius: parent.radius
         anchors.fill: parent
         anchors.margins: root.margins
 
         /* 设定颜色背景 */
-        color : "gray"
+        color : "white"
 
         /* 渐变色背景 */
-        LinearGradient {
-            id: linear
-            visible: false
-            anchors.fill: parent
-            source: parent
-            start: Qt.point(0, 0);
-            end: Qt.point(0, parent.height)
-            gradient: Gradient {
-                GradientStop { position: 0.0; color: "#F5F5F5" }
-                GradientStop { position: 1.0; color: "#F5F5F5" }
-                // GradientStop { position: 0.0; color: "#ccfbff" }
-                // GradientStop { position: 1.0; color: "#ef96c5" }
-            }
-        }
+        // LinearGradient {
+        //     id: linear
+        //     visible: true
+        //     anchors.fill: parent
+        //     source: parent
+        //     start: Qt.point(0, 0);
+        //     end: Qt.point(0, parent.height)
+        //     gradient: Gradient {
+        //         GradientStop { position: 0.0; color: "#ccfbff" }
+        //         GradientStop { position: 1.0; color: "#ef96c5" }
+        //     }
+        // }
 
         /* 图片背景 */
-        Image {
-            id: image
-            visible: false
-            anchors.fill: parent
-            source: root.imagePath
-        }
+        // Image {
+        //     id: image
+        //     visible: false
+        //     anchors.fill: parent
+        //     source: root.imagePath
+        // }
 
         /* 选择使用那个背景（渐变色、或者图片） */
-        OpacityMask {
-            anchors.fill: parent
-            source: source_obj_background
-            maskSource: parent
-        }
-
-        /* 窗口顶部区域（此区域可以拖动窗口，双击放大窗口） */
-        Rectangle {
-            id: titleBar
-            height: 50
-            width: parent.width
-            anchors.horizontalCenter: parent.horizontalCenter
-            topLeftRadius: parent.radius
-            topRightRadius: parent.radius
-
-            color: "transparent"
-
-            /* 移动窗口、双击放大缩小窗口 */
-            MouseArea {
-
-                property point clickPos: Qt.point(0, 0);
-
-                id: mouseArea
-                anchors.fill: parent
-                anchors.margins: 5
-
-                /* 只处理鼠标左击 */
-                acceptedButtons: Qt.LeftButton
-
-                /* 鼠标按压，记录此时鼠标的位置，便于接下来移动窗口 */
-                onPressed: {
-                    /* 如果处于全屏模式，直接返回 */
-                    if (windowRoot.visibility === Window.FullScreen)
-                        return;
-                    clickPos = Qt.point(mouseX, mouseY)
-                }
-
-                /* 窗口移动 */
-                onPositionChanged: {
-                    /* 如果处于全屏模式，直接返回 */
-                    if (windowRoot.visibility === Window.FullScreen)
-                        return;
-                    /* 鼠标偏移量 */
-                    var delta = Qt.point(mouseX - clickPos.x, mouseY - clickPos.y)
-
-                    /* 如果mainwindow继承自QWidget,用setPos */
-                    windowRoot.setX(windowRoot.x + delta.x)
-                    windowRoot.setY(windowRoot.y + delta.y)
-                }
-
-                /* 双击窗口 */
-                onDoubleClicked: {
-                    if (root.state !== "NormalWindow") {
-                        root.state = "NormalWindow"
-                    } else {
-                        root.state = "FullWindow"
-                    }
-                }
-            }
-
-            /* 子项容器 */
-            Item {
-                id: titleBarContent
-                anchors.fill: parent
-            }
-        }
-
+        // OpacityMask {
+        //     anchors.fill: parent
+        //     source: image
+        //     maskSource: parent
+        // }
 
         /* 改变鼠标的形状到缩放样式，表示可以进行窗口缩放 */
         MouseArea {
@@ -165,6 +101,62 @@ Item {
                 if (p.y >= height - b) { e |= Qt.BottomEdge }
                 if (e !== 0)  {
                     windowRoot.startSystemResize(e);
+                }
+            }
+        }
+    }
+
+    /* 窗口顶部区域（此区域可以拖动窗口，双击放大窗口） */
+    Rectangle {
+        id: windowTitleBarContent
+        height: 50
+        width: windowContent.width
+        anchors.top: windowContent.top
+        anchors.horizontalCenter: windowContent.horizontalCenter
+        topLeftRadius: windowContent.radius
+        topRightRadius: windowContent.radius
+
+        color: "transparent"
+
+        /* 移动窗口、双击放大缩小窗口 */
+        MouseArea {
+
+            property point clickPos: Qt.point(0, 0);
+
+            id: mouseArea
+            anchors.fill: parent
+            anchors.margins: 5
+
+            /* 只处理鼠标左击 */
+            acceptedButtons: Qt.LeftButton
+
+            /* 鼠标按压，记录此时鼠标的位置，便于接下来移动窗口 */
+            onPressed: {
+                /* 如果处于全屏模式，直接返回 */
+                if (windowRoot.visibility === Window.FullScreen)
+                    return;
+                clickPos = Qt.point(mouseX, mouseY)
+            }
+
+            /* 窗口移动 */
+            onPositionChanged: {
+                /* 如果处于全屏模式，直接返回 */
+                if (windowRoot.visibility === Window.FullScreen)
+                    return;
+                /* 鼠标偏移量 */
+                var delta = Qt.point(mouseX - clickPos.x, mouseY - clickPos.y)
+
+                /* 如果mainwindow继承自QWidget,用setPos */
+                windowRoot.setX(windowRoot.x + delta.x)
+                windowRoot.setY(windowRoot.y + delta.y)
+            }
+
+            /* 双击窗口 */
+            onDoubleClicked: {
+                if (root.state !== "NormalWindow") {
+                    root.state = "NormalWindow"
+                } else {
+                    root.state = "FullWindow"
                 }
             }
         }
