@@ -1,3 +1,5 @@
+
+
 /****************************************************************************
 **
 ** Copyright (C) 2019 The Qt Company Ltd.
@@ -47,7 +49,6 @@
 ** $QT_END_LICENSE$
 **
 ****************************************************************************/
-
 import QtQuick 2.7
 import QtQuick.Controls 2.0
 import QtQuick.Layouts 1.3
@@ -58,8 +59,11 @@ Item {
 
     width: 768
     height: 768
+    /* 首页，因为没有选择任何咖啡，会默认盖住咖啡里面的结构 */
     property alias questionVisible: question.visible
     property bool showLabels: true
+
+    /* 显示咖啡名称Label的text属性 */
     property alias coffeeLabel: cappuccinoLabel.text
 
     property real sugarAmount: 2
@@ -72,6 +76,7 @@ Item {
         color: "#443224"
         anchors.fill: parent
 
+        /* 咖啡杯子空杯子背景 */
         Image {
             id: background
             x: 12
@@ -109,6 +114,7 @@ Item {
             }
         }
 
+        /* 浓咖啡 */
         Item {
             id: coffee
             x: 12
@@ -124,6 +130,7 @@ Item {
             }
         }
 
+        /* 杯子外轮廓 */
         Image {
             id: cupFront
             x: 11
@@ -135,7 +142,7 @@ Item {
             x: 499
             y: 370
             color: "#ffffff"
-            text: qsTr("Hot Milk")
+            text: qsTr("热牛奶")
             font.capitalization: Font.AllUppercase
             font.family: Constants.fontFamily
             wrapMode: Text.WrapAnywhere
@@ -147,7 +154,7 @@ Item {
             x: 486
             y: 468
             color: "#ffffff"
-            text: qsTr("Espresso Coffee")
+            text: qsTr("浓缩咖啡")
             font.capitalization: Font.AllUppercase
             font.family: Constants.fontFamily
             wrapMode: Text.WrapAnywhere
@@ -166,7 +173,7 @@ Item {
             x: 512
             y: 259
             color: "#ffffff"
-            text: qsTr("Milk Foam")
+            text: qsTr("奶泡")
             font.family: Constants.fontFamily
             wrapMode: Text.WrapAnywhere
             font.pixelSize: 18
@@ -191,7 +198,7 @@ Item {
         Text {
             id: cappuccinoLabel
             color: "#ffffff"
-            text: qsTr("CAPPUCCINO")
+            text: qsTr("卡布奇诺咖啡")
             visible: !question.visible
             anchors.top: parent.top
             anchors.topMargin: 32
@@ -210,6 +217,8 @@ Item {
             sugarAmount: root.sugarAmount
         }
     }
+
+
     Image {
         id: question
         y: 170
@@ -218,3 +227,6 @@ Item {
         source: "images/cup_structure/coffee_cup_large.png"
     }
 }
+
+
+

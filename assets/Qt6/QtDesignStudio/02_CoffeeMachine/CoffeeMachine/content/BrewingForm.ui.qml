@@ -1,3 +1,5 @@
+
+
 /****************************************************************************
 **
 ** Copyright (C) 2019 The Qt Company Ltd.
@@ -47,7 +49,6 @@
 ** $QT_END_LICENSE$
 **
 ****************************************************************************/
-
 import QtQuick 2.4
 import QtQuick.Controls 2.0
 import QtQuick.Layouts 1.3
@@ -58,7 +59,7 @@ Item {
     width: Constants.width
     height: Constants.height
     clip: true
-    property string coffeeName: qsTr("Cappuccino")
+    property string coffeeName: qsTr("卡布奇诺咖啡")
     property real foamAmount: 1
     property real milkAmount: 6
     property real coffeeAmount: 4
@@ -91,7 +92,7 @@ Item {
         id: brewLabel
 
         color: "#ffffff"
-        text: qsTr("Making ") + root.coffeeName
+        text: qsTr("制作") + root.coffeeName
         anchors.topMargin: Constants.defaultMargin
         anchors.top: parent.top
         anchors.horizontalCenter: parent.horizontalCenter
@@ -122,7 +123,7 @@ Item {
 
             PropertyChanges {
                 target: brewLabel
-                text: root.coffeeName + qsTr(" Ready")
+                text: root.coffeeName + qsTr("准备")
             }
         }
     ]

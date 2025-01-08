@@ -1,3 +1,5 @@
+
+
 /****************************************************************************
 **
 ** Copyright (C) 2019 The Qt Company Ltd.
@@ -47,7 +49,6 @@
 ** $QT_END_LICENSE$
 **
 ****************************************************************************/
-
 import QtQuick 2.4
 import QtQuick.Layouts 1.3
 
@@ -83,24 +84,24 @@ Flickable {
 
         CoffeeButton {
             id: cappuccinoButton
-            text: "Cappuccino"
+            text: "卡布奇诺咖啡"
         }
 
         CoffeeButton {
             id: espressoButton
-            text: "Espresso"
+            text: "浓咖啡"
             source: "images/icons/coffees/Espresso.png"
         }
 
         CoffeeButton {
             id: latteButton
-            text: "Latte"
+            text: "拿铁咖啡"
             source: "images/icons/coffees/Latte.png"
         }
 
         CoffeeButton {
             id: macchiatoButton
-            text: "Macchiato"
+            text: "黑糖玛奇朵咖啡"
             source: "images/icons/coffees/Macchiato.png"
         }
     }

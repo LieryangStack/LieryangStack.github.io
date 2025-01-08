@@ -1,3 +1,5 @@
+
+
 /****************************************************************************
 **
 ** Copyright (C) 2019 The Qt Company Ltd.
@@ -47,7 +49,6 @@
 ** $QT_END_LICENSE$
 **
 ****************************************************************************/
-
 import QtQuick 2.4
 import QtQuick.Controls 2.0
 import QtQuick.Layouts 1.3
@@ -68,7 +69,7 @@ Row {
     Text {
         id: brewLabel
         color: "#ffffff"
-        text: qsTr("Brew Me a CUP")
+        text: qsTr("给我冲杯咖啡")
         font.family: Constants.fontFamily
         wrapMode: Text.WrapAnywhere
         font.pixelSize: 64

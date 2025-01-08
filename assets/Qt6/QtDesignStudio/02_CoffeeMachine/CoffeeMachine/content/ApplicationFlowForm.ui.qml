@@ -64,19 +64,21 @@ Rectangle {
 
     state: intital
 
-    /*  */
+    /* 请把杯子放进托盘页面 */
     EmptyCupForm {
         id: emptyCup
         x: 1024
         y: 0
     }
 
+    /* 冲咖啡页面 */
     Brewing {
         id: brewing
         x: 2048
         y: 0
     }
 
+    /* 选择咖啡页面（第一个页面） */
     ChoosingCoffee {
         id: choosingCoffee
         x: -366
@@ -404,8 +406,7 @@ Rectangle {
         State {
             name: "reset"
 
-            PropertyChanges {
-            }
+            PropertyChanges {}
 
             PropertyChanges {
                 target: resetAnimation
@@ -417,5 +418,3 @@ Rectangle {
         }
     ]
 }
-
-

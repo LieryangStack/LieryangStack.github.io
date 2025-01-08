@@ -67,7 +67,7 @@ SideBarForm {
     }
 
     macchiatoButton.onClicked: {
-        sideBar.currentCoffee = qsTr("Macchiato")
+        sideBar.currentCoffee = qsTr("黑糖玛奇朵咖啡")
         sideBar.currentFoam = 1
         sideBar.currentMilk = 1
         sideBar.currentCoffeeAmount = 4
@@ -75,7 +75,7 @@ SideBarForm {
     }
 
     latteButton.onClicked: {
-        sideBar.currentCoffee = qsTr("Latte")
+        sideBar.currentCoffee = qsTr("拿铁咖啡")
         sideBar.currentFoam = 1
         sideBar.currentMilk = 10
         sideBar.currentCoffeeAmount = 3
@@ -83,7 +83,7 @@ SideBarForm {
     }
 
     espressoButton.onClicked: {
-        sideBar.currentCoffee = qsTr("Espresso")
+        sideBar.currentCoffee = qsTr("浓咖啡")
         sideBar.currentFoam = 0
         sideBar.currentMilk = 0
         sideBar.currentCoffeeAmount = 4
@@ -91,7 +91,7 @@ SideBarForm {
     }
 
     cappuccinoButton.onClicked: {
-        sideBar.currentCoffee = qsTr("Cappuccino")
+        sideBar.currentCoffee = qsTr("卡布奇诺咖啡")
         sideBar.currentFoam = 1
         sideBar.currentMilk = 7
         sideBar.currentCoffeeAmount = 3.5

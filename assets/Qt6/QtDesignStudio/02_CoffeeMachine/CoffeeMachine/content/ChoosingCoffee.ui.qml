@@ -1,3 +1,5 @@
+
+
 /****************************************************************************
 **
 ** Copyright (C) 2019 The Qt Company Ltd.
@@ -47,7 +49,6 @@
 ** $QT_END_LICENSE$
 **
 ****************************************************************************/
-
 import QtQuick 2.4
 import QtQuick.Controls 2.0
 import QtQuick.Layouts 1.3
@@ -132,7 +133,7 @@ Item {
         NavigationButton {
             id: brewButton
 
-            text: "Brew"
+            text: "冲咖啡"
             anchors.bottom: parent.bottom
             anchors.right: parent.right
             anchors.rightMargin: Constants.defaultMargin
@@ -214,7 +215,7 @@ Item {
     }
     NavigationButton {
         id: backButton
-        text: "Back"
+        text: "返回"
         opacity: 0
         anchors.leftMargin: Constants.defaultMargin
         anchors.bottom: parent.bottom
@@ -223,6 +224,7 @@ Item {
         forward: false
     }
 
+    /* 点击该按钮，就会进入设定冲该类型咖啡页面 */
     NavigationButton {
         id: brewButtonSelection
 
