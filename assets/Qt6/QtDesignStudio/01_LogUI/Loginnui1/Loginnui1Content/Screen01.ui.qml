@@ -166,6 +166,11 @@ Rectangle {
                 frame: 0
             }
         }
+
+        KeyframeGroup {
+            target: repeatPassword
+            property: "anchors"
+        }
     }
 
     states: [
