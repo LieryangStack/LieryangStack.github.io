@@ -22,7 +22,8 @@ Window {
 
         transitions: Transition {
             /* 如果没有设定从那个状态到那个状态，就是所有状态都会执行 */
-            PropertyAnimation { properties: "x,y"; easing.type: Easing.OutQuart; duration: 1000; to: 500}
+            to: "moved"
+            PropertyAnimation { properties: "x,y"; easing.type: Easing.OutQuart; duration: 3000;}
         }
 
         MouseArea {
@@ -37,39 +38,39 @@ Window {
     }
 
 
-    Rectangle {
-      id: rect1
-      width: 200
-      height: 50
-      color: "pink"
-      y: rect.width
+    // Rectangle {
+    //   id: rect1
+    //   width: 200
+    //   height: 50
+    //   color: "pink"
+    //   y: rect.width
 
-        Behavior on width {
-          NumberAnimation { duration: 500 }
-        }
+    //     Behavior on width {
+    //       NumberAnimation { duration: 500 }
+    //     }
 
-        MouseArea {
-            anchors.fill: parent
-            onClicked: {
-            if (rect1.width == 50)
-              rect1.width = 200
-            else
-              rect1.width = 50
-            }
-        }
-    }
+    //     MouseArea {
+    //         anchors.fill: parent
+    //         onClicked: {
+    //         if (rect1.width == 50)
+    //           rect1.width = 200
+    //         else
+    //           rect1.width = 50
+    //         }
+    //     }
+    // }
 
-    Rectangle {
-      width: 100; height: 100
-      anchors.top: rect1.bottom
-      color: "blue"
+    // Rectangle {
+    //   width: 100; height: 100
+    //   anchors.top: rect1.bottom
+    //   color: "blue"
 
-      /* 按照顺序依次执行每个子动画 */
-      SequentialAnimation on x {
-          loops: Animation.Infinite
-          PropertyAnimation { to: window.width - 100; duration: 2000}
-          PropertyAnimation { to: 0; duration: 2000 }
-      }
-    }
+    //   /* 按照顺序依次执行每个子动画 */
+    //   SequentialAnimation on x {
+    //       loops: Animation.Infinite
+    //       PropertyAnimation { to: window.width - 100; duration: 2000}
+    //       PropertyAnimation { to: 0; duration: 2000 }
+    //   }
+    // }
 
 }

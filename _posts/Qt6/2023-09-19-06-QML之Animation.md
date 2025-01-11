@@ -31,9 +31,11 @@ tags: [QML]
 
 该属性表示动画应播放的次数。
 
-- 默认情况下，loops 为 1：动画将播放一次然后停止。
+- 默认情况下，loops 为 `1`：<font color="red">动画将播放一次然后停止。</font>
 
-- 如果设置为 Animation.Infinite，动画将无限次重复，直到显式停止（通过将 running 属性设置为 false 或调用 stop() 方法）。
+- 如果设置为 `Animation.Infinite`，动画将无限次重复，直到显式停止（通过将 running 属性设置为 false 或调用 stop() 方法）。
+
+- 如果设置为 `0`，则动画不运行。
 
 在以下示例中，矩形将无限次旋转。
 
@@ -42,8 +44,9 @@ Rectangle {
     width: 100; height: 100; color: "green"
     RotationAnimation on rotation {
         loops: Animation.Infinite
-        from: 0
-        to: 360
+        from: 0 /* 值从那个值开始变化 */
+        to: 360 /* 值变化到那个值 */
+        duration: 1000 /* 变化持续时间 */
     }
 }
 ```
@@ -70,6 +73,7 @@ Rectangle {
     NumberAnimation on x {
         running: myMouse.pressed
         from: 0; to: 100
+        duration: 1000
     }
     MouseArea { id: myMouse }
 }

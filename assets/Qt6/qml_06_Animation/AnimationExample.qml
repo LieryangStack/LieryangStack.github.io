@@ -10,7 +10,7 @@ Image {
  
     property int padding: 40
     property int duration: 4000
-    property bool running: true
+    property bool running: false
  
     Image {
         id: box
@@ -24,7 +24,7 @@ Image {
             id: xAnimation
             from: root.padding
             to: root.width - box.width - root.padding
-            // loops: Animation.Infinite /* 动画运行次数 */
+            loops: Animation.Infinite /* 动画运行次数 */
             duration: root.duration
             running: root.running /* 控制动画运行状态 */
         }
@@ -32,7 +32,7 @@ Image {
             id: rotationAnimation
             from: 0
             to: 360
-            // loops: Animation.Infinite
+            loops: Animation.Infinite
             duration: root.duration
             running: root.running
         }
@@ -45,8 +45,8 @@ Image {
             box.x = root.padding
             box.rotation = 0
             root.running = true
-            // xAnimation.restart()
-            // rotationAnimation.restart()
+            xAnimation.restart()
+            rotationAnimation.restart()
         }
     }
  
