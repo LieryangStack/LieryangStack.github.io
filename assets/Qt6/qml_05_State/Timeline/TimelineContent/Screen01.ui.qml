@@ -24,11 +24,6 @@ Rectangle {
         anchors.verticalCenter: parent.verticalCenter
         checkable: true
         anchors.horizontalCenter: parent.horizontalCenter
-
-        Connections {
-            target: button
-            onClicked: animation.start()
-        }
     }
 
     Text {
@@ -36,8 +31,9 @@ Rectangle {
         x: 298
         y: 74
         text: qsTr("测试动画效果")
-        font.pixelSize: 12
-        visible: false
+        font.pixelSize: 20
+        opacity: 0
+        visible: true
     }
 
     Timeline {
@@ -55,6 +51,20 @@ Rectangle {
         startFrame: 0
         endFrame: 1000
         enabled: false
+
+        KeyframeGroup {
+            target: _text
+            property: "opacity"
+            Keyframe {
+                value: 0
+                frame: 0
+            }
+
+            Keyframe {
+                value: 1
+                frame: 1000
+            }
+        }
     }
     states: [
         State {
@@ -62,19 +72,13 @@ Rectangle {
             when: button.checked
 
             PropertyChanges {
-                target: _text
-                visible: true
-                font.pixelSize: 20
+                target: timelineAnimation
+                running: true
             }
 
             PropertyChanges {
                 target: timeline
                 enabled: true
-            }
-
-            PropertyChanges {
-                target: timelineAnimation
-                running: true
             }
         }
     ]
