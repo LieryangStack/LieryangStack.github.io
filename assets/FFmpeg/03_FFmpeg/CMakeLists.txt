@@ -1,0 +1,1 @@
+add_executable(01_GetInfo 01_GetInfo.cpp)

@@ -1,0 +1,7 @@
+[
+{
+  "directory": "/home/lieryang/Desktop/LieryangStack.github.io/assets/FFmpeg/build/03_FFmpeg",
+  "command": "/usr/bin/g++   -g -std=gnu++11 -o CMakeFiles/01_GetInfo.dir/01_GetInfo.cpp.o -c /home/lieryang/Desktop/LieryangStack.github.io/assets/FFmpeg/03_FFmpeg/01_GetInfo.cpp",
+  "file": "/home/lieryang/Desktop/LieryangStack.github.io/assets/FFmpeg/03_FFmpeg/01_GetInfo.cpp"
+}
+]

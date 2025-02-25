@@ -1,0 +1,1 @@
+/usr/bin/g++ -g CMakeFiles/01_GetInfo.dir/01_GetInfo.cpp.o -o 01_GetInfo  -lavformat -lavcodec -lavutil 
