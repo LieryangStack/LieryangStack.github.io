@@ -15,3 +15,11 @@ SOEM的层级架构如下图所示：
 
 ![alt text](image.png)
 
+https://blog.csdn.net/cln512/article/details/110704584
+
+https://blog.csdn.net/weixin_48501028/article/details/128835795
+
+https://openethercatsociety.github.io/doc/soem/tutorial_8txt.html
+
+https://www.liruan.net/215.html
+
