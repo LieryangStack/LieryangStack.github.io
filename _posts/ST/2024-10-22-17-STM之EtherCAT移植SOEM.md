@@ -23,3 +23,14 @@ https://openethercatsociety.github.io/doc/soem/tutorial_8txt.html
 
 https://www.liruan.net/215.html
 
+
+
+
+## CiA402
+
+https://zhuanlan.zhihu.com/p/713705053
+
+https://blog.csdn.net/qq_46211259/article/details/142423849
+
+https://www.cnblogs.com/tossorrow/p/18380990
+
