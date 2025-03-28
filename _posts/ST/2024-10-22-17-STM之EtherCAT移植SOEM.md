@@ -13,7 +13,7 @@ SOEM库采用分层设计，并且提供了一个抽象层，将SOEM协议栈与
 
 SOEM的层级架构如下图所示：
 
-![alt text](image.png)
+![alt text](./ethercat_image/image.png)
 
 https://blog.csdn.net/cln512/article/details/110704584
 
