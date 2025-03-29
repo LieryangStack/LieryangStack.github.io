@@ -1,8 +1,8 @@
 ---
 layout: post
-title: 十七、STM32——EtherCAT
-categories: STM32
-tags: [STM32]
+title: 二、EtherCAT——移植SOEM
+categories: EtherCAT
+tags: [EtherCAT]
 ---
 
 ## 1 SOEM
