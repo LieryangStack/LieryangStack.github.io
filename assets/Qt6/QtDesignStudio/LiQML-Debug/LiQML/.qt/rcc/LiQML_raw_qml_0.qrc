@@ -1,0 +1,8 @@
+<RCC>
+  <qresource prefix="/qt/qml/LiQML/">
+    <file alias="Constants.qml">C:/ProgramData/QtCreator/Links/5967955dc86529ec1eee22e80ba00bac/LiQML/Constants.qml</file>
+    <file alias="EventListSimulator.qml">C:/ProgramData/QtCreator/Links/5967955dc86529ec1eee22e80ba00bac/LiQML/EventListSimulator.qml</file>
+    <file alias="EventListModel.qml">C:/ProgramData/QtCreator/Links/5967955dc86529ec1eee22e80ba00bac/LiQML/EventListModel.qml</file>
+  </qresource>
+</RCC>
+

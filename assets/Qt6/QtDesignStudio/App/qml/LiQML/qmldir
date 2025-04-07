@@ -1,0 +1,10 @@
+module LiQML
+linktarget LiQMLplugin
+optional plugin LiQMLplugin
+classname LiQMLPlugin
+typeinfo LiQML.qmltypes
+prefer :/qt/qml/LiQML/
+singleton Constants 1.0 Constants.qml
+EventListSimulator 1.0 EventListSimulator.qml
+EventListModel 1.0 EventListModel.qml
+

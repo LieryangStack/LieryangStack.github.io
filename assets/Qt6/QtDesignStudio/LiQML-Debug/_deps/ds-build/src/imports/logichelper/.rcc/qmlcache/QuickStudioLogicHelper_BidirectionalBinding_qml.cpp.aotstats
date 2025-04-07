@@ -1,0 +1,60 @@
+[
+    {
+        "moduleFiles": [
+            {
+                "entries": [
+                    {
+                        "codegenSuccessfull": false,
+                        "column": 27,
+                        "durationMicroseconds": 163,
+                        "errorMessage": "Cannot load property block from (component in C:/ProgramData/QtCreator/Links/2cdf872ecbadb6d37613b6048fc5c678/_deps/ds-build/src/imports/logichelper/BidirectionalBinding.qml)::__internal with type QObject.",
+                        "functionName": "onValue01Changed",
+                        "line": 112
+                    },
+                    {
+                        "codegenSuccessfull": false,
+                        "column": 27,
+                        "durationMicroseconds": 38,
+                        "errorMessage": "Cannot load property block from (component in C:/ProgramData/QtCreator/Links/2cdf872ecbadb6d37613b6048fc5c678/_deps/ds-build/src/imports/logichelper/BidirectionalBinding.qml)::__internal with type QObject.",
+                        "functionName": "onValue02Changed",
+                        "line": 124
+                    },
+                    {
+                        "codegenSuccessfull": true,
+                        "column": 17,
+                        "durationMicroseconds": 203,
+                        "errorMessage": "",
+                        "functionName": "target",
+                        "line": 138
+                    },
+                    {
+                        "codegenSuccessfull": false,
+                        "column": 16,
+                        "durationMicroseconds": 271,
+                        "errorMessage": "Cannot generate efficient code for LoadElement with non-list base type (component in C:/ProgramData/QtCreator/Links/2cdf872ecbadb6d37613b6048fc5c678/_deps/ds-build/src/imports/logichelper/BidirectionalBinding.qml)::target01 with type QObject (stored as QJSValue)",
+                        "functionName": "value",
+                        "line": 140
+                    },
+                    {
+                        "codegenSuccessfull": true,
+                        "column": 17,
+                        "durationMicroseconds": 88,
+                        "errorMessage": "",
+                        "functionName": "target",
+                        "line": 144
+                    },
+                    {
+                        "codegenSuccessfull": false,
+                        "column": 16,
+                        "durationMicroseconds": 246,
+                        "errorMessage": "Cannot generate efficient code for LoadElement with non-list base type (component in C:/ProgramData/QtCreator/Links/2cdf872ecbadb6d37613b6048fc5c678/_deps/ds-build/src/imports/logichelper/BidirectionalBinding.qml)::target02 with type QObject (stored as QJSValue)",
+                        "functionName": "value",
+                        "line": 146
+                    }
+                ],
+                "filepath": "C:/ProgramData/QtCreator/Links/2cdf872ecbadb6d37613b6048fc5c678/_deps/ds-build/src/imports/logichelper/BidirectionalBinding.qml"
+            }
+        ],
+        "moduleId": "QtQuick.Studio.LogicHelper(QuickStudioLogicHelper)"
+    }
+]

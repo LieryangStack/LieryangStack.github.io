@@ -1,0 +1,2 @@
+C:/ProgramData/QtCreator/Links/2cdf872ecbadb6d37613b6048fc5c678/_deps/ds-build/src/imports/designeffects/.qsb/shaders/innerShadowClip.frag.qsb: \
+  C:/ProgramData/QtCreator/Links/2cdf872ecbadb6d37613b6048fc5c678/_deps/ds-src/src/imports/designeffects/shaders/innerShadowClip.frag

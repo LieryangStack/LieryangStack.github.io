@@ -1,0 +1,60 @@
+[
+    {
+        "moduleFiles": [
+            {
+                "entries": [
+                    {
+                        "codegenSuccessfull": true,
+                        "column": 23,
+                        "durationMicroseconds": 145,
+                        "errorMessage": "",
+                        "functionName": "fill",
+                        "line": 11
+                    },
+                    {
+                        "codegenSuccessfull": false,
+                        "column": 20,
+                        "durationMicroseconds": 236,
+                        "errorMessage": "Cannot access value for name model1",
+                        "functionName": "model",
+                        "line": 16
+                    },
+                    {
+                        "codegenSuccessfull": false,
+                        "column": 27,
+                        "durationMicroseconds": 127,
+                        "errorMessage": "Cannot access value for name modelData",
+                        "functionName": "text",
+                        "line": 22
+                    },
+                    {
+                        "codegenSuccessfull": true,
+                        "column": 22,
+                        "durationMicroseconds": 69,
+                        "errorMessage": "",
+                        "functionName": "height",
+                        "line": 30
+                    },
+                    {
+                        "codegenSuccessfull": false,
+                        "column": 20,
+                        "durationMicroseconds": 274,
+                        "errorMessage": "Cannot access value for name stringListModel",
+                        "functionName": "model",
+                        "line": 37
+                    },
+                    {
+                        "codegenSuccessfull": false,
+                        "column": 27,
+                        "durationMicroseconds": 54,
+                        "errorMessage": "Cannot access value for name model",
+                        "functionName": "text",
+                        "line": 43
+                    }
+                ],
+                "filepath": "C:/ProgramData/QtCreator/Links/9a084b7ad885e9042acc2116e4ce17ab/View.qml"
+            }
+        ],
+        "moduleId": "Stringlistmodel(stringlistmodelexample)"
+    }
+]

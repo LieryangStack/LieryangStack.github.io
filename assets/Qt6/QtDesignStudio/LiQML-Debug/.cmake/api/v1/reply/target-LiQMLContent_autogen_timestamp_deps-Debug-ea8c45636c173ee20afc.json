@@ -1,0 +1,38 @@
+{
+	"backtrace" : 0,
+	"backtraceGraph" : 
+	{
+		"commands" : [],
+		"files" : 
+		[
+			"LiQMLContent/CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 0
+			}
+		]
+	},
+	"dependencies" : 
+	[
+		{
+			"backtrace" : 0,
+			"id" : "LiQMLContent_tooling::@fc70fccdda3e6ffa02a8"
+		}
+	],
+	"folder" : 
+	{
+		"name" : "QtInternalTargets"
+	},
+	"id" : "LiQMLContent_autogen_timestamp_deps::@fc70fccdda3e6ffa02a8",
+	"isGeneratorProvided" : true,
+	"name" : "LiQMLContent_autogen_timestamp_deps",
+	"paths" : 
+	{
+		"build" : "LiQMLContent",
+		"source" : "LiQMLContent"
+	},
+	"sources" : [],
+	"type" : "UTILITY"
+}

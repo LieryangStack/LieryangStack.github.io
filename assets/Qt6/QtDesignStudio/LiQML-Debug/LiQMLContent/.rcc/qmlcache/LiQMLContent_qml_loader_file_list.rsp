@@ -1,0 +1,8 @@
+--resource
+C:/ProgramData/QtCreator/Links/2cdf872ecbadb6d37613b6048fc5c678/LiQMLContent/.qt/rcc/qmake_LiQMLContent.qrc
+--resource
+C:/ProgramData/QtCreator/Links/2cdf872ecbadb6d37613b6048fc5c678/LiQMLContent/.qt/rcc/LiQMLContent_raw_qml_0.qrc
+/qt/qml/LiQMLContent/FramelessWindowForm.qml
+/qt/qml/LiQMLContent/FramelessWindowButton.qml
+/qt/qml/LiQMLContent/App.qml
+/qt/qml/LiQMLContent/FramelessWindow.qml

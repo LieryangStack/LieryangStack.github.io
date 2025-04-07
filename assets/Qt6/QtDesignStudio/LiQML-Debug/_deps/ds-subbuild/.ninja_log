@@ -1,0 +1,21 @@
+# ninja log v6
+1	55	7657093544805117	ds-populate-prefix/src/ds-populate-stamp/ds-populate-mkdir	168c24f45ad5802f
+1	55	7657093544805117	C:/ProgramData/QtCreator/Links/2cdf872ecbadb6d37613b6048fc5c678/_deps/ds-subbuild/ds-populate-prefix/src/ds-populate-stamp/ds-populate-mkdir	168c24f45ad5802f
+55	3505	7657093579300852	ds-populate-prefix/src/ds-populate-stamp/ds-populate-download	47e71154eb6688bf
+55	3505	7657093579300852	C:/ProgramData/QtCreator/Links/2cdf872ecbadb6d37613b6048fc5c678/_deps/ds-subbuild/ds-populate-prefix/src/ds-populate-stamp/ds-populate-download	47e71154eb6688bf
+3505	4950	7657093579330949	ds-populate-prefix/src/ds-populate-stamp/ds-populate-update	e0657cef286af7ba
+3505	4950	7657093579330949	C:/ProgramData/QtCreator/Links/2cdf872ecbadb6d37613b6048fc5c678/_deps/ds-subbuild/ds-populate-prefix/src/ds-populate-stamp/ds-populate-update	e0657cef286af7ba
+4950	5006	7657093594318817	ds-populate-prefix/src/ds-populate-stamp/ds-populate-patch	6900cc4449bf4f72
+4950	5006	7657093594318817	C:/ProgramData/QtCreator/Links/2cdf872ecbadb6d37613b6048fc5c678/_deps/ds-subbuild/ds-populate-prefix/src/ds-populate-stamp/ds-populate-patch	6900cc4449bf4f72
+5006	5063	7657093594878759	ds-populate-prefix/src/ds-populate-stamp/ds-populate-configure	b0ba5288f6a2c52e
+5006	5063	7657093594878759	C:/ProgramData/QtCreator/Links/2cdf872ecbadb6d37613b6048fc5c678/_deps/ds-subbuild/ds-populate-prefix/src/ds-populate-stamp/ds-populate-configure	b0ba5288f6a2c52e
+5063	5119	7657093595448432	ds-populate-prefix/src/ds-populate-stamp/ds-populate-build	9b42cb1c1ff12df0
+5063	5119	7657093595448432	C:/ProgramData/QtCreator/Links/2cdf872ecbadb6d37613b6048fc5c678/_deps/ds-subbuild/ds-populate-prefix/src/ds-populate-stamp/ds-populate-build	9b42cb1c1ff12df0
+5119	5174	7657093595981381	ds-populate-prefix/src/ds-populate-stamp/ds-populate-install	18d43b6ee0c8a980
+5119	5174	7657093595981381	C:/ProgramData/QtCreator/Links/2cdf872ecbadb6d37613b6048fc5c678/_deps/ds-subbuild/ds-populate-prefix/src/ds-populate-stamp/ds-populate-install	18d43b6ee0c8a980
+5175	5233	7657093596575672	ds-populate-prefix/src/ds-populate-stamp/ds-populate-test	42c250ed4bd5737d
+5175	5233	7657093596575672	C:/ProgramData/QtCreator/Links/2cdf872ecbadb6d37613b6048fc5c678/_deps/ds-subbuild/ds-populate-prefix/src/ds-populate-stamp/ds-populate-test	42c250ed4bd5737d
+5233	5316	7657093597411796	CMakeFiles/ds-populate-complete	f86e82250ff4bd28
+5233	5316	7657093597411796	ds-populate-prefix/src/ds-populate-stamp/ds-populate-done	f86e82250ff4bd28
+5233	5316	7657093597411796	C:/ProgramData/QtCreator/Links/2cdf872ecbadb6d37613b6048fc5c678/_deps/ds-subbuild/CMakeFiles/ds-populate-complete	f86e82250ff4bd28
+5233	5316	7657093597411796	C:/ProgramData/QtCreator/Links/2cdf872ecbadb6d37613b6048fc5c678/_deps/ds-subbuild/ds-populate-prefix/src/ds-populate-stamp/ds-populate-done	f86e82250ff4bd28

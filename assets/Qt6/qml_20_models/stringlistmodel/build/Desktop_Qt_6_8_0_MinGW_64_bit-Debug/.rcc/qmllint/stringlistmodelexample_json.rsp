@@ -1,0 +1,12 @@
+--bare
+-I
+C:/ProgramData/QtCreator/Links/9a084b7ad885e9042acc2116e4ce17ab
+-I
+C:/Qt/6.8.0/mingw_64/qml
+--resource
+C:/ProgramData/QtCreator/Links/9a084b7ad885e9042acc2116e4ce17ab/.qt/rcc/qmake_Stringlistmodel.qrc
+--resource
+C:/ProgramData/QtCreator/Links/9a084b7ad885e9042acc2116e4ce17ab/.qt/rcc/stringlistmodelexample_raw_qml_0.qrc
+C:/ProgramData/QtCreator/Links/c0d812f7222f7f3befa45f326efe2041/View.qml
+--json
+C:/ProgramData/QtCreator/Links/9a084b7ad885e9042acc2116e4ce17ab/stringlistmodelexample_qmllint.json

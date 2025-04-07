@@ -10,17 +10,21 @@ import QtQuick.Layouts
 
 Window {
     id: window
-    width: Constants.width
-    height: Constants.height
 
     flags: Qt.FramelessWindowHint | Qt.Window
 
     visible: true
     color: "transparent"
+    minimumWidth: 980
+    minimumHeight: 640
 
     FramelessWindow {
         id: screen01
         anchors.fill: parent
+        anchors.leftMargin: 0
+        anchors.rightMargin: 0
+        anchors.topMargin: 0
+        anchors.bottomMargin: 0
         windowRoot: window
 
         Rectangle {
@@ -29,62 +33,583 @@ Window {
 
             anchors.fill: parent.windowContent
 
-            Pane {
-                id: pane
-                x: 32
-                y: 37
-                width: 200
-                height: 200
+            Row {
+                anchors.left: parent.left
+                anchors.top: parent.top
+                anchors.leftMargin: 20
+                anchors.topMargin: 20
+                spacing: 5
+                Image {
+                    id: icon
+                    width: 36
+                    height: 36
+                    source: "image/icon.png"
+                    fillMode: Image.PreserveAspectFit
+                }
 
-
-
-                CheckBox {
-                    id: checkBox
-                    x: 10
-                    y: 10
-                    text: qsTr("复选框")
-
-                    // Material.theme: Material.Dark
-                    Material.foreground: Material.Pink
-                    Material.background: Material.Blue
-                    Material.accent: Material.Cyan
+                Label {
+                    id: label
+                    width: 86
+                    height: 36
+                    color: "#a42e28"
+                    text: qsTr("晋轩和无线CAN")
+                    verticalAlignment: Text.AlignVCenter
+                    styleColor: "#a42e28"
+                    font.pointSize: 18
+                    font.italic: false
+                    font.bold: true
                 }
             }
 
-
-
-
-            ComboBox {
-                id: comboBox
-                x: 378
+            Frame {
+                id: frame
+                x: 20
                 y: 81
-                width: 120
-                height: 37
-                flat: true
-                editable: true
-                model: ["First", "Second", "Third"]
+                width: 200
+                height: 250
+                background: Rectangle {
+                    color :"#22a42e28"
+                    radius: 10
+                }
+
+                ColumnLayout {
+                    id: columnLayout
+                    anchors.fill: parent
+
+                    Row {
+                        id: row1
+                        x: 34
+                        y: 74
+                        width: 100
+                        height: 100
+                        spacing: 15
+
+                        Label {
+                            width: 50
+                            height: 37
+                            text: qsTr("串口号")
+                            verticalAlignment: Text.AlignVCenter
+                            font.pointSize: 12
+                        }
+
+                        ComboBox {
+                            width: 110
+                            height: 37
+                            flat: true
+                            editable: true
+                            model: ["COM23"]
+                        }
+
+                    }
+
+                    Row {
+                        x: 34
+                        y: 74
+                        width: 100
+                        height: 100
+                        spacing: 15
+
+                        Label {
+                            width: 50
+                            height: 37
+                            text: qsTr("波特率")
+                            verticalAlignment: Text.AlignVCenter
+                            font.pointSize: 12
+                        }
+
+                        ComboBox {
+                            width: 110
+                            height: 37
+                            flat: true
+                            editable: true
+                            model: ["9600", "115200"]
+                        }
+
+                    }
+
+                    Row {
+                        x: 34
+                        y: 74
+                        width: 100
+                        height: 100
+                        spacing: 15
+
+                        Label {
+                            width: 50
+                            height: 37
+                            text: qsTr("数据位")
+                            verticalAlignment: Text.AlignVCenter
+                            font.pointSize: 12
+                        }
+
+                        ComboBox {
+                            width: 110
+                            height: 37
+                            flat: true
+                            editable: true
+                            model: ["8"]
+                        }
+
+                    }
+
+                    Row {
+                        x: 34
+                        y: 74
+                        width: 100
+                        height: 100
+                        spacing: 15
+
+                        Label {
+                            width: 50
+                            height: 37
+                            text: qsTr("停止位")
+                            verticalAlignment: Text.AlignVCenter
+                            font.pointSize: 12
+                        }
+
+                        ComboBox {
+                            width: 110
+                            height: 37
+                            flat: true
+                            editable: true
+                            model: ["1"]
+                        }
+
+                    }
+
+                    Row {
+                        x: 34
+                        y: 74
+                        width: 100
+                        height: 100
+                        spacing: 15
+
+                        Label {
+                            width: 50
+                            height: 37
+                            text: qsTr("校验位")
+                            verticalAlignment: Text.AlignVCenter
+                            font.pointSize: 12
+                        }
+
+                        ComboBox {
+                            width: 110
+                            height: 37
+                            flat: true
+                            editable: true
+                            model: ["NONE"]
+                        }
+                    }
+                }
             }
 
-            Switch {
-                id: _switch
-                x: 400
-                y: 328
-                text: qsTr("Switch")
+            ColumnLayout {
+                x: 20
+                y: 350
+                height: 200
+                Button {
+                    id: button
+                    height: 100
+                    text: qsTr("打开串口")
+                    font.pointSize: 12
+                    font.bold: true
+                    highlighted: true
+                    Material.accent: Material.Red
+                    Layout.preferredWidth: 200
+                    Layout.preferredHeight: 50
+                }
+
+                Button {
+                    text: qsTr("下载配置")
+                    font.pointSize: 12
+                    font.bold: true
+                    highlighted: true
+                    Material.accent: Material.Red
+                    Layout.preferredWidth: 200
+                    Layout.preferredHeight: 50
+                }
+
+                Button {
+                    text: qsTr("读取配置")
+                    font.pointSize: 12
+                    font.bold: true
+                    highlighted: true
+                    Material.accent: Material.Red
+                    Layout.preferredWidth: 200
+                    Layout.preferredHeight: 50
+                }
+
+                Button {
+                    text: qsTr("重启设备")
+                    font.pointSize: 12
+                    font.bold: true
+                    highlighted: true
+                    Material.accent: Material.Red
+                    Layout.preferredWidth: 200
+                    Layout.preferredHeight: 50
+                }
             }
 
-            SpinBox {
-                id: spinBox
-                x: 389
-                y: 139
-                width: 143
-                height: 31
+            Label {
+                id: label1
+                x: 277
+                y: 56
+                width: 99
+                height: 27
+                text: qsTr("设备参数")
+                verticalAlignment: Text.AlignVCenter
+                font.bold: true
+                font.pointSize: 14
+                color: "#a42e28"
             }
 
+
+            Frame {
+                x: 277
+                y: 89
+                width: 654
+                height: 169
+                background: Rectangle {
+                    color :"#22a42e28"
+                    radius: 10
+                }
+
+                ColumnLayout {
+                    id: columnLayout1
+                    anchors.fill: parent
+
+                    RowLayout {
+
+                        Label {
+                            width: 120
+                            text: "  CAN通信波特率"
+                            font.pointSize: 12
+                            Layout.preferredWidth: 135
+                        }
+
+
+                        ComboBox {
+                            model: ["5K","10K","20K","50K","100K"]
+                            Layout.preferredHeight: 35
+                        }
+
+                    }
+
+
+                    RowLayout {
+                        x: 291
+                        y: 75
+                        spacing: 10
+                        Switch {
+                            text: qsTr("注册包")
+                            font.pointSize: 12
+                            Layout.preferredWidth: 130
+                            Layout.preferredHeight: 41
+                        }
+
+                        ComboBox {
+                            model: ["设备IMEI"]
+                            Layout.preferredHeight: 35
+                        }
+                    }
+
+                    RowLayout {
+                        x: 291
+                        y: 135
+                        spacing: 10
+                        Switch {
+                            text: qsTr("心跳包")
+                            font.pointSize: 12
+                            Layout.preferredWidth: 130
+                            Layout.preferredHeight: 41
+                        }
+
+                        ComboBox {
+                            model: ["设备IMEI"]
+                            Layout.preferredHeight: 35
+                        }
+
+
+                        Label {
+                            text: "心跳周期"
+                            font.pointSize: 12
+                        }
+
+                        Rectangle{
+                                x: 10
+                                y: 10
+                                width: 100
+                                height: 35
+                                opacity: 1
+                                color: "#00ffffff"
+                                border.color: "#7b7979"
+                                border.width: 1
+                                radius: 4
+
+                                TextInput {
+                                    text: qsTr("60000")
+                                    anchors.fill: parent
+                                    font.pixelSize: 12
+                                    horizontalAlignment: Text.AlignHCenter
+                                    verticalAlignment: Text.AlignVCenter
+                                }
+                        }
+                    }
+                }
+
+                Label {
+                    x: -12
+                    y: 180
+                    width: 99
+                    height: 27
+                    text: qsTr("MQTT透传参数")
+                    verticalAlignment: Text.AlignVCenter
+                    font.bold: true
+                    font.pointSize: 14
+                    color: "#a42e28"
+                }
+
+
+                Frame {
+                    x: -12
+                    y: 220
+                    width: 654
+                    height: 240
+                    background: Rectangle {
+                        color :"#22a42e28"
+                        radius: 10
+                    }
+
+                    ColumnLayout {
+                        anchors.fill: parent
+
+                        RowLayout {
+
+                            Label {
+                                width: 120
+                                text: "IP/域名"
+                                font.pointSize: 12
+                                Layout.preferredWidth: 100
+                            }
+
+
+                            Rectangle{
+                                width: 100
+                                height: 35
+                                opacity: 1
+                                color: "#00ffffff"
+                                border.color: "#7b7979"
+                                border.width: 1
+                                radius: 4
+
+                                TextInput {
+                                    text: qsTr("192.168.10.1")
+                                    anchors.fill: parent
+                                    font.pixelSize: 12
+                                    horizontalAlignment: Text.AlignHCenter
+                                    verticalAlignment: Text.AlignVCenter
+                                }
+                            }
+
+                        }
+
+                        RowLayout {
+
+                            Label {
+                                width: 120
+                                text: "端口"
+                                font.pointSize: 12
+                                Layout.preferredWidth: 100
+                            }
+
+
+                            Rectangle{
+                                width: 100
+                                height: 35
+                                opacity: 1
+                                color: "#00ffffff"
+                                border.color: "#7b7979"
+                                border.width: 1
+                                radius: 4
+
+                                TextInput {
+                                    text: qsTr("6002")
+                                    anchors.fill: parent
+                                    font.pixelSize: 12
+                                    horizontalAlignment: Text.AlignHCenter
+                                    verticalAlignment: Text.AlignVCenter
+                                }
+                            }
+
+                        }
+
+                        RowLayout {
+
+                            Label {
+                                width: 120
+                                text: "客户端ID"
+                                font.pointSize: 12
+                                Layout.preferredWidth: 100
+                            }
+
+
+                            Rectangle{
+                                width: 100
+                                height: 35
+                                opacity: 1
+                                color: "#00ffffff"
+                                border.color: "#7b7979"
+                                border.width: 1
+                                radius: 4
+
+                                TextInput {
+                                    text: qsTr("6002")
+                                    anchors.fill: parent
+                                    font.pixelSize: 12
+                                    horizontalAlignment: Text.AlignHCenter
+                                    verticalAlignment: Text.AlignVCenter
+                                }
+                            }
+
+                        }
+
+                        RowLayout {
+
+                            Label {
+                                width: 120
+                                text: "用户名"
+                                font.pointSize: 12
+                                Layout.preferredWidth: 100
+                            }
+
+
+                            Rectangle{
+                                width: 100
+                                height: 35
+                                opacity: 1
+                                color: "#00ffffff"
+                                border.color: "#7b7979"
+                                border.width: 1
+                                radius: 4
+
+                                TextInput {
+                                    text: qsTr("6002")
+                                    anchors.fill: parent
+                                    font.pixelSize: 12
+                                    horizontalAlignment: Text.AlignHCenter
+                                    verticalAlignment: Text.AlignVCenter
+                                }
+                            }
+
+                        }
+
+                        RowLayout {
+
+                            Label {
+                                width: 120
+                                text: "密码"
+                                font.pointSize: 12
+                                Layout.preferredWidth: 100
+                            }
+
+
+                            Rectangle{
+                                width: 100
+                                height: 35
+                                opacity: 1
+                                color: "#00ffffff"
+                                border.color: "#7b7979"
+                                border.width: 1
+                                radius: 4
+
+                                TextInput {
+                                    text: qsTr("6002")
+                                    anchors.fill: parent
+                                    font.pixelSize: 12
+                                    horizontalAlignment: Text.AlignHCenter
+                                    verticalAlignment: Text.AlignVCenter
+                                }
+                            }
+
+                        }
+
+
+                        RowLayout {
+
+                            Label {
+                                width: 120
+                                text: "订阅主题"
+                                font.pointSize: 12
+                                Layout.preferredWidth: 100
+                            }
+
+
+                            Rectangle{
+                                width: 100
+                                height: 35
+                                opacity: 1
+                                color: "#00ffffff"
+                                border.color: "#7b7979"
+                                border.width: 1
+                                radius: 4
+
+                                TextInput {
+                                    text: qsTr("6002")
+                                    anchors.fill: parent
+                                    font.pixelSize: 12
+                                    horizontalAlignment: Text.AlignHCenter
+                                    verticalAlignment: Text.AlignVCenter
+                                }
+                            }
+
+                        }
+
+                        RowLayout {
+
+                            Label {
+                                width: 120
+                                text: "发布主题"
+                                font.pointSize: 12
+                                Layout.preferredWidth: 100
+                            }
+
+
+                            Rectangle{
+                                width: 100
+                                height: 35
+                                opacity: 1
+                                color: "#00ffffff"
+                                border.color: "#7b7979"
+                                border.width: 1
+                                radius: 4
+
+                                TextInput {
+                                    text: qsTr("6002")
+                                    anchors.fill: parent
+                                    font.pixelSize: 12
+                                    horizontalAlignment: Text.AlignHCenter
+                                    verticalAlignment: Text.AlignVCenter
+                                }
+                            }
+
+                        }
+
+                    }
+
+                }
+
+
+
+
+
+            }
 
         }
     }
 
     property bool isMinimized: false
+    width: 980
+    height: 640
 
     /* 解决窗口最小化恢复后，左上角的标题阴影 */
     onVisibilityChanged: {
