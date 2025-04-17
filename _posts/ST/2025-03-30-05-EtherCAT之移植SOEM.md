@@ -13,7 +13,43 @@ SOEM库采用分层设计，并且提供了一个抽象层，将SOEM协议栈与
 
 SOEM的层级架构如下图所示：
 
-![alt text](./ethercat_image/image.png)
+![alt text](image.png)
+
+![alt text](image-1.png)
+
+
+### 1.1 osal.c
+
+
+
+
+### 1.2 nicdrv.c
+
+
+
+https://blog.csdn.net/cln512/article/details/110704584
+
+https://blog.csdn.net/weixin_48501028/article/details/128835795
+
+https://openethercatsociety.github.io/doc/soem/tutorial_8txt.html
+
+https://www.liruan.net/215.html
+
+https://blog.csdn.net/cln512/article/details/122093205
+
+https://blog.csdn.net/cln512/category_9146325.html
+
+https://blog.csdn.net/cln512/article/details/147198512
+
+
+
+
+
+
+
+
+
+
 
 https://blog.csdn.net/cln512/article/details/110704584
 
