@@ -13,9 +13,9 @@ SOEM库采用分层设计，并且提供了一个抽象层，将SOEM协议栈与
 
 SOEM的层级架构如下图所示：
 
-![alt text](image.png)
+![alt text](./soem_image_bak/image.png)
 
-![alt text](image-1.png)
+![alt text](./soem_image_bak/image-1.png)
 
 
 ### 1.1 osal.c
