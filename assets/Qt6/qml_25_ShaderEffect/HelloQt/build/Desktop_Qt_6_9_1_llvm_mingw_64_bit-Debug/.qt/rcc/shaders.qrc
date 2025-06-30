@@ -1,0 +1,7 @@
+<RCC>
+  <qresource prefix="/qt/qml/shadereffects">
+    <file alias="content/shaders/myeffect.vert.qsb">C:/ProgramData/QtCreator/Links/28d150ef69b4ac4a27dad39fe67c8ad5/.qsb/content/shaders/myeffect.vert.qsb</file>
+    <file alias="content/shaders/myeffect.frag.qsb">C:/ProgramData/QtCreator/Links/28d150ef69b4ac4a27dad39fe67c8ad5/.qsb/content/shaders/myeffect.frag.qsb</file>
+  </qresource>
+</RCC>
+

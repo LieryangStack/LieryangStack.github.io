@@ -1,4 +1,4 @@
-# Install script for directory: C:/Users/Lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_17_ChartView/LineSeries
+# Install script for directory: C:/Users/lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_17_ChartView/LineSeries
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -38,7 +38,7 @@ if(NOT DEFINED CMAKE_OBJDUMP)
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/bin" TYPE EXECUTABLE FILES "C:/Users/Lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_17_ChartView/LineSeries/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/appLineSeries.exe")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/bin" TYPE EXECUTABLE FILES "C:/Users/lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_17_ChartView/LineSeries/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/appLineSeries.exe")
   if(EXISTS "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/bin/appLineSeries.exe" AND
      NOT IS_SYMLINK "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/bin/appLineSeries.exe")
     if(CMAKE_INSTALL_DO_STRIP)
@@ -55,5 +55,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "C:/Users/Lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_17_ChartView/LineSeries/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "C:/Users/lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_17_ChartView/LineSeries/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

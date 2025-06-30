@@ -3,26 +3,26 @@ import QtQuick
 Window {
   width: 500; height: 600
   visible: true
-  
+
   Item {
-      id: nonlayered
+    id: nonlayered
 
-      opacity: 0.5
+    opacity: 0.5
 
-      // layer.enabled: true
+    layer.enabled: false
 
-      Rectangle { width: 80; 
-                  height: 80; 
-                  opacity: 0.5;
-                  color: "red"; 
-                  border.width: 1 }
-      Rectangle { x: 20; 
-                  y: 20; 
-                  width: 80; 
-                  height: 80;
-                  opacity: 0.5; 
-                  color: "green"; 
-                  border.width: 1 }
+    Rectangle { width: 80; 
+                height: 80; 
+                opacity: 0.5;
+                color: "red"; 
+                border.width: 1 }
+    Rectangle { x: 20; 
+                y: 20; 
+                width: 80; 
+                height: 80;
+                opacity: 0.5;
+                color: "green"; 
+                border.width: 1 }
   }
 
   Item {
@@ -43,12 +43,11 @@ Window {
                   y: 20; 
                   width: 80; 
                   height: 80;
-                  opacity: 0.5; 
+                  opacity: 0.5;
                   color: "green"; 
                   border.width: 1 }
   }
-
-
+    
   // Item {
   //     x: 300
   //     width: 100; height: 100

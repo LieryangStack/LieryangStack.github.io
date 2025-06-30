@@ -16,6 +16,8 @@
 #endif
 Q_QMLTYPE_EXPORT void qml_register_types_LineSeries()
 {
+    QT_WARNING_PUSH QT_WARNING_DISABLE_DEPRECATED
+    QT_WARNING_POP
     qmlRegisterModule("LineSeries", 1, 0);
 }
 

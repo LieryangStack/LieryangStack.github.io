@@ -1,26 +1,26 @@
 {
-	"BUILD_DIR" : "C:/Users/Lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_17_ChartView/LineSeries/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/appLineSeries_autogen",
-	"CMAKE_BINARY_DIR" : "C:/Users/Lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_17_ChartView/LineSeries/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug",
-	"CMAKE_CURRENT_BINARY_DIR" : "C:/Users/Lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_17_ChartView/LineSeries/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug",
-	"CMAKE_CURRENT_SOURCE_DIR" : "C:/Users/Lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_17_ChartView/LineSeries",
-	"CMAKE_SOURCE_DIR" : "C:/Users/Lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_17_ChartView/LineSeries",
+	"BUILD_DIR" : "C:/Users/lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_17_ChartView/LineSeries/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/appLineSeries_autogen",
+	"CMAKE_BINARY_DIR" : "C:/Users/lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_17_ChartView/LineSeries/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug",
+	"CMAKE_CURRENT_BINARY_DIR" : "C:/Users/lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_17_ChartView/LineSeries/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug",
+	"CMAKE_CURRENT_SOURCE_DIR" : "C:/Users/lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_17_ChartView/LineSeries",
+	"CMAKE_SOURCE_DIR" : "C:/Users/lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_17_ChartView/LineSeries",
 	"CROSS_CONFIG" : false,
 	"GENERATOR" : "Ninja",
-	"INCLUDE_DIR" : "C:/Users/Lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_17_ChartView/LineSeries/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/appLineSeries_autogen/include",
+	"INCLUDE_DIR" : "C:/Users/lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_17_ChartView/LineSeries/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/appLineSeries_autogen/include",
 	"INPUTS" : 
 	[
-		"C:/Users/Lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_17_ChartView/LineSeries/MyRect.qml",
-		"C:/Users/Lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_17_ChartView/LineSeries/UI.qml"
+		"C:/Users/lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_17_ChartView/LineSeries/MyRect.qml",
+		"C:/Users/lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_17_ChartView/LineSeries/UI.qml"
 	],
-	"LOCK_FILE" : "C:/Users/Lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_17_ChartView/LineSeries/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/CMakeFiles/appLineSeries_autogen.dir/AutoRcc_qml_EWIEGA46WW_Lock.lock",
+	"LOCK_FILE" : "C:/Users/lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_17_ChartView/LineSeries/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/CMakeFiles/appLineSeries_autogen.dir/AutoRcc_qml_EWIEGA46WW_Lock.lock",
 	"MULTI_CONFIG" : false,
 	"OPTIONS" : [ "--no-zstd", "-name", "qml" ],
 	"OUTPUT_CHECKSUM" : "EWIEGA46WW",
 	"OUTPUT_NAME" : "qrc_qml.cpp",
-	"RCC_EXECUTABLE" : "C:/Qt/6.7.2/mingw_64/./bin/rcc.exe",
+	"RCC_EXECUTABLE" : "C:/Qt/6.9.1/mingw_64/bin/rcc.exe",
 	"RCC_LIST_OPTIONS" : [ "--list" ],
-	"SETTINGS_FILE" : "C:/Users/Lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_17_ChartView/LineSeries/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/CMakeFiles/appLineSeries_autogen.dir/AutoRcc_qml_EWIEGA46WW_Used.txt",
-	"SOURCE" : "C:/Users/Lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_17_ChartView/LineSeries/qml.qrc",
-	"USE_BETTER_GRAPH" : false,
+	"SETTINGS_FILE" : "C:/Users/lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_17_ChartView/LineSeries/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/CMakeFiles/appLineSeries_autogen.dir/AutoRcc_qml_EWIEGA46WW_Used.txt",
+	"SOURCE" : "C:/Users/lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_17_ChartView/LineSeries/qml.qrc",
+	"USE_BETTER_GRAPH" : true,
 	"VERBOSITY" : 0
 }

@@ -146,6 +146,7 @@
 #define __DEC32_MIN_EXP__ (-94)
 #define __INTPTR_WIDTH__ 64
 #define __FLT64X_HAS_INFINITY__ 1
+#define QT_QMLWORKERSCRIPT_LIB 1
 #define __UINT_LEAST32_MAX__ 0xffffffffU
 #define __FLT32X_HAS_DENORM__ 1
 #define __INT_FAST16_TYPE__ short int
@@ -258,6 +259,7 @@
 #define __x86_64__ 1
 #define __FLT32X_MIN_EXP__ (-1021)
 #define __DEC32_SUBNORMAL_MIN__ 0.000001E-95DF
+#define QT_QMLMETA_LIB 1
 #define __MSVCRT__ 1
 #define __INT_FAST16_MAX__ 0x7fff
 #define __FLT64_DIG__ 15
@@ -402,7 +404,6 @@
 #define _ENABLE_EXTENDED_ALIGNED_STORAGE 1
 #define __FLT32X_NORM_MAX__ 1.79769313486231570814527423731704357e+308F32x
 #define __CHAR32_TYPE__ unsigned int
-#define QT_QMLBUILTINS_LIB 1
 #define __FLT_MAX__ 3.40282346638528859811704183484516925e+38F
 #define __cpp_constexpr 201603L
 #define __SSE2__ 1

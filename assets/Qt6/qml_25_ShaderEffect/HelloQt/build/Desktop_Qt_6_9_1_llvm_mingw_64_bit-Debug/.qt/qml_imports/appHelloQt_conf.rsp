@@ -1,0 +1,15 @@
+-rootPath
+C:/ProgramData/QtCreator/Links/2a9d48a2e52b811cef7680d6444d098c
+-cmake-output
+-output-file
+C:/ProgramData/QtCreator/Links/28d150ef69b4ac4a27dad39fe67c8ad5/.qt/qml_imports/appHelloQt_conf.cmake
+-importPath
+C:/ProgramData/QtCreator/Links/28d150ef69b4ac4a27dad39fe67c8ad5/HelloQt
+-importPath
+C:/ProgramData/QtCreator/Links/28d150ef69b4ac4a27dad39fe67c8ad5
+-importPath
+C:/Qt/6.9.1/llvm-mingw_64/qml
+-qrcFiles
+C:/ProgramData/QtCreator/Links/28d150ef69b4ac4a27dad39fe67c8ad5/.qt/rcc/qmake_HelloQt.qrc
+C:/ProgramData/QtCreator/Links/28d150ef69b4ac4a27dad39fe67c8ad5/.qt/rcc/appHelloQt_raw_qml_0.qrc
+C:/ProgramData/QtCreator/Links/28d150ef69b4ac4a27dad39fe67c8ad5/.qt/rcc/shaders.qrc

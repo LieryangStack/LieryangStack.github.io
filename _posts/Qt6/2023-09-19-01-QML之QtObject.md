@@ -11,7 +11,7 @@ tags: [QML]
     
     ![alt text](/assets/Qt6/qml_01_QtObject/image/image.png)
 
-3. 视觉类型的元素，跟元素其实就是 `QtObject`
+3. 视觉类型的元素，根元素其实就是 `QtObject`
 
     ![alt text](/assets/Qt6/qml_01_QtObject/image/image-1.png)
 

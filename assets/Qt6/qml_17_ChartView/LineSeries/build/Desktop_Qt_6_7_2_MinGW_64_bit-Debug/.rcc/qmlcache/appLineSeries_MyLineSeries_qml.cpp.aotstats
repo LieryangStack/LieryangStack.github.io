@@ -1,0 +1,52 @@
+[
+    {
+        "moduleFiles": [
+            {
+                "entries": [
+                    {
+                        "codegenSuccessful": true,
+                        "column": 27,
+                        "durationMicroseconds": 241,
+                        "errorMessage": "",
+                        "functionName": "animationOptions",
+                        "line": 34
+                    },
+                    {
+                        "codegenSuccessful": true,
+                        "column": 23,
+                        "durationMicroseconds": 36,
+                        "errorMessage": "",
+                        "functionName": "fill",
+                        "line": 32
+                    },
+                    {
+                        "codegenSuccessful": true,
+                        "column": 27,
+                        "durationMicroseconds": 40,
+                        "errorMessage": "",
+                        "functionName": "alignment",
+                        "line": 33
+                    },
+                    {
+                        "codegenSuccessful": true,
+                        "column": 20,
+                        "durationMicroseconds": 32,
+                        "errorMessage": "",
+                        "functionName": "axisX",
+                        "line": 41
+                    },
+                    {
+                        "codegenSuccessful": true,
+                        "column": 20,
+                        "durationMicroseconds": 28,
+                        "errorMessage": "",
+                        "functionName": "axisY",
+                        "line": 42
+                    }
+                ],
+                "filePath": "C:/Users/lieryang/Desktop/LieryangStack.github.io/assets/Qt6/qml_17_ChartView/LineSeries/MyLineSeries.qml"
+            }
+        ],
+        "moduleId": "LineSeries(appLineSeries)"
+    }
+]

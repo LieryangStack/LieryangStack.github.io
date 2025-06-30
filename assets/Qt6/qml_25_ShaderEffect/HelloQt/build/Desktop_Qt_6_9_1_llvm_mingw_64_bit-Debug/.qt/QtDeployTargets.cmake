@@ -1,0 +1,3 @@
+set(__QT_DEPLOY_TARGET_appHelloQt_FILE C:/ProgramData/QtCreator/Links/28d150ef69b4ac4a27dad39fe67c8ad5/appHelloQt.exe)
+set(__QT_DEPLOY_TARGET_appHelloQt_TYPE EXECUTABLE)
+set(__QT_DEPLOY_TARGET_appHelloQt_RUNTIME_DLLS C:/Qt/6.9.1/llvm-mingw_64/bin/Qt6Quick.dll;C:/Qt/6.9.1/llvm-mingw_64/bin/Qt6QmlMeta.dll;C:/Qt/6.9.1/llvm-mingw_64/bin/Qt6QmlWorkerScript.dll;C:/Qt/6.9.1/llvm-mingw_64/bin/Qt6QmlModels.dll;C:/Qt/6.9.1/llvm-mingw_64/bin/Qt6Qml.dll;C:/Qt/6.9.1/llvm-mingw_64/bin/Qt6Network.dll;C:/Qt/6.9.1/llvm-mingw_64/bin/Qt6OpenGL.dll;C:/Qt/6.9.1/llvm-mingw_64/bin/Qt6Gui.dll;C:/Qt/6.9.1/llvm-mingw_64/bin/Qt6Core.dll)

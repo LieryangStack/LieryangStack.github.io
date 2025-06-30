@@ -1,0 +1,7 @@
+<RCC>
+  <qresource prefix="/qt/qml/HelloQt/">
+    <file alias="Main.qml">C:/ProgramData/QtCreator/Links/2a9d48a2e52b811cef7680d6444d098c/Main.qml</file>
+    <file alias="qml.qrc">C:/ProgramData/QtCreator/Links/2a9d48a2e52b811cef7680d6444d098c/qml.qrc</file>
+  </qresource>
+</RCC>
+

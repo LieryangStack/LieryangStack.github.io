@@ -21,14 +21,14 @@ extern const unsigned char qmlData alignas(16) [];
 extern const unsigned char qmlData alignas(16) [] = {
 
 0x71,0x76,0x34,0x63,0x64,0x61,0x74,0x61,
-0x3f,0x0,0x0,0x0,0x2,0x7,0x6,0x0,
+0x42,0x0,0x0,0x0,0x1,0x9,0x6,0x0,
 0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,
-0xb4,0x13,0x0,0x0,0x65,0x34,0x31,0x36,
-0x62,0x30,0x39,0x37,0x31,0x34,0x34,0x61,
-0x64,0x39,0x64,0x39,0x35,0x33,0x34,0x31,
-0x61,0x64,0x39,0x34,0x38,0x63,0x30,0x63,
-0x32,0x38,0x63,0x35,0x37,0x31,0x62,0x61,
-0x36,0x61,0x64,0x39,0x0,0x0,0x0,0x0,
+0xb4,0x13,0x0,0x0,0x37,0x32,0x33,0x31,
+0x36,0x33,0x39,0x39,0x66,0x62,0x35,0x66,
+0x37,0x34,0x34,0x34,0x37,0x32,0x65,0x33,
+0x38,0x61,0x39,0x65,0x31,0x34,0x34,0x39,
+0x33,0x39,0x39,0x65,0x36,0x64,0x64,0x39,
+0x63,0x38,0x38,0x30,0x0,0x0,0x0,0x0,
 0x0,0x0,0x0,0x0,0x92,0x5d,0x22,0xfb,
 0x79,0x47,0xe6,0x7f,0x1,0x74,0x0,0x88,
 0x7c,0x64,0x3a,0x19,0x0,0x0,0x0,0x0,
@@ -654,29 +654,17 @@ extern const unsigned char qmlData alignas(16) [] = {
 };
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_MSVC(4573)
-
-template <typename Binding>
-void wrapCall(const QQmlPrivate::AOTCompiledContext *aotContext, void *dataPtr, void **argumentsPtr, Binding &&binding)
-{
-    using return_type = std::invoke_result_t<Binding, const QQmlPrivate::AOTCompiledContext *, void **>;
-    if constexpr (std::is_same_v<return_type, void>) {
-       Q_UNUSED(dataPtr)
-       binding(aotContext, argumentsPtr);
-    } else {
-        if (dataPtr) {
-           *static_cast<return_type *>(dataPtr) = binding(aotContext, argumentsPtr);
-        } else {
-           binding(aotContext, argumentsPtr);
-        }
-    }
-}
 extern const QQmlPrivate::AOTCompiledFunction aotBuiltFunctions[];
 extern const QQmlPrivate::AOTCompiledFunction aotBuiltFunctions[] = {
-{ 0, QMetaType::fromType<int>(), {  }, 
-    [](const QQmlPrivate::AOTCompiledContext *context, void *data, void **argv) {
-        wrapCall(context, data, argv, [](const QQmlPrivate::AOTCompiledContext *aotContext, void **argumentsPtr) {
+{ 0, 0, [](QV4::ExecutableCompilationUnit *contextUnit, QMetaType *argTypes) {
+    struct { QV4::ExecutableCompilationUnit *compilationUnit; } c { contextUnit };
+    const auto *aotContext = &c;
+    Q_UNUSED(aotContext);
+    argTypes[0] = []() { static const auto t = QMetaType::fromName("DeclarativeChart::Animation"); return t; }();
+}, 
+    [](const QQmlPrivate::AOTCompiledContext *aotContext, void **argv) {
 Q_UNUSED(aotContext)
-Q_UNUSED(argumentsPtr)
+Q_UNUSED(argv)
 // expression for animationOptions at line 34, column 9
 int r2_0;
 {
@@ -690,21 +678,37 @@ while (!aotContext->getEnumLookup(1, &r2_0)) {
 aotContext->setInstructionPointer(4);
 #endif
 aotContext->initGetEnumLookup(1, []() { static const auto t = QMetaType::fromName("DeclarativeChart*"); return t; }().metaObject(), "Animation", "SeriesAnimations");
-if (aotContext->engine->hasError())
-    return int();
+if (aotContext->engine->hasError()) {
+aotContext->setReturnValueUndefined();
+if (argv[0]) {
+    const QMetaType returnType = []() { static const auto t = QMetaType::fromName("DeclarativeChart::Animation"); return t; }();
+    returnType.destruct(argv[0]);
+    returnType.construct(argv[0]);
+ }
+return;
+}
 }
 {
 }
 {
 }
 // generate_Ret
-return r2_0;
-});}
- },{ 1, QMetaType::fromType<QObject*>(), {  }, 
-    [](const QQmlPrivate::AOTCompiledContext *context, void *data, void **argv) {
-        wrapCall(context, data, argv, [](const QQmlPrivate::AOTCompiledContext *aotContext, void **argumentsPtr) {
+if (argv[0]) {
+    const QMetaType returnType = QMetaType::fromType<int>();
+    returnType.destruct(argv[0]);
+    returnType.construct(argv[0], &r2_0);
+}
+return;
+}
+ },{ 1, 0, [](QV4::ExecutableCompilationUnit *contextUnit, QMetaType *argTypes) {
+    struct { QV4::ExecutableCompilationUnit *compilationUnit; } c { contextUnit };
+    const auto *aotContext = &c;
+    Q_UNUSED(aotContext);
+    argTypes[0] = []() { static const auto t = QMetaType::fromName("QQuickItem*"); return t; }();
+}, 
+    [](const QQmlPrivate::AOTCompiledContext *aotContext, void **argv) {
 Q_UNUSED(aotContext)
-Q_UNUSED(argumentsPtr)
+Q_UNUSED(argv)
 // expression for fill at line 32, column 9
 QObject *r2_0;
 // generate_LoadQmlContextPropertyLookup
@@ -715,22 +719,34 @@ while (!aotContext->loadScopeObjectPropertyLookup(2, &r2_0)) {
 #ifdef QT_NO_DEBUG
 aotContext->setInstructionPointer(2);
 #endif
-aotContext->initLoadScopeObjectPropertyLookup(2, []() { static const auto t = QMetaType::fromName("QQuickItem*"); return t; }());
-if (aotContext->engine->hasError())
-    return static_cast<QObject *>(nullptr);
+aotContext->initLoadScopeObjectPropertyLookup(2);
+if (aotContext->engine->hasError()) {
+aotContext->setReturnValueUndefined();
+if (argv[0]) {
+    *static_cast<QObject * *>(argv[0]) = nullptr;
+}
+return;
+}
 }
 {
 }
 {
 }
 // generate_Ret
-return r2_0;
-});}
- },{ 2, QMetaType::fromType<int>(), {  }, 
-    [](const QQmlPrivate::AOTCompiledContext *context, void *data, void **argv) {
-        wrapCall(context, data, argv, [](const QQmlPrivate::AOTCompiledContext *aotContext, void **argumentsPtr) {
+if (argv[0]) {
+    *static_cast<QObject * *>(argv[0]) = r2_0;
+}
+return;
+}
+ },{ 2, 0, [](QV4::ExecutableCompilationUnit *contextUnit, QMetaType *argTypes) {
+    struct { QV4::ExecutableCompilationUnit *compilationUnit; } c { contextUnit };
+    const auto *aotContext = &c;
+    Q_UNUSED(aotContext);
+    argTypes[0] = []() { static const auto t = QMetaType::fromName("Qt::Alignment"); return t; }();
+}, 
+    [](const QQmlPrivate::AOTCompiledContext *aotContext, void **argv) {
 Q_UNUSED(aotContext)
-Q_UNUSED(argumentsPtr)
+Q_UNUSED(argv)
 // expression for alignment at line 33, column 9
 int r2_0;
 {
@@ -744,21 +760,37 @@ while (!aotContext->getEnumLookup(4, &r2_0)) {
 aotContext->setInstructionPointer(4);
 #endif
 aotContext->initGetEnumLookup(4, []() { static const auto t = QMetaType::fromName("Qt"); return t; }().metaObject(), "AlignmentFlag", "AlignTop");
-if (aotContext->engine->hasError())
-    return int();
+if (aotContext->engine->hasError()) {
+aotContext->setReturnValueUndefined();
+if (argv[0]) {
+    const QMetaType returnType = []() { static const auto t = QMetaType::fromName("Qt::Alignment"); return t; }();
+    returnType.destruct(argv[0]);
+    returnType.construct(argv[0]);
+ }
+return;
+}
 }
 {
 }
 {
 }
 // generate_Ret
-return r2_0;
-});}
- },{ 3, QMetaType::fromType<QObject*>(), {  }, 
-    [](const QQmlPrivate::AOTCompiledContext *context, void *data, void **argv) {
-        wrapCall(context, data, argv, [](const QQmlPrivate::AOTCompiledContext *aotContext, void **argumentsPtr) {
+if (argv[0]) {
+    const QMetaType returnType = QMetaType::fromType<int>();
+    returnType.destruct(argv[0]);
+    returnType.construct(argv[0], &r2_0);
+}
+return;
+}
+ },{ 3, 0, [](QV4::ExecutableCompilationUnit *contextUnit, QMetaType *argTypes) {
+    struct { QV4::ExecutableCompilationUnit *compilationUnit; } c { contextUnit };
+    const auto *aotContext = &c;
+    Q_UNUSED(aotContext);
+    argTypes[0] = []() { static const auto t = QMetaType::fromName("QAbstractAxis*"); return t; }();
+}, 
+    [](const QQmlPrivate::AOTCompiledContext *aotContext, void **argv) {
 Q_UNUSED(aotContext)
-Q_UNUSED(argumentsPtr)
+Q_UNUSED(argv)
 // expression for axisX at line 41, column 13
 QObject *r2_0;
 // generate_LoadQmlContextPropertyLookup
@@ -770,21 +802,33 @@ while (!aotContext->loadContextIdLookup(5, &r2_0)) {
 aotContext->setInstructionPointer(2);
 #endif
 aotContext->initLoadContextIdLookup(5);
-if (aotContext->engine->hasError())
-    return static_cast<QObject *>(nullptr);
+if (aotContext->engine->hasError()) {
+aotContext->setReturnValueUndefined();
+if (argv[0]) {
+    *static_cast<QObject * *>(argv[0]) = nullptr;
+}
+return;
+}
 }
 {
 }
 {
 }
 // generate_Ret
-return r2_0;
-});}
- },{ 4, QMetaType::fromType<QObject*>(), {  }, 
-    [](const QQmlPrivate::AOTCompiledContext *context, void *data, void **argv) {
-        wrapCall(context, data, argv, [](const QQmlPrivate::AOTCompiledContext *aotContext, void **argumentsPtr) {
+if (argv[0]) {
+    *static_cast<QObject * *>(argv[0]) = r2_0;
+}
+return;
+}
+ },{ 4, 0, [](QV4::ExecutableCompilationUnit *contextUnit, QMetaType *argTypes) {
+    struct { QV4::ExecutableCompilationUnit *compilationUnit; } c { contextUnit };
+    const auto *aotContext = &c;
+    Q_UNUSED(aotContext);
+    argTypes[0] = []() { static const auto t = QMetaType::fromName("QAbstractAxis*"); return t; }();
+}, 
+    [](const QQmlPrivate::AOTCompiledContext *aotContext, void **argv) {
 Q_UNUSED(aotContext)
-Q_UNUSED(argumentsPtr)
+Q_UNUSED(argv)
 // expression for axisY at line 42, column 13
 QObject *r2_0;
 // generate_LoadQmlContextPropertyLookup
@@ -796,17 +840,25 @@ while (!aotContext->loadContextIdLookup(6, &r2_0)) {
 aotContext->setInstructionPointer(2);
 #endif
 aotContext->initLoadContextIdLookup(6);
-if (aotContext->engine->hasError())
-    return static_cast<QObject *>(nullptr);
+if (aotContext->engine->hasError()) {
+aotContext->setReturnValueUndefined();
+if (argv[0]) {
+    *static_cast<QObject * *>(argv[0]) = nullptr;
+}
+return;
+}
 }
 {
 }
 {
 }
 // generate_Ret
-return r2_0;
-});}
- },{ 0, QMetaType::fromType<void>(), {}, nullptr }};
+if (argv[0]) {
+    *static_cast<QObject * *>(argv[0]) = r2_0;
+}
+return;
+}
+ },{ 0, 0, nullptr, nullptr }};
 QT_WARNING_POP
 }
 }

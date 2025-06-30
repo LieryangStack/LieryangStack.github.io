@@ -1,0 +1,28 @@
+[
+    {
+        "moduleFiles": [
+            {
+                "entries": [
+                    {
+                        "codegenSuccessful": true,
+                        "column": 39,
+                        "durationMicroseconds": 226,
+                        "errorMessage": "",
+                        "functionName": "src",
+                        "line": 16
+                    },
+                    {
+                        "codegenSuccessful": false,
+                        "column": 35,
+                        "durationMicroseconds": 57,
+                        "errorMessage": "Cannot access value for name img",
+                        "functionName": "src",
+                        "line": 32
+                    }
+                ],
+                "filePath": "C:/ProgramData/QtCreator/Links/2a9d48a2e52b811cef7680d6444d098c/Main.qml"
+            }
+        ],
+        "moduleId": "HelloQt(appHelloQt)"
+    }
+]
