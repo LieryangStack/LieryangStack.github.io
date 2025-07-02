@@ -133,6 +133,20 @@ tags: [QML]
 
 2. 我暂时不用这部分内容也可以，不是必须要解决的问题，所以暂时不做研究了。
 
+解决方案：
+
+1. 使用和Qt Design Studio相同版本的Qt和编译工具。
+
+2. 一定要添加 `PLUGIN_TARGET 插件库名称` 与 `qt6_add_qml_module` 目标名称相同。
+
+    ```c
+    qt_add_qml_module(chartsplugin
+        URI "Charts"
+        PLUGIN_TARGET chartsplugin
+        DEPENDENCIES QtQuick
+    )
+    ```
+
 ## 参考
 
 [参考1：Designer-Developer Workflow](https://doc.qt.io/qtdesignstudio/studio-designer-developer-workflow.html)
