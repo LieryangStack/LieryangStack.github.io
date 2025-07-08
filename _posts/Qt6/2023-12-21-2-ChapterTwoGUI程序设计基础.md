@@ -11,7 +11,7 @@ tags: [Qt6开发学习]
 
 ### 2.1.1 GUI项目文件组成
 
-![Alt text](项目管理目录树.png)
+![Alt text](/assets/Qt6/ChapterTwo/image/项目管理目录树.png)
 
 - **samp2_1.pro**: 是qmake构建系统的项目配置文件，其中存储了项目的各种设置内容。
 - **widget.ui**: 是UI文件，这是用于窗口界面可视化设计的文件。
@@ -53,25 +53,25 @@ Qt元对象系统(Meta-Object-System)是由Qt Core实现的，所以要想使用
 
 下面就是每个类开始要定义 `Q_OBJECT` 宏：
 
-![alt text](image.png)
+![alt text](/assets/Qt6/ChapterTwo/image/image.png)
 
 MOC元对象编译器会检查文件中是否定义 `Q_OBJECT` 宏,然后生成 `moc_className.cpp` 文件。（该文件就是宏里面函数的实现）
 
 qmake就含有MOC编译器。
 
-![alt text](image-1.png)
+![alt text](/assets/Qt6/ChapterTwo/image/image-1.png)
 
 **补充内容2：UIC**
 
 我们使用 `Qt Designer` 软件编辑 `*.ui` 文件，但是C++并不能直接编译该文件，所以UIC就是把 `*.ui` 文件生成 `ui_***.h` 头文件。
 
-![alt text](image-2.png)
+![alt text](/assets/Qt6/ChapterTwo/image/image-2.png)
 
 **补充内容3：rcc：**
 
 Qt 自带的开发工具集里有专门的 rcc 工具，用于将 .qrc 资源里面描述的图片、文档等编译成对应的源代码文件 qrc_***.cpp
 
-![alt text](image-3.png)
+![alt text](/assets/Qt6/ChapterTwo/image/image-3.png)
 
 ### 2.1.3 UI文件
 
@@ -79,16 +79,16 @@ Qt 自带的开发工具集里有专门的 rcc 工具，用于将 .qrc 资源里
 
 1. 修改构建的对象名称
 
-    ![alt text](image-4.png)
+    ![alt text](/assets/Qt6/ChapterTwo/image/image-4.png)
 
 2. 按钮btnClose的 `clicked()` 信号连接窗口Widget的 `close()` 槽函数。
 
-    ![alt text](image-5.png)
+    ![alt text](/assets/Qt6/ChapterTwo/image/image-5.png)
 
 
 ### 2.1.4 主程序文件
 
-![alt text](image-6.png)
+![alt text](/assets/Qt6/ChapterTwo/image/image-6.png)
 
 ### 2.1.5 窗口相关的文件
 
@@ -99,12 +99,12 @@ Qt 自带的开发工具集里有专门的 rcc 工具，用于将 .qrc 资源里
 
 1. 基于 `Ui_Widget` 的 `Widget` 类。这个 `Ui::Widget *ui`其实是我们窗口类 `Widget` 的一个私有成员。用于描述窗口类`Widget`，我们在 UI 文件中界面组件的属性设置、布局以及信号与槽的关联等内容。
 
-![alt text](image-7.png)
+![alt text](/assets/Qt6/ChapterTwo/image/image-7.png)
 
 
 ## 2.2 可视化UI设计
 
-![alt text](image-8.png)
+![alt text](/assets/Qt6/ChapterTwo/image/image-8.png)
 
 **补充内容1：QWidget的一些属性**
 
@@ -132,13 +132,13 @@ Qt 自带的开发工具集里有专门的 rcc 工具，用于将 .qrc 资源里
 
   - QSizePolicy::Expanding：控件将尽可能地扩展以填充可用的空间，适用于希望占据额外空间的控件。
 
-    ![alt text](image-9.png)
+    ![alt text](/assets/Qt6/ChapterTwo/image/image-9.png)
 
 **补充内容2：转到槽**
 
 右击控件 -> Go to slot
 
-![alt text](image-10.png)
+![alt text](/assets/Qt6/ChapterTwo/image/image-10.png)
 
 然后，就可以直接编写槽函数。
 
@@ -146,7 +146,7 @@ Qt 自带的开发工具集里有专门的 rcc 工具，用于将 .qrc 资源里
 
 通过 `setupUi` 函数中调用 `QMetaObject::connectSlotsByName(Dialog);`
 
-![alt text](image-12.png)
+![alt text](/assets/Qt6/ChapterTwo/image/image-12.png)
 
 递归搜索给定对象的所有子对象，并将来自这些子对象的匹配信号连接到以下形式的对象插槽：
 
@@ -160,7 +160,7 @@ void on_<object name>_<signal name>(<signal parameters>);
 void on_btnClear_clicked();
 ```
 
-![alt text](image-11.png)
+![alt text](/assets/Qt6/ChapterTwo/image/image-11.png)
 
 
 
