@@ -67,17 +67,17 @@ qt_add_qml_module 函数提供了多个参数，以便您在创建 QML 模块时
 
 ## 3 重要参数说明
 
-![alt text](image.png)
+![alt text](/assets/Qt6/cmake_02_qt_add_qml_module/image/image.png)
 
 1. `TARGET` 和 `PLUGIN_TARGET` 最好名称一样，如果不指定 `PLUGIN_TARGET`，会默认生成 `TARGET+plugin` 的库文件。这样会有两个动态库文件，使用qds的时候会报错，不能正常链接动态库。
 
-    ![alt text](image-2.png)
+    ![alt text](/assets/Qt6/cmake_02_qt_add_qml_module/image/image-2.png)
 
-    ![alt text](image-1.png)
+    ![alt text](/assets/Qt6/cmake_02_qt_add_qml_module/image/image-1.png)
 
 2. `URI` 和 `VERSION` 
    
-    ![alt text](image-3.png)
+    ![alt text](/assets/Qt6/cmake_02_qt_add_qml_module/image/image-3.png)
 
 ## 4 问题总结
 
@@ -85,7 +85,7 @@ qt_add_qml_module 函数提供了多个参数，以便您在创建 QML 模块时
 
 `TARGET` 和 `PLUGIN_TARGET` 名称不一样，就会有两个库。这样如果使用Module组件，就会报错无法加载库 C 。这是因为只调用了 `exampleplugin.dll`，调用不到 `example.dll`。所以一般要显式定义 `PLUGIN_TARGET`。
 
-![alt text](image-4.png)
+![alt text](/assets/Qt6/cmake_02_qt_add_qml_module/image/image-4.png)
 
 ### 4.2 静态库
 
@@ -102,10 +102,15 @@ qt_add_qml_module 函数提供了多个参数，以便您在创建 QML 模块时
 
 但当你使用 静态编译（也就是将 Qt 库和插件编译进可执行文件中）时，Qt 无法自动发现这些 QML 插件，因此需要手动告诉 Qt “我要导入这个插件”。
 
-![alt text](image-5.png)
+![alt text](/assets/Qt6/cmake_02_qt_add_qml_module/image/image-5.png)
 
 `Q_IMPORT_QML_PLUGIN` 后面的名称就是 `qmldir` 文件中的 `classname`名称。
 
 这个类名定义规范：当你在 CMake 中使用 qt_add_qml_module() 添加一个 QML 模块时，Qt 会自动为你生成一个插件扩展类。默认情况下，这个类的名字来源于 URI 参数，将其中的 . 替换为 _ 并且最后加Plugin。
 
-![alt text](image-6.png)
+![alt text](/assets/Qt6/cmake_02_qt_add_qml_module/image/image-6.png)
+
+
+## 参考
+
+[参考1： Qt cmake 增加qml文件：深度剖析Qt cmake 的qt_add_qml_module函数](https://blog.csdn.net/qq_21438461/article/details/130475251)
