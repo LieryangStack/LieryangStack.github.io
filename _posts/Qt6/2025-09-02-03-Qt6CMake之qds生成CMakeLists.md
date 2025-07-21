@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 三、Qt6CMake——Qt Design Studio生成CMake文件
+title: 三、Qt6CMake——qds生成CMake文件
 categories: Qt6CMake
 tags: [Qt6CMake]
 ---
