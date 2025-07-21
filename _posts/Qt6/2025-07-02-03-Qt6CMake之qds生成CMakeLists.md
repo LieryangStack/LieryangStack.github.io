@@ -66,7 +66,11 @@ tags: [Qt6CMake]
 
 ![alt text](/assets/Qt6/cmake_03_qds/image/image-9.png)
 
-### 2.1 关于qml库问题
+### 2.1 关于qml插件库引用
+
+
+![alt text](/assets/Qt6/cmake_03_qds/image/image-13.png)
+
 
 比如 `StudyProject` 目录里面定义了
 
@@ -78,7 +82,7 @@ tags: [Qt6CMake]
 
 ![alt text](/assets/Qt6/cmake_03_qds/image/image-11.png)
 
-### 2.2 关于 `qmlcomponents` 库
+### 2.2  qmlcomponents插件库
 
 这部分是 `Qt Design Studio` 定义的 qml组件，比如：`ArcItem`、`Glow` 、`QuickStudioApplication` 等等。
 
@@ -86,16 +90,11 @@ tags: [Qt6CMake]
 
 ## 3 创建C++插件导入qds
 
-
 制作插件（或者说是动态库）是很常见的需求，其实也可以说是将qml文件或者c++文件封装成静态库或者动态库，提供moudle信息，然后给其他qml界面调用。
 
-1. 我认为这里的插件Plugin，可以等同认为是模组Moudle，因为可以在qml文件中直接调用该Plugin。
+1. C++编写的对象组件和qml编写的对象组件都可以一起封装成一个插件。
 
-2. C++编写的对象组件和qml编写的对象组件都可以一起封装成一个插件。
-
-3. CMake中使用 `qt_add_qml_module` 直接生成相关的文件和库。（一般情况下，`qt_add_qml_module` 等同于 `qt6_add_qml_module`）
-
-4. 存在问题：无法给 `Qt Design Studio` 使用，应该是由于动态库链接问题造成。
+2. CMake中使用 `qt_add_qml_module` 直接生成相关的文件和库。（`qt_add_qml_module` 等同于 `qt6_add_qml_module`）
 
 ### 3.1 生成Qt Quick扩展插件
 
@@ -129,11 +128,9 @@ tags: [Qt6CMake]
 
 ![alt text](/assets/Qt6/cmake_03_qds/extension_plugin_image/image-6.png)
 
-我分析可能得原因：
+原因：
 
-1. 动态库 Liplugin.dll 链接其他库的问题。
-
-2. 我暂时不用这部分内容也可以，不是必须要解决的问题，所以暂时不做研究了。
+动态库 Liplugin.dll 链接 Li.dll 造成的问题。
 
 解决方案：
 
