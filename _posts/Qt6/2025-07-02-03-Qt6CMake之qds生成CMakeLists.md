@@ -1,9 +1,10 @@
 ---
 layout: post
-title: 三、Qt6CMake——qds生成CMake文件
+title: 三、Qt6CMake——qds生成CMakeLists
 categories: Qt6CMake
 tags: [Qt6CMake]
 ---
+
 
 
 `qds` 就是`Qt Design Studio`，本章节记录，如何创建 `Qt Design Studio` 和 `Qt Creator` 共同开发项目。
